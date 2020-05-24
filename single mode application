@@ -1,0 +1,41 @@
+Tools Needed 
+ * Smart Phone Flash Tool
+ * recovery3_twrp302_Lenovo_TB3-710F
+ * MTK Extractor_v2.6.3
+ * Driver_Auto_Installer
+ * Lenovo_tb3_710f_mt8127_s000024_160506_5.0.1
+ * logo builder v1.6.1
+ 
+ 
+1st step (rooting the device)
+
+open sp flash tool and select scatter file in recovey3_twrp302_lenovo_tb3_710f, 
+Press download button in sp flash tool and switch off the device and press the volume + or - and connect the usb cable. 
+now sp tool will detect and complete the download process. once it is completed restart to recovery mode. 
+now the twrp recovert installed. go to reboot and press system and now slider and super su installed in your os 
+and now go to play store or chrome and install lastest super su file and check it.. your device will be rooted.
+
+2nd step (splash screen change)
+
+open mtk extractor and extract Lenovo_tb3_710f_mt8127_s000024_160506_5.0.1 and edit logo.bin with logo builder v1.6.1 and 
+edit  1st image and 39th image as we need it and now 
+
+open sp flash tool and select scatter file in Lenovo_tb3_710f_mt8127_s000024_160506_5.0.1 and select only logo and  
+Press download button in sp flash tool and switch off the device and press the volume + or - and connect the usb cable. 
+now sp tool will detect and complete the download process and logo has been changed.
+
+
+3rd step (plug the cable to switch on the device)
+
+Reboot the device in fastboot(bootloader) and open adb in command and write fastboot oem off-mode-charge 0
+
+
+4th step (uninstall the system applications)
+
+system app uninstaller device has to be rooted.
+
+5th step (remove bootanimation.zip as bootanimation.zip.bak)
+
+install root explorer app and go to system/media/ change the bootanimation.zip to .bak file... 
+
+https://www.xda-developers.com/customize-battery-saver-mode-android-8-0/
