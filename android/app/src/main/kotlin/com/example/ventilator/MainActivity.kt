@@ -50,9 +50,9 @@ class MainActivity: FlutterActivity() {
                     ex.printStackTrace()
                 }
                 result.success(true)
-            } else if(call.method == "sendPlayAudioStart"){
+            } else if(call.method == "sendPlayAudioStartH"){
                 try {
-                    mp= MediaPlayer.create(getApplicationContext(),R.raw.ealarm);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
+                    mp= MediaPlayer.create(getApplicationContext(),R.raw.high);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
 
                     if(mp?.isPlaying()!!){
 //                        mp?.stop();
@@ -63,7 +63,8 @@ class MainActivity: FlutterActivity() {
                         mp?.start()
                         mp!!.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
                             override fun onCompletion(mp: MediaPlayer) {
-                                mp.release()
+                                mp?.release()
+
                             }
                         })
                     }
@@ -71,7 +72,57 @@ class MainActivity: FlutterActivity() {
                     ex.printStackTrace()
                 }
                 result.success(true)
-            }  else if(call.method == "sendPlayAudioStop"){
+            }  else if(call.method == "sendPlayAudioStartM"){
+                try {
+                    mp= MediaPlayer.create(getApplicationContext(),R.raw.medium);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
+
+                    if(mp?.isPlaying()!!){
+//                        mp?.stop();
+//                        mp?.reset();
+//                        mp?.release();
+                    }
+                    else{
+                        mp?.start()
+                        mp!!.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
+                            override fun onCompletion(mp: MediaPlayer) {
+                                mp?.release()
+
+                            }
+                        })
+                    }
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                result.success(true)
+            }else if(call.method == "sendPlayAudioStartL"){
+                try {
+                    mp= MediaPlayer.create(getApplicationContext(),R.raw.low);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
+
+                    if(mp?.isPlaying()!!){
+//                        mp?.stop();
+//                        mp?.reset();
+//                        mp?.release();
+                    }
+                    else{
+                        mp?.start()
+                        mp!!.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
+                            override fun onCompletion(mp: MediaPlayer) {
+                                mp?.release()
+
+                            }
+                        })
+                    }
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                result.success(true)
+            }
+
+
+
+
+
+            else if(call.method == "sendPlayAudioStop"){
                 try {
 //                    mp= MediaPlayer.create(getApplicationContext(),R.raw.ealarm);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
                     mp?.stop();

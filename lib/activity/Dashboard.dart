@@ -429,9 +429,11 @@ class _CheckPageState extends State<Dashboard> {
       patientAge,
       patientHeight,
       patientWeight;
+  
   bool newTreatmentEnabled = false, powerButtonEnabled = false;
   int noTimes;
-  bool isplaying = false, _buttonPressed = false;
+  bool isplaying = false, _buttonPressed = false,respiratoryEnable=false;
+  int  previousCode=101,presentCode;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -478,11 +480,17 @@ class _CheckPageState extends State<Dashboard> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
+      var now = new DateTime.now();
       if (event != null) {
+        setState(() {
+          respiratoryEnable = true;
+        });
         if (event[0] == 126 && event.length > 110) {
           list.addAll(event);
           list.removeAt(0);
         }
+
+        lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
 
         // var length = list.length;
         // bool data = await checkCrc(list, length);
@@ -770,9 +778,31 @@ class _CheckPageState extends State<Dashboard> {
           setState(() {
             alarmActive = list[108].toString();
           });
+          
 
           if (list[108] == 1) {
-            _playMusic();
+            presentCode = ((list[106] << 8) + list[107]);
+            Fluttertoast.showToast(msg: presentCode.toString());
+            if(presentCode!=previousCode){
+                previousCode = presentCode;
+                 if(presentCode==5 || presentCode==7 || presentCode==10 || presentCode==11 || presentCode==17){
+                    _playMusicHigh();
+                    sendSoundOn();
+                    audioEnable=true;
+                }else if(presentCode==1 || presentCode==2 || presentCode==3 || presentCode==4 || presentCode==6 || presentCode==8 || presentCode==9 || presentCode==12
+                || presentCode==13 || presentCode==14 || presentCode==15 || presentCode==16 || presentCode==18 || presentCode==19 || presentCode==20 || presentCode==21
+                || presentCode==22 ){
+                     _playMusicMedium();
+                    sendSoundOn();
+                    audioEnable=true;
+                }else if(presentCode==23){
+                     _playMusicLower();
+                    sendSoundOn();
+                    audioEnable=true;
+                }
+              
+            }
+            // _playMusic();
           } else if (list[108] == 0) {
             _stopMusic();
           }
@@ -823,7 +853,7 @@ class _CheckPageState extends State<Dashboard> {
                                                                               "LOW VTI"
                                                                           : ((list[106] << 8) + list[107]) == 16
                                                                               ? alarmMessage = "HIGH VTI"
-                                                                              : ((list[106] << 8) + list[107]) == 17 ? alarmMessage = "PATIENT DISCONNECTION" : ((list[106] << 8) + list[107]) == 18 ? alarmMessage = "LOW O2  supply" : ((list[106] << 8) + list[107]) == 19 ? alarmMessage = "LOW RR" : ((list[106] << 8) + list[107]) == 20 ? alarmMessage = "HIGH RR" : ((list[106] << 8) + list[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((list[106] << 8) + list[107]) == 22 ? alarmMessage = "LOW PEEP" : ((list[106] << 8) + list[107]) == 23 ? alarmMessage = "Apnea backup" : alarmMessage = "0";
+                                                                              : ((list[106] << 8) + list[107]) == 17 ? alarmMessage = "PATIENT DISCONNECTED" : ((list[106] << 8) + list[107]) == 18 ? alarmMessage = "LOW O2  supply" : ((list[106] << 8) + list[107]) == 19 ? alarmMessage = "LOW RR" : ((list[106] << 8) + list[107]) == 20 ? alarmMessage = "HIGH RR" : ((list[106] << 8) + list[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((list[106] << 8) + list[107]) == 22 ? alarmMessage = "LOW PEEP" : ((list[106] << 8) + list[107]) == 23 ? alarmMessage = "Apnea backup" : alarmMessage = "0";
             });
 
             // if (list[109] == 0) {
@@ -999,6 +1029,10 @@ class _CheckPageState extends State<Dashboard> {
         });
         // }
       } else {
+
+        setState(() {
+          respiratoryEnable=false;
+        });
         pressurePoints.clear();
         volumePoints.clear();
         flowPoints.clear();
@@ -1063,31 +1097,35 @@ class _CheckPageState extends State<Dashboard> {
       }
     });
 
-    // _timer2 = Timer.periodic(Duration(minutes: 1), (timer) async {
-    //   if (_status == "Connected") {
-    //     String lastTime = await dbHelper.getLastRecordTime();
-    //     String lastRecordTime =
-    //         lastTime.split("[{datetimeP: ")[1].split("}]")[0];
+    _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
+      if (_status == "Connected") {
+        // String lastTime = await dbHelper.getLastRecordTime();
+        // String lastRecordTime =
+        //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
 
-    //     var now = new DateTime.now();
-    //     setState(() {
-    //       presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-    //       DateTime date1 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
-    //       DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
-    //       var differnceD = date2.difference(date1);
-    //       if (differnceD.inMinutes > 2) {
-    //         // Fluttertoast.showToast(msg: "Timeout.");
-    //         // psValue1 = 0;
-    //         // mvValue = 0;
-    //         // vteValue = 0;
-    //         // fio2DisplayParameter = 0;
-    //         // pressurePoints = [];
-    //         // volumePoints = [];
-    //         // flowPoints = [];
-    //       }
-    //     });
-    //   }
-    // });
+        var now = new DateTime.now();
+        setState(() {
+          presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+          DateTime date1 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
+          DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
+          var differnceD = date2.difference(date1);
+          if (differnceD.inSeconds> 2) {
+
+            setState(() {
+              respiratoryEnable=false;
+            });            
+            // Fluttertoast.showToast(msg: "Timeout.");
+            // psValue1 = 0;
+            // mvValue = 0;
+            // vteValue = 0;
+            // fio2DisplayParameter = 0;
+            // pressurePoints = [];
+            // volumePoints = [];
+            // flowPoints = [];
+          }
+        });
+      }
+    });
     // _timer = Timer.periodic(Duration(minutes: 5), (timer) async {
     //   if (_status == "Connected") {
     //     String lastTime = await dbHelper.getLastRecordTime();
@@ -1117,7 +1155,7 @@ class _CheckPageState extends State<Dashboard> {
 
   saveData(VentilatorOMode data, String patientId) async {
     print("data saving id : " + patientId);
-    // dbHelper.save(data);
+    dbHelper.save(data);
   }
 
   Future<void> _sendShutdown() async {
@@ -1129,12 +1167,36 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  Future<void> _playMusic() async {
+  Future<void> _playMusicHigh() async {
     setState(() {
       isplaying = true;
     });
     try {
-      var result = await shutdownChannel.invokeMethod('sendPlayAudioStart');
+      var result = await shutdownChannel.invokeMethod('sendPlayAudioStartH');
+      print(result);
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _playMusicMedium() async {
+    setState(() {
+      isplaying = true;
+    });
+    try {
+      var result = await shutdownChannel.invokeMethod('sendPlayAudioStartM');
+      print(result);
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _playMusicLower() async {
+    setState(() {
+      isplaying = true;
+    });
+    try {
+      var result = await shutdownChannel.invokeMethod('sendPlayAudioStartL');
       print(result);
     } on PlatformException catch (e) {
       print(e);
@@ -1357,6 +1419,11 @@ class _CheckPageState extends State<Dashboard> {
       patientWeight = preferences.getString("pweight");
       if (patientWeight == null || patientWeight == "") {
         patientWeight = "133";
+      }if(i==null){
+        i="1.0";
+      }
+      if(e==null){
+        e="1.0";
       }
       noTimes = int.tryParse(preferences.getString("noTimes"));
       peepHeight = 252 - ((peepValue * 3.71) - 4);
@@ -1365,14 +1432,12 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   checkI(String i) {
-    var data =
-        i.split(".")[1].toString() == "0" ? i.split(".")[0].toString() : i;
+    var data =  i.split(".")[1].toString() == "0" ? i.split(".")[0].toString() : i;
     return data;
   }
 
   checkE(String e) {
-    var data =
-        e.split(".")[1].toString() == "0" ? e.split(".")[0].toString() : e;
+    var data = e.split(".")[1].toString() == "0" ? e.split(".")[0].toString() : e;
     return data;
   }
 
@@ -1384,7 +1449,7 @@ class _CheckPageState extends State<Dashboard> {
       yAxisColor: Colors.grey,
       padding: 10.0,
       backgroundColor: Color(0xFF171e27),
-      traceColor: Colors.green,
+      traceColor: Colors.yellow,
       yAxisMax: 60,
       yAxisMin: 0.0,
       dataSet: pressurePoints,
@@ -1395,7 +1460,7 @@ class _CheckPageState extends State<Dashboard> {
         yAxisColor: Colors.grey,
         padding: 10.0,
         backgroundColor: Color(0xFF171e27),
-        traceColor: Colors.yellow,
+        traceColor: Colors.green,
         yAxisMax: 90.0,
         yAxisMin: -90.0,
         dataSet: flowPoints);
@@ -2411,7 +2476,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.2",
+                  "V1.3",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4180,7 +4245,7 @@ class _CheckPageState extends State<Dashboard> {
             SizedBox(
               width: 115,
             ),
-            Center(
+           respiratoryEnable==true ?  Center(
               child: Listener(
                 onPointerDown: (details) {
                   writeRespiratoryPauseData(2);
@@ -4227,7 +4292,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ),
-            ),
+            ):Container(),
           ],
         ),
       ),
@@ -5004,7 +5069,7 @@ class _CheckPageState extends State<Dashboard> {
                                 valueColor: AlwaysStoppedAnimation<Color>(
                                   psvIe ? Color(0xFF213855) : Color(0xFFE0E0E0),
                                 ),
-                                value: psvIeValue != null ? psvIeValue / 61 : 0,
+                                value: psvIeValue != null ? psvIeValue / 61: 0,
                               ),
                             ),
                           )
@@ -6090,12 +6155,12 @@ class _CheckPageState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(psvminValue.toString()),
+                            Text(psvIe ? getIeData(psvminValue,1) : psvminValue.toString()),
                             Text(
                               psvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(psvmaxValue.toString())
+                            Text( psvIe ? getIeData(psvmaxValue,1) :  psvmaxValue.toString())
                           ],
                         ),
                       )
@@ -9082,6 +9147,11 @@ class _CheckPageState extends State<Dashboard> {
                                     setState(() {
                                       psimvPsValue = psimvPsValue + 1;
                                     });
+                                  }else if (psimvFio2 == true &&
+                                      psimvFio2Value != psimvmaxValue) {
+                                    setState(() {
+                                      psimvFio2Value = psimvFio2Value + 1;
+                                    });
                                   }
                                 });
                               },
@@ -9189,12 +9259,12 @@ class _CheckPageState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(psimvminValue.toString()),
+                            Text(psimvIe ? getIeData(psimvminValue,1) :psimvminValue.toString()),
                             Text(
                               psimvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(psimvmaxValue.toString())
+                            Text(psimvIe ? getIeData(psimvmaxValue,1): psimvmaxValue.toString())
                           ],
                         ),
                       )
@@ -10821,7 +10891,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    vccmvIeValue != null ? vccmvIeValue / 4 : 0,
+                                    vccmvIeValue != null ? vccmvIeValue / 61 : 0,
                               ),
                             ),
                           )
@@ -11947,12 +12017,12 @@ class _CheckPageState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(vccmvminValue.toString()),
+                            Text(vccmvIe ? getIeData(vccmvIeValue,1) :vccmvminValue.toString()),
                             Text(
                               vccmvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(vccmvmaxValue.toString())
+                            Text( vccmvIe ?getIeData(vccmvmaxValue,1) : vccmvmaxValue.toString())
                           ],
                         ),
                       )
@@ -13351,7 +13421,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : vsimvRr
                                           ? vsimvRrValue.toInt().toString()
                                           : vsimvIe
-                                              ? vsimvIeValue.toInt().toString()
+                                              ? getIeData(vsimvIeValue,1).toString()
                                               : vsimvVt
                                                   ? vsimvVtValue
                                                       .toInt()
@@ -13539,12 +13609,12 @@ class _CheckPageState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(vsimvminValue.toString()),
+                            Text( vsimvminValue.toString()),
                             Text(
                               vsimvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(vsimvmaxValue.toString())
+                            Text(  vsimvmaxValue.toString() )
                           ],
                         ),
                       )
@@ -13896,7 +13966,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    vacvIeValue != null ? vacvIeValue / 61 : 0,
+                                    vacvIeValue != null ? vacvIeValue / 4 : 0,
                               ),
                             ),
                           )
@@ -15017,12 +15087,12 @@ class _CheckPageState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(vacvminValue.toString()),
+                            Text( vacvIe ? getIeData(vacvminValue,1)  :vacvminValue.toString()),
                             Text(
                               vacvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(vacvmaxValue.toString())
+                            Text( vacvIe ? getIeData(vacvminValue,1):vacvmaxValue.toString())
                           ],
                         ),
                       )
@@ -15420,7 +15490,9 @@ class _CheckPageState extends State<Dashboard> {
                                                                                 ? "2.2:1"
                                                                                 : pccmvIeValue == 20 ? "2.1:1" : pccmvIeValue == 21 ? "2.0:1" : pccmvIeValue == 22 ? "1.9:1" : pccmvIeValue == 23 ? "1.8:1" : pccmvIeValue == 24 ? "1.7:1" : pccmvIeValue == 25 ? "1.6:1" : pccmvIeValue == 26 ? "1.5:1" : pccmvIeValue == 27 ? "1.4:1" : pccmvIeValue == 28 ? "1.3:1" : pccmvIeValue == 29 ? "1.2:1" : pccmvIeValue == 30 ? "1.1:1" : pccmvIeValue == 31 ? "1:1" : pccmvIeValue == 32 ? "1:1.1" : pccmvIeValue == 33 ? "1:1.2" : pccmvIeValue == 34 ? "1:1.3" : pccmvIeValue == 35 ? "1:1.4" : pccmvIeValue == 36 ? "1:1.5" : pccmvIeValue == 37 ? "1:1.6" : pccmvIeValue == 38 ? "1:1.7" : pccmvIeValue == 39 ? "1:1.8" : pccmvIeValue == 40 ? "1:1.9" : pccmvIeValue == 41 ? "1:2.0" : pccmvIeValue == 42 ? "1:2.1" : pccmvIeValue == 43 ? "1:2.2" : pccmvIeValue == 44 ? "1:2.3" : pccmvIeValue == 45 ? "1:2.4" : pccmvIeValue == 46 ? "1:2.5" : pccmvIeValue == 47 ? "1:2.6" : pccmvIeValue == 48 ? "1:2.7" : pccmvIeValue == 49 ? "1:2.8" : pccmvIeValue == 50 ? "1:2.9" : pccmvIeValue == 51 ? "1:3.0" : pccmvIeValue == 52 ? "1:3.1" : pccmvIeValue == 53 ? "1:3.2" : pccmvIeValue == 54 ? "1:3.3" : pccmvIeValue == 55 ? "1:3.4" : pccmvIeValue == 56 ? "1:3.5" : pccmvIeValue == 57 ? "1:3.6" : pccmvIeValue == 58 ? "1:3.7" : pccmvIeValue == 59 ? "1:3.8" : pccmvIeValue == 60 ? "1:3.9" : pccmvIeValue == 61 ? "1:4.0" : "0".toString();
 
-    var dataI = data.split(":")[0];
+    
+
+     var dataI = data.split(":")[0];
     var dataE = data.split(":")[1];
     if (res == 1) {
       return data;

@@ -20,12 +20,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/layout/abc_list_menu_item_icon.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_btn_radio_off_mtrl.xml.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable/btn_radio_off_mtrl.xml"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl_dark.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_btn_radio_off_mtrl.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable/btn_radio_off_mtrl.xml"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
@@ -36,20 +36,20 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_light.9.png"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-v23_abc_control_background_material.xml.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-v23/abc_control_background_material.xml"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_list_focused_holo.9.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xxhdpi-v4/abc_list_focused_holo.9.png"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/interpolator_btn_radio_to_off_mtrl_animation_interpolator_0.xml.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/interpolator/btn_radio_to_off_mtrl_animation_interpolator_0.xml"
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-v23_abc_control_background_material.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-v23/abc_control_background_material.xml"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_tooltip_frame_light.xml.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable/tooltip_frame_light.xml"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/interpolator_btn_radio_to_off_mtrl_animation_interpolator_0.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/interpolator/btn_radio_to_off_mtrl_animation_interpolator_0.xml"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
@@ -68,12 +68,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable/abc_ic_ab_back_material.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/raw_ealarm.mp3.flat",
         "source": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/android/app/src/main/res/raw/ealarm.mp3"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
@@ -112,12 +112,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/color/abc_primary_text_material_light.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-v21_abc_list_divider_material.xml.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-v21/abc_list_divider_material.xml"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xhdpi-v4/abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-v21_abc_list_divider_material.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-v21/abc_list_divider_material.xml"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
@@ -136,28 +136,28 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/layout-v26/abc_screen_toolbar.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_popup_background_mtrl_mult.9.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_abc_list_selector_holo_dark.xml.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable/abc_list_selector_holo_dark.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
@@ -188,12 +188,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xxxhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/interpolator_btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
@@ -332,20 +332,24 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/layout/abc_dialog_title_material.xml"
     },
     {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/raw_high.wav.flat",
+        "source": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/android/app/src/main/res/raw/high.wav"
+    },
+    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_text_select_handle_right_mtrl_dark.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_text_select_handle_right_mtrl_dark.png"
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
@@ -400,12 +404,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/color/abc_background_cache_hint_selector_material_light.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/interpolator_btn_checkbox_checked_mtrl_animation_interpolator_1.xml.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
@@ -428,20 +432,20 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/anim/abc_slide_in_bottom.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_toast_bg.xml.flat",
-        "source": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/fluttertoast/intermediates/packaged_res/debug/drawable/toast_bg.xml"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/color_abc_tint_edittext.xml.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/color/abc_tint_edittext.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_toast_bg.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/fluttertoast/intermediates/packaged_res/debug/drawable/toast_bg.xml"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/color-v21_abc_btn_colored_borderless_text_material.xml.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/color-v21/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_abc_vector_test.xml.flat",
@@ -468,12 +472,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/anim_abc_tooltip_enter.xml.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/anim/abc_tooltip_enter.xml"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_middle_mtrl_light.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_text_select_handle_middle_mtrl_light.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/anim_abc_tooltip_enter.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/anim/abc_tooltip_enter.xml"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_black_16dp.png.flat",
@@ -528,12 +532,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable/abc_cab_background_top_material.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_abc_btn_radio_material.xml.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable/abc_btn_radio_material.xml"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable_abc_btn_radio_material.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable/abc_btn_radio_material.xml"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
@@ -640,12 +644,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/drawable/notification_bg_low.xml"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -704,12 +708,12 @@
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
-        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
-    },
-    {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
@@ -794,6 +798,10 @@
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/raw_low.wav.flat",
+        "source": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/android/app/src/main/res/raw/low.wav"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
@@ -1434,6 +1442,10 @@
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_longpressed_holo.9.png.flat",
         "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/drawable-mdpi-v4/abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/raw_medium.wav.flat",
+        "source": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/android/app/src/main/res/raw/medium.wav"
     },
     {
         "merged": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/res/merged/debug/drawable-hdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",

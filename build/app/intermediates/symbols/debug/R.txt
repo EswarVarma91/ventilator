@@ -833,6 +833,9 @@ int layout support_simple_spinner_dropdown_item 0x7f0a0026
 int layout toast_custom 0x7f0a0027
 int mipmap ic_launcher 0x7f0b0000
 int raw ealarm 0x7f0c0000
+int raw high 0x7f0c0001
+int raw low 0x7f0c0002
+int raw medium 0x7f0c0003
 int string abc_action_bar_home_description 0x7f0d0000
 int string abc_action_bar_up_description 0x7f0d0001
 int string abc_action_menu_overflow_description 0x7f0d0002

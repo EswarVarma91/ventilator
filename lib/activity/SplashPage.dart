@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
      preferences.setString("pweight", "" );
      preferences.setString("pheight", "" );
      preferences.setString('noTimes', counter.toString());
-    
+    await sleep(Duration(seconds: 2));
   }
 
   @override
