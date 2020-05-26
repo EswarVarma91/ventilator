@@ -37,7 +37,7 @@ class DatabaseHelper {
   static const String LUNG_IMAGE = 'lungImage';
   static const String PAW = 'paw';
   static const String TABLE = 'graphPoints';
-  static const String DATABASE = 'vzDB';
+  static const String DATABASE = 'vDB';
 
   Future<Database> get db async {
     if (_db != null) {
@@ -95,6 +95,7 @@ class DatabaseHelper {
             vom.lungImage,
             vom.paw
           ]);
+          print("result data : "+res.toString());
       return res;
     } catch (Exception) {
       return null;
@@ -109,7 +110,7 @@ class DatabaseHelper {
 
   Future<List<PatientsList>> getAllPatients() async {
      var dbClient = await db;
-    List<Map> dataData= await dbClient.rawQuery('SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID');
+    List<Map> dataData= await dbClient.rawQuery('SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
     List<PatientsList> plist =[];
     if(dataData.length>0){
       for(int i=0; i<dataData.length;i++){

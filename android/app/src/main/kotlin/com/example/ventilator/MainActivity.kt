@@ -7,6 +7,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.BatteryManager
 import android.os.Build
 import android.os.UserManager
@@ -24,6 +26,7 @@ class MainActivity: FlutterActivity() {
 
     private lateinit var mAdminComponentName: ComponentName
     private lateinit var mDevicePolicyManager: DevicePolicyManager
+    var mp: MediaPlayer? = null
 
     companion object {
         const val LOCK_ACTIVITY_KEY = "MainActivity"
@@ -36,6 +39,7 @@ class MainActivity: FlutterActivity() {
         mAdminComponentName = MyDeviceAdminReceiver.getComponentName(this)
         mDevicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 
+
         MethodChannel(flutterEngine.getDartExecutor(), CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "sendShutdowndevice") {
                 try {
@@ -46,7 +50,62 @@ class MainActivity: FlutterActivity() {
                     ex.printStackTrace()
                 }
                 result.success(true)
-            } else {
+            } else if(call.method == "sendPlayAudioStart"){
+                try {
+                    mp= MediaPlayer.create(getApplicationContext(),R.raw.ealarm);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
+
+                    if(mp?.isPlaying()!!){
+//                        mp?.stop();
+//                        mp?.reset();
+//                        mp?.release();
+                    }
+                    else{
+                        mp?.start()
+                        mp!!.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
+                            override fun onCompletion(mp: MediaPlayer) {
+                                mp.release()
+                            }
+                        })
+                    }
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                result.success(true)
+            }  else if(call.method == "sendPlayAudioStop"){
+                try {
+//                    mp= MediaPlayer.create(getApplicationContext(),R.raw.ealarm);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
+                    mp?.stop();
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                result.success(true)
+            } else if(call.method == "sendsoundoff"){
+                try {
+//                  //mute audio
+                    val amanager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                    amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true)
+                    amanager.setStreamMute(AudioManager.STREAM_ALARM, true)
+                    amanager.setStreamMute(AudioManager.STREAM_MUSIC, true)
+                    amanager.setStreamMute(AudioManager.STREAM_RING, true)
+                    amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true)
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                result.success(true)
+            }else if(call.method == "sendsoundon"){
+                try {
+//                  // unmute audio
+                    val amanager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                    amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
+                    amanager.setStreamMute(AudioManager.STREAM_ALARM, false)
+                    amanager.setStreamMute(AudioManager.STREAM_MUSIC, false)
+                    amanager.setStreamMute(AudioManager.STREAM_RING, false)
+                    amanager.setStreamMute(AudioManager.STREAM_SYSTEM, false)
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                result.success(true)
+            }else {
                 result.notImplemented()
             }
         }

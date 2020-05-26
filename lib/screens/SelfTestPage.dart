@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:grouped_checkbox/grouped_checkbox.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screen/screen.dart';
@@ -41,10 +41,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
       battery = 0,
       communication = 0,
       compressor = 0,
-      blender = 0,checkOfffset=0;
-
-
- 
+      blender = 0,
+      checkOfffset = 0;
 
   @override
   void initState() {
@@ -128,33 +126,79 @@ class _SelfTestPageState extends State<SelfTestPage> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
+      // Fluttertoast.showToast(msg: event.toString());
+      print(event.length.toString());
       if (event != null) {
-        if (event[0] == 126 && event.length > 19) {
+        if (event[0] == 126 && event.length == 120) {
           list.addAll(event);
           list.removeAt(0);
         }
+
+        if (list[112] == 2) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => CallibrationPage()),
+              ModalRoute.withName('/'));
+        }
+
         setState(() {
-          checkOfffset = list[3].toInt();
-          o2pressuresensor = list[4].toInt();
-          mtpressuresensor = list[5].toInt();
-          exhalationflowsensor = list[6].toInt();
+          // list[113]=(0x55);
+          // list[114]=(0x55);
+          // list[115]=(0x55);
+          // list[116]=(0x55);
+          o2pressuresensor = ((list[113] & 0x3) >> 0);
+          mtpressuresensor = ((list[113] & 0xC) >> 2);
+          exhalationflowsensor = ((list[113] & 0x30) >> 4);
+          inhalationflowsensor = ((list[113] & 0xC0) >> 6);
 
-          inhalationflowsensor = list[7].toInt();
-          exhalationpressure = list[8].toInt();
-          inhalationpressure = list[9].toInt();
+          exhalationpressure = ((list[114] & 0x3) >> 0);
+          inhalationpressure = ((list[114] & 0xC) >> 2);
+          o2sensor = ((list[114] & 0x30) >> 4);
+          inhalationvalve = ((list[114] & 0xC0) >> 6);
 
-          o2sensor = list[10].toInt();
-          inhalationvalve = list[11].toInt();
-          exhalationvalve = list[12].toInt();
+          exhalationvalve = ((list[115] & 0x3) >> 0);
+          ventvalue = ((list[115] & 0xC) >> 2);
+          mainpower = ((list[115] & 0x30) >> 4);
+          battery = ((list[115] & 0xC0) >> 6);
 
-          ventvalue = list[13].toInt();
-          mainpower = list[14].toInt();
-          battery = list[15].toInt();
+          communication = ((list[116] & 0x3) >> 0);
+          compressor = ((list[116] & 0xC) >> 2);
+          blender = ((list[116] & 0x30) >> 4);
 
-          communication = list[16].toInt();
-          compressor = list[17].toInt();
-          blender = list[18].toInt();
+          Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
         });
+
+        // Fluttertoast.showToast(msg: ((list[2] << 8) + list[3]).toString());
+        // print("packet : "+((list[2] << 8) + list[3]).toString());
+
+        // if(((list[2] << 8) + list[3]).toString()=="12"){
+        // setState(() {
+        //   checkOfffset = (list[2] << 8) + list[3].toInt();
+        //   o2pressuresensor = list[4].toInt();
+        //   mtpressuresensor = list[5].toInt();
+        //   exhalationflowsensor = list[6].toInt();
+
+        //   inhalationflowsensor = list[7].toInt();
+        //   exhalationpressure = list[8].toInt();
+        //   inhalationpressure = list[9].toInt();
+
+        //   o2sensor = list[10].toInt();
+        //   inhalationvalve = list[11].toInt();
+        //   exhalationvalve = list[12].toInt();
+
+        //   ventvalue = list[13].toInt();
+        //   mainpower = list[14].toInt();
+        //   battery = list[15].toInt();
+
+        //   communication = list[16].toInt();
+        //   compressor = list[17].toInt();
+        //   blender = list[18].toInt();
+        // });
+        // }else{
+
+        // }
+        list.clear();
       }
     });
     setState(() {
@@ -209,7 +253,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: o2pressuresensor == 0 ? false : true,
+                                value: o2pressuresensor == 0 ? false: o2pressuresensor == 1 ? false: o2pressuresensor == 2 ? true : false,
+                                activeColor: o2pressuresensor == 1 ? Colors.red : o2pressuresensor == 2 ? Colors.blue : Colors.green,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -230,7 +275,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: mtpressuresensor == 0 ? false : true,
+                                 value: mtpressuresensor == 0 ? false: mtpressuresensor == 1 ? false: mtpressuresensor == 2 ? true : false,
+                                activeColor: mtpressuresensor == 1 ? Colors.red : mtpressuresensor == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -251,7 +297,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: inhalationvalve == 0 ? false : true,
+                                value: inhalationvalve == 0? false: inhalationvalve == 1? false: inhalationvalve == 2 ? true : false,
+                                activeColor: inhalationvalve == 1? Colors.red : inhalationvalve == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -272,7 +319,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: exhalationvalve == 0 ? false : true,
+                                 value: exhalationvalve == 0? false: exhalationvalve == 1? false: exhalationvalve == 2 ? true : false,
+                                activeColor: exhalationvalve == 1 ? Colors.red : exhalationvalve == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -299,7 +347,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: exhalationflowsensor == 0 ? false : true,
+                                value: exhalationflowsensor == 0? false: exhalationflowsensor == 1? false: exhalationflowsensor == 2 ? true : false,
+                                activeColor: exhalationflowsensor == 1? Colors.red : exhalationflowsensor == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -320,7 +369,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: inhalationflowsensor == 0 ? false : true,
+                                value: inhalationflowsensor == 0? false: inhalationflowsensor == 1? false: inhalationflowsensor == 2 ? true : false,
+                                activeColor: inhalationflowsensor == 1? Colors.red : inhalationflowsensor == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -341,7 +391,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: exhalationpressure == 0 ? false : true,
+                                value: exhalationpressure == 0? false: exhalationpressure == 1? false: exhalationpressure == 2 ? true : false,
+                                activeColor: exhalationpressure == 1? Colors.red : exhalationpressure == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -362,7 +413,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: inhalationpressure == 0 ? false : true,
+                                value: inhalationpressure == 0? false: inhalationpressure == 1? false: inhalationpressure == 2 ? true : false,
+                                activeColor: inhalationpressure == 1 ? Colors.red : inhalationpressure == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -389,7 +441,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: o2sensor == 0 ? false : true,
+                                 value: o2sensor == 0? false: o2sensor == 1? false: o2sensor == 2 ? true : false,
+                                activeColor: o2sensor == 1 ? Colors.red : o2sensor == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -410,7 +463,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: ventvalue == 0 ? false : true,
+                                value: ventvalue == 0? false: ventvalue == 1? false: ventvalue == 2 ? true : false,
+                                activeColor: ventvalue == 1 ? Colors.red : ventvalue == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -431,7 +485,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: communication == 0 ? false : true,
+                                value: communication == 0? false: communication == 1? false: communication == 2 ? true : false,
+                                activeColor: communication == 1 ? Colors.red : communication == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -452,7 +507,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: mainpower == 0 ? false : true,
+                               value: mainpower == 0? false: mainpower == 1? false: mainpower == 2 ? true : false,
+                                activeColor: mainpower == 1 ? Colors.red : mainpower == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -479,7 +535,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: battery == 0 ? false : true,
+                                value: battery == 0? false: battery == 1? false: battery == 2 ? true : false,
+                                activeColor: battery == 1 ? Colors.red : battery == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -500,7 +557,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: compressor == 0 ? false : true,
+                                value: compressor == 0? false: compressor == 1? false: compressor == 2 ? true : false,
+                                activeColor: compressor == 1 ? Colors.red : compressor == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -521,8 +579,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: blender == 0 ? false : true,
-                                activeColor: Colors.red,
+                                value: blender == 0? false: blender == 1? false: blender == 2 ? true : false,
+                                activeColor: blender == 1 ? Colors.red : blender == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -533,25 +591,37 @@ class _SelfTestPageState extends State<SelfTestPage> {
                   )
                 ],
               ),
-              SizedBox(height: 15,),
-              checkOfffset==0 ? Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("Self test in progress..",style: TextStyle(fontSize: 30,color: Colors.white),),
-                  ),
-                  SizedBox(width: 40,),
-                  CircularProgressIndicator()
-                ],
-              ): Container(child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text("Test Completed"),
-                )),
-              ),)
+              SizedBox(
+                height: 15,
+              ),
+              checkOfffset == 0
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Self test in progress..",
+                            style: TextStyle(fontSize: 30, color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 40,
+                        ),
+                        CircularProgressIndicator()
+                      ],
+                    )
+                  : Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text("Test Completed"),
+                        )),
+                      ),
+                    )
             ],
           ),
         ),

@@ -22,17 +22,19 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    // counter = counter+1;
     saveData();
   }
 
   saveData() async {
-    counter = counter+1;
     preferences = await SharedPreferences.getInstance();
+    counter = int.tryParse(preferences.getString("noTimes"));
+    counter = counter +1;
     preferences.setString("mode", "PC-CMV");
     preferences.setInt("rr", 12);
     preferences.setInt("ie", 3);
-    preferences.setInt("i", 1);
-    preferences.setInt("e", 3);
+    preferences.setString("i", "1.0");
+    preferences.setString("e", "1.0");
     preferences.setInt("peep", 10);
     // preferences.setInt("ps", 40);
     preferences.setInt("fio2", 22);

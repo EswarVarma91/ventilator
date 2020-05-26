@@ -59,6 +59,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   @override
   void initState() {
     super.initState();
+    vomL.clear();
     Screen.keepOn(true);
     dbHelper = DatabaseHelper();
     getPatientData(widget.patientID, widget.fromDateC, widget.toDateC);
@@ -76,11 +77,12 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   }
 
   getPatientData(var pId, var fromDate, var toDate) async {
+    
     vomL = await dbHelper.getPatientsData(pId, fromDate.toString(), toDate.toString());
     pressurePoints.clear();
     volumePoints.clear();
     flowPoints.clear();
-    vomL.clear();
+    
 
     if (vomL.isNotEmpty) {
       setState(() {
@@ -224,6 +226,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
 
     return Scaffold(
         resizeToAvoidBottomPadding: false,
+        appBar: AppBar(title: Text(widget.patientID),),
         body: dataAvailable
             ? Container(
                 color: Color(0xFF171e27),
@@ -278,7 +281,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                   ],
                 ),
               )
-            : Center(child: CircularProgressIndicator()));
+            : Center(child: Text("No Data Available.")));
   }
 
   rightBar() {
@@ -1826,6 +1829,8 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
 
     var finalFrom = DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateFromSend.toString().split(".")[0]);
     var finalTo = DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateToSend.toString().split(".")[0]);
+
+    vomL.clear();
 
     getPatientData(patientID,finalFrom , finalTo);
   }

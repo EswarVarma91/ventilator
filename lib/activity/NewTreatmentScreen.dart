@@ -339,33 +339,16 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                                         heightId.text = index.toString();
                                         if (index <= 70) {
                                           setState(() {
-                                            weightId.text =
-                                                ((0.125 * index) - 0.75)
-                                                    .toInt()
-                                                    .toString();
+                                            weightId.text =((0.125 * index) - 0.75).toInt().toString();
                                           });
                                         } else if (70 < index && index <= 128) {
                                           setState(() {
-                                            weightId.text =
-                                                (((0.0037 * index - 0.4018) *
-                                                            index) +
-                                                        18.62)
-                                                    .toInt()
-                                                    .toString();
+                                            weightId.text =(((0.0037 * index - 0.4018) *index) + 18.62).toInt().toString();
                                           });
                                         } else if (index >= 129) {
                                           setState(() {
-                                            maleEnabled == true
-                                                ? weightId.text =
-                                                    ((0.9079 * index) - 88.022)
-                                                        .toInt()
-                                                        .toString()
-                                                : femaleEnabled == true
-                                                    ? weightId.text =
-                                                        ((0.9049 * index) -
-                                                                88.022)
-                                                            .toInt()
-                                                            .toString()
+                                            maleEnabled == true ? weightId.text =((0.9079 * index) - 88.022).toInt().toString()
+                                                : femaleEnabled == true ? weightId.text =((0.9049 * index) -88.022).toInt().toString()
                                                     : 0.toString();
                                           });
                                         }
