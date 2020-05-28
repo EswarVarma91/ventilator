@@ -2,68 +2,102 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:screen/screen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
+import 'package:ventilator/database/ADatabaseHelper.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
-import 'package:ventilator/viewlog/AlarmLog.dart';
 import 'package:ventilator/viewlog/ViewLogDataDisplayPage.dart';
+import 'package:ventilator/viewlog/ViewLogPatientList.dart';
 
 import 'ViewLogChooseDateandTime.dart';
 
-class ViewLogPatientList extends StatefulWidget {
-  ViewLogPatientList({Key key}) : super(key: key);
+class AlarmLog extends StatefulWidget {
+  AlarmLog({Key key}) : super(key: key);
 
   @override
-  _ViewLogPatientListState createState() => _ViewLogPatientListState();
+  _AlarmLogListState createState() => _AlarmLogListState();
 }
 
-class _ViewLogPatientListState extends State<ViewLogPatientList> {
-  Future<List<PatientsList>> patientList;
+class _AlarmLogListState extends State<AlarmLog> {
+  Future<List<AlarmsList>> alarmList;
   String name, price;
-  DatabaseHelper dbHelper;
+  ADatabaseHelper dbHelper;
 
   @override
   void initState() {
     super.initState();
     Screen.keepOn(true);
-    dbHelper = DatabaseHelper();
+    dbHelper = ADatabaseHelper();
     getPatientData();
   }
 
   getPatientData() async {
-    patientList = dbHelper.getAllPatients();
-    print(patientList);
+    alarmList = dbHelper.getAllAlarms();
+    print(alarmList);
+  }
+
+  getAlarmCode(int res){
+
+    var  data = res == 01
+                  ? "AC POWER DISCONNECTED"
+                  : res == 02
+                      ? " LOW BATTERY"
+                      : res == 03
+                          ? "CALIBRATE FiO2"
+                          : res == 04
+                              ? "CALIBRATION FiO2 FAIL"
+                              : res == 05
+                                  ? "SYSTEM FAULT"
+                                  : res == 06
+                                      ? "SELF TEST FAIL"
+                                      : res == 07
+                                          ? "FiO2 SENSOR MISSING"
+                                          : res == 08
+                                              ? "HIGH FiO2"
+                                              : res == 09
+                                                  ? "LOW FIO2"
+                                                  : res == 10
+                                                      ? 
+                                                          "HIGH LEAKAGE"
+                                                      : res ==
+                                                              11
+                                                          ? 
+                                                              "HIGH PRESSURE"
+                                                          : res ==
+                                                                  12
+                                                              ? 
+                                                                  "LOW PRESSURE"
+                                                              : res == 13
+                                                                  ? 
+                                                                      "LOW VTE"
+                                                                  : res == 14
+                                                                      ? 
+                                                                          "HIGH VTE"
+                                                                      : res ==
+                                                                              15
+                                                                          ? 
+                                                                              "LOW VTI"
+                                                                          : res == 16
+                                                                              ? "HIGH VTI"
+                                                                              : res == 17 ? "PATIENT DISCONNECTED" : res == 18 ? "LOW O2  supply" : res == 19 ? "LOW RR" : res == 20 ? "HIGH RR" : res == 21 ? "HIGH PEEP" : res == 22 ? "LOW PEEP" : res == 23 ? "Apnea backup" : "0";
+  return data;
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
-        title: Text("Patient List"),
-       actions: <Widget>[
-        FlatButton(
-          textColor: Colors.white,
-          onPressed: () {
-            Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AlarmLog()),
-          );
-      
-          },
-          child: Icon(Icons.alarm),
-          shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-        ),
-      ],
+        title: Text("Alarm List"),
       ),
       body: WillPopScope(
         onWillPop: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Dashboard()),
+            MaterialPageRoute(builder: (context) => ViewLogPatientList()),
           );
         },
         child: FutureBuilder<List>(
-          future: patientList,
+          future: alarmList,
           initialData: List(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
@@ -82,18 +116,18 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
                           child: ListTile(
                         onTap: () {
                           // selectDateandTimeRange();
-                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ViewLogChooseDateandTime(snapshot.data[index].pId,
-                                  snapshot.data[index].pName,
-                                  snapshot.data[index].minTime,
-                                  snapshot.data[index].maxTime)));
+                          //  Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => ViewLogChooseDateandTime(snapshot.data[index].pId,
+                          //         snapshot.data[index].pName,
+                          //         snapshot.data[index].minTime,
+                          //         snapshot.data[index].maxTime)));
                         },
                         leading: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Icon(
-                            Icons.person,
+                            Icons.alarm,
                             size: 35,
                           ),
                         ),
@@ -111,49 +145,17 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          snapshot.data[index].pName != null
-                                              ? snapshot.data[index].pName
-                                                  .toString()
+                                   Text(snapshot.data[index].alarmCode != null
+                                              ? getAlarmCode(int.tryParse(snapshot.data[index].alarmCode))
+                                                  .toString().toUpperCase()
                                               : "",
                                           style: TextStyle(fontSize: 22),
                                         ),
                                         SizedBox(
                                           width: 30,
                                         ),
-                                        Text(
-                                          snapshot.data[index].pId != null
-                                              ? snapshot.data[index].pId
-                                                  .toString()
-                                                  .toUpperCase()
-                                              : "",
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          snapshot.data[index].minTime != null
-                                              ? snapshot.data[index].minTime
-                                                  .toString()
-                                              : "",
-                                          style: TextStyle(fontSize: 10),
-                                        ),
-                                        Text("  -  "),
-                                        Text(
-                                          snapshot.data[index].maxTime != null
-                                              ? snapshot.data[index].maxTime
-                                                  .toString()
-                                              : "",
-                                          style: TextStyle(fontSize: 10),
-                                        ),
-                                      ],
-                                    )
+                                      
+                                   
                                   ],
                                 ),
                               ),

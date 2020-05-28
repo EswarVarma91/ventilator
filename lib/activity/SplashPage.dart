@@ -25,13 +25,27 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     // counter = counter+1;
-    saveData();
+    getData();
+    // saveData();
   }
 
-  saveData() async {
+
+  getData() async{
     preferences = await SharedPreferences.getInstance();
-    counter = int.tryParse(preferences.getString("noTimes"));
-    counter = counter +1;
+    counter = (preferences.getInt("noTimes")).toInt();
+    await sleep(Duration(seconds: 4));
+    saveData(counter);
+  }
+
+  saveData(int counter) async {
+    preferences = await SharedPreferences.getInstance();
+
+    // if(counter==null){
+    //   counter = counter +1;
+    // }else{
+      counter = counter +1;
+    // }
+    
     preferences.setString("mode", "PC-CMV");
     preferences.setInt("rr", 12);
     preferences.setInt("ie", 3);
@@ -55,8 +69,8 @@ class _SplashPageState extends State<SplashPage> {
      preferences.setString("page", "" );
      preferences.setString("pweight", "" );
      preferences.setString("pheight", "" );
-     preferences.setString('noTimes', counter.toString());
-    await sleep(Duration(seconds: 2));
+     preferences.setInt('noTimes', counter);
+    // await sleep(Duration(seconds: 2));
   }
 
   @override
@@ -67,7 +81,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: SplashScreen(
           seconds: 2,
-          navigateAfterSeconds: Dashboard(),
+          navigateAfterSeconds: SelfTestPage(),
           backgroundColor: Colors.white,
           loaderColor: Colors.black,
         ),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -117,143 +118,182 @@ class _CallibrationPageState extends State<CallibrationPage> {
     });
   }
 
+  bool testingText = false;
+  String textText="";
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
-    return Container(
-      child: Center(
-        child: Column(
-          children: [
-            Container(
-              child: Image.asset(
-                'assets/images/logo.png',
-                width: 412,
+    return Scaffold(
+          body: Container(
+            color: Color(0xFF171e27),
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 242,
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      sendFullTest();
-                    },
-                    child: Container(
-                      width: 220,
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Continue \n with".toUpperCase(),
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
+             testingText ?  Text("$textText",style: TextStyle(color: Colors.white,fontSize: 30),):Text("",style: TextStyle(color: Colors.white,fontSize: 30),),
+              SizedBox(height: 140,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        // setState(() {
+                        //   testingText= true;
+                        //   textText = "Testing 0 \u2082..";
+                        // });
+                        // sendFullTest();
+
+                        //  setState(() {
+                        //   testingText= true;
+                        //   textText = "Testing 0\u2082..";
+                        // });
+
+                        //  _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
+                        //     setState(() async {                                                                                                                                                                                                                                           
+                        //       testingText=true;
+                        //       textText = "Calibration Completed.";
+                        //       // await sleep(Duration(seconds:1));
+                        //     });
+                        // });
+
+                       
+                      },
+                      child: Container(
+                        width: 220,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Continue \n with".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "Full Test".toUpperCase(),
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                              Text(
+                                "Full Test".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      sendCalibrationText();
-                    },
-                    child: Container(
-                      width: 220,
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Continue \n with".toUpperCase(),
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        // sendCalibrationText();
+                        setState(() {
+                          testingText= true;
+                          textText = "Calibrating 0\u2082..";
+                        });
+
+                         _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
+                            setState(() async {                                                                                                                                                                                                                                           
+                              testingText=true;
+                              textText = "Calibration Completed.";
+                              // await sleep(Duration(seconds:1));
+                            });
+                        });
+                      },
+                      child: Container(
+                        width: 220,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Continue \n with".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "Calibration".toUpperCase(),
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                              Text(
+                                "Calibration".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Dashboard()),
-                      );
-                    },
-                    child: Container(
-                      width: 220,
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Continue \n with".toUpperCase(),
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Dashboard()),
+                        );
+                      },
+                      child: Container(
+                        width: 220,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Continue \n with".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "Treatment".toUpperCase(),
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                              Text(
+                                "Treatment".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

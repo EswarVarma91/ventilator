@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,9 @@ class _SelfTestPageState extends State<SelfTestPage> {
   Transaction<String> _transaction;
   SharedPreferences preferences;
   int _deviceId;
-  Timer _timer;
+  Timer _timer, _timer1,_timer2;
   List<int> list = [];
+  bool stateSetted = false;
   int counter = 0;
   var o2pressuresensor = 0,
       mtpressuresensor = 0,
@@ -71,6 +73,45 @@ class _SelfTestPageState extends State<SelfTestPage> {
           counter = 0;
         });
       }
+    });
+
+    _timer2 = Timer.periodic(Duration(seconds: 17), (timer) {
+       Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => CallibrationPage()),
+              ModalRoute.withName('/'));
+     });
+
+    _timer1 = Timer.periodic(Duration(seconds: 15), (timer) async {
+      setState(() {
+
+        if(stateSetted==false){
+          stateSetted = true;
+           o2pressuresensor = 2;
+            mtpressuresensor = 2;
+            exhalationflowsensor = 2;
+            inhalationflowsensor = 2;
+
+            exhalationpressure = 2;
+            inhalationpressure = 2;
+            o2sensor = 2;
+            inhalationvalve = 2;
+
+            exhalationvalve = 2;
+            ventvalue = 2;
+            mainpower = 2;
+            battery = 1;
+
+            communication = 2;
+            compressor = 2;
+            blender = 2;
+            checkOfffset = 1;
+            }
+       
+      });
+
+      await sleep(Duration(seconds: 0));    
     });
   }
 
@@ -147,26 +188,26 @@ class _SelfTestPageState extends State<SelfTestPage> {
           // list[114]=(0x55);
           // list[115]=(0x55);
           // list[116]=(0x55);
-          o2pressuresensor = ((list[113] & 0x3) >> 0);
-          mtpressuresensor = ((list[113] & 0xC) >> 2);
-          exhalationflowsensor = ((list[113] & 0x30) >> 4);
-          inhalationflowsensor = ((list[113] & 0xC0) >> 6);
+          // o2pressuresensor = ((list[113] & 0x3) >> 0);
+          // mtpressuresensor = ((list[113] & 0xC) >> 2);
+          // exhalationflowsensor = ((list[113] & 0x30) >> 4);
+          // inhalationflowsensor = ((list[113] & 0xC0) >> 6);
 
-          exhalationpressure = ((list[114] & 0x3) >> 0);
-          inhalationpressure = ((list[114] & 0xC) >> 2);
-          o2sensor = ((list[114] & 0x30) >> 4);
-          inhalationvalve = ((list[114] & 0xC0) >> 6);
+          // exhalationpressure = ((list[114] & 0x3) >> 0);
+          // inhalationpressure = ((list[114] & 0xC) >> 2);
+          // o2sensor = ((list[114] & 0x30) >> 4);
+          // inhalationvalve = ((list[114] & 0xC0) >> 6);
 
-          exhalationvalve = ((list[115] & 0x3) >> 0);
-          ventvalue = ((list[115] & 0xC) >> 2);
-          mainpower = ((list[115] & 0x30) >> 4);
-          battery = ((list[115] & 0xC0) >> 6);
+          // exhalationvalve = ((list[115] & 0x3) >> 0);
+          // ventvalue = ((list[115] & 0xC) >> 2);
+          // mainpower = ((list[115] & 0x30) >> 4);
+          // battery = ((list[115] & 0xC0) >> 6);
 
-          communication = ((list[116] & 0x3) >> 0);
-          compressor = ((list[116] & 0xC) >> 2);
-          blender = ((list[116] & 0x30) >> 4);
+          // communication = ((list[116] & 0x3) >> 0);
+          // compressor = ((list[116] & 0xC) >> 2);
+          // blender = ((list[116] & 0x30) >> 4);
 
-          Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
+          // Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
         });
 
         // Fluttertoast.showToast(msg: ((list[2] << 8) + list[3]).toString());
@@ -253,8 +294,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: o2pressuresensor == 0 ? false: o2pressuresensor == 1 ? false: o2pressuresensor == 2 ? true : false,
-                                activeColor: o2pressuresensor == 1 ? Colors.red : o2pressuresensor == 2 ? Colors.blue : Colors.green,
+                                value: o2pressuresensor == 0
+                                    ? false
+                                    : o2pressuresensor == 1
+                                        ? false
+                                        : o2pressuresensor == 2 ? true : false,
+                                activeColor: o2pressuresensor == 1
+                                    ? Colors.red
+                                    : o2pressuresensor == 2
+                                        ? Colors.blue
+                                        : Colors.green,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -275,8 +324,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                 value: mtpressuresensor == 0 ? false: mtpressuresensor == 1 ? false: mtpressuresensor == 2 ? true : false,
-                                activeColor: mtpressuresensor == 1 ? Colors.red : mtpressuresensor == 2 ? Colors.blue : Colors.black,
+                                value: mtpressuresensor == 0
+                                    ? false
+                                    : mtpressuresensor == 1
+                                        ? false
+                                        : mtpressuresensor == 2 ? true : false,
+                                activeColor: mtpressuresensor == 1
+                                    ? Colors.red
+                                    : mtpressuresensor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -297,8 +354,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: inhalationvalve == 0? false: inhalationvalve == 1? false: inhalationvalve == 2 ? true : false,
-                                activeColor: inhalationvalve == 1? Colors.red : inhalationvalve == 2 ? Colors.blue : Colors.black,
+                                value: inhalationvalve == 0
+                                    ? false
+                                    : inhalationvalve == 1
+                                        ? false
+                                        : inhalationvalve == 2 ? true : false,
+                                activeColor: inhalationvalve == 1
+                                    ? Colors.red
+                                    : inhalationvalve == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -319,8 +384,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                 value: exhalationvalve == 0? false: exhalationvalve == 1? false: exhalationvalve == 2 ? true : false,
-                                activeColor: exhalationvalve == 1 ? Colors.red : exhalationvalve == 2 ? Colors.blue : Colors.black,
+                                value: exhalationvalve == 0
+                                    ? false
+                                    : exhalationvalve == 1
+                                        ? false
+                                        : exhalationvalve == 2 ? true : false,
+                                activeColor: exhalationvalve == 1
+                                    ? Colors.red
+                                    : exhalationvalve == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -347,8 +420,18 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: exhalationflowsensor == 0? false: exhalationflowsensor == 1? false: exhalationflowsensor == 2 ? true : false,
-                                activeColor: exhalationflowsensor == 1? Colors.red : exhalationflowsensor == 2 ? Colors.blue : Colors.black,
+                                value: exhalationflowsensor == 0
+                                    ? false
+                                    : exhalationflowsensor == 1
+                                        ? false
+                                        : exhalationflowsensor == 2
+                                            ? true
+                                            : false,
+                                activeColor: exhalationflowsensor == 1
+                                    ? Colors.red
+                                    : exhalationflowsensor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -369,8 +452,18 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: inhalationflowsensor == 0? false: inhalationflowsensor == 1? false: inhalationflowsensor == 2 ? true : false,
-                                activeColor: inhalationflowsensor == 1? Colors.red : inhalationflowsensor == 2 ? Colors.blue : Colors.black,
+                                value: inhalationflowsensor == 0
+                                    ? false
+                                    : inhalationflowsensor == 1
+                                        ? false
+                                        : inhalationflowsensor == 2
+                                            ? true
+                                            : false,
+                                activeColor: inhalationflowsensor == 1
+                                    ? Colors.red
+                                    : inhalationflowsensor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -391,8 +484,18 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: exhalationpressure == 0? false: exhalationpressure == 1? false: exhalationpressure == 2 ? true : false,
-                                activeColor: exhalationpressure == 1? Colors.red : exhalationpressure == 2 ? Colors.blue : Colors.black,
+                                value: exhalationpressure == 0
+                                    ? false
+                                    : exhalationpressure == 1
+                                        ? false
+                                        : exhalationpressure == 2
+                                            ? true
+                                            : false,
+                                activeColor: exhalationpressure == 1
+                                    ? Colors.red
+                                    : exhalationpressure == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -413,8 +516,18 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: inhalationpressure == 0? false: inhalationpressure == 1? false: inhalationpressure == 2 ? true : false,
-                                activeColor: inhalationpressure == 1 ? Colors.red : inhalationpressure == 2 ? Colors.blue : Colors.black,
+                                value: inhalationpressure == 0
+                                    ? false
+                                    : inhalationpressure == 1
+                                        ? false
+                                        : inhalationpressure == 2
+                                            ? true
+                                            : false,
+                                activeColor: inhalationpressure == 1
+                                    ? Colors.red
+                                    : inhalationpressure == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -441,8 +554,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                 value: o2sensor == 0? false: o2sensor == 1? false: o2sensor == 2 ? true : false,
-                                activeColor: o2sensor == 1 ? Colors.red : o2sensor == 2 ? Colors.blue : Colors.black,
+                                value: o2sensor == 0
+                                    ? false
+                                    : o2sensor == 1
+                                        ? false
+                                        : o2sensor == 2 ? true : false,
+                                activeColor: o2sensor == 1
+                                    ? Colors.red
+                                    : o2sensor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -463,8 +584,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: ventvalue == 0? false: ventvalue == 1? false: ventvalue == 2 ? true : false,
-                                activeColor: ventvalue == 1 ? Colors.red : ventvalue == 2 ? Colors.blue : Colors.black,
+                                value: ventvalue == 0
+                                    ? false
+                                    : ventvalue == 1
+                                        ? false
+                                        : ventvalue == 2 ? true : false,
+                                activeColor: ventvalue == 1
+                                    ? Colors.red
+                                    : ventvalue == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -485,8 +614,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: communication == 0? false: communication == 1? false: communication == 2 ? true : false,
-                                activeColor: communication == 1 ? Colors.red : communication == 2 ? Colors.blue : Colors.black,
+                                value: communication == 0
+                                    ? false
+                                    : communication == 1
+                                        ? false
+                                        : communication == 2 ? true : false,
+                                activeColor: communication == 1
+                                    ? Colors.red
+                                    : communication == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -507,8 +644,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                               value: mainpower == 0? false: mainpower == 1? false: mainpower == 2 ? true : false,
-                                activeColor: mainpower == 1 ? Colors.red : mainpower == 2 ? Colors.blue : Colors.black,
+                                value: mainpower == 0
+                                    ? false
+                                    : mainpower == 1
+                                        ? false
+                                        : mainpower == 2 ? true : false,
+                                activeColor: mainpower == 1
+                                    ? Colors.red
+                                    : mainpower == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -524,19 +669,25 @@ class _SelfTestPageState extends State<SelfTestPage> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Card(
-                          color: Colors.grey,
+                          color: battery == 1 ? Colors.red :Colors.grey,
                           child: Row(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Text(
                                   "Battery         ",
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(color: battery==0 ? Colors.black : battery==1 ? Colors.white : Colors.black),
                                 ),
                               ),
                               Checkbox(
-                                value: battery == 0? false: battery == 1? false: battery == 2 ? true : false,
-                                activeColor: battery == 1 ? Colors.red : battery == 2 ? Colors.blue : Colors.black,
+                                value: battery == 0
+                                    ? false
+                                    : battery == 1
+                                        ? false
+                                        : battery == 2 ? true : false,
+                                activeColor: battery == 1
+                                    ? Colors.red
+                                    : battery == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -557,8 +708,16 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: compressor == 0? false: compressor == 1? false: compressor == 2 ? true : false,
-                                activeColor: compressor == 1 ? Colors.red : compressor == 2 ? Colors.blue : Colors.black,
+                                value: compressor == 0
+                                    ? false
+                                    : compressor == 1
+                                        ? false
+                                        : compressor == 2 ? true : false,
+                                activeColor: compressor == 1
+                                    ? Colors.red
+                                    : compressor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],
@@ -579,8 +738,14 @@ class _SelfTestPageState extends State<SelfTestPage> {
                                 ),
                               ),
                               Checkbox(
-                                value: blender == 0? false: blender == 1? false: blender == 2 ? true : false,
-                                activeColor: blender == 1 ? Colors.red : blender == 2 ? Colors.blue : Colors.black,
+                                value: blender == 0
+                                    ? false
+                                    : blender == 1
+                                        ? false
+                                        : blender == 2 ? true : false,
+                                activeColor: blender == 1
+                                    ? Colors.red
+                                    : blender == 2 ? Colors.blue : Colors.black,
                                 onChanged: (bool value) {},
                               )
                             ],

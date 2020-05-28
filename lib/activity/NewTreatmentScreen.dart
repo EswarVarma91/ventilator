@@ -370,7 +370,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                                       });
                                     },
                                     children: List.generate(
-                                        228,
+                                        200,
                                         (index) => Center(
                                               child: Text(index.toString()),
                                             ))),
@@ -486,7 +486,8 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
     } else if (nameId.text.isEmpty) {
     } else if (ageId.text.isEmpty) {
     } else if (maleEnabled == false && femaleEnabled == false) {
-    } else if (heightId.text.isEmpty) {
+    } else if (int.tryParse(heightId.text)<=134 || int.tryParse(heightId.text)>=200) {
+      Fluttertoast.showToast(msg: "Enter height between 134cm to 200cm");
     } else {
       preferences = await SharedPreferences.getInstance();
       preferences.setString("pid", patientId.text.toString());

@@ -35,7 +35,7 @@ class _ViewLogChooseDateandTimeState extends State<ViewLogChooseDateandTime> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Choose min and max timmings".toUpperCase()),
+        title: Text("Choose min and max"),
       ),
       body: Column(
         children: [

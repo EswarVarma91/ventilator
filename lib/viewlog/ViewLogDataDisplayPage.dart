@@ -59,7 +59,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   @override
   void initState() {
     super.initState();
-    vomL.clear();
+    vomL=[];
     Screen.keepOn(true);
     dbHelper = DatabaseHelper();
     getPatientData(widget.patientID, widget.fromDateC, widget.toDateC);
@@ -79,9 +79,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   getPatientData(var pId, var fromDate, var toDate) async {
     
     vomL = await dbHelper.getPatientsData(pId, fromDate.toString(), toDate.toString());
-    pressurePoints.clear();
-    volumePoints.clear();
-    flowPoints.clear();
+    pressurePoints = [];
+    volumePoints=[];
+    flowPoints=[];
     
 
     if (vomL.isNotEmpty) {
@@ -226,7 +226,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
 
     return Scaffold(
         resizeToAvoidBottomPadding: false,
-        appBar: AppBar(title: Text(widget.patientID),),
+        // appBar: AppBar(title: Text(widget.patientID),),
         body: dataAvailable
             ? Container(
                 color: Color(0xFF171e27),
@@ -258,9 +258,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                               child: Container(
                                 child: CupertinoSlider(
                                   onChanged: (value) {
-                                    pressurePoints.clear();
-                                    volumePoints.clear();
-                                    flowPoints.clear();
+                                    pressurePoints=[];
+                                    volumePoints=[];
+                                    flowPoints=[];
                                     // if (isPlaying == false) {
                                     setState(() {
                                       currentValue = value.toInt();

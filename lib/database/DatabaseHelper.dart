@@ -13,6 +13,7 @@ class DatabaseHelper {
   static const String PATIENTAGE = 'patientAge';
   static const String PATIENTHEIGHT = 'patientGender';
   static const String PATIENTGENDER = 'patientHeight';
+  static const String ALARM = 'alarmCodes';
   static const String PIPD = 'pipD';
   static const String VTD = 'vtD';
   static const String PEEPD = 'peepD';
@@ -37,7 +38,8 @@ class DatabaseHelper {
   static const String LUNG_IMAGE = 'lungImage';
   static const String PAW = 'paw';
   static const String TABLE = 'graphPoints';
-  static const String DATABASE = 'vDB';
+  static const String TABLE_ALARM ='alarms';
+  static const String DATABASE = 'adb';
 
   Future<Database> get db async {
     if (_db != null) {
@@ -55,8 +57,8 @@ class DatabaseHelper {
   }
 
   _onCreate(Database db, int version) async {
-    await db.execute(
-        'CREATE TABLE $TABLE($ID INTEGER PRIMARY KEY AUTOINCREMENT, $PATIENTID TEXT, $PATIENTNAME TEXT, $PATIENTAGE TEXT, $PATIENTGENDER TEXT,$PATIENTHEIGHT TEXT,$PIPD TEXT, $VTD TEXT,$PEEPD TEXT, $RRD TEXT,$FIO2D TEXT,$MAPD TEXT,$MVD TEXT,$COMPLAINCED TEXT, $IED TEXT,$RRS TEXT,$IES TEXT,$PEEPS TEXT,$PSS TEXT,$FIO2S TEXT,$TIS TEXT,$TES TEXT,$PRESSURE_POINTS REAL, $FLOW_POINTS REAL, $VOLUME_POINTS REAL, $DATE_TIME TEXT,$OPERATING_MODE TEXT,$LUNG_IMAGE TEXT,$PAW TEXT)');
+    await db.execute('CREATE TABLE $TABLE($ID INTEGER PRIMARY KEY AUTOINCREMENT, $PATIENTID TEXT, $PATIENTNAME TEXT, $PATIENTAGE TEXT, $PATIENTGENDER TEXT,$PATIENTHEIGHT TEXT,$PIPD TEXT, $VTD TEXT,$PEEPD TEXT, $RRD TEXT,$FIO2D TEXT,$MAPD TEXT,$MVD TEXT,$COMPLAINCED TEXT, $IED TEXT,$RRS TEXT,$IES TEXT,$PEEPS TEXT,$PSS TEXT,$FIO2S TEXT,$TIS TEXT,$TES TEXT,$PRESSURE_POINTS REAL, $FLOW_POINTS REAL, $VOLUME_POINTS REAL, $DATE_TIME TEXT,$OPERATING_MODE TEXT,$LUNG_IMAGE TEXT,$PAW TEXT)');
+    // await db.execute('CREATE TABLE $TABLE_ALARM($ID INTERGER PRIMARY KEY AUTOINCREMENT,$ALARM TEXT,$DATE_TIME TEXT)');
   }
 
   Future<int> save(VentilatorOMode vom) async {
@@ -101,6 +103,31 @@ class DatabaseHelper {
       return null;
     }
   }
+
+  // Future<int> saveAlarm(AlarmsList al) async {
+  //   var now = new DateTime.now();
+  //   try{
+  //     var dbClient = await db;
+  //     var res = await dbClient.rawInsert("INSERT INTO $TABLE_ALARM($ALARM,$DATE_TIME) VALUES(?,?)",[al.alarmCode,DateFormat("yyyy-MM-dd HH:mm:ss").format(now),]);
+  //     return res;
+  //   }catch(Exception){
+  //     return null;
+  //   }
+  // }
+
+  //  Future<List<AlarmsList>> getAllAlarms() async {
+  //    var dbClient = await db;
+  //   List<Map> dataData= await dbClient.rawQuery('SELECT $ID,$ALARM, FROM $TABLE_ALARM group by $ALARM ORDER BY $ID DESC LIMIT 200');
+  //   List<AlarmsList> plist =[];
+  //   if(dataData.length>0){
+  //     for(int i=0; i<dataData.length;i++){
+  //       plist.add(AlarmsList.fromMap(dataData[i]));
+  //     }
+  //   }
+  //   return plist;
+  // }
+
+
 
   Future<String> getLastRecordTime() async {
      var dbClient = await db;
