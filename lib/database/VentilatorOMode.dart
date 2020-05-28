@@ -188,11 +188,13 @@ class PatientsList {
 class AlarmsList {
   String alarmId;
   String alarmCode;
+  String datetime;
 
   AlarmsList(this.alarmCode);
 
    AlarmsList.fromMap(Map<String, dynamic> map) {
     alarmId = map['id'];
     alarmCode = map['alarmCodes'];
+    datetime = map['datetime'];
   }
 }

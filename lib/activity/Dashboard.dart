@@ -203,9 +203,9 @@ class _CheckPageState extends State<Dashboard> {
       pacvFlowRamp = false;
 
   int pacvItrigValue = 60,
-      pacvRrValue = 12,
-      pacvIeValue = 31,
-      pacvPeepValue = 5,
+      pacvRrValue = 20,
+      pacvIeValue = 51,
+      pacvPeepValue = 10,
       pacvPcValue = 30,
       pacvVtMinValue = 100,
       pacvVtMaxValue = 400,
@@ -226,9 +226,9 @@ class _CheckPageState extends State<Dashboard> {
       vacvFlowRamp = false;
 
   int vacvItrigValue = 60,
-      vacvRrValue = 12,
-      vacvIeValue = 31,
-      vacvPeepValue = 5,
+      vacvRrValue = 20,
+      vacvIeValue = 51,
+      vacvPeepValue = 10,
       vacvVtValue = 200,
       vacvPcMinValue = 20,
       vacvPcMaxValue = 60,
@@ -253,8 +253,8 @@ class _CheckPageState extends State<Dashboard> {
       psvFlowRamp = false;
 
   int psvItrigValue = 60,
-      psvPeepValue = 5,
-      psvIeValue = 31,
+      psvPeepValue = 10,
+      psvIeValue = 51,
       psvPsValue = 30,
       psvTiValue = 5,
       psvVtMinValue = 100,
@@ -262,7 +262,7 @@ class _CheckPageState extends State<Dashboard> {
       psvFio2Value = 21,
       psvAtimeValue = 10,
       psvEtrigValue = 10,
-      psvBackupRrValue = 12,
+      psvBackupRrValue = 20,
       psvMinTeValue = 1,
       psvFlowRampValue = 4;
 
@@ -281,10 +281,10 @@ class _CheckPageState extends State<Dashboard> {
       psimvFlowRamp = false;
 
   int psimvItrigValue = 60,
-      psimvRrValue = 12,
+      psimvRrValue = 20,
       psimvPsValue = 22,
-      psimvIeValue = 31,
-      psimvPeepValue = 5,
+      psimvIeValue = 51,
+      psimvPeepValue = 10,
       psimvPcValue = 30,
       psimvVtMinValue = 100,
       psimvVtMaxValue = 300,
@@ -306,9 +306,9 @@ class _CheckPageState extends State<Dashboard> {
       vsimvFlowRamp = false;
 
   int vsimvItrigValue = 60,
-      vsimvRrValue = 12,
-      vsimvIeValue = 31,
-      vsimvPeepValue = 5,
+      vsimvRrValue = 20,
+      vsimvIeValue = 51,
+      vsimvPeepValue = 10,
       vsimvVtValue = 200,
       vsimvPsValue = 22,
       vsimvPcMinValue = 20,
@@ -334,16 +334,16 @@ class _CheckPageState extends State<Dashboard> {
   bool pccmvFlowRamp = false, pccmvFlowRampChanged = false;
   bool pccmvTih = false, pccmvValueChanged = false;
 
-  int pccmvRRValue = 12,
-      pccmvIeValue = 31,
-      pccmvPeepValue = 5,
+  int pccmvRRValue = 20,
+      pccmvIeValue = 51,
+      pccmvPeepValue = 10,
       pccmvPcValue = 30,
       pccmvFio2Value = 21,
       pccmvVtminValue = 100,
       pccmvVtmaxValue = 400,
       pccmvTihValue = 50,
-      pccmvRRValueTemp = 12,
-      pccmvIeValueTemp = 31,
+      pccmvRRValueTemp = 20,
+      pccmvIeValueTemp = 51,
       pccmvPeepValueTemp = 10,
       pccmvPcValueTemp = 30,
       pccmvFio2ValueTemp = 21,
@@ -365,9 +365,9 @@ class _CheckPageState extends State<Dashboard> {
   bool vccmvFlowRamp = false;
   bool vccmvTih = false;
 
-  int vccmvRRValue = 12,
-      vccmvIeValue = 31,
-      vccmvPeepValue = 5,
+  int vccmvRRValue = 20,
+      vccmvIeValue = 51,
+      vccmvPeepValue = 10,
       vccmvPcMinValue = 20,
       vccmvPcMaxValue = 60,
       vccmvFio2Value = 21,
@@ -1431,7 +1431,7 @@ class _CheckPageState extends State<Dashboard> {
         i="1.0";
       }
       if(e==null){
-        e="1.0";
+        e="3.0";
       }
       if(vteValue==null){
           vteValue=0;
@@ -13263,6 +13263,7 @@ prvcData() {
             //     ),
             //   ),
             // ),
+            Container(width: 166),
           ],
         ),
         Column(
@@ -17749,8 +17750,8 @@ prvcData() {
     if (pacvEnabled == true) {
       setState(() {
         pacvItrigValue = 60;
-        pacvRrValue = 12;
-        pacvIeValue = 31;
+        pacvRrValue = 20;
+        pacvIeValue = 51;
         pacvPeepValue = 10;
         pacvPcValue = 30;
         pacvVtMinValue = 100;
@@ -17774,8 +17775,8 @@ prvcData() {
       });
     } else if (pccmvEnabled == true) {
       setState(() {
-        pccmvRRValue = 12;
-        pccmvIeValue = 31;
+        pccmvRRValue = 20;
+        pccmvIeValue = 51;
         pccmvPeepValue = 10;
         pccmvPcValue = 30;
         pccmvFio2Value = 21;
@@ -17800,8 +17801,8 @@ prvcData() {
       });
     } else if (vccmvEnabled == true) {
       setState(() {
-        vccmvRRValue = 12;
-        vccmvIeValue = 31;
+        vccmvRRValue = 20;
+        vccmvIeValue = 51;
         vccmvPeepValue = 10;
         vccmvPcMinValue = 20;
         vccmvPcMaxValue = 60;
@@ -17827,8 +17828,8 @@ prvcData() {
     } else if (vacvEnabled == true) {
       setState(() {
         vacvItrigValue = 60;
-        vacvRrValue = 12;
-        vacvIeValue = 31;
+        vacvRrValue = 20;
+        vacvIeValue = 51;
         vacvPeepValue = 10;
         vacvVtValue = 200;
         vacvPcMinValue = 20;
@@ -17854,7 +17855,7 @@ prvcData() {
       setState(() {
         psvItrigValue = 60;
         psvPeepValue = 10;
-        psvIeValue = 31;
+        psvIeValue = 51;
         psvPsValue = 30;
         psvTiValue = 5;
         psvVtMinValue = 100;
@@ -17862,7 +17863,7 @@ prvcData() {
         psvFio2Value = 21;
         psvAtimeValue = 10;
         psvEtrigValue = 10;
-        psvBackupRrValue = 12;
+        psvBackupRrValue = 20;
         psvMinTeValue = 1;
         psvFlowRampValue = 4;
         psvItrig = true;
@@ -17884,41 +17885,7 @@ prvcData() {
         psvparameterName = "I Trig";
         psvparameterUnits = "cmH20";
       });
-    } else if (psvEnabled == true) {
-      setState(() {
-        psvItrigValue = 60;
-        psvPeepValue = 10;
-        psvIeValue = 31;
-        psvPsValue = 30;
-        psvTiValue = 5;
-        psvVtMinValue = 100;
-        psvVtMaxValue = 400;
-        psvFio2Value = 21;
-        psvAtimeValue = 10;
-        psvEtrigValue = 10;
-        psvBackupRrValue = 12;
-        psvMinTeValue = 1;
-        psvFlowRampValue = 4;
-        psvItrig = true;
-        psvPeep = false;
-        psvIe = false;
-        psvPs = false;
-        psvTi = false;
-        psvVtMin = false;
-        psvVtMax = false;
-        psvFio2 = false;
-        psvAtime = false;
-        psvEtrig = false;
-        psvBackupRr = false;
-        psvMinTe = false;
-        psvFlowRamp = false;
-        psvmaxValue = 100;
-        psvminValue = 20;
-        psvdefaultValue = 60;
-        psvparameterName = "I Trig";
-        psvparameterUnits = "cmH20";
-      });
-    } else if (vsimvEnabled == true) {
+    }  else if (vsimvEnabled == true) {
       setState(() {
         vsimvItrig = true;
         vsimvRr = false;
@@ -17931,9 +17898,9 @@ prvcData() {
         vsimvFio2 = false;
         vsimvFlowRamp = false;
         vsimvItrigValue = 60;
-        vsimvRrValue = 12;
-        vsimvIeValue = 31;
-        vsimvPeepValue = 5;
+        vsimvRrValue = 20;
+        vsimvIeValue = 51;
+        vsimvPeepValue = 10;
         vsimvVtValue = 200;
         vsimvPsValue = 22;
         vsimvPcMinValue = 20;
@@ -17959,9 +17926,9 @@ prvcData() {
         vsimvFio2 = false;
         vsimvFlowRamp = false;
         vsimvItrigValue = 60;
-        vsimvRrValue = 12;
-        vsimvIeValue = 31;
-        vsimvPeepValue = 5;
+        vsimvRrValue = 20;
+        vsimvIeValue = 51;
+        vsimvPeepValue =10;
         vsimvVtValue = 200;
         vsimvPsValue = 22;
         vsimvPcMinValue = 20;
@@ -17988,10 +17955,10 @@ prvcData() {
         psimvFlowRamp = false;
 
         psimvItrigValue = 60;
-        psimvRrValue = 12;
+        psimvRrValue = 20;
         psimvPsValue = 22;
-        psimvIeValue = 31;
-        psimvPeepValue = 5;
+        psimvIeValue = 51;
+        psimvPeepValue = 10;
         psimvPcValue = 30;
         psimvVtMinValue = 100;
         psimvVtMaxValue = 300;

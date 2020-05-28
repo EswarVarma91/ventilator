@@ -55,7 +55,7 @@ class ADatabaseHelper {
 
    Future<List<AlarmsList>> getAllAlarms() async {
      var dbClient = await db;
-    List<Map> dataData= await dbClient.rawQuery('SELECT $ID,$ALARM FROM $TABLE_ALARM group by $ALARM ORDER BY $ID ASC LIMIT 200');
+    List<Map> dataData= await dbClient.rawQuery('SELECT $ID,$ALARM,$DATE_TIME FROM $TABLE_ALARM group by $ALARM ORDER BY $ID ASC LIMIT 200');
     List<AlarmsList> plist =[];
     if(dataData.length>0){
       for(int i=0; i<dataData.length;i++){

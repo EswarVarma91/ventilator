@@ -47,10 +47,10 @@ class _SplashPageState extends State<SplashPage> {
     // }
     
     preferences.setString("mode", "PC-CMV");
-    preferences.setInt("rr", 12);
+    preferences.setInt("rr", 20);
     preferences.setInt("ie", 3);
     preferences.setString("i", "1.0");
-    preferences.setString("e", "1.0");
+    preferences.setString("e", "3.0");
     preferences.setInt("peep", 10);
     // preferences.setInt("ps", 40);
     preferences.setInt("fio2", 21);

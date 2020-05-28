@@ -154,7 +154,12 @@ class _AlarmLogListState extends State<AlarmLog> {
                                         SizedBox(
                                           width: 30,
                                         ),
-                                      
+                                      Text(snapshot.data[index].datetime != null
+                                              ? snapshot.data[index].datetime
+                                                  .toString().toUpperCase()
+                                              : "",
+                                          style: TextStyle(fontSize: 10),
+                                        ),
                                    
                                   ],
                                 ),
