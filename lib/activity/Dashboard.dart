@@ -209,7 +209,7 @@ class _CheckPageState extends State<Dashboard> {
       pacvPcValue = 30,
       pacvVtMinValue = 100,
       pacvVtMaxValue = 400,
-      pacvFio2Value = 22,
+      pacvFio2Value = 21,
       pacvFlowRampValue = 3;
 
   int pacvmaxValue = 100, pacvminValue = 20, pacvdefaultValue = 60;
@@ -232,7 +232,7 @@ class _CheckPageState extends State<Dashboard> {
       vacvVtValue = 200,
       vacvPcMinValue = 20,
       vacvPcMaxValue = 60,
-      vacvFio2Value = 22,
+      vacvFio2Value = 21,
       vacvFlowRampValue = 4;
 
   int vacvmaxValue = 100, vacvminValue = 20, vacvdefaultValue = 60;
@@ -259,7 +259,7 @@ class _CheckPageState extends State<Dashboard> {
       psvTiValue = 5,
       psvVtMinValue = 100,
       psvVtMaxValue = 400,
-      psvFio2Value = 22,
+      psvFio2Value = 21,
       psvAtimeValue = 10,
       psvEtrigValue = 10,
       psvBackupRrValue = 12,
@@ -288,7 +288,7 @@ class _CheckPageState extends State<Dashboard> {
       psimvPcValue = 30,
       psimvVtMinValue = 100,
       psimvVtMaxValue = 300,
-      psimvFio2Value = 22,
+      psimvFio2Value = 21,
       psimvFlowRampValue = 3;
 
   int psimvmaxValue = 100, psimvminValue = 20, psimvdefaultValue = 60;
@@ -313,7 +313,7 @@ class _CheckPageState extends State<Dashboard> {
       vsimvPsValue = 22,
       vsimvPcMinValue = 20,
       vsimvPcMaxValue = 60,
-      vsimvFio2Value = 22,
+      vsimvFio2Value = 21,
       vsimvFlowRampValue = 4;
 
   int vsimvmaxValue = 100, vsimvminValue = 20, vsimvdefaultValue = 60;
@@ -370,7 +370,7 @@ class _CheckPageState extends State<Dashboard> {
       vccmvPeepValue = 5,
       vccmvPcMinValue = 20,
       vccmvPcMaxValue = 60,
-      vccmvFio2Value = 22,
+      vccmvFio2Value = 21,
       vccmvVtValue = 200,
       vccmvTihValue = 50;
   int vccmvFlowRampValue = 4;
@@ -403,7 +403,7 @@ class _CheckPageState extends State<Dashboard> {
       maxvte = 1200,
       minmve = 0,
       maxmve = 100,
-      minppeak = 10,
+      minppeak = 0,
       maxppeak = 60,
       minpeep = 0,
       maxpeep = 30,
@@ -433,7 +433,6 @@ class _CheckPageState extends State<Dashboard> {
       patientWeight;
   
   bool newTreatmentEnabled = false, powerButtonEnabled = false;
-  int noTimes;
   bool isplaying = false, _buttonPressed = false,respiratoryEnable=false;
   int  previousCode=101,presentCode;
 
@@ -672,7 +671,7 @@ class _CheckPageState extends State<Dashboard> {
             } else {
               // Fluttertoast.showToast(msg: noTimes.toString());
               var data = VentilatorOMode(
-                  "SWASIT" + noTimes.toString(),
+                  "SWASIT " +  DateFormat("dd-MM-yyyy").format(now).toString(),
                   patientName,
                   patientAge,
                   patientGender,
@@ -1050,7 +1049,7 @@ class _CheckPageState extends State<Dashboard> {
     _ports = [];
     List<UsbDevice> devices = await UsbSerial.listDevices();
     if (devices.isEmpty) {
-      getData();
+      // getData();
       setState(() {
         _status = "Disconnected";
         usbConnected = false;
@@ -1069,17 +1068,18 @@ class _CheckPageState extends State<Dashboard> {
   bool _loopActive = false;
   int timerCounter = 0;
 
-  getNoTimes() async {
-    preferences =await SharedPreferences.getInstance();
-    noTimes = preferences.getInt("noTimes");
-  }
+  // getNoTimes() async {
+  //   await sleep(Duration(seconds: 6));
+  //   preferences =await SharedPreferences.getInstance();
+  //   noTimes = preferences.getInt("noTimes");
+  // }
 
   @override
   initState() {
     super.initState();
     // _playMusic();
     getData();
-    getNoTimes();
+    // getNoTimes();
     UsbSerial.usbEventStream.listen((UsbEvent event) {
       _getPorts();
     });
@@ -4838,7 +4838,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "20",
+                              "21",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psvFio2
@@ -5931,8 +5931,7 @@ class _CheckPageState extends State<Dashboard> {
               height: 5,
             ),
             patientId != ""
-                ? Text("")
-                : Container(
+                ?  Container(
                     height: 40,
                     width: 340,
                     decoration: BoxDecoration(
@@ -5951,7 +5950,7 @@ class _CheckPageState extends State<Dashboard> {
                               (int.tryParse(patientWeight) * 8).toString())
                         ],
                       ),
-                    )),
+                    )):Container(),
             SizedBox(
               height: 5,
             ),
@@ -7211,7 +7210,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "20",
+                              "21",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvFio2
@@ -7477,8 +7476,7 @@ class _CheckPageState extends State<Dashboard> {
               height: 5,
             ),
             patientId != ""
-                ? Text("")
-                : Container(
+                ? Container(
                     height: 40,
                     width: 400,
                     decoration: BoxDecoration(
@@ -7497,7 +7495,7 @@ class _CheckPageState extends State<Dashboard> {
                               (int.tryParse(patientWeight) * 8).toString())
                         ],
                       ),
-                    )),
+                    )):Container(),
             SizedBox(
               height: 5,
             ),
@@ -8634,7 +8632,7 @@ prvcData() {
               onTap: () {
                 setState(() {
                   vacvmaxValue = 100;
-                  vacvminValue = 20;
+                  vacvminValue = 21;
                   vacvparameterName = "FiO2";
                   vacvparameterUnits = "";
                   vacvItrig = false;
@@ -8697,7 +8695,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "20",
+                              "21",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvFio2
@@ -8964,7 +8962,7 @@ prvcData() {
             SizedBox(
               height: 5,
             ),
-            Container(
+            patientId!=""?Container(
                 height: 40,
                 width: 400,
                 decoration: BoxDecoration(
@@ -8983,7 +8981,7 @@ prvcData() {
                           (int.tryParse(patientWeight) * 8).toString())
                     ],
                   ),
-                )),
+                )):Container(),
             SizedBox(
               height: 5,
             ),
@@ -10189,7 +10187,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "20",
+                              "21",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvFio2
@@ -10577,8 +10575,7 @@ prvcData() {
               height: 5,
             ),
             patientId != ""
-                ? Text("")
-                : Container(
+                ?  Container(
                     height: 40,
                     width: 400,
                     decoration: BoxDecoration(
@@ -10597,7 +10594,7 @@ prvcData() {
                               (int.tryParse(patientWeight) * 8).toString())
                         ],
                       ),
-                    )),
+                    )):Container(),
             SizedBox(
               height: 5,
             ),
@@ -11959,8 +11956,7 @@ prvcData() {
               height: 5,
             ),
             patientId != ""
-                ? Text("")
-                : Container(
+                ? Container(
                     height: 40,
                     width: 400,
                     decoration: BoxDecoration(
@@ -11980,7 +11976,7 @@ prvcData() {
                               (int.tryParse(patientWeight ?? 0) * 8).toString())
                         ],
                       ),
-                    )),
+                    )):Container(),
             SizedBox(
               height: 5,
             ),
@@ -13354,8 +13350,7 @@ prvcData() {
               height: 5,
             ),
             patientId != ""
-                ? Text("")
-                : Container(
+                ?  Container(
                     height: 40,
                     width: 400,
                     decoration: BoxDecoration(
@@ -13374,7 +13369,7 @@ prvcData() {
                               (int.tryParse(patientWeight) * 8).toString())
                         ],
                       ),
-                    )),
+                    )):Container(),
             SizedBox(
               height: 5,
             ),
@@ -14571,7 +14566,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "20",
+                              "21",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvFio2
@@ -14951,7 +14946,7 @@ prvcData() {
             SizedBox(
               height: 5,
             ),
-            Container(
+            patientId!="" ? Container(
                 height: 40,
                 width: 400,
                 decoration: BoxDecoration(
@@ -14970,7 +14965,7 @@ prvcData() {
                           (int.tryParse(patientWeight) * 8).toString())
                     ],
                   ),
-                )),
+                )):Container(),
             SizedBox(
               height: 5,
             ),
@@ -15975,7 +15970,7 @@ prvcData() {
               onTap: () {
                 setState(() {
                   vacvmaxValue = 100;
-                  vacvminValue = 20;
+                  vacvminValue = 21;
                   vacvparameterName = "FiO2";
                   vacvparameterUnits = "";
                   vacvItrig = false;
@@ -16038,7 +16033,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "20",
+                              "21",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvFio2
@@ -16424,7 +16419,7 @@ prvcData() {
             SizedBox(
               height: 5,
             ),
-            Container(
+            patientId!="" ? Container(
                 height: 40,
                 width: 400,
                 decoration: BoxDecoration(
@@ -16443,7 +16438,7 @@ prvcData() {
                           (int.tryParse(patientWeight) * 8).toString())
                     ],
                   ),
-                )),
+                )):Container(),
             SizedBox(
               height: 5,
             ),
@@ -17760,7 +17755,7 @@ prvcData() {
         pacvPcValue = 30;
         pacvVtMinValue = 100;
         pacvVtMaxValue = 400;
-        pacvFio2Value = 22;
+        pacvFio2Value = 21;
         pacvFlowRampValue = 3;
         pacvmaxValue = 100;
         pacvminValue = 20;
@@ -17810,7 +17805,7 @@ prvcData() {
         vccmvPeepValue = 10;
         vccmvPcMinValue = 20;
         vccmvPcMaxValue = 60;
-        vccmvFio2Value = 22;
+        vccmvFio2Value = 21;
         vccmvVtValue = 200;
         vccmvTihValue = 50;
         vccmvFlowRampValue = 4;
@@ -17838,7 +17833,7 @@ prvcData() {
         vacvVtValue = 200;
         vacvPcMinValue = 20;
         vacvPcMaxValue = 60;
-        vacvFio2Value = 22;
+        vacvFio2Value = 21;
         vacvFlowRampValue = 4;
         vacvmaxValue = 100;
         vacvminValue = 20;
@@ -17864,7 +17859,7 @@ prvcData() {
         psvTiValue = 5;
         psvVtMinValue = 100;
         psvVtMaxValue = 400;
-        psvFio2Value = 22;
+        psvFio2Value = 21;
         psvAtimeValue = 10;
         psvEtrigValue = 10;
         psvBackupRrValue = 12;
@@ -17898,7 +17893,7 @@ prvcData() {
         psvTiValue = 5;
         psvVtMinValue = 100;
         psvVtMaxValue = 400;
-        psvFio2Value = 22;
+        psvFio2Value = 21;
         psvAtimeValue = 10;
         psvEtrigValue = 10;
         psvBackupRrValue = 12;
@@ -17943,7 +17938,7 @@ prvcData() {
         vsimvPsValue = 22;
         vsimvPcMinValue = 20;
         vsimvPcMaxValue = 60;
-        vsimvFio2Value = 22;
+        vsimvFio2Value = 21;
         vsimvFlowRampValue = 4;
         vsimvmaxValue = 100;
         vsimvminValue = 20;
@@ -18000,7 +17995,7 @@ prvcData() {
         psimvPcValue = 30;
         psimvVtMinValue = 100;
         psimvVtMaxValue = 300;
-        psimvFio2Value = 22;
+        psimvFio2Value = 21;
         psimvFlowRampValue = 3;
 
         psimvmaxValue = 100;
@@ -18266,7 +18261,7 @@ prvcData() {
               onTap: () {
                 setState(() {
                   alarmmaxValue = 60;
-                  alarmminValue = 10;
+                  alarmminValue = 0;
                   alarmparameterName = "Ppeak";
                   alarmRR = false;
                   alarmVte = false;
@@ -18602,7 +18597,7 @@ prvcData() {
                                       minvte = minvte - 1;
                                     });
                                   } else if (alarmPpeak == true &&
-                                      minppeak != 10) {
+                                      minppeak != 0) {
                                     setState(() {
                                       minppeak = minppeak - 1;
                                     });
@@ -18716,7 +18711,7 @@ prvcData() {
                               : alarmVte
                                   ? 0
                                   : alarmPpeak
-                                      ? 10
+                                      ? 0
                                       : alarmFio2
                                           ? 21
                                           : alarmpeep

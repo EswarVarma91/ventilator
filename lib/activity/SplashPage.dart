@@ -19,7 +19,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   SharedPreferences preferences;
-  int counter=0;
+  // int counter=0;
 
   @override
   void initState() {
@@ -32,18 +32,18 @@ class _SplashPageState extends State<SplashPage> {
 
   getData() async{
     preferences = await SharedPreferences.getInstance();
-    counter = (preferences.getInt("noTimes")).toInt();
-    await sleep(Duration(seconds: 4));
-    saveData(counter);
+    // counter = (preferences.getInt("noTimes")).toInt();
+    // await sleep(Duration(seconds: 7));
+    saveData();
   }
 
-  saveData(int counter) async {
+  saveData() async {
     preferences = await SharedPreferences.getInstance();
 
     // if(counter==null){
     //   counter = counter +1;
     // }else{
-      counter = counter +1;
+      // counter = counter +1;
     // }
     
     preferences.setString("mode", "PC-CMV");
@@ -53,7 +53,7 @@ class _SplashPageState extends State<SplashPage> {
     preferences.setString("e", "1.0");
     preferences.setInt("peep", 10);
     // preferences.setInt("ps", 40);
-    preferences.setInt("fio2", 22);
+    preferences.setInt("fio2", 21);
     preferences.setInt("tih", 50);
     preferences.setInt("paw", 0);
     // preferences.setInt("tidal", 14);
@@ -69,7 +69,7 @@ class _SplashPageState extends State<SplashPage> {
      preferences.setString("page", "" );
      preferences.setString("pweight", "" );
      preferences.setString("pheight", "" );
-     preferences.setInt('noTimes', counter);
+    //  preferences.setInt('noTimes', counter);
     // await sleep(Duration(seconds: 2));
   }
 
