@@ -148,8 +148,6 @@ class DatabaseHelper {
   
   Future<List<PatientsList>> patientDataByDateId(String patientIdD,String dateTimeW) async {
     var dbClient = await db;
-    // List<Map> dataData = await dbClient.rawQuery(
-    //     'SELECT $DATE_TIME FROM (SELECT $DATE_TIME FROM $TABLE GROUP BY $GLOBAL_COUNTER_NO WHERE $PATIENTID=\'$patientIdD\') gcn WHERE GROUP BY $DATE_TIME');
     List<Map> dataData = await dbClient.rawQuery('SELECT $PATIENTID, min($DATE_TIME) minTime, max($DATE_TIME) maxTime FROM $TABLE where $PATIENTID= \'$patientIdD\'  AND DATE($DATE_TIME) = DATE(\'$dateTimeW\')');
     List<PatientsList> plist = [];
     if (dataData.length > 0) {
@@ -159,6 +157,45 @@ class DatabaseHelper {
     }
     return plist;
   }
+
+
+  Future<List<PatientsList>> splitData(String patientIdD,String dateTimeW) async {
+    var dbClient = await db;
+    var checkValue=0;
+    
+    var a;
+    List<Map> dataData = await dbClient.rawQuery('SELECT $DATE_TIME dates from $TABLE where $DATE_TIME BETWEEN ("2020-06-05 14:50:08") and ("2020-06-05 14:50:36")');
+  
+    List<PatientsList> plist = [];
+    List<PatientsList> slist = [];
+    List<PatientsList> list = [];
+    
+    if(dataData.length>0){
+      plist.clear();
+      slist.clear();
+      list.clear();
+      a = ((dataData.length*150)/1000).round();
+      var dataLength= (189/a).floor();
+      for (int i =0 ; i<dataLength;i++){
+        slist.clear();
+        for(int j=0 ; j<a;j++){
+          slist.add(PatientsList.fromMap(dataData[checkValue+j]));
+        }
+        checkValue = checkValue + slist.length;
+       list.add(PatientsList("0","0",slist[0].datetimeP.toString(), slist[slist.length-1].datetimeP.toString(),"0"));
+      }
+      plist.addAll(list);
+    }
+
+    // if (dataData.length > 0) {
+    //   for (int i = 0; i < dataData.length; i++) {
+    //     plist.add(PatientsList.fromMap(dataData[i]));
+    //   }
+    // }
+    return plist;
+  }
+
+
 
   // Future<List<VentilatorOMode>> getPatientsData(String patientIdD,String fromDate,String toDate) async {
   //    var dbClient = await db;

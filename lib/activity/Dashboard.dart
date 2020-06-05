@@ -490,7 +490,8 @@ class _CheckPageState extends State<Dashboard> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
-      // cc = cc+1;
+    
+    print(event);
       // Fluttertoast.showToast(msg: event.length.toString() + " "+cc.toString() + );
       var now = new DateTime.now();
       if (event != null) {
@@ -504,9 +505,12 @@ class _CheckPageState extends State<Dashboard> {
         }
 
         lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-
+    //      crcData = list[list.length - 1] * 256 + list[list.length - 2];
+    // Fluttertoast.showToast(msg: list.length.toString()+" "+cc.toString() +"  geting crc" +crcData.toString());
+  
         // var length = list.length;
-         checkCrc(list, event.length);
+        // bool data = await 
+        checkCrc(list, list.length);
         // if (data == false) {
         //   list.clear();
         // } else {
@@ -1233,18 +1237,22 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   checkCrc(List<int> obj, length) async {
-    cc = cc+1;
-    int index = length - 2;
+    // cc = cc+1;
+    int index = length - 1;
     int i = 0;
     int crcData = 0;
     int uiCrc = 0, r = 0;
     int temp = 0;
+    List<int> l = [];
+    l.insert(0,126);
+    l.addAll(obj);
+    print(l);
 
     while (index-- > 0) {
       r = ulCrc16Table[uiCrc & 0xF];
       uiCrc = ((uiCrc >> 4) & 0x0FFF);
 
-      temp = obj[i];
+      temp = l[i];
 
       uiCrc = (uiCrc ^ r ^ ulCrc16Table[temp & 0xF]);
 
@@ -1254,14 +1262,14 @@ class _CheckPageState extends State<Dashboard> {
       i++;
     }
 
-    crcData = obj[length - 1] * 256 + obj[length - 2];
-    Fluttertoast.showToast(msg: length.toString()+" "+cc.toString() +"  geting crc" +crcData.toString() + " cal crc "+uiCrc.toString());
+    crcData = l[length] * 256 + l[length - 1];
+    Fluttertoast.showToast(msg: length.toString()+" "+"  geting crc" +crcData.toString() + " cal crc "+uiCrc.toString());
   
-    if (crcData == uiCrc) {
-      return true;
-    } else {
-      return false;
-    }
+    // if (crcData == uiCrc) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   void _getTime() {
@@ -2005,7 +2013,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  setData();
+                                                  // setData();
                                                   pccmvEnabled = true;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = false;
@@ -2048,7 +2056,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  setData();
+                                                  // setData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = true;
@@ -2091,7 +2099,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  setData();
+                                                  // setData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = true;
                                                   pacvEnabled = false;
@@ -2133,7 +2141,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  setData();
+                                                  // setData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = false;
@@ -2176,7 +2184,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  setData();
+                                                  // setData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = false;
@@ -2219,7 +2227,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  setData();
+                                                  // setData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = false;
@@ -2262,7 +2270,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  setData();
+                                                  // setData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = false;
@@ -8649,7 +8657,7 @@ prvcData() {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 30;
+                  vacvmaxValue = 60;
                   vacvminValue = 1;
                   vacvparameterName = "RR";
                   vacvparameterUnits = "bpm";
@@ -8702,7 +8710,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "30",
+                              "60",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvRr
@@ -8748,7 +8756,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    vacvRrValue != null ? vacvRrValue / 30 : 0,
+                                    vacvRrValue != null ? vacvRrValue / 60 : 0,
                               ),
                             ),
                           )

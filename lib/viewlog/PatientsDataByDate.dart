@@ -12,7 +12,7 @@ class PatientsDataByDate extends StatefulWidget {
 }
 
 class _PatientsDataByDateState extends State<PatientsDataByDate> {
-  Future<List<PatientsList>> patientdatesList;
+  Future<List<PatientsList>> patientdatesList,l;
   
   DatabaseHelper dbHelper;
 
@@ -26,6 +26,8 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
 
   getPatientDatesData() async {
     patientdatesList = dbHelper.patientDataByDateId(widget.patientId,widget.datetimeW);
+    l = dbHelper.splitData(widget.patientId,widget.datetimeW);
+    print(l);
     print(patientdatesList);
   }
 
@@ -77,10 +79,12 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
                         child: Card(
                             child: ListTile(
                           onTap: () {
-                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PatientsDataByDate(snapshot.data[index].datetimeP,widget.patientId)));
+                            l = dbHelper.splitData(widget.patientId,widget.datetimeW);
+                            print(l);
+                            //  Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => PatientsDataByDate(snapshot.data[index].datetimeP,widget.patientId)));
                             },
                           leading: Padding(
                             padding: const EdgeInsets.all(10.0),
