@@ -81,6 +81,11 @@ flutter:
     - assets/images/powerIcon.png
     - assets/images/shutdown.png
     - assets/images/logo.png
+    - assets/images/nobattery.png
+    - assets/images/calibrate.png
+    - assets/images/bell_line.png
+    - assets/images/bell_silent_line.png
+
     
     - assets/lungs/1.png
     - assets/lungs/2.png

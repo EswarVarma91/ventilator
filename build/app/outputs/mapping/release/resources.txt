@@ -18,6 +18,7 @@ Referenced Strings:
   $this$substring
   %s.%sParcelizer
   .font
+  .org.chromium.Chromium.
   .xml
   /proc/self/fd/
   /stream
@@ -76,7 +77,6 @@ Referenced Strings:
   B:
   BITMAP
   BITMAP_MASKABLE
-  BOTH
   BOTTOM_OVERLAYS
   BanParcelableUsage
   Brightness.dark
@@ -170,7 +170,6 @@ Referenced Strings:
   InlinedApi
   LANDSCAPE_LEFT
   LANDSCAPE_RIGHT
-  LEFT
   LIGHT
   LIGHT_IMPACT
   LONG_PRESS
@@ -194,7 +193,6 @@ Referenced Strings:
   MissingPermission
   MissingSuperCall
   MultiAutoCompleteTextView
-  NAME
   NAMES_ROUTE
   NONE
   NO_TARGET
@@ -220,7 +218,6 @@ Referenced Strings:
   PLATFORM_VIEW
   PORTRAIT_DOWN
   PORTRAIT_UP
-  POSTAL_ADDRESS
   PathParser
   PlatformChannel
   PlatformViewsChannel
@@ -233,7 +230,6 @@ Referenced Strings:
   REPLACE
   RESOURCE
   RESUMED
-  RIGHT
   RTL
   RadioButton
   RatingBar
@@ -273,6 +269,8 @@ Referenced Strings:
   SystemChrome.setEnabledSystemUIOverlays
   SystemChrome.setPreferredOrientations
   SystemChrome.setSystemUIOverlayStyle
+  SystemGestures.getSystemGestureExclus...
+  SystemGestures.setSystemGestureExclus...
   SystemNavigator.pop
   SystemSound.play
   SystemSoundType.click
@@ -288,9 +286,7 @@ Referenced Strings:
   TextCapitalization.words
   TextInput.clearClient
   TextInput.hide
-  TextInput.requestAutofill
   TextInput.setClient
-  TextInput.setEditableSizeAndTransform
   TextInput.setEditingState
   TextInput.setPlatformViewClient
   TextInput.show
@@ -307,12 +303,9 @@ Referenced Strings:
   TextInputClient.performAction
   TextInputClient.requestExistingInputS...
   TextInputClient.updateEditingState
-  TextInputClient.updateEditingStateWit...
-  TextInputType.address
   TextInputType.datetime
   TextInputType.emailAddress
   TextInputType.multiline
-  TextInputType.name
   TextInputType.number
   TextInputType.phone
   TextInputType.text
@@ -366,11 +359,6 @@ Referenced Strings:
   addFontFromBuffer
   addFontWeightStyle
   addView
-  addressCity
-  addressCountry
-  addressLocality
-  addressRegion
-  addressState
   alpha
   alwaysUse24HourFormat
   android
@@ -388,6 +376,7 @@ Referenced Strings:
   android.intent.action.TIMEZONE_CHANGED
   android.intent.action.TIME_SET
   android.intent.action.TIME_TICK
+  android.intent.extra.KEY_CONFIRM
   android.intent.extra.PROCESS_TEXT_REA...
   android.os.action.POWER_SAVE_MODE_CHA...
   android.permission.ACCESS_COARSE_LOCA...
@@ -455,7 +444,6 @@ Referenced Strings:
   audio
   autoMirrored
   autocorrect
-  autofill
   b
   background_mode
   bad_param
@@ -463,15 +451,8 @@ Referenced Strings:
   batch
   baudRate
   bgcolor
-  birthDateDay
-  birthDateFull
-  birthDateMonth
-  birthDateYear
-  birthday
-  birthdayDay
-  birthdayMonth
-  birthdayYear
   bool
+  bottom
   bounceInterpolator
   brightness
   buffer
@@ -499,6 +480,7 @@ Referenced Strings:
   codePoint
   columns
   com.android.example.USB_PERMISSION
+  com.android.internal.intent.action.RE...
   com.android.internal.view.menu.MenuBu...
   com.tekartik.sqflite
   commit
@@ -513,16 +495,9 @@ Referenced Strings:
   controlX2
   controlY1
   controlY2
-  countryName
   cp210x
   create
   createFromFamiliesWithDefault
-  creditCardExpirationDate
-  creditCardExpirationDay
-  creditCardExpirationMonth
-  creditCardExpirationYear
-  creditCardNumber
-  creditCardSecurityCode
   currentIndex
   cycleInterpolator
   d
@@ -552,9 +527,6 @@ Referenced Strings:
   drawable
   duration
   e
-  editingValue
-  email
-  emailAddress
   enableSuggestions
   endColor
   endX
@@ -563,12 +535,8 @@ Referenced Strings:
   error
   event
   execute
-  extendedAddress
-  extendedPostalCode
   extent
   f
-  familyName
-  fields
   file
   file_id
   fillAlpha
@@ -604,8 +572,6 @@ Referenced Strings:
   free_form
   freeze
   ftdi
-  fullStreetAddress
-  gender
   get
   getAll
   getApplicationDocumentsDirectory
@@ -629,7 +595,6 @@ Referenced Strings:
   getTemporaryDirectory
   getTextDirectionHeuristic
   github.com/clovisnicolas/flutter_screen
-  givenName
   gps
   gradient
   gradientRadius
@@ -637,7 +602,6 @@ Referenced Strings:
   group
   h
   height
-  hints
   http://schemas.android.com/apk/res/an...
   id
   inTransaction
@@ -645,6 +609,7 @@ Referenced Strings:
   input
   inputAction
   inputType
+  inputTypeError
   input_method
   insert
   intent_extra_data_key
@@ -675,6 +640,7 @@ Referenced Strings:
   kotlin.reflect.jvm.internal.Reflectio...
   label
   layout_inflater
+  left
   length
   libapp.so
   libflutter.so
@@ -717,17 +683,11 @@ Referenced Strings:
   message
   metaState
   method
-  middleInitial
-  middleName
   mp
   msg
   name
-  namePrefix
-  nameSuffix
   native_instance
   network
-  newPassword
-  newUsername
   newValue
   nm
   noResult
@@ -742,7 +702,6 @@ Referenced Strings:
   onLockTaskModeEntering
   onLockTaskModeExiting
   onMenuKeyEvent
-  oneTimeCode
   opaque
   open
   openDatabase
@@ -753,23 +712,11 @@ Referenced Strings:
   overshootInterpolator
   params
   parity
-  password
   path
   pathData
   pathInterpolator
   performStopActivity
   permission
-  personFamilyName
-  personGivenName
-  personMiddleInitial
-  personMiddleName
-  personName
-  personNamePrefix
-  personNameSuffix
-  phoneCountryCode
-  phoneNational
-  phoneNumber
-  phoneNumberDevice
   pid
   pl2303
   plainCodePoint
@@ -777,10 +724,6 @@ Referenced Strings:
   plugins.flutter.io/path_provider
   plugins.flutter.io/shared_preferences
   popRoute
-  postalAddress
-  postalAddressExtended
-  postalAddressExtendedPostalCode
-  postalCode
   postfix
   power
   prefix
@@ -812,6 +755,7 @@ Referenced Strings:
   resize
   result
   result_code
+  right
   rotation
   route
   rows
@@ -850,7 +794,6 @@ Referenced Strings:
   setInt
   setLayoutDirection
   setLocale
-  setPlatformResolvedLocale
   setPortParameters
   setRTS
   setString
@@ -866,7 +809,6 @@ Referenced Strings:
   signed
   singleInstance
   sink
-  smsOTPCode
   source
   sql
   sqlite_error
@@ -879,7 +821,6 @@ Referenced Strings:
   statusBarIconBrightness
   status_bar_height
   stopBits
-  streetAddress
   string
   strokeAlpha
   strokeColor
@@ -887,7 +828,6 @@ Referenced Strings:
   strokeLineJoin
   strokeMiterLimit
   strokeWidth
-  su
   success.
   suggest_flags
   suggest_icon_1
@@ -907,10 +847,6 @@ Referenced Strings:
   tap
   target
   tekartik_sqflite.db
-  telephoneNumber
-  telephoneNumberCountryCode
-  telephoneNumberDevice
-  telephoneNumberNational
   text
   text/plain
   textCapitalization
@@ -936,7 +872,6 @@ Referenced Strings:
   trimPathStart
   truncated
   type
-  uniqueIdentifier
   unknown
   update
   updateViewLayout
@@ -945,7 +880,6 @@ Referenced Strings:
   usb_serial/UsbSerialPortAdapter/
   usb_serial/usb_events
   user_query
-  username
   value
   valueFrom
   valueTo
@@ -1158,6 +1092,8 @@ Marking id:search_plate:2131165309 used because its prefix matches string pool c
 Marking id:search_src_text:2131165310 used because its prefix matches string pool constant search
 Marking id:search_voice_btn:2131165311 used because its prefix matches string pool constant search
 Marking string:search_menu_title:2131558427 used because its prefix matches string pool constant search
+Marking id:right_icon:2131165296 used because its prefix matches string pool constant right
+Marking id:right_side:2131165297 used because its prefix matches string pool constant right
 Marking attr:font:2130837627 used because its prefix matches string pool constant font
 Marking attr:fontFamily:2130837628 used because its prefix matches string pool constant font
 Marking attr:fontProviderAuthority:2130837629 used because its prefix matches string pool constant font
@@ -1219,18 +1155,9 @@ Marking attr:drawableTintMode:2130837616 used because its prefix matches string 
 Marking attr:drawableTopCompat:2130837617 used because its prefix matches string pool constant drawable
 Marking xml:device_admin_receiver:2131755008 used because its prefix matches string pool constant device
 Marking xml:device_filter:2131755009 used because its prefix matches string pool constant device
-Marking attr:subMenuArrow:2130837718 used because its prefix matches string pool constant su
-Marking attr:submitBackground:2130837719 used because its prefix matches string pool constant su
-Marking attr:subtitle:2130837720 used because its prefix matches string pool constant su
-Marking attr:subtitleTextAppearance:2130837721 used because its prefix matches string pool constant su
-Marking attr:subtitleTextColor:2130837722 used because its prefix matches string pool constant su
-Marking attr:subtitleTextStyle:2130837723 used because its prefix matches string pool constant su
-Marking attr:suggestionRowLayout:2130837724 used because its prefix matches string pool constant su
-Marking id:submenuarrow:2131165322 used because its prefix matches string pool constant su
-Marking id:submit_area:2131165323 used because its prefix matches string pool constant su
-Marking layout:support_simple_spinner_dropdown_item:2131361830 used because its prefix matches string pool constant su
 Marking attr:queryBackground:2130837695 used because its prefix matches string pool constant query
 Marking attr:queryHint:2130837696 used because its prefix matches string pool constant query
+Marking id:bottom:2131165248 used because its prefix matches string pool constant bottom
 Marking color:error_color_material_dark:2130968618 used because its prefix matches string pool constant error
 Marking color:error_color_material_light:2130968619 used because its prefix matches string pool constant error
 Resource Reference Graph:
@@ -1769,13 +1696,6 @@ attr:actionBarPopupTheme:2130837506,
    attr:seekBarStyle:2130837704,
    attr:spinnerStyle:2130837714,
    attr:srcCompat:2130837716,
-   attr:subMenuArrow:2130837718,
-   attr:submitBackground:2130837719,
-   attr:subtitle:2130837720,
-   attr:subtitleTextAppearance:2130837721,
-   attr:subtitleTextColor:2130837722,
-   attr:subtitleTextStyle:2130837723,
-   attr:suggestionRowLayout:2130837724,
    attr:textAllCaps:2130837729,
    attr:textAppearanceLargePopupMenu:2130837730,
    attr:textAppearanceListItem:2130837731,
@@ -1926,6 +1846,7 @@ attr:actionBarPopupTheme:2130837506,
    id:action_mode_bar_stub:2131165237,
    id:action_mode_close_button:2131165238,
    id:alertTitle:2131165243,
+   id:bottom:2131165248,
    id:buttonPanel:2131165249,
    id:center_vertical:2131165250,
    id:content:2131165255,
@@ -1939,6 +1860,8 @@ attr:actionBarPopupTheme:2130837506,
    id:message:2131165281,
    id:on:2131165291,
    id:parentPanel:2131165292,
+   id:right_icon:2131165296,
+   id:right_side:2131165297,
    id:scrollIndicatorDown:2131165299,
    id:scrollIndicatorUp:2131165300,
    id:scrollView:2131165301,

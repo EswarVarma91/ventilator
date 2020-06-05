@@ -1,10 +1,10 @@
-# Referenced at /Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:33
+# Referenced at /Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:33
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
-# Referenced at /Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:41
+# Referenced at /Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:41
 -keep class com.example.ventilator.MainActivity { <init>(); }
-# Referenced at /Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:70
+# Referenced at /Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:71
 -keep class com.example.ventilator.MyDeviceAdminReceiver { <init>(); }
-# Referenced at /Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:33
+# Referenced at /Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:33
 -keep class io.flutter.app.FlutterApplication { <init>(); }
 # Referenced at /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/layout/abc_alert_dialog_title_material.xml:57
 # Referenced at /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/layout/abc_alert_dialog_material.xml:52

@@ -11,7 +11,7 @@ class ADatabaseHelper {
   static const String ALARM = 'alarmCodes';
   static const String DATE_TIME = 'datetime';
   static const String TABLE_ALARM ='alarms';
-  static const String DATABASE = 'alarmDb';
+  static const String DATABASE = 'alarmsDb';
 
   Future<Database> get db async {
     if (_db != null) {
@@ -29,9 +29,7 @@ class ADatabaseHelper {
   }
 
   _onCreate(Database db, int version) async {
-    // await db.execute('CREATE TABLE $TABLE($ID INTEGER PRIMARY KEY AUTOINCREMENT, $PATIENTID TEXT, $PATIENTNAME TEXT, $PATIENTAGE TEXT, $PATIENTGENDER TEXT,$PATIENTHEIGHT TEXT,$PIPD TEXT, $VTD TEXT,$PEEPD TEXT, $RRD TEXT,$FIO2D TEXT,$MAPD TEXT,$MVD TEXT,$COMPLAINCED TEXT, $IED TEXT,$RRS TEXT,$IES TEXT,$PEEPS TEXT,$PSS TEXT,$FIO2S TEXT,$TIS TEXT,$TES TEXT,$PRESSURE_POINTS REAL, $FLOW_POINTS REAL, $VOLUME_POINTS REAL, $DATE_TIME TEXT,$OPERATING_MODE TEXT,$LUNG_IMAGE TEXT,$PAW TEXT)');
     await db.execute('CREATE TABLE $TABLE_ALARM($ID INTERGER PRIMARY KEY,$ALARM TEXT,$DATE_TIME TEXT)');
-    // await db.execute("CREATE TABLE "+TABLE_ALARM+" ("+ID+" INTEGER PRIMARY KEY AUTOINCREMENT)",$ALARM)
   }
 
 

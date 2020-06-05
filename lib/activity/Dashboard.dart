@@ -16,6 +16,7 @@ import 'package:usb_serial/usb_serial.dart';
 import 'package:ventilator/bottombar/CommonDialog.dart';
 import 'package:ventilator/calibration/CalibrationPage.dart';
 import 'package:ventilator/database/ADatabaseHelper.dart';
+import 'package:ventilator/database/CounterDatabaseHelper.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
 import 'package:ventilator/graphs/Oscilloscope.dart';
@@ -34,6 +35,8 @@ class Dashboard extends StatefulWidget {
 
 class _CheckPageState extends State<Dashboard> {
   static const shutdownChannel = const MethodChannel("shutdown");
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   Uint16List ulCrc16Table = Uint16List.fromList([
     0x0000,
     0xCC01,
@@ -147,13 +150,13 @@ class _CheckPageState extends State<Dashboard> {
       internalTemperatureR;
   int rrValue,
       peepValue,
+      pcValue,
       psValue,
       vtValue,
       psValue1 = 0,
       peepDisplayValue = 0,
       fio2Value,
-      tiValue = 0,
-      teValue = 0,
+      
       ibytValue,
       vteValue,
       leakMeanValue,
@@ -164,6 +167,8 @@ class _CheckPageState extends State<Dashboard> {
   int ieValue;
   double peepHeight = 280, psHeight = 280;
   String modeName, dateandTime;
+  double tiValue = 0,
+      teValue = 0;
 
   double mode1rrval = 12,
       mode1ieval = 2,
@@ -202,7 +207,7 @@ class _CheckPageState extends State<Dashboard> {
       pacvFio2 = false,
       pacvFlowRamp = false;
 
-  int pacvItrigValue = 60,
+  int pacvItrigValue = 6,
       pacvRrValue = 20,
       pacvIeValue = 51,
       pacvPeepValue = 10,
@@ -212,8 +217,8 @@ class _CheckPageState extends State<Dashboard> {
       pacvFio2Value = 21,
       pacvFlowRampValue = 3;
 
-  int pacvmaxValue = 100, pacvminValue = 20, pacvdefaultValue = 60;
-  String pacvparameterName = "I Trig", pacvparameterUnits = "cmH20";
+  int pacvmaxValue = 10, pacvminValue = 1, pacvdefaultValue = 6;
+  String pacvparameterName = "I Trig", pacvparameterUnits = "cmH\u2082O Below Peep";
 
   bool vacvItrig = true,
       vacvRr = false,
@@ -225,7 +230,7 @@ class _CheckPageState extends State<Dashboard> {
       vacvFio2 = false,
       vacvFlowRamp = false;
 
-  int vacvItrigValue = 60,
+  int vacvItrigValue = 6,
       vacvRrValue = 20,
       vacvIeValue = 51,
       vacvPeepValue = 10,
@@ -235,8 +240,8 @@ class _CheckPageState extends State<Dashboard> {
       vacvFio2Value = 21,
       vacvFlowRampValue = 4;
 
-  int vacvmaxValue = 100, vacvminValue = 20, vacvdefaultValue = 60;
-  String vacvparameterName = "I Trig", vacvparameterUnits = "cmH20";
+  int vacvmaxValue = 10, vacvminValue = 1, vacvdefaultValue = 6;
+  String vacvparameterName = "I Trig", vacvparameterUnits = "cmH\u2082O Below Peep";
 
   bool psvItrig = true,
       psvPeep = false,
@@ -252,8 +257,8 @@ class _CheckPageState extends State<Dashboard> {
       psvMinTe = false,
       psvFlowRamp = false;
 
-  int psvItrigValue = 60,
-      psvPeepValue = 10,
+  int psvItrigValue = 6,
+      psvPeepValue = 1,
       psvIeValue = 51,
       psvPsValue = 30,
       psvTiValue = 5,
@@ -266,8 +271,8 @@ class _CheckPageState extends State<Dashboard> {
       psvMinTeValue = 1,
       psvFlowRampValue = 4;
 
-  int psvmaxValue = 100, psvminValue = 20, psvdefaultValue = 60;
-  String psvparameterName = "I Trig", psvparameterUnits = "cmH20";
+  int psvmaxValue = 10, psvminValue = 1, psvdefaultValue = 6;
+  String psvparameterName = "I Trig", psvparameterUnits = "cmH\u2082O  Below Peep";
 
   bool psimvItrig = true,
       psimvRr = false,
@@ -280,7 +285,7 @@ class _CheckPageState extends State<Dashboard> {
       psimvFio2 = false,
       psimvFlowRamp = false;
 
-  int psimvItrigValue = 60,
+  int psimvItrigValue = 6,
       psimvRrValue = 20,
       psimvPsValue = 22,
       psimvIeValue = 51,
@@ -291,8 +296,8 @@ class _CheckPageState extends State<Dashboard> {
       psimvFio2Value = 21,
       psimvFlowRampValue = 3;
 
-  int psimvmaxValue = 100, psimvminValue = 20, psimvdefaultValue = 60;
-  String psimvparameterName = "I Trig", psimvparameterUnits = "cmH20";
+  int psimvmaxValue = 10, psimvminValue = 1, psimvdefaultValue = 6;
+  String psimvparameterName = "I Trig", psimvparameterUnits = "cmH\u2082O  Below Peep";
 
   bool vsimvItrig = true,
       vsimvRr = false,
@@ -305,7 +310,7 @@ class _CheckPageState extends State<Dashboard> {
       vsimvFio2 = false,
       vsimvFlowRamp = false;
 
-  int vsimvItrigValue = 60,
+  int vsimvItrigValue = 6,
       vsimvRrValue = 20,
       vsimvIeValue = 51,
       vsimvPeepValue = 10,
@@ -316,8 +321,8 @@ class _CheckPageState extends State<Dashboard> {
       vsimvFio2Value = 21,
       vsimvFlowRampValue = 4;
 
-  int vsimvmaxValue = 100, vsimvminValue = 20, vsimvdefaultValue = 60;
-  String vsimvparameterName = "I Trig", vsimvparameterUnits = "cmH20";
+  int vsimvmaxValue = 10, vsimvminValue =1, vsimvdefaultValue = 6;
+  String vsimvparameterName = "I Trig", vsimvparameterUnits = "cmH\u2082O Below Peep";
 
   bool prvcApnea = true;
   int prvcApneaValue = 30;
@@ -353,7 +358,7 @@ class _CheckPageState extends State<Dashboard> {
   int pccmvFlowRampValue = 4;
 
   int pccmvmaxValue = 60, pccmvminValue = 1, pccmvdefaultValue = 12;
-  String pccmvparameterName = "RR", pccmvparameterUnits = "";
+  String pccmvparameterName = "RR", pccmvparameterUnits = "bpm";
 
   bool vccmvRR = true;
   bool vccmvIe = false;
@@ -394,19 +399,22 @@ class _CheckPageState extends State<Dashboard> {
   bool playOnEnabled = false, powerOnEnabled = false;
   var dbHelper = DatabaseHelper();
   var dbHelpera = ADatabaseHelper();
+  var dbCounter = CounterDatabaseHelper();
   String lastRecordTime;
   String priorityNo, alarmActive;
+  double pplateauDisplay=0;
+  int tempDisplay=0,respiratoryFlag=0,leakVolumeDisplay=0,peakFlowDisplay=0,spontaneousDisplay=0;
 
-  int minRrtotal = 5,
-      maxRrtotal = 65,
+  int minRrtotal = 1,
+      maxRrtotal = 70,
       minvte = 0,
-      maxvte = 1200,
+      maxvte = 2400,
       minmve = 0,
       maxmve = 100,
       minppeak = 0,
-      maxppeak = 60,
+      maxppeak = 100,
       minpeep = 0,
-      maxpeep = 30,
+      maxpeep = 40,
       minfio2 = 21,
       maxfio2 = 100;
 
@@ -433,8 +441,8 @@ class _CheckPageState extends State<Dashboard> {
       patientWeight;
   
   bool newTreatmentEnabled = false, powerButtonEnabled = false;
-  bool isplaying = false, _buttonPressed = false,respiratoryEnable=false;
-  int  previousCode=101,presentCode;
+  bool isplaying = false, _buttonPressed = false,respiratoryEnable=false,insExpButtonEnable=false;
+  int  previousCode=101,presentCode,vteMinValue=0;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -481,10 +489,12 @@ class _CheckPageState extends State<Dashboard> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
+      // Fluttertoast.showToast(msg: event.toString());
       var now = new DateTime.now();
       if (event != null) {
         setState(() {
           respiratoryEnable = true;
+          // playOnEnabled = false;
         });
         if (event[0] == 126 && event.length > 110) {
           list.addAll(event);
@@ -522,39 +532,44 @@ class _CheckPageState extends State<Dashboard> {
 
           setState(() {
             var now = new DateTime.now();
-
-            tiValue = (((list[74] << 8) + list[75]) / 1000).toInt(); //75 76
-            teValue = (((list[76] << 8) + list[77]) / 1000).toInt();
-            ibytValue = ((list[90] << 8) + list[91]);
+            // ibytValue = ((list[90] << 8) + list[91]);
 
             int vteValueCheck = ((list[4] << 8) + list[5]); //5 6
 
-            // mvValue =
-
-            if (vteValueCheck != 0) {
+            if (vteValueCheck != 0 && vteValueCheck.round()>0 && vteValueCheck.round()<2500) {
               setState(() {
+                vteMinValue = vteValue - vtValue;
                 vteValue = vteValueCheck;
               });
             }
             int mvValueCheck = (((list[8] << 8) + list[9])).toInt();
 
-            if (mvValueCheck != "0") {
+            if (mvValueCheck != "0" && (mvValueCheck/1000).round()>0 && (mvValueCheck/1000).round()<100) {
               setState(() {
                 mvValue = mvValueCheck;
               });
             }
 
+            tempDisplay = list[64];
+            leakVolumeDisplay = ((list[102] << 8) + list[103]);
+            peakFlowDisplay = ((list[70] << 8) + list[71]);
+            spontaneousDisplay = ((list[82] << 8) + list[83]);
+
             int rrtotalCheck = ((list[10] << 8) + list[11]).toInt(); //11,12
 
-            if (rrtotalCheck != "0") {
+            if (rrtotalCheck != "0" && rrtotalCheck.round()>0 && rrtotalCheck.round()<100) {
               setState(() {
                 rrDisplayValue = rrtotalCheck;
               });
             }
-            int psValueCheck = (((list[14] << 8) + list[15]) / 100).toInt();
-            peepDisplayValue = (((list[16] << 8) + list[17]) / 100).toInt();
+            int psValueCheck = (((list[14] << 8) + list[15]) / 100).round().toInt();
 
-            if (psValueCheck != 0) {
+            if((((list[16] << 8) + list[17]) / 100).round().toInt()>0 && (((list[16] << 8) + list[17]) / 100).round().toInt()<150){
+              peepDisplayValue = (((list[16] << 8) + list[17]) / 100).round().toInt();
+            }
+            
+
+            if (psValueCheck != 0 && psValueCheck.round()>0 && psValueCheck.round()<150) {
               setState(() {
                 psValue1 = psValueCheck;
               });
@@ -570,10 +585,11 @@ class _CheckPageState extends State<Dashboard> {
             expiratoryPressureR =
                 (((list[36] << 8) + list[37]) / 100).toInt(); //37 38
 
+            if(((list[38] << 8) + list[39]).round()>20 && ((list[38] << 8) + list[39]).round()<100){
             fio2DisplayParameter = ((list[38] << 8) + list[39]); // 39,40
+            }
 
             mixingTankPressureR = ((list[40] << 8) + list[41]);
-            // o2ipPressureR = ((list[42] << 8) + list[43]);
             airipPressureR = ((list[44] << 8) + list[45]);
 
             //flow graph
@@ -588,123 +604,79 @@ class _CheckPageState extends State<Dashboard> {
             internalTemperatureR = ((list[60] << 8) + list[61]);
             operatinModeR = ((list[104] << 8) + list[105]);
 
-            // pressure graph
-            double temp = (((list[34] << 8) + list[35]))
-                .toDouble(); // pressure points 35,36
-
-            if (temp > 40000) {
-              setState(() {
-                temp = -((65535 - temp) / 100);
-              });
-            } else {
-              setState(() {
-                temp = temp / 100;
-              });
+             if (list[108] == 1) {
+            presentCode = ((list[106] << 8) + list[107]);
+            var data = AlarmsList(presentCode.toString());
+            //  dbHelpera.saveAlarm(data); //TODO
+            // Fluttertoast.showToast(msg: presentCode.toString());
+            if(presentCode!=previousCode){
+                previousCode = presentCode;
+                _stopMusic();
+                 if(presentCode==5 || presentCode==7 || presentCode==10 || presentCode==11 || presentCode==17){
+                    _playMusicHigh();
+                    sendSoundOn();
+                    audioEnable=true;
+                }else if(presentCode==1 || presentCode==2 || presentCode==3 || presentCode==4 || presentCode==6 || presentCode==8 || presentCode==9 || presentCode==12
+                || presentCode==13 || presentCode==14 || presentCode==15 || presentCode==16 || presentCode==18 || presentCode==19 || presentCode==20 || presentCode==21
+                || presentCode==22 ){
+                     _playMusicMedium();
+                    sendSoundOn();
+                    audioEnable=true;
+                }else if(presentCode==23){
+                     _playMusicLower();
+                    sendSoundOn();
+                    audioEnable=true;
+                } 
             }
-            List<double> li = [];
+            // _playMusic();
+          } else if (list[108] == 0) {
+            _stopMusic();
+          }
+           cdisplayParameter = (vteValue/(pplateauDisplay-peepDisplayValue)).toInt();
 
-            if (pressurePoints.length >= 100) {
-              setState(() {
-                // pressurePoints.removeRange(0, 50);
-              });
-            } else {
-              pressurePoints.add(temp);
-              // li.add(temp);
+
+
+          if (list[108] == 1) {
+            setState(() {
+            if(list[109]==1 || list[109]==0){
+
+            ((list[106] << 8) + list[107])==5 ? alarmMessage = "SYSTEM FAULT" :
+            ((list[106] << 8) + list[107])==7 ? alarmMessage = "FiO\u2082 SENSOR MISSING":
+            ((list[106] << 8) + list[107])==10 ? alarmMessage ="HIGH LEAKAGE":
+            ((list[106] << 8) + list[107])==11 ? alarmMessage = "HIGH PRESSURE" :
+            ((list[106] << 8) + list[107])==17 ? alarmMessage = "PATIENT DISCONNECTED" :alarmMessage="";
+                        
+            }else if(list[109]==2){
+
+            ((list[106] << 8) + list[107])==1 ? alarmMessage = "AC POWER DISCONNECTED" :
+            ((list[106] << 8) + list[107])==2? alarmMessage = " LOW BATTERY" :
+            ((list[106] << 8) + list[107])==3 ? alarmMessage = "CALIBRATE FiO2":
+            ((list[106] << 8) + list[107])==4 ? alarmMessage = "CALIBRATION FiO2 FAIL":
+            ((list[106] << 8) + list[107])==6 ?  alarmMessage = "SELF TEST FAIL" :
+            ((list[106] << 8) + list[107])==8 ? alarmMessage = "HIGH FiO2":
+            ((list[106] << 8) + list[107])==9 ? alarmMessage = "LOW FIO2":
+            ((list[106] << 8) + list[107])==12 ? alarmMessage = "LOW PRESSURE" :
+            ((list[106] << 8) + list[107])==13 ? alarmMessage = "LOW VTE":
+            ((list[106] << 8) + list[107])==14 ? alarmMessage = "HIGH VTE" :
+            ((list[106] << 8) + list[107])==15 ? alarmMessage = "LOW VTI":
+            ((list[106] << 8) + list[107])==16? alarmMessage = "HIGH VTI":
+            ((list[106] << 8) + list[107])==18 ? alarmMessage = "LOW O2  supply":
+            ((list[106] << 8) + list[107])==19 ? alarmMessage = "LOW RR" :
+            ((list[106] << 8) + list[107])==20 ? alarmMessage = "HIGH RR" :
+            ((list[106] << 8) + list[107])==21 ?alarmMessage = "HIGH PEEP" :
+            ((list[106] << 8) + list[107])==22? alarmMessage = "LOW PEEP": alarmMessage="";
+            
+
+            }else if(list[109]==3){
+              ((list[106] << 8) + list[107])==23 ? alarmMessage = "Apnea backup" : alarmMessage="";
             }
+            });
 
-            // Fluttertoast.showToast(msg:pressurePoints.length.toString());
+            
+           
+          }
 
-            double temp1 =
-                ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
-
-            if (volumePoints.length >= 100) {
-              // volumePoints.removeRange(0, 50);
-            } else {
-              // Fluttertoast.showToast(msg: temp1.toString(),toastLength: Toast.LENGTH_SHORT);
-              volumePoints.add(temp1);
-            }
-
-            double temp3 = ((((list[46] << 8) + list[47])) -
-                    (((list[48] << 8) + list[49])))
-                .toDouble();
-            temp3 = temp3 * 0.06;
-
-            if (flowPoints.length >= 100) {
-              // flowPoints.removeRange(0, 50);
-            } else {
-              flowPoints.add(temp3);
-            }
-
-            //  Fluttertoast.showToast(msg:flowPoints.length.toString());
-
-            if (patientId != "") {
-              // Fluttertoast.showToast(msg: "1");
-              var data = VentilatorOMode(
-                  patientId,
-                  patientName,
-                  patientAge,
-                  patientGender,
-                  patientHeight,
-                  psValue1.toString(),
-                  vteValue.toString(),
-                  peepDisplayValue.toString(),
-                  rrDisplayValue.toString(),
-                  fio2DisplayParameter.toString(),
-                  mapDisplayValue.toString(),
-                  mvValue.toString(),
-                  cdisplayParameter.toString(),
-                  ieDisplayValue.toString(),
-                  rrValue.toString(),
-                  ieValue.toString(),
-                  peepValue.toString(),
-                  psValue.toString(),
-                  fio2Value.toString(),
-                  tiValue.toString(),
-                  teValue.toString(),
-                  temp,
-                  temp3,
-                  temp1,
-                  operatinModeR.toString(),
-                  lungImage.toString(),
-                  paw.toString());
-              saveData(data, patientId);
-            } else {
-              // Fluttertoast.showToast(msg: noTimes.toString());
-              var data = VentilatorOMode(
-                  "SWASIT " +  DateFormat("dd-MM-yyyy").format(now).toString(),
-                  patientName,
-                  patientAge,
-                  patientGender,
-                  patientHeight,
-                  psValue1.toString(),
-                  vteValue.toString(),
-                  peepDisplayValue.toString(),
-                  rrDisplayValue.toString(),
-                  fio2DisplayParameter.toString(),
-                  mapDisplayValue.toString(),
-                  mvValue.toString(),
-                  cdisplayParameter.toString(),
-                  ieDisplayValue.toString(),
-                  rrValue.toString(),
-                  ieValue.toString(),
-                  peepValue.toString(),
-                  psValue.toString(),
-                  fio2Value.toString(),
-                  tiValue.toString(),
-                  teValue.toString(),
-                  temp,
-                  temp3,
-                  temp1,
-                  operatinModeR.toString(),
-                  lungImage.toString(),
-                  paw.toString());
-              saveData(data, patientId);
-              // Fluttertoast.showToast(
-              //     msg: patientId == "" ? "SWASIT" + noTimes.toString() : "0");
-              // dbHelper.save();
-            }
-
-            if (paw <= 10) {
+          if (paw <= 10) {
               setState(() {
                 lungImage = 1;
               });
@@ -731,7 +703,6 @@ class _CheckPageState extends State<Dashboard> {
             i = list[12].toString();
             e = list[13].toString();
             tempIe = i + ":" + e;
-            // ieValue = e;
           });
 
           if (operatinModeR == 1) {
@@ -767,10 +738,9 @@ class _CheckPageState extends State<Dashboard> {
               modeName = "PRVC";
             });
           }
-
+        if((((list[68] << 8) + list[69]) / 100).round().toInt()>0 && (((list[68] << 8) + list[69]) / 100).round().toInt()<150){
           mapDisplayValue = (((list[68] << 8) + list[69]) / 100).toInt();
-          cdisplayParameter = (list[80] << 8) + list[81];
-
+        }
           if (list[84] == 1) {
             ioreDisplayParamter = "I";
           } else if (list[84] == 2) {
@@ -780,249 +750,132 @@ class _CheckPageState extends State<Dashboard> {
           }
 
           setState(() {
-
             if(list[108]!=0 &&  ((list[106] << 8) + list[107])!=null  &&  ((list[106] << 8) + list[107])>=1 && ((list[106] << 8) + list[107])<=23){
                alarmActive = list[108].toString();
             }else{
                alarmActive=0.toString();
             }
-           
           });
+
+            // pressure graph
+            double temp = (((list[34] << 8) + list[35]))
+                .toDouble(); // pressure points 35,36
+
+            if (temp > 40000) {
+              setState(() {
+                temp = -((65535 - temp) / 100);
+              });
+            } else {
+              setState(() {
+                temp = temp / 100;
+              });
+            }
+
+            if(temp.round()>0 && temp.round()<150)
+            {
+            if (pressurePoints.length >= 50) {
+              setState(() {
+                pressurePoints.removeAt(0);
+                pressurePoints.add(temp);
+              });
+            } else {
+              pressurePoints.add(temp);
+              // Fluttertoast.showToast(msg: pressurePoints.length.toString());
+              // li.add(temp);
+            }
+            }
+
+            double temp1 =
+                ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
+            
+              if(((list[60] << 8) + list[61]).toInt()>0 && ((list[60] << 8) + list[61]).toInt()<150){
+             pplateauDisplay =  ((list[60] << 8) + list[61]).toDouble();
+              }
+              if(temp1.round() > 0 && temp1.round() < 2500){
+              if (volumePoints.length >= 50) {
+              volumePoints.removeAt(0);
+              volumePoints.add(temp1);
+            } else {
+              volumePoints.add(temp1);
+            }
+              }
+           
+
+            double temp3 = ((((list[46] << 8) + list[47])) -
+                    (((list[48] << 8) + list[49])))
+                .toDouble();
+            temp3 = temp3 * 0.06;
+
+              if(temp3.round()>-100 && temp3.round()<200){
+                if (flowPoints.length >= 50) {
+              flowPoints.removeAt(0);
+              flowPoints.add(temp3);
+            } else {
+              flowPoints.add(temp3);
+            }
+              }
+            
+            if (patientId != "") {
+              // Fluttertoast.showToast(msg: patientId.toString());
+              var data = VentilatorOMode(
+                  patientId,
+                  patientName.toString(),
+                  psValue1.toString(),
+                  vteValue.toString(),
+                  peepDisplayValue.toString(),
+                  rrDisplayValue.toString(),
+                  fio2DisplayParameter.toString(),
+                  mapDisplayValue.toString(),
+                  mvValue.toString(),
+                  cdisplayParameter.toString(),
+                  ieDisplayValue.toString(),
+                  rrValue.toString(),
+                  ieValue.toString(),
+                  peepValue.toString(),
+                  psValue.toString(),
+                  fio2Value.toString(),
+                  tiValue.toString(),
+                  teValue.toString(),
+                  temp,
+                  temp3,
+                  temp1,
+                  operatinModeR.toString(),
+                  lungImage.toString(),
+                  paw.toString(),
+                  globalCounterNo.toString());
+              saveData(data, patientId);
+            } else {
+              var data = VentilatorOMode( "SWASIT " +  globalCounterNo.toString(),
+                  patientName,
+                  psValue1.toString(),
+                  vteValue.toString(),
+                  peepDisplayValue.toString(),
+                  rrDisplayValue.toString(),
+                  fio2DisplayParameter.toString(),
+                  mapDisplayValue.toString(),
+                  mvValue.toString(),
+                  cdisplayParameter.toString(),
+                  ieDisplayValue.toString(),
+                  rrValue.toString(),
+                  ieValue.toString(),
+                  peepValue.toString(),
+                  psValue.toString(),
+                  fio2Value.toString(),
+                  tiValue.toString(),
+                  teValue.toString(),
+                  temp,
+                  temp3,
+                  temp1,
+                  operatinModeR.toString(),
+                  lungImage.toString(),
+                  paw.toString(),globalCounterNo.toString());
+              saveData(data, patientId);
+            }
+
+            
           
 
-          if (list[108] == 1) {
-            presentCode = ((list[106] << 8) + list[107]);
-            var data = AlarmsList(presentCode.toString());
-             dbHelpera.saveAlarm(data);
-            // Fluttertoast.showToast(msg: presentCode.toString());
-            if(presentCode!=previousCode){
-                previousCode = presentCode;
-                _stopMusic();
-                 if(presentCode==5 || presentCode==7 || presentCode==10 || presentCode==11 || presentCode==17){
-                    _playMusicHigh();
-                    sendSoundOn();
-                    audioEnable=true;
-                }else if(presentCode==1 || presentCode==2 || presentCode==3 || presentCode==4 || presentCode==6 || presentCode==8 || presentCode==9 || presentCode==12
-                || presentCode==13 || presentCode==14 || presentCode==15 || presentCode==16 || presentCode==18 || presentCode==19 || presentCode==20 || presentCode==21
-                || presentCode==22 ){
-                     _playMusicMedium();
-                    sendSoundOn();
-                    audioEnable=true;
-                }else if(presentCode==23){
-                     _playMusicLower();
-                    sendSoundOn();
-                    audioEnable=true;
-                } 
-            }
-            // _playMusic();
-          } else if (list[108] == 0) {
-            _stopMusic();
-          }
-
-
-
-          if (list[108] == 1) {
-            setState(() {
-            if(list[109]==1 || list[109]==0){
-
-            ((list[106] << 8) + list[107])==5 ? alarmMessage = "SYSTEM FAULT" :
-            ((list[106] << 8) + list[107])==7 ? alarmMessage = "FiO2 SENSOR MISSING":
-            ((list[106] << 8) + list[107])==10 ? alarmMessage ="HIGH LEAKAGE":
-            ((list[106] << 8) + list[107])==11 ? alarmMessage = "HIGH PRESSURE" :
-            ((list[106] << 8) + list[107])==17 ? alarmMessage = "PATIENT DISCONNECTED" :alarmMessage="";
-                        
-            }else if(list[109]==2){
-
-            ((list[106] << 8) + list[107])==1 ? alarmMessage = "AC POWER DISCONNECTED" :
-            ((list[106] << 8) + list[107])==2? alarmMessage = " LOW BATTERY" :
-            ((list[106] << 8) + list[107])==3 ? alarmMessage = "CALIBRATE FiO2":
-            ((list[106] << 8) + list[107])==4 ? alarmMessage = "CALIBRATION FiO2 FAIL":
-            ((list[106] << 8) + list[107])==6 ?  alarmMessage = "SELF TEST FAIL" :
-            ((list[106] << 8) + list[107])==8 ? alarmMessage = "HIGH FiO2":
-            ((list[106] << 8) + list[107])==9 ? alarmMessage = "LOW FIO2":
-            ((list[106] << 8) + list[107])==12 ? alarmMessage = "LOW PRESSURE" :
-            ((list[106] << 8) + list[107])==13 ? alarmMessage = "LOW VTE":
-            ((list[106] << 8) + list[107])==14 ? alarmMessage = "HIGH VTE" :
-            ((list[106] << 8) + list[107])==15 ? alarmMessage = "LOW VTI":
-            ((list[106] << 8) + list[107])==16? alarmMessage = "HIGH VTI":
-            ((list[106] << 8) + list[107])==18 ? alarmMessage = "LOW O2  supply":
-            ((list[106] << 8) + list[107])==19 ? alarmMessage = "LOW RR" :
-            ((list[106] << 8) + list[107])==20 ? alarmMessage = "HIGH RR" :
-            ((list[106] << 8) + list[107])==21 ?alarmMessage = "HIGH PEEP" :
-            ((list[106] << 8) + list[107])==22? alarmMessage = "LOW PEEP": alarmMessage="";
-            
-
-            }else if(list[109]==3){
-              ((list[106] << 8) + list[107])==23 ? alarmMessage = "Apnea backup" : alarmMessage="";
-            }
-            });
-
-            // if (list[109] == 0) {
-            // setState(() {
-            //   ((((list[106] << 8) + list[107]) << 8) + list[107]) == 24
-            //       ? alarmMessage = "Device Fault9 Restart/Srvc"
-            //       : ((list[106] << 8) + list[107]) == 25
-            //           ? alarmMessage = "Device Fault10 Restart/Srvc"
-            //           : ((list[106] << 8) + list[107]) == 26
-            //               ? alarmMessage = "Device Fault11 Restart/Srvc"
-            //               : ((list[106] << 8) + list[107]) == 27
-            //                   ? alarmMessage = "Device Fault12 Restart/Srvc"
-            //                   : ((list[106] << 8) + list[107]) == 28
-            //                       ? alarmMessage = "Device Fault13 Restart/Srvc"
-            //                       : ((list[106] << 8) + list[107]) == 52
-            //                           ? alarmMessage = "Power Supply Loss"
-            //                           : ((list[106] << 8) + list[107]) == 62
-            //                               ? alarmMessage = "Power Disconnected"
-            //                               : ((list[106] << 8) + list[107]) == 63
-            //                                   ? alarmMessage =
-            //                                       "Patient Disconnected"
-            //                                   : ((list[106] << 8) + list[107]) == 64
-            //                                       ? alarmMessage =
-            //                                           "High Inspiratory Pressure"
-            //                                       : ((list[106] << 8) + list[107]) == 65
-            //                                           ? alarmMessage =
-            //                                               "High Peep"
-            //                                           : ((list[106] << 8) +
-            //                                                       list[107]) ==
-            //                                                   66
-            //                                               ? alarmMessage =
-            //                                                   "High Respiratory Rate"
-            //                                               : ((list[106] << 8) +
-            //                                                           list[
-            //                                                               107]) ==
-            //                                                       67
-            //                                                   ? alarmMessage =
-            //                                                       "Power Sensor Failure"
-            //                                                   : ((list[106] << 8) + list[107]) == 68
-            //                                                       ? alarmMessage =
-            //                                                           "Read / Write Error"
-            //                                                       : ((list[106] << 8) + list[107]) == 69
-            //                                                           ? alarmMessage =
-            //                                                               "Ventilator Temperature Error"
-            //                                                           : ((list[106] << 8) + list[107]) ==
-            //                                                                   70
-            //                                                               ? alarmMessage =
-            //                                                                   "System Failure"
-            //                                                               : ((list[106] << 8) + list[107]) == 71
-            //                                                                   ? alarmMessage = "Low Tidal Volume"
-            //                                                                   : "";
-            // });
-            // // } else if (list[110] == 1) {
-            // setState(() {
-            //   ((list[106] << 8) + list[107]) == 6
-            //       ? alarmMessage = "Buzzer Fault3 Restart/Srvc"
-            //       : ((list[106] << 8) + list[107]) == 11
-            //           ? alarmMessage = "If Persists Restart/Srvc"
-            //           : ((list[106] << 8) + list[107]) == 12
-            //               ? alarmMessage = "Check Exh Valve Pressure"
-            //               : ((list[106] << 8) + list[107]) == 13
-            //                   ? alarmMessage = "CHECK FiO2 SENSOR"
-            //                   : ((list[106] << 8) + list[107]) == 17
-            //                       ? alarmMessage =
-            //                           "CONNECT VALVE OR CHANGE PRESS"
-            //                       : ((list[106] << 8) + list[107]) == 21
-            //                           ? alarmMessage =
-            //                               "DEVICE FAULT3 RESTART/SRVC"
-            //                           : ((list[106] << 8) + list[107]) == 23
-            //                               ? alarmMessage =
-            //                                   "DEVICE FAULT7 RESTART/SRVC"
-            //                               : ((list[106] << 8) + list[107]) == 32
-            //                                   ? alarmMessage =
-            //                                       "FiO2 SENSOR MISSING"
-            //                                   : ((list[106] << 8) + list[107]) == 36
-            //                                       ? alarmMessage =
-            //                                           "HIGH LEAKAGE"
-            //                                       : ((list[106] << 8) + list[107]) == 37
-            //                                           ? alarmMessage =
-            //                                               "HIGH PRESSURE"
-            //                                           : ((list[106] << 8) +
-            //                                                       list[107]) ==
-            //                                                   40
-            //                                               ? alarmMessage =
-            //                                                   "HIGH VTI"
-            //                                               : ((list[106] << 8) +
-            //                                                           list[
-            //                                                               107]) ==
-            //                                                       41
-            //                                                   ? alarmMessage =
-            //                                                       "INSP FLOW RESTART/SRVC"
-            //                                                   : ((list[106] << 8) + list[107]) == 42
-            //                                                       ? alarmMessage =
-            //                                                           "INTENTIONAL VENT STOP"
-            //                                                       : ((list[106] << 8) + list[107]) == 43
-            //                                                           ? alarmMessage =
-            //                                                               "KEYPAD FAULT RESTART/SRVC* *IF PERSISTS RESTART/SRVC"
-            //                                                           : ((list[106] << 8) + list[107]) ==
-            //                                                                   48
-            //                                                               ? alarmMessage =
-            //                                                                   "OCCLUSION CHECK CIRCUIT*  *IF PERSISTS RESTART/SRVC "
-            //                                                               : ((list[106] << 8) + list[107]) == 49
-            //                                                                   ? alarmMessage = "OCCLUSION CHECK CIRCUIT"
-            //                                                                   : ((list[106] << 8) + list[107]) == 50 ? alarmMessage = "PATIENT DISCONNECTION* *IF PERSISTS RESTART/SRVC" : ((list[106] << 8) + list[107]) == 53 ? alarmMessage = "PRES SENS FLT1 RESTART/SRVC" : ((list[106] << 8) + list[107]) == 55 ? alarmMessage = "REMOVE VALVE prvc MODE" : ((list[106] << 8) + list[107]) == 56 ? alarmMessage = "REMOVE VALVE OR CHANGE PRES" : ((list[106] << 8) + list[107]) == 58 ? alarmMessage = "TURB OVERHEAT RESTART/SRVC" : ((list[106] << 8) + list[107]) == 60 ? alarmMessage = "VALVE MISSING CONNECT VALVE" : ((list[106] << 8) + list[107]) == 61 ? alarmMessage = "VTI NOT REACHED* *IF PERSISTS RESTART/SRVC" : "";
-            // });
-            // // } else if (list[109] == 2) {
-            // setState(() {
-            //   ((list[106] << 8) + list[107]) == 2
-            //       ? alarmMessage = "BATTERY FAULT1 RESTART/SRVC"
-            //       : ((list[106] << 8) + list[107]) == 3
-            //           ? alarmMessage = "DBATTERY FAULT2 RESTART/SRVC"
-            //           : ((list[106] << 8) + list[107]) == 4
-            //               ? alarmMessage = "BUZZER FAULT1  RESTART/SRVC"
-            //               : ((list[106] << 8) + list[107]) == 5
-            //                   ? alarmMessage = "BUZZER FAULT2 RESTART/SRVC"
-            //                   : ((list[106] << 8) + list[107]) == 7
-            //                       ? alarmMessage = "BUZZER LOW BATTERY"
-            //                       : ((list[106] << 8) + list[107]) == 8
-            //                           ? alarmMessage = "CALIBRATE FiO2"
-            //                           : ((list[106] << 8) + list[107]) == 9
-            //                               ? alarmMessage = "CALIBRATION FAIL"
-            //                               : ((list[106] << 8) + list[107]) == 10
-            //                                   ? alarmMessage =
-            //                                       "CHECK BATTERY CHARGE *IF PERSISTS RESTART/SRVC"
-            //                                   : ((list[106] << 8) + list[107]) == 14
-            //                                       ? alarmMessage =
-            //                                           "CHECK PROXIMAL LINE1* *IF PERSISTS RESTART/SRVC"
-            //                                       : ((list[106] << 8) + list[107]) == 15
-            //                                           ? alarmMessage =
-            //                                               "CHECK REMOTE ALARM"
-            //                                           : ((list[106] << 8) +
-            //                                                       list[107]) ==
-            //                                                   16
-            //                                               ? alarmMessage =
-            //                                                   "CHECK SETTINGS"
-            //                                               : ((list[106] << 8) +
-            //                                                           list[
-            //                                                               107]) ==
-            //                                                       22
-            //                                                   ? alarmMessage =
-            //                                                       "DEVICE FAULT5 RESTART/SRVC"
-            //                                                   : ((list[106] << 8) + list[107]) == 29
-            //                                                       ? alarmMessage =
-            //                                                           "E SENS FAULT OR CIRC LEAK"
-            //                                                       : ((list[106] << 8) + list[107]) == 31
-            //                                                           ? alarmMessage =
-            //                                                               "EXH VALVE LEAKAGE"
-            //                                                           : ((list[106] << 8) + list[107]) ==
-            //                                                                   33
-            //                                                               ? alarmMessage =
-            //                                                                   "HIGH / LOW BATTERY TEMP* *IF PERSISTS RESTART/SRVC"
-            //                                                               : ((list[106] << 8) + list[107]) == 34
-            //                                                                   ? alarmMessage = "HIGH FiO2"
-            //                                                                   : ((list[106] << 8) + list[107]) == 35 ? alarmMessage = "HIGH INT TEMP COOL VENT* *IF PERSISTS RESTART/SRVC" : ((list[106] << 8) + list[107]) == 38 ? alarmMessage = "DHIGH RATE" : ((list[106] << 8) + list[107]) == 39 ? alarmMessage = "HIGH VTE" : ((list[106] << 8) + list[107]) == 45 ? alarmMessage = "LOW FiO2" : ((list[106] << 8) + list[107]) == 46 ? alarmMessage = "LOW VTE" : ((list[106] << 8) + list[107]) == 47 ? alarmMessage = "LOW VTI	" : ((list[106] << 8) + list[107]) == 51 ? alarmMessage = "POWER FAULT RESTART/SRVC" : ((list[106] << 8) + list[107]) == 54 ? alarmMessage = "PROX SENS FLT2 RESTART/SRVCC" : ((list[106] << 8) + list[107]) == 59 ? alarmMessage = "UNKNOWN BATTERY" : "";
-            // });
-            // // } else if (list[109] == 3) {
-            // setState(() {
-            //   ((list[106] << 8) + list[107]) == 20
-            //       ? alarmMessage = "DC POWER DISCONNECTION"
-            //       : "";
-            // });
-            // }
-          }
-
-          // setState(() {
-          //   var now = new DateTime.now();
-          //   lastRecordTime = DateFormat("dd-MM-yyyy H:m:s").format(now);
-          // });
+         
 
           list.clear();
 
@@ -1066,7 +919,9 @@ class _CheckPageState extends State<Dashboard> {
   String i = "1", e = "3";
   int _start = 30;
   bool _loopActive = false;
-  int timerCounter = 0;
+  int timerCounter = 00;
+  int displayTemperature=0;
+  int globalCounter=0,globalCounterNo=0;
 
   // getNoTimes() async {
   //   await sleep(Duration(seconds: 6));
@@ -1074,10 +929,29 @@ class _CheckPageState extends State<Dashboard> {
   //   noTimes = preferences.getInt("noTimes");
   // }
 
+  counterData() async {
+    var data = await dbCounter.getCounterNo();
+    print(data);
+    if(data.isEmpty){
+      globalCounter = globalCounter+1;
+      dbCounter.saveCounter(CounterValue(globalCounter.toString()));
+      setState(() {
+        globalCounterNo = globalCounter;
+      });
+    }else if(data.isNotEmpty){
+      globalCounter = int.tryParse(data[0].counterValue.toString());
+      globalCounter = globalCounter+1;
+      dbCounter.updateCounterNo(globalCounter.toString());
+      setState(() {
+        globalCounterNo = globalCounter;
+      });
+    }
+  }
+
   @override
   initState() {
     super.initState();
-    // _playMusic();
+    counterData();
     getData();
     // getNoTimes();
     UsbSerial.usbEventStream.listen((UsbEvent event) {
@@ -1121,7 +995,22 @@ class _CheckPageState extends State<Dashboard> {
 
             setState(() {
               respiratoryEnable=false;
+              insExpButtonEnable=false;
+              // playOnEnabled = false;
             });            
+            if(playOnEnabled){
+           if(mounted){
+             setState(() {
+                psValue1 = 0;
+                mvValue = 0;
+                vteValue = 0;
+                fio2DisplayParameter = 0;
+                pressurePoints = [];
+                volumePoints = [];
+                flowPoints = [];
+             });
+           }
+            }
             // Fluttertoast.showToast(msg: "Timeout.");
             // psValue1 = 0;
             // mvValue = 0;
@@ -1334,8 +1223,6 @@ class _CheckPageState extends State<Dashboard> {
       resList.add(13);
       resList.add((data & 0x00FF));
       resList.add(0x7F);
-
-      // Fluttertoast.showToast(msg: resList.toString(),toastLength: Toast.LENGTH_SHORT);
     });
     await _port.write(Uint8List.fromList(resList));
   }
@@ -1362,14 +1249,7 @@ class _CheckPageState extends State<Dashboard> {
     }
 
     crcData = obj[length - 1] * 256 + obj[length - 2];
-    // Fluttertoast.showToast(msg: null)
-    // Fluttertoast.showToast(
-    //     msg: "received crc : " +
-    //         crcData.toString() +
-    //         "  \n" +
-    //         " calcu crc : " +
-    //         uiCrc.toString());
-
+  
     if (crcData == uiCrc) {
       return true;
     } else {
@@ -1412,10 +1292,14 @@ class _CheckPageState extends State<Dashboard> {
       e = preferences.getString("e");
       peepValue = preferences.getInt("peep");
       psValue = preferences.getInt("ps");
+      pcValue = preferences.getInt("pc");
       vtValue = preferences.getInt("vt");
       vteValue = preferences.getInt("vte");
       fio2Value = preferences.getInt("fio2");
-      tiValue = 0;
+      tiValue = (double.tryParse(i)/(double.tryParse(i)+double.tryParse(e)))*(60000/rrValue);
+      print(tiValue.toString());
+      teValue = (double.tryParse(e)/(double.tryParse(i)+double.tryParse(e)))*(60000/rrValue);
+      print(teValue.toString());
       paw = preferences.getInt("paw");
       mvValue = 0;
       rrtotalValue = preferences.getInt("rrtotal");
@@ -1461,9 +1345,9 @@ class _CheckPageState extends State<Dashboard> {
       padding: 10.0,
       backgroundColor: Color(0xFF171e27),
       traceColor: Colors.yellow,
-      yAxisMax: 60,
+      yAxisMax: 100,
       yAxisMin: 0.0,
-      dataSet: pressurePoints,
+      dataSet: pressurePoints
     );
 
     scopeOne1 = Oscilloscope(
@@ -1472,7 +1356,7 @@ class _CheckPageState extends State<Dashboard> {
         padding: 10.0,
         backgroundColor: Color(0xFF171e27),
         traceColor: Colors.green,
-        yAxisMax: 90.0,
+        yAxisMax: 150.0,
         yAxisMin: -90.0,
         dataSet: flowPoints);
 
@@ -1484,11 +1368,503 @@ class _CheckPageState extends State<Dashboard> {
       traceColor: Colors.blue,
       yAxisMax: 1000.0,
       yAxisMin: 0.0,
-      dataSet: volumePoints,
+      dataSet: volumePoints
     );
 
     return Scaffold(
         resizeToAvoidBottomPadding: false,
+        key: _scaffoldKey, //_scaffoldKey.currentState.openDrawer(),
+        drawer: Container(
+          width:190,
+          child: Theme(
+             data: Theme.of(context).copyWith( canvasColor: Colors.transparent, ),
+                    child: Container(
+              color: Colors.transparent,
+              child: Drawer(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(height:50),
+                    Container(
+                    color: Color(0xFF171e27),
+                    width: 190,
+                    height: 85,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12,top:5),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text("",
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 10)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                "",
+                                style:
+                                    TextStyle(color: Colors.green, fontSize: 10),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5.0),
+                              child: Text(
+                                cdisplayParameter.toString(),
+                                style:
+                                    TextStyle(color: Colors.green, fontSize: 38),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 0.0, bottom: 65),
+                              child: Text(
+                                "Compliance",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "ml/cmH\u2082O",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 0),
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 12),
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.green, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.green, fontSize: 12),
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 18.0),
+                                child: Divider(
+                                  color: Colors.white,
+                                  height: 1,
+                                ),
+                              ))
+                        ],
+                      )),
+                    ),
+                  ),
+                 Container(
+                    color: Color(0xFF171e27),
+                    width: 190,
+                    height: 85,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12,top:10),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text("",
+                                  style: TextStyle(
+                                      color: Colors.yellow, fontSize: 10)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                "",
+                                style:
+                                    TextStyle(color: Colors.yellow, fontSize: 10),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5.0),
+                              child: Text(
+                                leakVolumeDisplay==null ?"0":leakVolumeDisplay.toString(),
+                                // "0000",
+                                style:
+                                    TextStyle(color: Colors.yellow, fontSize: 35),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 0.0, bottom: 60),
+                              child: Text(
+                                "Leak Volume",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "ml",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 0),
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 12),
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.yellow, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.yellow, fontSize: 12),
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 18.0),
+                                child: Divider(
+                                  color: Colors.white,
+                                  height: 1,
+                                ),
+                              ))
+                        ],
+                      )),
+                    ),
+                  ), Container(
+                    color: Color(0xFF171e27),
+                    width: 190,
+                    height: 85,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12,top:5,bottom:5),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text("",
+                                  style: TextStyle(
+                                      color: Colors.pink, fontSize: 10)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                "",
+                                style:
+                                    TextStyle(color: Colors.pink, fontSize: 10),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5.0),
+                              child: Text(
+                                peakFlowDisplay==null ? "0": peakFlowDisplay.toString(),
+                                // "00",
+                                style:
+                                    TextStyle(color: Colors.pink, fontSize: 35),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 0.0, bottom: 60),
+                              child: Text(
+                                "Peak Flow",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "lpm",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 0),
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 12),
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.pink, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.pink, fontSize: 12),
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 18.0),
+                                child: Divider(
+                                  color: Colors.white,
+                                  height: 1,
+                                ),
+                              )),
+                        ],
+                      )),
+                    ),
+                  ),
+                  Container(
+                    color: Color(0xFF171e27),
+                    width: 190,
+                    height: 85,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12,top:5,bottom:5),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text("",
+                                  style: TextStyle(
+                                      color: Colors.pink, fontSize: 10)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                "",
+                                style:
+                                    TextStyle(color: Colors.pink, fontSize: 10),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5.0),
+                              child: Text(
+                                spontaneousDisplay==null ? "0": spontaneousDisplay.toString(),
+                                // "00",
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 35),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 0.0, bottom: 60),
+                              child: Text(
+                                "Spontaneous Volume",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "ml",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 0),
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 12),
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.pink, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.pink, fontSize: 12),
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 18.0),
+                                child: Divider(
+                                  color: Colors.white,
+                                  height: 1,
+                                ),
+                              )),
+                        ],
+                      )),
+                    ),
+                  ),
+                ],),
+              ),
+            ),
+          ),
+        ),
         body: Container(
           color: Color(0xFF171e27),
           child: Stack(
@@ -1554,24 +1930,24 @@ class _CheckPageState extends State<Dashboard> {
                       //             MaterialPageRoute(builder: (context) => NewTreatmentScreen()),)
                       : monitorEnabled ? monitorClick() : Container(),
 
-              _buttonPressed
-                  ? Center(
-                    child: Material(
-                        borderRadius: BorderRadius.circular(24.0),
-                        color: Colors.green,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 30.0, right: 30.0, top: 15, bottom: 15),
-                          child: Text(
-                            ioreDisplayParamter=="I" ?  "Inspiratory Pause : " +  (timerCounter.toString() + "s")
-                              : ioreDisplayParamter=="E" ? "Expiratory Pause : "  + (timerCounter.toString() + "s") 
-                              : "Respiratory Pause : "+ (timerCounter.toString() + "s"),
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.white)),
-                        ),
-                      ),
-                  )
-                  : Container()
+              // _buttonPressed
+              //     ? Center(
+              //       child: Material(
+              //           borderRadius: BorderRadius.circular(24.0),
+              //           color: Colors.green,
+              //           child: Padding(
+              //             padding: const EdgeInsets.only(
+              //                 left: 30.0, right: 30.0, top: 15, bottom: 15),
+              //             child: Text(
+              //               ioreDisplayParamter=="I" ?  "Inspiratory Pause : " +  (timerCounter.toString() + "s")
+              //                 : ioreDisplayParamter=="E" ? "Expiratory Pause : "  + (timerCounter.toString() + "s") 
+              //                 : "Respiratory Pause : "+ (timerCounter.toString() + "s"),
+              //                 style:
+              //                     TextStyle(fontSize: 30, color: Colors.white)),
+              //           ),
+              //         ),
+              //     )
+              //     : Container()
             ],
           ),
         ));
@@ -2202,9 +2578,28 @@ class _CheckPageState extends State<Dashboard> {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      setState(() {
+                                                      // if(pccmvEnabled==true){
+                                                      //     if(minRrtotal<pccmvRRValue){
+                                                      //       Fluttertoast.showToast(msg: "RR Value is less");
+                                                      //     }else if(maxRrtotal<pccmvRRValue){
+
+                                                      //     }else if(minpeep<pccmvPeepValue){
+
+                                                      //     }else if(pccmvPeepValue>maxpeep){
+
+                                                      //     }else if(pccmvPcValue<minppeak){
+
+                                                      //     }else if(pccmvPcValue>maxppeak){
+
+                                                      //     }else{
+                                                      //       writeAlarmsData();
+                                                      //     }
+                                                      // }else if(pacvEnabled==true){
+
+                                                      // }
+                                                      // else{
                                                         writeAlarmsData();
-                                                      });
+                                                      // }
                                                     },
                                                     child: Container(
                                                       height: 80,
@@ -2501,16 +2896,7 @@ class _CheckPageState extends State<Dashboard> {
                 SizedBox(
                   height: 5,
                 ),
-                Stack(children: [
-
-                  Padding(
-                    padding: const EdgeInsets.only(bottom:4.0),
-                    child: RotatedBox(quarterTurns: 3,child:Center(child: Icon(Icons.battery_full,size: 45,color:Colors.white)),),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top:12.0),
-                    child: Center(child: Icon(Icons.close,color:Colors.red,size:22)),
-                  )
+                
                   
                 //   Center(
                 //     child: Padding(
@@ -2538,23 +2924,23 @@ class _CheckPageState extends State<Dashboard> {
                 // ),
                 //    ),
                 //  ),
-                ],
-                ),
+                
                 SizedBox(
                   height: 2,
                 ),
-                powerButtonEnabled
-                    ? Padding(
-                        padding: const EdgeInsets.only(right: 40.0, bottom: 20),
-                        child: IconButton(
-                          icon: Icon(Icons.power_settings_new,
-                              size: 70, color: Colors.red),
-                          onPressed: () {
-                            _sendShutdown();
-                          },
-                        ),
-                      )
-                    : Container(),
+                // powerButtonEnabled
+                //     ? 
+                    // Padding(
+                    //     padding: const EdgeInsets.only(right: 40.0, bottom: 20),
+                    //     child: IconButton(
+                    //       icon: Icon(Icons.power_settings_new,
+                    //           size: 70, color: Colors.red),
+                    //       onPressed: () {
+                    //         _sendShutdown();
+                    //       },
+                    //     ),
+                    //   ),
+                    // : Container(),
                 //  Padding(
                 //   padding: const EdgeInsets.only(right: 40.0, bottom: 20),
                 //   child: IconButton(
@@ -2621,66 +3007,9 @@ class _CheckPageState extends State<Dashboard> {
                                   }),
                             ),
                           ),
-                    // _status == "Connected"
-                    //     ? Padding(
-                    //         padding:
-                    //             const EdgeInsets.only(right: 5.0, top: 5.0),
-                    //         child: Image.asset(
-                    //           "assets/images/usbconnected.png",
-                    //           width: 38,
-                    //           color: Colors.white,
-                    //         ),
-                    //       )
-                    //     : Padding(
-                    //         padding:
-                    //             const EdgeInsets.only(right: 5.0, top: 5.0),
-                    //         child: Image.asset(
-                    //           "assets/images/usbdisconnected.png",
-                    //           width: 38,
-                    //           color: Colors.white,
-                    //         ),
-                    //       ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    audioEnable
-                        ? InkWell(
-                            onTap: () {
-                              setState(() {
-                                audioEnable = false;
-                                sendSoundOff();
-                              });
-                            },
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 12.0, top: 5.0),
-                              child: Image.asset(
-                                "assets/images/audioon.png",
-                                color: Colors.white,
-                                width: 38,
-                              ),
-                            ),
-                          )
-                        : InkWell(
-                            onTap: () {
-                              setState(() {
-                                audioEnable = true;
-                                sendSoundOn();
-                              });
-                            },
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 12.0, top: 5.0),
-                              child: Image.asset(
-                                "assets/images/audiooff.png",
-                                color: Colors.grey,
-                                width: 38,
-                              ),
-                            ),
-                          ),
                     SizedBox(
                       height:
-                          playOnEnabled ? 108 : powerButtonEnabled ? 211 : 280,
+                          playOnEnabled ? 188 : powerButtonEnabled ? 131 : 240,
                     ),
                   ],
                 ),
@@ -2726,7 +3055,43 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          InkWell(
+                          
+                    //       InkWell(
+                    //         onTap: () {
+                    //           setState(() {
+                    //             Navigator.push(
+                    //               context,
+                    //               new MaterialPageRoute(
+                    //                   builder: (context) => SelfTestPage()),
+                    //             );
+                    //           });
+                    //         },
+                    //         child: Center(
+                    //           child: Container(
+                    //             width: 120,
+                    //             child: Card(
+                    //               color: monitorEnabled
+                    //                   ? Colors.blue
+                    //                   : Colors.white,
+                    //               child: Padding(
+                    //                 padding: const EdgeInsets.all(12.0),
+                    //                 child: Center(
+                    //                     child: Text(" Test \n Calibration",
+                    //                         textAlign: TextAlign.center,
+                    //                         style: TextStyle(
+                    //                             fontWeight: FontWeight.bold,
+                    //                             color: monitorEnabled
+                    //                                 ? Colors.white
+                    //                                 : Colors.black))),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                        ],
+                      )
+                    : Container(),
+                InkWell(
                             onTap: () {
                               setState(() {
                                 Navigator.push(
@@ -2757,42 +3122,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                Navigator.push(
-                                  context,
-                                  new MaterialPageRoute(
-                                      builder: (context) => SelfTestPage()),
-                                );
-                              });
-                            },
-                            child: Center(
-                              child: Container(
-                                width: 120,
-                                child: Card(
-                                  color: monitorEnabled
-                                      ? Colors.blue
-                                      : Colors.white,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Center(
-                                        child: Text(" Test \n Calibration",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: monitorEnabled
-                                                    ? Colors.white
-                                                    : Colors.black))),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container(),
-
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -2806,7 +3135,6 @@ class _CheckPageState extends State<Dashboard> {
                   child: Center(
                     child: Container(
                       width: 120,
-                      height:80,
                       child: Card(
                         color: modesEnabled ? Colors.blue : Colors.white,
                         child: Padding(
@@ -2824,6 +3152,38 @@ class _CheckPageState extends State<Dashboard> {
                     ),
                   ),
                 ),
+
+                 audioEnable
+                        ? InkWell(
+                            onTap: () {
+                              setState(() {
+                                audioEnable = false;
+                                sendSoundOff();
+                              });
+                            },
+                            child:  Center(
+                              child: Image.asset(
+                                  "assets/images/bell_line.png",
+                                  color: Colors.white,
+                                  width: 108,
+                                ),
+                            ),
+                          )
+                        : InkWell(
+                            onTap: () {
+                              setState(() {
+                                audioEnable = true;
+                                sendSoundOn();
+                              });
+                            },
+                            child: Center(
+                              child: Image.asset(
+                                  "assets/images/bell_silent_line.png",
+                                  color: Colors.grey,
+                                  width: 104,
+                                ),
+                            ),
+                          ),
                 // InkWell(
                 //   onTap: () {
                 //     setState(() {
@@ -2903,6 +3263,7 @@ class _CheckPageState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(width: 25),
+                          
                           graphs(),
                           SizedBox(width: 9),
                           Container(
@@ -2948,11 +3309,11 @@ class _CheckPageState extends State<Dashboard> {
                                                 alignment: Alignment.bottomLeft,
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.all(2.0),
+                                                      const EdgeInsets.only(bottom:5.0,left:4.0),
                                                   child: Text(
-                                                    "",
+                                                    "cmH\u2082O",
                                                     style: TextStyle(
-                                                        color: Colors.green,
+                                                        color: Colors.white,
                                                         fontSize: 10),
                                                   ),
                                                 ),
@@ -2968,7 +3329,7 @@ class _CheckPageState extends State<Dashboard> {
                                                     // "000",
                                                     style: TextStyle(
                                                         color: Colors.green,
-                                                        fontSize: 40),
+                                                        fontSize: 35),
                                                   ),
                                                 ),
                                               ),
@@ -3013,15 +3374,17 @@ class _CheckPageState extends State<Dashboard> {
                                           child: Center(
                                               child: Stack(
                                             children: [
-                                              Align(
-                                                alignment: Alignment.topRight,
+                                               Align(
+                                                alignment: Alignment.bottomLeft,
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: Text("l/m",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10)),
+                                                      const EdgeInsets.only(bottom:5.0,left:4),
+                                                  child: Text(
+                                                    "L/m",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10),
+                                                  ),
                                                 ),
                                               ),
                                               Align(
@@ -3049,7 +3412,7 @@ class _CheckPageState extends State<Dashboard> {
                                                     // "0000",
                                                     style: TextStyle(
                                                         color: Colors.yellow,
-                                                        fontSize: 40),
+                                                        fontSize: 35),
                                                   ),
                                                 ),
                                               ),
@@ -3059,7 +3422,7 @@ class _CheckPageState extends State<Dashboard> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "MV",
+                                                    "MVe",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
@@ -3083,170 +3446,252 @@ class _CheckPageState extends State<Dashboard> {
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      height: 162,
-                                    )
-                                    // Center(
-                                    //   child: Container(
-                                    //     color: Color(0xFF171e27),
-                                    //     width: 170,
-                                    //     height: 81,
-                                    //     child: Padding(
-                                    //       padding: const EdgeInsets.only(
-                                    //           top: 2, left: 4),
-                                    //       child: Center(
-                                    //           child: Stack(
-                                    //         children: [
-                                    //           Align(
-                                    //             alignment: Alignment.topRight,
-                                    //             child: Padding(
-                                    //               padding:
-                                    //                   const EdgeInsets.all(2.0),
-                                    //               child: Text("ml/cmH2O",
-                                    //                   style: TextStyle(
-                                    //                       color: Colors.white,
-                                    //                       fontSize: 10)),
-                                    //             ),
-                                    //           ),
-                                    //           Align(
-                                    //             alignment: Alignment.bottomLeft,
-                                    //             child: Padding(
-                                    //               padding:
-                                    //                   const EdgeInsets.all(2.0),
-                                    //               child: Text(
-                                    //                 "",
-                                    //                 style: TextStyle(
-                                    //                     color: Colors.green,
-                                    //                     fontSize: 10),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //           Align(
-                                    //             alignment: Alignment.center,
-                                    //             child: Padding(
-                                    //               padding:
-                                    //                   const EdgeInsets.only(
-                                    //                       right: 8.0),
-                                    //               child: Text(
-                                    //                 cdisplayParameter
-                                    //                     .toString(),
-                                    //                 // "0000",
-                                    //                 style: TextStyle(
-                                    //                     color: Colors.pink,
-                                    //                     fontSize: 40),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //           Align(
-                                    //             alignment: Alignment.centerLeft,
-                                    //             child: Container(
-                                    //               margin: EdgeInsets.only(
-                                    //                   bottom: 60, left: 4),
-                                    //               child: Text(
-                                    //                 "C",
-                                    //                 style: TextStyle(
-                                    //                     color: Colors.white,
-                                    //                     fontSize: 12),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //           Align(
-                                    //               alignment:
-                                    //                   Alignment.bottomCenter,
-                                    //               child: Padding(
-                                    //                 padding:
-                                    //                     const EdgeInsets.only(
-                                    //                         top: 18.0),
-                                    //                 child: Divider(
-                                    //                   color: Colors.white,
-                                    //                   height: 1,
-                                    //                 ),
-                                    //               ))
-                                    //         ],
-                                    //       )),
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    // Center(
-                                    //   child: Container(
-                                    //     color: Color(0xFF171e27),
-                                    //     width: 170,
-                                    //     height: 81,
-                                    //     child: Padding(
-                                    //       padding: const EdgeInsets.all(5.0),
-                                    //       child: Center(
-                                    //           child: Stack(
-                                    //         children: [
-                                    //           Align(
-                                    //             alignment: Alignment.topLeft,
-                                    //             child: Padding(
-                                    //               padding:
-                                    //                   const EdgeInsets.all(2.0),
-                                    //               child: Text("",
-                                    //                   style: TextStyle(
-                                    //                       color: Colors.green,
-                                    //                       fontSize: 10)),
-                                    //             ),
-                                    //           ),
-                                    //           Align(
-                                    //             alignment: Alignment.bottomLeft,
-                                    //             child: Padding(
-                                    //               padding:
-                                    //                   const EdgeInsets.all(2.0),
-                                    //               child: Text(
-                                    //                 "",
-                                    //                 style: TextStyle(
-                                    //                     color: Colors.green,
-                                    //                     fontSize: 10),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //           Align(
-                                    //             alignment: Alignment.center,
-                                    //             child: Padding(
-                                    //               padding:
-                                    //                   const EdgeInsets.only(
-                                    //                       right: 8.0),
-                                    //               child: Text(
-                                    //                 ieDisplayValue.toString(),
-                                    //                 // "0000",
-                                    //                 style: TextStyle(
-                                    //                     color: Colors.blue,
-                                    //                     fontSize: 40),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //           Align(
-                                    //             alignment: Alignment.topLeft,
-                                    //             child: Container(
+                                    // Container(
+                                    //   height: 162,
+                                    // )
+                                    Center(
+                                      child: Container(
+                                        color: Color(0xFF171e27),
+                                        width: 170,
+                                        height: 81,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 2, left: 4),
+                                          child: Center(
+                                              child: Stack(
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.topRight,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Text("",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 10)),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.bottomLeft,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Text(
+                                                    "cmH\u2082O",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 8.0),
+                                                  child: Text(
+                                                    pplateauDisplay
+                                                        .toStringAsFixed(0),
+                                                    // "0000",
+                                                    style: TextStyle(
+                                                        color: Colors.pink,
+                                                        fontSize: 35),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 60, left: 4),
+                                                  child: Text(
+                                                    "P Plateau",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 18.0),
+                                                    child: Divider(
+                                                      color: Colors.white,
+                                                      height: 1,
+                                                    ),
+                                                  ))
+                                            ],
+                                          )),
+                                        ),
+                                      ),
+                                    ),
+                                   Row(children: <Widget>[
+                                      Center(
+                                      child: Container(
+                                        color: Color(0xFF171e27),
+                                        width: 85,
+                                        height: 81,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: Center(
+                                              child: Stack(
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Text("",
+                                                      style: TextStyle(
+                                                          color: Colors.green,
+                                                          fontSize: 10)),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.bottomLeft,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Text(
+                                                    "ms",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 8.0),
+                                                  child: Text(
+                                                    tiValue.toStringAsFixed(0),
+                                                    // "0000",
+                                                    style: TextStyle(
+                                                        color: Colors.blue,
+                                                        fontSize: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Container(
 
-                                    //               margin: EdgeInsets.only(
-                                    //                   bottom: 50, left: 4),
-                                    //               child: Text(
-                                    //                 "I:E",
-                                    //                 style: TextStyle(
-                                    //                     color: Colors.white,
-                                    //                     fontSize: 12),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //           Align(
-                                    //               alignment:
-                                    //                   Alignment.bottomCenter,
-                                    //               child: Padding(
-                                    //                 padding:
-                                    //                     const EdgeInsets.only(
-                                    //                         top: 18.0),
-                                    //                 child: Divider(
-                                    //                   color: Colors.white,
-                                    //                   height: 1,
-                                    //                 ),
-                                    //               ))
-                                    //         ],
-                                    //       )),
-                                    //     ),
-                                    //   ),
-                                    // ),
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 50, left: 4),
+                                                  child: Text(
+                                                    "Ti",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 18.0),
+                                                    child: Divider(
+                                                      color: Colors.white,
+                                                      height: 1,
+                                                    ),
+                                                  ))
+                                            ],
+                                          )),
+                                        ),
+                                      ),
+                                    ),
+                                     Center(
+                                      child: Container(
+                                        color: Color(0xFF171e27),
+                                        width: 85,
+                                        height: 81,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: Center(
+                                              child: Stack(
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Text("",
+                                                      style: TextStyle(
+                                                          color: Colors.green,
+                                                          fontSize: 10)),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.bottomLeft,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Text(
+                                                    "ms",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 8.0),
+                                                  child: Text(
+                                                    teValue.toStringAsFixed(0),
+                                                    // "0000",
+                                                    style: TextStyle(
+                                                        color: Colors.blue,
+                                                        fontSize: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Container(
+
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 50, left: 4),
+                                                  child: Text(
+                                                    "Te",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 18.0),
+                                                    child: Divider(
+                                                      color: Colors.white,
+                                                      height: 1,
+                                                    ),
+                                                  ))
+                                            ],
+                                          )),
+                                        ),
+                                      ),
+                                    ),
+                                   ],)
                                   ],
                                 ),
                                 SizedBox(
@@ -3254,7 +3699,7 @@ class _CheckPageState extends State<Dashboard> {
                                 ),
                                 Stack(
                                   children: [
-                                    Align(
+                                  insExpButtonEnable==false ?  Align(
                                       alignment: Alignment.center,
                                       child: Row(
                                         mainAxisAlignment:
@@ -3295,6 +3740,100 @@ class _CheckPageState extends State<Dashboard> {
                                           ),
                                         ],
                                       ),
+                                    ): 
+                                    Column(children: <Widget>[
+                                      Center(
+                                        child: Listener(
+                                          onPointerDown: (details) {
+                                            writeRespiratoryPauseData(1);
+                                            // _inpirationPressed = true;
+                                            _buttonPressed = true;
+                                            _increaseCounterWhilePressed();
+                                          },
+                                          onPointerUp: (details) {
+                                            writeRespiratoryPauseData(0);
+                                            setState(() {
+                                              timerCounter = 0;
+                                              _buttonPressed = false;
+                                              // _inpirationPressed = false;
+                                            });
+                                          },
+                                          child: Material(
+                                            borderRadius: BorderRadius.circular(4.0),
+                                                  color: Colors.green,
+                                                            child: Container(
+                                              width: 135,
+                                              height: 58.5,
+                                              child: Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: Center(
+                                                      child: Stack(
+                                                    children: [
+                                                      Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text(
+                                                          "Inspiratory \n Pause",
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontWeight: FontWeight.bold,
+                                                              color: Colors.white),
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )),
+                                                ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height:5),
+                                      Center(
+                                        child: Listener(
+                                          onPointerDown: (details) {
+                                            writeRespiratoryPauseData(2);
+                                             _buttonPressed = true;
+                                            _increaseCounterWhilePressed();
+                                          },
+                                          onPointerUp: (details) {
+                                            writeRespiratoryPauseData(0);
+                                            setState(() {
+                                              timerCounter = 0;
+                                               _buttonPressed = false;
+                                              // _expiratoryPressed = false;
+                                            });
+                                          },
+                                          child: Material(
+                                            borderRadius: BorderRadius.circular(4.0),
+                                                  color: Colors.green,
+                                                            child: Container(
+                                              width: 135,
+                                              height: 58.5,
+                                              child: Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: Center(
+                                                      child: Stack(
+                                                    children: [
+                                                      Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text(
+                                                          "Expiratory \n Pause",
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontWeight: FontWeight.bold,
+                                                              color: Colors.white),
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )),
+                                                ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height:5),
+                                    ],
                                     ),
                                   ],
                                 )
@@ -3333,7 +3872,7 @@ class _CheckPageState extends State<Dashboard> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -3366,7 +3905,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Text(
                               psValue1.toString(),
                               style:
-                                  TextStyle(color: Colors.green, fontSize: 40),
+                                  TextStyle(color: Colors.green, fontSize: 38),
                             ),
                           ),
                         ),
@@ -3383,13 +3922,55 @@ class _CheckPageState extends State<Dashboard> {
                           ),
                         ),
                         Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "cmH\u2082O",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        Padding(
                           padding: const EdgeInsets.only(top: 0),
                           child: Align(
                             alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH2O",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  "MAX",
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                                Text(
+                                  maxppeak.toString(),
+                                  style:
+                                      TextStyle(color: Colors.green, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  minppeak.toString(),
+                                  style:
+                                      TextStyle(color: Colors.green, fontSize: 12),
+                                ),
+                                Text(
+                                  "MIN",
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -3411,7 +3992,7 @@ class _CheckPageState extends State<Dashboard> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -3445,7 +4026,7 @@ class _CheckPageState extends State<Dashboard> {
                               vteValue.toString(),
                               // "0000",
                               style:
-                                  TextStyle(color: Colors.yellow, fontSize: 40),
+                                  TextStyle(color: Colors.yellow, fontSize: 35),
                             ),
                           ),
                         ),
@@ -3455,20 +4036,64 @@ class _CheckPageState extends State<Dashboard> {
                             padding:
                                 const EdgeInsets.only(left: 0.0, bottom: 60),
                             child: Text(
-                              "VT",
+                              "VTe",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
-                              "ml",
+                              "mL",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  "MAX",
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                                Text(
+                                  maxvte.toString(),
+                                  style:
+                                      TextStyle(color: Colors.yellow, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  // vteMinValue.toString(),
+                                  minvte.toString(),
+                                  ////""
+                                  style:
+                                      TextStyle(color: Colors.yellow, fontSize: 12),
+                                ),
+                                Text(
+                                  "MIN",
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -3490,7 +4115,7 @@ class _CheckPageState extends State<Dashboard> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -3524,7 +4149,7 @@ class _CheckPageState extends State<Dashboard> {
                               peepDisplayValue.toString(),
                               // "00",
                               style:
-                                  TextStyle(color: Colors.pink, fontSize: 40),
+                                  TextStyle(color: Colors.pink, fontSize: 35),
                             ),
                           ),
                         ),
@@ -3534,20 +4159,62 @@ class _CheckPageState extends State<Dashboard> {
                             padding:
                                 const EdgeInsets.only(left: 0.0, bottom: 60),
                             child: Text(
-                              "Peep",
+                              "PEEP",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
-                              "cmH2O",
+                              "cmH\u2082O",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  "MAX",
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                                Text(
+                                  maxpeep.toString(),
+                                  style:
+                                      TextStyle(color: Colors.pink, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  minpeep.toString(),
+                                  style:
+                                      TextStyle(color: Colors.pink, fontSize: 12),
+                                ),
+                                Text(
+                                  "MIN",
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -3569,7 +4236,7 @@ class _CheckPageState extends State<Dashboard> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -3603,7 +4270,7 @@ class _CheckPageState extends State<Dashboard> {
                               rrDisplayValue.toString(),
                               // "00",
                               style:
-                                  TextStyle(color: Colors.blue, fontSize: 40),
+                                  TextStyle(color: Colors.blue, fontSize: 35),
                             ),
                           ),
                         ),
@@ -3620,9 +4287,9 @@ class _CheckPageState extends State<Dashboard> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
                               "bpm",
                               style:
@@ -3630,6 +4297,49 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  "MAX",
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                                Text(
+                                  maxRrtotal.toString(),
+                                  style:
+                                      TextStyle(color: Colors.blue, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  minRrtotal.toString(),
+                                  style:
+                                      TextStyle(color: Colors.blue, fontSize: 12),
+                                ),
+                                Text(
+                                  "MIN",
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        
                         Align(
                             alignment: Alignment.bottomCenter,
                             child: Padding(
@@ -3648,7 +4358,7 @@ class _CheckPageState extends State<Dashboard> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -3682,7 +4392,7 @@ class _CheckPageState extends State<Dashboard> {
                               fio2DisplayParameter.toString(),
                               // "000",
                               style:
-                                  TextStyle(color: Colors.teal, fontSize: 40),
+                                  TextStyle(color: Colors.teal, fontSize: 35),
                             ),
                           ),
                         ),
@@ -3692,16 +4402,16 @@ class _CheckPageState extends State<Dashboard> {
                             padding: const EdgeInsets.only(
                                 left: 0.0, bottom: 55, right: 0.0),
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
                               "%",
                               style:
@@ -3769,7 +4479,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "b/min",
+                              "bpm",
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
@@ -3781,7 +4491,7 @@ class _CheckPageState extends State<Dashboard> {
                               child: Text(
                                 rrValue.toString(),
                                 style: TextStyle(
-                                    fontSize: 25, color: Colors.white),
+                                    fontSize: 30, color: Colors.white),
                               ),
                             ),
                           ),
@@ -3841,7 +4551,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                            "",
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
@@ -3853,7 +4563,7 @@ class _CheckPageState extends State<Dashboard> {
                               child: Text(
                                 checkI(i) + ":" + checkE(e),
                                 style: TextStyle(
-                                    fontSize: 25, color: Colors.white),
+                                    fontSize: 30, color: Colors.white),
                               ),
                             ),
                           ),
@@ -3884,6 +4594,7 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+            
             InkWell(
               onTap: () {
                 //  CommonClick("PEEP") ;
@@ -3905,7 +4616,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Text(
                               "peep".toUpperCase(),
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
@@ -3913,9 +4624,9 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "cmH\u2082O",
                               style:
-                                  TextStyle(fontSize: 12, color: Colors.white),
+                                  TextStyle(fontSize: 10, color: Colors.white),
                             ),
                           ),
                           // Align(
@@ -3935,7 +4646,7 @@ class _CheckPageState extends State<Dashboard> {
                               child: Text(
                                 peepValue.toString(),
                                 style: TextStyle(
-                                    fontSize: 25, color: Colors.white),
+                                    fontSize: 30, color: Colors.white),
                               ),
                             ),
                           ),
@@ -3979,7 +4690,7 @@ class _CheckPageState extends State<Dashboard> {
                                       operatinModeR == 2 ||
                                       operatinModeR == 4 ||
                                       operatinModeR == 3
-                                  ? "PS"
+                                  ? "PC"
                                   : operatinModeR == 7 ||
                                           operatinModeR == 1 ||
                                           operatinModeR == 5
@@ -3988,12 +4699,12 @@ class _CheckPageState extends State<Dashboard> {
                                               modeName == "PACV" ||
                                               modeName == "PSIMV" ||
                                               modeName == "PSV"
-                                          ? "PS"
+                                          ? "PC"
                                           : modeName == "VC-CMV" ||
                                                   modeName == "VACV" ||
                                                   modeName == "VSIMV"
                                               ? "Vt"
-                                              : "PS",
+                                              : "PC",
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -4036,14 +4747,14 @@ class _CheckPageState extends State<Dashboard> {
                                                 modeName == "PACV" ||
                                                 modeName == "PSIMV" ||
                                                 modeName == "PSV"
-                                            ? psValue.toString()
+                                            ? pcValue.toString()
                                             : modeName == "VC-CMV" ||
                                                     modeName == "VACV" ||
                                                     modeName == "VSIMV"
                                                 ? vtValue.toString()
-                                                : psValue.toString(),
+                                                : pcValue.toString(),
                                 style: TextStyle(
-                                    fontSize: 25, color: Colors.white),
+                                    fontSize: 30, color: Colors.white),
                               ),
                             ),
                           ),
@@ -4064,9 +4775,71 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+           operatinModeR == 4 || modeName == "PSIMV" ? 
+           InkWell(
+              onTap: () {
+                //  CommonClick("PS") ;
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text( "PS",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text( psValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: psValue != null ? psValue / 60 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            )
+            :Container(),
             InkWell(
               onTap: () {
-                // CommonClick("FiO2");
+                // CommonClick("FiO\u2082");
               },
               child: Center(
                 child: Container(
@@ -4083,7 +4856,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -4093,7 +4866,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "%",
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
@@ -4115,7 +4888,7 @@ class _CheckPageState extends State<Dashboard> {
                               child: Text(
                                 fio2Value.toString(),
                                 style: TextStyle(
-                                    fontSize: 25, color: Colors.white),
+                                    fontSize: 30, color: Colors.white),
                               ),
                             ),
                           ),
@@ -4281,56 +5054,44 @@ class _CheckPageState extends State<Dashboard> {
             //   ),
             // ),
             SizedBox(
-              width: 115,
+              width: operatinModeR == 4  || modeName == "PSIMV" ? 10 : 130,
             ),
-           respiratoryEnable==true ?  Center(
-              child: Listener(
-                onPointerDown: (details) {
-                  writeRespiratoryPauseData(2);
-                  _buttonPressed = true;
-                  // writeRespiratoryPauseData(2);
-                  // _buttonPressed ? writeRespiratoryPauseData(2):"";
-                  // startTimer();
-                  _increaseCounterWhilePressed();
-                },
-                onPointerUp: (details) {
-                  writeRespiratoryPauseData(0);
-                  setState(() {
-                    timerCounter = 0;
-                    // sleep(Duration(seconds: 2));
-                    _buttonPressed = false;
-                    // _buttonPressed ? writeRespiratoryPauseData(0):"";
-                  });
-                },
+           respiratoryEnable==true ? 
+            InkWell(
+              onTap: (){
+                insExpButtonEnable=!insExpButtonEnable;
+              },
+                          child: Center(
                 child: Material(
-                  borderRadius: BorderRadius.circular(24.0),
-                        color: Colors.green,
-                                  child: Container(
-                    width: 160,
-                    height: 110,
-                    child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Respiratory \n Pause",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                                textAlign: TextAlign.center,
+                    borderRadius: BorderRadius.circular(24.0),
+                          color: insExpButtonEnable ? Colors.white: Colors.green,
+                      child: Container(
+                      width: 160,
+                      height: 110,
+                      child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Center(
+                              child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Respiratory \n Pause",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color:insExpButtonEnable ? Colors.black : Colors.white),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
-                            ),
-                          ],
-                        )),
-                      ),
+                            ],
+                          )),
+                        ),
+                    ),
                   ),
-                ),
               ),
-            ):Container(),
+            )
+            :Container(),
           ],
         ),
       ),
@@ -4371,8 +5132,77 @@ class _CheckPageState extends State<Dashboard> {
                       fontWeight: FontWeight.bold),
                 ),
               )),
+
+           
+              
+                          SizedBox(width: 10),
+                          Material(borderRadius: BorderRadius.circular(5),child: Container(
+                            height:40,width:80,
+                            child: Image.asset("assets/images/nobattery.png",width:28,color:Colors.black))),
+                            SizedBox(width: 10),
+                           Material(borderRadius: BorderRadius.circular(5),child: InkWell(
+                             onTap: (){
+                               Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => SelfTestPage()),
+                                );
+                             },
+                                                        child: Container(
+                              height:40,width:80,
+                              child: Image.asset("assets/images/calibrate.png",width:60,)),
+                           )),
+
+                            
+                          SizedBox(width: 10),
+                           timerCounter!=0 ?   Material(
+                 borderRadius: BorderRadius.circular(14.0),
+                        color: Colors.white,
+                child: Container(
+                  width:80,
+                  height:40,
+                  child: Center(
+                    child:  timerCounter<=9 ?
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("00:0"+timerCounter.toString(),style:TextStyle(color:Colors.green,fontSize: 20)),
+                    ):
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("00:"+timerCounter.toString(),style: TextStyle(color:Colors.green,fontSize: 20)),
+                    )
+                    ),
+                )
+                  ): Material(
+                 borderRadius: BorderRadius.circular(5.0),
+                        color: Colors.white,
+                child: Container(
+                  width:80,
+                  height:40,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("00:00",style:TextStyle(color:Colors.green,fontSize: 20)),
+                    )
+                    ),
+                )
+                  ),
+                          SizedBox(width:10),
+                          Material(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
+                              width:80,
+                              height:40,
+                            child:Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(displayTemperature.toString()+" C",style: TextStyle(fontSize: 20)),
+                              )))),
+                
+
             ],
           ),
+
           // Stack(
           //   children: [
           //     Padding(
@@ -4412,603 +5242,132 @@ class _CheckPageState extends State<Dashboard> {
         Column(
           children: [
             InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 100;
-                  psvminValue = 20;
-                  psvparameterName = "I Trig";
-                  psvparameterUnits = "cmH20";
-                  psvItrig = true;
-                  psvPeep = false;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = false;
-                  psvEtrig = false;
-                  psvFlowRamp = false;
-                  psvBackupRr = false;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "I Trig",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "20",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+                onTap: () {
+                  setState(() {
+                    psvmaxValue = 30;
+                    psvminValue = 1;
+                    psvparameterName = "Backup RR";
+                    psvparameterUnits = "bpm";
+                    psvItrig = false;
+                    psvPeep = false;
+                    psvIe = false;
+                    psvPs = false;
+                    psvTi = false;
+                    psvVtMin = false;
+                    psvVtMax = false;
+                    psvFio2 = false;
+                    psvAtime = false;
+                    psvEtrig = false;
+                    psvFlowRamp = false;
+                    psvBackupRr = true;
+                    psvMinTe = false;
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 130,
+                    height: 130,
+                    child: Card(
+                      elevation: 40,
+                      color:
+                          psvBackupRr ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Center(
+                            child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
                               child: Text(
-                                psvItrigValue.toString(),
+                                "Backup RR",
                                 style: TextStyle(
-                                    fontSize: 35,
-                                    color: psvItrig
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: psvBackupRr
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psvItrigValue != null
-                                    ? psvItrigValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 30;
-                  psvminValue = 1;
-                  psvparameterName = "Peep";
-                  psvparameterUnits = "";
-                  psvItrig = false;
-                  psvPeep = true;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = false;
-                  psvEtrig = false;
-                  psvFlowRamp = false;
-                  psvBackupRr = false;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvPeep ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Peep",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "30",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "0",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+                            Align(
+                              alignment: Alignment.topRight,
                               child: Text(
-                                psvPeepValue.toString(),
+                                "bpm",
                                 style: TextStyle(
-                                    fontSize: 35,
-                                    color: psvPeep
+                                    fontSize: 12,
+                                    color: psvBackupRr
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psvPeepValue != null
-                                    ? psvPeepValue / 30
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 40;
-                  psvminValue = 0;
-                  psvparameterName = "PS";
-                  psvparameterUnits = "";
-                  psvItrig = false;
-                  psvPeep = false;
-                  psvIe = false;
-                  psvPs = true;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = false;
-                  psvEtrig = false;
-                  psvFlowRamp = false;
-                  psvBackupRr = false;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvPs ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Ps",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvPs
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH20",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPs
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "40",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPs
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "0",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPs
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+                            Align(
+                              alignment: Alignment.bottomRight,
                               child: Text(
-                                psvPsValue.toString(),
+                                "30",
                                 style: TextStyle(
-                                    fontSize: 35,
-                                    color: psvPs
+                                    fontSize: 12,
+                                    color: psvBackupRr
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvPs ? Color(0xFF213855) : Color(0xFFE0E0E0),
-                                ),
-                                value: psvPsValue != null ? psvPsValue / 40 : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 100;
-                  psvminValue = 21;
-                  psvparameterName = "FiO2";
-                  psvparameterUnits = "";
-                  psvItrig = false;
-                  psvPeep = false;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = true;
-                  psvAtime = false;
-                  psvEtrig = false;
-                  psvFlowRamp = false;
-                  psvBackupRr = false;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvFio2 ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "FiO2",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvFio2
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvFio2
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvFio2
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "21",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvFio2
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+                            Align(
+                              alignment: Alignment.bottomLeft,
                               child: Text(
-                                psvFio2Value.toString(),
+                                "1",
                                 style: TextStyle(
-                                    fontSize: 35,
-                                    color: psvFio2
+                                    fontSize: 12,
+                                    color: psvBackupRr
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvFio2
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: Text(
+                                  psvBackupRrValue.toString(),
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: psvBackupRr
+                                          ? Color(0xFF213855)
+                                          : Color(0xFFE0E0E0)),
                                 ),
-                                value: psvFio2Value != null
-                                    ? psvFio2Value / 100
-                                    : 0,
                               ),
                             ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 30;
-                  psvminValue = 5;
-                  psvparameterName = "A Time";
-                  psvparameterUnits = "";
-                  psvItrig = false;
-                  psvPeep = false;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = true;
-                  psvEtrig = false;
-                  psvFlowRamp = false;
-                  psvBackupRr = false;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvAtime ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Apena Time",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvAtime
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvAtime
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "30",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvAtime
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "5",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvAtime
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                psvAtimeValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: psvAtime
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 20.0, left: 10, right: 10),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: LinearProgressIndicator(
+                                  backgroundColor: Colors.grey,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    psvBackupRr
                                         ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvAtime
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
+                                        : Color(0xFFE0E0E0),
+                                  ),
+                                  value: psvBackupRrValue != null
+                                      ? psvBackupRrValue / 30
+                                      : 0,
                                 ),
-                                value: psvAtimeValue != null
-                                    ? psvAtimeValue / 30
-                                    : 0,
                               ),
-                            ),
-                          )
-                        ],
-                      )),
+                            )
+                          ],
+                        )),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            InkWell(
+
+
+               InkWell(
               onTap: () {
                 setState(() {
                   psvmaxValue = 61;
                   psvminValue = 1;
-                  psvparameterName = "Apnea I:E";
+                  psvparameterName = "Backup I:E";
                   psvparameterUnits = "";
                   psvItrig = false;
                   psvPeep = false;
@@ -5040,7 +5399,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Apnea I:E",
+                              "Backup I:E",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -5118,9 +5477,853 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+
+           
+            InkWell(
+              onTap: () {
+                setState(() {
+                  psvmaxValue = 30;
+                  psvminValue = 1;
+                  psvparameterName = "PEEP";
+                  psvparameterUnits = "";
+                  psvItrig = false;
+                  psvPeep = true;
+                  psvIe = false;
+                  psvPs = false;
+                  psvTi = false;
+                  psvVtMin = false;
+                  psvVtMax = false;
+                  psvFio2 = false;
+                  psvAtime = false;
+                  psvEtrig = false;
+                  psvFlowRamp = false;
+                  psvBackupRr = false;
+                  psvMinTe = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psvPeep ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PEEP",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psvPeep
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvPeep
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "30",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvPeep
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "0",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvPeep
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                psvPeepValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psvPeep
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psvPeep
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: psvPeepValue != null
+                                    ? psvPeepValue / 30
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+           
           ],
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () {
+                setState(() {
+                  psvmaxValue = 30;
+                  psvminValue = 5;
+                  psvparameterName = "A Time";
+                  psvparameterUnits = "s";
+                  psvItrig = false;
+                  psvPeep = false;
+                  psvIe = false;
+                  psvPs = false;
+                  psvTi = false;
+                  psvVtMin = false;
+                  psvVtMax = false;
+                  psvFio2 = false;
+                  psvAtime = true;
+                  psvEtrig = false;
+                  psvFlowRamp = false;
+                  psvBackupRr = false;
+                  psvMinTe = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psvAtime ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Apena Time",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psvAtime
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "s",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvAtime
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "30",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvAtime
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "5",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvAtime
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                psvAtimeValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psvAtime
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psvAtime
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: psvAtimeValue != null
+                                    ? psvAtimeValue / 30
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  psvmaxValue = 100;
+                  psvminValue = 21;
+                  psvparameterName = "FiO\u2082";
+                  psvparameterUnits = "%";
+                  psvItrig = false;
+                  psvPeep = false;
+                  psvIe = false;
+                  psvPs = false;
+                  psvTi = false;
+                  psvVtMin = false;
+                  psvVtMax = false;
+                  psvFio2 = true;
+                  psvAtime = false;
+                  psvEtrig = false;
+                  psvFlowRamp = false;
+                  psvBackupRr = false;
+                  psvMinTe = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psvFio2 ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "FiO\u2082",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psvFio2
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "%",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvFio2
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvFio2
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "21",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvFio2
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                psvFio2Value.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psvFio2
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psvFio2
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: psvFio2Value != null
+                                    ? psvFio2Value / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+             InkWell(
+              onTap: () {
+                setState(() {
+                  psvmaxValue = 10;
+                  psvminValue = 1;
+                  psvparameterName = "I Trig";
+                  psvparameterUnits = "cmH\u2082O Below PEEP";
+                  psvItrig = true;
+                  psvPeep = false;
+                  psvIe = false;
+                  psvPs = false;
+                  psvTi = false;
+                  psvVtMin = false;
+                  psvVtMax = false;
+                  psvFio2 = false;
+                  psvAtime = false;
+                  psvEtrig = false;
+                  psvFlowRamp = false;
+                  psvBackupRr = false;
+                  psvMinTe = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I Trig",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                "-"+psvItrigValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psvItrig
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: psvItrigValue != null
+                                    ? psvItrigValue / 10
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            
+           
+          ],
+        ),
+        
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    psvmaxValue = 2400;
+                    psvminValue = 50;
+                    psvparameterName = "Vt Min";
+                    psvparameterUnits = "mL";
+                    psvItrig = false;
+                    psvPeep = false;
+                    psvIe = false;
+                    psvPs = false;
+                    psvTi = false;
+                    psvVtMin = true;
+                    psvVtMax = false;
+                    psvFio2 = false;
+                    psvAtime = false;
+                    psvEtrig = false;
+                    psvBackupRr = false;
+                    psvFlowRamp = false;
+                    psvMinTe = false;
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 130,
+                    height: 130,
+                    child: Card(
+                      elevation: 40,
+                      color: psvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Center(
+                            child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Vt Min",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: psvVtMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                "mL",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvVtMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                "2400",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvVtMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "50",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvVtMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: Text(
+                                  psvVtMinValue.toString(),
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: psvVtMin
+                                          ? Color(0xFF213855)
+                                          : Color(0xFFE0E0E0)),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 20.0, left: 10, right: 10),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: LinearProgressIndicator(
+                                  backgroundColor: Colors.grey,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    psvVtMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0),
+                                  ),
+                                  value: psvVtMinValue != null
+                                      ? psvVtMinValue / 2400
+                                      : 0,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    psvmaxValue = 2400;
+                    psvminValue = 50;
+                    psvparameterName = "Vt Max";
+                    psvparameterUnits = "mL";
+                    psvItrig = false;
+                    psvPeep = false;
+                    psvIe = false;
+                    psvPs = false;
+                    psvTi = false;
+                    psvVtMin = false;
+                    psvVtMax = true;
+                    psvBackupRr = false;
+                    psvFio2 = false;
+                    psvAtime = false;
+                    psvEtrig = false;
+                    psvFlowRamp = false;
+                    psvMinTe = false;
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 130,
+                    height: 130,
+                    child: Card(
+                      elevation: 40,
+                      color: psvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Center(
+                            child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Vt Max",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: psvVtMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                "mL",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvVtMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                "2400",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvVtMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "50",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvVtMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: Text(
+                                  psvVtMaxValue.toString(),
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: psvVtMax
+                                          ? Color(0xFF213855)
+                                          : Color(0xFFE0E0E0)),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 20.0, left: 10, right: 10),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: LinearProgressIndicator(
+                                  backgroundColor: Colors.grey,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    psvVtMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0),
+                                  ),
+                                  value: psvVtMaxValue != null
+                                      ? psvVtMaxValue / 2400
+                                      : 0,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+               InkWell(
+              onTap: () {
+                setState(() {
+                  psvmaxValue = 80;
+                  psvminValue = 1;
+                  psvparameterName = "PS";
+                  psvparameterUnits = "cmH\u2082O";
+                  psvItrig = false;
+                  psvPeep = false;
+                  psvIe = false;
+                  psvPs = true;
+                  psvTi = false;
+                  psvVtMin = false;
+                  psvVtMax = false;
+                  psvFio2 = false;
+                  psvAtime = false;
+                  psvEtrig = false;
+                  psvFlowRamp = false;
+                  psvBackupRr = false;
+                  psvMinTe = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psvPs ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PS",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psvPs
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvPs
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "80",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvPs
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvPs
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                psvPsValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psvPs
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psvPs ? Color(0xFF213855) : Color(0xFFE0E0E0),
+                                ),
+                                value: psvPsValue != null ? psvPsValue / 80 : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+              
+              
+            ]),
+
+            Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -5130,7 +6333,7 @@ class _CheckPageState extends State<Dashboard> {
                     psvmaxValue = 30;
                     psvminValue = 0;
                     psvparameterName = "Ti";
-                    psvparameterUnits = "";
+                    psvparameterUnits = "s";
                     psvItrig = false;
                     psvPeep = false;
                     psvIe = false;
@@ -5173,7 +6376,7 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.topRight,
                               child: Text(
-                                "",
+                                "s",
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: psvTi
@@ -5241,132 +6444,14 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 30;
-                    psvminValue = 1;
-                    psvparameterName = "Apnea RR";
-                    psvparameterUnits = "";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = false;
-                    psvTi = false;
-                    psvVtMin = false;
-                    psvVtMax = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvEtrig = false;
-                    psvFlowRamp = false;
-                    psvBackupRr = true;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color:
-                          psvBackupRr ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Apnea RR",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvBackupRr
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvBackupRr
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "30",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvBackupRr
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "1",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvBackupRr
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvBackupRrValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvBackupRr
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvBackupRr
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value: psvBackupRrValue != null
-                                      ? psvBackupRrValue / 30
-                                      : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+             
                InkWell(
                 onTap: () {
                   setState(() {
                     psvmaxValue = 5;
                     psvminValue = 1;
                     psvparameterName = "Min Te";
-                    psvparameterUnits = "";
+                    psvparameterUnits = "s";
                     psvItrig = false;
                     psvPeep = false;
                     psvIe = false;
@@ -5409,7 +6494,7 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.topRight,
                               child: Text(
-                                "",
+                                "s",
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: psvMinTe
@@ -5478,370 +6563,10 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ),
-              
-            ]),
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 600;
-                    psvminValue = 100;
-                    psvparameterName = "Vt Min";
-                    psvparameterUnits = "ml";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = false;
-                    psvTi = false;
-                    psvVtMin = true;
-                    psvVtMax = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvEtrig = false;
-                    psvBackupRr = false;
-                    psvFlowRamp = false;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Vt Min",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "600",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "100",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvVtMinValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvVtMin
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value: psvVtMinValue != null
-                                      ? psvVtMinValue / 600
-                                      : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 700;
-                    psvminValue = 200;
-                    psvparameterName = "Vt Max";
-                    psvparameterUnits = "";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = false;
-                    psvTi = false;
-                    psvVtMin = false;
-                    psvVtMax = true;
-                    psvBackupRr = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvEtrig = false;
-                    psvFlowRamp = false;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Vt Max",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "700",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "200",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvVtMaxValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvVtMax
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value: psvVtMaxValue != null
-                                      ? psvVtMaxValue / 700
-                                      : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              // InkWell(
-              //   onTap: () {
-              //     setState(() {
-              //       psvmaxValue = 5;
-              //       psvminValue = 1;
-              //       psvparameterName = "Min Te";
-              //       psvparameterUnits = "";
-              //       psvItrig = false;
-              //       psvPeep = false;
-              //       psvIe = false;
-              //       psvPs = false;
-              //       psvTi = false;
-              //       psvVtMin = false;
-              //       psvVtMax = false;
-              //       psvFio2 = false;
-              //       psvAtime = false;
-              //       psvBackupRr = false;
-              //       psvEtrig = false;
-              //       psvFlowRamp = false;
-              //       psvMinTe = true;
-              //     });
-              //   },
-              //   child: Center(
-              //     child: Container(
-              //       width: 130,
-              //       height: 130,
-              //       child: Card(
-              //         elevation: 40,
-              //         color: psvMinTe ? Color(0xFFE0E0E0) : Color(0xFF213855),
-              //         child: Padding(
-              //           padding: const EdgeInsets.all(6.0),
-              //           child: Center(
-              //               child: Stack(
-              //             children: [
-              //               Align(
-              //                 alignment: Alignment.topLeft,
-              //                 child: Text(
-              //                   "Min Te",
-              //                   style: TextStyle(
-              //                       fontSize: 15,
-              //                       fontWeight: FontWeight.bold,
-              //                       color: psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.topRight,
-              //                 child: Text(
-              //                   "",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.bottomRight,
-              //                 child: Text(
-              //                   "5",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.bottomLeft,
-              //                 child: Text(
-              //                   "1",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.center,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.only(top: 1.0),
-              //                   child: Text(
-              //                     psvMinTeValue.toString(),
-              //                     style: TextStyle(
-              //                         fontSize: 35,
-              //                         color: psvMinTe
-              //                             ? Color(0xFF213855)
-              //                             : Color(0xFFE0E0E0)),
-              //                   ),
-              //                 ),
-              //               ),
-              //               Padding(
-              //                 padding: const EdgeInsets.only(
-              //                     bottom: 20.0, left: 10, right: 10),
-              //                 child: Align(
-              //                   alignment: Alignment.bottomCenter,
-              //                   child: LinearProgressIndicator(
-              //                     backgroundColor: Colors.grey,
-              //                     valueColor: AlwaysStoppedAnimation<Color>(
-              //                       psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0),
-              //                     ),
-              //                     value: psvMinTeValue != null
-              //                         ? psvMinTeValue / 5
-              //                         : 0,
-              //                   ),
-              //                 ),
-              //               )
-              //             ],
-              //           )),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Container(
-                height: 130,
+                height: 126,
               )
+              
             ]),
         SizedBox(
           width: 10,
@@ -5894,7 +6619,7 @@ class _CheckPageState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(top: 28.0),
                                 child: Column(
                                   children: [
-                                    Text("Peep"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -5915,7 +6640,7 @@ class _CheckPageState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                    Text("FiO2"),
+                                    Text("FiO\u2082"),
                                     Text("$minfio2-$maxfio2"),
                                   ],
                                 ),
@@ -5966,17 +6691,11 @@ class _CheckPageState extends State<Dashboard> {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        psvparameterName,
-                        style: TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.normal),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
+                        children: <Widget>[
+                          IconButton(
                               icon: Icon(
                                 Icons.remove,
                                 color: Colors.black,
@@ -5992,7 +6711,10 @@ class _CheckPageState extends State<Dashboard> {
                                   } else if (psvPeep == true &&
                                       psvPeepValue != psvminValue) {
                                     setState(() {
-                                      psvPeepValue = psvPeepValue - 1;
+                                      psvPeepValue = psvPeepValue-1;
+                                      if(psvItrigValue>1 && psvItrigValue>psvPeepValue){
+                                        psvItrigValue = psvPeepValue;
+                                      }
                                     });
                                   } else if (psvPs == true &&
                                       psvPsValue != psvminValue) {
@@ -6018,11 +6740,9 @@ class _CheckPageState extends State<Dashboard> {
                                       //  }
                                     });
                                   } else if (psvVtMax == true &&
-                                      psvVtMaxValue != psvminValue) {
+                                      psvVtMaxValue != psvVtMinValue+1) {
                                     psvVtMaxValue = psvVtMaxValue - 1;
-                                    //  if (psvVtMaxValue <= psvVtMinValue+100) {
-                                    //    psvVtMinValue = psvVtMaxValue - 100;
-                                    //  }
+                                    
                                   } else if (psvFio2 == true &&
                                       psvFio2Value != psvminValue) {
                                     setState(() {
@@ -6060,9 +6780,114 @@ class _CheckPageState extends State<Dashboard> {
                             SizedBox(
                               width: 60,
                             ),
+                          Text(
+                            psvparameterName,
+                            style: TextStyle(
+                                fontSize: 36, fontWeight: FontWeight.normal),
+                          ),
+                          SizedBox(
+                              width: 60,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 45,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (psvItrig == true &&
+                                      psvItrigValue != psvmaxValue) {
+                                    setState(() {
+                                      psvItrigValue = psvItrigValue + 1;
+                                      if(psvPeepValue <= psvItrigValue){
+                                        if(psvPeepValue==0){
+                                          psvItrigValue=1;
+                                        }else{
+                                         psvItrigValue=psvPeepValue;
+                                        }
+                                      }
+                                    }); 
+                                  } else if (psvPeep == true &&
+                                      psvPeepValue != psvmaxValue) {
+                                    setState(() {
+                                      psvPeepValue = psvPeepValue + 1;
+                                    });
+                                  } else if (psvPs == true &&
+                                      psvPsValue != psvmaxValue) {
+                                    setState(() {
+                                      psvPsValue = psvPsValue + 1;
+                                    });
+                                  } else if (psvIe == true &&
+                                      psvIeValue != psvmaxValue) {
+                                    setState(() {
+                                      psvIeValue = psvIeValue + 1;
+                                    });
+                                  } else if (psvTi == true &&
+                                      psvTiValue != psvmaxValue) {
+                                    setState(() {
+                                      psvTiValue = psvTiValue + 1;
+                                    });
+                                  } else if (psvVtMin == true &&
+                                      psvVtMinValue != pacvmaxValue) {
+                                    setState(() {
+                                     
+                                      if(psvVtMaxValue<2390){
+                                         psvVtMinValue = psvVtMinValue + 1;
+                                          psvVtMaxValue = psvVtMinValue + 1;
+                                      }
+                                      
+                                    });
+                                  } else if (psvVtMax == true &&
+                                      psvVtMaxValue != pacvmaxValue) {
+                                    setState(() {
+                                      psvVtMaxValue = psvVtMaxValue + 1;
+                                    });
+                                  } else if (psvFio2 == true &&
+                                      psvFio2Value != psvmaxValue) {
+                                    setState(() {
+                                      psvFio2Value = psvFio2Value + 1;
+                                    });
+                                  } else if (psvFlowRamp == true &&
+                                      psvFlowRampValue != psvmaxValue) {
+                                    setState(() {
+                                      psvFlowRampValue = psvFlowRampValue + 1;
+                                    });
+                                  } else if (psvAtime == true &&
+                                      psvAtimeValue != psvmaxValue) {
+                                    setState(() {
+                                      psvAtimeValue = psvAtimeValue + 1;
+                                    });
+                                  } else if (psvEtrig == true &&
+                                      psvEtrigValue != psvmaxValue) {
+                                    setState(() {
+                                      psvEtrigValue = psvEtrigValue + 1;
+                                    });
+                                  } else if (psvBackupRr == true &&
+                                      psvBackupRrValue != psvmaxValue) {
+                                    setState(() {
+                                      psvBackupRrValue = psvBackupRrValue + 1;
+                                    });
+                                  } else if (psvMinTe == true &&
+                                      psvMinTeValue != psvmaxValue) {
+                                    setState(() {
+                                      psvMinTeValue = psvMinTeValue + 1;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            
                             Text(
                               psvItrig
-                                  ? psvItrigValue.toInt().toString()
+                                  ? "-"+psvItrigValue.toInt().toString()
                                   : psvPeep
                                       ? psvPeepValue.toInt().toString()
                                       : psvPs
@@ -6106,91 +6931,7 @@ class _CheckPageState extends State<Dashboard> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (psvItrig == true &&
-                                      psvItrigValue != psvmaxValue) {
-                                    setState(() {
-                                      psvItrigValue = psvItrigValue + 1;
-                                    });
-                                  } else if (psvPeep == true &&
-                                      psvPeepValue != psvmaxValue) {
-                                    setState(() {
-                                      psvPeepValue = psvPeepValue + 1;
-                                    });
-                                  } else if (psvPs == true &&
-                                      psvPsValue != psvmaxValue) {
-                                    setState(() {
-                                      psvPsValue = psvPsValue + 1;
-                                    });
-                                  } else if (psvIe == true &&
-                                      psvIeValue != psvmaxValue) {
-                                    setState(() {
-                                      psvIeValue = psvIeValue + 1;
-                                    });
-                                  } else if (psvTi == true &&
-                                      psvTiValue != psvmaxValue) {
-                                    setState(() {
-                                      psvTiValue = psvTiValue + 1;
-                                    });
-                                  } else if (psvVtMin == true &&
-                                      psvVtMinValue != psvmaxValue) {
-                                    setState(() {
-                                      // if(psvVtMinValue!=600){
-                                      psvVtMinValue = psvVtMinValue + 1;
-                                      // if (psvVtMaxValue <= psvVtMinValue+100) {
-                                      //   psvVtMaxValue = psvVtMinValue + 100;
-                                      // }
-                                      // }
-                                    });
-                                  } else if (psvVtMax == true &&
-                                      psvVtMaxValue != psvmaxValue) {
-                                    setState(() {
-                                      psvVtMaxValue = psvVtMaxValue + 1;
-                                    });
-                                  } else if (psvFio2 == true &&
-                                      psvFio2Value != psvmaxValue) {
-                                    setState(() {
-                                      psvFio2Value = psvFio2Value + 1;
-                                    });
-                                  } else if (psvFlowRamp == true &&
-                                      psvFlowRampValue != psvmaxValue) {
-                                    setState(() {
-                                      psvFlowRampValue = psvFlowRampValue + 1;
-                                    });
-                                  } else if (psvAtime == true &&
-                                      psvAtimeValue != psvmaxValue) {
-                                    setState(() {
-                                      psvAtimeValue = psvAtimeValue + 1;
-                                    });
-                                  } else if (psvEtrig == true &&
-                                      psvEtrigValue != psvmaxValue) {
-                                    setState(() {
-                                      psvEtrigValue = psvEtrigValue + 1;
-                                    });
-                                  } else if (psvBackupRr == true &&
-                                      psvBackupRrValue != psvmaxValue) {
-                                    setState(() {
-                                      psvBackupRrValue = psvBackupRrValue + 1;
-                                    });
-                                  } else if (psvMinTe == true &&
-                                      psvMinTeValue != psvmaxValue) {
-                                    setState(() {
-                                      psvMinTeValue = psvMinTeValue + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
+                            
                           ],
                         ),
                       ),
@@ -6205,11 +6946,21 @@ class _CheckPageState extends State<Dashboard> {
                             onChanged: (double value) {
                               if (psvItrig == true) {
                                 setState(() {
-                                  psvItrigValue = value.toInt();
-                                });
+                                      psvItrigValue = psvItrigValue + 1;
+                                      if(psvPeepValue <= psvItrigValue){
+                                        if(psvPeepValue==0){
+                                          psvItrigValue=1;
+                                        }else{
+                                         psvItrigValue=psvPeepValue;
+                                        }
+                                      }
+                                    });
                               } else if (psvPeep == true) {
                                 setState(() {
                                   psvPeepValue = value.toInt();
+                                if(psvItrigValue>1 && psvItrigValue>psvPeepValue){
+                                        psvItrigValue = psvPeepValue;
+                                    }
                                 });
                               } else if (psvPs == true) {
                                 setState(() {
@@ -6223,26 +6974,19 @@ class _CheckPageState extends State<Dashboard> {
                                 setState(() {
                                   psvTiValue = value.toInt();
                                 });
-                              } else if (psvVtMin == true) {
-                                setState(() {
-                                  psvVtMinValue = value.toInt();
-                                });
-                                // if(psvVtMinValue>=(psvVtMaxValue)-100){
-                                //   psvVtMaxValue = psvVtMinValue+100;
-                                // }
-                              } else if (psvVtMax == true) {
-                                setState(() {
-                                  // if(value.toInt()<200){
-                                  //     psvVtMaxValue = 200;
-                                  // }else if(value.toInt()>600){
-                                  //   psvVtMaxValue = 600;
-                                  // }else{
-                                  psvVtMaxValue = value.toInt();
-                                  // }
+                              }  else if (psvVtMin == true) {
 
-                                  // if(200 <= psvVtMaxValue && psvVtMaxValue <= 600 && psvVtMaxValue<psvVtMinValue+100){
-                                  //   psvVtMinValue = psvVtMaxValue-100;
-                                  // }
+                                if(value.toInt()<2390){
+                                psvVtMinValue = value.toInt();
+                                psvVtMaxValue = psvVtMinValue+1;
+                                }
+                              } else if (psvVtMax == true){
+                                setState(() {
+                                  if(value.toInt()<=psvVtMinValue+1){
+                                    psvVtMaxValue = psvVtMinValue+1;
+                                  }else{
+                                  psvVtMaxValue = value.toInt();
+                                  }
                                 });
                               } else if (psvFio2 == true) {
                                 setState(() {
@@ -6312,12 +7056,16 @@ class _CheckPageState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(psvIe ? getIeData(psvminValue,1) : psvminValue.toString()),
+                            Text(psvIe ? getIeData(psvminValue,1) 
+                            : psvItrig ? "-"+psvminValue.toString()
+                            : psvminValue.toString()),
                             Text(
                               psvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text( psvIe ? getIeData(psvmaxValue,1) :  psvmaxValue.toString())
+                            Text( psvIe ? getIeData(psvmaxValue,1) 
+                            : psvItrig ? "-"+psvmaxValue.toString()
+                            :  psvmaxValue.toString())
                           ],
                         ),
                       )
@@ -6339,127 +7087,14 @@ class _CheckPageState extends State<Dashboard> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  pacvmaxValue = 100;
-                  pacvminValue = 20;
-                  pacvparameterName = "I Trig";
-                  pacvparameterUnits = "cmH20";
-                  pacvItrig = true;
-                  pacvRr = false;
-                  pacvIe = false;
-                  pacvPeep = false;
-                  pacvPc = false;
-                  pacvVtMin = false;
-                  pacvVtMax = false;
-                  pacvFio2 = false;
-                  pacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: pacvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "I Trig",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: pacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "20",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                pacvItrigValue.toString() + "%",
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: pacvItrig
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  pacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: pacvItrigValue != null
-                                    ? pacvItrigValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+           
             InkWell(
               onTap: () {
                 setState(() {
                   pacvmaxValue = 60;
                   pacvminValue = 1;
                   pacvparameterName = "RR";
-                  pacvparameterUnits = "";
+                  pacvparameterUnits = "bpm";
                   pacvItrig = false;
                   pacvRr = true;
                   pacvIe = false;
@@ -6498,7 +7133,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "bpm",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvRr
@@ -6679,17 +7314,13 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-          ],
-        ),
-        Column(
-          children: [
-            InkWell(
+             InkWell(
               onTap: () {
                 setState(() {
                   pacvmaxValue = 30;
                   pacvminValue = 0;
                   pacvparameterName = "PEEP";
-                  pacvparameterUnits = "";
+                  pacvparameterUnits = "cmH\u2082O";
                   pacvItrig = false;
                   pacvRr = false;
                   pacvIe = false;
@@ -6728,7 +7359,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "cmH20",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvPeep
@@ -6797,13 +7428,132 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+          ],
+        ),
+        Column(
+          children: [
+             InkWell(
+              onTap: () {
+                setState(() {
+                  pacvmaxValue = 10;
+                  pacvminValue = 1;
+                  pacvparameterName = "I Trig";
+                  pacvparameterUnits = "cmH\u2082O Below PEEP";
+                  pacvItrig = true;
+                  pacvRr = false;
+                  pacvIe = false;
+                  pacvPeep = false;
+                  pacvPc = false;
+                  pacvVtMin = false;
+                  pacvVtMax = false;
+                  pacvFio2 = false;
+                  pacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: pacvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I Trig",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: pacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "-10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "-1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                "-"+pacvItrigValue.toString() ,
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: pacvItrig
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  pacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: pacvItrigValue != null
+                                    ? pacvItrigValue / 10
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+           
             InkWell(
               onTap: () {
                 setState(() {
-                  pacvmaxValue = 40;
-                  pacvminValue = 10;
-                  pacvparameterName = "Pc";
-                  pacvparameterUnits = "";
+                  pacvmaxValue = 80;
+                  pacvminValue = 1;
+                  pacvparameterName = "PC";
+                  pacvparameterUnits = "cmH\u2082O";
                   pacvItrig = false;
                   pacvRr = false;
                   pacvIe = false;
@@ -6830,7 +7580,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Pc",
+                              "PC",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -6842,7 +7592,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvPc
@@ -6853,7 +7603,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "40",
+                              "80",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvPc
@@ -6864,7 +7614,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "10",
+                              "1",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvPc
@@ -6899,240 +7649,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    pacvPcValue != null ? pacvPcValue / 40 : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  pacvmaxValue = 600;
-                  pacvminValue = 100;
-                  pacvparameterName = "Vt Min";
-                  pacvparameterUnits = "";
-                  pacvItrig = false;
-                  pacvRr = false;
-                  pacvIe = false;
-                  pacvPeep = false;
-                  pacvPc = false;
-                  pacvVtMin = true;
-                  pacvVtMax = false;
-                  pacvFio2 = false;
-                  pacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: pacvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vt Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "600",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                pacvVtMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: pacvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: pacvVtMinValue != null
-                                    ? pacvVtMinValue / 600
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            
-          ],
-        ),
-        Column(
-          children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  pacvmaxValue = 700;
-                  pacvminValue = 200;
-                  pacvparameterName = "Vt Max";
-                  pacvparameterUnits = "";
-                  pacvItrig = false;
-                  pacvRr = false;
-                  pacvIe = false;
-                  pacvPeep = false;
-                  pacvPc = false;
-                  pacvVtMin = false;
-                  pacvVtMax = true;
-                  pacvFio2 = false;
-                  pacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: pacvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vt Max",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "700",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                pacvVtMaxValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: pacvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: pacvVtMaxValue != null
-                                    ? pacvVtMaxValue / 700
-                                    : 0,
+                                    pacvPcValue != null ? pacvPcValue / 80 : 0,
                               ),
                             ),
                           )
@@ -7148,8 +7665,8 @@ class _CheckPageState extends State<Dashboard> {
                 setState(() {
                   pacvmaxValue = 100;
                   pacvminValue = 21;
-                  pacvparameterName = "FiO2";
-                  pacvparameterUnits = "";
+                  pacvparameterName = "FiO\u2082";
+                  pacvparameterUnits = "%";
                   pacvItrig = false;
                   pacvRr = false;
                   pacvIe = false;
@@ -7176,7 +7693,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -7188,7 +7705,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "%",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvFio2
@@ -7257,6 +7774,241 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+           
+            
+          ],
+        ),
+        Column(
+          children: [
+             InkWell(
+              onTap: () {
+                setState(() {
+                  pacvmaxValue = 2400;
+                  pacvminValue = 50;
+                  pacvparameterName = "Vt Min";
+                  pacvparameterUnits = "mL";
+                  pacvItrig = false;
+                  pacvRr = false;
+                  pacvIe = false;
+                  pacvPeep = false;
+                  pacvPc = false;
+                  pacvVtMin = true;
+                  pacvVtMax = false;
+                  pacvFio2 = false;
+                  pacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: pacvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Vt Min",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: pacvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "mL",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "2400",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "50",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                pacvVtMinValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: pacvVtMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  pacvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: pacvVtMinValue != null
+                                    ? pacvVtMinValue / 2400
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  pacvmaxValue = 2400;
+                  pacvminValue = 50;
+                  pacvparameterName = "Vt Max";
+                  pacvparameterUnits = "mL";
+                  pacvItrig = false;
+                  pacvRr = false;
+                  pacvIe = false;
+                  pacvPeep = false;
+                  pacvPc = false;
+                  pacvVtMin = false;
+                  pacvVtMax = true;
+                  pacvFio2 = false;
+                  pacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: pacvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Vt Max",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: pacvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "mL",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "2400",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "50",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: pacvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                pacvVtMaxValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: pacvVtMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  pacvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: pacvVtMaxValue != null
+                                    ? pacvVtMaxValue / 2400
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            
            
 
             // InkWell(
@@ -7386,6 +8138,7 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
+            Container(width: 160,)
           ],
         ),
         SizedBox(
@@ -7439,7 +8192,7 @@ class _CheckPageState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(top: 28.0),
                                 child: Column(
                                   children: [
-                                    Text("Peep"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -7460,7 +8213,7 @@ class _CheckPageState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                    Text("FiO2"),
+                                    Text("FiO\u2082"),
                                     Text("$minfio2-$maxfio2"),
                                   ],
                                 ),
@@ -7511,17 +8264,11 @@ class _CheckPageState extends State<Dashboard> {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        pacvparameterName,
-                        style: TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.normal),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
+                        children: <Widget>[
+                          IconButton(
                               icon: Icon(
                                 Icons.remove,
                                 color: Colors.black,
@@ -7534,13 +8281,12 @@ class _CheckPageState extends State<Dashboard> {
                                     setState(() {
                                       pacvItrigValue = pacvItrigValue - 1;
                                     });
-                                  } else if (pacvPeep == true &&
-                                      pacvPeepValue != pacvminValue) {
+                                  } else if (pacvPeep == true && pacvPeepValue!=pacvminValue) {
                                     setState(() {
-                                      pacvPeepValue = pacvPeepValue - 1;
-                                      // if (pacvPeepValue >= pacvPcValue) {
-                                      //   pacvPcValue = pacvPcValue - 1;
-                                      // }
+                                      pacvPeepValue = pacvPeepValue-1;
+                                      if(pacvItrigValue>1 && pacvItrigValue>pacvPeepValue){
+                                        pacvItrigValue = pacvPeepValue;
+                                      }
                                     });
                                   } else if (pacvRr == true &&
                                       pacvRrValue != pacvminValue) {
@@ -7561,17 +8307,11 @@ class _CheckPageState extends State<Dashboard> {
                                       pacvVtMinValue != pacvminValue) {
                                     setState(() {
                                       pacvVtMinValue = pacvVtMinValue - 1;
-                                      // if (pacvVtMinValue >= pacvVtMaxValue) {
-                                      //   pacvVtMaxValue = pacvVtMaxValue - 1;
-                                      // }
                                     });
                                   } else if (pacvVtMax == true &&
-                                      pacvVtMaxValue != pacvminValue) {
+                                      pacvVtMaxValue != pacvVtMinValue+1) {
                                     pacvVtMaxValue = pacvVtMaxValue - 1;
-                                    // if (pacvVtMaxValue <=
-                                    //     pacvVtMinValue + 100) {
-                                    //   pacvVtMinValue = pacvVtMaxValue - 100;
-                                    // }
+                                    
                                   } else if (pacvFio2 == true &&
                                       pacvFio2Value != pacvminValue) {
                                     setState(() {
@@ -7589,9 +8329,94 @@ class _CheckPageState extends State<Dashboard> {
                             SizedBox(
                               width: 60,
                             ),
+                          Text(
+                            pacvparameterName,
+                            style: TextStyle(
+                                fontSize: 36, fontWeight: FontWeight.normal),
+                          ),
+                          SizedBox(
+                              width: 60,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 45,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (pacvItrig == true &&  pacvItrigValue != pacvmaxValue) {
+                                    setState(() {
+                                      pacvItrigValue = pacvItrigValue + 1;
+                                      if(pacvPeepValue <= pacvItrigValue){
+                                        if(pacvPeepValue==0){
+                                          pacvItrigValue=1;
+                                        }else{
+                                         pacvItrigValue=pacvPeepValue;
+                                        }
+                                      }
+                                    });
+                                  } else if (pacvPeep == true &&
+                                      pacvPeepValue != pacvmaxValue) {
+                                    setState(() {
+                                      pacvPeepValue = pacvPeepValue + 1;
+                                      // if (pacvPcValue <= pacvPeepValue) {
+                                      //   pacvPcValue = pacvPeepValue + 1;
+                                      // }
+                                    });
+                                  } else if (pacvRr == true &&
+                                      pacvRrValue != pacvmaxValue) {
+                                    setState(() {
+                                      pacvRrValue = pacvRrValue + 1;
+                                    });
+                                  } else if (pacvIe == true &&
+                                      pacvIeValue != pacvmaxValue) {
+                                    setState(() {
+                                      pacvIeValue = pacvIeValue + 1;
+                                    });
+                                  } else if (pacvPc == true &&
+                                      pacvPcValue != pacvmaxValue) {
+                                    setState(() {
+                                      pacvPcValue = pacvPcValue + 1;
+                                    });
+                                  }  else if (pacvVtMin == true &&
+                                      pacvVtMinValue != pacvmaxValue) {
+                                    setState(() {
+                                      if(pacvVtMaxValue<2390){
+                                         pacvVtMinValue = pacvVtMinValue + 1;
+                                          pacvVtMaxValue = pacvVtMinValue + 1;
+                                      }  
+                                    });
+                                  } else if (pacvVtMax == true &&
+                                      pacvVtMaxValue != pacvmaxValue) {
+                                    setState(() {
+                                      pacvVtMaxValue = pacvVtMaxValue + 1;
+                                    });
+                                  } else if (pacvFio2 == true &&
+                                      pacvFio2Value != pacvmaxValue) {
+                                    setState(() {
+                                      pacvFio2Value = pacvFio2Value + 1;
+                                    });
+                                  } else if (pacvFlowRamp == true &&
+                                      pacvFlowRampValue != pacvmaxValue) {
+                                    setState(() {
+                                      pacvFlowRampValue = pacvFlowRampValue + 1;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            
                             Text(
                               pacvItrig
-                                  ? pacvItrigValue.toInt().toString()
+                                  ? "-"+pacvItrigValue.toInt().toString()
                                   : pacvPeep
                                       ? pacvPeepValue.toInt().toString()
                                       : pacvRr
@@ -7624,75 +8449,7 @@ class _CheckPageState extends State<Dashboard> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (pacvItrig == true &&
-                                      pacvItrigValue != pacvmaxValue) {
-                                    setState(() {
-                                      pacvItrigValue = pacvItrigValue + 1;
-                                    });
-                                  } else if (pacvPeep == true &&
-                                      pacvPeepValue != pacvmaxValue) {
-                                    setState(() {
-                                      pacvPeepValue = pacvPeepValue + 1;
-                                      // if (pacvPcValue <= pacvPeepValue) {
-                                      //   pacvPcValue = pacvPeepValue + 1;
-                                      // }
-                                    });
-                                  } else if (pacvRr == true &&
-                                      pacvRrValue != pacvmaxValue) {
-                                    setState(() {
-                                      pacvRrValue = pacvRrValue + 1;
-                                    });
-                                  } else if (pacvIe == true &&
-                                      pacvIeValue != pacvmaxValue) {
-                                    setState(() {
-                                      pacvIeValue = pacvIeValue + 1;
-                                    });
-                                  } else if (pacvPc == true &&
-                                      pacvPcValue != pacvmaxValue) {
-                                    setState(() {
-                                      pacvPcValue = pacvPcValue + 1;
-                                    });
-                                  } else if (pacvVtMin == true &&
-                                      pacvVtMinValue != pacvmaxValue) {
-                                    setState(() {
-                                      // if (pacvVtMinValue != 600) {
-                                      pacvVtMinValue = pacvVtMinValue + 1;
-                                      // if (pacvVtMaxValue <=
-                                      //     pacvVtMinValue + 100) {
-                                      //   pacvVtMaxValue = pacvVtMinValue + 100;
-                                      // }
-                                      // }
-                                    });
-                                  } else if (pacvVtMax == true &&
-                                      pacvVtMaxValue != pacvmaxValue) {
-                                    setState(() {
-                                      pacvVtMaxValue = pacvVtMaxValue + 1;
-                                    });
-                                  } else if (pacvFio2 == true &&
-                                      pacvFio2Value != pacvmaxValue) {
-                                    setState(() {
-                                      pacvFio2Value = pacvFio2Value + 1;
-                                    });
-                                  } else if (pacvFlowRamp == true &&
-                                      pacvFlowRampValue != pacvmaxValue) {
-                                    setState(() {
-                                      pacvFlowRampValue = pacvFlowRampValue + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
+                            
                           ],
                         ),
                       ),
@@ -7708,17 +8465,22 @@ class _CheckPageState extends State<Dashboard> {
                             min: pacvminValue.toDouble() ?? 0,
                             max: pacvmaxValue.toDouble() ?? 0,
                             onChanged: (double value) {
-                              if (pacvItrig == true) {
+                              if (pacvItrig == true && pacvItrigValue!=pacvPeepValue) {
                                 setState(() {
                                   pacvItrigValue = value.toInt();
+                                   if(pacvPeepValue <= pacvItrigValue){
+                                     if(pacvPeepValue==0){
+                                       pacvItrigValue = 1;
+                                     }else{
+                                         pacvItrigValue=pacvPeepValue;
+                                      }
+                                      }
                                 });
                               } else if (pacvPeep == true) {
-                                // if (pacvPcValue <= pacvPeepValue) {
-                                //   pacvPcValue = value.toInt();
-                                //   pacvPeepValue = value.toInt();
-                                // } else {
                                 pacvPeepValue = value.toInt();
-                                // }
+                                if(pacvItrigValue>1 && pacvItrigValue>pacvPeepValue){
+                                        pacvItrigValue = pacvPeepValue;
+                                      }
                               } else if (pacvRr == true) {
                                 setState(() {
                                   pacvRrValue = value.toInt();
@@ -7731,27 +8493,21 @@ class _CheckPageState extends State<Dashboard> {
                                 setState(() {
                                   pacvPcValue = value.toInt();
                                 });
-                              } else if (pacvVtMin == true) {
+                              }  else if (pacvVtMin == true) {
+
+                                if(value.toInt()<2390){
                                 pacvVtMinValue = value.toInt();
-                                // if (pacvVtMinValue >= (pacvVtMaxValue) - 100) {
-                                //   pacvVtMaxValue = pacvVtMinValue + 100;
-                                // }
-                              } else if (pacvVtMax == true) {
+                                pacvVtMaxValue = pacvVtMinValue+1;
+                                }
+                              } else if (pacvVtMax == true){
                                 setState(() {
-                                  // if (value.toInt() < 200) {
-                                  //   pacvVtMaxValue = 200;
-                                  // } else if (value.toInt() > 600) {
-                                  //   pacvVtMaxValue = 600;
-                                  // } else {
+                                  if(value.toInt()<=pacvVtMinValue+1){
+                                    pacvVtMaxValue = pacvVtMinValue+1;
+                                  }else{
                                   pacvVtMaxValue = value.toInt();
-                                  // }
-                                  // if (200 <= pacvVtMaxValue &&
-                                  //     pacvVtMaxValue <= 600 &&
-                                  //     pacvVtMaxValue < pacvVtMinValue + 100) {
-                                  //   pacvVtMinValue = pacvVtMaxValue - 100;
-                                  // }
+                                  }
                                 });
-                              } else if (pacvFio2 == true) {
+                              }else if (pacvFio2 == true) {
                                 setState(() {
                                   pacvFio2Value = value.toInt();
                                 });
@@ -7794,6 +8550,7 @@ class _CheckPageState extends State<Dashboard> {
                           children: [
                             Text(pacvIe
                                 ? getIeData(pacvminValue, 1)
+                                : pacvItrig ? "-"+pacvminValue.toString()
                                 : pacvminValue.toString()),
                             Text(
                               pacvparameterUnits,
@@ -7801,6 +8558,7 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             Text(pacvIe
                                 ? getIeData(pacvmaxValue, 1)
+                                : pacvItrig ? "-"+pacvmaxValue.toString()
                                 : pacvmaxValue.toString()),
                           ],
                         ),
@@ -7824,127 +8582,14 @@ prvcData() {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vacvmaxValue = 100;
-                  vacvminValue = 20;
-                  vacvparameterName = "I Trig";
-                  vacvparameterUnits = "cmH20";
-                  vacvItrig = true;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vacvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "I Trig",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "20",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vacvItrigValue.toString() + "%",
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vacvItrig
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vacvItrigValue != null
-                                    ? vacvItrigValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            
             InkWell(
               onTap: () {
                 setState(() {
                   vacvmaxValue = 30;
                   vacvminValue = 1;
                   vacvparameterName = "RR";
-                  vacvparameterUnits = "";
+                  vacvparameterUnits = "bpm";
                   vacvItrig = false;
                   vacvRr = true;
                   vacvIe = false;
@@ -7983,7 +8628,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "bpm",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvRr
@@ -8165,17 +8810,13 @@ prvcData() {
                 ),
               ),
             ),
-          ],
-        ),
-        Column(
-          children: [
-            InkWell(
+             InkWell(
               onTap: () {
                 setState(() {
                   vacvmaxValue = 30;
                   vacvminValue = 0;
                   vacvparameterName = "PEEP";
-                  vacvparameterUnits = "";
+                  vacvparameterUnits = "cmH\u2082O";
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -8214,7 +8855,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "cmH20",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvPeep
@@ -8283,13 +8924,18 @@ prvcData() {
                 ),
               ),
             ),
+          ],
+        ),
+        Column(
+          children: [
+           
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 600;
-                  vacvminValue = 100;
+                  vacvmaxValue = 2000;
+                  vacvminValue = 50;
                   vacvparameterName = "Vt";
-                  vacvparameterUnits = "";
+                  vacvparameterUnits = "mL";
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -8328,7 +8974,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "mL",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -8339,7 +8985,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "600",
+                              "2000",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -8350,7 +8996,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "100",
+                              "50",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -8385,7 +9031,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    vacvVtValue != null ? vacvVtValue / 600 : 0,
+                                    vacvVtValue != null ? vacvVtValue / 2000 : 0,
                               ),
                             ),
                           )
@@ -8396,245 +9042,15 @@ prvcData() {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vacvmaxValue = 59;
-                  vacvminValue = 10;
-                  vacvparameterName = "PC Min";
-                  vacvparameterUnits = "";
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = true;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vacvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "60",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "10",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vacvPcMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vacvPcMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vacvPcMinValue != null
-                                    ? vacvPcMinValue / 60
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vacvmaxValue = 60;
-                  vacvminValue = 10;
-                  vacvparameterName = "PC Max";
-                  vacvparameterUnits = "";
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = true;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vacvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Max",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vacvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "60",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "10",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vacvPcMaxValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vacvPcMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vacvPcMaxValue != null
-                                    ? vacvPcMaxValue / 60
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
+
+
+             InkWell(
               onTap: () {
                 setState(() {
                   vacvmaxValue = 100;
                   vacvminValue = 21;
-                  vacvparameterName = "FiO2";
-                  vacvparameterUnits = "";
+                  vacvparameterName = "FiO\u2082";
+                  vacvparameterUnits = "%";
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -8661,7 +9077,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -8673,7 +9089,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "%",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvFio2
@@ -8742,6 +9158,354 @@ prvcData() {
                 ),
               ),
             ),
+            
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vacvmaxValue = 10;
+                  vacvminValue = 1;
+                  vacvparameterName = "I Trig";
+                  vacvparameterUnits = "cmH\u2082O Below PEEP";
+                  vacvItrig = true;
+                  vacvRr = false;
+                  vacvIe = false;
+                  vacvPeep = false;
+                  vacvVt = false;
+                  vacvPcMin = false;
+                  vacvPcMax = false;
+                  vacvFio2 = false;
+                  vacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vacvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I Trig",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "-10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "-1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                "-"+vacvItrigValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vacvItrig
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vacvItrigValue != null
+                                    ? vacvItrigValue / 10
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vacvmaxValue = 100;
+                  vacvminValue = 10;
+                  vacvparameterName = "PC Min";
+                  vacvparameterUnits = "cmH\u2082O";
+                  vacvItrig = false;
+                  vacvRr = false;
+                  vacvIe = false;
+                  vacvPeep = false;
+                  vacvVt = false;
+                  vacvPcMin = true;
+                  vacvPcMax = false;
+                  vacvFio2 = false;
+                  vacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vacvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Min",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vacvPcMinValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vacvPcMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vacvPcMinValue != null
+                                    ? vacvPcMinValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vacvmaxValue = 100;
+                  vacvminValue = 10;
+                  vacvparameterName = "PC Max";
+                  vacvparameterUnits = "cmH\u2082O";
+                  vacvItrig = false;
+                  vacvRr = false;
+                  vacvIe = false;
+                  vacvPeep = false;
+                  vacvVt = false;
+                  vacvPcMin = false;
+                  vacvPcMax = true;
+                  vacvFio2 = false;
+                  vacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vacvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Max",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vacvPcMaxValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vacvPcMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vacvPcMaxValue != null
+                                    ? vacvPcMaxValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+           
 
             // InkWell(
             //   onTap: () {
@@ -8926,7 +9690,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 28.0),
                                 child: Column(
                                   children: [
-                                    Text("Peep"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -8947,7 +9711,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                    Text("FiO2"),
+                                    Text("FiO\u2082"),
                                     Text("$minfio2-$maxfio2"),
                                   ],
                                 ),
@@ -8997,17 +9761,11 @@ prvcData() {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        vacvparameterName,
-                        style: TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.normal),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                         mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
+                        children: <Widget>[
+                          IconButton(
                               icon: Icon(
                                 Icons.remove,
                                 color: Colors.black,
@@ -9023,13 +9781,10 @@ prvcData() {
                                   } else if (vacvPeep == true &&
                                       vacvPeepValue != vacvminValue) {
                                     setState(() {
-                                      vacvPeepValue = vacvPeepValue - 1;
-                                      // if (vacvPcMinValue <= vacvPeepValue) {
-                                      //   vacvPcMinValue = vacvPeepValue + 1;
-                                      //   if (vacvPcMaxValue <= vacvPcMinValue) {
-                                      //     vacvPcMaxValue = vacvPcMinValue + 1;
-                                      //   }
-                                      // }
+                                      vacvPeepValue = vacvPeepValue-1;
+                                      if(vacvItrigValue>1 && vacvItrigValue>vacvPeepValue){
+                                        vacvItrigValue = vacvPeepValue;
+                                      }
                                     });
                                   } else if (vacvRr == true &&
                                       vacvRrValue != vacvminValue) {
@@ -9055,10 +9810,9 @@ prvcData() {
                                       // }
                                     });
                                   } else if (vacvPcMax == true &&
-                                      vacvPcMaxValue != vacvminValue) {
-                                    setState(() {
-                                      vacvPcMaxValue = vacvPcMaxValue - 1;
-                                    });
+                                      vacvPcMaxValue != vacvPcMinValue+1) {
+                                    vacvPcMaxValue = vacvPcMaxValue - 1;
+                                    
                                   } else if (vacvFio2 == true &&
                                       vacvFio2Value != vacvminValue) {
                                     setState(() {
@@ -9076,9 +9830,100 @@ prvcData() {
                             SizedBox(
                               width: 60,
                             ),
+                          Text(
+                            vacvparameterName,
+                            style: TextStyle(
+                                fontSize: 36, fontWeight: FontWeight.normal),
+                          ),
+                          SizedBox(
+                              width: 60,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 45,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (vacvItrig == true &&
+                                      vacvItrigValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvItrigValue = vacvItrigValue + 1;
+                                      if(vacvPeepValue <= vacvItrigValue){
+                                        if(vacvPeepValue==0){
+                                          vacvItrigValue=1;
+                                        }else{
+                                         vacvItrigValue=vacvPeepValue;
+                                        }
+                                      }
+                                    });
+                                  } else if (vacvPeep == true &&
+                                      vacvPeepValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvPeepValue = vacvPeepValue + 1;
+                                      // if (vacvPcMinValue <= vacvPeepValue) {
+                                      //   vacvPcMinValue = vacvPeepValue + 1;
+                                      //   if (vacvPcMaxValue <= vacvPcMinValue) {
+                                      //     vacvPcMaxValue = vacvPcMinValue + 1;
+                                      //   }
+                                      // }
+                                    });
+                                  } else if (vacvRr == true &&
+                                      vacvRrValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvRrValue = vacvRrValue + 1;
+                                    });
+                                  } else if (vacvIe == true &&
+                                      vacvIeValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvIeValue = vacvIeValue + 1;
+                                    });
+                                  } else if (vacvVt == true &&
+                                      vacvVtValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvVtValue = vacvVtValue + 1;
+                                    });
+                                  } else if (vacvPcMin == true &&
+                                      vacvPcMinValue != vacvmaxValue) {
+                                    setState(() {
+                                     
+                                      if(vacvPcMaxValue<90){
+                                         vacvPcMinValue = vacvPcMinValue + 1;
+                                          vacvPcMaxValue = vacvPcMinValue + 1;
+                                      }
+                                      
+                                    });
+                                  } else if (vacvPcMax == true &&
+                                      vacvPcMaxValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvPcMaxValue = vacvPcMaxValue + 1;
+                                    });
+                                  }else if (vacvFio2 == true &&
+                                      vacvFio2Value != vacvmaxValue) {
+                                    setState(() {
+                                      vacvFio2Value = vacvFio2Value + 1;
+                                    });
+                                  } else if (vacvFlowRamp == true &&
+                                      vacvFlowRampValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvFlowRampValue = vacvFlowRampValue + 1;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            
                             Text(
                               vacvItrig
-                                  ? vacvItrigValue.toInt().toString()
+                                  ? "-"+vacvItrigValue.toInt().toString()
                                   : vacvPeep
                                       ? vacvPeepValue.toInt().toString()
                                       : vacvRr
@@ -9111,75 +9956,7 @@ prvcData() {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (vacvItrig == true &&
-                                      vacvItrigValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvItrigValue = vacvItrigValue + 1;
-                                    });
-                                  } else if (vacvPeep == true &&
-                                      vacvPeepValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvPeepValue = vacvPeepValue + 1;
-                                      // if (vacvPcMinValue <= vacvPeepValue) {
-                                      //   vacvPcMinValue = vacvPeepValue + 1;
-                                      //   if (vacvPcMaxValue <= vacvPcMinValue) {
-                                      //     vacvPcMaxValue = vacvPcMinValue + 1;
-                                      //   }
-                                      // }
-                                    });
-                                  } else if (vacvRr == true &&
-                                      vacvRrValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvRrValue = vacvRrValue + 1;
-                                    });
-                                  } else if (vacvIe == true &&
-                                      vacvIeValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvIeValue = vacvIeValue + 1;
-                                    });
-                                  } else if (vacvVt == true &&
-                                      vacvVtValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvVtValue = vacvVtValue + 1;
-                                    });
-                                  } else if (vacvPcMin == true &&
-                                      vacvPcMinValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvPcMinValue = vacvPcMinValue + 1;
-                                      // if (vacvPcMaxValue <= vacvPcMinValue) {
-                                      //   vacvPcMaxValue = vacvPcMinValue + 1;
-                                      // }
-                                    });
-                                  } else if (vacvPcMax == true &&
-                                      vacvPcMaxValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvPcMaxValue = vacvPcMaxValue + 1;
-                                    });
-                                  } else if (vacvFio2 == true &&
-                                      vacvFio2Value != vacvmaxValue) {
-                                    setState(() {
-                                      vacvFio2Value = vacvFio2Value + 1;
-                                    });
-                                  } else if (vacvFlowRamp == true &&
-                                      vacvFlowRampValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvFlowRampValue = vacvFlowRampValue + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
+                            
                           ],
                         ),
                       ),
@@ -9196,18 +9973,22 @@ prvcData() {
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
                               if (vacvItrig == true) {
-                                setState(() {
-                                  vacvItrigValue = value.toInt();
-                                });
+                                 setState(() {
+                                      vacvItrigValue = vacvItrigValue + 1;
+                                      if(vacvPeepValue <= vacvItrigValue){
+                                        if(vacvPeepValue==0){
+                                          vacvItrigValue=1;
+                                        }else{
+                                         vacvItrigValue=vacvPeepValue;
+                                        }
+                                      }
+                                    }); 
                               } else if (vacvPeep == true) {
                                 setState(() {
                                   vacvPeepValue = value.toInt();
-                                  // if (vacvPcMinValue <= vacvPeepValue) {
-                                  //   vacvPcMinValue = value.toInt() + 1;
-                                  //   if (vacvPcMaxValue <= vacvPcMinValue) {
-                                  //     vacvPcMaxValue = value.toInt() + 1;
-                                  //   }
-                                  // }
+                                if(vacvItrigValue>1 && vacvItrigValue>vacvPeepValue){
+                                        vacvItrigValue = vacvPeepValue;
+                                      }
                                 });
                               } else if (vacvRr == true) {
                                 setState(() {
@@ -9221,18 +10002,19 @@ prvcData() {
                                 setState(() {
                                   vacvVtValue = value.toInt();
                                 });
-                              } else if (vacvPcMin == true) {
+                              }  else if (vacvPcMin == true) {
+
+                                if(value.toInt()<90){
+                                vacvPcMinValue = value.toInt();
+                                vacvPcMaxValue = vacvPcMinValue+1;
+                                }
+                              } else if (vacvPcMax == true){
                                 setState(() {
-                                  vacvPcMinValue = value.toInt();
-                                  // if (vacvPcMaxValue <= vacvPcMinValue) {
-                                  //   if ((vacvPcMaxValue >= 60) == false) {
-                                  //     vacvPcMaxValue = value.toInt() + 1;
-                                  //   }
-                                  // }
-                                });
-                              } else if (vacvPcMax == true) {
-                                setState(() {
+                                  if(value.toInt()<=vacvPcMinValue+1){
+                                    vacvPcMaxValue = vacvPcMinValue+1;
+                                  }else{
                                   vacvPcMaxValue = value.toInt();
+                                  }
                                 });
                               } else if (vacvFio2 == true) {
                                 setState(() {
@@ -9275,12 +10057,16 @@ prvcData() {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text( vacvIe ? getIeData(vacvminValue,1)  :vacvminValue.toString()),
+                            Text( vacvIe ? getIeData(vacvminValue,1) 
+                            : vacvItrig ? "-"+vacvminValue.toString()
+                             :vacvminValue.toString()),
                             Text(
                               vacvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text( vacvIe ? getIeData(vacvminValue,1):vacvmaxValue.toString())
+                            Text( vacvIe ? getIeData(vacvminValue,1)
+                             : vacvItrig ? "-"+vacvmaxValue.toString()
+                            :vacvmaxValue.toString())
                           ],
                         ),
                       )
@@ -9299,128 +10085,14 @@ prvcData() {
       children: [
         Column(
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psimvmaxValue = 100;
-                  psimvminValue = 20;
-                  psimvparameterName = "I Trig";
-                  psimvparameterUnits = "cmH20";
-                  psimvItrig = true;
-                  psimvRr = false;
-                  psimvIe = false;
-                  psimvPeep = false;
-                  psimvPc = false;
-                  psimvPs = false;
-                  psimvVtMin = false;
-                  psimvVtMax = false;
-                  psimvFio2 = false;
-                  psimvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psimvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "I Trig",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "20",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                psimvItrigValue.toString() + "%",
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: psimvItrig
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psimvItrigValue != null
-                                    ? psimvItrigValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+           
             InkWell(
               onTap: () {
                 setState(() {
                   psimvmaxValue = 60;
                   psimvminValue = 1;
                   psimvparameterName = "RR";
-                  psimvparameterUnits = "";
+                  psimvparameterUnits = "bpm";
                   psimvItrig = false;
                   psimvRr = true;
                   psimvIe = false;
@@ -9460,7 +10132,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "bpm",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvRr
@@ -9645,19 +10317,13 @@ prvcData() {
                 ),
               ),
             ),
-          ],
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
+             InkWell(
               onTap: () {
                 setState(() {
                   psimvmaxValue = 30;
                   psimvminValue = 0;
                   psimvparameterName = "PEEP";
-                  psimvparameterUnits = "";
+                  psimvparameterUnits = "cmH\u2082O";
                   psimvItrig = false;
                   psimvRr = false;
                   psimvIe = false;
@@ -9697,7 +10363,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "cmH20",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPeep
@@ -9766,13 +10432,20 @@ prvcData() {
                 ),
               ),
             ),
+          ],
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+           
             InkWell(
               onTap: () {
                 setState(() {
-                  psimvmaxValue = 40;
-                  psimvminValue = 10;
-                  psimvparameterName = "Pc";
-                  psimvparameterUnits = "";
+                  psimvmaxValue = 80;
+                  psimvminValue = 1;
+                  psimvparameterName = "PC";
+                  psimvparameterUnits = "cmH\u2082O";
                   psimvItrig = false;
                   psimvRr = false;
                   psimvIe = false;
@@ -9800,7 +10473,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Pc",
+                              "PC",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -9812,7 +10485,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPc
@@ -9823,7 +10496,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "40",
+                              "80",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPc
@@ -9834,7 +10507,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "10",
+                              "1",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPc
@@ -9869,7 +10542,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: psimvPcValue != null
-                                    ? psimvPcValue / 40
+                                    ? psimvPcValue / 80
                                     : 0,
                               ),
                             ),
@@ -9881,251 +10554,13 @@ prvcData() {
                 ),
               ),
             ),
-            
             InkWell(
-              onTap: () {
-                setState(() {
-                  psimvmaxValue = 600;
-                  psimvminValue = 100;
-                  psimvparameterName = "Vt Min";
-                  psimvparameterUnits = "";
-                  psimvItrig = false;
-                  psimvRr = false;
-                  psimvIe = false;
-                  psimvPeep = false;
-                  psimvPc = false;
-                  psimvVtMin = true;
-                  psimvVtMax = false;
-                  psimvFio2 = false;
-                  psimvFlowRamp = false;
-                  psimvPs = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psimvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vt Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "600",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                psimvVtMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: psimvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psimvVtMinValue != null
-                                    ? psimvVtMinValue / 600
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-
-             InkWell(
-              onTap: () {
-                setState(() {
-                  psimvmaxValue = 700;
-                  psimvminValue = 200;
-                  psimvparameterName = "Vt Max";
-                  psimvparameterUnits = "";
-                  psimvItrig = false;
-                  psimvRr = false;
-                  psimvIe = false;
-                  psimvPeep = false;
-                  psimvPc = false;
-                  psimvVtMin = false;
-                  psimvVtMax = true;
-                  psimvFio2 = false;
-                  psimvFlowRamp = false;
-                  psimvPs = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psimvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vt Max",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "700",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                psimvVtMaxValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: psimvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psimvVtMaxValue != null
-                                    ? psimvVtMaxValue / 700
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-             InkWell(
               onTap: () {
                 setState(() {
                   psimvmaxValue = 100;
                   psimvminValue = 21;
-                  psimvparameterName = "FiO2";
-                  psimvparameterUnits = "";
+                  psimvparameterName = "FiO\u2082";
+                  psimvparameterUnits = "%";
                   psimvItrig = false;
                   psimvRr = false;
                   psimvIe = false;
@@ -10153,7 +10588,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -10165,7 +10600,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "%",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvFio2
@@ -10237,10 +10672,364 @@ prvcData() {
              InkWell(
               onTap: () {
                 setState(() {
-                  psimvmaxValue = 40;
-                  psimvminValue = 0;
+                  psimvmaxValue = 10;
+                  psimvminValue = 1;
+                  psimvparameterName = "I Trig";
+                  psimvparameterUnits = "cmH\u2082O Below PEEP";
+                  psimvItrig = true;
+                  psimvRr = false;
+                  psimvIe = false;
+                  psimvPeep = false;
+                  psimvPc = false;
+                  psimvPs = false;
+                  psimvVtMin = false;
+                  psimvVtMax = false;
+                  psimvFio2 = false;
+                  psimvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psimvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I Trig",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                "-"+psimvItrigValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psimvItrig
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: psimvItrigValue != null
+                                    ? psimvItrigValue / 10
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            InkWell(
+              onTap: () {
+                setState(() {
+                  psimvmaxValue = 2400;
+                  psimvminValue = 50;
+                  psimvparameterName = "Vt Min";
+                  psimvparameterUnits = "mL";
+                  psimvItrig = false;
+                  psimvRr = false;
+                  psimvIe = false;
+                  psimvPeep = false;
+                  psimvPc = false;
+                  psimvVtMin = true;
+                  psimvVtMax = false;
+                  psimvFio2 = false;
+                  psimvFlowRamp = false;
+                  psimvPs = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psimvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Vt Min",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psimvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "mL",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "2400",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "50",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                psimvVtMinValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psimvVtMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psimvVtMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: psimvVtMinValue != null
+                                    ? psimvVtMinValue / 2400
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+             InkWell(
+              onTap: () {
+                setState(() {
+                  psimvmaxValue = 2400;
+                  psimvminValue = 50;
+                  psimvparameterName = "Vt Max";
+                  psimvparameterUnits = "mL";
+                  psimvItrig = false;
+                  psimvRr = false;
+                  psimvIe = false;
+                  psimvPeep = false;
+                  psimvPc = false;
+                  psimvVtMin = false;
+                  psimvVtMax = true;
+                  psimvFio2 = false;
+                  psimvFlowRamp = false;
+                  psimvPs = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psimvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Vt Max",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psimvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "mL",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "2400",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "50",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psimvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                psimvVtMaxValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psimvVtMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psimvVtMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: psimvVtMaxValue != null
+                                    ? psimvVtMaxValue / 2400
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+             
+             InkWell(
+              onTap: () {
+                setState(() {
+                  psimvmaxValue = 70;
+                  psimvminValue = 1;
                   psimvparameterName = "PS";
-                  psimvparameterUnits = "";
+                  psimvparameterUnits = "cmH\u2082O";
                   psimvItrig = false;
                   psimvRr = false;
                   psimvIe = false;
@@ -10280,7 +11069,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPs
@@ -10291,7 +11080,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "40",
+                              "70",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPs
@@ -10302,7 +11091,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "0",
+                              "1",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPs
@@ -10337,7 +11126,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: psimvPsValue != null
-                                    ? psimvPsValue / 40
+                                    ? psimvPsValue / 70
                                     : 0,
                               ),
                             ),
@@ -10349,6 +11138,7 @@ prvcData() {
                 ),
               ),
             ),
+            // Container(height: 260,)s
 
           
            
@@ -10538,7 +11328,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 28.0),
                                 child: Column(
                                   children: [
-                                    Text("Peep"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -10559,7 +11349,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                    Text("FiO2"),
+                                    Text("FiO\u2082"),
                                     Text("$minfio2-$maxfio2"),
                                   ],
                                 ),
@@ -10607,17 +11397,11 @@ prvcData() {
                 child: Center(
                   child: Column(
                     children: [
-                      Text(
-                        psimvparameterName,
-                        style: TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.normal),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
+                        children: <Widget>[
+                          IconButton(
                               icon: Icon(
                                 Icons.remove,
                                 color: Colors.black,
@@ -10633,7 +11417,10 @@ prvcData() {
                                   } else if (psimvPeep == true &&
                                       psimvPeepValue != psimvminValue) {
                                     setState(() {
-                                      psimvPeepValue = psimvPeepValue - 1;
+                                      psimvPeepValue = psimvPeepValue-1;
+                                      if(psimvItrigValue>1 && psimvItrigValue>psimvPeepValue){
+                                        psimvItrigValue = psimvPeepValue;
+                                      }
                                     });
                                   } else if (psimvRr == true &&
                                       psimvRrValue != psimvminValue) {
@@ -10659,11 +11446,9 @@ prvcData() {
                                       //  }
                                     });
                                   } else if (psimvVtMax == true &&
-                                      psimvVtMaxValue != psimvminValue) {
+                                      psimvVtMaxValue != psimvVtMinValue+1) {
                                     psimvVtMaxValue = psimvVtMaxValue - 1;
-                                    //  if (psimvVtMaxValue <= psimvVtMinValue+100) {
-                                    //    psimvVtMinValue = psimvVtMaxValue - 100;
-                                    //  }
+                                    
                                   } else if (psimvFio2 == true &&
                                       psimvFio2Value != psimvminValue) {
                                     setState(() {
@@ -10687,9 +11472,100 @@ prvcData() {
                             SizedBox(
                               width: 60,
                             ),
+                          Text(
+                            psimvparameterName,
+                            style: TextStyle(
+                                fontSize: 36, fontWeight: FontWeight.normal),
+                          ),
+                          SizedBox(
+                              width: 60,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 45,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (psimvItrig == true &&
+                                      psimvItrigValue != psimvmaxValue) {
+                                   setState(() {
+                                      psimvItrigValue = psimvItrigValue + 1;
+                                      if(psimvPeepValue <= psimvItrigValue){
+                                        if(psimvPeepValue==0){
+                                          psimvItrigValue=1;
+                                        }else{
+                                         psimvItrigValue=psimvPeepValue;
+                                        }
+                                      }
+                                    });
+                                  } else if (psimvPeep == true &&
+                                      psimvPeepValue != psimvmaxValue) {
+                                    setState(() {
+                                      psimvPeepValue = psimvPeepValue + 1;
+                                    });
+                                  } else if (psimvRr == true &&
+                                      psimvRrValue != psimvmaxValue) {
+                                    setState(() {
+                                      psimvRrValue = psimvRrValue + 1;
+                                    });
+                                  } else if (psimvIe == true &&
+                                      psimvIeValue != psimvmaxValue) {
+                                    setState(() {
+                                      psimvIeValue = psimvIeValue + 1;
+                                    });
+                                  } else if (psimvPc == true &&
+                                      psimvPcValue != psimvmaxValue) {
+                                    setState(() {
+                                      psimvPcValue = psimvPcValue + 1;
+                                    });
+                                  }  else if (psimvVtMin == true &&
+                                      psimvVtMinValue != pacvmaxValue) {
+                                    setState(() {
+                                     
+                                      if(psimvVtMaxValue<2390){
+                                         psimvVtMinValue = psimvVtMinValue + 1;
+                                          psimvVtMaxValue = psimvVtMinValue + 1;
+                                      }
+                                      
+                                    });
+                                  } else if (psimvVtMax == true &&
+                                      psimvVtMaxValue != pacvmaxValue) {
+                                    setState(() {
+                                      psimvVtMaxValue = psimvVtMaxValue + 1;
+                                    });
+                                  } else if (psimvFlowRamp == true &&
+                                      psimvFlowRampValue != psimvmaxValue) {
+                                    setState(() {
+                                      psimvFlowRampValue =
+                                          psimvFlowRampValue + 1;
+                                    });
+                                  } else if (psimvPs == true &&
+                                      psimvPsValue != psimvmaxValue) {
+                                    setState(() {
+                                      psimvPsValue = psimvPsValue + 1;
+                                    });
+                                  }else if (psimvFio2 == true &&
+                                      psimvFio2Value != psimvmaxValue) {
+                                    setState(() {
+                                      psimvFio2Value = psimvFio2Value + 1;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            
                             Text(
                               psimvItrig
-                                  ? psimvItrigValue.toInt().toString()
+                                  ? "-"+psimvItrigValue.toInt().toString()
                                   : psimvPeep
                                       ? psimvPeepValue.toInt().toString()
                                       : psimvRr
@@ -10726,82 +11602,7 @@ prvcData() {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (psimvItrig == true &&
-                                      psimvItrigValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvItrigValue = psimvItrigValue + 1;
-                                    });
-                                  } else if (psimvPeep == true &&
-                                      psimvPeepValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvPeepValue = psimvPeepValue + 1;
-                                    });
-                                  } else if (psimvRr == true &&
-                                      psimvRrValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvRrValue = psimvRrValue + 1;
-                                    });
-                                  } else if (psimvIe == true &&
-                                      psimvIeValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvIeValue = psimvIeValue + 1;
-                                    });
-                                  } else if (psimvPc == true &&
-                                      psimvPcValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvPcValue = psimvPcValue + 1;
-                                    });
-                                  } else if (psimvVtMin == true &&
-                                      psimvVtMinValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvVtMinValue = psimvVtMinValue + 1;
-                                    });
-                                  } else if (psimvVtMin == true &&
-                                      psimvVtMinValue != psimvmaxValue) {
-                                    setState(() {
-                                      // if(psimvVtMinValue!=psimvminValue){
-                                      psimvVtMinValue = psimvVtMinValue + 1;
-                                      // if (psimvVtMaxValue <= psimvVtMinValue+100) {
-                                      //   psimvVtMaxValue = psimvVtMinValue + 100;
-                                      // }
-                                      // }
-                                    });
-                                  } else if (psimvVtMax == true &&
-                                      psimvVtMaxValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvVtMaxValue = psimvVtMaxValue + 1;
-                                    });
-                                  } else if (psimvFlowRamp == true &&
-                                      psimvFlowRampValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvFlowRampValue =
-                                          psimvFlowRampValue + 1;
-                                    });
-                                  } else if (psimvPs == true &&
-                                      psimvPsValue != psimvmaxValue) {
-                                    setState(() {
-                                      psimvPsValue = psimvPsValue + 1;
-                                    });
-                                  }else if (psimvFio2 == true &&
-                                      psimvFio2Value != psimvmaxValue) {
-                                    setState(() {
-                                      psimvFio2Value = psimvFio2Value + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
+                            
                           ],
                         ),
                       ),
@@ -10816,11 +11617,21 @@ prvcData() {
                             onChanged: (double value) {
                               if (psimvItrig == true) {
                                 setState(() {
-                                  psimvItrigValue = value.toInt();
-                                });
+                                      psimvItrigValue = psimvItrigValue + 1;
+                                      if(psimvPeepValue <= psimvItrigValue){
+                                        if(psimvPeepValue==0){
+                                          psimvItrigValue=1;
+                                        }else{
+                                         psimvItrigValue=psimvPeepValue;
+                                        }
+                                      }
+                                    });
                               } else if (psimvPeep == true) {
                                 setState(() {
                                   psimvPeepValue = value.toInt();
+                                if(psimvItrigValue>1 && psimvItrigValue>psimvPeepValue){
+                                        psimvItrigValue = psimvPeepValue;
+                                      } 
                                 });
                               } else if (psimvRr == true) {
                                 setState(() {
@@ -10834,24 +11645,20 @@ prvcData() {
                                 setState(() {
                                   psimvPcValue = value.toInt();
                                 });
-                              } else if (psimvVtMin == true) {
-                                psimvVtMinValue = value.toInt();
-// if(psimvVtMinValue>=(psimvVtMaxValue)-100){
-//   psimvVtMaxValue = psimvVtMinValue+100;
-// }
-                              } else if (psimvVtMax == true) {
-                                setState(() {
-//  if(value.toInt()<200){
-//      psimvVtMaxValue = 200;
-//  }else if(value.toInt()>600){
-//    psimvVtMaxValue = 600;
-//  }else{
-                                  psimvVtMaxValue = value.toInt();
-//  }
+                              } 
+                                  else if (psimvVtMin == true) {
 
-//  if(200 <= psimvVtMaxValue && psimvVtMaxValue <= 600 && psimvVtMaxValue<psimvVtMinValue+100){
-//    psimvVtMinValue = psimvVtMaxValue-100;
-//  }
+                                if(value.toInt()<2390){
+                                psimvVtMinValue = value.toInt();
+                                psimvVtMaxValue = psimvVtMinValue+1;
+                                }
+                              } else if (psimvVtMax == true){
+                                setState(() {
+                                  if(value.toInt()<=psimvVtMinValue+1){
+                                    psimvVtMaxValue = psimvVtMinValue+1;
+                                  }else{
+                                  psimvVtMaxValue = value.toInt();
+                                  }
                                 });
                               } else if (psimvFio2 == true) {
                                 setState(() {
@@ -10905,12 +11712,16 @@ prvcData() {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(psimvIe ? getIeData(psimvminValue,1) :psimvminValue.toString()),
+                            Text(psimvIe ? getIeData(psimvminValue,1) 
+                            :psimvItrig ? "-"+psimvminValue.toString()
+                            :psimvminValue.toString()),
                             Text(
                               psimvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(psimvIe ? getIeData(psimvmaxValue,1): psimvmaxValue.toString())
+                            Text(psimvIe ? getIeData(psimvmaxValue,1)
+                            :psimvItrig ? "-"+psimvmaxValue.toString()
+                            : psimvmaxValue.toString())
                           ],
                         ),
                       )
@@ -10938,7 +11749,7 @@ prvcData() {
                   pccmvmaxValue = 60;
                   pccmvminValue = 1;
                   pccmvparameterName = "RR";
-                  pccmvparameterUnits = "";
+                  pccmvparameterUnits = "bpm";
                   // pccmvTempValue = pccmvRRValue;
                   pccmvRRChanged = true;
                   pccmvRR = true;
@@ -10979,7 +11790,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "bpm",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: pccmvRR
@@ -11168,7 +11979,7 @@ prvcData() {
                   pccmvmaxValue = 30;
                   pccmvminValue = 0;
                   pccmvparameterName = "PEEP";
-                  pccmvparameterUnits = "";
+                  pccmvparameterUnits = "cmH\u2082O";
                   pccmvRR = false;
                   pccmvIe = false;
                   pccmvPeep = true;
@@ -11207,7 +12018,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "cmH20",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: pccmvPeep
@@ -11283,10 +12094,10 @@ prvcData() {
             InkWell(
               onTap: () {
                 setState(() {
-                  pccmvmaxValue = 40;
-                  pccmvminValue = 5;
+                  pccmvmaxValue = 80;
+                  pccmvminValue = 1;
                   pccmvparameterName = "PC";
-                  pccmvparameterUnits = "";
+                  pccmvparameterUnits = "cmH\u2082O";
                   pccmvRR = false;
                   pccmvIe = false;
                   pccmvPeep = false;
@@ -11325,7 +12136,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "cmH20",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: pccmvPc
@@ -11336,7 +12147,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "40",
+                              "80",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvPc
@@ -11347,7 +12158,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              pccmvPc ? pccmvPeepValue.toString() : "5",
+                              "1",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvPc
@@ -11382,7 +12193,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: pccmvPcValue != null
-                                    ? pccmvPcValue / 40
+                                    ? pccmvPcValue / 80
                                     : 0,
                               ),
                             ),
@@ -11399,8 +12210,8 @@ prvcData() {
                 setState(() {
                   pccmvmaxValue = 100;
                   pccmvminValue = 21;
-                  pccmvparameterName = "FiO2";
-                  pccmvparameterUnits = "";
+                  pccmvparameterName = "FiO\u2082";
+                  pccmvparameterUnits = "%";
                   pccmvRR = false;
                   pccmvIe = false;
                   pccmvPeep = false;
@@ -11427,7 +12238,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "FiO2",
+                              "FiO"+'\u2082',
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -11439,7 +12250,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "%",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: pccmvFio2
@@ -11508,13 +12319,18 @@ prvcData() {
                 ),
               ),
             ),
+            
+          ],
+        ),
+        Column(
+          children: [
             InkWell(
               onTap: () {
                 setState(() {
-                  pccmvmaxValue = 600;
-                  pccmvminValue = 100;
+                  pccmvmaxValue = 2400;
+                  pccmvminValue = 50;
                   pccmvparameterName = "VTmin";
-                  pccmvparameterUnits = "";
+                  pccmvparameterUnits = "mL";
                   pccmvRR = false;
                   pccmvIe = false;
                   pccmvPeep = false;
@@ -11553,7 +12369,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "mL",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: pccmvVtmin
@@ -11564,7 +12380,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "600",
+                              "2400",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmin
@@ -11575,7 +12391,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "100",
+                              "50",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmin
@@ -11610,7 +12426,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: pccmvVtminValue != null
-                                    ? pccmvVtminValue / 600
+                                    ? pccmvVtminValue / 2400
                                     : 0,
                               ),
                             ),
@@ -11622,17 +12438,13 @@ prvcData() {
                 ),
               ),
             ),
-          ],
-        ),
-        Column(
-          children: [
             InkWell(
               onTap: () {
                 setState(() {
-                  pccmvmaxValue = 700;
-                  pccmvminValue = 200;
+                  pccmvmaxValue = 2400;
+                  pccmvminValue = 50;
                   pccmvparameterName = "VTmax";
-                  pccmvparameterUnits = "";
+                  pccmvparameterUnits = "mL";
                   pccmvRR = false;
                   pccmvIe = false;
                   pccmvPeep = false;
@@ -11671,7 +12483,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "mL",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: pccmvVtmax
@@ -11682,7 +12494,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "700",
+                              "2400",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmax
@@ -11693,7 +12505,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "200",
+                              "50",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmax
@@ -11728,7 +12540,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: pccmvVtmaxValue != null
-                                    ? pccmvVtmaxValue / 700
+                                    ? pccmvVtmaxValue / 2400
                                     : 0,
                               ),
                             ),
@@ -11868,6 +12680,7 @@ prvcData() {
             //     ),
             //   ),
             // ),
+            Container(width: 136,)
           ],
         ),
         SizedBox(width: 15),
@@ -11919,7 +12732,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 28.0),
                                 child: Column(
                                   children: [
-                                    Text("Peep"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -11940,7 +12753,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                    Text("FiO2"),
+                                    Text("FiO\u2082"),
                                     Text("$minfio2-$maxfio2"),
                                   ],
                                 ),
@@ -11992,20 +12805,15 @@ prvcData() {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        pccmvparameterName,
-                        style: TextStyle(fontSize: 36),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
+                        children: <Widget>[
+                          IconButton(
                               icon: Icon(
                                 Icons.remove,
                                 color: Colors.black,
-                                size: 45,
+                                size: 55,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -12020,22 +12828,13 @@ prvcData() {
                                     setState(() {
                                       pccmvIeValue = pccmvIeValue - 1;
                                     });
-                                  } else if (pccmvPeep == true &&
-                                      pccmvPeepValue != pccmvminValue) {
+                                  } else if (pccmvPeep == true && pccmvPeepValue != pccmvminValue) {
                                     setState(() {
                                       pccmvPeepValue = pccmvPeepValue - 1;
-                                      // if (pccmvPeepValue >= pccmvPcValue) {
-                                      //   pccmvPcValue = pccmvPcValue - 1;
-                                      // }
                                     });
-                                  } else if (pccmvPc == true &&
-                                      pccmvPcValue != pccmvminValue) {
+                                  } else if (pccmvPc == true && pccmvPcValue != pccmvminValue) {
                                     setState(() {
-                                      // if(pccmvPcValue<=6){
-                                      //   pccmvPcValue=5;
-                                      // }else{
                                       pccmvPcValue = pccmvPcValue - 1;
-                                      // }
                                     });
                                   } else if (pccmvFio2 == true &&
                                       pccmvFio2Value != pccmvminValue) {
@@ -12051,7 +12850,7 @@ prvcData() {
                                       // }
                                     });
                                   } else if (pccmvVtmax == true &&
-                                      pccmvVtmaxValue != pccmvminValue) {
+                                      pccmvVtmaxValue != pccmvVtminValue+1) {
                                     pccmvVtmaxValue = pccmvVtmaxValue - 1;
                                     // if (pccmvVtmaxValue <=
                                     //     pccmvVtminValue + 100) {
@@ -12070,6 +12869,83 @@ prvcData() {
                             SizedBox(
                               width: 60,
                             ),
+                          Text(
+                            pccmvparameterName,
+                            style: TextStyle(fontSize: 36),
+                          ),
+                          SizedBox(
+                              width: 60,
+                            ),
+
+                          IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 55,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (pccmvRR == true &&
+                                      pccmvRRValue != pccmvmaxValue) {
+                                    setState(() {
+                                      pccmvRRValue = pccmvRRValue + 1;
+                                    });
+                                    sendRRData(pccmvRRValue);
+                                  } else if (pccmvIe == true &&
+                                      pccmvIeValue != pccmvmaxValue) {
+                                    setState(() {
+                                      pccmvIeValue = pccmvIeValue + 1;
+                                    });
+                                  } else if (pccmvPeep == true &&
+                                      pccmvPeepValue != pccmvmaxValue) {
+                                    setState(() {
+                                      pccmvPeepValue = pccmvPeepValue + 1;
+                                      if (pccmvPcValue <= pccmvPeepValue) {
+                                        pccmvPcValue = pccmvPeepValue + 1;
+                                      }
+                                    });
+                                  } else if (pccmvPc == true &&
+                                      pccmvPcValue != pccmvmaxValue) {
+                                    setState(() {
+                                      pccmvPcValue = pccmvPcValue + 1;
+                                    });
+                                  } else if (pccmvFio2 == true &&
+                                      pccmvFio2Value != pccmvmaxValue) {
+                                    setState(() {
+                                      pccmvFio2Value = pccmvFio2Value + 1;
+                                    });
+                                  } else if (pccmvVtmin == true &&
+                                      pccmvVtminValue != pccmvmaxValue) {
+                                    setState(() {
+                                      if(pccmvVtmaxValue<2390){
+                                         pccmvVtminValue = pccmvVtminValue + 1;
+                                          pccmvVtmaxValue = pccmvVtminValue + 1;
+                                      }
+                                    });
+                                  } else if (pccmvVtmax == true &&
+                                      pccmvVtmaxValue != pccmvmaxValue) {
+                                    setState(() {
+                                      pccmvVtmaxValue = pccmvVtmaxValue + 1;
+                                    });
+                                  } else if (pccmvFlowRamp == true &&
+                                      pccmvFlowRampValue != pccmvmaxValue) {
+                                    setState(() {
+                                      pccmvFlowRampValue =
+                                          pccmvFlowRampValue + 1;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            
+                            
                             Text(
                               pccmvRR
                                   ? pccmvRRValue.toInt().toString()
@@ -12115,66 +12991,8 @@ prvcData() {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (pccmvRR == true &&
-                                      pccmvRRValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvRRValue = pccmvRRValue + 1;
-                                    });
-                                    sendRRData(pccmvRRValue);
-                                  } else if (pccmvIe == true &&
-                                      pccmvIeValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvIeValue = pccmvIeValue + 1;
-                                    });
-                                  } else if (pccmvPeep == true &&
-                                      pccmvPeepValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvPeepValue = pccmvPeepValue + 1;
-                                      // if (pccmvPcValue <= pccmvPeepValue) {
-                                      //   pccmvPcValue = pccmvPeepValue + 1;
-                                      // }
-                                    });
-                                  } else if (pccmvPc == true &&
-                                      pccmvPcValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvPcValue = pccmvPcValue + 1;
-                                    });
-                                  } else if (pccmvFio2 == true &&
-                                      pccmvFio2Value != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvFio2Value = pccmvFio2Value + 1;
-                                    });
-                                  } else if (pccmvVtmin == true &&
-                                      pccmvVtminValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvVtminValue = pccmvVtminValue + 1;
-                                    });
-                                  } else if (pccmvVtmax == true &&
-                                      pccmvVtmaxValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvVtmaxValue = pccmvVtmaxValue + 1;
-                                    });
-                                  } else if (pccmvFlowRamp == true &&
-                                      pccmvFlowRampValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvFlowRampValue =
-                                          pccmvFlowRampValue + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
+                            
+                            
                           ],
                         ),
                       ),
@@ -12239,34 +13057,24 @@ prvcData() {
                                   pccmvFio2Value = value.toInt();
                                 });
                               } else if (pccmvVtmin == true) {
+
+                                if(value.toInt()<2390){
                                 pccmvVtminValue = value.toInt();
+                                if(pccmvVtmaxValue<=pccmvVtminValue){
+                                pccmvVtmaxValue = pccmvVtminValue+1;
+                                }
+                                }
                                 // if (pccmvVtminValue >=
                                 //     (pccmvVtmaxValue) - 100) {
                                 //   pccmvVtmaxValue = pccmvVtminValue + 100;
                                 // }
-                              } else if (pccmvVtmax == true) {
+                              } else if (pccmvVtmax == true){
                                 setState(() {
-                                  // if (value.toInt() < 200) {
-                                  //   pccmvVtmaxValue = 200;
-                                  // } else if (value.toInt() > 600) {
-                                  //   pccmvVtmaxValue = 600;
-                                  // } else {
+                                  if(value.toInt()<=pccmvVtminValue+1){
+                                    pccmvVtmaxValue = pccmvVtminValue+1;
+                                  }else{
                                   pccmvVtmaxValue = value.toInt();
-                                  // }
-
-                                  // if (200 <= pccmvVtmaxValue &&
-                                  //     pccmvVtmaxValue <= 600 &&
-                                  //     pccmvVtmaxValue < pccmvVtminValue + 100) {
-                                  //   pccmvVtminValue = pccmvVtmaxValue - 100;
-                                  // }
-                                  // else{
-                                  //        pccmvVtmaxValue = value.toInt();
-                                  //  if(pccmvVtmaxValue<=(pccmvVtminValue)+100){
-                                  //    if(pccmvVtminValue<=pccmvminValue){
-                                  //       pccmvVtminValue = pccmvVtmaxValue-100;
-                                  //    }
-                                  //  }
-                                  //   }
+                                  }
                                 });
                               } else if (pccmvFlowRamp == true) {
                                 setState(() {
@@ -12287,9 +13095,7 @@ prvcData() {
                           children: [
                             Text(pccmvIe
                                 ? getIeData(pccmvminValue, 1)
-                                : pccmvPc
-                                    ? pccmvPeepValue.toString()
-                                    : pccmvminValue.toString()),
+                                : pccmvminValue.toString()),
                             Text(
                               pccmvparameterUnits,
                               style: TextStyle(fontSize: 16),
@@ -12324,7 +13130,7 @@ prvcData() {
                   vccmvmaxValue = 60;
                   vccmvminValue = 1;
                   vccmvparameterName = "RR";
-                  vccmvparameterUnits = "";
+                  vccmvparameterUnits = "bpm";
                   vccmvRR = true;
                   vccmvIe = false;
                   vccmvPeep = false;
@@ -12364,7 +13170,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "bpm",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: vccmvRR
@@ -12553,7 +13359,7 @@ prvcData() {
                   vccmvmaxValue = 30;
                   vccmvminValue = 0;
                   vccmvparameterName = "PEEP";
-                  vccmvparameterUnits = "";
+                  vccmvparameterUnits = "cmH\u2082O";
                   vccmvRR = false;
                   vccmvIe = false;
                   vccmvPeep = true;
@@ -12594,7 +13400,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "cmH20",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: vccmvPeep
@@ -12670,10 +13476,10 @@ prvcData() {
             InkWell(
               onTap: () {
                 setState(() {
-                  vccmvmaxValue = 600;
-                  vccmvminValue = 200;
+                  vccmvmaxValue = 2000;
+                  vccmvminValue = 50;
                   vccmvparameterName = "VT";
-                  vccmvparameterUnits = "";
+                  vccmvparameterUnits = "mL";
                   vccmvRR = false;
                   vccmvIe = false;
                   vccmvPeep = false;
@@ -12713,7 +13519,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "mL",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: vccmvVt
@@ -12724,7 +13530,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "600",
+                              "2000",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vccmvVt
@@ -12735,7 +13541,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "200",
+                              "50",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vccmvVt
@@ -12770,7 +13576,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vccmvVtValue != null
-                                    ? vccmvVtValue / 600
+                                    ? vccmvVtValue / 2000
                                     : 0,
                               ),
                             ),
@@ -12787,8 +13593,8 @@ prvcData() {
                 setState(() {
                   vccmvmaxValue = 100;
                   vccmvminValue = 21;
-                  vccmvparameterName = "FiO2";
-                  vccmvparameterUnits = "";
+                  vccmvparameterName = "FiO\u2082";
+                  vccmvparameterUnits = "%";
                   vccmvRR = false;
                   vccmvIe = false;
                   vccmvPeep = false;
@@ -12816,7 +13622,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -12828,7 +13634,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "%",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: vccmvFio2
@@ -12897,372 +13703,242 @@ prvcData() {
                 ),
               ),
             ),
-            // InkWell(
-            //   onTap: () async {
-            //     setState(() {
-            //       vccmvmaxValue = 59;
-            //       vccmvminValue = 10;
-            //       vccmvparameterName = "PC Min";
-            //       vccmvparameterUnits = "";
-            //       vccmvRR = false;
-            //       vccmvIe = false;
-            //       vccmvPeep = false;
-            //       vccmvVt = false;
-            //       vccmvPcMax = false;
-            //       vccmvPcMin = true;
-            //       vccmvFio2 = false;
-            //       vccmvFlowRamp = false;
-            //       vccmvTih = false;
-            //     });
-            //     sleep(const Duration(milliseconds: 200));
-            //   },
-            //   child: Center(
-            //     child: Container(
-            //       width: 146,
-            //       height: 130,
-            //       child: Card(
-            //         elevation: 40,
-            //         color: vccmvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "PC Min",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "cmH20",
-            //                   style: TextStyle(
-            //                       fontSize: 9,
-            //                       color: vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "60",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "10",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vccmvPcMinValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vccmvPcMin
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vccmvPcMinValue != null
-            //                         ? vccmvPcMinValue / 60
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+           
           ],
         ),
         Column(
           children: [
-            // InkWell(
-            //   onTap: () {
-            //     setState(() {
-            //       vccmvmaxValue = 60;
-            //       vccmvminValue = 10;
-            //       vccmvparameterName = "PC Max";
-            //       vccmvparameterUnits = "";
-            //       vccmvRR = false;
-            //       vccmvIe = false;
-            //       vccmvPeep = false;
-            //       vccmvVt = false;
-            //       vccmvPcMax = true;
-            //       vccmvPcMin = false;
-            //       vccmvFio2 = false;
-            //       vccmvFlowRamp = false;
-            //       vccmvTih = false;
-            //     });
-            //     sleep(const Duration(milliseconds: 200));
-            //   },
-            //   child: Center(
-            //     child: Container(
-            //       width: 146,
-            //       height: 130,
-            //       child: Card(
-            //         elevation: 40,
-            //         color: vccmvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "PC Max",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vccmvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "cmH20",
-            //                   style: TextStyle(
-            //                       fontSize: 9,
-            //                       color: vccmvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "60",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vccmvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "10",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vccmvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vccmvPcMaxValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vccmvPcMax
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vccmvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vccmvPcMaxValue != null
-            //                         ? vccmvPcMaxValue / 60
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // InkWell(
-            //   onTap: () {
-            //     setState(() {
-            //       vccmvmaxValue = 4;
-            //       vccmvminValue = 0;
-            //       vccmvparameterName = "Flow Ramp";
-            //       vccmvparameterUnits = "";
-            //       vccmvRR = false;
-            //       vccmvIe = false;
-            //       vccmvPeep = false;
-            //       vccmvVt = false;
-            //       vccmvPcMax = false;
-            //       vccmvPcMin = false;
-            //       vccmvFio2 = false;
-            //       vccmvFlowRamp = true;
-            //       vccmvTih = false;
-
-            //       vccmvVt = false;
-            //       vccmvFlowRamp = true;
-            //       vccmvTih = false;
-            //     });
-            //   },
-            //   child: Center(
-            //     child: Container(
-            //       width: 146,
-            //       height: 130,
-            //       child: Card(
-            //         elevation: 40,
-            //         color:
-            //             vccmvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Flow Ramp",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 9,
-            //                       color: vccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "4",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "0",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vccmvFlowRampValue.toString() == "0"
-            //                         ? "AF"
-            //                         : vccmvFlowRampValue.toString() == "1"
-            //                             ? "AS"
-            //                             : vccmvFlowRampValue.toString() == "2"
-            //                                 ? "DF"
-            //                                 : vccmvFlowRampValue.toString() ==
-            //                                         "3"
-            //                                     ? "DS"
-            //                                     : vccmvFlowRampValue
-            //                                                 .toString() ==
-            //                                             "4"
-            //                                         ? "S"
-            //                                         : "S",
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vccmvFlowRamp
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vccmvFlowRampValue != null
-            //                         ? vccmvFlowRampValue / 4
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+             InkWell(
+              onTap: () async {
+                setState(() {
+                  vccmvmaxValue = 100;
+                  vccmvminValue = 10;
+                  vccmvparameterName = "PC Min";
+                  vccmvparameterUnits = "cmH\u2082O";
+                  vccmvRR = false;
+                  vccmvIe = false;
+                  vccmvPeep = false;
+                  vccmvVt = false;
+                  vccmvPcMax = false;
+                  vccmvPcMin = true;
+                  vccmvFio2 = false;
+                  vccmvFlowRamp = false;
+                  vccmvTih = false;
+                });
+                sleep(const Duration(milliseconds: 200));
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vccmvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Min",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vccmvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 9,
+                                  color: vccmvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vccmvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vccmvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vccmvPcMinValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vccmvPcMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vccmvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vccmvPcMinValue != null
+                                    ? vccmvPcMinValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vccmvmaxValue = 100;
+                  vccmvminValue = 10;
+                  vccmvparameterName = "PC Max";
+                  vccmvparameterUnits = "cmH\u2082O";
+                  vccmvRR = false;
+                  vccmvIe = false;
+                  vccmvPeep = false;
+                  vccmvVt = false;
+                  vccmvPcMax = true;
+                  vccmvPcMin = false;
+                  vccmvFio2 = false;
+                  vccmvFlowRamp = false;
+                  vccmvTih = false;
+                });
+                sleep(const Duration(milliseconds: 200));
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vccmvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Max",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 9,
+                                  color: vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vccmvPcMaxValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vccmvPcMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vccmvPcMaxValue != null
+                                    ? vccmvPcMaxValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            
             Container(width: 166),
           ],
         ),
@@ -13314,7 +13990,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 28.0),
                                 child: Column(
                                   children: [
-                                    Text("Peep"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -13335,7 +14011,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                    Text("FiO2"),
+                                    Text("FiO\u2082"),
                                     Text("$minfio2-$maxfio2"),
                                   ],
                                 ),
@@ -13386,16 +14062,11 @@ prvcData() {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        vccmvparameterName,
-                        style: TextStyle(fontSize: 36),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
+                        children: <Widget>[
+                          IconButton(
                               icon: Icon(
                                 Icons.remove,
                                 color: Colors.black,
@@ -13426,10 +14097,9 @@ prvcData() {
                                       // }
                                     });
                                   } else if (vccmvPcMax == true &&
-                                      vccmvPcMaxValue != vccmvminValue) {
-                                    setState(() {
-                                      vccmvPcMaxValue = vccmvPcMaxValue - 1;
-                                    });
+                                      vccmvPcMaxValue != vccmvPcMinValue+1) {
+                                    vccmvPcMaxValue = vccmvPcMaxValue - 1;
+                                    
                                   } else if (vccmvFio2 == true &&
                                       vccmvFio2Value != vccmvminValue) {
                                     setState(() {
@@ -13461,6 +14131,86 @@ prvcData() {
                             SizedBox(
                               width: 60,
                             ),
+                          Text(
+                            vccmvparameterName,
+                            style: TextStyle(fontSize: 36),
+                          ),
+                          SizedBox(
+                              width: 60,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 45,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (vccmvRR == true &&
+                                      vccmvRRValue != vccmvmaxValue) {
+                                    setState(() {
+                                      vccmvRRValue = vccmvRRValue + 1;
+                                    });
+                                  } else if (vccmvIe == true &&
+                                      vccmvIeValue != vccmvmaxValue) {
+                                    setState(() {
+                                      vccmvIeValue = vccmvIeValue + 1;
+                                    });
+                                  } else if (vccmvPeep == true &&
+                                      vccmvPeepValue != vccmvmaxValue) {
+                                    setState(() {
+                                      vccmvPeepValue = vccmvPeepValue + 1;
+                                      // if (vccmvPcMinValue <= vccmvPeepValue) {
+                                      //   vccmvPcMinValue = vccmvPeepValue + 1;
+                                      //   if (vccmvPcMaxValue <=
+                                      //       vccmvPcMinValue) {
+                                      //     vccmvPcMaxValue = vccmvPcMinValue + 1;
+                                      //   }
+                                      // }
+                                    });
+                                  } else if (vccmvFio2 == true &&
+                                      vccmvFio2Value != vccmvmaxValue) {
+                                    setState(() {
+                                      vccmvFio2Value = vccmvFio2Value + 1;
+                                    });
+                                  } else if (vccmvVt == true &&
+                                      vccmvVtValue != vccmvmaxValue) {
+                                    setState(() {
+                                      vccmvVtValue = vccmvVtValue + 1;
+                                    });
+                                  }  else if (vccmvPcMin == true &&
+                                      vccmvPcMinValue != pacvmaxValue) {
+                                    setState(() {
+                                     
+                                      if(vccmvPcMaxValue<90){
+                                         vccmvPcMinValue = vccmvPcMinValue + 1;
+                                          vccmvPcMaxValue = vccmvPcMinValue + 1;
+                                      }
+                                      
+                                    });
+                                  } else if (vccmvPcMax == true &&
+                                      vccmvPcMaxValue != pacvmaxValue) {
+                                    setState(() {
+                                      vccmvPcMaxValue = vccmvPcMaxValue + 1;
+                                    });
+                                  } else if (vccmvFlowRamp == true &&
+                                      vccmvFlowRampValue != vccmvmaxValue) {
+                                    setState(() {
+                                      vccmvFlowRampValue =
+                                          vccmvFlowRampValue + 1;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            
                             Text(
                               vccmvRR
                                   ? vccmvRRValue.toInt().toString()
@@ -13505,72 +14255,7 @@ prvcData() {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (vccmvRR == true &&
-                                      vccmvRRValue != vccmvmaxValue) {
-                                    setState(() {
-                                      vccmvRRValue = vccmvRRValue + 1;
-                                    });
-                                  } else if (vccmvIe == true &&
-                                      vccmvIeValue != vccmvmaxValue) {
-                                    setState(() {
-                                      vccmvIeValue = vccmvIeValue + 1;
-                                    });
-                                  } else if (vccmvPeep == true &&
-                                      vccmvPeepValue != vccmvmaxValue) {
-                                    setState(() {
-                                      vccmvPeepValue = vccmvPeepValue + 1;
-                                      // if (vccmvPcMinValue <= vccmvPeepValue) {
-                                      //   vccmvPcMinValue = vccmvPeepValue + 1;
-                                      //   if (vccmvPcMaxValue <=
-                                      //       vccmvPcMinValue) {
-                                      //     vccmvPcMaxValue = vccmvPcMinValue + 1;
-                                      //   }
-                                      // }
-                                    });
-                                  } else if (vccmvPcMax == true &&
-                                      vccmvPcMaxValue != vccmvmaxValue) {
-                                    setState(() {
-                                      vccmvPcMaxValue = vccmvPcMaxValue + 1;
-                                    });
-                                  } else if (vccmvFio2 == true &&
-                                      vccmvFio2Value != vccmvmaxValue) {
-                                    setState(() {
-                                      vccmvFio2Value = vccmvFio2Value + 1;
-                                    });
-                                  } else if (vccmvVt == true &&
-                                      vccmvVtValue != vccmvmaxValue) {
-                                    setState(() {
-                                      vccmvVtValue = vccmvVtValue + 1;
-                                    });
-                                  } else if (vccmvPcMin == true &&
-                                      vccmvPcMinValue != vccmvmaxValue) {
-                                    setState(() {
-                                      vccmvPcMinValue = vccmvPcMinValue + 1;
-                                      // if (vccmvPcMaxValue <= vccmvPcMinValue) {
-                                      //   vccmvPcMaxValue = vccmvPcMinValue + 1;
-                                      // }
-                                    });
-                                  } else if (vccmvFlowRamp == true &&
-                                      vccmvFlowRampValue != vccmvmaxValue) {
-                                    setState(() {
-                                      vccmvFlowRampValue =
-                                          vccmvFlowRampValue + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
+                            
                           ],
                         ),
                       ),
@@ -13624,11 +14309,7 @@ prvcData() {
                                   // }
                                   // }
                                 });
-                              } else if (vccmvPcMax == true) {
-                                setState(() {
-                                  vccmvPcMaxValue = value.toInt();
-                                });
-                              } else if (vccmvFio2 == true) {
+                              }  else if (vccmvFio2 == true) {
                                 setState(() {
                                   vccmvFio2Value = value.toInt();
                                 });
@@ -13637,13 +14318,18 @@ prvcData() {
                                   vccmvVtValue = value.toInt();
                                 });
                               } else if (vccmvPcMin == true) {
+
+                                if(value.toInt()<90){
+                                vccmvPcMinValue = value.toInt();
+                                vccmvPcMaxValue = vccmvPcMinValue+1;
+                                }
+                              } else if (vccmvPcMax == true){
                                 setState(() {
-                                  vccmvPcMinValue = value.toInt();
-                                  // if (vccmvPcMaxValue <= vccmvPcMinValue) {
-                                  //   if ((vccmvPcMaxValue >= 59) == false) {
-                                  //     vccmvPcMaxValue = value.toInt() + 1;
-                                  //   }
-                                  // }
+                                  if(value.toInt()<=vccmvPcMinValue+1){
+                                    vccmvPcMaxValue = vccmvPcMinValue+1;
+                                  }else{
+                                  vccmvPcMaxValue = value.toInt();
+                                  }
                                 });
                               } else if (vccmvFlowRamp == true) {
                                 setState(() {
@@ -13685,128 +14371,14 @@ prvcData() {
       children: [
         Column(
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vsimvmaxValue = 100;
-                  vsimvminValue = 20;
-                  vsimvparameterName = "I Trig";
-                  vsimvparameterUnits = "cmH20";
-                  vsimvItrig = true;
-                  vsimvRr = false;
-                  vsimvIe = false;
-                  vsimvPeep = false;
-                  vsimvVt = false;
-                  vsimvPcMin = false;
-                  vsimvPcMax = false;
-                  vsimvFio2 = false;
-                  vsimvFlowRamp = false;
-                  vsimvPs = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vsimvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "I Trig",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vsimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "20",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vsimvItrigValue.toString() + "%",
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vsimvItrig
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vsimvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vsimvItrigValue != null
-                                    ? vsimvItrigValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+           
             InkWell(
               onTap: () {
                 setState(() {
                   vsimvmaxValue = 60;
                   vsimvminValue = 1;
                   vsimvparameterName = "RR";
-                  vsimvparameterUnits = "";
+                  vsimvparameterUnits = "bpm";
                   vsimvItrig = false;
                   vsimvRr = true;
                   vsimvIe = false;
@@ -13846,7 +14418,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "bpm",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvRr
@@ -14031,17 +14603,13 @@ prvcData() {
                 ),
               ),
             ),
-          ],
-        ),
-        Column(
-          children: [
-            InkWell(
+             InkWell(
               onTap: () {
                 setState(() {
                   vsimvmaxValue = 30;
                   vsimvminValue = 0;
                   vsimvparameterName = "PEEP";
-                  vsimvparameterUnits = "";
+                  vsimvparameterUnits = "cmH\u2082O";
                   vsimvItrig = false;
                   vsimvRr = false;
                   vsimvIe = false;
@@ -14081,7 +14649,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "cmH20",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvPeep
@@ -14150,13 +14718,18 @@ prvcData() {
                 ),
               ),
             ),
+          ],
+        ),
+        Column(
+          children: [
+           
             InkWell(
               onTap: () {
                 setState(() {
-                  vsimvmaxValue = 600;
-                  vsimvminValue = 200;
+                  vsimvmaxValue = 2000;
+                  vsimvminValue = 50;
                   vsimvparameterName = "Vt";
-                  vsimvparameterUnits = "";
+                  vsimvparameterUnits = "mL";
                   vsimvItrig = false;
                   vsimvRr = false;
                   vsimvIe = false;
@@ -14196,7 +14769,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "mL",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvVt
@@ -14207,7 +14780,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "600",
+                              "2000",  
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvVt
@@ -14218,7 +14791,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "200",
+                              "50",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvVt
@@ -14253,7 +14826,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vsimvVtValue != null
-                                    ? vsimvVtValue / 600
+                                    ? vsimvVtValue / 2000
                                     : 0,
                               ),
                             ),
@@ -14265,247 +14838,13 @@ prvcData() {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vsimvmaxValue = 59;
-                  vsimvminValue = 10;
-                  vsimvparameterName = "PC Min";
-                  vsimvparameterUnits = "";
-                  vsimvItrig = false;
-                  vsimvRr = false;
-                  vsimvIe = false;
-                  vsimvPeep = false;
-                  vsimvVt = false;
-                  vsimvPcMin = true;
-                  vsimvPcMax = false;
-                  vsimvFio2 = false;
-                  vsimvFlowRamp = false;
-                  vsimvPs = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vsimvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "60",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "10",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vsimvPcMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vsimvPcMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vsimvPcMinValue != null
-                                    ? vsimvPcMinValue / 60
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vsimvmaxValue = 60;
-                  vsimvminValue = 10;
-                  vsimvparameterName = "PC Max";
-                  vsimvparameterUnits = "";
-                  vsimvItrig = false;
-                  vsimvRr = false;
-                  vsimvIe = false;
-                  vsimvPeep = false;
-                  vsimvVt = false;
-                  vsimvPcMin = false;
-                  vsimvPcMax = true;
-                  vsimvFio2 = false;
-                  vsimvFlowRamp = false;
-                  vsimvPs = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vsimvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Max",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vsimvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "60",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "10",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vsimvPcMaxValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vsimvPcMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vsimvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vsimvPcMaxValue != null
-                                    ? vsimvPcMaxValue / 60
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
+             InkWell(
               onTap: () {
                 setState(() {
                   vsimvmaxValue = 100;
                   vsimvminValue = 21;
-                  vsimvparameterName = "FiO2";
-                  vsimvparameterUnits = "";
+                  vsimvparameterName = "FiO\u2082";
+                  vsimvparameterUnits = "%";
                   vsimvItrig = false;
                   vsimvRr = false;
                   vsimvIe = false;
@@ -14533,7 +14872,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -14545,7 +14884,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "%",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvFio2
@@ -14614,13 +14953,365 @@ prvcData() {
                 ),
               ),
             ),
+
+             InkWell(
+              onTap: () {
+                setState(() {
+                  vsimvmaxValue = 10;
+                  vsimvminValue = 1;
+                  vsimvparameterName = "I Trig";
+                  vsimvparameterUnits = "cmH\u2082O Below PEEP";
+                  vsimvItrig = true;
+                  vsimvRr = false;
+                  vsimvIe = false;
+                  vsimvPeep = false;
+                  vsimvVt = false;
+                  vsimvPcMin = false;
+                  vsimvPcMax = false;
+                  vsimvFio2 = false;
+                  vsimvFlowRamp = false;
+                  vsimvPs = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vsimvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I Trig",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vsimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                "-"+vsimvItrigValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vsimvItrig
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vsimvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vsimvItrigValue != null
+                                    ? vsimvItrigValue / 10
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            
+          ],
+        ),
+        Column(
+          children: [
             InkWell(
               onTap: () {
                 setState(() {
-                  vsimvmaxValue = 40;
-                  vsimvminValue = 0;
+                  vsimvmaxValue = 100;
+                  vsimvminValue = 10;
+                  vsimvparameterName = "PC Min";
+                  vsimvparameterUnits = "cmH\u2082O";
+                  vsimvItrig = false;
+                  vsimvRr = false;
+                  vsimvIe = false;
+                  vsimvPeep = false;
+                  vsimvVt = false;
+                  vsimvPcMin = true;
+                  vsimvPcMax = false;
+                  vsimvFio2 = false;
+                  vsimvFlowRamp = false;
+                  vsimvPs = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vsimvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Min",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vsimvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vsimvPcMinValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vsimvPcMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vsimvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vsimvPcMinValue != null
+                                    ? vsimvPcMinValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vsimvmaxValue = 100;
+                  vsimvminValue = 10;
+                  vsimvparameterName = "PC Max";
+                  vsimvparameterUnits = "cmH\u2082O";
+                  vsimvItrig = false;
+                  vsimvRr = false;
+                  vsimvIe = false;
+                  vsimvPeep = false;
+                  vsimvVt = false;
+                  vsimvPcMin = false;
+                  vsimvPcMax = true;
+                  vsimvFio2 = false;
+                  vsimvFlowRamp = false;
+                  vsimvPs = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vsimvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Max",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vsimvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vsimvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vsimvPcMaxValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vsimvPcMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vsimvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vsimvPcMaxValue != null
+                                    ? vsimvPcMaxValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+           
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vsimvmaxValue = 70;
+                  vsimvminValue = 1;
                   vsimvparameterName = "PS";
-                  vsimvparameterUnits = "";
+                  vsimvparameterUnits = "cmH\u2082O";
                   vsimvItrig = false;
                   vsimvRr = false;
                   vsimvIe = false;
@@ -14660,7 +15351,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvPs
@@ -14671,7 +15362,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "40",
+                              "70",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvPs
@@ -14682,7 +15373,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "0",
+                              "1",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvPs
@@ -14717,7 +15408,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vsimvPsValue != null
-                                    ? vsimvPsValue / 40
+                                    ? vsimvPsValue / 70
                                     : 0,
                               ),
                             ),
@@ -14858,6 +15549,7 @@ prvcData() {
             //     ),
             //   ),
             // ),
+            // Container(height: 260),
           ],
         ),
         SizedBox(
@@ -14911,7 +15603,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 28.0),
                                 child: Column(
                                   children: [
-                                    Text("Peep"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -14932,7 +15624,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                    Text("FiO2"),
+                                    Text("FiO\u2082"),
                                     Text("$minfio2-$maxfio2"),
                                   ],
                                 ),
@@ -14979,17 +15671,11 @@ prvcData() {
                 child: Center(
                   child: Column(
                     children: [
-                      Text(
-                        vsimvparameterName,
-                        style: TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.normal),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
+                        children: <Widget>[
+                           IconButton(
                               icon: Icon(
                                 Icons.remove,
                                 color: Colors.black,
@@ -15004,8 +15690,11 @@ prvcData() {
                                     });
                                   } else if (vsimvPeep == true &&
                                       vsimvPeepValue != vsimvminValue) {
-                                    setState(() {
-                                      vsimvPeepValue = vsimvPeepValue - 1;
+                                     setState(() {
+                                      vsimvPeepValue = vsimvPeepValue-1;
+                                      if(vsimvItrigValue>1 && vsimvItrigValue>vsimvPeepValue){
+                                        vsimvItrigValue = vsimvPeepValue;
+                                      }
                                     });
                                   } else if (vsimvRr == true &&
                                       vsimvRrValue != vsimvminValue) {
@@ -15031,10 +15720,9 @@ prvcData() {
                                       // }
                                     });
                                   } else if (vsimvPcMax == true &&
-                                      vsimvPcMaxValue != vsimvminValue) {
-                                    setState(() {
-                                      vsimvPcMaxValue = vsimvPcMaxValue - 1;
-                                    });
+                                      vsimvPcMaxValue != vsimvPcMinValue+1) {
+                                    vsimvPcMaxValue = vsimvPcMaxValue - 1;
+                                    
                                   } else if (vsimvFio2 == true &&
                                       vsimvFio2Value != vsimvminValue) {
                                     setState(() {
@@ -15058,9 +15746,100 @@ prvcData() {
                             SizedBox(
                               width: 60,
                             ),
+                          Text(
+                            vsimvparameterName,
+                            style: TextStyle(
+                                fontSize: 36, fontWeight: FontWeight.normal),
+                          ),
+                           SizedBox(
+                              width: 60,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 45,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (vsimvItrig == true &&
+                                      vsimvItrigValue != vsimvmaxValue) {
+                                     setState(() {
+                                      vsimvItrigValue = vsimvItrigValue + 1;
+                                      if(vsimvPeepValue <= vsimvItrigValue){
+                                        if(vsimvPeepValue==0){
+                                          vsimvItrigValue=1;
+                                        }else{
+                                         vsimvItrigValue=vsimvPeepValue;
+                                        }
+                                      }
+                                    });
+                                  } else if (vsimvPeep == true &&
+                                      vsimvPeepValue != vsimvmaxValue) {
+                                    setState(() {
+                                      vsimvPeepValue = vsimvPeepValue + 1;
+                                    });
+                                  } else if (vsimvRr == true &&
+                                      vsimvRrValue != vsimvmaxValue) {
+                                    setState(() {
+                                      vsimvRrValue = vsimvRrValue + 1;
+                                    });
+                                  } else if (vsimvIe == true &&
+                                      vsimvIeValue != vsimvmaxValue) {
+                                    setState(() {
+                                      vsimvIeValue = vsimvIeValue + 1;
+                                    });
+                                  } else if (vsimvVt == true &&
+                                      vsimvVtValue != vsimvmaxValue) {
+                                    setState(() {
+                                      vsimvVtValue = vsimvVtValue + 1;
+                                    });
+                                  } else if (vsimvPcMin == true &&
+                                      vsimvPcMinValue != pacvmaxValue) {
+                                    setState(() {
+                                     
+                                      if(vsimvPcMaxValue<90){
+                                         vsimvPcMinValue = vsimvPcMinValue + 1;
+                                          vsimvPcMaxValue = vsimvPcMinValue + 1;
+                                      }
+                                      
+                                    });
+                                  } else if (vsimvPcMax == true &&
+                                      vsimvPcMaxValue != pacvmaxValue) {
+                                    setState(() {
+                                      vsimvPcMaxValue = vsimvPcMaxValue + 1;
+                                    });
+                                  } else if (vsimvFio2 == true &&
+                                      vsimvFio2Value != vsimvmaxValue) {
+                                    setState(() {
+                                      vsimvFio2Value = vsimvFio2Value + 1;
+                                    });
+                                  } else if (vsimvFlowRamp == true &&
+                                      vsimvFlowRampValue != vsimvmaxValue) {
+                                    setState(() {
+                                      vsimvFlowRampValue =
+                                          vsimvFlowRampValue + 1;
+                                    });
+                                  } else if (vsimvPs == true &&
+                                      vsimvPsValue != vsimvmaxValue) {
+                                    setState(() {
+                                      vsimvPsValue = vsimvPsValue + 1;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                           
                             Text(
                               vsimvItrig
-                                  ? vsimvItrigValue.toInt().toString()
+                                  ? "-"+vsimvItrigValue.toInt().toString()
                                   : vsimvPeep
                                       ? vsimvPeepValue.toInt().toString()
                                       : vsimvRr
@@ -15097,75 +15876,7 @@ prvcData() {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (vsimvItrig == true &&
-                                      vsimvItrigValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvItrigValue = vsimvItrigValue + 1;
-                                    });
-                                  } else if (vsimvPeep == true &&
-                                      vsimvPeepValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvPeepValue = vsimvPeepValue + 1;
-                                    });
-                                  } else if (vsimvRr == true &&
-                                      vsimvRrValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvRrValue = vsimvRrValue + 1;
-                                    });
-                                  } else if (vsimvIe == true &&
-                                      vsimvIeValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvIeValue = vsimvIeValue + 1;
-                                    });
-                                  } else if (vsimvVt == true &&
-                                      vsimvVtValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvVtValue = vsimvVtValue + 1;
-                                    });
-                                  } else if (vsimvPcMin == true &&
-                                      vsimvPcMinValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvPcMinValue = vsimvPcMinValue + 1;
-                                      // if (vsimvPcMaxValue <= vsimvPcMinValue) {
-                                      //   vsimvPcMaxValue = vsimvPcMinValue + 1;
-                                      // }
-                                    });
-                                  } else if (vsimvPcMax == true &&
-                                      vsimvPcMaxValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvPcMaxValue = vsimvPcMaxValue + 1;
-                                    });
-                                  } else if (vsimvFio2 == true &&
-                                      vsimvFio2Value != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvFio2Value = vsimvFio2Value + 1;
-                                    });
-                                  } else if (vsimvFlowRamp == true &&
-                                      vsimvFlowRampValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvFlowRampValue =
-                                          vsimvFlowRampValue + 1;
-                                    });
-                                  } else if (vsimvPs == true &&
-                                      vsimvPsValue != vsimvmaxValue) {
-                                    setState(() {
-                                      vsimvPsValue = vsimvPsValue + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
+                           
                           ],
                         ),
                       ),
@@ -15179,12 +15890,22 @@ prvcData() {
                             max: vsimvmaxValue.toDouble(),
                             onChanged: (double value) {
                               if (vsimvItrig == true) {
-                                setState(() {
-                                  vsimvItrigValue = value.toInt();
-                                });
+                                 setState(() {
+                                      vsimvItrigValue = vsimvItrigValue + 1;
+                                      if(vsimvPeepValue <= vsimvItrigValue){
+                                        if(vsimvPeepValue==0){
+                                          vsimvItrigValue=1;
+                                        }else{
+                                         vsimvItrigValue=vsimvPeepValue;
+                                        }
+                                      }
+                                    });
                               } else if (vsimvPeep == true) {
                                 setState(() {
                                   vsimvPeepValue = value.toInt();
+                                if(vsimvItrigValue>1 && vsimvItrigValue>vsimvPeepValue){
+                                        vsimvItrigValue = vsimvPeepValue;
+                                      }
                                 });
                               } else if (vsimvRr == true) {
                                 setState(() {
@@ -15198,13 +15919,19 @@ prvcData() {
                                 setState(() {
                                   vsimvVtValue = value.toInt();
                                 });
-                              } else if (vsimvPcMin == true) {
+                              }  else if (vsimvPcMin == true) {
+
+                                if(value.toInt()<90){
+                                vsimvPcMinValue = value.toInt();
+                                vsimvPcMaxValue = vsimvPcMinValue+1;
+                                }
+                              } else if (vsimvPcMax == true){
                                 setState(() {
-                                  vsimvPcMinValue = value.toInt();
-                                });
-                              } else if (vsimvPcMax == true) {
-                                setState(() {
+                                  if(value.toInt()<=vsimvPcMinValue+1){
+                                    vsimvPcMaxValue = vsimvPcMinValue+1;
+                                  }else{
                                   vsimvPcMaxValue = value.toInt();
+                                  }
                                 });
                               } else if (vsimvFio2 == true) {
                                 setState(() {
@@ -15254,12 +15981,12 @@ prvcData() {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text( vsimvminValue.toString()),
+                            Text(vsimvItrig ? "-"+vsimvminValue.toString(): vsimvminValue.toString()),
                             Text(
                               vsimvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(  vsimvmaxValue.toString() )
+                            Text( vsimvItrig ? "-"+vsimvmaxValue.toString() : vsimvmaxValue.toString() )
                           ],
                         ),
                       )
@@ -15281,127 +16008,14 @@ prvcData() {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vacvmaxValue = 100;
-                  vacvminValue = 20;
-                  vacvparameterName = "I Trig";
-                  vacvparameterUnits = "cmH20";
-                  vacvItrig = true;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vacvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "I Trig",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "20",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vacvItrigValue.toString() + "%",
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vacvItrig
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvItrig
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vacvItrigValue != null
-                                    ? vacvItrigValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            
             InkWell(
               onTap: () {
                 setState(() {
                   vacvmaxValue = 30;
                   vacvminValue = 1;
                   vacvparameterName = "RR";
-                  vacvparameterUnits = "";
+                  vacvparameterUnits = "bpm";
                   vacvItrig = false;
                   vacvRr = true;
                   vacvIe = false;
@@ -15440,7 +16054,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "bpm",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvRr
@@ -15622,17 +16236,13 @@ prvcData() {
                 ),
               ),
             ),
-          ],
-        ),
-        Column(
-          children: [
-            InkWell(
+             InkWell(
               onTap: () {
                 setState(() {
                   vacvmaxValue = 30;
                   vacvminValue = 0;
                   vacvparameterName = "PEEP";
-                  vacvparameterUnits = "";
+                  vacvparameterUnits = "cmH\u2082O";
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -15671,7 +16281,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "cmH20",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvPeep
@@ -15740,13 +16350,18 @@ prvcData() {
                 ),
               ),
             ),
+          ],
+        ),
+        Column(
+          children: [
+           
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 600;
-                  vacvminValue = 100;
+                  vacvmaxValue = 2000;
+                  vacvminValue = 50;
                   vacvparameterName = "Vt";
-                  vacvparameterUnits = "";
+                  vacvparameterUnits = "mL";
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -15785,7 +16400,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "mL",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -15796,7 +16411,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "600",
+                              "2000",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -15807,7 +16422,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "100",
+                              "50",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -15842,7 +16457,7 @@ prvcData() {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    vacvVtValue != null ? vacvVtValue / 600 : 0,
+                                    vacvVtValue != null ? vacvVtValue / 2000 : 0,
                               ),
                             ),
                           )
@@ -15853,127 +16468,14 @@ prvcData() {
                 ),
               ),
             ),
-            // InkWell(
-            //   onTap: () {
-            //     setState(() {
-            //       vacvmaxValue = 59;
-            //       vacvminValue = 10;
-            //       vacvparameterName = "PC Min";
-            //       vacvparameterUnits = "";
-            //       vacvItrig = false;
-            //       vacvRr = false;
-            //       vacvIe = false;
-            //       vacvPeep = false;
-            //       vacvVt = false;
-            //       vacvPcMin = true;
-            //       vacvPcMax = false;
-            //       vacvFio2 = false;
-            //       vacvFlowRamp = false;
-            //     });
-            //   },
-            //   child: Center(
-            //     child: Container(
-            //       width: 146,
-            //       height: 130,
-            //       child: Card(
-            //         elevation: 40,
-            //         color: vacvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "PC Min",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "60",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "10",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vacvPcMinValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vacvPcMin
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vacvPcMinValue != null
-            //                         ? vacvPcMinValue / 60
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+           
              InkWell(
               onTap: () {
                 setState(() {
                   vacvmaxValue = 100;
                   vacvminValue = 21;
-                  vacvparameterName = "FiO2";
-                  vacvparameterUnits = "";
+                  vacvparameterName = "FiO\u2082";
+                  vacvparameterUnits = "%";
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -16000,7 +16502,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -16012,7 +16514,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "%",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvFio2
@@ -16081,124 +16583,352 @@ prvcData() {
                 ),
               ),
             ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vacvmaxValue = 10;
+                  vacvminValue = 1;
+                  vacvparameterName = "I Trig";
+                  vacvparameterUnits = "cmH\u2082O Below PEEP";
+                  vacvItrig = true;
+                  vacvRr = false;
+                  vacvIe = false;
+                  vacvPeep = false;
+                  vacvVt = false;
+                  vacvPcMin = false;
+                  vacvPcMax = false;
+                  vacvFio2 = false;
+                  vacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vacvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I Trig",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "-10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "-1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                "-"+vacvItrigValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vacvItrig
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vacvItrig
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vacvItrigValue != null
+                                    ? vacvItrigValue / 10
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
         Column(
           children: [
-            // InkWell(
-            //   onTap: () {
-            //     setState(() {
-            //       vacvmaxValue = 60;
-            //       vacvminValue = 10;
-            //       vacvparameterName = "PC Max";
-            //       vacvparameterUnits = "";
-            //       vacvItrig = false;
-            //       vacvRr = false;
-            //       vacvIe = false;
-            //       vacvPeep = false;
-            //       vacvVt = false;
-            //       vacvPcMin = false;
-            //       vacvPcMax = true;
-            //       vacvFio2 = false;
-            //       vacvFlowRamp = false;
-            //     });
-            //   },
-            //   child: Center(
-            //     child: Container(
-            //       width: 146,
-            //       height: 130,
-            //       child: Card(
-            //         elevation: 40,
-            //         color: vacvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "PC Max",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vacvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "60",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "10",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vacvPcMaxValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vacvPcMax
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vacvPcMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vacvPcMaxValue != null
-            //                         ? vacvPcMaxValue / 60
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+             InkWell(
+              onTap: () {
+                setState(() {
+                  vacvmaxValue = 100;
+                  vacvminValue = 10;
+                  vacvparameterName = "PC Min";
+                  vacvparameterUnits = "mL";
+                  vacvItrig = false;
+                  vacvRr = false;
+                  vacvIe = false;
+                  vacvPeep = false;
+                  vacvVt = false;
+                  vacvPcMin = true;
+                  vacvPcMax = false;
+                  vacvFio2 = false;
+                  vacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vacvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Min",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "mL",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vacvPcMinValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vacvPcMin
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vacvPcMin
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vacvPcMinValue != null
+                                    ? vacvPcMinValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vacvmaxValue = 100;
+                  vacvminValue = 10;
+                  vacvparameterName = "PC Max";
+                  vacvparameterUnits = "mL";
+                  vacvItrig = false;
+                  vacvRr = false;
+                  vacvIe = false;
+                  vacvPeep = false;
+                  vacvVt = false;
+                  vacvPcMin = false;
+                  vacvPcMax = true;
+                  vacvFio2 = false;
+                  vacvFlowRamp = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vacvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Max",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "mL",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vacvPcMaxValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vacvPcMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vacvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vacvPcMaxValue != null
+                                    ? vacvPcMaxValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
            
 
             // InkWell(
@@ -16384,7 +17114,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 28.0),
                                 child: Column(
                                   children: [
-                                    Text("Peep"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -16405,7 +17135,7 @@ prvcData() {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                    Text("FiO2"),
+                                    Text("FiO\u2082"),
                                     Text("$minfio2-$maxfio2"),
                                   ],
                                 ),
@@ -16455,17 +17185,11 @@ prvcData() {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        vacvparameterName,
-                        style: TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.normal),
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
+                        children: <Widget>[
+                          IconButton(
                               icon: Icon(
                                 Icons.remove,
                                 color: Colors.black,
@@ -16481,14 +17205,11 @@ prvcData() {
                                   } else if (vacvPeep == true &&
                                       vacvPeepValue != vacvminValue) {
                                     setState(() {
-                                      vacvPeepValue = vacvPeepValue - 1;
-                                      // if (vacvPcMinValue <= vacvPeepValue) {
-                                      //   vacvPcMinValue = vacvPeepValue + 1;
-                                      //   if (vacvPcMaxValue <= vacvPcMinValue) {
-                                      //     vacvPcMaxValue = vacvPcMinValue + 1;
-                                      //   }
-                                      // }
-                                    });
+                                      vacvPeepValue = vacvPeepValue-1;
+                                      if(vacvItrigValue>1 && vacvItrigValue>vacvPeepValue){
+                                        vacvItrigValue = vacvPeepValue;
+                                      }
+                                    }); //peep negative
                                   } else if (vacvRr == true &&
                                       vacvRrValue != vacvminValue) {
                                     setState(() {
@@ -16513,10 +17234,9 @@ prvcData() {
                                       // }
                                     });
                                   } else if (vacvPcMax == true &&
-                                      vacvPcMaxValue != vacvminValue) {
-                                    setState(() {
-                                      vacvPcMaxValue = vacvPcMaxValue - 1;
-                                    });
+                                      vacvPcMaxValue != vacvPcMinValue+1) {
+                                    vacvPcMaxValue = vacvPcMaxValue - 1;
+                                    
                                   } else if (vacvFio2 == true &&
                                       vacvFio2Value != vacvminValue) {
                                     setState(() {
@@ -16534,9 +17254,97 @@ prvcData() {
                             SizedBox(
                               width: 60,
                             ),
+                          Text(
+                            vacvparameterName,
+                            style: TextStyle(
+                                fontSize: 36, fontWeight: FontWeight.normal),
+                          ),
+                          SizedBox(
+                              width: 60,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 45,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (vacvItrig == true &&
+                                      vacvItrigValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvItrigValue = vacvItrigValue + 1;
+                                      if(vacvPeepValue <= vacvItrigValue){
+                                        if(vacvPeepValue==0){
+                                          vacvItrigValue=1;
+                                        }else{
+                                         vacvItrigValue=vacvPeepValue;
+                                        }
+                                      }
+                                    }); //itrig positive
+                                  } else if (vacvPeep == true &&
+                                      vacvPeepValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvPeepValue = vacvPeepValue + 1;
+                                      // if (vacvPcMinValue <= vacvPeepValue) {
+                                      //   vacvPcMinValue = vacvPeepValue + 1;
+                                      //   if (vacvPcMaxValue <= vacvPcMinValue) {
+                                      //     vacvPcMaxValue = vacvPcMinValue + 1;
+                                      //   }
+                                      // }
+                                    });
+                                  } else if (vacvRr == true &&
+                                      vacvRrValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvRrValue = vacvRrValue + 1;
+                                    });
+                                  } else if (vacvIe == true &&
+                                      vacvIeValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvIeValue = vacvIeValue + 1;
+                                    });
+                                  } else if (vacvVt == true &&
+                                      vacvVtValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvVtValue = vacvVtValue + 1;
+                                    });
+                                  } else if (vacvPcMin == true && vacvPcMinValue != pacvmaxValue) {
+                                    setState(() {
+                                      if(vacvPcMaxValue<90){
+                                         vacvPcMinValue = vacvPcMinValue + 1;
+                                          vacvPcMaxValue = vacvPcMinValue + 1;
+                                      }
+                                    });
+                                  } else if (vacvPcMax == true &&
+                                      vacvPcMaxValue != pacvmaxValue) {
+                                    setState(() {
+                                      vacvPcMaxValue = vacvPcMaxValue + 1;
+                                    });
+                                  } else if (vacvFio2 == true &&
+                                      vacvFio2Value != vacvmaxValue) {
+                                    setState(() {
+                                      vacvFio2Value = vacvFio2Value + 1;
+                                    });
+                                  } else if (vacvFlowRamp == true &&
+                                      vacvFlowRampValue != vacvmaxValue) {
+                                    setState(() {
+                                      vacvFlowRampValue = vacvFlowRampValue + 1;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            
                             Text(
                               vacvItrig
-                                  ? vacvItrigValue.toInt().toString()
+                                  ? "-"+vacvItrigValue.toInt().toString()
                                   : vacvPeep
                                       ? vacvPeepValue.toInt().toString()
                                       : vacvRr
@@ -16569,75 +17377,7 @@ prvcData() {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (vacvItrig == true &&
-                                      vacvItrigValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvItrigValue = vacvItrigValue + 1;
-                                    });
-                                  } else if (vacvPeep == true &&
-                                      vacvPeepValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvPeepValue = vacvPeepValue + 1;
-                                      // if (vacvPcMinValue <= vacvPeepValue) {
-                                      //   vacvPcMinValue = vacvPeepValue + 1;
-                                      //   if (vacvPcMaxValue <= vacvPcMinValue) {
-                                      //     vacvPcMaxValue = vacvPcMinValue + 1;
-                                      //   }
-                                      // }
-                                    });
-                                  } else if (vacvRr == true &&
-                                      vacvRrValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvRrValue = vacvRrValue + 1;
-                                    });
-                                  } else if (vacvIe == true &&
-                                      vacvIeValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvIeValue = vacvIeValue + 1;
-                                    });
-                                  } else if (vacvVt == true &&
-                                      vacvVtValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvVtValue = vacvVtValue + 1;
-                                    });
-                                  } else if (vacvPcMin == true &&
-                                      vacvPcMinValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvPcMinValue = vacvPcMinValue + 1;
-                                      // if (vacvPcMaxValue <= vacvPcMinValue) {
-                                      //   vacvPcMaxValue = vacvPcMinValue + 1;
-                                      // }
-                                    });
-                                  } else if (vacvPcMax == true &&
-                                      vacvPcMaxValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvPcMaxValue = vacvPcMaxValue + 1;
-                                    });
-                                  } else if (vacvFio2 == true &&
-                                      vacvFio2Value != vacvmaxValue) {
-                                    setState(() {
-                                      vacvFio2Value = vacvFio2Value + 1;
-                                    });
-                                  } else if (vacvFlowRamp == true &&
-                                      vacvFlowRampValue != vacvmaxValue) {
-                                    setState(() {
-                                      vacvFlowRampValue = vacvFlowRampValue + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
+                            
                           ],
                         ),
                       ),
@@ -16654,18 +17394,22 @@ prvcData() {
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
                               if (vacvItrig == true) {
-                                setState(() {
-                                  vacvItrigValue = value.toInt();
-                                });
+                                 setState(() {
+                                      vacvItrigValue = vacvItrigValue + 1;
+                                      if(vacvPeepValue <= vacvItrigValue){
+                                        if(vacvPeepValue==0){
+                                          vacvItrigValue=1;
+                                        }else{
+                                         vacvItrigValue=vacvPeepValue;
+                                        }
+                                      }
+                                    }); // slider itrig
                               } else if (vacvPeep == true) {
                                 setState(() {
-                                  vacvPeepValue = value.toInt();
-                                  // if (vacvPcMinValue <= vacvPeepValue) {
-                                  //   vacvPcMinValue = value.toInt() + 1;
-                                  //   if (vacvPcMaxValue <= vacvPcMinValue) {
-                                  //     vacvPcMaxValue = value.toInt() + 1;
-                                  //   }
-                                  // }
+                                 vacvPeepValue = value.toInt();
+                                if(vacvItrigValue>1 && vacvItrigValue>vacvPeepValue){
+                                        vacvItrigValue = vacvPeepValue;
+                                      }
                                 });
                               } else if (vacvRr == true) {
                                 setState(() {
@@ -16679,18 +17423,19 @@ prvcData() {
                                 setState(() {
                                   vacvVtValue = value.toInt();
                                 });
-                              } else if (vacvPcMin == true) {
+                              }  else if (vacvPcMin == true) {
+
+                                if(value.toInt()<90){
+                                vacvPcMinValue = value.toInt();
+                                vacvPcMaxValue = vacvPcMinValue+1;
+                                }
+                              } else if (vacvPcMax == true){
                                 setState(() {
-                                  vacvPcMinValue = value.toInt();
-                                  // if (vacvPcMaxValue <= vacvPcMinValue) {
-                                  //   if ((vacvPcMaxValue >= 60) == false) {
-                                  //     vacvPcMaxValue = value.toInt() + 1;
-                                  //   }
-                                  // }
-                                });
-                              } else if (vacvPcMax == true) {
-                                setState(() {
+                                  if(value.toInt()<=vacvPcMinValue+1){
+                                    vacvPcMaxValue = vacvPcMinValue+1;
+                                  }else{
                                   vacvPcMaxValue = value.toInt();
+                                  }
                                 });
                               } else if (vacvFio2 == true) {
                                 setState(() {
@@ -16733,12 +17478,16 @@ prvcData() {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text( vacvIe ? getIeData(vacvminValue,1)  :vacvminValue.toString()),
+                            Text( 
+                              vacvIe ? getIeData(vacvminValue,1)  
+                              :vacvItrig ? "-"+vacvminValue.toString()
+                              :vacvminValue.toString()
+                              ),
                             Text(
                               vacvparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text( vacvIe ? getIeData(vacvminValue,1):vacvmaxValue.toString())
+                            Text( vacvIe ? getIeData(vacvminValue,1):vacvItrig ? "-"+vacvmaxValue.toString():vacvmaxValue.toString())
                           ],
                         ),
                       )
@@ -16753,21 +17502,21 @@ prvcData() {
 
   graphs() {
     return Container(
-      padding: EdgeInsets.only(left: 170, right: 0, top: 20),
+      padding: EdgeInsets.only(left: 170, right: 0, top: 45),
       child: Column(
         children: [
           Container(
             width: 520,
-            height: 120,
+            height: 110,
             child: Stack(
               children: [
                 Container(
                     margin: EdgeInsets.only(left: 20, right: 10, top: 10),
                     child: scopeOne),
                 Container(
-                    margin: EdgeInsets.only(left: 10),
+                    margin: EdgeInsets.only(left: 10,top:8),
                     child: Text(
-                      "60" + " cmH2O",
+                      "100" + " cmH\u2082O",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
@@ -16785,7 +17534,7 @@ prvcData() {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 109,
+                    top: 99,
                   ),
                   color: Colors.grey,
                   height: 1,
@@ -16870,7 +17619,7 @@ prvcData() {
           ),
           Container(
             width: 520,
-            height: 160,
+            height: 150,
             child: Stack(
               children: [
                 Container(
@@ -16884,13 +17633,13 @@ prvcData() {
                 Container(
                     margin: EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      "90 lpm",
+                      "150 Lpm",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                    margin: EdgeInsets.only(left: 10, top: 135),
+                    margin: EdgeInsets.only(left: 10, top: 127),
                     child: Text(
-                      "-90 lpm",
+                      "-90 Lpm",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
@@ -16900,7 +17649,7 @@ prvcData() {
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                  margin: EdgeInsets.only(left: 28, top: 26),
+                  margin: EdgeInsets.only(left: 28, top: 20),
                   width: 1,
                   color: Colors.grey,
                   height: 108,
@@ -16908,7 +17657,7 @@ prvcData() {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 79,
+                    top: 88,
                   ),
                   color: Colors.grey,
                   height: 1,
@@ -16939,7 +17688,7 @@ prvcData() {
           ),
           Container(
             width: 520,
-            height: 120,
+            height: 110,
             child: Stack(
               children: [
                 Container(
@@ -16948,7 +17697,7 @@ prvcData() {
                 Container(
                     margin: EdgeInsets.only(left: 10),
                     child: Text(
-                      "1000 ml",
+                      "1000 mL",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
@@ -16958,7 +17707,7 @@ prvcData() {
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                  margin: EdgeInsets.only(left: 28, top: 24),
+                  margin: EdgeInsets.only(left: 30, top: 15),
                   width: 1,
                   color: Colors.grey,
                   height: 85,
@@ -16966,7 +17715,7 @@ prvcData() {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 109,
+                    top: 99,
                   ),
                   color: Colors.grey,
                   height: 1,
@@ -16998,11 +17747,12 @@ prvcData() {
             width: 480,
             height: 70,
             child: Card(
-              color: alarmActive == "1"
-                  ? Colors.red
-                  :
+              color: 
+              alarmActive == "1"? 
+              Colors.red
+                  :Color(0xFF171e27),
                   // priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
-                  Color(0xFF171e27),
+                  
               child: Center(
                   child: Align(
                 alignment: Alignment.centerLeft,
@@ -17068,7 +17818,7 @@ prvcData() {
       listObj.add(peepLowL);
       // Fluttertoast.showToast(msg: listObj.toString());
       // getCrcData(listObj);
-    } else if (data == "fio2") {
+    } else if (data == "FiO\u2082") {
       int temp = int.tryParse(result.split("ab")[0]);
       peepHighL = ((temp & 0xFF00) >> 8);
       peepLowL = (temp & 0xFF);
@@ -17208,7 +17958,7 @@ prvcData() {
       preferences.setString("i", dataI1.toString());
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", pccmvPeepValue);
-      preferences.setInt("fio2", pccmvFio2Value);
+      preferences.setInt("FiO\u2082", pccmvFio2Value);
       preferences.setInt("ps", pccmvPcValue);
 
       //to calculate crc
@@ -17259,11 +18009,11 @@ prvcData() {
         modeWriteList.add((vccmvFio2Value & 0xFF00) >> 8);
         modeWriteList.add((vccmvFio2Value & 0x00FF));
 
-        modeWriteList.add((60 & 0xFF00) >> 8);
-        modeWriteList.add((60 & 0x00FF));
+        modeWriteList.add((vccmvPcMinValue & 0xFF00) >> 8);
+        modeWriteList.add((vccmvPcMinValue & 0x00FF));
 
-        modeWriteList.add((0 & 0xFF00) >> 8);
-        modeWriteList.add((0 & 0x00FF));
+        modeWriteList.add((vccmvPcMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((vccmvPcMaxValue & 0x00FF));
 
         // modeWriteList.add((vccmvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((vccmvFlowRampValue & 0x00FF));
@@ -17278,7 +18028,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vccmvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("fio2", vccmvFio2Value);
+      preferences.setInt("FiO\u2082", vccmvFio2Value);
       preferences.setInt("vt", vccmvVtValue);
 
       //to calculate crc
@@ -17313,8 +18063,8 @@ prvcData() {
         modeWriteList.add(0);
         modeWriteList.add(2);
 
-        modeWriteList.add((pacvItrigValue & 0xFF00) >> 8);
-        modeWriteList.add((pacvItrigValue & 0x00FF));
+        modeWriteList.add((-pacvItrigValue & 0xFF00) >> 8);
+        modeWriteList.add((-pacvItrigValue & 0x00FF));
 
         modeWriteList.add((pacvRrValue & 0xFF00) >> 8);
         modeWriteList.add((pacvRrValue & 0x00FF));
@@ -17351,7 +18101,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", pacvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("fio2", pacvFio2Value);
+      preferences.setInt("FiO\u2082", pacvFio2Value);
       preferences.setInt("ps", pacvPcValue);
       ;
 
@@ -17382,8 +18132,8 @@ prvcData() {
         modeWriteList.add(20);
         modeWriteList.add(0);
         modeWriteList.add(1);
-        modeWriteList.add((vacvItrigValue & 0xFF00) >> 8);
-        modeWriteList.add((vacvItrigValue & 0x00FF));
+        modeWriteList.add((-vacvItrigValue & 0xFF00) >> 8);
+        modeWriteList.add((-vacvItrigValue & 0x00FF));
 
         modeWriteList.add((vacvRrValue & 0xFF00) >> 8);
         modeWriteList.add((vacvRrValue & 0x00FF));
@@ -17397,11 +18147,11 @@ prvcData() {
         modeWriteList.add((vacvVtValue & 0xFF00) >> 8);
         modeWriteList.add((vacvVtValue & 0x00FF));
 
-        modeWriteList.add((0 & 0xFF00) >> 8);
-        modeWriteList.add((0 & 0x00FF));
+        modeWriteList.add((vacvPcMinValue & 0xFF00) >> 8);
+        modeWriteList.add((vacvPcMinValue & 0x00FF));
 
-        modeWriteList.add((60 & 0xFF00) >> 8);
-        modeWriteList.add((60 & 0x00FF));
+        modeWriteList.add((vacvPcMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((vacvPcMaxValue & 0x00FF));
 
         modeWriteList.add((vacvFio2Value & 0xFF00) >> 8);
         modeWriteList.add((vacvFio2Value & 0x00FF));
@@ -17420,7 +18170,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vacvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("fio2", vacvFio2Value);
+      preferences.setInt("FiO\u2082", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
 
       if (_status == "Connected") {
@@ -17451,8 +18201,8 @@ prvcData() {
         modeWriteList.add(0);
         modeWriteList.add(4);
 
-        modeWriteList.add((psimvItrigValue & 0xFF00) >> 8);
-        modeWriteList.add((psimvItrigValue & 0x00FF));
+        modeWriteList.add((-psimvItrigValue & 0xFF00) >> 8);
+        modeWriteList.add((-psimvItrigValue & 0x00FF));
 
         modeWriteList.add((psimvRrValue & 0xFF00) >> 8);
         modeWriteList.add((psimvRrValue & 0x00FF));
@@ -17488,8 +18238,9 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", psimvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("fio2", psimvFio2Value);
-      preferences.setInt("ps", psimvPcValue);
+      preferences.setInt("FiO\u2082", psimvFio2Value);
+      preferences.setInt("ps", psimvPsValue);
+      preferences.setInt("pc", psimvPcValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -17520,8 +18271,8 @@ prvcData() {
         modeWriteList.add(0);
         modeWriteList.add(5);
 
-        modeWriteList.add((vsimvItrigValue & 0xFF00) >> 8); //5
-        modeWriteList.add((vsimvItrigValue & 0x00FF)); //6
+        modeWriteList.add((-vsimvItrigValue & 0xFF00) >> 8); //5
+        modeWriteList.add((-vsimvItrigValue & 0x00FF)); //6
 
         modeWriteList.add((vsimvRrValue & 0xFF00) >> 8); //7
         modeWriteList.add((vsimvRrValue & 0x00FF)); //8
@@ -17532,11 +18283,11 @@ prvcData() {
         modeWriteList.add((vsimvPeepValue & 0xFF00) >> 8); //11
         modeWriteList.add((vsimvPeepValue & 0x00FF)); //12
 
-        modeWriteList.add((vsimvPcMinValue & 0xFF00) >> 8);
-        modeWriteList.add((vsimvPcMinValue & 0x00FF));
+        modeWriteList.add((vsimvminValue & 0xFF00) >> 8);
+        modeWriteList.add((psimvminValue & 0x00FF));
 
-        modeWriteList.add((vsimvPcMaxValue & 0xFF00) >> 8);
-        modeWriteList.add((vsimvPcMaxValue & 0x00FF));
+        modeWriteList.add((vsimvmaxValue & 0xFF00) >> 8);
+        modeWriteList.add((vsimvmaxValue & 0x00FF));
 
         modeWriteList.add((vsimvVtValue & 0xFF00) >> 8); //17
         modeWriteList.add((vsimvVtValue & 0x00FF));
@@ -17558,7 +18309,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vsimvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("fio2", vsimvFio2Value);
+      preferences.setInt("FiO\u2082", vsimvFio2Value);
       preferences.setInt("vt", vsimvVtValue);
       preferences.setInt("ps", vsimvPcMaxValue);
 
@@ -17590,8 +18341,8 @@ prvcData() {
         modeWriteList.add(0);
         modeWriteList.add(3);
 
-        modeWriteList.add((psvItrigValue & 0xFF00) >> 8); //5
-        modeWriteList.add((psvItrigValue & 0x00FF)); //6
+        modeWriteList.add((-psvItrigValue & 0xFF00) >> 8); //5
+        modeWriteList.add((-psvItrigValue & 0x00FF)); //6
 
         modeWriteList.add((psvPeepValue & 0xFF00) >> 8); //7
         modeWriteList.add((psvPeepValue & 0x00FF)); //8
@@ -17638,8 +18389,9 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", psvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("fio2", psvFio2Value);
-      preferences.setInt("ps", psvPsValue);
+      preferences.setInt("FiO\u2082", psvFio2Value);
+      preferences.setInt("ps", psimvPsValue);
+      preferences.setInt("pc", psimvPcValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -17668,8 +18420,8 @@ prvcData() {
         modeWriteList.add(20);
         modeWriteList.add(0);
         modeWriteList.add(14);
-        modeWriteList.add((vacvItrigValue & 0xFF00) >> 8);
-        modeWriteList.add((vacvItrigValue & 0x00FF));
+        modeWriteList.add((-vacvItrigValue & 0xFF00) >> 8);
+        modeWriteList.add((-vacvItrigValue & 0x00FF));
 
         modeWriteList.add((vacvRrValue & 0xFF00) >> 8);
         modeWriteList.add((vacvRrValue & 0x00FF));
@@ -17706,7 +18458,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vacvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("fio2", vacvFio2Value);
+      preferences.setInt("FiO\u2082", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
 
       if (_status == "Connected") {
@@ -17749,7 +18501,7 @@ prvcData() {
   void setData() {
     if (pacvEnabled == true) {
       setState(() {
-        pacvItrigValue = 60;
+        pacvItrigValue = 6;
         pacvRrValue = 20;
         pacvIeValue = 51;
         pacvPeepValue = 10;
@@ -17758,11 +18510,11 @@ prvcData() {
         pacvVtMaxValue = 400;
         pacvFio2Value = 21;
         pacvFlowRampValue = 3;
-        pacvmaxValue = 100;
-        pacvminValue = 20;
-        pacvdefaultValue = 60;
+        pacvmaxValue = 10;
+        pacvminValue = 1;
+        pacvdefaultValue = 6;
         pacvparameterName = "I Trig";
-        pacvparameterUnits = "cmH20";
+        pacvparameterUnits = "cmH\u2082O Below Peep";
         pacvItrig = true;
         pacvRr = false;
         pacvIe = false;
@@ -17827,7 +18579,7 @@ prvcData() {
       });
     } else if (vacvEnabled == true) {
       setState(() {
-        vacvItrigValue = 60;
+        vacvItrigValue = 6;
         vacvRrValue = 20;
         vacvIeValue = 51;
         vacvPeepValue = 10;
@@ -17836,11 +18588,11 @@ prvcData() {
         vacvPcMaxValue = 60;
         vacvFio2Value = 21;
         vacvFlowRampValue = 4;
-        vacvmaxValue = 100;
-        vacvminValue = 20;
-        vacvdefaultValue = 60;
+        vacvmaxValue = 10;
+        vacvminValue = 1;
+        vacvdefaultValue = 6;
         vacvparameterName = "I Trig";
-        vacvparameterUnits = "cmH20";
+        vacvparameterUnits = "cmH\u2082O Below Peep";
         vacvItrig = true;
         vacvRr = false;
         vacvIe = false;
@@ -17853,7 +18605,7 @@ prvcData() {
       });
     } else if (psvEnabled == true) {
       setState(() {
-        psvItrigValue = 60;
+        psvItrigValue = 6;
         psvPeepValue = 10;
         psvIeValue = 51;
         psvPsValue = 30;
@@ -17879,11 +18631,11 @@ prvcData() {
         psvBackupRr = false;
         psvMinTe = false;
         psvFlowRamp = false;
-        psvmaxValue = 100;
-        psvminValue = 20;
-        psvdefaultValue = 60;
+        psvmaxValue = 10;
+        psvminValue = 1;
+        psvdefaultValue = 6;
         psvparameterName = "I Trig";
-        psvparameterUnits = "cmH20";
+        psvparameterUnits = "cmH\u2082O Below Peep";
       });
     }  else if (vsimvEnabled == true) {
       setState(() {
@@ -17897,7 +18649,7 @@ prvcData() {
         vsimvPcMax = false;
         vsimvFio2 = false;
         vsimvFlowRamp = false;
-        vsimvItrigValue = 60;
+        vsimvItrigValue = 6;
         vsimvRrValue = 20;
         vsimvIeValue = 51;
         vsimvPeepValue = 10;
@@ -17907,11 +18659,11 @@ prvcData() {
         vsimvPcMaxValue = 60;
         vsimvFio2Value = 21;
         vsimvFlowRampValue = 4;
-        vsimvmaxValue = 100;
-        vsimvminValue = 20;
-        vsimvdefaultValue = 60;
+        vsimvmaxValue = 10;
+        vsimvminValue = 1;
+        vsimvdefaultValue = 6;
         vsimvparameterName = "I Trig";
-        vsimvparameterUnits = "cmH20";
+        vsimvparameterUnits = "cmH\u2082O Below Peep";
       });
     } else if (psimvEnabled == true) {
       setState(() {
@@ -17925,7 +18677,7 @@ prvcData() {
         vsimvPcMax = false;
         vsimvFio2 = false;
         vsimvFlowRamp = false;
-        vsimvItrigValue = 60;
+        vsimvItrigValue = 6;
         vsimvRrValue = 20;
         vsimvIeValue = 51;
         vsimvPeepValue =10;
@@ -17935,43 +18687,13 @@ prvcData() {
         vsimvPcMaxValue = 60;
         vsimvFio2Value = 22;
         vsimvFlowRampValue = 4;
-        vsimvmaxValue = 100;
-        vsimvminValue = 20;
-        vsimvdefaultValue = 60;
+        vsimvmaxValue = 10;
+        vsimvminValue = 1;
+        vsimvdefaultValue = 6;
         vsimvparameterName = "I Trig";
-        vsimvparameterUnits = "cmH20";
+        vsimvparameterUnits = "cmH\u2082O Below Peep";
       });
-    } else if (psimvEnabled == true) {
-      setState(() {
-        psimvItrig = true;
-        psimvRr = false;
-        psimvIe = false;
-        psimvPeep = false;
-        psimvPc = false;
-        psimvPs = false;
-        psimvVtMin = false;
-        psimvVtMax = false;
-        psimvFio2 = false;
-        psimvFlowRamp = false;
-
-        psimvItrigValue = 60;
-        psimvRrValue = 20;
-        psimvPsValue = 22;
-        psimvIeValue = 51;
-        psimvPeepValue = 10;
-        psimvPcValue = 30;
-        psimvVtMinValue = 100;
-        psimvVtMaxValue = 300;
-        psimvFio2Value = 21;
-        psimvFlowRampValue = 3;
-
-        psimvmaxValue = 100;
-        psimvminValue = 20;
-        psimvdefaultValue = 60;
-        psimvparameterName = "I Trig";
-        psimvparameterUnits = "cmH20";
-      });
-    }
+    } 
   }
 
   writeAlarmsData() async {
@@ -18037,7 +18759,7 @@ prvcData() {
             InkWell(
               onTap: () {
                 setState(() {
-                  alarmmaxValue = 100;
+                  alarmmaxValue = 70;
                   alarmminValue = 1;
                   alarmparameterName = "RR Total";
 
@@ -18078,7 +18800,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "bpm",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: alarmRR
@@ -18089,7 +18811,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "100",
+                              "70",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: alarmRR
@@ -18132,7 +18854,7 @@ prvcData() {
             InkWell(
               onTap: () {
                 setState(() {
-                  alarmmaxValue = 1200;
+                  alarmmaxValue = 2400;
                   alarmminValue = 0;
                   alarmparameterName = "VTe";
                   alarmRR = false;
@@ -18173,7 +18895,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "mL",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: alarmVte
@@ -18184,7 +18906,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "900",
+                              "2400",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: alarmVte
@@ -18224,101 +18946,7 @@ prvcData() {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  alarmmaxValue = 60;
-                  alarmminValue = 0;
-                  alarmparameterName = "Ppeak";
-                  alarmRR = false;
-                  alarmVte = false;
-                  alarmPpeakchanged = true;
-                  alarmPpeak = true;
-                  alarmpeep = false;
-                  alarmFio2 = false;
-                  alarmConfirmed = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  color:
-                      alarmPpeakchanged ? Color(0xFFB0BEC5) : Color(0xFF213855),
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: alarmPpeak ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Ppeak",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: alarmPpeak
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH20",
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  color: alarmPpeak
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "60",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: alarmPpeak
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "0",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: alarmPpeak
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                "$minppeak - $maxppeak",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: alarmPpeak
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+           
           ],
         ),
         Column(
@@ -18328,7 +18956,7 @@ prvcData() {
             //     setState(() {
             //       alarmmaxValue = 100;
             //       alarmminValue = 21;
-            //       alarmparameterName = "FiO2";
+            //       alarmparameterName = "FiO\u2082";
             //       alarmFio2changed = true;
             //       alarmRR = false;
             //       alarmVte = false;
@@ -18355,7 +18983,7 @@ prvcData() {
             //               Align(
             //                 alignment: Alignment.topLeft,
             //                 child: Text(
-            //                   "FiO2",
+            //                   "FiO\u2082",
             //                   style: TextStyle(
             //                       fontSize: 15,
             //                       fontWeight: FontWeight.bold,
@@ -18421,9 +19049,9 @@ prvcData() {
             InkWell(
               onTap: () {
                 setState(() {
-                  alarmmaxValue = 30;
+                  alarmmaxValue = 40;
                   alarmminValue = 0;
-                  alarmparameterName = "Peep";
+                  alarmparameterName = "PEEP";
                   alarmpeepchanged = true;
                   alarmRR = false;
                   alarmVte = false;
@@ -18450,7 +19078,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Peep",
+                              "PEEP",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -18462,7 +19090,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 9,
                                   color: alarmpeep
@@ -18473,7 +19101,7 @@ prvcData() {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "30",
+                              "40",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: alarmpeep
@@ -18501,6 +19129,101 @@ prvcData() {
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: alarmpeep
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+             InkWell(
+              onTap: () {
+                setState(() {
+                  alarmmaxValue = 100;
+                  alarmminValue = 0;
+                  alarmparameterName = "Ppeak";
+                  alarmRR = false;
+                  alarmVte = false;
+                  alarmPpeakchanged = true;
+                  alarmPpeak = true;
+                  alarmpeep = false;
+                  alarmFio2 = false;
+                  alarmConfirmed = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  color:
+                      alarmPpeakchanged ? Color(0xFFB0BEC5) : Color(0xFF213855),
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: alarmPpeak ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Ppeak",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: alarmPpeak
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 9,
+                                  color: alarmPpeak
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: alarmPpeak
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "0",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: alarmPpeak
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                "$minppeak - $maxppeak",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: alarmPpeak
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -18614,17 +19337,17 @@ prvcData() {
                               onPressed: () {
                                 setState(() {
                                   alarmConfirmed = false;
-                                  if (alarmRR == true && maxRrtotal != 100) {
+                                  if (alarmRR == true && maxRrtotal != 70) {
                                     setState(() {
                                       maxRrtotal = maxRrtotal + 1;
                                     });
                                   } else if (alarmVte == true &&
-                                      maxvte != 1200) {
+                                      maxvte != 2400) {
                                     setState(() {
                                       maxvte = maxvte + 1;
                                     });
                                   } else if (alarmPpeak == true &&
-                                      maxppeak != 60) {
+                                      maxppeak != 100) {
                                     setState(() {
                                       maxppeak = maxppeak + 1;
                                     });
@@ -18634,7 +19357,7 @@ prvcData() {
                                       maxfio2 = maxfio2 + 1;
                                     });
                                   } else if (alarmpeep == true &&
-                                      maxpeep != 30) {
+                                      maxpeep != 40) {
                                     setState(() {
                                       maxpeep = maxpeep + 1;
                                     });
@@ -18685,15 +19408,15 @@ prvcData() {
                                               ? 0
                                               : 0.0, // Min range value
                           max: alarmRR
-                              ? 100
+                              ? 70
                               : alarmVte
-                                  ? 1200
+                                  ? 2400
                                   : alarmPpeak
-                                      ? 60
+                                      ? 100
                                       : alarmFio2
                                           ? 100
                                           : alarmpeep
-                                              ? 30
+                                              ?40
                                               : 0.0, // Max range value
                           onMinChanged: (minVal) {
                             setState(() {

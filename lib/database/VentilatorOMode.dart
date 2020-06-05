@@ -1,8 +1,8 @@
+import 'dart:developer';
+
 class VentilatorOMode {
    int id;
-    String  patientAge,operatingMode,lungImage,paw,
-      patientGender,
-      patientHeight,
+    String  operatingMode,lungImage,paw,
       pipD,
       vtD,
       peepD,
@@ -18,7 +18,7 @@ class VentilatorOMode {
       psS,
       fio2S,
       tiS,
-      teS;
+      teS,globalCounterNo;
   double pressureValues, flowValues, volumeValues;
   String dateTime;
   String patientName,patientId;
@@ -26,9 +26,6 @@ class VentilatorOMode {
   VentilatorOMode(
       this.patientId,
       this.patientName,
-      this.patientAge,
-      this.patientGender,
-      this.patientHeight,
       this.pipD,
       this.vtD,
       this.peepD,
@@ -47,7 +44,7 @@ class VentilatorOMode {
       this.teS,
       this.pressureValues,
       this.flowValues,
-      this.volumeValues,this.operatingMode,this.lungImage,this.paw);
+      this.volumeValues,this.operatingMode,this.lungImage,this.paw,this.globalCounterNo);
 
   // Map<String, dynamic> toMap() {
   //   var map = <String, dynamic>{
@@ -84,9 +81,6 @@ class VentilatorOMode {
     id = map['id'];
     patientId = map['patientId'];
     patientName = map['patientName'];
-    patientAge = map['patientAge'];
-    patientGender = map['patientGender'];
-    patientHeight = map['patientHeight'];
     pipD = map['pipD'];
     vtD = map['vtD'];
     peepD = map['peepD'];
@@ -110,15 +104,13 @@ class VentilatorOMode {
     operatingMode = map['operatingMode'];
     lungImage = map['lungImage'];
     paw = map['paw'];//
+    globalCounterNo = map['globalCounterNo'];
   }
 
   VentilatorOMode.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         patientId = json['patientId'],
         patientName = json['patientName'],
-        patientAge = json['patientAge'],
-        patientGender = json['patientGender'],
-        patientHeight = json['patientHeight'],
         pipD = json['pipD'],
         vtD = json['vtD'],
         peepD = json['peepD'],
@@ -137,15 +129,14 @@ class VentilatorOMode {
         pressureValues = json['pressureValues'],
         flowValues = json['flowValues'],
         volumeValues = json['volumeValues'],
-        dateTime = json['dateTime'];
+        dateTime = json['dateTime'],
+         globalCounterNo = json['globalCounterNo']
+        ;
 
   VentilatorOMode.map(dynamic obj) {
     this.id = obj['id'];
     this.patientId = obj['patientId'];
     this.patientName = obj['patientName'];
-    this.patientAge = obj['patientAge'];
-    this.patientGender = obj['patientGender'];
-    this.patientHeight = obj['patientHeight'];
     this.pipD = obj['pipD'];
     this.vtD = obj['vtD'];
     this.peepD = obj['peepD'];
@@ -165,6 +156,7 @@ class VentilatorOMode {
     this.flowValues = obj['flowValues'];
     this.volumeValues = obj['volumeValues'];
     this.dateTime = obj['dateTime'];
+    this.globalCounterNo = obj['globalCounterNo'];
   }
 }
 
@@ -196,5 +188,40 @@ class AlarmsList {
     alarmId = map['id'];
     alarmCode = map['alarmCodes'];
     datetime = map['datetime'];
+  }
+}
+
+
+
+class PatientsSaveList {
+  String patientId;
+  String patientName;
+  String patientAge;
+  String patientGender;
+  String patientHeight;
+  String datetime;
+
+  PatientsSaveList(this.patientId,this.patientName,this.patientAge,this.patientGender,this.patientHeight);
+
+   PatientsSaveList.fromMap(Map<String, dynamic> map) {
+    patientId = map['patientId'];
+    patientName = map['patientName'];
+    patientAge = map['patientAge'];
+    patientGender = map['patientGender'];
+    patientHeight = map['patientHeight'];
+    datetime = map['datetime'];
+  }
+}
+
+
+class CounterValue {
+  int id;
+  String counterValue;
+
+  CounterValue(this.counterValue);
+
+  CounterValue.fromMap(Map<String,dynamic> map) {
+    id = map['id'];
+    counterValue = map['counterNo'];
   }
 }

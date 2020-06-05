@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:usb_serial/transaction.dart';
