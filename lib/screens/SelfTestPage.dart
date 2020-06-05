@@ -59,19 +59,23 @@ class _SelfTestPageState extends State<SelfTestPage> {
       counter = counter + 1;
       List<int> obj = [0x7E, 0, 20, 0, 11, 0];
       if (counter <= 250) {
-        setState(() {
+        if(mounted){
+          setState(() {
           obj.add(counter);
           obj.add(1);
           obj.add(0x7F);
         });
+        }
         // Fluttertoast.showToast(msg: obj.toString());
         if (_status == "Connected") {
           await _port.write(Uint8List.fromList(obj));
         } else {}
       } else {
-        setState(() {
+        if(mounted){
+          setState(() {
           counter = 0;
         });
+        }
       }
     });
 
@@ -84,8 +88,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
      });
 
     _timer1 = Timer.periodic(Duration(seconds: 15), (timer) async {
-      setState(() {
-
+      if(mounted){
+        setState(() {
         if(stateSetted==false){
           stateSetted = true;
            o2pressuresensor = 2;
@@ -108,8 +112,8 @@ class _SelfTestPageState extends State<SelfTestPage> {
             blender = 2;
             checkOfffset = 1;
             }
-       
       });
+      }
 
       await sleep(Duration(seconds: 0));    
     });

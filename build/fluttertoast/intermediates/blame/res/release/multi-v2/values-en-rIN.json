@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/fluttertoast/intermediates/res/merged/release/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "/Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/build/fluttertoast/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
                     "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/values-en-rIN/values-en-rIN.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/fluttertoast/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "/Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/build/fluttertoast/intermediates/res/merged/release/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
                     "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/values-en-rIN/values-en-rIN.xml",

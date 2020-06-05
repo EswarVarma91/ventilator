@@ -1,13 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
-import 'package:ventilator/activity/ConnectionPage.dart';
-import 'package:ventilator/screens/CallibrationPage.dart';
 import 'package:ventilator/screens/SelfTestPage.dart';
 
 class SplashPage extends StatefulWidget {
@@ -31,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
 
 
   getData() async{
-    preferences = await SharedPreferences.getInstance();
+    // preferences = await SharedPreferences.getInstance();
     // counter = (preferences.getInt("noTimes")).toInt();
     // await sleep(Duration(seconds: 7));
     saveData();
@@ -81,7 +77,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: SplashScreen(
           seconds: 2,
-          navigateAfterSeconds: SelfTestPage(),
+          navigateAfterSeconds: Dashboard(),
           backgroundColor: Colors.white,
           loaderColor: Colors.black,
         ),

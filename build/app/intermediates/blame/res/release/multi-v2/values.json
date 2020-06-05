@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "/Users/eswarvarmapanumetcha/mobile_app_development/github/ventilator/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

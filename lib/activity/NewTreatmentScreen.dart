@@ -26,27 +26,41 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
   bool femaleEnabled = false;
   bool ageEnabled = false;
   bool heightEnabled = false;
+  bool adultEnabled= true;
+  bool pediatricEnabled = false;
   double commonValue = 0;
   String calculatingIn = "cm";
   SharedPreferences preferences;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("New Treatment"),
-      ),
-      body: WillPopScope(
-        onWillPop: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Dashboard()),
-          );
-        },
-        child: Container(
+      resizeToAvoidBottomPadding: false,
+      body:  Container(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(height: 10,),
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left:12.0,),
+                    child: IconButton(icon: Icon(Icons.arrow_back,size: 25,),onPressed: (){
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Dashboard()),
+                      );
+                    },),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:28.0),
+                    child: Text("New Patient",style: TextStyle(color: Colors.black,fontSize: 20),),
+                  )
+                ],
+              ),
+              SizedBox(height: 20,),
               Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: const EdgeInsets.only(left:25.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +77,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                         });
                       },
                       child: Container(
-                        width: 250,
+                        width: 210,
                         child: TextFormField(
                           showCursor: true,
                           readOnly: true,
@@ -99,7 +113,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                         });
                       },
                       child: Container(
-                        width: 250,
+                        width: 210,
                         child: TextFormField(
                           showCursor: true,
                           readOnly: true,
@@ -125,7 +139,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                       ),
                     ),
                     Container(
-                        width: 250,
+                        width: 200,
                         child: Row(
                           children: [
                             InkWell(
@@ -180,11 +194,72 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                             ),
                           ],
                         )),
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(left:25.0),
+                          child: Container(
+                          width: 230,
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    adultEnabled = true;
+                                    pediatricEnabled = false;
+                                    keyboardEnable = true;
+                                  });
+                                },
+                                child: Material(
+                                  child: Card(
+                                      color: adultEnabled
+                                          ? Color(0xFF171e27)
+                                          : Colors.white,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(22.0),
+                                        child: Text(
+                                          "Adult",
+                                          style: TextStyle(
+                                              color: adultEnabled
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                        ),
+                                      )),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    adultEnabled = false;
+                                    pediatricEnabled = true;
+                                    keyboardEnable = true;
+                                  });
+                                },
+                                child: Material(
+                                  child: Card(
+                                      color: pediatricEnabled
+                                          ? Color(0xFF171e27)
+                                          : Colors.white,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(22.0),
+                                        child: Text(
+                                          "Pediatric",
+                                          style: TextStyle(
+                                              color: pediatricEnabled
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                        ),
+                                      )),
+                                ),
+                              ),
+                            ],
+                          )),
+                        ),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(18),
+                padding: const EdgeInsets.only(left:25.0,top: 36,right: 24),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -322,7 +397,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                 ),
               ),
               Container(
-                height: heightEnabled ? 0 : 7,
+                height: heightEnabled ? 0 : 21,
               ),
               keyboardEnable
                   ? heightEnabled
@@ -352,21 +427,6 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                                                     : 0.toString();
                                           });
                                         }
-                                        // if(index<152){
-                                        //   setState(() {
-                                        //     var data1 = 152-index;
-                                        //     var data2 = data1*1.1;
-                                        //     var data3 = 48-data2;
-                                        //     print(data3);
-                                        //    maleEnabled ?  weightId.text = (48 - (152-index) * 1.1).toInt().toString()
-                                        //    :femaleEnabled ? weightId.text = (45-(152-index) * 1.1).toInt().toString():0.toString();
-                                        //   });
-                                        // }else{
-                                        //   setState(() {
-                                        //    maleEnabled ?  weightId.text = (48 - (index-152) * 1.1).toInt().toString()
-                                        //    :femaleEnabled ? weightId.text = (45-(index-152) * 1.1).toInt().toString():0.toString();
-                                        //   });
-                                        // }
                                       });
                                     },
                                     children: List.generate(
@@ -395,7 +455,6 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 

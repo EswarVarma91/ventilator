@@ -9,9 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.media.AudioManager
 import android.media.MediaPlayer
-import android.os.BatteryManager
-import android.os.Build
-import android.os.UserManager
+import android.os.*
 import android.provider.Settings
 import android.view.View
 import androidx.annotation.NonNull
@@ -20,6 +18,7 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
+import java.lang.reflect.InvocationTargetException
 
 
 class MainActivity: FlutterActivity() {
@@ -43,9 +42,19 @@ class MainActivity: FlutterActivity() {
         MethodChannel(flutterEngine.getDartExecutor(), CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "sendShutdowndevice") {
                 try {
-                    val proc = Runtime.getRuntime()
-                            .exec(arrayOf("su", "-c", "reboot -p"))
-                    proc.waitFor()
+//                    val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+//                    try {
+//                        pm.getClass().getMethod("goToSleep", arrayOf<Class<*>?>(Long::class.javaPrimitiveType)).invoke(pm, SystemClock.uptimeMillis())
+//                    } catch (e: NoSuchMethodException) {
+//                        e.printStackTrace()
+//                    } catch (e: IllegalAccessException) {
+//                        e.printStackTrace()
+//                    } catch (e: InvocationTargetException) {
+//                        e.printStackTrace()
+//                    }
+//                    val proc = Runtime.getRuntime()
+//                            .exec(arrayOf("su", "-c", "reboot -p"))
+//                    proc.waitFor()
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
@@ -191,8 +200,8 @@ class MainActivity: FlutterActivity() {
         setUserRestriction(UserManager.DISALLOW_SAFE_BOOT, disallow)
         setUserRestriction(UserManager.DISALLOW_FACTORY_RESET, disallow)
         setUserRestriction(UserManager.DISALLOW_ADD_USER, disallow)
-        setUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER,disallow)
-        setUserRestriction(UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA, disallow)
+        setUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER,false)
+        setUserRestriction(UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA, false)
         setUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME, disallow)
     }
 

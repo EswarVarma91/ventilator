@@ -9,11 +9,11 @@ Tools Needed
  
 1st step (rooting the device)
 
-open sp flash tool and select scatter file in recovey3_twrp302_lenovo_tb3_710f, 
+open sp flash tool and select scatter file in recovery3_twrp302_lenovo_tb3_710f, 
 Press download button in sp flash tool and switch off the device and press the volume + or - and connect the usb cable. 
 now sp tool will detect and complete the download process. once it is completed restart to recovery mode. 
-now the twrp recovert installed. go to reboot and press system and now slider and super su installed in your os 
-and now go to play store or chrome and install lastest super su file and check it.. your device will be rooted.
+now the twrp reconvert installed. go to reboot and press system and now slider and super su installed in your os 
+and now go to play store or chrome and install latest super su file and check it.. your device will be rooted.
 
 2nd step (splash screen change)
 
@@ -39,3 +39,44 @@ system app uninstaller device has to be rooted.
 install root explorer app and go to system/media/ change the bootanimation.zip to .bak file... 
 
 https://www.xda-developers.com/customize-battery-saver-mode-android-8-0/
+
+
+
+ setState(() {
+                                      vacvPeepValue = vacvPeepValue-1;
+                                      if(vacvItrigValue>1 && vacvItrigValue>vacvPeepValue){
+                                        vacvItrigValue = vacvPeepValue;
+                                      }
+                                    }); //peep negative
+
+
+
+
+ setState(() {
+                                      vacvItrigValue = vacvItrigValue + 1;
+                                      if(vacvPeepValue <= vacvItrigValue){
+                                        if(vacvPeepValue==0){
+                                          vacvItrigValue=1;
+                                        }else{
+                                         vacvItrigValue=vacvPeepValue;
+                                        }
+                                      }
+                                    }); //itrig positive
+
+                      
+ setState(() {
+                                      vacvItrigValue = vacvItrigValue + 1;
+                                      if(vacvPeepValue <= vacvItrigValue){
+                                        if(vacvPeepValue==0){
+                                          vacvItrigValue=1;
+                                        }else{
+                                         vacvItrigValue=vacvPeepValue;
+                                        }
+                                      }
+                                    }); // slider itrig
+
+
+vacvPeepValue = value.toInt();
+                                if(vacvItrigValue>1 && vacvItrigValue>vacvPeepValue){
+                                        vacvItrigValue = vacvPeepValue;
+                                      } // slider peep
