@@ -4089,7 +4089,7 @@ class _CheckPageState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  // vteMinValue.toString(),
+                                 modeName == "VC-CMV" || modeName=="VACV" || modeName =="VSIMV" ? vteMinValue.toString():
                                   minvte.toString(),
                                   ////""
                                   style:
