@@ -14,18 +14,20 @@
       <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/.filecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/app.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/libs.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/libs.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/build-history.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/last-build.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/outputs/apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/apk/app.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/outputs/apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/apk/app.apk.sha1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/apk/debug/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/cache.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../build/cache.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/activity/Dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/activity/Dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/activity/NewTreatmentScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/activity/NewTreatmentScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/activity/SplashPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/activity/SplashPage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/database/DatabaseHelper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/database/DatabaseHelper.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +35,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="0123456789ABCDEF" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="HA13ZTV5" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -182,25 +184,25 @@
       <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state x="568" y="330" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.823@0.23.1440.823" timestamp="1591175582105" />
-    <state width="1398" height="195" key="GridCell.Tab.0.bottom" timestamp="1591249952750">
+    <state width="1398" height="195" key="GridCell.Tab.0.bottom" timestamp="1591342256017">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="195" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1591249952750" />
-    <state width="1398" height="195" key="GridCell.Tab.0.center" timestamp="1591249952749">
+    <state width="1398" height="195" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1591342256017" />
+    <state width="1398" height="195" key="GridCell.Tab.0.center" timestamp="1591342256015">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="195" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1591249952749" />
-    <state width="1398" height="195" key="GridCell.Tab.0.left" timestamp="1591249952746">
+    <state width="1398" height="195" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1591342256015" />
+    <state width="1398" height="195" key="GridCell.Tab.0.left" timestamp="1591342256013">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="195" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1591249952746" />
-    <state width="1398" height="195" key="GridCell.Tab.0.right" timestamp="1591249952750">
+    <state width="1398" height="195" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1591342256013" />
+    <state width="1398" height="195" key="GridCell.Tab.0.right" timestamp="1591342256016">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="195" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1591249952750" />
-    <state x="390" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1591324700318">
+    <state width="1398" height="195" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1591342256016" />
+    <state x="390" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1591351436523">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="390" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1591324700318" />
+    <state x="390" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1591351436523" />
   </component>
 </project>

@@ -111,47 +111,18 @@ class DatabaseHelper {
             vom.paw,
             vom.globalCounterNo
           ]);
-      print("result data : " + res.toString());
-      Fluttertoast.showToast(msg: res.toString());
+      // print("result data : " + res.toString());
+      // Fluttertoast.showToast(msg: " data saved in db "+res.toString());
       return res;
     } catch (Exception) {
       return null;
     }
   }
 
-  // Future<int> saveAlarm(AlarmsList al) async {
-  //   var now = new DateTime.now();
-  //   try{
-  //     var dbClient = await db;
-  //     var res = await dbClient.rawInsert("INSERT INTO $TABLE_ALARM($ALARM,$DATE_TIME) VALUES(?,?)",[al.alarmCode,DateFormat("yyyy-MM-dd HH:mm:ss").format(now),]);
-  //     return res;
-  //   }catch(Exception){
-  //     return null;
-  //   }
-  // }
-
-  //  Future<List<AlarmsList>> getAllAlarms() async {
-  //    var dbClient = await db;
-  //   List<Map> dataData= await dbClient.rawQuery('SELECT $ID,$ALARM, FROM $TABLE_ALARM group by $ALARM ORDER BY $ID DESC LIMIT 200');
-  //   List<AlarmsList> plist =[];
-  //   if(dataData.length>0){
-  //     for(int i=0; i<dataData.length;i++){
-  //       plist.add(AlarmsList.fromMap(dataData[i]));
-  //     }
-  //   }
-  //   return plist;
-  // }
-
-  // Future<String> getLastRecordTime() async {
-  //    var dbClient = await db;
-  //   var dataData= await dbClient.rawQuery('SELECT $DATE_TIME FROM $TABLE ORDER BY $ID DESC LIMIT 1');
-  //   return dataData.toString();
-  // }
-
   Future<List<PatientsList>> getAllPatients() async {
     var dbClient = await db;
-    List<Map> dataData = await dbClient.rawQuery(
-        'SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
+     // List<Map> dataData = await dbClient.rawQuery('SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
+          List<Map> dataData = await dbClient.rawQuery('SELECT $PATIENTID,$PATIENTNAME from $TABLE GROUP BY $GLOBAL_COUNTER_NO ORDER BY $ID DESC');
     List<PatientsList> plist = [];
     if (dataData.length > 0) {
       for (int i = 0; i < dataData.length; i++) {
@@ -160,6 +131,20 @@ class DatabaseHelper {
     }
     return plist;
   }
+
+
+  // Future<List<PatientsList>> getAllPatients() async {
+  //   var dbClient = await db;
+  //   List<Map> dataData = await dbClient.rawQuery(
+  //       'SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
+  //   List<PatientsList> plist = [];
+  //   if (dataData.length > 0) {
+  //     for (int i = 0; i < dataData.length; i++) {
+  //       plist.add(PatientsList.fromMap(dataData[i]));
+  //     }
+  //   }
+  //   return plist;
+  // }
 
   Future<List<VentilatorOMode>> getPatientsDates(String patientIdD) async {
     var dbClient = await db;

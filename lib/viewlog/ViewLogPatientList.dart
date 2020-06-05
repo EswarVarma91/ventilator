@@ -85,10 +85,7 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ViewLogChooseDateandTime(snapshot.data[index].pId,
-                                  snapshot.data[index].pName,
-                                  snapshot.data[index].minTime,
-                                  snapshot.data[index].maxTime)));
+                                  builder: (context) => ViewLogChooseDateandTime(snapshot.data[index].pId, snapshot.data[index].pName,)));
                         },
                         leading: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -114,46 +111,41 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
                                     Row(
                                       children: [
                                         Text(
-                                          snapshot.data[index].pName != null
-                                              ? snapshot.data[index].pName
-                                                  .toString()
-                                              : "",
+                                          snapshot.data[index].pName != null || snapshot.data[index].pName != ""  ? snapshot.data[index].pName.toString()
+                                              : "NA",
                                           style: TextStyle(fontSize: 22),
                                         ),
                                         SizedBox(
                                           width: 30,
                                         ),
                                         Text(
-                                          snapshot.data[index].pId != null
-                                              ? snapshot.data[index].pId
-                                                  .toString()
-                                                  .toUpperCase()
-                                              : "",
+                                          snapshot.data[index].pId != null ? snapshot.data[index].pId.toString().toUpperCase()
+                                              : "NA",
                                           style: TextStyle(
                                               fontSize: 22,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          snapshot.data[index].minTime != null
-                                              ? snapshot.data[index].minTime
-                                                  .toString()
-                                              : "",
-                                          style: TextStyle(fontSize: 10),
-                                        ),
-                                        Text("  -  "),
-                                        Text(
-                                          snapshot.data[index].maxTime != null
-                                              ? snapshot.data[index].maxTime
-                                                  .toString()
-                                              : "",
-                                          style: TextStyle(fontSize: 10),
-                                        ),
-                                      ],
-                                    )
+                                    // Row(
+                                    //   children: [
+                                    //     Text(
+                                    //       snapshot.data[index].minTime != null
+                                    //           ? snapshot.data[index].minTime
+                                    //               .toString()
+                                    //           : "",
+                                    //       style: TextStyle(fontSize: 10),
+                                    //     ),
+                                    //     Text("  -  "),
+                                    //     Text(
+                                    //       snapshot.data[index].maxTime != null
+                                    //           ? snapshot.data[index].maxTime
+                                    //               .toString()
+                                    //           : "",
+                                    //       style: TextStyle(fontSize: 10),
+                                    //     ),
+                                    //   ],
+                                    // )
                                   ],
                                 ),
                               ),

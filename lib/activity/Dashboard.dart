@@ -536,7 +536,9 @@ class _CheckPageState extends State<Dashboard> {
 
             int vteValueCheck = ((list[4] << 8) + list[5]); //5 6
 
-            if (vteValueCheck != 0 && vteValueCheck.round()>0 && vteValueCheck.round()<2500) {
+            if (vteValueCheck != 0 
+            // && vteValueCheck.round()>0 && vteValueCheck.round()<2500
+            ) {
               setState(() {
                 vteMinValue = vteValue - vtValue;
                 vteValue = vteValueCheck;
@@ -544,7 +546,7 @@ class _CheckPageState extends State<Dashboard> {
             }
             int mvValueCheck = (((list[8] << 8) + list[9])).toInt();
 
-            if (mvValueCheck != "0" && (mvValueCheck/1000).round()>0 && (mvValueCheck/1000).round()<100) {
+            if (mvValueCheck != "0") {
               setState(() {
                 mvValue = mvValueCheck;
               });
@@ -557,21 +559,25 @@ class _CheckPageState extends State<Dashboard> {
 
             int rrtotalCheck = ((list[10] << 8) + list[11]).toInt(); //11,12
 
-            if (rrtotalCheck != "0" && rrtotalCheck.round()>0 && rrtotalCheck.round()<100) {
+            if (rrtotalCheck != "0" 
+            // && rrtotalCheck.round()>0 && rrtotalCheck.round()<100
+            ) {
               setState(() {
                 rrDisplayValue = rrtotalCheck;
               });
             }
-            int psValueCheck = (((list[14] << 8) + list[15]) / 100).round().toInt();
+            int pipValueCheck = (((list[14] << 8) + list[15]) / 100).round().toInt();
 
-            if((((list[16] << 8) + list[17]) / 100).round().toInt()>0 && (((list[16] << 8) + list[17]) / 100).round().toInt()<150){
+            // if((((list[16] << 8) + list[17]) / 100).round().toInt()>0 && (((list[16] << 8) + list[17]) / 100).round().toInt()<150){
               peepDisplayValue = (((list[16] << 8) + list[17]) / 100).round().toInt();
-            }
+            // }
             
 
-            if (psValueCheck != 0 && psValueCheck.round()>0 && psValueCheck.round()<150) {
+            if (pipValueCheck != 0 
+            // && pipValueCheck.round()>0 && pipValueCheck.round()<150
+            ) {
               setState(() {
-                psValue1 = psValueCheck;
+                psValue1 = pipValueCheck;
               });
             }
             paw = (((list[34] << 8) + list[35]) / 100).toInt();
@@ -585,9 +591,9 @@ class _CheckPageState extends State<Dashboard> {
             expiratoryPressureR =
                 (((list[36] << 8) + list[37]) / 100).toInt(); //37 38
 
-            if(((list[38] << 8) + list[39]).round()>20 && ((list[38] << 8) + list[39]).round()<100){
+            // if(((list[38] << 8) + list[39]).round()>20 && ((list[38] << 8) + list[39]).round()<100){
             fio2DisplayParameter = ((list[38] << 8) + list[39]); // 39,40
-            }
+            // }
 
             mixingTankPressureR = ((list[40] << 8) + list[41]);
             airipPressureR = ((list[44] << 8) + list[45]);
@@ -633,8 +639,6 @@ class _CheckPageState extends State<Dashboard> {
             _stopMusic();
           }
            cdisplayParameter = (vteValue/(pplateauDisplay-peepDisplayValue)).toInt();
-
-
 
           if (list[108] == 1) {
             setState(() {
@@ -738,9 +742,9 @@ class _CheckPageState extends State<Dashboard> {
               modeName = "PRVC";
             });
           }
-        if((((list[68] << 8) + list[69]) / 100).round().toInt()>0 && (((list[68] << 8) + list[69]) / 100).round().toInt()<150){
+        // if((((list[68] << 8) + list[69]) / 100).round().toInt()>0 && (((list[68] << 8) + list[69]) / 100).round().toInt()<150){
           mapDisplayValue = (((list[68] << 8) + list[69]) / 100).toInt();
-        }
+        // }
           if (list[84] == 1) {
             ioreDisplayParamter = "I";
           } else if (list[84] == 2) {
@@ -771,8 +775,8 @@ class _CheckPageState extends State<Dashboard> {
               });
             }
 
-            if(temp.round()>0 && temp.round()<150)
-            {
+            // if(temp.round()>0 && temp.round()<150)
+            // {
             if (pressurePoints.length >= 50) {
               setState(() {
                 pressurePoints.removeAt(0);
@@ -783,10 +787,10 @@ class _CheckPageState extends State<Dashboard> {
               // Fluttertoast.showToast(msg: pressurePoints.length.toString());
               // li.add(temp);
             }
-            }
-            if(((list[60] << 8) + list[61]).toInt()>0 && ((list[60] << 8) + list[61]).toInt()<150){
+            // }
+            // if(((list[60] << 8) + list[61]).toInt()>0 && ((list[60] << 8) + list[61]).toInt()<150){
              pplateauDisplay =  ((list[60] << 8) + list[61]).toDouble();
-              }
+              // }
 
             double temp1 =
                 ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
@@ -811,7 +815,7 @@ class _CheckPageState extends State<Dashboard> {
                 .toDouble();
             temp3 = temp3 * 0.06;
 
-              if(temp3.round()>-100 && temp3.round()<200){
+              // if(temp3.round()>-100 && temp3.round()<200){
                 if (flowPoints.length >= 50) {
                   setState(() {
                     flowPoints.removeAt(0);
@@ -820,7 +824,7 @@ class _CheckPageState extends State<Dashboard> {
                 } else {
                   flowPoints.add(temp3);
                 }
-              }
+              // }
             
             if (patientId != "") {
               // Fluttertoast.showToast(msg: patientId.toString());
@@ -878,19 +882,11 @@ class _CheckPageState extends State<Dashboard> {
                   paw.toString(),globalCounterNo.toString());
               saveData(data, patientId);
             }
-
-            
-          
-
-         
-
           list.clear();
-
           //==============
         });
         // }
       } else {
-
         setState(() {
           respiratoryEnable=false;
         });
@@ -2971,6 +2967,7 @@ class _CheckPageState extends State<Dashboard> {
                               setState(() {
                                 playOnEnabled = false;
                               });
+                              counterData();
                               writeDataPlay();
                             },
                             child: Padding(
@@ -2986,6 +2983,7 @@ class _CheckPageState extends State<Dashboard> {
                                     setState(() {
                                       playOnEnabled = false;
                                     });
+                                    counterData();
                                     writeDataPlay();
                                   }),
                             ),
@@ -4674,7 +4672,7 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-            InkWell(
+           modeName != "PSV" ?  InkWell(
               onTap: () {
                 //  CommonClick("PS") ;
               },
@@ -4694,16 +4692,14 @@ class _CheckPageState extends State<Dashboard> {
                             alignment: Alignment.topLeft,
                             child: Text(
                               operatinModeR == 6 ||
-                                      operatinModeR == 2 ||
-                                      operatinModeR == 3
+                                      operatinModeR == 2 
                                   ? "PC"
                                   : operatinModeR == 7 ||
                                           operatinModeR == 1 ||
                                           operatinModeR == 5
                                       ? "Vt"
                                       : modeName == "PC-CMV" ||
-                                              modeName == "PACV" ||
-                                              modeName == "PSV"
+                                              modeName == "PACV" 
                                           ? "PC"
                                           : modeName == "VC-CMV" ||
                                                   modeName == "VACV" ||
@@ -4777,7 +4773,67 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ),
-            ),
+            ):InkWell(
+              onTap: () {
+                //  CommonClick("PS") ;
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text( "PS",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text( psValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: psValue != null ? psValue / 60 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            )
+            ,
            operatinModeR == 4 || modeName == "PSIMV" ? 
            InkWell(
               onTap: () {
@@ -6781,7 +6837,7 @@ class _CheckPageState extends State<Dashboard> {
                               },
                             ),
                             SizedBox(
-                              width: 60,
+                              width: 40,
                             ),
                           Text(
                             psvparameterName,
@@ -6789,7 +6845,7 @@ class _CheckPageState extends State<Dashboard> {
                                 fontSize: 36, fontWeight: FontWeight.normal),
                           ),
                           SizedBox(
-                              width: 60,
+                              width: 40,
                             ),
                             IconButton(
                               icon: Icon(
@@ -18386,15 +18442,15 @@ prvcData() {
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "PSV");
-      preferences.setInt("rr", psimvRrValue);
+      preferences.setInt("rr", psvBackupRrValue);
       // preferences.setInt("ie", vsimvIeValue);
       preferences.setString("i", dataI1.toString());
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", psvPeepValue);
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", psvFio2Value);
-      preferences.setInt("ps", psimvPsValue);
-      preferences.setInt("pc", psimvPcValue);
+      preferences.setInt("ps", psvPsValue);
+      // preferences.setInt("pc", );
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));

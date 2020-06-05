@@ -545,6 +545,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
     } else if (nameId.text.isEmpty) {
     } else if (ageId.text.isEmpty) {
     } else if (maleEnabled == false && femaleEnabled == false) {
+    } else if (adultEnabled == false && pediatricEnabled == false) {
     } else if (int.tryParse(heightId.text)<=134 || int.tryParse(heightId.text)>=200) {
       Fluttertoast.showToast(msg: "Enter height between 134cm to 200cm");
     } else {
@@ -553,6 +554,8 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
       preferences.setString("pname", nameId.text.toString());
       preferences.setString(
           "pgender", maleEnabled ? "1" : femaleEnabled ? "2" : "0");
+      preferences.setString(
+          "pmode", adultEnabled ? "1" : pediatricEnabled ? "2" : "0");
       preferences.setString("page", ageId.text.toString());
       preferences.setString("pheight", heightId.text.toString());
        preferences.setString("pweight", weightId.text.toString());

@@ -77,6 +77,7 @@ class MainActivity: FlutterActivity() {
                     }
                     else{
                         mp?.start()
+                        mp?.setLooping(true)
                         mp!!.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
                             override fun onCompletion(mp: MediaPlayer) {
                                 mp?.release()
@@ -99,6 +100,7 @@ class MainActivity: FlutterActivity() {
                     }
                     else{
                         mp?.start()
+                        mp?.setLooping(true)
                         mp!!.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
                             override fun onCompletion(mp: MediaPlayer) {
                                 mp?.release()
@@ -121,6 +123,7 @@ class MainActivity: FlutterActivity() {
                     }
                     else{
                         mp?.start()
+                        mp?.setLooping(true)
                         mp!!.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
                             override fun onCompletion(mp: MediaPlayer) {
                                 mp?.release()

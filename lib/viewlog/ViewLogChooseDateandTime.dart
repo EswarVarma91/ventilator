@@ -4,7 +4,7 @@ import 'package:ventilator/viewlog/ViewLogDataDisplayPage.dart';
 
 class ViewLogChooseDateandTime extends StatefulWidget {
   String pId, pName, pmin, pmax;
-  ViewLogChooseDateandTime(this.pId, this.pName, this.pmin, this.pmax,
+  ViewLogChooseDateandTime(this.pId, this.pName,
       {Key key})
       : super(key: key);
 

@@ -105,7 +105,7 @@ class _TracePainter extends CustomPainter {
       ..strokeJoin = StrokeJoin.round
       ..strokeWidth = 3.0
       ..color = traceColor
-      ..style = PaintingStyle.stroke;
+      ..style = PaintingStyle.fill;
 
     final axisPaint = Paint()
       ..strokeWidth = 2
