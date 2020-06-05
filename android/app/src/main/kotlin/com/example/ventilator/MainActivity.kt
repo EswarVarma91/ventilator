@@ -1,5 +1,6 @@
 package com.example.ventilator
 
+import android.R.attr.process
 import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.app.admin.SystemUpdatePolicy
@@ -9,7 +10,9 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.media.AudioManager
 import android.media.MediaPlayer
-import android.os.*
+import android.os.BatteryManager
+import android.os.Build
+import android.os.UserManager
 import android.provider.Settings
 import android.view.View
 import androidx.annotation.NonNull
@@ -18,7 +21,9 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-import java.lang.reflect.InvocationTargetException
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
 
 
 class MainActivity: FlutterActivity() {
@@ -41,17 +46,17 @@ class MainActivity: FlutterActivity() {
 
         MethodChannel(flutterEngine.getDartExecutor(), CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "sendShutdowndevice") {
+                var commandString : String
+                var line: String
                 try {
-//                    val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+//                    commandString = String.format("%s", "adb shell " + "reboot -p");
 //                    try {
-//                        pm.getClass().getMethod("goToSleep", arrayOf<Class<*>?>(Long::class.javaPrimitiveType)).invoke(pm, SystemClock.uptimeMillis())
-//                    } catch (e: NoSuchMethodException) {
-//                        e.printStackTrace()
-//                    } catch (e: IllegalAccessException) {
-//                        e.printStackTrace()
-//                    } catch (e: InvocationTargetException) {
-//                        e.printStackTrace()
+//                        process = ProcessHelper.runTimeExec(commandString)
+//                    } catch (e: IOException) {
 //                    }
+
+
+
 //                    val proc = Runtime.getRuntime()
 //                            .exec(arrayOf("su", "-c", "reboot -p"))
 //                    proc.waitFor()

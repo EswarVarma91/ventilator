@@ -784,21 +784,26 @@ class _CheckPageState extends State<Dashboard> {
               // li.add(temp);
             }
             }
+            if(((list[60] << 8) + list[61]).toInt()>0 && ((list[60] << 8) + list[61]).toInt()<150){
+             pplateauDisplay =  ((list[60] << 8) + list[61]).toDouble();
+              }
 
             double temp1 =
                 ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
             
-              if(((list[60] << 8) + list[61]).toInt()>0 && ((list[60] << 8) + list[61]).toInt()<150){
-             pplateauDisplay =  ((list[60] << 8) + list[61]).toDouble();
-              }
-              if(temp1.round() > 0 && temp1.round() < 2500){
-              if (volumePoints.length >= 50) {
-              volumePoints.removeAt(0);
-              volumePoints.add(temp1);
-            } else {
-              volumePoints.add(temp1);
-            }
-              }
+              
+
+              // if(temp1.round() > 0 && temp1.round() < 2500)
+              // {
+                if (volumePoints.length >= 50) {
+                  setState(() {
+                    volumePoints.removeAt(0);
+                  volumePoints.add(temp1);
+                  });
+                } else {
+                  volumePoints.add(temp1);
+                }
+              // }
            
 
             double temp3 = ((((list[46] << 8) + list[47])) -
@@ -808,11 +813,13 @@ class _CheckPageState extends State<Dashboard> {
 
               if(temp3.round()>-100 && temp3.round()<200){
                 if (flowPoints.length >= 50) {
-              flowPoints.removeAt(0);
-              flowPoints.add(temp3);
-            } else {
-              flowPoints.add(temp3);
-            }
+                  setState(() {
+                    flowPoints.removeAt(0);
+                  flowPoints.add(temp3);
+                  });
+                } else {
+                  flowPoints.add(temp3);
+                }
               }
             
             if (patientId != "") {

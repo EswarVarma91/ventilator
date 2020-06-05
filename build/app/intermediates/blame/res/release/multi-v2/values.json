@@ -1,27 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values/values.xml",
             "map": [
-                {
-                    "source": "/Users/eswarvarmapanumetcha/Downloads/ventilator-1.4/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "134,777",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "426,937"
-                    },
-                    "to": {
-                        "startLines": "1353,1358",
-                        "startColumns": "4,4",
-                        "startOffsets": "87677,87974",
-                        "endLines": "1357,1360",
-                        "endColumns": "12,12",
-                        "endOffsets": "87969,88134"
-                    }
-                },
                 {
                     "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/933d661a419bf7a83fd1cf166912a299/appcompat-1.1.0-rc01/res/values/values.xml",
                     "from": {
@@ -58,6 +39,25 @@
                         "endLines": "49,50,149,150,151,152,153,154,155,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,228,229,233,234,235,236,237,238,239,240,241,242,243,249,278,1632,1636,1637,1641,1642,1785,1786,2508,2597,2629,2666,2673",
                         "endColumns": "68,62,69,67,71,69,60,73,72,60,60,61,63,61,60,67,99,59,65,72,68,56,51,61,71,75,64,58,58,59,59,59,59,59,59,59,59,59,59,58,59,59,59,59,59,59,59,59,59,59,58,59,59,58,58,58,58,58,58,34,34,54,62,54,57,56,49,60,56,33,34,34,69,70,116,12,109,12,128,71,66,24,24,24,24,24",
                         "endOffsets": "3296,3359,10147,10215,10287,10357,10418,10492,10565,11410,11471,11533,11597,11659,11720,11788,11888,11948,12014,12087,12156,12213,12265,12327,12852,12928,12993,13052,13111,13171,13231,13291,13351,13411,13471,13531,13591,13651,13711,13770,13830,13890,13950,14010,14070,14130,14190,14250,14310,14370,14429,14489,14549,14608,14667,14726,14785,14844,14903,15177,15212,15409,15472,15527,15585,15642,15692,15753,15810,15844,15879,15914,16259,18249,109578,109779,109889,110090,110219,121534,121601,160738,166187,168252,170012,170389"
+                    }
+                },
+                {
+                    "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "134,777",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "426,937"
+                    },
+                    "to": {
+                        "startLines": "1353,1358",
+                        "startColumns": "4,4",
+                        "startOffsets": "87677,87974",
+                        "endLines": "1357,1360",
+                        "endColumns": "12,12",
+                        "endOffsets": "87969,88134"
                     }
                 },
                 {
