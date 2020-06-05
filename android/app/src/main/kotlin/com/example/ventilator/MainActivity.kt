@@ -49,6 +49,8 @@ class MainActivity: FlutterActivity() {
                 var commandString : String
                 var line: String
                 try {
+
+                   val proc =  Runtime.getRuntime().exec("reboot -p")
 //                    commandString = String.format("%s", "adb shell " + "reboot -p");
 //                    try {
 //                        process = ProcessHelper.runTimeExec(commandString)
@@ -59,7 +61,7 @@ class MainActivity: FlutterActivity() {
 
 //                    val proc = Runtime.getRuntime()
 //                            .exec(arrayOf("su", "-c", "reboot -p"))
-//                    proc.waitFor()
+                    proc.waitFor()
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
