@@ -443,6 +443,7 @@ class _CheckPageState extends State<Dashboard> {
   bool newTreatmentEnabled = false, powerButtonEnabled = false;
   bool isplaying = false, _buttonPressed = false,respiratoryEnable=false,insExpButtonEnable=false;
   int  previousCode=101,presentCode,vteMinValue=0;
+  int cc=0;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -489,7 +490,8 @@ class _CheckPageState extends State<Dashboard> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
-      // Fluttertoast.showToast(msg: event.toString());
+      // cc = cc+1;
+      // Fluttertoast.showToast(msg: event.length.toString() + " "+cc.toString() + );
       var now = new DateTime.now();
       if (event != null) {
         setState(() {
@@ -504,7 +506,7 @@ class _CheckPageState extends State<Dashboard> {
         lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
 
         // var length = list.length;
-        // bool data = await checkCrc(list, length);
+         checkCrc(list, event.length);
         // if (data == false) {
         //   list.clear();
         // } else {
@@ -1231,6 +1233,7 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   checkCrc(List<int> obj, length) async {
+    cc = cc+1;
     int index = length - 2;
     int i = 0;
     int crcData = 0;
@@ -1252,6 +1255,7 @@ class _CheckPageState extends State<Dashboard> {
     }
 
     crcData = obj[length - 1] * 256 + obj[length - 2];
+    Fluttertoast.showToast(msg: length.toString()+" "+cc.toString() +"  geting crc" +crcData.toString() + " cal crc "+uiCrc.toString());
   
     if (crcData == uiCrc) {
       return true;
@@ -14238,7 +14242,7 @@ prvcData() {
                                       vccmvVtValue = vccmvVtValue + 1;
                                     });
                                   }  else if (vccmvPcMin == true &&
-                                      vccmvPcMinValue != pacvmaxValue) {
+                                      vccmvPcMinValue != vccmvmaxValue) {
                                     setState(() {
                                      
                                       if(vccmvPcMaxValue<90){
@@ -14248,7 +14252,7 @@ prvcData() {
                                       
                                     });
                                   } else if (vccmvPcMax == true &&
-                                      vccmvPcMaxValue != pacvmaxValue) {
+                                      vccmvPcMaxValue != vccmvmaxValue) {
                                     setState(() {
                                       vccmvPcMaxValue = vccmvPcMaxValue + 1;
                                     });

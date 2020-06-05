@@ -6,8 +6,7 @@ import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
 import 'package:ventilator/viewlog/AlarmLog.dart';
 import 'package:ventilator/viewlog/ViewLogDataDisplayPage.dart';
-
-import 'ViewLogChooseDateandTime.dart';
+import 'package:ventilator/viewlog/patientsDates.dart';
 
 class ViewLogPatientList extends StatefulWidget {
   ViewLogPatientList({Key key}) : super(key: key);
@@ -44,10 +43,10 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
         FlatButton(
           textColor: Colors.white,
           onPressed: () {
-            Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AlarmLog()),
-          );
+          //   Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => AlarmLog()),
+          // );
       
           },
           child: Icon(Icons.alarm),
@@ -85,7 +84,7 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ViewLogChooseDateandTime(snapshot.data[index].pId, snapshot.data[index].pName,)));
+                                  builder: (context) => patientsDates(snapshot.data[index].pId)));
                         },
                         leading: Padding(
                           padding: const EdgeInsets.all(10.0),

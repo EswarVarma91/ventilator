@@ -133,28 +133,28 @@ class DatabaseHelper {
   }
 
 
-  // Future<List<PatientsList>> getAllPatients() async {
-  //   var dbClient = await db;
-  //   List<Map> dataData = await dbClient.rawQuery(
-  //       'SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
-  //   List<PatientsList> plist = [];
-  //   if (dataData.length > 0) {
-  //     for (int i = 0; i < dataData.length; i++) {
-  //       plist.add(PatientsList.fromMap(dataData[i]));
-  //     }
-  //   }
-  //   return plist;
-  // }
-
-  Future<List<VentilatorOMode>> getPatientsDates(String patientIdD) async {
+  Future<List<PatientsList>> patientDatesById(String patientIdD) async {
     var dbClient = await db;
-    //  SELECT * FROM graphPoints WHERE patientId="p002" and datetimeP BETWEEN "24-01-2010 09:02:23"  AND "24-01-2010 09:02:54"
-    List<Map> dataData = await dbClient.rawQuery(
-        'SELECT $DATE_TIME FROM (SELECT $DATE_TIME FROM $TABLE GROUP BY $GLOBAL_COUNTER_NO WHERE $PATIENTID=\'$patientIdD\') gcn WHERE GROUP BY $DATE_TIME');
-    List<VentilatorOMode> plist = [];
+    List<Map> dataData = await dbClient.rawQuery( 'SELECT DISTINCT date($DATE_TIME) dates from $TABLE  where $PATIENTID = \'$patientIdD\'');
+    List<PatientsList> plist = [];
     if (dataData.length > 0) {
       for (int i = 0; i < dataData.length; i++) {
-        plist.add(VentilatorOMode.fromMap(dataData[i]));
+        plist.add(PatientsList.fromMap(dataData[i]));
+      }
+    }
+    return plist;
+  }
+
+  
+  Future<List<PatientsList>> patientDataByDateId(String patientIdD,String dateTimeW) async {
+    var dbClient = await db;
+    // List<Map> dataData = await dbClient.rawQuery(
+    //     'SELECT $DATE_TIME FROM (SELECT $DATE_TIME FROM $TABLE GROUP BY $GLOBAL_COUNTER_NO WHERE $PATIENTID=\'$patientIdD\') gcn WHERE GROUP BY $DATE_TIME');
+    List<Map> dataData = await dbClient.rawQuery('SELECT $PATIENTID, min($DATE_TIME) minTime, max($DATE_TIME) maxTime FROM $TABLE where $PATIENTID= \'$patientIdD\'  AND DATE($DATE_TIME) = DATE(\'$dateTimeW\')');
+    List<PatientsList> plist = [];
+    if (dataData.length > 0) {
+      for (int i = 0; i < dataData.length; i++) {
+        plist.add(PatientsList.fromMap(dataData[i]));
       }
     }
     return plist;

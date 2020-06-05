@@ -165,14 +165,16 @@ class PatientsList {
   String pName;
   String minTime;
   String maxTime;
+  String datetimeP;
 
-  PatientsList(this.pId,this.pName,this.minTime,this.maxTime);
+  PatientsList(this.pId,this.pName,this.minTime,this.maxTime,this.datetimeP);
 
    PatientsList.fromMap(Map<String, dynamic> map) {
     pId = map['patientId'];
     pName = map['patientName'];
     minTime = map['minTime'];
     maxTime = map['maxTime'];
+    datetimeP = map['dates'];
   }
 }
 
