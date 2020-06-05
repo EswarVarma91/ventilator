@@ -17961,7 +17961,7 @@ prvcData() {
       preferences.setString("i", dataI1.toString());
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", pccmvPeepValue);
-      preferences.setInt("FiO\u2082", pccmvFio2Value);
+      preferences.setInt("fio2", pccmvFio2Value);
       preferences.setInt("ps", pccmvPcValue);
 
       //to calculate crc
@@ -18031,7 +18031,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vccmvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("FiO\u2082", vccmvFio2Value);
+      preferences.setInt("fio2", vccmvFio2Value);
       preferences.setInt("vt", vccmvVtValue);
 
       //to calculate crc
@@ -18104,7 +18104,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", pacvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("FiO\u2082", pacvFio2Value);
+      preferences.setInt("fio2", pacvFio2Value);
       preferences.setInt("ps", pacvPcValue);
       ;
 
@@ -18173,7 +18173,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vacvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("FiO\u2082", vacvFio2Value);
+      preferences.setInt("fio2", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
 
       if (_status == "Connected") {
@@ -18241,7 +18241,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", psimvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("FiO\u2082", psimvFio2Value);
+      preferences.setInt("fio2", psimvFio2Value);
       preferences.setInt("ps", psimvPsValue);
       preferences.setInt("pc", psimvPcValue);
 
@@ -18312,7 +18312,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vsimvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("FiO\u2082", vsimvFio2Value);
+      preferences.setInt("fio2", vsimvFio2Value);
       preferences.setInt("vt", vsimvVtValue);
       preferences.setInt("ps", vsimvPcMaxValue);
 
@@ -18392,7 +18392,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", psvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("FiO\u2082", psvFio2Value);
+      preferences.setInt("fio2", psvFio2Value);
       preferences.setInt("ps", psimvPsValue);
       preferences.setInt("pc", psimvPcValue);
 
@@ -18461,7 +18461,7 @@ prvcData() {
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vacvPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("FiO\u2082", vacvFio2Value);
+      preferences.setInt("fio2", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
 
       if (_status == "Connected") {
