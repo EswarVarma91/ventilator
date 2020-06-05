@@ -4688,7 +4688,6 @@ class _CheckPageState extends State<Dashboard> {
                             child: Text(
                               operatinModeR == 6 ||
                                       operatinModeR == 2 ||
-                                      operatinModeR == 4 ||
                                       operatinModeR == 3
                                   ? "PC"
                                   : operatinModeR == 7 ||
@@ -4697,7 +4696,6 @@ class _CheckPageState extends State<Dashboard> {
                                       ? "Vt"
                                       : modeName == "PC-CMV" ||
                                               modeName == "PACV" ||
-                                              modeName == "PSIMV" ||
                                               modeName == "PSV"
                                           ? "PC"
                                           : modeName == "VC-CMV" ||
@@ -4736,7 +4734,6 @@ class _CheckPageState extends State<Dashboard> {
                               child: Text(
                                 operatinModeR == 6 ||
                                         operatinModeR == 2 ||
-                                        operatinModeR == 4 ||
                                         operatinModeR == 3
                                     ? psValue.toString()
                                     : operatinModeR == 7 ||
@@ -4745,7 +4742,6 @@ class _CheckPageState extends State<Dashboard> {
                                         ? vtValue.toString()
                                         : modeName == "PC-CMV" ||
                                                 modeName == "PACV" ||
-                                                modeName == "PSIMV" ||
                                                 modeName == "PSV"
                                             ? pcValue.toString()
                                             : modeName == "VC-CMV" ||
