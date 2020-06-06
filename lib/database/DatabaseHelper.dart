@@ -12,6 +12,7 @@ class DatabaseHelper {
   static const String PATIENTID = 'patientId';
   static const String PATIENTNAME = 'patientName';
   static const String ALARM = 'alarmCodes';
+  static const String ALARM_PRIORITY = 'alarmPriority';
   static const String PIPD = 'pipD';
   static const String VTD = 'vtD';
   static const String PEEPD = 'peepD';
@@ -36,6 +37,7 @@ class DatabaseHelper {
   static const String LUNG_IMAGE = 'lungImage';
   static const String PAW = 'paw';
   static const String GLOBAL_COUNTER_NO = 'globalCounterNo';
+  
 
   static const String COUNTER_NO = 'counterNo';
   // static const String DATE_TIME = 'datetime';
@@ -67,7 +69,7 @@ class DatabaseHelper {
 
   _onCreate(Database db, int version) async {
     await db.execute(
-        'CREATE TABLE $TABLE($ID INTEGER PRIMARY KEY AUTOINCREMENT, $PATIENTID TEXT, $PATIENTNAME TEXT,$PIPD TEXT, $VTD TEXT,$PEEPD TEXT, $RRD TEXT,$FIO2D TEXT,$MAPD TEXT,$MVD TEXT,$COMPLAINCED TEXT, $IED TEXT,$RRS TEXT,$IES TEXT,$PEEPS TEXT,$PSS TEXT,$FIO2S TEXT,$TIS TEXT,$TES TEXT,$PRESSURE_POINTS REAL, $FLOW_POINTS REAL, $VOLUME_POINTS REAL, $DATE_TIME TEXT,$OPERATING_MODE TEXT,$LUNG_IMAGE TEXT,$PAW TEXT,$GLOBAL_COUNTER_NO TEXT)');
+        'CREATE TABLE $TABLE($ID INTEGER PRIMARY KEY AUTOINCREMENT, $PATIENTID TEXT, $PATIENTNAME TEXT,$PIPD TEXT, $VTD TEXT,$PEEPD TEXT, $RRD TEXT,$FIO2D TEXT,$MAPD TEXT,$MVD TEXT,$COMPLAINCED TEXT, $IED TEXT,$RRS TEXT,$IES TEXT,$PEEPS TEXT,$PSS TEXT,$FIO2S TEXT,$TIS TEXT,$TES TEXT,$PRESSURE_POINTS REAL, $FLOW_POINTS REAL, $VOLUME_POINTS REAL, $DATE_TIME TEXT,$OPERATING_MODE TEXT,$LUNG_IMAGE TEXT,$PAW TEXT,$GLOBAL_COUNTER_NO TEXT,$ALARM,$ALARM_PRIORITY)');
     // await db.execute('CREATE TABLE $TABLE_ALARM($ID INTERGER PRIMARY KEY AUTOINCREMENT,$ALARM TEXT,$DATE_TIME TEXT)');
     await db.execute(
         'CREATE TABLE $TABLE_NAME($ID INTERGER PRIMARY KEY,$COUNTER_NO TEXT,$DATE_TIME TEXT)');
@@ -82,7 +84,7 @@ class DatabaseHelper {
     try {
       var dbClient = await db;
       var res = await dbClient.rawInsert(
-          "INSERT into $TABLE ($PATIENTID,$PATIENTNAME,$PIPD,$VTD, $PEEPD, $RRD, $FIO2D, $MAPD, $MVD, $COMPLAINCED,$IED, $RRS, $IES, $PEEPS, $PSS, $FIO2S,$TIS, $TES,$PRESSURE_POINTS,$FLOW_POINTS, $VOLUME_POINTS,$DATE_TIME,$OPERATING_MODE,$LUNG_IMAGE,$PAW,$GLOBAL_COUNTER_NO) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+          "INSERT into $TABLE ($PATIENTID,$PATIENTNAME,$PIPD,$VTD, $PEEPD, $RRD, $FIO2D, $MAPD, $MVD, $COMPLAINCED,$IED, $RRS, $IES, $PEEPS, $PSS, $FIO2S,$TIS, $TES,$PRESSURE_POINTS,$FLOW_POINTS, $VOLUME_POINTS,$DATE_TIME,$OPERATING_MODE,$LUNG_IMAGE,$PAW,$GLOBAL_COUNTER_NO,$ALARM,$ALARM_PRIORITY) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
           [
             vom.patientId,
             vom.patientName,
@@ -109,7 +111,9 @@ class DatabaseHelper {
             vom.operatingMode,
             vom.lungImage,
             vom.paw,
-            vom.globalCounterNo
+            vom.globalCounterNo,
+            vom.alarmC,
+            vom.alarmP
           ]);
       // print("result data : " + res.toString());
       // Fluttertoast.showToast(msg: " data saved in db "+res.toString());
@@ -163,28 +167,38 @@ class DatabaseHelper {
     var dbClient = await db;
     var checkValue=0;
     
-    var a;
-    List<Map> dataData = await dbClient.rawQuery('SELECT $DATE_TIME dates from $TABLE where $DATE_TIME BETWEEN \'$minTime\' and \'$maxTime\' order by $ID DESC');
+    int noofBoxes=0;
+    List<Map> dataData = await dbClient.rawQuery('SELECT $DATE_TIME dates from $TABLE where $DATE_TIME BETWEEN \'$minTime\' and \'$maxTime\'');
   
     List<PatientsList> plist = [];
     List<PatientsList> slist = [];
     List<PatientsList> list = [];
-    
-    if(dataData.length>0){
+
+    var data = (dataData.length * (0.00025)).toInt();
+
+    if(int.tryParse((dataData.length * (0.00025)).toDouble().toString().split(".")[1])>0){
+      noofBoxes = data+1;
+    }else{
+      noofBoxes = data;
+    }
+    int recordScanner=0;
       plist.clear();
       slist.clear();
       list.clear();
-      a = ((dataData.length*150)/1000).round();
-      var dataLength= (dataData.length/a).floor();
-      for (int i =0 ; i<dataLength;i++){
-        slist.clear();
-        for(int j=0 ; j<a;j++){
-          slist.add(PatientsList.fromMap(dataData[checkValue+j]));
+
+    for(int i=0; i<noofBoxes;i++){
+      for(int j=0;j<4000;j++){
+        if(recordScanner==dataData.length){
+          break;
         }
-        checkValue = checkValue + slist.length;
-       list.add(PatientsList("0","0",slist[0].datetimeP.toString(), slist[slist.length-1].datetimeP.toString(),"0"));
+        recordScanner++;
+        slist.add(PatientsList.fromMap(dataData[checkValue+j]));
       }
+      checkValue = checkValue + slist.length;
+      list.add(PatientsList("0","0",slist[0].datetimeP.toString(), slist[slist.length-1].datetimeP.toString(),"0"));
       plist.addAll(list);
+      list.clear();
+      slist.clear();
     }
     return plist;
   }

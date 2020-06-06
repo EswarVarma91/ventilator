@@ -105,7 +105,7 @@ class _SelfTestPageState extends State<SelfTestPage> {
             exhalationvalve = 2;
             ventvalue = 2;
             mainpower = 2;
-            battery = 1;
+            battery = 2;
 
             communication = 2;
             compressor = 2;

@@ -56,13 +56,26 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       psValue = "0",
       vtValue = "0";
 
+      int minRrtotal = 1,
+      maxRrtotal = 70,
+      minvte = 0,
+      maxvte = 2400,
+      minmve = 0,
+      maxmve = 100,
+      minppeak = 0,
+      maxppeak = 100,
+      minpeep = 0,
+      maxpeep = 40,
+      minfio2 = 21,
+      maxfio2 = 100;
+
   @override
   void initState() {
     super.initState();
     vomL=[];
     Screen.keepOn(true);
     dbHelper = DatabaseHelper();
-    getPatientData(widget.patientID, widget.fromDateC, widget.toDateC);
+    getPatientData(widget.fromDateC, widget.toDateC);
   }
 
   runData(data) async {
@@ -76,9 +89,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
     await Future.delayed(Duration(milliseconds: numberOfMilliseconds));
   }
 
-  getPatientData(var pId, var fromDate, var toDate) async {
+  getPatientData(var fromDate, var toDate) async {
     
-    vomL = await dbHelper.getPatientsData(toDate.toString(), fromDate.toString());
+    vomL = await dbHelper.getPatientsData(fromDate.toString(), toDate.toString());
     print(vomL);
     pressurePoints = [];
     volumePoints=[];
@@ -194,36 +207,34 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     scopeOne = Oscilloscope(
-      showYAxis: true,
-      yAxisColor: Colors.grey,
-      padding: 10.0,
-      backgroundColor: Color(0xFF171e27),
-      traceColor: Colors.green,
-      yAxisMax: 60,
-      yAxisMin: 0.0,
-      dataSet: pressurePoints,
-    );
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Color(0xFF171e27),
+        traceColor: Colors.yellow,
+        yAxisMax: 100,
+        yAxisMin: 0.0,
+        dataSet: pressurePoints);
 
     scopeOne1 = Oscilloscope(
         showYAxis: true,
         yAxisColor: Colors.grey,
         padding: 10.0,
         backgroundColor: Color(0xFF171e27),
-        traceColor: Colors.yellow,
-        yAxisMax: 90.0,
+        traceColor: Colors.green,
+        yAxisMax: 150.0,
         yAxisMin: -90.0,
         dataSet: flowPoints);
 
     scopeOne2 = Oscilloscope(
-      showYAxis: true,
-      yAxisColor: Colors.grey,
-      padding: 10.0,
-      backgroundColor: Color(0xFF171e27),
-      traceColor: Colors.blue,
-      yAxisMax: 700.0,
-      yAxisMin: 0.0,
-      dataSet: volumePoints,
-    );
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Color(0xFF171e27),
+        traceColor: Colors.blue,
+        yAxisMax: 1000.0,
+        yAxisMin: 0.0,
+        dataSet: volumePoints);
 
     return Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -282,7 +293,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                   ],
                 ),
               )
-            : Center(child: Text("No Data Available.")));
+            : CircularProgressIndicator());
   }
 
   rightBar() {
@@ -379,7 +390,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   }
 
   main() {
-    return Stack(
+     return Stack(
       children: [
         topbar(),
         leftbar(),
@@ -442,11 +453,13 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                 alignment: Alignment.bottomLeft,
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.all(2.0),
+                                                      const EdgeInsets.only(
+                                                          bottom: 5.0,
+                                                          left: 4.0),
                                                   child: Text(
-                                                    "",
+                                                    "cmH\u2082O",
                                                     style: TextStyle(
-                                                        color: Colors.green,
+                                                        color: Colors.white,
                                                         fontSize: 10),
                                                   ),
                                                 ),
@@ -462,7 +475,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                     // "000",
                                                     style: TextStyle(
                                                         color: Colors.green,
-                                                        fontSize: 40),
+                                                        fontSize: 35),
                                                   ),
                                                 ),
                                               ),
@@ -508,14 +521,17 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                               child: Stack(
                                             children: [
                                               Align(
-                                                alignment: Alignment.topRight,
+                                                alignment: Alignment.bottomLeft,
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: Text("ml",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10)),
+                                                      const EdgeInsets.only(
+                                                          bottom: 5.0, left: 4),
+                                                  child: Text(
+                                                    "L/m",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10),
+                                                  ),
                                                 ),
                                               ),
                                               Align(
@@ -538,11 +554,12 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                       const EdgeInsets.only(
                                                           right: 8.0),
                                                   child: Text(
-                                                    mvValue.toString(),
+                                                    (int.tryParse(mvValue) / 1000)
+                                                        .toStringAsFixed(3),
                                                     // "0000",
                                                     style: TextStyle(
                                                         color: Colors.yellow,
-                                                        fontSize: 40),
+                                                        fontSize: 35),
                                                   ),
                                                 ),
                                               ),
@@ -552,7 +569,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "MV",
+                                                    "MVe",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
@@ -576,6 +593,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                         ),
                                       ),
                                     ),
+                                    // Container(
+                                    //   height: 162,
+                                    // )
                                     Center(
                                       child: Container(
                                         color: Color(0xFF171e27),
@@ -592,7 +612,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(2.0),
-                                                  child: Text("ml/cmH2O",
+                                                  child: Text("",
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 10)),
@@ -604,9 +624,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                   padding:
                                                       const EdgeInsets.all(2.0),
                                                   child: Text(
-                                                    "",
+                                                    "cmH\u2082O",
                                                     style: TextStyle(
-                                                        color: Colors.green,
+                                                        color: Colors.white,
                                                         fontSize: 10),
                                                   ),
                                                 ),
@@ -618,12 +638,12 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                       const EdgeInsets.only(
                                                           right: 8.0),
                                                   child: Text(
-                                                    cdisplayParameter
-                                                        .toString(),
-                                                    // "0000",
+                                                    // pplateauDisplay
+                                                    //     .toStringAsFixed(0),
+                                                    "0",
                                                     style: TextStyle(
                                                         color: Colors.pink,
-                                                        fontSize: 40),
+                                                        fontSize: 35),
                                                   ),
                                                 ),
                                               ),
@@ -633,7 +653,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "C",
+                                                    "P Plateau",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
@@ -657,85 +677,186 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                         ),
                                       ),
                                     ),
-                                    Center(
-                                      child: Container(
-                                        color: Color(0xFF171e27),
-                                        width: 170,
-                                        height: 81,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: Center(
-                                              child: Stack(
-                                            children: [
-                                              Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: Text("",
-                                                      style: TextStyle(
-                                                          color: Colors.green,
-                                                          fontSize: 10)),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: Alignment.bottomLeft,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: Text(
-                                                    "",
-                                                    style: TextStyle(
-                                                        color: Colors.green,
-                                                        fontSize: 10),
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: Alignment.center,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 8.0),
-                                                  child: Text(
-                                                    ieDisplayValue.toString(),
-                                                    // "0000",
-                                                    style: TextStyle(
-                                                        color: Colors.blue,
-                                                        fontSize: 40),
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Container(
-                                                  margin: EdgeInsets.only(
-                                                      bottom: 50, left: 4),
-                                                  child: Text(
-                                                    "I:E",
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12),
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                  alignment:
-                                                      Alignment.bottomCenter,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 18.0),
-                                                    child: Divider(
-                                                      color: Colors.white,
-                                                      height: 1,
-                                                    ),
-                                                  ))
-                                            ],
-                                          )),
-                                        ),
-                                      ),
-                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        // Center(
+                                        //   child: Container(
+                                        //     color: Color(0xFF171e27),
+                                        //     width: 85,
+                                        //     height: 81,
+                                        //     child: Padding(
+                                        //       padding:
+                                        //           const EdgeInsets.all(5.0),
+                                        //       child: Center(
+                                        //           child: Stack(
+                                        //         children: [
+                                        //           Align(
+                                        //             alignment:
+                                        //                 Alignment.topLeft,
+                                        //             child: Padding(
+                                        //               padding:
+                                        //                   const EdgeInsets.all(
+                                        //                       2.0),
+                                        //               child: Text("",
+                                        //                   style: TextStyle(
+                                        //                       color:
+                                        //                           Colors.green,
+                                        //                       fontSize: 10)),
+                                        //             ),
+                                        //           ),
+                                        //           Align(
+                                        //             alignment:
+                                        //                 Alignment.bottomLeft,
+                                        //             child: Padding(
+                                        //               padding:
+                                        //                   const EdgeInsets.all(
+                                        //                       2.0),
+                                        //               child: Text(
+                                        //                 "ms",
+                                        //                 style: TextStyle(
+                                        //                     color: Colors.white,
+                                        //                     fontSize: 10),
+                                        //               ),
+                                        //             ),
+                                        //           ),
+                                        //           Align(
+                                        //             alignment: Alignment.center,
+                                        //             child: Padding(
+                                        //               padding:
+                                        //                   const EdgeInsets.only(
+                                        //                       right: 8.0),
+                                        //               child: Text(
+                                        //                 double.tryParse(tiValue)
+                                        //                     .toStringAsFixed(0),
+                                        //                 // "0000",
+                                        //                 style: TextStyle(
+                                        //                     color: Colors.blue,
+                                        //                     fontSize: 18),
+                                        //               ),
+                                        //             ),
+                                        //           ),
+                                        //           Align(
+                                        //             alignment:
+                                        //                 Alignment.topLeft,
+                                        //             child: Container(
+                                        //               margin: EdgeInsets.only(
+                                        //                   bottom: 50, left: 4),
+                                        //               child: Text(
+                                        //                 "Ti",
+                                        //                 style: TextStyle(
+                                        //                     color: Colors.white,
+                                        //                     fontSize: 12),
+                                        //               ),
+                                        //             ),
+                                        //           ),
+                                        //           Align(
+                                        //               alignment: Alignment
+                                        //                   .bottomCenter,
+                                        //               child: Padding(
+                                        //                 padding:
+                                        //                     const EdgeInsets
+                                        //                             .only(
+                                        //                         top: 18.0),
+                                        //                 child: Divider(
+                                        //                   color: Colors.white,
+                                        //                   height: 1,
+                                        //                 ),
+                                        //               ))
+                                        //         ],
+                                        //       )),
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                        // Center(
+                                        //   child: Container(
+                                        //     color: Color(0xFF171e27),
+                                        //     width: 85,
+                                        //     height: 81,
+                                        //     child: Padding(
+                                        //       padding:
+                                        //           const EdgeInsets.all(5.0),
+                                        //       child: Center(
+                                        //           child: Stack(
+                                        //         children: [
+                                        //           Align(
+                                        //             alignment:
+                                        //                 Alignment.topLeft,
+                                        //             child: Padding(
+                                        //               padding:
+                                        //                   const EdgeInsets.all(
+                                        //                       2.0),
+                                        //               child: Text("",
+                                        //                   style: TextStyle(
+                                        //                       color:
+                                        //                           Colors.green,
+                                        //                       fontSize: 10)),
+                                        //             ),
+                                        //           ),
+                                        //           Align(
+                                        //             alignment:
+                                        //                 Alignment.bottomLeft,
+                                        //             child: Padding(
+                                        //               padding:
+                                        //                   const EdgeInsets.all(
+                                        //                       2.0),
+                                        //               child: Text(
+                                        //                 "ms",
+                                        //                 style: TextStyle(
+                                        //                     color: Colors.white,
+                                        //                     fontSize: 10),
+                                        //               ),
+                                        //             ),
+                                        //           ),
+                                        //           Align(
+                                        //             alignment: Alignment.center,
+                                        //             child: Padding(
+                                        //               padding:
+                                        //                   const EdgeInsets.only(
+                                        //                       right: 8.0),
+                                        //               child: Text(
+                                        //                 teValue
+                                        //                     .toStringAsFixed(0),
+                                        //                 // "0000",
+                                        //                 style: TextStyle(
+                                        //                     color: Colors.blue,
+                                        //                     fontSize: 18),
+                                        //               ),
+                                        //             ),
+                                        //           ),
+                                        //           Align(
+                                        //             alignment:
+                                        //                 Alignment.topLeft,
+                                        //             child: Container(
+                                        //               margin: EdgeInsets.only(
+                                        //                   bottom: 50, left: 4),
+                                        //               child: Text(
+                                        //                 "Te",
+                                        //                 style: TextStyle(
+                                        //                     color: Colors.white,
+                                        //                     fontSize: 12),
+                                        //               ),
+                                        //             ),
+                                        //           ),
+                                        //           Align(
+                                        //               alignment: Alignment
+                                        //                   .bottomCenter,
+                                        //               child: Padding(
+                                        //                 padding:
+                                        //                     const EdgeInsets
+                                        //                             .only(
+                                        //                         top: 18.0),
+                                        //                 child: Divider(
+                                        //                   color: Colors.white,
+                                        //                   height: 1,
+                                        //                 ),
+                                        //               ))
+                                        //         ],
+                                        //       )),
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                      ],
+                                    )
                                   ],
                                 ),
                                 SizedBox(
@@ -743,33 +864,52 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                 ),
                                 Stack(
                                   children: [
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                              lungImage == "1"
-                                                  ? "assets/lungs/1.png"
-                                                  : lungImage == "2"
-                                                      ? "assets/lungs/2.png"
-                                                      : lungImage == "3"
-                                                          ? "assets/lungs/3.png"
-                                                          : lungImage == "4"
-                                                              ? "assets/lungs/4.png"
-                                                              : lungImage == "5"
-                                                                  ? "assets/lungs/5.png"
-                                                                  : "assets/lungs/1.png",
-                                              width: 120),
-                                          Text(ioreDisplayParamter,
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                        ],
-                                      ),
-                                    ),
+                                   Align(
+                                            alignment: Alignment.center,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Image.asset(
+                                                    lungImage == 1
+                                                        ? "assets/lungs/1.png"
+                                                        : lungImage == 2
+                                                            ? "assets/lungs/2.png"
+                                                            : lungImage == 3
+                                                                ? "assets/lungs/3.png"
+                                                                : lungImage == 4
+                                                                    ? "assets/lungs/4.png"
+                                                                    : lungImage ==
+                                                                            5
+                                                                        ? "assets/lungs/5.png"
+                                                                        : "assets/lungs/1.png",
+                                                    width: 120),
+                                                Container(
+                                                  height: 25,
+                                                  width: 25,
+                                                  decoration: new BoxDecoration(
+                                                    borderRadius:
+                                                        new BorderRadius
+                                                            .circular(25.0),
+                                                    border: new Border.all(
+                                                      width: 2.0,
+                                                      color: Colors.green,
+                                                    ),
+                                                  ),
+                                                  child: Center(
+                                                      child: Text(
+                                                          ioreDisplayParamter,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 10))),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        
                                   ],
                                 )
                               ],
@@ -807,7 +947,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -840,7 +980,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                             child: Text(
                               psValue1.toString(),
                               style:
-                                  TextStyle(color: Colors.green, fontSize: 40),
+                                  TextStyle(color: Colors.green, fontSize: 38),
                             ),
                           ),
                         ),
@@ -857,13 +997,57 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                           ),
                         ),
                         Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "cmH\u2082O",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        Padding(
                           padding: const EdgeInsets.only(top: 0),
                           child: Align(
                             alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH2O",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  "MAX",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                                Text(
+                                  maxppeak.toString(),
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  minppeak.toString(),
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 12),
+                                ),
+                                Text(
+                                  "MIN",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -885,7 +1069,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -919,7 +1103,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                               vteValue.toString(),
                               // "0000",
                               style:
-                                  TextStyle(color: Colors.yellow, fontSize: 40),
+                                  TextStyle(color: Colors.yellow, fontSize: 35),
                             ),
                           ),
                         ),
@@ -929,20 +1113,70 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                             padding:
                                 const EdgeInsets.only(left: 0.0, bottom: 60),
                             child: Text(
-                              "VT",
+                              "VTe",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
-                              "ml",
+                              "mL",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  "MAX",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                                Text(
+                                  maxvte.toString(),
+                                  style: TextStyle(
+                                      color: Colors.yellow, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  // modeName == "VC-CMV" ||
+                                  //         modeName == "VACV" ||
+                                  //         modeName == "VSIMV"
+                                  //     ? vteMinValue.toString()
+                                  //     : 
+                                      minvte.toString(),
+                                  ////""
+                                  style: TextStyle(
+                                      color: Colors.yellow, fontSize: 12),
+                                ),
+                                Text(
+                                  "MIN",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -964,7 +1198,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -998,7 +1232,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                               peepDisplayValue.toString(),
                               // "00",
                               style:
-                                  TextStyle(color: Colors.pink, fontSize: 40),
+                                  TextStyle(color: Colors.pink, fontSize: 35),
                             ),
                           ),
                         ),
@@ -1008,20 +1242,64 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                             padding:
                                 const EdgeInsets.only(left: 0.0, bottom: 60),
                             child: Text(
-                              "Peep",
+                              "PEEP",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
-                              "cmH2O",
+                              "cmH\u2082O",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  "MAX",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                                Text(
+                                  maxpeep.toString(),
+                                  style: TextStyle(
+                                      color: Colors.pink, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  minpeep.toString(),
+                                  style: TextStyle(
+                                      color: Colors.pink, fontSize: 12),
+                                ),
+                                Text(
+                                  "MIN",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -1043,7 +1321,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -1077,7 +1355,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                               rrDisplayValue.toString(),
                               // "00",
                               style:
-                                  TextStyle(color: Colors.blue, fontSize: 40),
+                                  TextStyle(color: Colors.blue, fontSize: 35),
                             ),
                           ),
                         ),
@@ -1094,13 +1372,57 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
                               "bpm",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  "MAX",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                                Text(
+                                  maxRrtotal.toString(),
+                                  style: TextStyle(
+                                      color: Colors.blue, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  minRrtotal.toString(),
+                                  style: TextStyle(
+                                      color: Colors.blue, fontSize: 12),
+                                ),
+                                Text(
+                                  "MIN",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -1122,7 +1444,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 child: Container(
                   color: Color(0xFF171e27),
                   width: 200,
-                  height: 90,
+                  height: 85,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Center(
@@ -1156,7 +1478,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                               fio2DisplayParameter.toString(),
                               // "000",
                               style:
-                                  TextStyle(color: Colors.teal, fontSize: 40),
+                                  TextStyle(color: Colors.teal, fontSize: 35),
                             ),
                           ),
                         ),
@@ -1166,16 +1488,16 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                             padding: const EdgeInsets.only(
                                 left: 0.0, bottom: 55, right: 0.0),
                             child: Text(
-                              "FiO2",
+                              "FiO\u2082",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomLeft,
                             child: Text(
                               "%",
                               style:
@@ -1552,22 +1874,22 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   }
 
   graphs() {
-    return Container(
-      padding: EdgeInsets.only(left: 170, right: 0, top: 20),
+     return Container(
+      padding: EdgeInsets.only(left: 170, right: 0, top: 25),
       child: Column(
         children: [
           Container(
             width: 520,
-            height: 120,
+            height: 110,
             child: Stack(
               children: [
                 Container(
-                    margin: EdgeInsets.only(left: 20, right: 10, top: 10),
+                    margin: EdgeInsets.only(left: 20, right: 10, top:20),
                     child: scopeOne),
                 Container(
-                    margin: EdgeInsets.only(left: 10),
+                    margin: EdgeInsets.only(left: 10, top: 8),
                     child: Text(
-                      "60" + " cmH2O",
+                      "100" + " cmH\u2082O",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
@@ -1585,7 +1907,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 109,
+                    top: 99,
                   ),
                   color: Colors.grey,
                   height: 1,
@@ -1670,7 +1992,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
           ),
           Container(
             width: 520,
-            height: 160,
+            height: 150,
             child: Stack(
               children: [
                 Container(
@@ -1684,13 +2006,13 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 Container(
                     margin: EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      "90 lpm",
+                      "150 Lpm",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                    margin: EdgeInsets.only(left: 10, top: 135),
+                    margin: EdgeInsets.only(left: 10, top: 127),
                     child: Text(
-                      "-90 lpm",
+                      "-90 Lpm",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
@@ -1700,7 +2022,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                  margin: EdgeInsets.only(left: 28, top: 26),
+                  margin: EdgeInsets.only(left: 28, top: 20),
                   width: 1,
                   color: Colors.grey,
                   height: 108,
@@ -1708,7 +2030,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 79,
+                    top: 74,
                   ),
                   color: Colors.grey,
                   height: 1,
@@ -1739,7 +2061,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
           ),
           Container(
             width: 520,
-            height: 120,
+            height: 110,
             child: Stack(
               children: [
                 Container(
@@ -1748,7 +2070,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 Container(
                     margin: EdgeInsets.only(left: 10),
                     child: Text(
-                      "700 ml",
+                      "1000 mL",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
@@ -1758,7 +2080,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                  margin: EdgeInsets.only(left: 28, top: 24),
+                  margin: EdgeInsets.only(left: 30, top: 15),
                   width: 1,
                   color: Colors.grey,
                   height: 85,
@@ -1766,7 +2088,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 109,
+                    top: 99,
                   ),
                   color: Colors.grey,
                   height: 1,
@@ -1798,17 +2120,15 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
             width: 480,
             height: 70,
             child: Card(
-              color: alarmActive == "1"
-                  ? Colors.red
-                  :
-                  // priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
-                  Color(0xFF171e27),
+              color: alarmActive == "1" ? Colors.red : Color(0xFF171e27),
+              // priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
+
               child: Center(
                   child: Align(
                 alignment: Alignment.centerLeft,
                 child: Center(
                   child: Text(
-                    alarmActive == "1" ? alarmMessage : "",
+                    alarmActive == "1" ? alarmMessage.toUpperCase() : "",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
@@ -1833,6 +2153,6 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
 
     vomL.clear();
 
-    getPatientData(patientID,finalFrom , finalTo);
+    getPatientData(finalFrom , finalTo);
   }
 }

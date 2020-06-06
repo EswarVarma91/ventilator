@@ -36,23 +36,21 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         title: Text("Patient List"),
-       actions: <Widget>[
-        FlatButton(
-          textColor: Colors.white,
-          onPressed: () {
-          //   Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => AlarmLog()),
-          // );
-      
-          },
-          child: Icon(Icons.alarm),
-          shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-        ),
-      ],
+        actions: <Widget>[
+          FlatButton(
+            textColor: Colors.white,
+            onPressed: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AlarmLog()),
+              );
+            },
+            child: Icon(Icons.alarm),
+            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+          ),
+        ],
       ),
       body: WillPopScope(
         onWillPop: () {
@@ -69,106 +67,57 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
               return Center(child: CircularProgressIndicator());
             else if (snapshot.data.isEmpty)
               return Center(
-                child: Text("No Data Found"),
-              ); //CIRCULAR INDICATOR
+                child: CircularProgressIndicator(),
+              ); //
             else {
-              return ListView.builder(
+              return GridView.builder(
                   itemCount: snapshot.data.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,mainAxisSpacing: 0,crossAxisSpacing: 0),
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: 100,
-                      child: Card(
-                          child: ListTile(
+                    return ListTile(
                         onTap: () {
-                          // selectDateandTimeRange();
-                           Navigator.push(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => patientsDates(snapshot.data[index].pId)));
+                                  builder: (context) =>
+                                      patientsDates(snapshot.data[index].pId)));
                         },
-                        leading: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Icon(
-                            Icons.person,
-                            size: 35,
-                          ),
-                        ),
-                        // trailing: IconButton(icon: Icon(Icons.delete,size: 35,),onPressed: (){
-
-                        // },),
-                        title: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              // Container(height: 50,width: 1,color: Colors.black,),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          snapshot.data[index].pName != null || snapshot.data[index].pName != ""  ? snapshot.data[index].pName.toString()
-                                              : "NA",
-                                          style: TextStyle(fontSize: 22),
-                                        ),
-                                        SizedBox(
-                                          width: 30,
-                                        ),
-                                        Text(
-                                          snapshot.data[index].pId != null ? snapshot.data[index].pId.toString().toUpperCase()
-                                              : "NA",
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    // Row(
-                                    //   children: [
-                                    //     Text(
-                                    //       snapshot.data[index].minTime != null
-                                    //           ? snapshot.data[index].minTime
-                                    //               .toString()
-                                    //           : "",
-                                    //       style: TextStyle(fontSize: 10),
-                                    //     ),
-                                    //     Text("  -  "),
-                                    //     Text(
-                                    //       snapshot.data[index].maxTime != null
-                                    //           ? snapshot.data[index].maxTime
-                                    //               .toString()
-                                    //           : "",
-                                    //       style: TextStyle(fontSize: 10),
-                                    //     ),
-                                    //   ],
-                                    // )
-                                  ],
-                                ),
+                        title: Card(
+                            child: Container(
+                              height: 200,
+                              width: 250,
+                              child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    snapshot.data[index].pName != null ||
+                                            snapshot.data[index].pName != ""
+                                        ? snapshot.data[index].pName.toString()
+                                        : "NA",
+                                    style: TextStyle(fontSize: 22),
+                                  ),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  Text(
+                                    snapshot.data[index].pId != null
+                                        ? snapshot.data[index].pId
+                                            .toString()
+                                            .toUpperCase()
+                                        : "NA",
+                                    style: TextStyle(
+                                        fontSize: 22, fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.all(15.0),
-                              //   child: Column(
-                              //     crossAxisAlignment: CrossAxisAlignment.start,
-                              //     mainAxisAlignment: MainAxisAlignment.start,
-                              //     children: [
-                              //       Text(
-                              //         snapshot.data[index].pName != null
-                              //             ? snapshot.data[index].pName
-                              //                 .toString()
-                              //             : "",
-                              //         style: TextStyle(fontSize: 22),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                            ],
                           ),
+                            ),
                         ),
-                      )),
-                    );
+                      );
                   });
             }
           },
@@ -176,19 +125,4 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
       ),
     );
   }
-
-  // selectDateandTimeRange() {
-  //   DateTime now = new DateTime.now();
-
-  //   DatePicker.showDateTimePicker(context,
-  //       showTitleActions: true,
-  //       minTime: DateTime(now.year, now.month, now.day-6, now.hour, now.minute,now.second),
-  //       maxTime: DateTime(now.year, now.month, now.day, now.hour, now.minute,now.second), 
-  //     onChanged: (date) {
-  //     print('change $date in time zone ' +
-  //         date.timeZoneOffset.inHours.toString());
-  //   }, onConfirm: (date) {
-  //     print('confirm $date');
-  //   }, locale: LocaleType.zh);
-  // }
 }

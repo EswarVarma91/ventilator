@@ -5,6 +5,7 @@ import 'package:ventilator/activity/Dashboard.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
 
+import 'AlarmLog.dart';
 import 'ViewLogDataDisplayPage.dart';
 
 class PatientsDatainSlots extends StatefulWidget {
@@ -42,10 +43,10 @@ class _PatientsDatainSlotsState extends State<PatientsDatainSlots> {
         FlatButton(
           textColor: Colors.white,
           onPressed: () {
-          //   Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => AlarmLog()),
-          // );
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AlarmLog()),
+          );
           },
           child: Icon(Icons.alarm),
           shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
@@ -98,7 +99,7 @@ class _PatientsDatainSlotsState extends State<PatientsDatainSlots> {
                               children: [
                                 // dateFormate = DateFormat("dd-MM-yyyy").format(DateTime.parse("2019-09-30"));
                                 Text("From",style:TextStyle(fontSize: 12)),
-                                Text(snapshot.data[index].maxTime != null || snapshot.data[index].minTime != ""  ? DateFormat("HH:mm:ss").format(DateTime.parse(snapshot.data[index].minTime.toString())).toString():"",style:TextStyle(color: Colors.green)),
+                                Text(snapshot.data[index].minTime != null || snapshot.data[index].minTime != ""  ? DateFormat("HH:mm:ss").format(DateTime.parse(snapshot.data[index].minTime.toString())).toString():"",style:TextStyle(color: Colors.green)),
 
                                 Text("To",style:TextStyle(fontSize: 12)),
                                 Text(snapshot.data[index].maxTime != null || snapshot.data[index].maxTime != ""  ? DateFormat("HH:mm:ss").format(DateTime.parse(snapshot.data[index].maxTime.toString())).toString():"",style:TextStyle(color: Colors.green)),

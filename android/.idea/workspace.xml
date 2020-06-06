@@ -14,7 +14,9 @@
       <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/.filecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/app.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" afterDir="false" />
@@ -25,7 +27,7 @@
       <change beforePath="$PROJECT_DIR$/../build/cache.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../build/cache.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/activity/Dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/activity/Dashboard.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/database/DatabaseHelper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/database/DatabaseHelper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/graphs/Oscilloscope.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/graphs/Oscilloscope.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/database/VentilatorOMode.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/database/VentilatorOMode.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,9 +199,35 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1398" height="195" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1591342256016" />
-    <state x="390" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1591351436523">
+    <state x="390" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1591420916941">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="390" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1591351436523" />
+    <state x="390" y="281" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1591420916941" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt</url>
+          <line>52</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt</url>
+          <line>63</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt</url>
+          <line>64</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt</url>
+          <line>65</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -4,6 +4,7 @@ import 'package:ventilator/activity/Dashboard.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
 
+import 'AlarmLog.dart';
 import 'PatientsDataByDate.dart';
 
 class patientsDates extends StatefulWidget {
@@ -41,10 +42,10 @@ class _patientsDatesState extends State<patientsDates> {
         FlatButton(
           textColor: Colors.white,
           onPressed: () {
-          //   Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => AlarmLog()),
-          // );
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AlarmLog()),
+          );
           },
           child: Icon(Icons.alarm),
           shape: CircleBorder(side: BorderSide(color: Colors.transparent)),

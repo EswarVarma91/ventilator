@@ -21,7 +21,7 @@ class VentilatorOMode {
       teS,globalCounterNo;
   double pressureValues, flowValues, volumeValues;
   String dateTime;
-  String patientName,patientId;
+  String patientName,patientId,alarmC,alarmP;
 
   VentilatorOMode(
       this.patientId,
@@ -44,7 +44,7 @@ class VentilatorOMode {
       this.teS,
       this.pressureValues,
       this.flowValues,
-      this.volumeValues,this.operatingMode,this.lungImage,this.paw,this.globalCounterNo);
+      this.volumeValues,this.operatingMode,this.lungImage,this.paw,this.globalCounterNo,this.alarmC,this.alarmP);
 
   // Map<String, dynamic> toMap() {
   //   var map = <String, dynamic>{
@@ -105,6 +105,8 @@ class VentilatorOMode {
     lungImage = map['lungImage'];
     paw = map['paw'];//
     globalCounterNo = map['globalCounterNo'];
+    alarmC = map['alarmCodes'];
+    alarmP = map['alarmPriority'];
   }
 
   VentilatorOMode.fromJson(Map<String, dynamic> json)

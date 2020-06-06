@@ -50,7 +50,7 @@ class MainActivity: FlutterActivity() {
                 var line: String
                 try {
 
-                   val proc =  Runtime.getRuntime().exec("reboot -p")
+                   val proc =  Runtime.getRuntime().exec("adb shell reboot -p")
 //                    commandString = String.format("%s", "adb shell " + "reboot -p");
 //                    try {
 //                        process = ProcessHelper.runTimeExec(commandString)
