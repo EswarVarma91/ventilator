@@ -15,7 +15,7 @@ import 'package:ventilator/viewlog/ViewLogPatientList.dart';
 
 class ViewLogDataDisplayPage extends StatefulWidget {
   var patientID, fromDateC, toDateC;
-  ViewLogDataDisplayPage(this.patientID, this.fromDateC, this.toDateC);
+  ViewLogDataDisplayPage( this.fromDateC, this.toDateC);
 
   @override
   StateViewLogPage createState() => StateViewLogPage();
@@ -65,8 +65,8 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
     getPatientData(widget.patientID, widget.fromDateC, widget.toDateC);
   }
 
-  runData() async {
-    for (currentValue = 0; currentValue < vomL.length; currentValue++) {
+  runData(data) async {
+    for (currentValue = data==null || data=="" ? 0 : data; currentValue < vomL.length; currentValue++) {
       dataPack(currentValue, 1);
       await justWait(numberOfMilliseconds: 100);
     }
@@ -78,7 +78,8 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
 
   getPatientData(var pId, var fromDate, var toDate) async {
     
-    // TODO vomL = await dbHelper.getPatientsData(pId, fromDate.toString(), toDate.toString());
+    vomL = await dbHelper.getPatientsData(toDate.toString(), fromDate.toString());
+    print(vomL);
     pressurePoints = [];
     volumePoints=[];
     flowPoints=[];
@@ -94,7 +95,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       });
     }
     // isPlaying ?
-    runData();
+    runData(0);
     // : Container();
     // setState(() {
     //   isPlaying = false;

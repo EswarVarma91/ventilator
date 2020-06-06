@@ -135,7 +135,7 @@ class DatabaseHelper {
 
   Future<List<PatientsList>> patientDatesById(String patientIdD) async {
     var dbClient = await db;
-    List<Map> dataData = await dbClient.rawQuery( 'SELECT DISTINCT date($DATE_TIME) dates from $TABLE  where $PATIENTID = \'$patientIdD\'');
+    List<Map> dataData = await dbClient.rawQuery( 'SELECT DISTINCT date($DATE_TIME) dates from $TABLE  where $PATIENTID = \'$patientIdD\' order by $ID DESC');
     List<PatientsList> plist = [];
     if (dataData.length > 0) {
       for (int i = 0; i < dataData.length; i++) {
@@ -148,7 +148,7 @@ class DatabaseHelper {
   
   Future<List<PatientsList>> patientDataByDateId(String patientIdD,String dateTimeW) async {
     var dbClient = await db;
-    List<Map> dataData = await dbClient.rawQuery('SELECT $PATIENTID, min($DATE_TIME) minTime, max($DATE_TIME) maxTime FROM $TABLE where $PATIENTID= \'$patientIdD\'  AND DATE($DATE_TIME) = DATE(\'$dateTimeW\')');
+    List<Map> dataData = await dbClient.rawQuery('SELECT $PATIENTID, min($DATE_TIME) minTime, max($DATE_TIME) maxTime FROM $TABLE where $PATIENTID= \'$patientIdD\'  AND DATE($DATE_TIME) = DATE(\'$dateTimeW\') order by $ID DESC');
     List<PatientsList> plist = [];
     if (dataData.length > 0) {
       for (int i = 0; i < dataData.length; i++) {
@@ -159,12 +159,12 @@ class DatabaseHelper {
   }
 
 
-  Future<List<PatientsList>> splitData(String patientIdD,String dateTimeW) async {
+  Future<List<PatientsList>> splitData(String minTime,String maxTime) async {
     var dbClient = await db;
     var checkValue=0;
     
     var a;
-    List<Map> dataData = await dbClient.rawQuery('SELECT $DATE_TIME dates from $TABLE where $DATE_TIME BETWEEN ("2020-06-05 14:50:08") and ("2020-06-05 14:50:36")');
+    List<Map> dataData = await dbClient.rawQuery('SELECT $DATE_TIME dates from $TABLE where $DATE_TIME BETWEEN \'$minTime\' and \'$maxTime\' order by $ID DESC');
   
     List<PatientsList> plist = [];
     List<PatientsList> slist = [];
@@ -175,7 +175,7 @@ class DatabaseHelper {
       slist.clear();
       list.clear();
       a = ((dataData.length*150)/1000).round();
-      var dataLength= (189/a).floor();
+      var dataLength= (dataData.length/a).floor();
       for (int i =0 ; i<dataLength;i++){
         slist.clear();
         for(int j=0 ; j<a;j++){
@@ -186,29 +186,23 @@ class DatabaseHelper {
       }
       plist.addAll(list);
     }
-
-    // if (dataData.length > 0) {
-    //   for (int i = 0; i < dataData.length; i++) {
-    //     plist.add(PatientsList.fromMap(dataData[i]));
-    //   }
-    // }
     return plist;
   }
 
 
 
-  // Future<List<VentilatorOMode>> getPatientsData(String patientIdD,String fromDate,String toDate) async {
-  //    var dbClient = await db;
-  //   //  SELECT * FROM graphPoints WHERE patientId="p002" and datetimeP BETWEEN "24-01-2010 09:02:23"  AND "24-01-2010 09:02:54"
-  //   List<Map> dataData= await dbClient.rawQuery('SELECT * FROM $TABLE where $PATIENTID=\'$patientIdD\' AND $DATE_TIME BETWEEN \'$fromDate\' AND \'$toDate\'');
-  //   List<VentilatorOMode> plist =[];
-  //   if(dataData.length>0){
-  //     for(int i=0; i<dataData.length;i++){
-  //       plist.add(VentilatorOMode.fromMap(dataData[i]));
-  //     }
-  //   }
-  //   return plist;
-  // }
+  Future<List<VentilatorOMode>> getPatientsData(String fromDate,String toDate) async {
+     var dbClient = await db;
+    //  SELECT * FROM graphPoints WHERE patientId="p002" and datetimeP BETWEEN "24-01-2010 09:02:23"  AND "24-01-2010 09:02:54"
+    List<Map> dataData= await dbClient.rawQuery('SELECT * FROM $TABLE where $DATE_TIME BETWEEN \'$fromDate\' AND \'$toDate\'');
+    List<VentilatorOMode> plist =[];
+    if(dataData.length>0){
+      for(int i=0; i<dataData.length;i++){
+        plist.add(VentilatorOMode.fromMap(dataData[i]));
+      }
+    }
+    return plist;
+  }
 
   Future<int> delete(int id) async {
     var dbClient = await db;

@@ -4,6 +4,8 @@ import 'package:ventilator/activity/Dashboard.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
 
+import 'PatientsDatainSlots.dart';
+
 class PatientsDataByDate extends StatefulWidget {
   String datetimeW,patientId;
   PatientsDataByDate(this.datetimeW,this.patientId);
@@ -26,9 +28,9 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
 
   getPatientDatesData() async {
     patientdatesList = dbHelper.patientDataByDateId(widget.patientId,widget.datetimeW);
-    l = dbHelper.splitData(widget.patientId,widget.datetimeW);
-    print(l);
-    print(patientdatesList);
+    // l = dbHelper.splitData(widget.patientId,widget.datetimeW);
+    // print(l);
+    // print(patientdatesList);
   }
 
   @override
@@ -79,12 +81,12 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
                         child: Card(
                             child: ListTile(
                           onTap: () {
-                            l = dbHelper.splitData(widget.patientId,widget.datetimeW);
-                            print(l);
-                            //  Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => PatientsDataByDate(snapshot.data[index].datetimeP,widget.patientId)));
+                            // l = dbHelper.splitData(widget.patientId,widget.datetimeW);
+                            // print(l);
+                             Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PatientsDatainSlots(snapshot.data[index].minTime,snapshot.data[index].maxTime,)));
                             },
                           leading: Padding(
                             padding: const EdgeInsets.all(10.0),
