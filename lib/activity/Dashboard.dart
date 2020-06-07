@@ -403,7 +403,7 @@ class _CheckPageState extends State<Dashboard> {
   var dbHelper = DatabaseHelper();
   var dbHelpera = ADatabaseHelper();
   var dbCounter = CounterDatabaseHelper();
-  String lastRecordTime ;
+  String lastRecordTime;
   String priorityNo, alarmActive;
   double pplateauDisplay = 0;
   int tempDisplay = 0,
@@ -455,7 +455,7 @@ class _CheckPageState extends State<Dashboard> {
   int previousCode = 101, presentCode, vteMinValue = 0;
   int cc = 0;
   String checkTempData;
-  int powerIndication=0, batteryPercentage ;
+  int powerIndication = 0, batteryPercentage;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -502,485 +502,9 @@ class _CheckPageState extends State<Dashboard> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
-      print(event);
+      // print(event);
       // Fluttertoast.showToast(msg: event.length.toString() + " "+cc.toString() + );
-      var now = new DateTime.now();
-      if (event != null) {
-        setState(() {
-          respiratoryEnable = true;
-          // playOnEnabled = false;
-        });
-        if (event[0] == 126 && event.length > 110) {
-          list.addAll(event);
-          list.removeAt(0);
-        }
-
-        lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
-        //      crcData = list[list.length - 1] * 256 + list[list.length - 2];
-        // Fluttertoast.showToast(msg: list.length.toString()+" "+cc.toString() +"  geting crc" +crcData.toString());
-
-        // var length = list.length;
-        // bool data = await checkCrc(list, list.length);
-        // if (data == false) {
-        //   list.clear();
-        // } else {
-
-        // print("page no " + list[112].toString());
-        // if (list[112] == 1) {
-        //   Navigator.pushAndRemoveUntil(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (BuildContext context) => SelfTestPage()),
-        //       ModalRoute.withName('/'));
-        // } else if (list[112] == 2) {
-        //   Navigator.pushAndRemoveUntil(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (BuildContext context) => CallibrationPage()),
-        //       ModalRoute.withName('/'));
-        // }
-
-        //=========================
-
-        //=========================
-        setState(() {
-          //=============
-
-          setState(() {
-            var now = new DateTime.now();
-            // ibytValue = ((list[90] << 8) + list[91]);
-
-            int vteValueCheck = ((list[4] << 8) + list[5]); //5 6
-
-            if ((vteValueCheck != "" || vteValueCheck != null) && vteValueCheck.round()>0 && vteValueCheck.round()<2500) {
-              setState(() {
-                vteMinValue = vteValue - vtValue;
-                vteValue = ((list[4] << 8) + list[5]);
-              });
-            }
-            int mvValueCheck = (((list[8] << 8) + list[9])).toInt();
-
-            // if (mvValueCheck != "" && (mvValue/1000).toDouble() >0.00 && (mvValue/1000).toDouble()<100.00) {
-              setState(() {
-                mvValue = mvValueCheck;
-              });
-            // }
-
-            tempDisplay = list[64];
-            leakVolumeDisplay = ((list[102] << 8) + list[103]);
-            peakFlowDisplay = ((list[70] << 8) + list[71]);
-            spontaneousDisplay = ((list[82] << 8) + list[83]);
-
-            int rrtotalCheck = ((list[10] << 8) + list[11]).toInt(); //11,12
-
-            if (rrtotalCheck != "" && rrtotalCheck.round()>0 && rrtotalCheck.round()<100) {
-              setState(() {
-                rrDisplayValue = rrtotalCheck;
-              });
-            }
-            int pipValueCheck = (((list[14] << 8) + list[15]) / 100).round().toInt();
-
-            if((((list[16] << 8) + list[17]) / 100).round().toInt()>0 && (((list[16] << 8) + list[17]) / 100).round().toInt()<150){
-            peepDisplayValue = (((list[16] << 8) + list[17]) / 100).round().toInt();
-            }
-
-            if (pipValueCheck != 0  && pipValueCheck.round()>0 && pipValueCheck.round()<150) {
-              setState(() {
-                psValue1 = pipValueCheck;
-              });
-            }
-            paw = (((list[34] << 8) + list[35]) / 100).toInt();
-
-            if (paw > 200) {
-              setState(() {
-                paw = 0;
-              });
-            }
-
-            expiratoryPressureR =
-                (((list[36] << 8) + list[37]) / 100).toInt(); //37 38
-
-            if(((list[38] << 8) + list[39]).round()>20 && ((list[38] << 8) + list[39]).round()<100){
-            fio2DisplayParameter = ((list[38] << 8) + list[39]); // 39,40
-            }
-
-            mixingTankPressureR = ((list[40] << 8) + list[41]);
-            airipPressureR = ((list[44] << 8) + list[45]);
-
-            //flow graph
-            inspirationflowR = ((list[46] << 8) + list[47]); //47-48
-            exhalationflowR = ((list[48] << 8) + list[49]); //49-50
-
-            o2Valve = ((list[50] << 8) + list[51]);
-            airiPValveStatusR = ((list[52] << 8) + list[53]);
-            _2by2inhalationValueR = ((list[54] << 8) + list[55]);
-            _2by2exhalationValueR = ((list[56] << 8) + list[57]);
-            turbineSpeedR = ((list[58] << 8) + list[59]);
-            internalTemperatureR = ((list[60] << 8) + list[61]);
-            
-
-            checkTempData = list[31].toString();
-            if (list[108] == 1) {
-              presentCode = ((list[106] << 8) + list[107]);
-              if(presentCode!=0 && presentCode>0 && presentCode<23){
-              var data = AlarmsList(presentCode.toString());
-               dbHelpera.saveAlarm(data);
-              }
-              // Fluttertoast.showToast(msg: presentCode.toString());
-              if (presentCode != previousCode) {
-                previousCode = presentCode;
-                _stopMusic();
-                if (presentCode == 5 ||
-                    presentCode == 7 ||
-                    presentCode == 10 ||
-                    presentCode == 11 ||
-                    presentCode == 17) {
-                  _playMusicHigh();
-                  sendSoundOn();
-                  audioEnable = true;
-                } else if (presentCode == 1 ||
-                    presentCode == 2 ||
-                    presentCode == 3 ||
-                    presentCode == 4 ||
-                    presentCode == 6 ||
-                    presentCode == 8 ||
-                    presentCode == 9 ||
-                    presentCode == 12 ||
-                    presentCode == 13 ||
-                    presentCode == 14 ||
-                    presentCode == 15 ||
-                    presentCode == 16 ||
-                    presentCode == 18 ||
-                    presentCode == 19 ||
-                    presentCode == 20 ||
-                    presentCode == 21 ||
-                    presentCode == 22) {
-                  _playMusicMedium();
-                  sendSoundOn();
-                  audioEnable = true;
-                } else if (presentCode == 23) {
-                  _playMusicLower();
-                  sendSoundOn();
-                  audioEnable = true;
-                }
-              }
-              // _playMusic();
-            } else if (list[108] == 0) {
-              sendSoundOff();
-              _stopMusic();
-            }
-            cdisplayParameter =
-                (double.tryParse(vteValue.toString()) / (pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
-
-            if (list[108] == 1) {
-              setState(() {
-                if (list[109] == 1 || list[109] == 0) {
-                  ((list[106] << 8) + list[107]) == 5
-                      ? alarmMessage = "SYSTEM FAULT"
-                      : ((list[106] << 8) + list[107]) == 7
-                          ? alarmMessage = "FiO\u2082 SENSOR MISSING"
-                          : ((list[106] << 8) + list[107]) == 10
-                              ? alarmMessage = "HIGH LEAKAGE"
-                              : ((list[106] << 8) + list[107]) == 11
-                                  ? alarmMessage = "HIGH PRESSURE"
-                                  : ((list[106] << 8) + list[107]) == 17
-                                      ? alarmMessage = "PATIENT DISCONNECTED"
-                                      : alarmMessage = "";
-                } else if (list[109] == 2) {
-                  ((list[106] << 8) + list[107]) == 1
-                      ? alarmMessage = "AC POWER DISCONNECTED"
-                      : ((list[106] << 8) + list[107]) == 2
-                          ? alarmMessage = " LOW BATTERY"
-                          : ((list[106] << 8) + list[107]) == 3
-                              ? alarmMessage = "CALIBRATE FiO2"
-                              : ((list[106] << 8) + list[107]) == 4
-                                  ? alarmMessage = "CALIBRATION FiO2 FAIL"
-                                  : ((list[106] << 8) + list[107]) == 6
-                                      ? alarmMessage = "SELF TEST FAIL"
-                                      : ((list[106] << 8) + list[107]) == 8
-                                          ? alarmMessage = "HIGH FiO2"
-                                          : ((list[106] << 8) + list[107]) == 9
-                                              ? alarmMessage = "LOW FIO2"
-                                              : ((list[106] << 8) + list[107]) == 12
-                                                  ? alarmMessage =
-                                                      "LOW PRESSURE"
-                                                  : ((list[106] << 8) + list[107]) == 13
-                                                      ? alarmMessage = "LOW VTE"
-                                                      : ((list[106] << 8) +
-                                                                  list[107]) ==
-                                                              14
-                                                          ? alarmMessage =
-                                                              "HIGH VTE"
-                                                          : ((list[106] << 8) +
-                                                                      list[
-                                                                          107]) ==
-                                                                  15
-                                                              ? alarmMessage =
-                                                                  "LOW VTI"
-                                                              : ((list[106] << 8) + list[107]) == 16
-                                                                  ? alarmMessage =
-                                                                      "HIGH VTI"
-                                                                  : ((list[106] << 8) + list[107]) == 18
-                                                                      ? alarmMessage =
-                                                                          "LOW O2  supply"
-                                                                      : ((list[106] << 8) + list[107]) ==
-                                                                              19
-                                                                          ? alarmMessage =
-                                                                              "LOW RR"
-                                                                          : ((list[106] << 8) + list[107]) == 20
-                                                                              ? alarmMessage = "HIGH RR"
-                                                                              : ((list[106] << 8) + list[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((list[106] << 8) + list[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
-                } else if (list[109] == 3) {
-                  ((list[106] << 8) + list[107]) == 23
-                      ? alarmMessage = "Apnea backup"
-                      : alarmMessage = "";
-                }
-              });
-            }
-
-            if (paw <= 10) {
-              setState(() {
-                lungImage = 1;
-              });
-            } else if (paw <= 20 && paw >= 11) {
-              setState(() {
-                lungImage = 2;
-              });
-            } else if (paw <= 30 && paw >= 21) {
-              setState(() {
-                lungImage = 3;
-              });
-            } else if (paw <= 40 && paw >= 31) {
-              setState(() {
-                lungImage = 4;
-              });
-            } else if (paw <= 100 && paw >= 41) {
-              setState(() {
-                lungImage = 5;
-              });
-            }
-          });
-          setState(() {
-            String i = "", e = "", tempIe = "";
-            i = list[12].toString();
-            e = list[13].toString();
-            tempIe = i + ":" + e;
-          });
-
-          
-
-          var dataOperatingMode = ((list[104] << 8) + list[105]);
-          if(dataOperatingMode>1 && dataOperatingMode<14)
-          {
-            setState(() {
-              operatinModeR = ((list[104] << 8) + list[105]);
-            });
-          }
-
-          if(operatinModeR>1 && operatinModeR<14){
-               if (operatinModeR == 1) {
-            setState(() {
-              modeName = "VACV";
-            });
-          } else if (operatinModeR == 2) {
-            setState(() {
-              modeName = "PACV";
-            });
-          } else if (operatinModeR == 3) {
-            setState(() {
-              modeName = "PSV";
-            });
-          } else if (operatinModeR == 4) {
-            setState(() {
-              modeName = "PSIMV";
-            });
-          } else if (operatinModeR == 5) {
-            setState(() {
-              modeName = "VSIMV";
-            });
-          } else if (operatinModeR == 6) {
-            setState(() {
-              modeName = "PC-CMV";
-            });
-          } else if (operatinModeR == 7) {
-            setState(() {
-              modeName = "VC-CMV";
-            });
-          } else if (operatinModeR == 14) {
-            setState(() {
-              modeName = "PRVC";
-            });
-          }
-          }
-         
-          if((((list[68] << 8) + list[69]) / 100).round().toInt()>0 && (((list[68] << 8) + list[69]) / 100).round().toInt()<150){
-          mapDisplayValue = (((list[68] << 8) + list[69]) / 100).toInt();
-          }
-          if (list[84] == 1) {
-            ioreDisplayParamter = "I";
-          } else if (list[84] == 2) {
-            ioreDisplayParamter = "E";
-          } else {
-            ioreDisplayParamter = "";
-          }
-
-          setState(() {
-            if (list[108] != 0 &&
-                ((list[106] << 8) + list[107]) != null &&
-                ((list[106] << 8) + list[107]) >= 1 &&
-                ((list[106] << 8) + list[107]) <= 23) {
-              alarmActive = list[108].toString();
-            } else {
-              alarmActive = 0.toString();
-            }
-          });
-
-          // pressure graph
-          double temp = (((list[34] << 8) + list[35]))
-              .toDouble(); // pressure points 35,36
-
-          if (temp > 40000) {
-            setState(() {
-              temp = -((65535 - temp) / 100);
-            });
-          } else {
-            setState(() {
-              temp = temp / 100;
-            });
-          }
-
-          // if(temp.round()>0 && temp.round()<150)
-          // {
-          if (pressurePoints.length >= 50) {
-            setState(() {
-              pressurePoints.removeAt(0);
-              pressurePoints.add(temp);
-            });
-          } else {
-            pressurePoints.add(temp);
-          }
-          // }else{
-          //   pressurePoints.add(0);
-          // }
-          if(((list[60] << 8) + list[61]).toInt()>0 && ((list[60] << 8) + list[61]).toInt()<150){
-          pplateauDisplay = ((list[60] << 8) + list[61]).toDouble();
-          }
-
-          double temp1 =
-              ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
-
-          // if(temp1.round() >0 && temp1.round() < 2500)
-          // {
-          if (volumePoints.length >= 50) {
-            setState(() {
-              volumePoints.removeAt(0);
-              volumePoints.add(temp1);
-            });
-          } else {
-            volumePoints.add(temp1);
-          }
-          // }else{
-          //   volumePoints.add(0);
-          // }
-
-          double temp3 =
-              ((((list[46] << 8) + list[47])) - (((list[48] << 8) + list[49])))
-                  .toDouble();
-          temp3 = temp3 * 0.06;
-
-          // if(temp3.round()>-100 && temp3.round()<200){
-          if (flowPoints.length >= 50) {
-            setState(() {
-              flowPoints.removeAt(0);
-              flowPoints.add(temp3);
-            });
-          } else {
-            flowPoints.add(temp3);
-          }
-          // }else{
-          //   flowPoints.add(0);
-          // }
-
-          powerIndication = list[64];
-          batteryPercentage = list[65];
-
-          if (patientId != "") {
-            // Fluttertoast.showToast(msg: patientId.toString());
-            var data = VentilatorOMode(
-                patientId,
-                patientName.toString(),
-                psValue1.toString(),
-                vteValue.toString(),
-                peepDisplayValue.toString(),
-                rrDisplayValue.toString(),
-                fio2DisplayParameter.toString(),
-                mapDisplayValue.toString(),
-                mvValue.toString(),
-                cdisplayParameter.toString(),
-                ieDisplayValue.toString(),
-                rrValue.toString(),
-                checkI(i) + ":" + checkE(e).toString(),
-                peepValue.toString(),
-                psValue.toString(),
-                fio2Value.toString(),
-                vtValue.toString(),
-                tiValue.toString(),
-                teValue.toString(),
-                temp,
-                temp3,
-                temp1,
-                operatinModeR.toString(),
-                lungImage.toString(),
-                paw.toString(),
-                globalCounterNo.toString(),
-                ((list[106] << 8) + list[107]).toString(),
-                list[109].toString());
-            saveData(data, patientId);
-          } else {
-            var data = VentilatorOMode(
-                "SWASIT " + globalCounterNo.toString(),
-                patientName,
-                psValue1.toString(),
-                vteValue.toString(),
-                peepDisplayValue.toString(),
-                rrDisplayValue.toString(),
-                fio2DisplayParameter.toString(),
-                mapDisplayValue.toString(),
-                mvValue.toString(),
-                cdisplayParameter.toString(),
-                ieDisplayValue.toString(),
-                rrValue.toString(),
-                checkI(i) + ":" + checkE(e).toString(),
-                peepValue.toString(),
-                psValue.toString(),
-                fio2Value.toString(),
-                vtValue.toString(),
-                tiValue.toString(),
-                teValue.toString(),
-                temp,
-                temp3,
-                temp1,
-                operatinModeR.toString(),
-                lungImage.toString(),
-                paw.toString(),
-                globalCounterNo.toString(),
-                ((list[106] << 8) + list[107]).toString(),
-                list[109].toString());
-            saveData(data, patientId);
-          }
-          list.clear();
-          //==============
-        });
-        // }
-      } else {
-        setState(() {
-          respiratoryEnable = false;
-        });
-        pressurePoints.clear();
-        volumePoints.clear();
-        flowPoints.clear();
-        list.clear();
-      }
+      serializeEventData(event);
     });
     setState(() {
       _status = "Connected";
@@ -1041,7 +565,7 @@ class _CheckPageState extends State<Dashboard> {
   initState() {
     super.initState();
     var now = new DateTime.now();
-    lastRecordTime =  DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
+    lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
     counterData();
     getData();
     // getNoTimes();
@@ -1087,20 +611,20 @@ class _CheckPageState extends State<Dashboard> {
             setState(() {
               respiratoryEnable = false;
               insExpButtonEnable = false;
-               setState(() {
-                  // psValue1 = 0;
-                  // mvValue = 0;
-                  // vteValue = 0;
-                  // peepDisplayValue = 0;
-                  // rrtotalValue =0;
-                  // mapDisplayValue=0;
-                  // peepDisplayValue =0;
-                  // fio2DisplayParameter = 0;
-                  // pressurePoints.clear();
-                  // volumePoints.clear();
-                  // flowPoints.clear();
-                });
-              
+              setState(() {
+                // psValue1 = 0;
+                // mvValue = 0;
+                // vteValue = 0;
+                // peepDisplayValue = 0;
+                // rrtotalValue =0;
+                // mapDisplayValue=0;
+                // peepDisplayValue =0;
+                // fio2DisplayParameter = 0;
+                // pressurePoints.clear();
+                // volumePoints.clear();
+                // flowPoints.clear();
+              });
+
               // playOnEnabled = false;
             });
             if (playOnEnabled) {
@@ -1268,22 +792,22 @@ class _CheckPageState extends State<Dashboard> {
       });
     }
   }
-//   void startTimer() {
-//   const oneSec = const Duration(seconds: 1);
-//   _timer = new Timer.periodic(
-//     oneSec,
-//     (Timer timer) => setState(
-//       () {
-//         if (_start < 1) {
-//           timer.cancel();
-//         } else {
-//           _start = _start - 1;
-//           Fluttertoast.showToast(msg: _start.toString());
-//         }
-//       },
-//     ),
-//   );
-// }
+  //   void startTimer() {
+  //   const oneSec = const Duration(seconds: 1);
+  //   _timer = new Timer.periodic(
+  //     oneSec,
+  //     (Timer timer) => setState(
+  //       () {
+  //         if (_start < 1) {
+  //           timer.cancel();
+  //         } else {
+  //           _start = _start - 1;
+  //           Fluttertoast.showToast(msg: _start.toString());
+  //         }
+  //       },
+  //     ),
+  //   );
+  // }
 
   void _increaseCounterWhilePressed() async {
     // writeRespiratoryPauseData();
@@ -1918,7 +1442,8 @@ class _CheckPageState extends State<Dashboard> {
                                 child: Text(
                                   spontaneousDisplay == null
                                       ? "0"
-                                      : (spontaneousDisplay/1000).toStringAsFixed(3),
+                                      : (spontaneousDisplay / 1000)
+                                          .toStringAsFixed(3),
                                   // "00",
                                   style: TextStyle(
                                       color: Colors.blue, fontSize: 35),
@@ -3154,8 +2679,8 @@ class _CheckPageState extends State<Dashboard> {
                                   }),
                             ),
                           ),
-                      //  powerIndication==1 ?  Image.asset("assets/images/switchon.png"):powerIndication==0 ? 
-                      //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
+                    //  powerIndication==1 ?  Image.asset("assets/images/switchon.png"):powerIndication==0 ?
+                    //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                     SizedBox(
                       height:
                           playOnEnabled ? 188 : powerButtonEnabled ? 131 : 240,
@@ -3333,7 +2858,7 @@ class _CheckPageState extends State<Dashboard> {
                 Container(
                   height: 25,
                   width: 25,
-                  margin:EdgeInsets.only(left:80),
+                  margin: EdgeInsets.only(left: 80),
                   decoration: new BoxDecoration(
                     borderRadius: new BorderRadius.circular(25.0),
                     border: new Border.all(
@@ -3345,7 +2870,9 @@ class _CheckPageState extends State<Dashboard> {
                       child: Text(
                     checkTempData == "1"
                         ? "L"
-                        : checkTempData == "0" ? "U" : checkTempData == "2" ? "S" : "",
+                        : checkTempData == "0"
+                            ? "U"
+                            : checkTempData == "2" ? "S" : "",
                     style: TextStyle(color: Colors.white),
                   )),
                 ),
@@ -4310,8 +3837,8 @@ class _CheckPageState extends State<Dashboard> {
                                   //         modeName == "VACV" ||
                                   //         modeName == "VSIMV"
                                   //     ? vteMinValue.toString()
-                                  //     : 
-                                      minvte.toString(),
+                                  //     :
+                                  minvte.toString(),
                                   ////""
                                   style: TextStyle(
                                       color: Colors.yellow, fontSize: 12),
@@ -5429,9 +4956,12 @@ class _CheckPageState extends State<Dashboard> {
                   child: Container(
                       height: 40,
                       width: 80,
-                      child: batteryPercentage!=null ? Center(child: Text(batteryPercentage.toString()+" %",style:TextStyle(fontSize:20))) :
-                      Image.asset("assets/images/nobattery.png",
-                          width: 28, color: Colors.black))),
+                      child: batteryPercentage != null
+                          ? Center(
+                              child: Text(batteryPercentage.toString() + " %",
+                                  style: TextStyle(fontSize: 20)))
+                          : Image.asset("assets/images/nobattery.png",
+                              width: 28, color: Colors.black))),
               SizedBox(width: 10),
               Material(
                   borderRadius: BorderRadius.circular(5),
@@ -5501,10 +5031,18 @@ class _CheckPageState extends State<Dashboard> {
                         child: Text(displayTemperature.toString() + " C",
                             style: TextStyle(fontSize: 20)),
                       )))),
-               SizedBox(width: 10),
-              Material(borderRadius:BorderRadius.circular(5),color:powerIndication==1 ? Colors.green :
-              powerIndication==0 ? Colors.red : Colors.red,child:Container(width: 80,
-                      height: 40,child:Center(child: Text("AC Power",style:TextStyle(color:Colors.white))))),
+              SizedBox(width: 10),
+              Material(
+                  borderRadius: BorderRadius.circular(5),
+                  color: powerIndication == 1
+                      ? Colors.green
+                      : powerIndication == 0 ? Colors.red : Colors.red,
+                  child: Container(
+                      width: 80,
+                      height: 40,
+                      child: Center(
+                          child: Text("AC Power",
+                              style: TextStyle(color: Colors.white))))),
             ],
           ),
 
@@ -18196,8 +17734,8 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add((pccmvPeepValue & 0xFF00) >> 8);
         modeWriteList.add((pccmvPeepValue & 0x00FF));
 
-        modeWriteList.add((pccmvPcValue & 0xFF00) >> 8);//12
-        modeWriteList.add((pccmvPcValue & 0x00FF));//13
+        modeWriteList.add((pccmvPcValue & 0xFF00) >> 8); //12
+        modeWriteList.add((pccmvPcValue & 0x00FF)); //13
 
         modeWriteList.add((pccmvFio2Value & 0xFF00) >> 8);
         modeWriteList.add((pccmvFio2Value & 0x00FF));
@@ -19773,5 +19311,495 @@ class _CheckPageState extends State<Dashboard> {
     //  }
 
     // var lowerLevel  = iLimit;
+  }
+
+  serializeEventData(Uint8List event) {
+    var now = new DateTime.now();
+    if (event != null) {
+      setState(() {
+        respiratoryEnable = true;
+        // playOnEnabled = false;
+      });
+      if (event[0] == 126 && event.length > 110) {
+        list.addAll(event);
+        list.removeAt(0);
+      }
+
+      lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
+      //      crcData = list[list.length - 1] * 256 + list[list.length - 2];
+      // Fluttertoast.showToast(msg: list.length.toString()+" "+cc.toString() +"  geting crc" +crcData.toString());
+
+      // var length = list.length;
+      // bool data = await checkCrc(list, list.length);
+      // if (data == false) {
+      //   list.clear();
+      // } else {
+
+      // print("page no " + list[112].toString());
+      // if (list[112] == 1) {
+      //   Navigator.pushAndRemoveUntil(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (BuildContext context) => SelfTestPage()),
+      //       ModalRoute.withName('/'));
+      // } else if (list[112] == 2) {
+      //   Navigator.pushAndRemoveUntil(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (BuildContext context) => CallibrationPage()),
+      //       ModalRoute.withName('/'));
+      // }
+
+      //=========================
+
+      //=========================
+      setState(() {
+        //=============
+
+        setState(() {
+          var now = new DateTime.now();
+          // ibytValue = ((list[90] << 8) + list[91]);
+
+          int vteValueCheck = ((list[4] << 8) + list[5]); //5 6
+
+          if ((vteValueCheck != "" || vteValueCheck != null) &&
+              vteValueCheck.round() > 0 &&
+              vteValueCheck.round() < 2500) {
+            setState(() {
+              vteMinValue = vteValue - vtValue;
+              vteValue = ((list[4] << 8) + list[5]);
+            });
+          }
+          int mvValueCheck = (((list[8] << 8) + list[9])).toInt();
+
+          // if (mvValueCheck != "" && (mvValue/1000).toDouble() >0.00 && (mvValue/1000).toDouble()<100.00) {
+          setState(() {
+            mvValue = mvValueCheck;
+          });
+          // }
+
+          tempDisplay = list[64];
+          leakVolumeDisplay = ((list[102] << 8) + list[103]);
+          peakFlowDisplay = ((list[70] << 8) + list[71]);
+          spontaneousDisplay = ((list[82] << 8) + list[83]);
+
+          int rrtotalCheck = ((list[10] << 8) + list[11]).toInt(); //11,12
+
+          if (rrtotalCheck != "" &&
+              rrtotalCheck.round() > 0 &&
+              rrtotalCheck.round() < 100) {
+            setState(() {
+              rrDisplayValue = rrtotalCheck;
+            });
+          }
+          int pipValueCheck =
+              (((list[14] << 8) + list[15]) / 100).round().toInt();
+
+          if ((((list[16] << 8) + list[17]) / 100).round().toInt() > 0 &&
+              (((list[16] << 8) + list[17]) / 100).round().toInt() < 150) {
+            peepDisplayValue =
+                (((list[16] << 8) + list[17]) / 100).round().toInt();
+          }
+
+          if (pipValueCheck != 0 &&
+              pipValueCheck.round() > 0 &&
+              pipValueCheck.round() < 150) {
+            setState(() {
+              psValue1 = pipValueCheck;
+            });
+          }
+          paw = (((list[34] << 8) + list[35]) / 100).toInt();
+
+          if (paw > 200) {
+            setState(() {
+              paw = 0;
+            });
+          }
+
+          expiratoryPressureR =
+              (((list[36] << 8) + list[37]) / 100).toInt(); //37 38
+
+          if (((list[38] << 8) + list[39]).round() > 20 &&
+              ((list[38] << 8) + list[39]).round() < 100) {
+            fio2DisplayParameter = ((list[38] << 8) + list[39]); // 39,40
+          }
+
+          mixingTankPressureR = ((list[40] << 8) + list[41]);
+          airipPressureR = ((list[44] << 8) + list[45]);
+
+          //flow graph
+          inspirationflowR = ((list[46] << 8) + list[47]); //47-48
+          exhalationflowR = ((list[48] << 8) + list[49]); //49-50
+
+          o2Valve = ((list[50] << 8) + list[51]);
+          airiPValveStatusR = ((list[52] << 8) + list[53]);
+          _2by2inhalationValueR = ((list[54] << 8) + list[55]);
+          _2by2exhalationValueR = ((list[56] << 8) + list[57]);
+          turbineSpeedR = ((list[58] << 8) + list[59]);
+          internalTemperatureR = ((list[60] << 8) + list[61]);
+
+          checkTempData = list[31].toString();
+          if (list[108] == 1) {
+            presentCode = ((list[106] << 8) + list[107]);
+            if (presentCode != 0 && presentCode > 0 && presentCode < 23) {
+              var data = AlarmsList(presentCode.toString());
+              dbHelpera.saveAlarm(data);
+            }
+            // Fluttertoast.showToast(msg: presentCode.toString());
+            if (presentCode != previousCode) {
+              previousCode = presentCode;
+              _stopMusic();
+              if (presentCode == 5 ||
+                  presentCode == 7 ||
+                  presentCode == 10 ||
+                  presentCode == 11 ||
+                  presentCode == 17) {
+                _playMusicHigh();
+                sendSoundOn();
+                audioEnable = true;
+              } else if (presentCode == 1 ||
+                  presentCode == 2 ||
+                  presentCode == 3 ||
+                  presentCode == 4 ||
+                  presentCode == 6 ||
+                  presentCode == 8 ||
+                  presentCode == 9 ||
+                  presentCode == 12 ||
+                  presentCode == 13 ||
+                  presentCode == 14 ||
+                  presentCode == 15 ||
+                  presentCode == 16 ||
+                  presentCode == 18 ||
+                  presentCode == 19 ||
+                  presentCode == 20 ||
+                  presentCode == 21 ||
+                  presentCode == 22) {
+                _playMusicMedium();
+                sendSoundOn();
+                audioEnable = true;
+              } else if (presentCode == 23) {
+                _playMusicLower();
+                sendSoundOn();
+                audioEnable = true;
+              }
+            }
+            // _playMusic();
+          } else if (list[108] == 0) {
+            sendSoundOff();
+            _stopMusic();
+          }
+          cdisplayParameter = (double.tryParse(vteValue.toString()) /
+                  (pplateauDisplay -
+                      double.tryParse(peepDisplayValue.toString())))
+              .toInt();
+
+          if (list[108] == 1) {
+            setState(() {
+              if (list[109] == 1 || list[109] == 0) {
+                ((list[106] << 8) + list[107]) == 5
+                    ? alarmMessage = "SYSTEM FAULT"
+                    : ((list[106] << 8) + list[107]) == 7
+                        ? alarmMessage = "FiO\u2082 SENSOR MISSING"
+                        : ((list[106] << 8) + list[107]) == 10
+                            ? alarmMessage = "HIGH LEAKAGE"
+                            : ((list[106] << 8) + list[107]) == 11
+                                ? alarmMessage = "HIGH PRESSURE"
+                                : ((list[106] << 8) + list[107]) == 17
+                                    ? alarmMessage = "PATIENT DISCONNECTED"
+                                    : alarmMessage = "";
+              } else if (list[109] == 2) {
+                ((list[106] << 8) + list[107]) == 1
+                    ? alarmMessage = "AC POWER DISCONNECTED"
+                    : ((list[106] << 8) + list[107]) == 2
+                        ? alarmMessage = " LOW BATTERY"
+                        : ((list[106] << 8) + list[107]) == 3
+                            ? alarmMessage = "CALIBRATE FiO2"
+                            : ((list[106] << 8) + list[107]) == 4
+                                ? alarmMessage = "CALIBRATION FiO2 FAIL"
+                                : ((list[106] << 8) + list[107]) == 6
+                                    ? alarmMessage = "SELF TEST FAIL"
+                                    : ((list[106] << 8) + list[107]) == 8
+                                        ? alarmMessage = "HIGH FiO2"
+                                        : ((list[106] << 8) + list[107]) == 9
+                                            ? alarmMessage = "LOW FIO2"
+                                            : ((list[106] << 8) + list[107]) == 12
+                                                ? alarmMessage = "LOW PRESSURE"
+                                                : ((list[106] << 8) + list[107]) == 13
+                                                    ? alarmMessage = "LOW VTE"
+                                                    : ((list[106] << 8) +
+                                                                list[107]) ==
+                                                            14
+                                                        ? alarmMessage =
+                                                            "HIGH VTE"
+                                                        : ((list[106] << 8) +
+                                                                    list[
+                                                                        107]) ==
+                                                                15
+                                                            ? alarmMessage =
+                                                                "LOW VTI"
+                                                            : ((list[106] << 8) + list[107]) == 16
+                                                                ? alarmMessage =
+                                                                    "HIGH VTI"
+                                                                : ((list[106] << 8) + list[107]) ==
+                                                                        18
+                                                                    ? alarmMessage =
+                                                                        "LOW O2  supply"
+                                                                    : ((list[106] << 8) + list[107]) ==
+                                                                            19
+                                                                        ? alarmMessage =
+                                                                            "LOW RR"
+                                                                        : ((list[106] << 8) + list[107]) == 20
+                                                                            ? alarmMessage = "HIGH RR"
+                                                                            : ((list[106] << 8) + list[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((list[106] << 8) + list[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
+              } else if (list[109] == 3) {
+                ((list[106] << 8) + list[107]) == 23
+                    ? alarmMessage = "Apnea backup"
+                    : alarmMessage = "";
+              }
+            });
+          }
+
+          if (paw <= 10) {
+            setState(() {
+              lungImage = 1;
+            });
+          } else if (paw <= 20 && paw >= 11) {
+            setState(() {
+              lungImage = 2;
+            });
+          } else if (paw <= 30 && paw >= 21) {
+            setState(() {
+              lungImage = 3;
+            });
+          } else if (paw <= 40 && paw >= 31) {
+            setState(() {
+              lungImage = 4;
+            });
+          } else if (paw <= 100 && paw >= 41) {
+            setState(() {
+              lungImage = 5;
+            });
+          }
+        });
+        setState(() {
+          String i = "", e = "", tempIe = "";
+          i = list[12].toString();
+          e = list[13].toString();
+          tempIe = i + ":" + e;
+        });
+
+        var dataOperatingMode = ((list[104] << 8) + list[105]);
+        if (dataOperatingMode > 1 && dataOperatingMode < 14) {
+          setState(() {
+            operatinModeR = ((list[104] << 8) + list[105]);
+          });
+        }
+
+        if (operatinModeR > 1 && operatinModeR < 14) {
+          if (operatinModeR == 1) {
+            setState(() {
+              modeName = "VACV";
+            });
+          } else if (operatinModeR == 2) {
+            setState(() {
+              modeName = "PACV";
+            });
+          } else if (operatinModeR == 3) {
+            setState(() {
+              modeName = "PSV";
+            });
+          } else if (operatinModeR == 4) {
+            setState(() {
+              modeName = "PSIMV";
+            });
+          } else if (operatinModeR == 5) {
+            setState(() {
+              modeName = "VSIMV";
+            });
+          } else if (operatinModeR == 6) {
+            setState(() {
+              modeName = "PC-CMV";
+            });
+          } else if (operatinModeR == 7) {
+            setState(() {
+              modeName = "VC-CMV";
+            });
+          } else if (operatinModeR == 14) {
+            setState(() {
+              modeName = "PRVC";
+            });
+          }
+        }
+
+        if ((((list[68] << 8) + list[69]) / 100).round().toInt() > 0 &&
+            (((list[68] << 8) + list[69]) / 100).round().toInt() < 150) {
+          mapDisplayValue = (((list[68] << 8) + list[69]) / 100).toInt();
+        }
+        if (list[84] == 1) {
+          ioreDisplayParamter = "I";
+        } else if (list[84] == 2) {
+          ioreDisplayParamter = "E";
+        } else {
+          ioreDisplayParamter = "";
+        }
+
+        setState(() {
+          if (list[108] != 0 &&
+              ((list[106] << 8) + list[107]) != null &&
+              ((list[106] << 8) + list[107]) >= 1 &&
+              ((list[106] << 8) + list[107]) <= 23) {
+            alarmActive = list[108].toString();
+          } else {
+            alarmActive = 0.toString();
+          }
+        });
+
+        // pressure graph
+        double temp =
+            (((list[34] << 8) + list[35])).toDouble(); // pressure points 35,36
+
+        if (temp > 40000) {
+          setState(() {
+            temp = -((65535 - temp) / 100);
+          });
+        } else {
+          setState(() {
+            temp = temp / 100;
+          });
+        }
+
+        // if(temp.round()>0 && temp.round()<150)
+        // {
+        if (pressurePoints.length >= 50) {
+          setState(() {
+            pressurePoints.removeAt(0);
+            pressurePoints.add(temp);
+          });
+        } else {
+          pressurePoints.add(temp);
+        }
+        // }else{
+        //   pressurePoints.add(0);
+        // }
+        if (((list[60] << 8) + list[61]).toInt() > 0 &&
+            ((list[60] << 8) + list[61]).toInt() < 150) {
+          pplateauDisplay = ((list[60] << 8) + list[61]).toDouble();
+        }
+
+        double temp1 =
+            ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
+
+        // if(temp1.round() >0 && temp1.round() < 2500)
+        // {
+        if (volumePoints.length >= 50) {
+          setState(() {
+            volumePoints.removeAt(0);
+            volumePoints.add(temp1);
+          });
+        } else {
+          volumePoints.add(temp1);
+        }
+        // }else{
+        //   volumePoints.add(0);
+        // }
+
+        double temp3 =
+            ((((list[46] << 8) + list[47])) - (((list[48] << 8) + list[49])))
+                .toDouble();
+        temp3 = temp3 * 0.06;
+
+        // if(temp3.round()>-100 && temp3.round()<200){
+        if (flowPoints.length >= 50) {
+          setState(() {
+            flowPoints.removeAt(0);
+            flowPoints.add(temp3);
+          });
+        } else {
+          flowPoints.add(temp3);
+        }
+        // }else{
+        //   flowPoints.add(0);
+        // }
+
+        powerIndication = list[64];
+        batteryPercentage = list[65];
+
+        if (patientId != "") {
+          // Fluttertoast.showToast(msg: patientId.toString());
+          var data = VentilatorOMode(
+              patientId,
+              patientName.toString(),
+              psValue1.toString(),
+              vteValue.toString(),
+              peepDisplayValue.toString(),
+              rrDisplayValue.toString(),
+              fio2DisplayParameter.toString(),
+              mapDisplayValue.toString(),
+              mvValue.toString(),
+              cdisplayParameter.toString(),
+              ieDisplayValue.toString(),
+              rrValue.toString(),
+              checkI(i) + ":" + checkE(e).toString(),
+              peepValue.toString(),
+              psValue.toString(),
+              fio2Value.toString(),
+              vtValue.toString(),
+              tiValue.toString(),
+              teValue.toString(),
+              temp,
+              temp3,
+              temp1,
+              operatinModeR.toString(),
+              lungImage.toString(),
+              paw.toString(),
+              globalCounterNo.toString(),
+              ((list[106] << 8) + list[107]).toString(),
+              list[109].toString());
+          saveData(data, patientId);
+        } else {
+          var data = VentilatorOMode(
+              "SWASIT " + globalCounterNo.toString(),
+              patientName,
+              psValue1.toString(),
+              vteValue.toString(),
+              peepDisplayValue.toString(),
+              rrDisplayValue.toString(),
+              fio2DisplayParameter.toString(),
+              mapDisplayValue.toString(),
+              mvValue.toString(),
+              cdisplayParameter.toString(),
+              ieDisplayValue.toString(),
+              rrValue.toString(),
+              checkI(i) + ":" + checkE(e).toString(),
+              peepValue.toString(),
+              psValue.toString(),
+              fio2Value.toString(),
+              vtValue.toString(),
+              tiValue.toString(),
+              teValue.toString(),
+              temp,
+              temp3,
+              temp1,
+              operatinModeR.toString(),
+              lungImage.toString(),
+              paw.toString(),
+              globalCounterNo.toString(),
+              ((list[106] << 8) + list[107]).toString(),
+              list[109].toString());
+          saveData(data, patientId);
+        }
+        list.clear();
+        //==============
+      });
+      // }
+    } else {
+      setState(() {
+        respiratoryEnable = false;
+      });
+      pressurePoints.clear();
+      volumePoints.clear();
+      flowPoints.clear();
+      list.clear();
+    }
   }
 }
