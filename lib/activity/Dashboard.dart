@@ -849,8 +849,8 @@ class _CheckPageState extends State<Dashboard> {
             });
           }
 
-          if(temp.round()>0 && temp.round()<150)
-          {
+          // if(temp.round()>0 && temp.round()<150)
+          // {
           if (pressurePoints.length >= 50) {
             setState(() {
               pressurePoints.removeAt(0);
@@ -859,9 +859,9 @@ class _CheckPageState extends State<Dashboard> {
           } else {
             pressurePoints.add(temp);
           }
-          }else{
-            pressurePoints.add(0);
-          }
+          // }else{
+          //   pressurePoints.add(0);
+          // }
           if(((list[60] << 8) + list[61]).toInt()>0 && ((list[60] << 8) + list[61]).toInt()<150){
           pplateauDisplay = ((list[60] << 8) + list[61]).toDouble();
           }
@@ -869,8 +869,8 @@ class _CheckPageState extends State<Dashboard> {
           double temp1 =
               ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
 
-          if(temp1.round() >0 && temp1.round() < 2500)
-          {
+          // if(temp1.round() >0 && temp1.round() < 2500)
+          // {
           if (volumePoints.length >= 50) {
             setState(() {
               volumePoints.removeAt(0);
@@ -879,16 +879,16 @@ class _CheckPageState extends State<Dashboard> {
           } else {
             volumePoints.add(temp1);
           }
-          }else{
-            volumePoints.add(0);
-          }
+          // }else{
+          //   volumePoints.add(0);
+          // }
 
           double temp3 =
               ((((list[46] << 8) + list[47])) - (((list[48] << 8) + list[49])))
                   .toDouble();
           temp3 = temp3 * 0.06;
 
-          if(temp3.round()>-100 && temp3.round()<200){
+          // if(temp3.round()>-100 && temp3.round()<200){
           if (flowPoints.length >= 50) {
             setState(() {
               flowPoints.removeAt(0);
@@ -897,9 +897,9 @@ class _CheckPageState extends State<Dashboard> {
           } else {
             flowPoints.add(temp3);
           }
-          }else{
-            flowPoints.add(0);
-          }
+          // }else{
+          //   flowPoints.add(0);
+          // }
 
           powerIndication = list[64];
           batteryPercentage = list[65];
