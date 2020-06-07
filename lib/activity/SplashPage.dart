@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
+import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/screens/SelfTestPage.dart';
 
 class SplashPage extends StatefulWidget {
@@ -15,12 +16,16 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   SharedPreferences preferences;
+  DatabaseHelper dbHelper;
   // int counter=0;
 
   @override
   void initState() {
     super.initState();
+    dbHelper = DatabaseHelper();
     // counter = counter+1;
+    var res = dbHelper.delete7Daysdata();
+    print(res);
     getData();
     // saveData();
   }

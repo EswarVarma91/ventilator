@@ -293,7 +293,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                   ],
                 ),
               )
-            : CircularProgressIndicator());
+            : Center(child: CircularProgressIndicator()));
   }
 
   rightBar() {
@@ -2030,7 +2030,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 74,
+                    top: 79,
                   ),
                   color: Colors.grey,
                   height: 1,

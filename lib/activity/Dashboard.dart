@@ -403,7 +403,7 @@ class _CheckPageState extends State<Dashboard> {
   var dbHelper = DatabaseHelper();
   var dbHelpera = ADatabaseHelper();
   var dbCounter = CounterDatabaseHelper();
-  String lastRecordTime;
+  String lastRecordTime ;
   String priorityNo, alarmActive;
   double pplateauDisplay = 0;
   int tempDisplay = 0,
@@ -515,7 +515,7 @@ class _CheckPageState extends State<Dashboard> {
           list.removeAt(0);
         }
 
-        lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+        lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
         //      crcData = list[list.length - 1] * 256 + list[list.length - 2];
         // Fluttertoast.showToast(msg: list.length.toString()+" "+cc.toString() +"  geting crc" +crcData.toString());
 
@@ -552,8 +552,7 @@ class _CheckPageState extends State<Dashboard> {
 
             int vteValueCheck = ((list[4] << 8) + list[5]); //5 6
 
-            if (vteValueCheck != "" || vteValueCheck != null
-                && vteValueCheck.round()>0 && vteValueCheck.round()<2500) {
+            if ((vteValueCheck != "" || vteValueCheck != null) && vteValueCheck.round()>0 && vteValueCheck.round()<2500) {
               setState(() {
                 vteMinValue = vteValue - vtValue;
                 vteValue = ((list[4] << 8) + list[5]);
@@ -574,24 +573,18 @@ class _CheckPageState extends State<Dashboard> {
 
             int rrtotalCheck = ((list[10] << 8) + list[11]).toInt(); //11,12
 
-            if (rrtotalCheck != ""
-                && rrtotalCheck.round()>0 && rrtotalCheck.round()<100
-                ) {
+            if (rrtotalCheck != "" && rrtotalCheck.round()>0 && rrtotalCheck.round()<100) {
               setState(() {
                 rrDisplayValue = rrtotalCheck;
               });
             }
-            int pipValueCheck =
-                (((list[14] << 8) + list[15]) / 100).round().toInt();
+            int pipValueCheck = (((list[14] << 8) + list[15]) / 100).round().toInt();
 
             if((((list[16] << 8) + list[17]) / 100).round().toInt()>0 && (((list[16] << 8) + list[17]) / 100).round().toInt()<150){
-            peepDisplayValue =
-                (((list[16] << 8) + list[17]) / 100).round().toInt();
+            peepDisplayValue = (((list[16] << 8) + list[17]) / 100).round().toInt();
             }
 
-            if (pipValueCheck != 0
-                && pipValueCheck.round()>0 && pipValueCheck.round()<150
-                ) {
+            if (pipValueCheck != 0  && pipValueCheck.round()>0 && pipValueCheck.round()<150) {
               setState(() {
                 psValue1 = pipValueCheck;
               });
@@ -624,7 +617,7 @@ class _CheckPageState extends State<Dashboard> {
             _2by2exhalationValueR = ((list[56] << 8) + list[57]);
             turbineSpeedR = ((list[58] << 8) + list[59]);
             internalTemperatureR = ((list[60] << 8) + list[61]);
-            operatinModeR = ((list[104] << 8) + list[105]);
+            
 
             checkTempData = list[31].toString();
             if (list[108] == 1) {
@@ -673,10 +666,11 @@ class _CheckPageState extends State<Dashboard> {
               }
               // _playMusic();
             } else if (list[108] == 0) {
+              sendSoundOff();
               _stopMusic();
             }
             cdisplayParameter =
-                (vteValue / (pplateauDisplay - peepDisplayValue)).toInt();
+                (double.tryParse(vteValue.toString()) / (pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
 
             if (list[108] == 1) {
               setState(() {
@@ -772,6 +766,17 @@ class _CheckPageState extends State<Dashboard> {
             e = list[13].toString();
             tempIe = i + ":" + e;
           });
+
+          
+
+          var dataOperatingMode = ((list[104] << 8) + list[105]);
+          if(dataOperatingMode>1 && dataOperatingMode<14)
+          {
+            setState(() {
+              operatinModeR = ((list[104] << 8) + list[105]);
+            });
+          }
+
           if(operatinModeR>1 && operatinModeR<14){
                if (operatinModeR == 1) {
             setState(() {
@@ -844,7 +849,7 @@ class _CheckPageState extends State<Dashboard> {
             });
           }
 
-          if(temp.round()>-150 && temp.round()<150)
+          if(temp.round()>0 && temp.round()<150)
           {
           if (pressurePoints.length >= 50) {
             setState(() {
@@ -853,9 +858,9 @@ class _CheckPageState extends State<Dashboard> {
             });
           } else {
             pressurePoints.add(temp);
-            // Fluttertoast.showToast(msg: pressurePoints.length.toString());
-            // li.add(temp);
           }
+          }else{
+            pressurePoints.add(0);
           }
           if(((list[60] << 8) + list[61]).toInt()>0 && ((list[60] << 8) + list[61]).toInt()<150){
           pplateauDisplay = ((list[60] << 8) + list[61]).toDouble();
@@ -864,7 +869,7 @@ class _CheckPageState extends State<Dashboard> {
           double temp1 =
               ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
 
-          if(temp1.round() > -2500 && temp1.round() < 2500)
+          if(temp1.round() >0 && temp1.round() < 2500)
           {
           if (volumePoints.length >= 50) {
             setState(() {
@@ -874,6 +879,8 @@ class _CheckPageState extends State<Dashboard> {
           } else {
             volumePoints.add(temp1);
           }
+          }else{
+            volumePoints.add(0);
           }
 
           double temp3 =
@@ -890,6 +897,8 @@ class _CheckPageState extends State<Dashboard> {
           } else {
             flowPoints.add(temp3);
           }
+          }else{
+            flowPoints.add(0);
           }
 
           powerIndication = list[64];
@@ -910,10 +919,11 @@ class _CheckPageState extends State<Dashboard> {
                 cdisplayParameter.toString(),
                 ieDisplayValue.toString(),
                 rrValue.toString(),
-                ieValue.toString(),
+                checkI(i) + ":" + checkE(e).toString(),
                 peepValue.toString(),
                 psValue.toString(),
                 fio2Value.toString(),
+                vtValue.toString(),
                 tiValue.toString(),
                 teValue.toString(),
                 temp,
@@ -940,10 +950,11 @@ class _CheckPageState extends State<Dashboard> {
                 cdisplayParameter.toString(),
                 ieDisplayValue.toString(),
                 rrValue.toString(),
-                ieValue.toString(),
+                checkI(i) + ":" + checkE(e).toString(),
                 peepValue.toString(),
                 psValue.toString(),
                 fio2Value.toString(),
+                vtValue.toString(),
                 tiValue.toString(),
                 teValue.toString(),
                 temp,
@@ -1029,6 +1040,8 @@ class _CheckPageState extends State<Dashboard> {
   @override
   initState() {
     super.initState();
+    var now = new DateTime.now();
+    lastRecordTime =  DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
     counterData();
     getData();
     // getNoTimes();
@@ -1075,17 +1088,17 @@ class _CheckPageState extends State<Dashboard> {
               respiratoryEnable = false;
               insExpButtonEnable = false;
                setState(() {
-                  psValue1 = 0;
-                  mvValue = 0;
-                  vteValue = 0;
-                  peepDisplayValue = 0;
-                  rrtotalValue =0;
-                  mapDisplayValue=0;
-                  peepDisplayValue =0;
-                  fio2DisplayParameter = 0;
-                  pressurePoints.clear();
-                  volumePoints.clear();
-                  flowPoints.clear();
+                  // psValue1 = 0;
+                  // mvValue = 0;
+                  // vteValue = 0;
+                  // peepDisplayValue = 0;
+                  // rrtotalValue =0;
+                  // mapDisplayValue=0;
+                  // peepDisplayValue =0;
+                  // fio2DisplayParameter = 0;
+                  // pressurePoints.clear();
+                  // volumePoints.clear();
+                  // flowPoints.clear();
                 });
               
               // playOnEnabled = false;
@@ -18183,8 +18196,8 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add((pccmvPeepValue & 0xFF00) >> 8);
         modeWriteList.add((pccmvPeepValue & 0x00FF));
 
-        modeWriteList.add((pccmvPcValue & 0xFF00) >> 8);
-        modeWriteList.add((pccmvPcValue & 0x00FF));
+        modeWriteList.add((pccmvPcValue & 0xFF00) >> 8);//12
+        modeWriteList.add((pccmvPcValue & 0x00FF));//13
 
         modeWriteList.add((pccmvFio2Value & 0xFF00) >> 8);
         modeWriteList.add((pccmvFio2Value & 0x00FF));

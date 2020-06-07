@@ -73,51 +73,54 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
               return GridView.builder(
                   itemCount: snapshot.data.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,mainAxisSpacing: 0,crossAxisSpacing: 0),
+                      crossAxisCount: 6,mainAxisSpacing: 0,crossAxisSpacing: 0),
                   itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                        onTap: () {
-                          Navigator.push(
+                    return GestureDetector(
+                      onTap: (){
+                        Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
                                       patientsDates(snapshot.data[index].pId)));
-                        },
-                        title: Card(
-                            child: Container(
-                              height: 200,
-                              width: 250,
+                      },
+                        child: Card(
+                            elevation: 10.0,
                               child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    snapshot.data[index].pName != null ||
-                                            snapshot.data[index].pName != ""
-                                        ? snapshot.data[index].pName.toString()
-                                        : "NA",
-                                    style: TextStyle(fontSize: 22),
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // Text(
+                                      //   snapshot.data[index].pName != null ||
+                                      //           snapshot.data[index].pName != ""
+                                      //       ? snapshot.data[index].pName.toString()
+                                      //       : "NA",
+                                      //   style: TextStyle(fontSize: 18),
+                                      // ),
+                                      // SizedBox(
+                                      //   height: 30,
+                                      // ),
+                                      Text(
+                                        snapshot.data[index].pId != null
+                                            ? snapshot.data[index].pId
+                                                .toString()
+                                                .toUpperCase()
+                                            : "NA",
+                                        style: TextStyle(
+                                            fontSize: 18, fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-                                  Text(
-                                    snapshot.data[index].pId != null
-                                        ? snapshot.data[index].pId
-                                            .toString()
-                                            .toUpperCase()
-                                        : "NA",
-                                    style: TextStyle(
-                                        fontSize: 22, fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                            ),
+                                ),
                               ),
                           ),
-                            ),
-                        ),
-                      );
+                    );
                   });
             }
           },
@@ -126,3 +129,5 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
     );
   }
 }
+
+

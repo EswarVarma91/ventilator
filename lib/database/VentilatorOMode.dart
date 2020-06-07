@@ -18,7 +18,7 @@ class VentilatorOMode {
       psS,
       fio2S,
       tiS,
-      teS,globalCounterNo;
+      teS,globalCounterNo,vtValue;
   double pressureValues, flowValues, volumeValues;
   String dateTime;
   String patientName,patientId,alarmC,alarmP;
@@ -40,6 +40,7 @@ class VentilatorOMode {
       this.peepS,
       this.psS,
       this.fio2S,
+      this.vtValue,
       this.tiS,
       this.teS,
       this.pressureValues,
@@ -95,6 +96,7 @@ class VentilatorOMode {
     peepS = map['peepS'];
     psS = map['psS'];
     fio2S = map['fio2S'];
+    vtValue = map['vtValueS'];
     tiS = map['tiS'];
     teS = map['teS'];
     pressureValues = map['pressureP'];
@@ -126,13 +128,16 @@ class VentilatorOMode {
         peepS = json['peepS'],
         psS = json['psS'],
         fio2S = json['fio2S'],
+        vtValue = json['vtValueS'],
         tiS = json['tiS'],
         teS = json['teS'],
         pressureValues = json['pressureValues'],
         flowValues = json['flowValues'],
         volumeValues = json['volumeValues'],
         dateTime = json['dateTime'],
-         globalCounterNo = json['globalCounterNo']
+         globalCounterNo = json['globalCounterNo'],
+          alarmC = json['alarmCodes'],
+    alarmP = json['alarmPriority']
         ;
 
   VentilatorOMode.map(dynamic obj) {
@@ -152,6 +157,7 @@ class VentilatorOMode {
     this.peepS = obj['peepS'];
     this.psS = obj['psS'];
     this.fio2S = obj['fio2S'];
+    this.vtValue = obj['vtValueS'];
     this.tiS = obj['tiS'];
     this.teS = obj['teS'];
     this.pressureValues = obj['pressureValues'];
@@ -159,6 +165,8 @@ class VentilatorOMode {
     this.volumeValues = obj['volumeValues'];
     this.dateTime = obj['dateTime'];
     this.globalCounterNo = obj['globalCounterNo'];
+    this.alarmC = obj['alarmCodes'];
+    this.alarmP = obj['alarmPriority'];
   }
 }
 
