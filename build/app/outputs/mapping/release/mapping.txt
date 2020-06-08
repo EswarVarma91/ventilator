@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 1.5.64
 # min_api: 21
-# pg_map_id: 64dbdfb
+# pg_map_id: 5970a2d
 androidx.activity.Cancellable -> androidx.activity.a:
 androidx.activity.ComponentActivity -> androidx.activity.ComponentActivity:
     androidx.activity.OnBackPressedDispatcher mOnBackPressedDispatcher -> f
@@ -5655,11 +5655,23 @@ androidx.versionedparcelable.VersionedParcelParcel -> androidx.versionedparcelab
     java.lang.String readString() -> i
 androidx.versionedparcelable.VersionedParcelable -> androidx.versionedparcelable.c:
 com.example.ventilator.MainActivity -> com.example.ventilator.MainActivity:
-    android.media.MediaPlayer mp -> e
-    android.app.admin.DevicePolicyManager mDevicePolicyManager -> d
+    android.media.MediaPlayer mp -> f
+    android.content.ComponentName mAdminComponentName -> d
+    android.os.PowerManager$WakeLock mWakeLock -> h
+    int RESULT_ENABLE -> i
+    android.app.admin.DevicePolicyManager mDevicePolicyManager -> e
+    android.os.PowerManager mPowerManager -> g
+    int access$getBatteryLevel(com.example.ventilator.MainActivity) -> a
+    void access$setMWakeLock$p(com.example.ventilator.MainActivity,android.os.PowerManager$WakeLock) -> a
     void configureFlutterEngine(io.flutter.embedding.engine.FlutterEngine) -> a
     void setMp(android.media.MediaPlayer) -> a
+    android.content.ComponentName access$getMAdminComponentName$p(com.example.ventilator.MainActivity) -> b
+    android.app.admin.DevicePolicyManager access$getMDevicePolicyManager$p(com.example.ventilator.MainActivity) -> c
+    android.os.PowerManager access$getMPowerManager$p(com.example.ventilator.MainActivity) -> d
+    android.os.PowerManager$WakeLock access$getMWakeLock$p(com.example.ventilator.MainActivity) -> e
     android.media.MediaPlayer getMp() -> s
+    int getRESULT_ENABLE() -> t
+    int getBatteryLevel() -> u
 com.example.ventilator.MainActivity$Companion -> com.example.ventilator.MainActivity$a:
 com.example.ventilator.MainActivity$configureFlutterEngine$1 -> com.example.ventilator.MainActivity$b:
     com.example.ventilator.MainActivity this$0 -> a

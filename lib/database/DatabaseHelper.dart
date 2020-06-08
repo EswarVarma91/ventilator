@@ -128,7 +128,7 @@ class DatabaseHelper {
   Future<List<PatientsList>> getAllPatients() async {
     var dbClient = await db;
      // List<Map> dataData = await dbClient.rawQuery('SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
-          List<Map> dataData = await dbClient.rawQuery('SELECT $PATIENTID,$PATIENTNAME from $TABLE GROUP BY $GLOBAL_COUNTER_NO ORDER BY $ID DESC');
+          List<Map> dataData = await dbClient.rawQuery('SELECT DISTINCT $PATIENTID,$PATIENTNAME from $TABLE GROUP BY $GLOBAL_COUNTER_NO ORDER BY $ID DESC');
     List<PatientsList> plist = [];
     if (dataData.length > 0) {
       for (int i = 0; i < dataData.length; i++) {

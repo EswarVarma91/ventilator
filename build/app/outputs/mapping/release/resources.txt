@@ -168,6 +168,7 @@ Referenced Strings:
   ImageButton
   ImageView
   InlinedApi
+  InvalidWakeLockTag
   LANDSCAPE_LEFT
   LANDSCAPE_RIGHT
   LIGHT
@@ -225,6 +226,7 @@ Referenced Strings:
   PonnamKarthik/fluttertoast
   PopupWindowCompatApi21
   PrivateApi
+  ProximityActivity
   R:
   REMOVE
   REPLACE
@@ -322,6 +324,7 @@ Referenced Strings:
   TypefaceCompatApi26Impl
   TypefaceCompatBaseImpl
   TypefaceCompatUtil
+  UNAVAILABLE
   UNKNOWN
   UNSET_PRIMARY_NAV
   URI
@@ -363,12 +366,16 @@ Referenced Strings:
   alwaysUse24HourFormat
   android
   android.app.ActivityThread
+  android.app.action.ADD_DEVICE_ADMIN
+  android.app.extra.ADD_EXPLANATION
+  android.app.extra.DEVICE_ADMIN
   android.content.res.ThemedResourceCache
   android.graphics.FontFamily
   android.graphics.Insets
   android.graphics.drawable.VectorDrawable
   android.hardware.usb.action.USB_DEVIC...
   android.hardware.usb.action.USB_DEVIC...
+  android.intent.action.BATTERY_CHANGED
   android.intent.action.MAIN
   android.intent.action.PROCESS_TEXT
   android.intent.action.RUN
@@ -448,6 +455,7 @@ Referenced Strings:
   bad_param
   base
   batch
+  batterymanager
   baudRate
   bgcolor
   bool
@@ -574,6 +582,7 @@ Referenced Strings:
   getAll
   getApplicationDocumentsDirectory
   getApplicationSupportDirectory
+  getBatteryLevel
   getChildId
   getDatabasesPath
   getExternalCacheDirectories
@@ -640,6 +649,7 @@ Referenced Strings:
   layout_inflater
   left
   length
+  level
   libapp.so
   libflutter.so
   light
@@ -652,6 +662,7 @@ Referenced Strings:
   long
   longPress
   mAccessibilityDelegate
+  mAdminComponentName
   mBuffer
   mButtonDrawable
   mChildNodeIds
@@ -758,6 +769,7 @@ Referenced Strings:
   route
   rows
   samsung
+  scale
   scaleX
   scaleY
   scanCode
@@ -772,7 +784,6 @@ Referenced Strings:
   sendPlayAudioStartL
   sendPlayAudioStartM
   sendPlayAudioStop
-  sendShutdowndevice
   sendsoundoff
   sendsoundon
   separator
@@ -842,6 +853,7 @@ Referenced Strings:
   systemNavigationBarColor
   systemNavigationBarDividerColor
   systemNavigationBarIconBrightness
+  tag
   tap
   target
   tekartik_sqflite.db
@@ -869,6 +881,8 @@ Referenced Strings:
   trimPathOffset
   trimPathStart
   truncated
+  turnOffScreen
+  turnOnScreen
   type
   unknown
   update
@@ -1155,6 +1169,14 @@ Marking xml:device_admin_receiver:2131755008 used because its prefix matches str
 Marking xml:device_filter:2131755009 used because its prefix matches string pool constant device
 Marking attr:queryBackground:2130837695 used because its prefix matches string pool constant query
 Marking attr:queryHint:2130837696 used because its prefix matches string pool constant query
+Marking id:tag_accessibility_actions:2131165325 used because its prefix matches string pool constant tag
+Marking id:tag_accessibility_clickable_spans:2131165326 used because its prefix matches string pool constant tag
+Marking id:tag_accessibility_heading:2131165327 used because its prefix matches string pool constant tag
+Marking id:tag_accessibility_pane_title:2131165328 used because its prefix matches string pool constant tag
+Marking id:tag_screen_reader_focusable:2131165329 used because its prefix matches string pool constant tag
+Marking id:tag_transition_group:2131165330 used because its prefix matches string pool constant tag
+Marking id:tag_unhandled_key_event_manager:2131165331 used because its prefix matches string pool constant tag
+Marking id:tag_unhandled_key_listeners:2131165332 used because its prefix matches string pool constant tag
 Marking id:bottom:2131165248 used because its prefix matches string pool constant bottom
 Marking color:error_color_material_dark:2130968618 used because its prefix matches string pool constant error
 Marking color:error_color_material_light:2130968619 used because its prefix matches string pool constant error
