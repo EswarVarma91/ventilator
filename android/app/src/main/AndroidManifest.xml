@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.DEVICE_POWER"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.REBOOT"
-        tools:ignore="signatureOrSystem" />
+        tools:ignore="ProtectedPermissions,signatureOrSystem" />
 <!--    <uses-permission android:name="android.permission.SHUTDOWN"-->
 <!--        tools:ignore="signatureOrSystem" />-->
     <uses-permission android:name="android.permission.REORDER_TASKS" />
@@ -32,7 +32,6 @@
         <meta-data android:name="flutterEmbedding" android:value="2" />
 
         <activity android:name=".MainActivity"
-        
             android:screenOrientation="fullSensor"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="false"
@@ -49,6 +48,7 @@
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
              <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>

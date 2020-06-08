@@ -1,29 +1,26 @@
 package com.example.ventilator
 
-import android.R.attr.process
 import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.app.admin.SystemUpdatePolicy
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.BatteryManager
 import android.os.Build
+import android.os.PowerManager
 import android.os.UserManager
 import android.provider.Settings
+import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import androidx.annotation.NonNull
+import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
 
 
 class MainActivity: FlutterActivity() {
@@ -31,12 +28,16 @@ class MainActivity: FlutterActivity() {
     private lateinit var mAdminComponentName: ComponentName
     private lateinit var mDevicePolicyManager: DevicePolicyManager
     var mp: MediaPlayer? = null
+    private val mPowerManager: PowerManager? = null
+    private var mWakeLock: PowerManager.WakeLock? = null
+    val RESULT_ENABLE = 1
 
     companion object {
         const val LOCK_ACTIVITY_KEY = "MainActivity"
         const val CHANNEL = "shutdown"
     }
 
+    @SuppressLint("InvalidWakeLockTag")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine)
@@ -45,28 +46,7 @@ class MainActivity: FlutterActivity() {
 
 
         MethodChannel(flutterEngine.getDartExecutor(), CHANNEL).setMethodCallHandler { call, result ->
-            if (call.method == "sendShutdowndevice") {
-                var commandString : String
-                var line: String
-                try {
-
-                   val proc =  Runtime.getRuntime().exec("adb shell reboot -p")
-//                    commandString = String.format("%s", "adb shell " + "reboot -p");
-//                    try {
-//                        process = ProcessHelper.runTimeExec(commandString)
-//                    } catch (e: IOException) {
-//                    }
-
-
-
-//                    val proc = Runtime.getRuntime()
-//                            .exec(arrayOf("su", "-c", "reboot -p"))
-                    proc.waitFor()
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                }
-                result.success(true)
-            } else if(call.method == "sendPlayAudioStartH"){
+            if(call.method == "sendPlayAudioStartH"){
                 try {
                     mp= MediaPlayer.create(getApplicationContext(),R.raw.high);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
 
@@ -135,6 +115,38 @@ class MainActivity: FlutterActivity() {
                     ex.printStackTrace()
                 }
                 result.success(true)
+            }else  if (call.method == "turnOnScreen") {
+                try {
+                    Log.v("ProximityActivity", "ON!")
+                    mWakeLock = mPowerManager?.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.FULL_WAKE_LOCK, "tag")
+                    mWakeLock?.acquire()
+//                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                result.success(true)
+            }
+            else  if (call.method == "turnOffScreen") {
+                try {
+                    Log.v("ProximityActivity", "OFF!");
+                    if(mDevicePolicyManager.isAdminActive(mAdminComponentName)){
+                        mDevicePolicyManager.lockNow()
+                    }else{
+                        val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
+                        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mAdminComponentName)
+                        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Please Click On Activate")
+                        startActivityForResult(intent, RESULT_ENABLE)
+                    }
+//                    mWakeLock = mPowerManager?.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "tag");
+//                    mWakeLock?.acquire();
+                    finish()
+//                  System.exit(0)
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                result.success(true)
             }
 
 
@@ -175,7 +187,15 @@ class MainActivity: FlutterActivity() {
                     ex.printStackTrace()
                 }
                 result.success(true)
-            }else {
+            }else if (call.method == "getBatteryLevel") {
+                val batteryLevel = getBatteryLevel()
+
+                if (batteryLevel != -1) {
+                    result.success(batteryLevel)
+                } else {
+                    result.error("UNAVAILABLE", "Battery level not available.", null)
+                }
+            } else {
                 result.notImplemented()
             }
         }
@@ -190,6 +210,17 @@ class MainActivity: FlutterActivity() {
 //        setKioskPolicies(true, isAdmin)
 
     }
+
+    private fun getBatteryLevel(): Int {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val batteryManager = getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+            batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+        } else {
+            val intent = ContextWrapper(applicationContext).registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            intent!!.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) * 100 / intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+        }
+    }
+
 
     @SuppressLint("NewApi")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -289,6 +320,19 @@ class MainActivity: FlutterActivity() {
                     or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
             window.decorView.systemUiVisibility = flags
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RESULT_ENABLE) {
+//            if (resultCode == Activity.RESULT_OK) {
+//
+//            } else {
+            finish()
+            System.exit(0)
+            //            }
+            return
         }
     }
 

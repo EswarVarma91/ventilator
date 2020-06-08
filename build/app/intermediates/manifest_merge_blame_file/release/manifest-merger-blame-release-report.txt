@@ -23,7 +23,7 @@
 18-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:11:5-12:47
 18-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:11:22-68
 19    <uses-permission android:name="android.permission.REBOOT" />
-19-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:13:5-14:44
+19-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:13:5-14:65
 19-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:13:22-62
 20    <!-- <uses-permission android:name="android.permission.SHUTDOWN" -->
 21    <!-- tools:ignore="signatureOrSystem" /> -->
@@ -72,43 +72,43 @@
 44            android:name="com.example.ventilator.MainActivity"
 44-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:34:19-47
 45            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-45-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:37:13-144
+45-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:13-144
 46            android:exported="true"
-46-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:40:13-36
+46-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:39:13-36
 47            android:hardwareAccelerated="false"
-47-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:13-48
+47-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:37:13-48
 48            android:launchMode="singleTop"
-48-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:39:13-43
+48-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:13-43
 49            android:screenOrientation="fullSensor"
-49-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:13-51
+49-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:35:13-51
 50            android:theme="@style/LaunchTheme"
-50-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:41:13-47
+50-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:40:13-47
 51            android:windowSoftInputMode="adjustResize" >
-51-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:42:13-55
+51-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:41:13-55
 52            <meta-data
-52-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:44:13-113
+52-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:43:13-113
 53                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
-53-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:44:24-89
+53-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:43:24-89
 54                android:value="true" />
-54-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:44:90-110
+54-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:43:90-110
 55
 56            <intent-filter>
-56-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:45:13-51:29
+56-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:44:13-50:29
 57
 58                <!-- <action android:name="android.intent.action.ACTION_REQUEST_SHUTDOWN" /> -->
 59                <action android:name="android.intent.action.MAIN" />
-59-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:17-69
-59-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:25-66
+59-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:46:17-69
+59-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:46:25-66
 60
 61                <category android:name="android.intent.category.LAUNCHER" />
-61-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:48:17-77
-61-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:48:27-74
+61-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:17-77
+61-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:27-74
 62                <category android:name="android.intent.category.HOME" />
-62-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:49:17-73
-62-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:49:27-70
+62-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:48:17-73
+62-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:48:27-70
 63                <category android:name="android.intent.category.DEFAULT" />
-63-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:50:17-76
-63-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:50:27-73
+63-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:49:17-76
+63-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:49:27-73
 64            </intent-filter>
 65            <intent-filter>
 65-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:52:14-54:29

@@ -10,6 +10,7 @@ class ADatabaseHelper {
   static const String ID = "id";
   static const String ALARM = 'alarmCodes';
   static const String DATE_TIME = 'datetime';
+  static const String GLOBAL_COUNTER_NO = 'globalCounterNo';
   static const String TABLE_ALARM ='alarms';
   static const String DATABASE = 'alarmsDb';
 
@@ -29,7 +30,7 @@ class ADatabaseHelper {
   }
 
   _onCreate(Database db, int version) async {
-    await db.execute('CREATE TABLE $TABLE_ALARM($ID INTERGER PRIMARY KEY,$ALARM TEXT,$DATE_TIME TEXT)');
+    await db.execute('CREATE TABLE $TABLE_ALARM($ID INTERGER PRIMARY KEY,$ALARM TEXT,$DATE_TIME TEXT,$GLOBAL_COUNTER_NO TEXT)');
   }
 
 
@@ -38,12 +39,13 @@ class ADatabaseHelper {
     try{
       var dbClient = await db;
        var res = await dbClient.rawInsert(
-          "INSERT into $TABLE_ALARM ($ALARM,$DATE_TIME) VALUES (?,?)",
+          "INSERT into $TABLE_ALARM ($ALARM,$DATE_TIME,$GLOBAL_COUNTER_NO) VALUES (?,?,?)",
           [
             al.alarmCode,
-            DateFormat("yyyy-MM-dd HH:mm:ss").format(now)
+            DateFormat("yyyy-MM-dd HH:mm:ss").format(now),
+            al.globalCounterNo
           ]);
-          print("result data 1 : "+res.toString());
+          // print("result data 1 : "+res.toString());
 
           return res;
     }catch(Exception){
@@ -53,7 +55,7 @@ class ADatabaseHelper {
 
    Future<List<AlarmsList>> getAllAlarms() async {
      var dbClient = await db;
-    List<Map> dataData= await dbClient.rawQuery('SELECT $ID,$ALARM,$DATE_TIME FROM $TABLE_ALARM group by $ALARM ORDER BY $ID ASC LIMIT 200');
+    List<Map> dataData= await dbClient.rawQuery('SELECT $ID,$ALARM,$DATE_TIME FROM $TABLE_ALARM group by $GLOBAL_COUNTER_NO ORDER BY $ID DESC LIMIT 200');
     List<AlarmsList> plist =[];
     if(dataData.length>0){
       for(int i=0; i<dataData.length;i++){
@@ -62,41 +64,6 @@ class ADatabaseHelper {
     }
     return plist;
   }
-
-
-
-  // Future<String> getLastRecordTime() async {
-  //    var dbClient = await db;
-  //   var dataData= await dbClient.rawQuery('SELECT $DATE_TIME FROM $TABLE ORDER BY $ID DESC LIMIT 1');
-  //   return dataData.toString();
-  // }
-
-  // Future<List<PatientsList>> getAllPatients() async {
-  //    var dbClient = await db;
-  //   List<Map> dataData= await dbClient.rawQuery('SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
-  //   List<PatientsList> plist =[];
-  //   if(dataData.length>0){
-  //     for(int i=0; i<dataData.length;i++){
-  //       plist.add(PatientsList.fromMap(dataData[i]));
-  //     }
-  //   }
-  //   return plist;
-  // }
-
-  
-
-  // Future<List<VentilatorOMode>> getPatientsData(String patientIdD,String fromDate,String toDate) async {
-  //    var dbClient = await db;
-  //   //  SELECT * FROM graphPoints WHERE patientId="p002" and datetimeP BETWEEN "24-01-2010 09:02:23"  AND "24-01-2010 09:02:54" 
-  //   List<Map> dataData= await dbClient.rawQuery('SELECT * FROM $TABLE where $PATIENTID=\'$patientIdD\' AND $DATE_TIME BETWEEN \'$fromDate\' AND \'$toDate\'');
-  //   List<VentilatorOMode> plist =[];
-  //   if(dataData.length>0){
-  //     for(int i=0; i<dataData.length;i++){
-  //       plist.add(VentilatorOMode.fromMap(dataData[i]));
-  //     }
-  //   }
-  //   return plist;
-  // }
 
   Future<int> delete(int id) async {
     var dbClient = await db;

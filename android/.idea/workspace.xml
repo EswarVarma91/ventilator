@@ -11,30 +11,152 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb362ea0-1d3f-40da-912c-25d409e43da3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_arm64_v8a_debug_1_0_0_ee76268252c22f5c11e82a7b87423ca3982e51a7_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_armeabi_v7a_debug_1_0_0_ee76268252c22f5c11e82a7b87423ca3982e51a7_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_flutter_embedding_debug_1_0_0_ee76268252c22f5c11e82a7b87423ca3982e51a7_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_x86_64_debug_1_0_0_ee76268252c22f5c11e82a7b87423ca3982e51a7_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_x86_debug_1_0_0_ee76268252c22f5c11e82a7b87423ca3982e51a7_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/0540d87737532c19b363de3bfa37fd78/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/0540d87737532c19b363de3bfa37fd78/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/0540d87737532c19b363de3bfa37fd78/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/0540d87737532c19b363de3bfa37fd78/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/0540d87737532c19b363de3bfa37fd78/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/0540d87737532c19b363de3bfa37fd78/kernel_snapshot.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/0540d87737532c19b363de3bfa37fd78/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/0540d87737532c19b363de3bfa37fd78/kernel_snapshot.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/aot_android_asset_bundle.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/aot_android_asset_bundle.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/armeabi-v7a/app.so" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/armeabi-v7a/app.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/flutter_assets.d" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/flutter_assets.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/kernel_snapshot.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/2d4bcccf190740394ba1d5592159c637/kernel_snapshot.stamp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/.filecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/kernel_snapshot.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/../.dart_tool/flutter_build/c0fa536c49f5f21f7dcc10ba968f3c73/kernel_snapshot.stamp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_arm64_v8a_debug_1_0_0_b851c718295a896918dc93cb1ff14f2f895a1b90_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_armeabi_v7a_debug_1_0_0_b851c718295a896918dc93cb1ff14f2f895a1b90_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_flutter_embedding_debug_1_0_0_b851c718295a896918dc93cb1ff14f2f895a1b90_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_x86_64_debug_1_0_0_b851c718295a896918dc93cb1ff14f2f895a1b90_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_x86_debug_1_0_0_b851c718295a896918dc93cb1ff14f2f895a1b90_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/-1290918537/android-shared_preferences.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-1290918537/android-shared_preferences.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/-1441689898/android-screen.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-1441689898/android-screen.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/-1771226315/android-fluttertoast.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-1771226315/android-fluttertoast.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/-1963620934/android-usb_serial.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-1963620934/android-usb_serial.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1813872585/android-sqflite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1813872585/android-sqflite.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/2094439556/android-path_provider.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/2094439556/android-path_provider.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/dex/release/mergeDexRelease/out/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/dex/release/mergeDexRelease/out/classes.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/libs.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/libs.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/arm64-v8a/app.so" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/arm64-v8a/app.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/armeabi-v7a/app.so" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/armeabi-v7a/app.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/flutter_assets/AssetManifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/flutter_build.d" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/flutter_build.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/libs.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/release/libs.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/debug-mergeNativeLibs/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/debug-mergeNativeLibs/merge-state" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/packageRelease/tmp/release/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/packageRelease/tmp/release/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/release-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/release-mergeJavaRes/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/release-mergeJavaRes/zip-cache/POpOhYZSCu+ZGc8hFU5hOOwn0HY=" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/release-mergeJavaRes/zip-cache/POpOhYZSCu+ZGc8hFU5hOOwn0HY=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/release-mergeNativeLibs/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/release-mergeNativeLibs/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/incremental/release-mergeNativeLibs/zip-cache/POpOhYZSCu+ZGc8hFU5hOOwn0HY=" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/incremental/release-mergeNativeLibs/zip-cache/POpOhYZSCu+ZGc8hFU5hOOwn0HY=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/manifest_merge_blame_file/release/manifest-merger-blame-release-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/manifest_merge_blame_file/release/manifest-merger-blame-release-report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/release/out/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/release/out/flutter_assets/AssetManifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/release/out/flutter_assets/assets/images/switchoff.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/merged_assets/release/out/flutter_assets/assets/images/switchon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/merged_native_libs/release/out/lib/armeabi-v7a/libapp.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/merged_native_libs/release/out/lib/armeabi-v7a/libflutter.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/stripped_native_libs/release/out/lib/armeabi-v7a/libapp.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/stripped_native_libs/release/out/lib/armeabi-v7a/libflutter.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity$configureFlutterEngine$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity$configureFlutterEngine$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/debug/1/com/example/ventilator/MainActivity.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$Companion.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$Companion.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$configureFlutterEngine$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity$configureFlutterEngine$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/intermediates/transforms/dexBuilder/release/1/com/example/ventilator/MainActivity.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/build-history.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/constants.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/constants.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/constants.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/constants.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/counters.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/counters.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream.len" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.len" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab_i" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream.len" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.len" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab_i" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileDebugKotlin/last-build.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/build-history.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/jvm/kotlin/proto.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/jvm/kotlin/proto.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab.keystream" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab.keystream.len" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab.len" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/caches-jvm/lookups/lookups.tab_i" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/kotlin/compileReleaseKotlin/last-build.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/outputs/apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/apk/app.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/outputs/apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/apk/app.apk.sha1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/outputs/apk/release/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/apk/release/app-release.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/cache.dill" beforeDir="false" afterPath="$PROJECT_DIR$/../build/cache.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/outputs/flutter-apk/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/flutter-apk/app-release.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/outputs/logs/manifest-merger-release-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/outputs/logs/manifest-merger-release-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/reports/lint-results-release-fatal.html" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/reports/lint-results-release-fatal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$configureFlutterEngine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity$configureFlutterEngine$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/release/com/example/ventilator/MainActivity.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/activity/Dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/activity/Dashboard.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/database/DatabaseHelper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/database/DatabaseHelper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/database/VentilatorOMode.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/database/VentilatorOMode.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/activity/SplashPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/activity/SplashPage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="HA13ZTV5" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="0123456789ABCDEF" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -43,7 +165,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -61,8 +188,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DEBUGGABLE_DEVICE" value="lenovo-lenovo_tb_7305f-0123456789ABCDEF" />
+    <property name="DEBUGGABLE_PROCESS" value="com.example.ventilator" />
+    <property name="DEBUGGER_ID" value="Auto" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/raw" />
     <property name="memory.settings.postsync.last.time.stamp" value="1591264434181" />
     <property name="project.structure.last.edited" value="SDK Location" />
@@ -183,51 +314,45 @@
       <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state x="568" y="330" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.823@0.23.1440.823" timestamp="1591175582105" />
-    <state width="1398" height="195" key="GridCell.Tab.0.bottom" timestamp="1591342256017">
+    <state x="576" y="222" key="AndroidProcessChooserDialog" timestamp="1591603779576">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="195" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1591342256017" />
-    <state width="1398" height="195" key="GridCell.Tab.0.center" timestamp="1591342256015">
+    <state x="576" y="222" key="AndroidProcessChooserDialog/0.0.1440.900@0.0.1440.900" timestamp="1591603779576" />
+    <state width="1398" height="294" key="GridCell.Tab.0.bottom" timestamp="1591610425465">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="195" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1591342256015" />
-    <state width="1398" height="195" key="GridCell.Tab.0.left" timestamp="1591342256013">
+    <state width="1398" height="294" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1591610425465" />
+    <state width="1398" height="294" key="GridCell.Tab.0.center" timestamp="1591610425462">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="195" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1591342256013" />
-    <state width="1398" height="195" key="GridCell.Tab.0.right" timestamp="1591342256016">
+    <state width="1398" height="294" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1591610425462" />
+    <state width="1398" height="294" key="GridCell.Tab.0.left" timestamp="1591610425461">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="195" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1591342256016" />
-    <state x="390" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1591420916941">
+    <state width="1398" height="294" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1591610425461" />
+    <state width="1398" height="294" key="GridCell.Tab.0.right" timestamp="1591610425463">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="390" y="281" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1591420916941" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt</url>
-          <line>52</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt</url>
-          <line>63</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt</url>
-          <line>64</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/example/ventilator/MainActivity.kt</url>
-          <line>65</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state width="1398" height="294" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1591610425463" />
+    <state width="1398" height="294" key="GridCell.Tab.1.bottom" timestamp="1591610425467">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="294" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1591610425467" />
+    <state width="1398" height="294" key="GridCell.Tab.1.center" timestamp="1591610425466">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="294" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1591610425466" />
+    <state width="1398" height="294" key="GridCell.Tab.1.left" timestamp="1591610425466">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="294" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1591610425466" />
+    <state width="1398" height="294" key="GridCell.Tab.1.right" timestamp="1591610425466">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="294" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1591610425466" />
+    <state x="390" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1591610875501">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="390" y="281" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1591610875501" />
   </component>
 </project>

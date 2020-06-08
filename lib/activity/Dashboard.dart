@@ -123,7 +123,7 @@ class _CheckPageState extends State<Dashboard> {
   int _deviceId;
   double batteryPercentageValue = 0.0;
   double _progress = 50;
-  Timer _timer, _timer1, _timer2;
+  Timer _timer, _timer1, _timer2,_timer3;
   List<int> list = [];
 
   double radians = 0, radians1 = 0;
@@ -447,7 +447,7 @@ class _CheckPageState extends State<Dashboard> {
       patientHeight,
       patientWeight;
 
-  bool newTreatmentEnabled = false, powerButtonEnabled = false;
+  bool newTreatmentEnabled = false, powerButtonEnabled = true;
   bool isplaying = false,
       _buttonPressed = false,
       respiratoryEnable = false,
@@ -456,6 +456,7 @@ class _CheckPageState extends State<Dashboard> {
   int cc = 0;
   String checkTempData;
   int powerIndication = 0, batteryPercentage;
+  String sendBattery;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -586,7 +587,7 @@ class _CheckPageState extends State<Dashboard> {
         // Fluttertoast.showToast(msg: obj.toString());
         if (_status == "Connected") {
           await _port.write(Uint8List.fromList(obj));
-        } else {}
+        } 
       } else {
         setState(() {
           counter = 0;
@@ -612,17 +613,17 @@ class _CheckPageState extends State<Dashboard> {
               respiratoryEnable = false;
               insExpButtonEnable = false;
               setState(() {
-                // psValue1 = 0;
-                // mvValue = 0;
-                // vteValue = 0;
-                // peepDisplayValue = 0;
-                // rrtotalValue =0;
-                // mapDisplayValue=0;
-                // peepDisplayValue =0;
-                // fio2DisplayParameter = 0;
-                // pressurePoints.clear();
-                // volumePoints.clear();
-                // flowPoints.clear();
+                psValue1 = 0;
+                mvValue = 0;
+                vteValue = 0;
+                peepDisplayValue = 0;
+                rrtotalValue =0;
+                mapDisplayValue=0;
+                peepDisplayValue =0;
+                fio2DisplayParameter = 0;
+                pressurePoints.clear();
+                volumePoints.clear();
+                flowPoints.clear();
               });
 
               // playOnEnabled = false;
@@ -652,6 +653,24 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
     });
+    _timer3 = Timer.periodic(Duration(seconds:1), (timer)  {
+      if(_status == "Connected") {
+          shutdownChannel.invokeMethod('getBatteryLevel').then((result) async {
+              List<int> resList = [];
+            setState(() {
+              resList.add(0x7E);
+              resList.add(0);
+              resList.add(20);
+              resList.add(0);
+              resList.add(15);
+              resList.add((result & 0x00FF));
+              resList.add(0x7F);
+            });
+            await _port.write(Uint8List.fromList(resList));
+          });
+      }
+     });
+
     // _timer = Timer.periodic(Duration(minutes: 5), (timer) async {
     //   if (_status == "Connected") {
     //     String lastTime = await dbHelper.getLastRecordTime();
@@ -759,6 +778,29 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
+  Future<void> turnOffScreen() async {
+    try {
+      var result = await shutdownChannel.invokeMethod('turnOffScreen');
+      print(result);
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+   Future<void> turnOnScreen() async {
+    try {
+      Screen.setBrightness(1.0);
+    Screen.keepOn(true);
+      var result = await shutdownChannel.invokeMethod('turnOnScreen');
+      
+      print(result);
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+ 
+
   getCrcData(List<int> obj) async {
     // obj.clear();
     int length = obj.length;
@@ -792,22 +834,7 @@ class _CheckPageState extends State<Dashboard> {
       });
     }
   }
-  //   void startTimer() {
-  //   const oneSec = const Duration(seconds: 1);
-  //   _timer = new Timer.periodic(
-  //     oneSec,
-  //     (Timer timer) => setState(
-  //       () {
-  //         if (_start < 1) {
-  //           timer.cancel();
-  //         } else {
-  //           _start = _start - 1;
-  //           Fluttertoast.showToast(msg: _start.toString());
-  //         }
-  //       },
-  //     ),
-  //   );
-  // }
+
 
   void _increaseCounterWhilePressed() async {
     // writeRespiratoryPauseData();
@@ -2598,29 +2625,19 @@ class _CheckPageState extends State<Dashboard> {
                 SizedBox(
                   height: 2,
                 ),
-                // powerButtonEnabled
-                //     ?
-                // Padding(
-                //     padding: const EdgeInsets.only(right: 40.0, bottom: 20),
-                //     child: IconButton(
-                //       icon: Icon(Icons.power_settings_new,
-                //           size: 70, color: Colors.red),
-                //       onPressed: () {
-                //         _sendShutdown();
-                //       },
-                //     ),
-                //   ),
-                // : Container(),
-                //  Padding(
-                //   padding: const EdgeInsets.only(right: 40.0, bottom: 20),
-                //   child: IconButton(
-                //     icon: Icon(Icons.power_settings_new,
-                //         size: 70, color: Colors.red),
-                //     onPressed: () {
-                //       _sendShutdown();
-                //     },
-                //   ),
-                // ),
+                powerButtonEnabled
+                    ?
+                Padding(
+                    padding: const EdgeInsets.only(right: 40.0, bottom: 20),
+                    child: IconButton(
+                      icon: Icon(Icons.power_settings_new,
+                          size: 70, color: Colors.red),
+                      onPressed: () {
+                        turnOffScreen();
+                      },
+                    ),
+                  )
+                : Container(),
                 SizedBox(
                   height: 2,
                 ),
@@ -2683,7 +2700,7 @@ class _CheckPageState extends State<Dashboard> {
                     //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                     SizedBox(
                       height:
-                          playOnEnabled ? 188 : powerButtonEnabled ? 131 : 240,
+                          playOnEnabled ? 188 : powerButtonEnabled ? 141 : 160,
                     ),
                   ],
                 ),
@@ -5028,7 +5045,7 @@ class _CheckPageState extends State<Dashboard> {
                       child: Center(
                           child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(displayTemperature.toString() + " C",
+                        child: Text(displayTemperature.toString() + "\u2103",
                             style: TextStyle(fontSize: 20)),
                       )))),
               SizedBox(width: 10),
@@ -19321,6 +19338,7 @@ class _CheckPageState extends State<Dashboard> {
         // playOnEnabled = false;
       });
       if (event[0] == 126 && event.length > 110) {
+        turnOnScreen();
         list.addAll(event);
         list.removeAt(0);
       }
@@ -19372,16 +19390,16 @@ class _CheckPageState extends State<Dashboard> {
           }
           int mvValueCheck = (((list[8] << 8) + list[9])).toInt();
 
-          // if (mvValueCheck != "" && (mvValue/1000).toDouble() >0.00 && (mvValue/1000).toDouble()<100.00) {
+          // if (mvValueCheck != "" && (mvValue/1000).toDouble() >0 && (mvValue/1000).toDouble()<100) {
           setState(() {
             mvValue = mvValueCheck;
           });
           // }
 
-          tempDisplay = list[64];
-          leakVolumeDisplay = ((list[102] << 8) + list[103]);
-          peakFlowDisplay = ((list[70] << 8) + list[71]);
-          spontaneousDisplay = ((list[82] << 8) + list[83]);
+          
+          leakVolumeDisplay = ((list[102] << 8) + list[103]); //103 104
+          peakFlowDisplay = ((list[70] << 8) + list[71]); //71 72
+          spontaneousDisplay = ((list[82] << 8) + list[83]); //83 84
 
           int rrtotalCheck = ((list[10] << 8) + list[11]).toInt(); //11,12
 
@@ -19393,12 +19411,12 @@ class _CheckPageState extends State<Dashboard> {
             });
           }
           int pipValueCheck =
-              (((list[14] << 8) + list[15]) / 100).round().toInt();
+              (((list[14] << 8) + list[15]) / 100).round().toInt(); //15 16
 
           if ((((list[16] << 8) + list[17]) / 100).round().toInt() > 0 &&
               (((list[16] << 8) + list[17]) / 100).round().toInt() < 150) {
             peepDisplayValue =
-                (((list[16] << 8) + list[17]) / 100).round().toInt();
+                (((list[16] << 8) + list[17]) / 100).round().toInt(); //17 18
           }
 
           if (pipValueCheck != 0 &&
@@ -19424,26 +19442,26 @@ class _CheckPageState extends State<Dashboard> {
             fio2DisplayParameter = ((list[38] << 8) + list[39]); // 39,40
           }
 
-          mixingTankPressureR = ((list[40] << 8) + list[41]);
-          airipPressureR = ((list[44] << 8) + list[45]);
+          // mixingTankPressureR = ((list[40] << 8) + list[41]); //41 42
+          // airipPressureR = ((list[44] << 8) + list[45]); // 45 46
 
           //flow graph
           inspirationflowR = ((list[46] << 8) + list[47]); //47-48
           exhalationflowR = ((list[48] << 8) + list[49]); //49-50
 
-          o2Valve = ((list[50] << 8) + list[51]);
-          airiPValveStatusR = ((list[52] << 8) + list[53]);
-          _2by2inhalationValueR = ((list[54] << 8) + list[55]);
-          _2by2exhalationValueR = ((list[56] << 8) + list[57]);
-          turbineSpeedR = ((list[58] << 8) + list[59]);
-          internalTemperatureR = ((list[60] << 8) + list[61]);
+          // o2Valve = ((list[50] << 8) + list[51]);
+          // airiPValveStatusR = ((list[52] << 8) + list[53]);
+          // _2by2inhalationValueR = ((list[54] << 8) + list[55]);
+          // _2by2exhalationValueR = ((list[56] << 8) + list[57]);
+          // turbineSpeedR = ((list[58] << 8) + list[59]);
 
           checkTempData = list[31].toString();
+
           if (list[108] == 1) {
             presentCode = ((list[106] << 8) + list[107]);
             if (presentCode != 0 && presentCode > 0 && presentCode < 23) {
               var data = AlarmsList(presentCode.toString());
-              dbHelpera.saveAlarm(data);
+              dbHelpera.saveAlarm(data,globalCounterNo.toString());
             }
             // Fluttertoast.showToast(msg: presentCode.toString());
             if (presentCode != previousCode) {
@@ -19643,6 +19661,9 @@ class _CheckPageState extends State<Dashboard> {
           ioreDisplayParamter = "";
         }
 
+        displayTemperature = list[88];
+        
+
         setState(() {
           if (list[108] != 0 &&
               ((list[106] << 8) + list[107]) != null &&
@@ -19723,6 +19744,7 @@ class _CheckPageState extends State<Dashboard> {
 
         powerIndication = list[64];
         batteryPercentage = list[65];
+        // batteryStatus = list[55];
 
         if (patientId != "") {
           // Fluttertoast.showToast(msg: patientId.toString());

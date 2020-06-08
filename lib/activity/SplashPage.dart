@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:screen/screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
@@ -17,10 +18,12 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   SharedPreferences preferences;
   DatabaseHelper dbHelper;
+  static const shutdownChannel = const MethodChannel("shutdown");
   // int counter=0;
 
   @override
   void initState() {
+    turnOnScreen();
     super.initState();
     dbHelper = DatabaseHelper();
     // counter = counter+1;
@@ -28,6 +31,18 @@ class _SplashPageState extends State<SplashPage> {
     print(res);
     getData();
     // saveData();
+  }
+
+    Future<void> turnOnScreen() async {
+    try {
+      Screen.setBrightness(1.0);
+    Screen.keepOn(true);
+      var result = await shutdownChannel.invokeMethod('turnOnScreen');
+      
+      print(result);
+    } on PlatformException catch (e) {
+      print(e);
+    }
   }
 
 
