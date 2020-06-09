@@ -455,7 +455,7 @@ class _CheckPageState extends State<Dashboard> {
   int previousCode = 101, presentCode, vteMinValue = 0;
   int cc = 0;
   String checkTempData;
-  int powerIndication = 0, batteryPercentage;
+   int powerIndication = 0, batteryPercentage,batteryStatus=0;
   String sendBattery;
 
   Future<bool> _connectTo(device) async {
@@ -612,6 +612,7 @@ class _CheckPageState extends State<Dashboard> {
             setState(() {
               respiratoryEnable = false;
               insExpButtonEnable = false;
+              powerButtonEnabled = true;
               psValue1 = 0;
               cc = 0;
               mvValue = 0;
@@ -647,6 +648,10 @@ class _CheckPageState extends State<Dashboard> {
             // pressurePoints = [];
             // volumePoints = [];
             // flowPoints = [];
+          }else{
+            setState(() {
+              powerButtonEnabled =false;
+            });
           }
         });
       }
@@ -2584,7 +2589,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.6.9",
+                  "V1.7.0",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4981,11 +4986,15 @@ class _CheckPageState extends State<Dashboard> {
                   child: Container(
                       height: 40,
                       width: 80,
-                      child: batteryPercentage != null
+                      child: batteryStatus == 0 ?
+                       batteryPercentage != null
                           ? Center(
                               child: Text(batteryPercentage.toString() + " %",
                                   style: TextStyle(fontSize: 20)))
                           : Image.asset("assets/images/nobattery.png",
+                              width: 28, color: Colors.black): batteryStatus == 1 ? 
+                              Image.asset("assets/images/chargingbattery.png",
+                              width: 28, color: Colors.black):Image.asset("assets/images/nobattery.png",
                               width: 28, color: Colors.black))),
               SizedBox(width: 10),
               Material(
@@ -19384,7 +19393,6 @@ class _CheckPageState extends State<Dashboard> {
 
         setState(() {
           var now = new DateTime.now();
-          // ibytValue = ((list[90] << 8) + list[91]);
 
           int vteValueCheck = ((list[4] << 8) + list[5]); //5 6
 
@@ -19449,9 +19457,7 @@ class _CheckPageState extends State<Dashboard> {
               ((list[38] << 8) + list[39]).round() < 100) {
             fio2DisplayParameter = ((list[38] << 8) + list[39]); // 39,40
           }
-          //flow graph
-          inspirationflowR = ((list[46] << 8) + list[47]); //47-48
-          exhalationflowR = ((list[48] << 8) + list[49]); //49-50
+          
 
           checkTempData = list[31].toString();
 
@@ -19498,7 +19504,6 @@ class _CheckPageState extends State<Dashboard> {
                 audioEnable = true;
               }
             }
-            // _playMusic();
           } else if (list[108] == 0) {
             sendSoundOff();
             _stopMusic();
@@ -19741,10 +19746,9 @@ class _CheckPageState extends State<Dashboard> {
 
         powerIndication = list[64];
         batteryPercentage = list[65];
-        // batteryStatus = list[55];
+        batteryStatus = list[78];
 
         if (patientId != "") {
-          // Fluttertoast.showToast(msg: patientId.toString());
           var data = VentilatorOMode(
               patientId,
               patientName.toString(),
@@ -19808,7 +19812,6 @@ class _CheckPageState extends State<Dashboard> {
           saveData(data, patientId);
         }
         list.clear();
-        //==============
       });
       // }
     } else {

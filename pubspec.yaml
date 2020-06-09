@@ -69,17 +69,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/lungtemp.gif
-    - assets/images/audioon.png
-    - assets/images/audiooff.png
-    - assets/images/usbconnected.png
-    - assets/images/usbdisconnected.png
     - assets/images/lowbattery.png
     - assets/images/normalbattery.png
     - assets/images/fullbattery.png
     - assets/images/chargingbattery.png
     - assets/images/powerIcon.png
-    - assets/images/shutdown.png
     - assets/images/logo.png
     - assets/images/nobattery.png
     - assets/images/calibrate.png
@@ -93,8 +87,6 @@ flutter:
     - assets/lungs/3.png
     - assets/lungs/4.png
     - assets/lungs/5.png
-
-    - assets/sound/emergency_alarm.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
