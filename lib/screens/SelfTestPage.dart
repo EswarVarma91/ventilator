@@ -583,7 +583,7 @@ class _SelfTestPageState extends State<SelfTestPage> {
                               Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Text(
-                                  "Vent Sensor       ",
+                                  "Vent Value        ",
                                   style: TextStyle(color: Colors.black),
                                 ),
                               ),
