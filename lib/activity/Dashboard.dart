@@ -447,7 +447,7 @@ class _CheckPageState extends State<Dashboard> {
       patientHeight,
       patientWeight;
 
-  bool newTreatmentEnabled = false, powerButtonEnabled = true;
+  bool newTreatmentEnabled = false, powerButtonEnabled = false;
   bool isplaying = false,
       _buttonPressed = false,
       respiratoryEnable = false,
