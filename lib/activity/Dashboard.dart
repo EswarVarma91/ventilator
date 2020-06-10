@@ -673,32 +673,68 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
     });
+_timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
+      if (_status == "Connected") {
+        // String lastTime = await dbHelper.getLastRecordTime();
+        // String lastRecordTime =
+        //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
 
-    // _timer = Timer.periodic(Duration(minutes: 5), (timer) async {
-    //   if (_status == "Connected") {
-    //     String lastTime = await dbHelper.getLastRecordTime();
-    //     String lastRecordTime =
-    //         lastTime.split("[{datetimeP: ")[1].split("}]")[0];
-
-    //     var now = new DateTime.now();
-    //     setState(() {
-    //       presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-    //       DateTime date1 =
-    //           DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
-    //       DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
-    //       var differnceD = date2.difference(date1);
-    //       if (differnceD.inMinutes > 5) {
-    //         setState(() {
-    //           powerButtonEnabled = true;
-    //         });
-    //       } else {
-    //         setState(() {
-    //           powerButtonEnabled = false;
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
+        var now = new DateTime.now();
+        setState(() {
+          presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+          DateTime date1 =
+              DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
+          DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
+          var differnceD = date2.difference(date1);
+          if (differnceD.inSeconds > 600) {
+            setState(() {
+              turnOffScreen();
+              respiratoryEnable = false;
+              insExpButtonEnable = false;
+              powerButtonEnabled = true;
+              psValue1 = 0;
+              cc = 0;
+              mvValue = 0;
+              vteValue = 0;
+              peepDisplayValue = 0;
+              rrtotalValue = 0;
+              mapDisplayValue = 0;
+              peepDisplayValue = 0;
+              fio2DisplayParameter = 0;
+              pressurePoints.clear();
+              volumePoints.clear();
+              flowPoints.clear();
+              // playOnEnabled = false;
+            });
+            if (playOnEnabled) {
+              if (mounted) {
+                setState(() {
+                  psValue1 = 0;
+                  mvValue = 0;
+                  vteValue = 0;
+                  fio2DisplayParameter = 0;
+                  pressurePoints = [];
+                  volumePoints = [];
+                  flowPoints = [];
+                });
+              }
+            }
+            // Fluttertoast.showToast(msg: "Timeout.");
+            // psValue1 = 0;
+            // mvValue = 0;
+            // vteValue = 0;
+            // fio2DisplayParameter = 0;
+            // pressurePoints = [];
+            // volumePoints = [];
+            // flowPoints = [];
+          } else {
+            setState(() {
+              powerButtonEnabled = false;
+            });
+          }
+        });
+      }
+    });
   }
 
   saveData(VentilatorOMode data, String patientId) async {
@@ -6432,9 +6468,7 @@ class _CheckPageState extends State<Dashboard> {
                 height: 126,
               )
             ]),
-        SizedBox(
-          width: 10,
-        ),
+        SizedBox(width:118),
         Column(
           children: [
             Container(
@@ -9460,14 +9494,12 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            Container(
-              width: 146,
-            )
+            // Container(
+            //   width: 146,
+            // )
           ],
         ),
-        SizedBox(
-          width: 10,
-        ),
+        SizedBox(width:140),
         Column(
           children: [
             Container(
@@ -11080,9 +11112,7 @@ class _CheckPageState extends State<Dashboard> {
             // ),
           ],
         ),
-        SizedBox(
-          width: 10,
-        ),
+        SizedBox(width:140),
         Column(
           children: [
             Container(
@@ -15304,9 +15334,7 @@ class _CheckPageState extends State<Dashboard> {
             // Container(height: 260),
           ],
         ),
-        SizedBox(
-          width: 10,
-        ),
+        SizedBox(width:140),
         Column(
           children: [
             Container(
