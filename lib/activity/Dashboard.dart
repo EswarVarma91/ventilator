@@ -2893,7 +2893,7 @@ class _CheckPageState extends State<Dashboard> {
                         onTap: () {
                           setState(() {
                             audioEnable = false;
-                            // sendSoundOff();
+                            sendSoundOff();
                           });
                         },
                         child: Center(
@@ -2908,7 +2908,7 @@ class _CheckPageState extends State<Dashboard> {
                         onTap: () {
                           setState(() {
                             audioEnable = true;
-                            // sendSoundOn();
+                            sendSoundOn();
                           });
                         },
                         child: Center(
@@ -19433,7 +19433,7 @@ class _CheckPageState extends State<Dashboard> {
                     presentCode == 11 ||
                     presentCode == 17) {
                   _playMusicHigh();
-                  // sendSoundOn();
+                  sendSoundOn();
                   audioEnable = true;
                 } else if (presentCode == 1 ||
                     presentCode == 2 ||
@@ -19453,12 +19453,12 @@ class _CheckPageState extends State<Dashboard> {
                     presentCode == 21 ||
                     presentCode == 22) {
                   _playMusicMedium();
-                  // sendSoundOn();
+                  sendSoundOn();
 
                   audioEnable = true;
                 } else if (presentCode == 23) {
                   _playMusicLower();
-                  // sendSoundOn();
+                  sendSoundOn();
                   audioEnable = true;
                 }
               }else{
@@ -19471,7 +19471,7 @@ class _CheckPageState extends State<Dashboard> {
                     presentCode == 11 ||
                     presentCode == 17) {
                   _playMusicHigh();
-                  // sendSoundOn();
+                  sendSoundOn();
                   audioEnable = true;
                 } else if (presentCode == 1 ||
                     presentCode == 2 ||
@@ -19491,19 +19491,19 @@ class _CheckPageState extends State<Dashboard> {
                     presentCode == 21 ||
                     presentCode == 22) {
                   _playMusicMedium();
-                  // sendSoundOn();
+                  sendSoundOn();
 
                   audioEnable = true;
                 } else if (presentCode == 23) {
                   _playMusicLower();
-                  // sendSoundOn();
+                  sendSoundOn();
                   audioEnable = true;
                 }
 
                 }
               }
             } else if (finalList[108] == 0) {
-              // sendSoundOff();
+              sendSoundOff();
               _stopMusic();
             }
             // cdisplayParameter = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString())))
