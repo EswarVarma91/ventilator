@@ -452,7 +452,7 @@ class _CheckPageState extends State<Dashboard> {
       _buttonPressed = false,
       respiratoryEnable = false,
       insExpButtonEnable = false;
-  int previousCode = 101, presentCode, vteMinValue = 0,alarmCounter=0;
+  int previousCode = 101, presentCode, vteMinValue = 0,alarmPrevCounter=101,alarmCounter;
   int cc = 0;
   String checkTempData;
   int powerIndication = 0, batteryPercentage, batteryStatus = 0;
@@ -19414,15 +19414,19 @@ class _CheckPageState extends State<Dashboard> {
 
             if (finalList[108] == 1) {
               presentCode = ((finalList[106] << 8) + finalList[107]);
-              alarmCounter = finalList[91];
+              alarmCounter = finalList[90];
               if (presentCode != 0 && presentCode > 0 && presentCode <= 23) {
                 var data = AlarmsList(
                     presentCode.toString(), this.globalCounterNo.toString());
                 dbHelpera.saveAlarm(data);
               }
-              if (presentCode != previousCode  && alarmCounter != alarmCounter) {
+              // Fluttertoast.showToast(msg: presentCode.toString()+" pre "+previousCode.toString() + "\n counter "+alarmCounter.toString()+"pre cnt "+alarmCounter.toString());
+
+              if (presentCode != previousCode) {
                 previousCode = presentCode;
+                // alarmPrevCounter = alarmCounter;
                 _stopMusic();
+              
                 if (presentCode == 5 ||
                     presentCode == 7 ||
                     presentCode == 10 ||
@@ -19457,14 +19461,52 @@ class _CheckPageState extends State<Dashboard> {
                   // sendSoundOn();
                   audioEnable = true;
                 }
+              }else{
+                if(alarmCounter != alarmPrevCounter){
+                  alarmPrevCounter = alarmCounter;
+                  _stopMusic();
+                  if (presentCode == 5 ||
+                    presentCode == 7 ||
+                    presentCode == 10 ||
+                    presentCode == 11 ||
+                    presentCode == 17) {
+                  _playMusicHigh();
+                  // sendSoundOn();
+                  audioEnable = true;
+                } else if (presentCode == 1 ||
+                    presentCode == 2 ||
+                    presentCode == 3 ||
+                    presentCode == 4 ||
+                    presentCode == 6 ||
+                    presentCode == 8 ||
+                    presentCode == 9 ||
+                    presentCode == 12 ||
+                    presentCode == 13 ||
+                    presentCode == 14 ||
+                    presentCode == 15 ||
+                    presentCode == 16 ||
+                    presentCode == 18 ||
+                    presentCode == 19 ||
+                    presentCode == 20 ||
+                    presentCode == 21 ||
+                    presentCode == 22) {
+                  _playMusicMedium();
+                  // sendSoundOn();
+
+                  audioEnable = true;
+                } else if (presentCode == 23) {
+                  _playMusicLower();
+                  // sendSoundOn();
+                  audioEnable = true;
+                }
+
+                }
               }
             } else if (finalList[108] == 0) {
               // sendSoundOff();
               _stopMusic();
             }
-            // cdisplayParameter = (double.tryParse(vteValue.toString()) /
-            //         (pplateauDisplay -
-            //             double.tryParse(peepDisplayValue.toString())))
+            // cdisplayParameter = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString())))
             //     .toInt();
 
             if (finalList[108] == 1) {
