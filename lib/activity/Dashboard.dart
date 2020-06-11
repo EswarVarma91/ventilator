@@ -2583,7 +2583,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.2",
+                  "V1.7.3",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -6628,7 +6628,7 @@ class _CheckPageState extends State<Dashboard> {
                           Text(
                             psvparameterName,
                             style: TextStyle(
-                                fontSize: 36, fontWeight: FontWeight.normal),
+                                fontSize: 25, fontWeight: FontWeight.normal),
                           ),
                           SizedBox(
                             width: 40,
@@ -6785,7 +6785,7 @@ class _CheckPageState extends State<Dashboard> {
                             min: psvminValue.toDouble(),
                             max: psvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (psvItrig == true) {
+                              if (psvItrig == true && psvItrigValue != 10) {
                                 setState(() {
                                   psvItrigValue = psvItrigValue + 1;
                                   if (psvPeepValue <= psvItrigValue) {
@@ -9775,7 +9775,7 @@ class _CheckPageState extends State<Dashboard> {
                             min: vacvminValue.toDouble(),
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (vacvItrig == true) {
+                              if (vacvItrig == true && vacvItrigValue != 10) {
                                 setState(() {
                                   vacvItrigValue = vacvItrigValue + 1;
                                   if (vacvPeepValue <= vacvItrigValue) {
@@ -11199,8 +11199,7 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvPeepValue != psimvminValue) {
                                   setState(() {
                                     psimvPeepValue = psimvPeepValue - 1;
-                                    if (psimvItrigValue > 1 &&
-                                        psimvItrigValue > psimvPeepValue) {
+                                    if (psimvItrigValue > 1 && psimvItrigValue > psimvPeepValue) {
                                       psimvItrigValue = psimvPeepValue;
                                     }
                                   });
@@ -11390,10 +11389,11 @@ class _CheckPageState extends State<Dashboard> {
                             min: psimvminValue.toDouble() ?? 0,
                             max: psimvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (psimvItrig == true) {
+                              if (psimvItrig == true && psimvItrigValue!=10) {
                                 setState(() {
                                   psimvItrigValue = psimvItrigValue + 1;
                                   if (psimvPeepValue <= psimvItrigValue) {
+                                    
                                     if (psimvPeepValue == 0) {
                                       psimvItrigValue = 1;
                                     } else {
@@ -11404,8 +11404,7 @@ class _CheckPageState extends State<Dashboard> {
                               } else if (psimvPeep == true) {
                                 setState(() {
                                   psimvPeepValue = value.toInt();
-                                  if (psimvItrigValue > 1 &&
-                                      psimvItrigValue > psimvPeepValue) {
+                                  if (psimvItrigValue > 1 && psimvItrigValue > psimvPeepValue) {
                                     psimvItrigValue = psimvPeepValue;
                                   }
                                 });
@@ -15613,7 +15612,7 @@ class _CheckPageState extends State<Dashboard> {
                             min: vsimvminValue.toDouble() ?? 0,
                             max: vsimvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (vsimvItrig == true) {
+                              if (vsimvItrig == true && vsimvItrigValue!=10) {
                                 setState(() {
                                   vsimvItrigValue = vsimvItrigValue + 1;
                                   if (vsimvPeepValue <= vsimvItrigValue) {
@@ -17101,7 +17100,7 @@ class _CheckPageState extends State<Dashboard> {
                             min: vacvminValue.toDouble(),
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (vacvItrig == true) {
+                              if (vacvItrig == true && vacvItrigValue!=10) {
                                 setState(() {
                                   vacvItrigValue = vacvItrigValue + 1;
                                   if (vacvPeepValue <= vacvItrigValue) {
@@ -19469,6 +19468,8 @@ class _CheckPageState extends State<Dashboard> {
             // cdisplayParameter = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString())))
             //     .toInt();
 
+
+
             if (finalList[108] == 1) {
               setState(() {
                 if (finalList[109] == 1 || finalList[109] == 0) {
@@ -19484,6 +19485,7 @@ class _CheckPageState extends State<Dashboard> {
                                       ? alarmMessage = "PATIENT DISCONNECTED"
                                       : alarmMessage = "";
                 } else if (finalList[109] == 2) {
+                  // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
                   ((finalList[106] << 8) + finalList[107]) == 1
                       ? alarmMessage = "AC POWER DISCONNECTED"
                       : ((finalList[106] << 8) + finalList[107]) == 2
