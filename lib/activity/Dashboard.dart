@@ -452,7 +452,7 @@ class _CheckPageState extends State<Dashboard> {
       _buttonPressed = false,
       respiratoryEnable = false,
       insExpButtonEnable = false;
-  int previousCode = 101, presentCode, vteMinValue = 0;
+  int previousCode = 101, presentCode, vteMinValue = 0,alarmCounter=0;
   int cc = 0;
   String checkTempData;
   int powerIndication = 0, batteryPercentage, batteryStatus = 0;
@@ -1474,7 +1474,7 @@ class _CheckPageState extends State<Dashboard> {
                         )),
                       ),
                     ),
-                    Container(
+                operatinModeR == 4 ||  operatinModeR==5  || operatinModeR==3  ?  Container(
                       color: Color(0xFF171e27),
                       width: 190,
                       height: 85,
@@ -1598,7 +1598,7 @@ class _CheckPageState extends State<Dashboard> {
                           ],
                         )),
                       ),
-                    ),
+                    ):Container() ,
                   ],
                 ),
               ),
@@ -2919,27 +2919,27 @@ class _CheckPageState extends State<Dashboard> {
                           ),
                         ),
                       ),
-                Container(
-                  height: 25,
-                  width: 25,
-                  margin: EdgeInsets.only(left: 80),
-                  decoration: new BoxDecoration(
-                    borderRadius: new BorderRadius.circular(25.0),
-                    border: new Border.all(
-                      width: 2.0,
-                      color: Colors.green,
-                    ),
-                  ),
-                  child: Center(
-                      child: Text(
-                    checkTempData == "1"
-                        ? "L"
-                        : checkTempData == "0"
-                            ? "U"
-                            : checkTempData == "2" ? "S" : "",
-                    style: TextStyle(color: Colors.white),
-                  )),
-                ),
+                // Container(
+                //   height: 25,
+                //   width: 25,
+                //   margin: EdgeInsets.only(left: 80),
+                //   decoration: new BoxDecoration(
+                //     borderRadius: new BorderRadius.circular(25.0),
+                //     border: new Border.all(
+                //       width: 2.0,
+                //       color: Colors.green,
+                //     ),
+                //   ),
+                //   child: Center(
+                //       child: Text(
+                //     checkTempData == "1"
+                //         ? "L"
+                //         : checkTempData == "0"
+                //             ? "U"
+                //             : checkTempData == "2" ? "S" : "",
+                //     style: TextStyle(color: Colors.white),
+                //   )),
+                // ),
 
                 // Text(checkTempData=="1" ? "L" :checkTempData=="0" ? "U":"",style:TextStyle(color:Colors.red))
                 // InkWell(
@@ -19276,28 +19276,30 @@ class _CheckPageState extends State<Dashboard> {
         respiratoryEnable = true;
         // playOnEnabled = false;
       });
-      if (event[0] == 126 && event.length == 115) {
-        list.clear();
-        listTemp.clear();
+      if (event[0] == 126 ){
+        list=[];
+        listTemp=[];
+        int cIndex=0;
         // turnOnScreen();
         list.addAll(event);
         list.removeAt(0);
 
 
             for (int i =0;i<list.length;i++){
-                  if(list[i]==125){
-                    setState(() {
-                      listTemp.insert(i,list[i] ^ 0x20);
-                    });
-                  }else{
-                    setState(() {
-                      listTemp.insert(i,list[i]);
-                    });
-                  }
+              
+
+                if(list[i]==125){
+                  listTemp.insert(cIndex,list[i+1] ^ 0x20);
+                  i = i+1;
+                }else{
+                  listTemp.insert(cIndex,list[i]);
+                }
+                cIndex = cIndex +1;
             }
+            print(listTemp.length.toString());
              serialiseReceivedPacket(listTemp);
              }else{
-               list.clear();
+               list=[];
              }
            } else {
              setState(() {
@@ -19306,28 +19308,28 @@ class _CheckPageState extends State<Dashboard> {
             //  pressurePoints.clear();
             //  volumePoints.clear();
             //  flowPoints.clear();
-             list.clear();
+             list=[];
            }
          }
        
-  serialiseReceivedPacket(List<int> list) {
-            if(list.isNotEmpty && list.length==114){
+  serialiseReceivedPacket(List<int> finalList) {
+            if(finalList.isNotEmpty && finalList.length==114){
             var now = new DateTime.now();
            
            lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
 
-      // bool data = await checkCrc(list, list.length);
+      // bool data = await checkCrc(finalList, finalList.length);
       // if (data == false) {
-      //   list.clear();
+      //   finalList.clear();
       // } else {
-        // print("page no " + list[112].toString());
-        // if (list[112] == 1) {
+        // print("page no " + finalList[112].toString());
+        // if (finalList[112] == 1) {
         //   Navigator.pushAndRemoveUntil(
         //       context,
         //       MaterialPageRoute(
         //           builder: (BuildContext context) => SelfTestPage()),
         //       ModalRoute.withName('/'));
-        // } else if (list[112] == 2) {
+        // } else if (finalList[112] == 2) {
         //   Navigator.pushAndRemoveUntil(
         //       context,
         //       MaterialPageRoute(
@@ -19344,18 +19346,18 @@ class _CheckPageState extends State<Dashboard> {
           setState(() {
             var now = new DateTime.now();
 
-            int vteValueCheck = ((list[4] << 8) + list[5]); //5 6
-            print("vte "+vteValueCheck.toString());
+            int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
+            // print("vte "+vteValueCheck.toString());
 
             if ((vteValueCheck != "" || vteValueCheck != null) &&
                 vteValueCheck.round() >= 0 &&
                 vteValueCheck.round() <= 2500) {
               setState(() {
                 vteMinValue = vteValue - vtValue;
-                vteValue = ((list[4] << 8) + list[5]);
+                vteValue = ((finalList[4] << 8) + finalList[5]);
               });
             }
-            int mvValueCheck = (((list[8] << 8) + list[9])).toInt();
+            int mvValueCheck = (((finalList[8] << 8) + finalList[9])).toInt();
 
             // if (mvValueCheck != "" && (mvValue/1000).toDouble() >0 && (mvValue/1000).toDouble()<100) {
             setState(() {
@@ -19363,11 +19365,11 @@ class _CheckPageState extends State<Dashboard> {
             });
             // }
 
-            leakVolumeDisplay = ((list[102] << 8) + list[103]); //103 104
-            peakFlowDisplay = ((list[70] << 8) + list[71]); //71 72
-            spontaneousDisplay = ((list[82] << 8) + list[83]); //83 84
+            leakVolumeDisplay = ((finalList[102] << 8) + finalList[103]); //103 104
+            peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
+            spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
 
-            int rrtotalCheck = ((list[10] << 8) + list[11]).toInt(); //11,12
+            int rrtotalCheck = ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
 
             if (rrtotalCheck != "" &&
                 rrtotalCheck.round() >= 0 &&
@@ -19377,12 +19379,12 @@ class _CheckPageState extends State<Dashboard> {
               });
             }
             int pipValueCheck =
-                (((list[14] << 8) + list[15]) / 100).round().toInt(); //15 16
+                (((finalList[14] << 8) + finalList[15]) / 100).round().toInt(); //15 16
 
-            if ((((list[16] << 8) + list[17]) / 100).round().toInt() >= 0 &&
-                (((list[16] << 8) + list[17]) / 100).round().toInt() <= 150) {
+            if ((((finalList[16] << 8) + finalList[17]) / 100).round().toInt() >= 0 &&
+                (((finalList[16] << 8) + finalList[17]) / 100).round().toInt() <= 150) {
               peepDisplayValue =
-                  (((list[16] << 8) + list[17]) / 100).round().toInt(); //17 18
+                  (((finalList[16] << 8) + finalList[17]) / 100).round().toInt(); //17 18
             }
 
             if (pipValueCheck != 0 &&
@@ -19392,7 +19394,7 @@ class _CheckPageState extends State<Dashboard> {
                 psValue1 = pipValueCheck;
               });
             }
-            paw = (((list[34] << 8) + list[35]) / 100).toInt();
+            paw = (((finalList[34] << 8) + finalList[35]) / 100).toInt();
 
             if (paw > 200) {
               setState(() {
@@ -19401,23 +19403,24 @@ class _CheckPageState extends State<Dashboard> {
             }
 
             expiratoryPressureR =
-                (((list[36] << 8) + list[37]) / 100).toInt(); //37 38
+                (((finalList[36] << 8) + finalList[37]) / 100).toInt(); //37 38
 
-            if (((list[38] << 8) + list[39]).round() >= 20 &&
-                ((list[38] << 8) + list[39]).round() <= 100) {
-              fio2DisplayParameter = ((list[38] << 8) + list[39]); // 39,40
+            if (((finalList[38] << 8) + finalList[39]).round() >= 20 &&
+                ((finalList[38] << 8) + finalList[39]).round() <= 100) {
+              fio2DisplayParameter = ((finalList[38] << 8) + finalList[39]); // 39,40
             }
 
-            checkTempData = list[31].toString();
+            checkTempData = finalList[31].toString();
 
-            if (list[108] == 1) {
-              presentCode = ((list[106] << 8) + list[107]);
+            if (finalList[108] == 1) {
+              presentCode = ((finalList[106] << 8) + finalList[107]);
+              alarmCounter = finalList[91];
               if (presentCode != 0 && presentCode > 0 && presentCode <= 23) {
                 var data = AlarmsList(
                     presentCode.toString(), this.globalCounterNo.toString());
                 dbHelpera.saveAlarm(data);
               }
-              if (presentCode != previousCode) {
+              if (presentCode != previousCode  && alarmCounter != alarmCounter) {
                 previousCode = presentCode;
                 _stopMusic();
                 if (presentCode == 5 ||
@@ -19455,7 +19458,7 @@ class _CheckPageState extends State<Dashboard> {
                   audioEnable = true;
                 }
               }
-            } else if (list[108] == 0) {
+            } else if (finalList[108] == 0) {
               // sendSoundOff();
               _stopMusic();
             }
@@ -19464,66 +19467,66 @@ class _CheckPageState extends State<Dashboard> {
             //             double.tryParse(peepDisplayValue.toString())))
             //     .toInt();
 
-            if (list[108] == 1) {
+            if (finalList[108] == 1) {
               setState(() {
-                if (list[109] == 1 || list[109] == 0) {
-                  ((list[106] << 8) + list[107]) == 5
+                if (finalList[109] == 1 || finalList[109] == 0) {
+                  ((finalList[106] << 8) + finalList[107]) == 5
                       ? alarmMessage = "SYSTEM FAULT"
-                      : ((list[106] << 8) + list[107]) == 7
+                      : ((finalList[106] << 8) + finalList[107]) == 7
                           ? alarmMessage = "FiO\u2082 SENSOR MISSING"
-                          : ((list[106] << 8) + list[107]) == 10
+                          : ((finalList[106] << 8) + finalList[107]) == 10
                               ? alarmMessage = "HIGH LEAKAGE"
-                              : ((list[106] << 8) + list[107]) == 11
+                              : ((finalList[106] << 8) + finalList[107]) == 11
                                   ? alarmMessage = "HIGH PRESSURE"
-                                  : ((list[106] << 8) + list[107]) == 17
+                                  : ((finalList[106] << 8) + finalList[107]) == 17
                                       ? alarmMessage = "PATIENT DISCONNECTED"
                                       : alarmMessage = "";
-                } else if (list[109] == 2) {
-                  ((list[106] << 8) + list[107]) == 1
+                } else if (finalList[109] == 2) {
+                  ((finalList[106] << 8) + finalList[107]) == 1
                       ? alarmMessage = "AC POWER DISCONNECTED"
-                      : ((list[106] << 8) + list[107]) == 2
+                      : ((finalList[106] << 8) + finalList[107]) == 2
                           ? alarmMessage = " LOW BATTERY"
-                          : ((list[106] << 8) + list[107]) == 3
+                          : ((finalList[106] << 8) + finalList[107]) == 3
                               ? alarmMessage = "CALIBRATE FiO2"
-                              : ((list[106] << 8) + list[107]) == 4
+                              : ((finalList[106] << 8) + finalList[107]) == 4
                                   ? alarmMessage = "CALIBRATION FiO2 FAIL"
-                                  : ((list[106] << 8) + list[107]) == 6
+                                  : ((finalList[106] << 8) + finalList[107]) == 6
                                       ? alarmMessage = "SELF TEST FAIL"
-                                      : ((list[106] << 8) + list[107]) == 8
+                                      : ((finalList[106] << 8) + finalList[107]) == 8
                                           ? alarmMessage = "HIGH FiO2"
-                                          : ((list[106] << 8) + list[107]) == 9
+                                          : ((finalList[106] << 8) + finalList[107]) == 9
                                               ? alarmMessage = "LOW FIO2"
-                                              : ((list[106] << 8) + list[107]) == 12
+                                              : ((finalList[106] << 8) + finalList[107]) == 12
                                                   ? alarmMessage =
                                                       "LOW PRESSURE"
-                                                  : ((list[106] << 8) + list[107]) == 13
+                                                  : ((finalList[106] << 8) + finalList[107]) == 13
                                                       ? alarmMessage = "LOW VTE"
-                                                      : ((list[106] << 8) +
-                                                                  list[107]) ==
+                                                      : ((finalList[106] << 8) +
+                                                                  finalList[107]) ==
                                                               14
                                                           ? alarmMessage =
                                                               "HIGH VTE"
-                                                          : ((list[106] << 8) +
-                                                                      list[
+                                                          : ((finalList[106] << 8) +
+                                                                      finalList[
                                                                           107]) ==
                                                                   15
                                                               ? alarmMessage =
                                                                   "LOW VTI"
-                                                              : ((list[106] << 8) + list[107]) == 16
+                                                              : ((finalList[106] << 8) + finalList[107]) == 16
                                                                   ? alarmMessage =
                                                                       "HIGH VTI"
-                                                                  : ((list[106] << 8) + list[107]) == 18
+                                                                  : ((finalList[106] << 8) + finalList[107]) == 18
                                                                       ? alarmMessage =
                                                                           "LOW O2  supply"
-                                                                      : ((list[106] << 8) + list[107]) ==
+                                                                      : ((finalList[106] << 8) + finalList[107]) ==
                                                                               19
                                                                           ? alarmMessage =
                                                                               "LOW RR"
-                                                                          : ((list[106] << 8) + list[107]) == 20
+                                                                          : ((finalList[106] << 8) + finalList[107]) == 20
                                                                               ? alarmMessage = "HIGH RR"
-                                                                              : ((list[106] << 8) + list[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((list[106] << 8) + list[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
-                } else if (list[109] == 3) {
-                  ((list[106] << 8) + list[107]) == 23
+                                                                              : ((finalList[106] << 8) + finalList[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((finalList[106] << 8) + finalList[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
+                } else if (finalList[109] == 3) {
+                  ((finalList[106] << 8) + finalList[107]) == 23
                       ? alarmMessage = "Apnea backup"
                       : alarmMessage = "";
                 }
@@ -19554,15 +19557,15 @@ class _CheckPageState extends State<Dashboard> {
           });
           setState(() {
             String i = "", e = "", tempIe = "";
-            i = list[12].toString();
-            e = list[13].toString();
+            i = finalList[12].toString();
+            e = finalList[13].toString();
             tempIe = i + ":" + e;
           });
 
-          var dataOperatingMode = ((list[104] << 8) + list[105]);
+          var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
           if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
             setState(() {
-              operatinModeR = ((list[104] << 8) + list[105]);
+              operatinModeR = ((finalList[104] << 8) + finalList[105]);
             });
           }
 
@@ -19602,33 +19605,33 @@ class _CheckPageState extends State<Dashboard> {
             }
           
 
-          if ((((list[68] << 8) + list[69]) / 100).round().toInt() >= 0 &&
-              (((list[68] << 8) + list[69]) / 100).round().toInt() <= 150) {
-            mapDisplayValue = (((list[68] << 8) + list[69]) / 100).toInt();
+          if ((((finalList[68] << 8) + finalList[69]) / 100).round().toInt() >= 0 &&
+              (((finalList[68] << 8) + finalList[69]) / 100).round().toInt() <= 150) {
+            mapDisplayValue = (((finalList[68] << 8) + finalList[69]) / 100).toInt();
           }
-          if (list[84] == 1) {
+          if (finalList[84] == 1) {
             ioreDisplayParamter = "I";
-          } else if (list[84] == 2) {
+          } else if (finalList[84] == 2) {
             ioreDisplayParamter = "E";
           } else {
             ioreDisplayParamter = "";
           }
 
-          displayTemperature = list[88];
+          displayTemperature = finalList[88];
 
           setState(() {
-            if (list[108] != 0 &&
-                ((list[106] << 8) + list[107]) != null &&
-                ((list[106] << 8) + list[107]) >= 1 &&
-                ((list[106] << 8) + list[107]) <= 23) {
-              alarmActive = list[108].toString();
+            if (finalList[108] != 0 &&
+                ((finalList[106] << 8) + finalList[107]) != null &&
+                ((finalList[106] << 8) + finalList[107]) >= 1 &&
+                ((finalList[106] << 8) + finalList[107]) <= 23) {
+              alarmActive = finalList[108].toString();
             } else {
               alarmActive = 0.toString();
             }
           });
 
           // pressure graph
-          double temp = (((list[34] << 8) + list[35]))
+          double temp = (((finalList[34] << 8) + finalList[35]))
               .toDouble(); // pressure points 35,36
 
           if (temp > 40000) {
@@ -19654,13 +19657,13 @@ class _CheckPageState extends State<Dashboard> {
           // }else{
           //   pressurePoints.add(0);
           // }
-          if (((list[60] << 8) + list[61]).toInt() >= 0 &&
-              ((list[60] << 8) + list[61]).toInt() <= 150) {
-            pplateauDisplay = ((list[60] << 8) + list[61]).toDouble();
+          if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
+              ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
+            pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
           }
 
           double temp1 =
-              ((list[58] << 8) + list[59]).toDouble(); // volume points 59,60
+              ((finalList[58] << 8) + finalList[59]).toDouble(); // volume points 59,60
 
           // if(temp1.round() >0 && temp1.round() < 2500)
           // {
@@ -19677,7 +19680,7 @@ class _CheckPageState extends State<Dashboard> {
           // }
 
           double temp3 =
-              ((((list[46] << 8) + list[47])) - (((list[48] << 8) + list[49])))
+              ((((finalList[46] << 8) + finalList[47])) - (((finalList[48] << 8) + finalList[49])))
                   .toDouble();
           temp3 = temp3 * 0.06;
 
@@ -19695,9 +19698,9 @@ class _CheckPageState extends State<Dashboard> {
           // }
 
          setState(() {
-            powerIndication = list[64];
-          batteryPercentage = list[65];
-          batteryStatus = list[78];
+            powerIndication = finalList[64];
+          batteryPercentage = finalList[65];
+          batteryStatus = finalList[78];
          });
 
           if (patientId != "") {
@@ -19728,8 +19731,8 @@ class _CheckPageState extends State<Dashboard> {
                 lungImage.toString(),
                 paw.toString(),
                 globalCounterNo.toString(),
-                ((list[106] << 8) + list[107]).toString(),
-                list[109].toString());
+                ((finalList[106] << 8) + finalList[107]).toString(),
+                finalList[109].toString());
             saveData(data, patientId);
           } else {
             var data = VentilatorOMode(
@@ -19759,12 +19762,13 @@ class _CheckPageState extends State<Dashboard> {
                 lungImage.toString(),
                 paw.toString(),
                 globalCounterNo.toString(),
-                ((list[106] << 8) + list[107]).toString(),
-                list[109].toString());
+                ((finalList[106] << 8) + finalList[107]).toString(),
+                finalList[109].toString());
             saveData(data, patientId);
           }
-          list.clear();
-          listTemp.clear();
+          finalList=[];
+          list = [];
+          listTemp=[];
         });
       // }
           }

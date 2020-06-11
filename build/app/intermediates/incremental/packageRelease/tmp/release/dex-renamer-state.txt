@@ -1,0 +1,4 @@
+#Thu Jun 11 11:09:32 IST 2020
+base.0=/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/dex/release/mergeDexRelease/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
