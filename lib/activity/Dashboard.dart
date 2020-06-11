@@ -205,13 +205,13 @@ class _CheckPageState extends State<Dashboard> {
       pacvFio2 = false,
       pacvFlowRamp = false;
 
-  int pacvItrigValue = 6,
+  int pacvItrigValue = 3,
       pacvRrValue = 20,
       pacvIeValue = 51,
       pacvPeepValue = 10,
       pacvPcValue = 30,
       pacvVtMinValue = 100,
-      pacvVtMaxValue = 400,
+      pacvVtMaxValue = 1200,
       pacvFio2Value = 21,
       pacvFlowRampValue = 3;
 
@@ -229,11 +229,11 @@ class _CheckPageState extends State<Dashboard> {
       vacvFio2 = false,
       vacvFlowRamp = false;
 
-  int vacvItrigValue = 6,
+  int vacvItrigValue = 3,
       vacvRrValue = 20,
       vacvIeValue = 51,
       vacvPeepValue = 10,
-      vacvVtValue = 200,
+      vacvVtValue = 400,
       vacvPcMinValue = 20,
       vacvPcMaxValue = 60,
       vacvFio2Value = 21,
@@ -257,13 +257,13 @@ class _CheckPageState extends State<Dashboard> {
       psvMinTe = false,
       psvFlowRamp = false;
 
-  int psvItrigValue = 6,
+  int psvItrigValue = 3,
       psvPeepValue = 1,
       psvIeValue = 51,
       psvPsValue = 30,
       psvTiValue = 5,
       psvVtMinValue = 100,
-      psvVtMaxValue = 400,
+      psvVtMaxValue = 1200,
       psvFio2Value = 21,
       psvAtimeValue = 10,
       psvEtrigValue = 10,
@@ -286,14 +286,14 @@ class _CheckPageState extends State<Dashboard> {
       psimvFio2 = false,
       psimvFlowRamp = false;
 
-  int psimvItrigValue = 6,
+  int psimvItrigValue = 3,
       psimvRrValue = 20,
-      psimvPsValue = 22,
+      psimvPsValue = 30,
       psimvIeValue = 51,
       psimvPeepValue = 10,
       psimvPcValue = 30,
       psimvVtMinValue = 100,
-      psimvVtMaxValue = 300,
+      psimvVtMaxValue = 1200,
       psimvFio2Value = 21,
       psimvFlowRampValue = 3;
 
@@ -312,11 +312,11 @@ class _CheckPageState extends State<Dashboard> {
       vsimvFio2 = false,
       vsimvFlowRamp = false;
 
-  int vsimvItrigValue = 6,
+  int vsimvItrigValue = 3,
       vsimvRrValue = 20,
       vsimvIeValue = 51,
       vsimvPeepValue = 10,
-      vsimvVtValue = 200,
+      vsimvVtValue = 400,
       vsimvPsValue = 22,
       vsimvPcMinValue = 20,
       vsimvPcMaxValue = 60,
@@ -348,7 +348,7 @@ class _CheckPageState extends State<Dashboard> {
       pccmvPcValue = 30,
       pccmvFio2Value = 21,
       pccmvVtminValue = 100,
-      pccmvVtmaxValue = 400,
+      pccmvVtmaxValue = 1200,
       pccmvTihValue = 50,
       pccmvRRValueTemp = 20,
       pccmvIeValueTemp = 51,
@@ -379,7 +379,7 @@ class _CheckPageState extends State<Dashboard> {
       vccmvPcMinValue = 20,
       vccmvPcMaxValue = 60,
       vccmvFio2Value = 21,
-      vccmvVtValue = 200,
+      vccmvVtValue = 400,
       vccmvTihValue = 50;
   int vccmvFlowRampValue = 4;
 
@@ -447,7 +447,7 @@ class _CheckPageState extends State<Dashboard> {
       patientHeight,
       patientWeight;
 
-  bool newTreatmentEnabled = false, powerButtonEnabled = false;
+  bool newTreatmentEnabled = false, powerButtonEnabled = true;
   bool isplaying = false,
       _buttonPressed = false,
       respiratoryEnable = false,
@@ -596,67 +596,67 @@ class _CheckPageState extends State<Dashboard> {
       }
     });
 
-    // _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
-    //   if (_status == "Connected") {
-    //     // String lastTime = await dbHelper.getLastRecordTime();
-    //     // String lastRecordTime =
-    //     //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
+    _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
+      if (_status == "Connected") {
+        // String lastTime = await dbHelper.getLastRecordTime();
+        // String lastRecordTime =
+        //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
 
-    //     var now = new DateTime.now();
-    //     setState(() {
-    //       presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-    //       DateTime date1 =
-    //           DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
-    //       DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
-    //       var differnceD = date2.difference(date1);
-    //       if (differnceD.inSeconds > 5) {
-    //         setState(() {
-    //           respiratoryEnable = false;
-    //           insExpButtonEnable = false;
-    //           powerButtonEnabled = true;
-    //           psValue1 = 0;
-    //           cc = 0;
-    //           mvValue = 0;
-    //           vteValue = 0;
-    //           peepDisplayValue = 0;
-    //           rrtotalValue = 0;
-    //           mapDisplayValue = 0;
-    //           peepDisplayValue = 0;
-    //           fio2DisplayParameter = 0;
-    //           pressurePoints.clear();
-    //           volumePoints.clear();
-    //           flowPoints.clear();
-    //           // playOnEnabled = false;
-    //         });
-    //         if (playOnEnabled) {
-    //           if (mounted) {
-    //             setState(() {
-    //               psValue1 = 0;
-    //               mvValue = 0;
-    //               vteValue = 0;
-    //               fio2DisplayParameter = 0;
-    //               pressurePoints = [];
-    //               volumePoints = [];
-    //               flowPoints = [];
-    //             });
-    //           }
-    //         }
-    //         // Fluttertoast.showToast(msg: "Timeout.");
-    //         // psValue1 = 0;
-    //         // mvValue = 0;
-    //         // vteValue = 0;
-    //         // fio2DisplayParameter = 0;
-    //         // pressurePoints = [];
-    //         // volumePoints = [];
-    //         // flowPoints = [];
-    //       } else {
-    //         setState(() {
-    //           powerButtonEnabled = false;
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
+        var now = new DateTime.now();
+        setState(() {
+          presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+          DateTime date1 =
+              DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
+          DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
+          var differnceD = date2.difference(date1);
+          if (differnceD.inSeconds > 5) {
+            setState(() {
+              respiratoryEnable = false;
+              insExpButtonEnable = false;
+              // powerButtonEnabled = true;
+              // psValue1 = 0;
+              // cc = 0;
+              // mvValue = 0;
+              // vteValue = 0;
+              // peepDisplayValue = 0;
+              // rrtotalValue = 0;
+              // mapDisplayValue = 0;
+              // peepDisplayValue = 0;
+              // fio2DisplayParameter = 0;
+              // pressurePoints.clear();
+              // volumePoints.clear();
+              // flowPoints.clear();
+              // playOnEnabled = false;
+            });
+            // if (playOnEnabled) {
+            //   if (mounted) {
+            //     setState(() {
+            //       psValue1 = 0;
+            //       mvValue = 0;
+            //       vteValue = 0;
+            //       fio2DisplayParameter = 0;
+            //       pressurePoints = [];
+            //       volumePoints = [];
+            //       flowPoints = [];
+            //     });
+            //   }
+            // }
+            // Fluttertoast.showToast(msg: "Timeout.");
+            // psValue1 = 0;
+            // mvValue = 0;
+            // vteValue = 0;
+            // fio2DisplayParameter = 0;
+            // pressurePoints = [];
+            // volumePoints = [];
+            // flowPoints = [];
+          } else {
+            setState(() {
+              // powerButtonEnabled = false;
+            });
+          }
+        });
+      }
+    });
     _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
       if (_status == "Connected") {
         shutdownChannel.invokeMethod('getBatteryLevel').then((result) async {
@@ -674,11 +674,8 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
     });
-// _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
+// _timer2 = Timer.periodic(Duration(minutes: 12), (timer) async {
 //       if (_status == "Connected") {
-//         // String lastTime = await dbHelper.getLastRecordTime();
-//         // String lastRecordTime =
-//         //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
 
 //         var now = new DateTime.now();
 //         setState(() {
@@ -687,47 +684,10 @@ class _CheckPageState extends State<Dashboard> {
 //               DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
 //           DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
 //           var differnceD = date2.difference(date1);
-//           if (differnceD.inSeconds > 600) {
+//           if (differnceD.inSeconds > 1200) {
 //             setState(() {
-//               turnOffScreen();
-//               respiratoryEnable = false;
-//               insExpButtonEnable = false;
 //               powerButtonEnabled = true;
-//               psValue1 = 0;
-//               cc = 0;
-//               mvValue = 0;
-//               vteValue = 0;
-//               peepDisplayValue = 0;
-//               rrtotalValue = 0;
-//               mapDisplayValue = 0;
-//               peepDisplayValue = 0;
-//               fio2DisplayParameter = 0;
-//               pressurePoints.clear();
-//               volumePoints.clear();
-//               flowPoints.clear();
-//               // playOnEnabled = false;
 //             });
-//             if (playOnEnabled) {
-//               if (mounted) {
-//                 setState(() {
-//                   psValue1 = 0;
-//                   mvValue = 0;
-//                   vteValue = 0;
-//                   fio2DisplayParameter = 0;
-//                   pressurePoints = [];
-//                   volumePoints = [];
-//                   flowPoints = [];
-//                 });
-//               }
-//             }
-//             // Fluttertoast.showToast(msg: "Timeout.");
-//             // psValue1 = 0;
-//             // mvValue = 0;
-//             // vteValue = 0;
-//             // fio2DisplayParameter = 0;
-//             // pressurePoints = [];
-//             // volumePoints = [];
-//             // flowPoints = [];
 //           } else {
 //             setState(() {
 //               powerButtonEnabled = false;
@@ -739,14 +699,14 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   saveData(VentilatorOMode data, String patientId) async {
-    print("data saving id : " + patientId);
+    // print("data saving id : " + patientId);
     dbHelper.save(data);
   }
 
   Future<void> _sendShutdown() async {
     try {
       var result = await shutdownChannel.invokeMethod('sendShutdowndevice');
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
       print(e);
     }
@@ -758,7 +718,7 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStartH');
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
       print(e);
     }
@@ -770,7 +730,7 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStartM');
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
       print(e);
     }
@@ -2623,7 +2583,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.1",
+                  "V1.7.2",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -2747,7 +2707,7 @@ class _CheckPageState extends State<Dashboard> {
                     //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                     SizedBox(
                       height:
-                          playOnEnabled ? 188 : powerButtonEnabled ? 141 : 240,
+                          playOnEnabled ? 148 : powerButtonEnabled ? 181 : 300,
                     ),
                   ],
                 ),
@@ -5875,8 +5835,8 @@ class _CheckPageState extends State<Dashboard> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    psvmaxValue = 2400;
-                    psvminValue = 50;
+                    psvmaxValue = 1200;
+                    psvminValue = 100;
                     psvparameterName = "Vt Min";
                     psvparameterUnits = "mL";
                     psvItrig = false;
@@ -5932,7 +5892,7 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: Text(
-                                "2400",
+                                "1200",
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: psvVtMin
@@ -5943,7 +5903,7 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.bottomLeft,
                               child: Text(
-                                "50",
+                                "100",
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: psvVtMin
@@ -5978,7 +5938,7 @@ class _CheckPageState extends State<Dashboard> {
                                         : Color(0xFFE0E0E0),
                                   ),
                                   value: psvVtMinValue != null
-                                      ? psvVtMinValue / 2400
+                                      ? psvVtMinValue / 1200
                                       : 0,
                                 ),
                               ),
@@ -5993,8 +5953,8 @@ class _CheckPageState extends State<Dashboard> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    psvmaxValue = 2400;
-                    psvminValue = 50;
+                    psvmaxValue = 1200;
+                    psvminValue = 100;
                     psvparameterName = "Vt Max";
                     psvparameterUnits = "mL";
                     psvItrig = false;
@@ -6050,7 +6010,7 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: Text(
-                                "2400",
+                                "1200",
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: psvVtMax
@@ -6061,7 +6021,7 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.bottomLeft,
                               child: Text(
-                                "50",
+                                "100",
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: psvVtMax
@@ -6096,7 +6056,7 @@ class _CheckPageState extends State<Dashboard> {
                                         : Color(0xFFE0E0E0),
                                   ),
                                   value: psvVtMaxValue != null
-                                      ? psvVtMaxValue / 2400
+                                      ? psvVtMaxValue / 1200
                                       : 0,
                                 ),
                               ),
@@ -6716,7 +6676,7 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (psvVtMin == true &&
                                     psvVtMinValue != pacvmaxValue) {
                                   setState(() {
-                                    if (psvVtMaxValue < 2390) {
+                                    if (psvVtMaxValue < 1190) {
                                       psvVtMinValue = psvVtMinValue + 1;
                                       psvVtMaxValue = psvVtMinValue + 1;
                                     }
@@ -6857,7 +6817,7 @@ class _CheckPageState extends State<Dashboard> {
                                   psvTiValue = value.toInt();
                                 });
                               } else if (psvVtMin == true) {
-                                if (value.toInt() < 2390) {
+                                if (value.toInt() < 1190) {
                                   psvVtMinValue = value.toInt();
                                   psvVtMaxValue = psvVtMinValue + 1;
                                 }
@@ -7664,8 +7624,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  pacvmaxValue = 2400;
-                  pacvminValue = 50;
+                  pacvmaxValue = 1200;
+                  pacvminValue = 100;
                   pacvparameterName = "Vt Min";
                   pacvparameterUnits = "mL";
                   pacvItrig = false;
@@ -7717,7 +7677,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2400",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvVtMin
@@ -7728,7 +7688,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "100",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvVtMin
@@ -7763,7 +7723,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: pacvVtMinValue != null
-                                    ? pacvVtMinValue / 2400
+                                    ? pacvVtMinValue / 1200
                                     : 0,
                               ),
                             ),
@@ -7778,8 +7738,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  pacvmaxValue = 2400;
-                  pacvminValue = 50;
+                  pacvmaxValue = 1200;
+                  pacvminValue = 100;
                   pacvparameterName = "Vt Max";
                   pacvparameterUnits = "mL";
                   pacvItrig = false;
@@ -7831,7 +7791,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2400",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvVtMax
@@ -7842,7 +7802,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "100",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvVtMax
@@ -7877,7 +7837,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: pacvVtMaxValue != null
-                                    ? pacvVtMaxValue / 2400
+                                    ? pacvVtMaxValue / 1200
                                     : 0,
                               ),
                             ),
@@ -8248,7 +8208,7 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (pacvVtMin == true &&
                                     pacvVtMinValue != pacvmaxValue) {
                                   setState(() {
-                                    if (pacvVtMaxValue < 2390) {
+                                    if (pacvVtMaxValue < 1190) {
                                       pacvVtMinValue = pacvVtMinValue + 1;
                                       pacvVtMaxValue = pacvVtMinValue + 1;
                                     }
@@ -8360,7 +8320,7 @@ class _CheckPageState extends State<Dashboard> {
                                   pacvPcValue = value.toInt();
                                 });
                               } else if (pacvVtMin == true) {
-                                if (value.toInt() < 2390) {
+                                if (value.toInt() < 1190) {
                                   pacvVtMinValue = value.toInt();
                                   pacvVtMaxValue = pacvVtMinValue + 1;
                                 }
@@ -8796,8 +8756,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 2000;
-                  vacvminValue = 50;
+                  vacvmaxValue = 1200;
+                  vacvminValue = 200;
                   vacvparameterName = "Vt";
                   vacvparameterUnits = "mL";
                   vacvItrig = false;
@@ -8849,7 +8809,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2000",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -8860,7 +8820,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -8895,7 +8855,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vacvVtValue != null
-                                    ? vacvVtValue / 2000
+                                    ? vacvVtValue / 1200
                                     : 0,
                               ),
                             ),
@@ -10570,7 +10530,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "10",
+                              "-10",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvItrig
@@ -10581,7 +10541,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "1",
+                              "-1",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvItrig
@@ -10637,8 +10597,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  psimvmaxValue = 2400;
-                  psimvminValue = 50;
+                  psimvmaxValue = 1200;
+                  psimvminValue = 100;
                   psimvparameterName = "Vt Min";
                   psimvparameterUnits = "mL";
                   psimvItrig = false;
@@ -10691,7 +10651,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2400",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvVtMin
@@ -10702,7 +10662,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "100",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvVtMin
@@ -10737,7 +10697,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: psimvVtMinValue != null
-                                    ? psimvVtMinValue / 2400
+                                    ? psimvVtMinValue / 1200
                                     : 0,
                               ),
                             ),
@@ -10753,8 +10713,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  psimvmaxValue = 2400;
-                  psimvminValue = 50;
+                  psimvmaxValue = 1200;
+                  psimvminValue = 100;
                   psimvparameterName = "Vt Max";
                   psimvparameterUnits = "mL";
                   psimvItrig = false;
@@ -10807,7 +10767,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2400",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvVtMax
@@ -10818,7 +10778,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "100",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvVtMax
@@ -10853,7 +10813,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: psimvVtMaxValue != null
-                                    ? psimvVtMaxValue / 2400
+                                    ? psimvVtMaxValue / 1200
                                     : 0,
                               ),
                             ),
@@ -11343,7 +11303,7 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (psimvVtMin == true &&
                                     psimvVtMinValue != pacvmaxValue) {
                                   setState(() {
-                                    if (psimvVtMaxValue < 2390) {
+                                    if (psimvVtMaxValue < 1190) {
                                       psimvVtMinValue = psimvVtMinValue + 1;
                                       psimvVtMaxValue = psimvVtMinValue + 1;
                                     }
@@ -11462,7 +11422,7 @@ class _CheckPageState extends State<Dashboard> {
                                   psimvPcValue = value.toInt();
                                 });
                               } else if (psimvVtMin == true) {
-                                if (value.toInt() < 2390) {
+                                if (value.toInt() < 1190) {
                                   psimvVtMinValue = value.toInt();
                                   psimvVtMaxValue = psimvVtMinValue + 1;
                                 }
@@ -12144,8 +12104,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  pccmvmaxValue = 2400;
-                  pccmvminValue = 50;
+                  pccmvmaxValue = 1200;
+                  pccmvminValue = 100;
                   pccmvparameterName = "VTmin";
                   pccmvparameterUnits = "mL";
                   pccmvRR = false;
@@ -12197,7 +12157,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2400",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmin
@@ -12208,7 +12168,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "100",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmin
@@ -12243,7 +12203,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: pccmvVtminValue != null
-                                    ? pccmvVtminValue / 2400
+                                    ? pccmvVtminValue / 1200
                                     : 0,
                               ),
                             ),
@@ -12258,8 +12218,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  pccmvmaxValue = 2400;
-                  pccmvminValue = 50;
+                  pccmvmaxValue = 1200;
+                  pccmvminValue = 200;
                   pccmvparameterName = "VTmax";
                   pccmvparameterUnits = "mL";
                   pccmvRR = false;
@@ -12311,7 +12271,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2400",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmax
@@ -12322,7 +12282,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "100",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmax
@@ -12357,7 +12317,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: pccmvVtmaxValue != null
-                                    ? pccmvVtmaxValue / 2400
+                                    ? pccmvVtmaxValue / 1200
                                     : 0,
                               ),
                             ),
@@ -12724,7 +12684,7 @@ class _CheckPageState extends State<Dashboard> {
                                   } else if (pccmvVtmin == true &&
                                       pccmvVtminValue != pccmvmaxValue) {
                                     setState(() {
-                                      if (pccmvVtmaxValue < 2390) {
+                                      if (pccmvVtmaxValue < 1390) {
                                         pccmvVtminValue = pccmvVtminValue + 1;
                                         pccmvVtmaxValue = pccmvVtminValue + 1;
                                       }
@@ -12861,7 +12821,7 @@ class _CheckPageState extends State<Dashboard> {
                                     pccmvFio2Value = value.toInt();
                                   });
                                 } else if (pccmvVtmin == true) {
-                                  if (value.toInt() < 2390) {
+                                  if (value.toInt() < 1190) {
                                     pccmvVtminValue = value.toInt();
                                     if (pccmvVtmaxValue <= pccmvVtminValue) {
                                       pccmvVtmaxValue = pccmvVtminValue + 1;
@@ -13281,8 +13241,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vccmvmaxValue = 2000;
-                  vccmvminValue = 50;
+                  vccmvmaxValue = 1200;
+                  vccmvminValue = 200;
                   vccmvparameterName = "VT";
                   vccmvparameterUnits = "mL";
                   vccmvRR = false;
@@ -13335,7 +13295,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2000",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vccmvVt
@@ -13346,7 +13306,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vccmvVt
@@ -13381,7 +13341,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vccmvVtValue != null
-                                    ? vccmvVtValue / 2000
+                                    ? vccmvVtValue / 1200
                                     : 0,
                               ),
                             ),
@@ -14511,8 +14471,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vsimvmaxValue = 2000;
-                  vsimvminValue = 50;
+                  vsimvmaxValue = 1200;
+                  vsimvminValue = 200;
                   vsimvparameterName = "Vt";
                   vsimvparameterUnits = "mL";
                   vsimvItrig = false;
@@ -14565,7 +14525,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2000",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvVt
@@ -14576,7 +14536,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvVt
@@ -16124,8 +16084,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 2000;
-                  vacvminValue = 50;
+                  vacvmaxValue = 1200;
+                  vacvminValue = 200;
                   vacvparameterName = "Vt";
                   vacvparameterUnits = "mL";
                   vacvItrig = false;
@@ -16177,7 +16137,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "2000",
+                              "1200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -16188,7 +16148,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "50",
+                              "200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -16223,7 +16183,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vacvVtValue != null
-                                    ? vacvVtValue / 2000
+                                    ? vacvVtValue / 1200
                                     : 0,
                               ),
                             ),
@@ -18256,13 +18216,13 @@ class _CheckPageState extends State<Dashboard> {
   void setData() {
     if (pacvEnabled == true) {
       setState(() {
-        pacvItrigValue = 6;
+        pacvItrigValue = 3;
         pacvRrValue = 20;
         pacvIeValue = 51;
         pacvPeepValue = 10;
         pacvPcValue = 30;
-        pacvVtMinValue = 100;
-        pacvVtMaxValue = 400;
+        pacvVtMinValue = 200;
+        pacvVtMaxValue = 1200;
         pacvFio2Value = 21;
         pacvFlowRampValue = 3;
         pacvmaxValue = 10;
@@ -18334,7 +18294,7 @@ class _CheckPageState extends State<Dashboard> {
       });
     } else if (vacvEnabled == true) {
       setState(() {
-        vacvItrigValue = 6;
+        vacvItrigValue = 3;
         vacvRrValue = 20;
         vacvIeValue = 51;
         vacvPeepValue = 10;
@@ -18360,7 +18320,7 @@ class _CheckPageState extends State<Dashboard> {
       });
     } else if (psvEnabled == true) {
       setState(() {
-        psvItrigValue = 6;
+        psvItrigValue = 3;
         psvPeepValue = 10;
         psvIeValue = 51;
         psvPsValue = 30;
@@ -18404,7 +18364,7 @@ class _CheckPageState extends State<Dashboard> {
         vsimvPcMax = false;
         vsimvFio2 = false;
         vsimvFlowRamp = false;
-        vsimvItrigValue = 6;
+        vsimvItrigValue = 3;
         vsimvRrValue = 20;
         vsimvIeValue = 51;
         vsimvPeepValue = 10;
@@ -18432,7 +18392,7 @@ class _CheckPageState extends State<Dashboard> {
         vsimvPcMax = false;
         vsimvFio2 = false;
         vsimvFlowRamp = false;
-        vsimvItrigValue = 6;
+        vsimvItrigValue = 3;
         vsimvRrValue = 20;
         vsimvIeValue = 51;
         vsimvPeepValue = 10;
