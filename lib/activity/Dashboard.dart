@@ -457,6 +457,7 @@ class _CheckPageState extends State<Dashboard> {
   String checkTempData;
   int powerIndication = 0, batteryPercentage, batteryStatus = 0;
   String sendBattery;
+  List<int> listTemp =[];
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -595,67 +596,67 @@ class _CheckPageState extends State<Dashboard> {
       }
     });
 
-    _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
-      if (_status == "Connected") {
-        // String lastTime = await dbHelper.getLastRecordTime();
-        // String lastRecordTime =
-        //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
+    // _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
+    //   if (_status == "Connected") {
+    //     // String lastTime = await dbHelper.getLastRecordTime();
+    //     // String lastRecordTime =
+    //     //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
 
-        var now = new DateTime.now();
-        setState(() {
-          presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-          DateTime date1 =
-              DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
-          DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
-          var differnceD = date2.difference(date1);
-          if (differnceD.inSeconds > 5) {
-            setState(() {
-              respiratoryEnable = false;
-              insExpButtonEnable = false;
-              powerButtonEnabled = true;
-              psValue1 = 0;
-              cc = 0;
-              mvValue = 0;
-              vteValue = 0;
-              peepDisplayValue = 0;
-              rrtotalValue = 0;
-              mapDisplayValue = 0;
-              peepDisplayValue = 0;
-              fio2DisplayParameter = 0;
-              pressurePoints.clear();
-              volumePoints.clear();
-              flowPoints.clear();
-              // playOnEnabled = false;
-            });
-            if (playOnEnabled) {
-              if (mounted) {
-                setState(() {
-                  psValue1 = 0;
-                  mvValue = 0;
-                  vteValue = 0;
-                  fio2DisplayParameter = 0;
-                  pressurePoints = [];
-                  volumePoints = [];
-                  flowPoints = [];
-                });
-              }
-            }
-            // Fluttertoast.showToast(msg: "Timeout.");
-            // psValue1 = 0;
-            // mvValue = 0;
-            // vteValue = 0;
-            // fio2DisplayParameter = 0;
-            // pressurePoints = [];
-            // volumePoints = [];
-            // flowPoints = [];
-          } else {
-            setState(() {
-              powerButtonEnabled = false;
-            });
-          }
-        });
-      }
-    });
+    //     var now = new DateTime.now();
+    //     setState(() {
+    //       presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+    //       DateTime date1 =
+    //           DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
+    //       DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
+    //       var differnceD = date2.difference(date1);
+    //       if (differnceD.inSeconds > 5) {
+    //         setState(() {
+    //           respiratoryEnable = false;
+    //           insExpButtonEnable = false;
+    //           powerButtonEnabled = true;
+    //           psValue1 = 0;
+    //           cc = 0;
+    //           mvValue = 0;
+    //           vteValue = 0;
+    //           peepDisplayValue = 0;
+    //           rrtotalValue = 0;
+    //           mapDisplayValue = 0;
+    //           peepDisplayValue = 0;
+    //           fio2DisplayParameter = 0;
+    //           pressurePoints.clear();
+    //           volumePoints.clear();
+    //           flowPoints.clear();
+    //           // playOnEnabled = false;
+    //         });
+    //         if (playOnEnabled) {
+    //           if (mounted) {
+    //             setState(() {
+    //               psValue1 = 0;
+    //               mvValue = 0;
+    //               vteValue = 0;
+    //               fio2DisplayParameter = 0;
+    //               pressurePoints = [];
+    //               volumePoints = [];
+    //               flowPoints = [];
+    //             });
+    //           }
+    //         }
+    //         // Fluttertoast.showToast(msg: "Timeout.");
+    //         // psValue1 = 0;
+    //         // mvValue = 0;
+    //         // vteValue = 0;
+    //         // fio2DisplayParameter = 0;
+    //         // pressurePoints = [];
+    //         // volumePoints = [];
+    //         // flowPoints = [];
+    //       } else {
+    //         setState(() {
+    //           powerButtonEnabled = false;
+    //         });
+    //       }
+    //     });
+    //   }
+    // });
     _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
       if (_status == "Connected") {
         shutdownChannel.invokeMethod('getBatteryLevel').then((result) async {
@@ -673,68 +674,68 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
     });
-_timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
-      if (_status == "Connected") {
-        // String lastTime = await dbHelper.getLastRecordTime();
-        // String lastRecordTime =
-        //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
+// _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
+//       if (_status == "Connected") {
+//         // String lastTime = await dbHelper.getLastRecordTime();
+//         // String lastRecordTime =
+//         //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
 
-        var now = new DateTime.now();
-        setState(() {
-          presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-          DateTime date1 =
-              DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
-          DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
-          var differnceD = date2.difference(date1);
-          if (differnceD.inSeconds > 600) {
-            setState(() {
-              turnOffScreen();
-              respiratoryEnable = false;
-              insExpButtonEnable = false;
-              powerButtonEnabled = true;
-              psValue1 = 0;
-              cc = 0;
-              mvValue = 0;
-              vteValue = 0;
-              peepDisplayValue = 0;
-              rrtotalValue = 0;
-              mapDisplayValue = 0;
-              peepDisplayValue = 0;
-              fio2DisplayParameter = 0;
-              pressurePoints.clear();
-              volumePoints.clear();
-              flowPoints.clear();
-              // playOnEnabled = false;
-            });
-            if (playOnEnabled) {
-              if (mounted) {
-                setState(() {
-                  psValue1 = 0;
-                  mvValue = 0;
-                  vteValue = 0;
-                  fio2DisplayParameter = 0;
-                  pressurePoints = [];
-                  volumePoints = [];
-                  flowPoints = [];
-                });
-              }
-            }
-            // Fluttertoast.showToast(msg: "Timeout.");
-            // psValue1 = 0;
-            // mvValue = 0;
-            // vteValue = 0;
-            // fio2DisplayParameter = 0;
-            // pressurePoints = [];
-            // volumePoints = [];
-            // flowPoints = [];
-          } else {
-            setState(() {
-              powerButtonEnabled = false;
-            });
-          }
-        });
-      }
-    });
+//         var now = new DateTime.now();
+//         setState(() {
+//           presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+//           DateTime date1 =
+//               DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
+//           DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
+//           var differnceD = date2.difference(date1);
+//           if (differnceD.inSeconds > 600) {
+//             setState(() {
+//               turnOffScreen();
+//               respiratoryEnable = false;
+//               insExpButtonEnable = false;
+//               powerButtonEnabled = true;
+//               psValue1 = 0;
+//               cc = 0;
+//               mvValue = 0;
+//               vteValue = 0;
+//               peepDisplayValue = 0;
+//               rrtotalValue = 0;
+//               mapDisplayValue = 0;
+//               peepDisplayValue = 0;
+//               fio2DisplayParameter = 0;
+//               pressurePoints.clear();
+//               volumePoints.clear();
+//               flowPoints.clear();
+//               // playOnEnabled = false;
+//             });
+//             if (playOnEnabled) {
+//               if (mounted) {
+//                 setState(() {
+//                   psValue1 = 0;
+//                   mvValue = 0;
+//                   vteValue = 0;
+//                   fio2DisplayParameter = 0;
+//                   pressurePoints = [];
+//                   volumePoints = [];
+//                   flowPoints = [];
+//                 });
+//               }
+//             }
+//             // Fluttertoast.showToast(msg: "Timeout.");
+//             // psValue1 = 0;
+//             // mvValue = 0;
+//             // vteValue = 0;
+//             // fio2DisplayParameter = 0;
+//             // pressurePoints = [];
+//             // volumePoints = [];
+//             // flowPoints = [];
+//           } else {
+//             setState(() {
+//               powerButtonEnabled = false;
+//             });
+//           }
+//         });
+//       }
+//     });
   }
 
   saveData(VentilatorOMode data, String patientId) async {
@@ -2892,7 +2893,7 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
                         onTap: () {
                           setState(() {
                             audioEnable = false;
-                            sendSoundOff();
+                            // sendSoundOff();
                           });
                         },
                         child: Center(
@@ -2907,7 +2908,7 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
                         onTap: () {
                           setState(() {
                             audioEnable = true;
-                            sendSoundOn();
+                            // sendSoundOn();
                           });
                         },
                         child: Center(
@@ -19268,19 +19269,52 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
   }
 
   serializeEventData(Uint8List event) async {
-    var now = new DateTime.now();
+    
+    
     if (event != null) {
       setState(() {
         respiratoryEnable = true;
         // playOnEnabled = false;
       });
-      if (event[0] == 126 && event.length > 110) {
+      if (event[0] == 126 && event.length == 115) {
+        list.clear();
+        listTemp.clear();
         // turnOnScreen();
         list.addAll(event);
         list.removeAt(0);
-      }
 
-      lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
+
+            for (int i =0;i<list.length;i++){
+                  if(list[i]==125){
+                    setState(() {
+                      listTemp.insert(i,list[i] ^ 0x20);
+                    });
+                  }else{
+                    setState(() {
+                      listTemp.insert(i,list[i]);
+                    });
+                  }
+            }
+             serialiseReceivedPacket(listTemp);
+             }else{
+               list.clear();
+             }
+           } else {
+             setState(() {
+               respiratoryEnable = false;
+             });
+            //  pressurePoints.clear();
+            //  volumePoints.clear();
+            //  flowPoints.clear();
+             list.clear();
+           }
+         }
+       
+  serialiseReceivedPacket(List<int> list) {
+            if(list.isNotEmpty && list.length==114){
+            var now = new DateTime.now();
+           
+           lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
 
       // bool data = await checkCrc(list, list.length);
       // if (data == false) {
@@ -19311,10 +19345,11 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
             var now = new DateTime.now();
 
             int vteValueCheck = ((list[4] << 8) + list[5]); //5 6
+            print("vte "+vteValueCheck.toString());
 
             if ((vteValueCheck != "" || vteValueCheck != null) &&
-                vteValueCheck.round() > 0 &&
-                vteValueCheck.round() < 2500) {
+                vteValueCheck.round() >= 0 &&
+                vteValueCheck.round() <= 2500) {
               setState(() {
                 vteMinValue = vteValue - vtValue;
                 vteValue = ((list[4] << 8) + list[5]);
@@ -19335,8 +19370,8 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
             int rrtotalCheck = ((list[10] << 8) + list[11]).toInt(); //11,12
 
             if (rrtotalCheck != "" &&
-                rrtotalCheck.round() > 0 &&
-                rrtotalCheck.round() < 100) {
+                rrtotalCheck.round() >= 0 &&
+                rrtotalCheck.round() <= 100) {
               setState(() {
                 rrDisplayValue = rrtotalCheck;
               });
@@ -19344,15 +19379,15 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
             int pipValueCheck =
                 (((list[14] << 8) + list[15]) / 100).round().toInt(); //15 16
 
-            if ((((list[16] << 8) + list[17]) / 100).round().toInt() > 0 &&
-                (((list[16] << 8) + list[17]) / 100).round().toInt() < 150) {
+            if ((((list[16] << 8) + list[17]) / 100).round().toInt() >= 0 &&
+                (((list[16] << 8) + list[17]) / 100).round().toInt() <= 150) {
               peepDisplayValue =
                   (((list[16] << 8) + list[17]) / 100).round().toInt(); //17 18
             }
 
             if (pipValueCheck != 0 &&
-                pipValueCheck.round() > 0 &&
-                pipValueCheck.round() < 150) {
+                pipValueCheck.round() >= 0 &&
+                pipValueCheck.round() <= 150) {
               setState(() {
                 psValue1 = pipValueCheck;
               });
@@ -19368,8 +19403,8 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
             expiratoryPressureR =
                 (((list[36] << 8) + list[37]) / 100).toInt(); //37 38
 
-            if (((list[38] << 8) + list[39]).round() > 20 &&
-                ((list[38] << 8) + list[39]).round() < 100) {
+            if (((list[38] << 8) + list[39]).round() >= 20 &&
+                ((list[38] << 8) + list[39]).round() <= 100) {
               fio2DisplayParameter = ((list[38] << 8) + list[39]); // 39,40
             }
 
@@ -19377,7 +19412,7 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
 
             if (list[108] == 1) {
               presentCode = ((list[106] << 8) + list[107]);
-              if (presentCode != 0 && presentCode > 0 && presentCode < 23) {
+              if (presentCode != 0 && presentCode > 0 && presentCode <= 23) {
                 var data = AlarmsList(
                     presentCode.toString(), this.globalCounterNo.toString());
                 dbHelpera.saveAlarm(data);
@@ -19391,7 +19426,7 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
                     presentCode == 11 ||
                     presentCode == 17) {
                   _playMusicHigh();
-                  sendSoundOn();
+                  // sendSoundOn();
                   audioEnable = true;
                 } else if (presentCode == 1 ||
                     presentCode == 2 ||
@@ -19411,22 +19446,23 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
                     presentCode == 21 ||
                     presentCode == 22) {
                   _playMusicMedium();
-                  sendSoundOn();
+                  // sendSoundOn();
+
                   audioEnable = true;
                 } else if (presentCode == 23) {
                   _playMusicLower();
-                  sendSoundOn();
+                  // sendSoundOn();
                   audioEnable = true;
                 }
               }
             } else if (list[108] == 0) {
-              sendSoundOff();
+              // sendSoundOff();
               _stopMusic();
             }
-            cdisplayParameter = (double.tryParse(vteValue.toString()) /
-                    (pplateauDisplay -
-                        double.tryParse(peepDisplayValue.toString())))
-                .toInt();
+            // cdisplayParameter = (double.tryParse(vteValue.toString()) /
+            //         (pplateauDisplay -
+            //             double.tryParse(peepDisplayValue.toString())))
+            //     .toInt();
 
             if (list[108] == 1) {
               setState(() {
@@ -19524,13 +19560,13 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
           });
 
           var dataOperatingMode = ((list[104] << 8) + list[105]);
-          if (dataOperatingMode > 0 && dataOperatingMode < 14) {
+          if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
             setState(() {
               operatinModeR = ((list[104] << 8) + list[105]);
             });
           }
 
-          if (operatinModeR > 0 && operatinModeR < 14) {
+         
             if (operatinModeR == 1) {
               setState(() {
                 modeName = "VACV";
@@ -19564,10 +19600,10 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
                 modeName = "PRVC";
               });
             }
-          }
+          
 
-          if ((((list[68] << 8) + list[69]) / 100).round().toInt() > 0 &&
-              (((list[68] << 8) + list[69]) / 100).round().toInt() < 150) {
+          if ((((list[68] << 8) + list[69]) / 100).round().toInt() >= 0 &&
+              (((list[68] << 8) + list[69]) / 100).round().toInt() <= 150) {
             mapDisplayValue = (((list[68] << 8) + list[69]) / 100).toInt();
           }
           if (list[84] == 1) {
@@ -19618,8 +19654,8 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
           // }else{
           //   pressurePoints.add(0);
           // }
-          if (((list[60] << 8) + list[61]).toInt() > 0 &&
-              ((list[60] << 8) + list[61]).toInt() < 150) {
+          if (((list[60] << 8) + list[61]).toInt() >= 0 &&
+              ((list[60] << 8) + list[61]).toInt() <= 150) {
             pplateauDisplay = ((list[60] << 8) + list[61]).toDouble();
           }
 
@@ -19728,16 +19764,9 @@ _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
             saveData(data, patientId);
           }
           list.clear();
+          listTemp.clear();
         });
       // }
-    } else {
-      setState(() {
-        respiratoryEnable = false;
-      });
-      pressurePoints.clear();
-      volumePoints.clear();
-      flowPoints.clear();
-      list.clear();
-    }
-  }
+          }
+         }
 }

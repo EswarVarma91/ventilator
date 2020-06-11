@@ -380,6 +380,12 @@
       "languageVersion": "2.6"
     },
     {
+      "name": "xor",
+      "rootUri": "file:///Users/eswarvarmapanumetcha/.pub-cache/hosted/pub.dartlang.org/xor-0.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "yaml",
       "rootUri": "file:///Users/eswarvarmapanumetcha/.pub-cache/hosted/pub.dartlang.org/yaml-2.2.1",
       "packageUri": "lib/",
@@ -392,7 +398,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-06-09T05:28:23.688438Z",
+  "generated": "2020-06-10T19:09:48.907111Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }
