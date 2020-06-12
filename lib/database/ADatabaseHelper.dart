@@ -11,8 +11,8 @@ class ADatabaseHelper {
   static const String ALARM = 'alarmCodes';
   static const String DATE_TIME = 'datetime';
   static const String GLOBAL_COUNTER_NO = 'globalCounterNo';
-  static const String TABLE_ALARM ='alarms';
-  static const String DATABASE = 'alarmsDb';
+  static const String TABLE_ALARM ='alarmTable';
+  static const String DATABASE = 'alarmDb';
 
   Future<Database> get db async {
     if (_db != null) {
@@ -30,7 +30,7 @@ class ADatabaseHelper {
   }
 
   _onCreate(Database db, int version) async {
-    await db.execute('CREATE TABLE $TABLE_ALARM($ID INTERGER PRIMARY KEY,$ALARM TEXT,$DATE_TIME TEXT,$GLOBAL_COUNTER_NO TEXT)');
+    await db.execute('CREATE TABLE $TABLE_ALARM($ID INTEGER PRIMARY KEY AUTOINCREMENT,$ALARM TEXT,$DATE_TIME TEXT,$GLOBAL_COUNTER_NO TEXT)');
   }
 
 
@@ -55,7 +55,7 @@ class ADatabaseHelper {
 
    Future<List<AlarmsList>> getAllAlarms() async {
      var dbClient = await db;
-    List<Map> dataData= await dbClient.rawQuery('SELECT $ID,$ALARM,$DATE_TIME FROM $TABLE_ALARM group by $GLOBAL_COUNTER_NO ORDER BY $ID ASC LIMIT 200');
+    List<Map> dataData= await dbClient.rawQuery('SELECT $ID,$ALARM,$DATE_TIME FROM $TABLE_ALARM GROUP BY $ALARM ORDER BY $ID DESC LIMIT 200');
     List<AlarmsList> plist =[];
     if(dataData.length>0){
       for(int i=0; i<dataData.length;i++){

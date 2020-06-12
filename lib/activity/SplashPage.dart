@@ -63,6 +63,7 @@ class _SplashPageState extends State<SplashPage> {
     // }
     
     preferences.setString("mode", "PC-CMV");
+    preferences.setString("checkMode", "0");
     preferences.setInt("rr", 20);
     preferences.setInt("ie", 3);
     preferences.setString("i", "1.0");
@@ -86,6 +87,15 @@ class _SplashPageState extends State<SplashPage> {
      preferences.setString("page", "" );
      preferences.setString("pweight", "" );
      preferences.setString("pheight", "" );
+     preferences.setInt('minrr',1);
+     preferences.setInt('maxrr',70);
+     preferences.setInt('minvte',0);
+     preferences.setInt('maxvte',2400);
+     preferences.setInt('minppeak',0);
+     preferences.setInt('maxppeak',100);
+     preferences.setInt('minpeep',0);
+     preferences.setInt('maxpeep',40);
+   
     //  preferences.setInt('noTimes', counter);
     // await sleep(Duration(seconds: 2));
   }

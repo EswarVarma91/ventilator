@@ -35,11 +35,11 @@ class _AlarmLogListState extends State<AlarmLog> {
 
   getAlarmCode(int res){
 
-    var  data = res == 01
+    var  data = res == 1
                   ? "AC POWER DISCONNECTED"
-                  : res == 02
+                  : res == 2
                       ? " LOW BATTERY"
-                      : res == 03
+                      : res == 3
                           ? "CALIBRATE FiO2"
                           : res == 04
                               ? "CALIBRATION FiO2 FAIL"
@@ -144,7 +144,7 @@ class _AlarmLogListState extends State<AlarmLog> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                    Text(snapshot.data[index].alarmCode != null
-                                              ? getAlarmCode(int.tryParse(snapshot.data[index].alarmCode))
+                                              ? getAlarmCode(int.tryParse(snapshot. data[index].alarmCode))
                                                   .toString().toUpperCase()
                                               : "",
                                           style: TextStyle(fontSize: 22),

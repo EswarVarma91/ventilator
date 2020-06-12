@@ -4,6 +4,7 @@ import 'package:screen/screen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
+import 'package:ventilator/viewlog/ViewLogPatientList.dart';
 
 import 'AlarmLog.dart';
 import 'ViewLogDataDisplayPage.dart';
@@ -57,7 +58,7 @@ class _PatientsDatainSlotsState extends State<PatientsDatainSlots> {
         onWillPop: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Dashboard()),
+            MaterialPageRoute(builder: (context) => ViewLogPatientList()),
           );
         },
         child: FutureBuilder<List>(

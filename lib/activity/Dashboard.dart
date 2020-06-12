@@ -258,7 +258,7 @@ class _CheckPageState extends State<Dashboard> {
       psvFlowRamp = false;
 
   int psvItrigValue = 3,
-      psvPeepValue = 1,
+      psvPeepValue = 10,
       psvIeValue = 51,
       psvPsValue = 30,
       psvTiValue = 5,
@@ -452,12 +452,16 @@ class _CheckPageState extends State<Dashboard> {
       _buttonPressed = false,
       respiratoryEnable = false,
       insExpButtonEnable = false;
-  int previousCode = 101, presentCode, vteMinValue = 0,alarmPrevCounter=101,alarmCounter;
+  int previousCode = 101,
+      presentCode,
+      vteMinValue = 0,
+      alarmPrevCounter = 101,
+      alarmCounter;
   int cc = 0;
   String checkTempData;
   int powerIndication = 0, batteryPercentage, batteryStatus = 0;
   String sendBattery;
-  List<int> listTemp =[];
+  List<int> listTemp = [];
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -536,7 +540,7 @@ class _CheckPageState extends State<Dashboard> {
   bool _loopActive = false;
   int timerCounter = 00;
   int displayTemperature = 0;
-  int globalCounter = 0, globalCounterNo = 0;
+  int globalCounter = 0, globalCounterNo = 1;
 
   // getNoTimes() async {
   //   await sleep(Duration(seconds: 6));
@@ -544,31 +548,31 @@ class _CheckPageState extends State<Dashboard> {
   //   noTimes = preferences.getInt("noTimes");
   // }
 
-  counterData() async {
-    var data = await dbCounter.getCounterNo();
-    print(data);
-    if (data.isEmpty) {
-      globalCounter = globalCounter + 1;
-      dbCounter.saveCounter(CounterValue(globalCounter.toString()));
-      setState(() {
-        globalCounterNo = globalCounter;
-      });
-    } else if (data.isNotEmpty) {
-      globalCounter = int.tryParse(data[0].counterValue.toString());
-      globalCounter = globalCounter + 1;
-      dbCounter.updateCounterNo(globalCounter.toString());
-      setState(() {
-        globalCounterNo = globalCounter;
-      });
-    }
-  }
+  // counterData() async {
+  //   var data = await dbCounter.getCounterNo();
+  //   print(data);
+  //   if (data.isEmpty) {
+  //     globalCounter = globalCounter + 1;
+  //     dbCounter.saveCounter(CounterValue(globalCounter.toString()));
+  //     setState(() {
+  //       globalCounterNo = globalCounter;
+  //     });
+  //   } else if (data.isNotEmpty) {
+  //     globalCounter = int.tryParse(data[0].counterValue.toString());
+  //     globalCounter = globalCounter + 1;
+  //     dbCounter.updateCounterNo(globalCounter.toString());
+  //     setState(() {
+  //       globalCounterNo = globalCounter;
+  //     });
+  //   }
+  // }
 
   @override
   initState() {
     super.initState();
     var now = new DateTime.now();
     lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
-    counterData();
+    // counterData();
     getData();
     // getNoTimes();
     UsbSerial.usbEventStream.listen((UsbEvent event) {
@@ -955,6 +959,7 @@ class _CheckPageState extends State<Dashboard> {
     Screen.keepOn(true);
     preferences = await SharedPreferences.getInstance();
     setState(() {
+      var checkData = preferences.getString('checkMode');
       modeName = preferences.getString("mode");
       rrValue = preferences.getInt("rr");
       ieValue = preferences.getInt("ie");
@@ -996,8 +1001,222 @@ class _CheckPageState extends State<Dashboard> {
         vteValue = 0;
       }
 
-      peepHeight = 252 - ((peepValue * 3.71) - 4);
-      psHeight = 252 - ((psValue * 3.71) - 4);
+      minRrtotal = preferences.getInt('minrr');
+      maxRrtotal = preferences.getInt('maxrr');
+      minvte = preferences.getInt('minvte');
+      maxvte = preferences.getInt('maxvte');
+      minppeak = preferences.getInt('minppeak');
+      maxppeak = preferences.getInt('maxppeak');
+      minpeep = preferences.getInt('minpeep');
+      maxpeep = preferences.getInt('maxpeep');
+
+      if (checkData == "0") {
+      } else if (checkData == "pacv") {
+        pacvItrigValue = preferences.getInt('pacvItrigValue');
+        pacvRrValue = preferences.getInt('pacvRrValue');
+        pacvIeValue = preferences.getInt('pacvIeValue');
+        pacvPeepValue = preferences.getInt('pacvPeepValue');
+        pacvPcValue = preferences.getInt('pacvPcValue');
+        pacvVtMinValue = preferences.getInt('pacvVtMinValue');
+        pacvVtMaxValue = preferences.getInt('pacvVtMaxValue');
+        pacvFio2Value = preferences.getInt('pacvFio2Value');
+        pacvFlowRampValue = preferences.getInt('pacvFlowRampValue');
+        pacvmaxValue = 10;
+        pacvminValue = 1;
+        pacvdefaultValue = preferences.getInt('pacvdefaultValue');
+
+        pacvparameterName = "I Trig";
+        pacvparameterUnits = "cmH\u2082O Below Peep";
+        pacvItrig = true;
+        pacvRr = false;
+        pacvIe = false;
+        pacvPeep = false;
+        pacvPc = false;
+        pacvVtMin = false;
+        pacvVtMax = false;
+        pacvFio2 = false;
+        pacvFlowRamp = false;
+      } else if (checkData == "pccmv") {
+        pccmvRRValue = preferences.getInt('pccmvRRValue');
+        pccmvIeValue = preferences.getInt('pccmvIeValue');
+        pccmvPeepValue = preferences.getInt('pccmvPeepValue');
+        pccmvPcValue = preferences.getInt('pccmvPcValue');
+        pccmvFio2Value = preferences.getInt('pccmvFio2Value');
+        pccmvVtminValue = preferences.getInt('pccmvVtminValue');
+        pccmvVtmaxValue = preferences.getInt('pccmvVtmaxValue');
+        pccmvTihValue = preferences.getInt('pccmvTihValue');
+        pccmvFlowRampValue = preferences.getInt('pccmvFlowRampValue');
+        pccmvmaxValue = 60;
+        pccmvminValue = 1;
+        pccmvdefaultValue = preferences.getInt('pccmvdefaultValue');
+
+        pccmvparameterName = "RR";
+        pccmvparameterUnits = "";
+        pccmvRR = true;
+        pccmvIe = false;
+        pccmvPeep = false;
+        pccmvPc = false;
+        pccmvFio2 = false;
+        pccmvVtmin = false;
+        pccmvVtmax = false;
+        pccmvFlowRamp = false;
+      } else if (checkData == "vccmv") {
+        vccmvRRValue = preferences.getInt('vccmvRRValue');
+        vccmvIeValue = preferences.getInt('vccmvIeValue');
+        vccmvPeepValue = preferences.getInt('vccmvPeepValue');
+        vccmvPcMinValue = preferences.getInt('vccmvPcMinValue');
+        vccmvPcMaxValue = preferences.getInt('vccmvPcMaxValue');
+        vccmvFio2Value = preferences.getInt('vccmvFio2Value');
+        vccmvVtValue = preferences.getInt('vccmvVtValue');
+        vccmvTihValue = preferences.getInt('vccmvTihValue');
+        vccmvFlowRampValue = preferences.getInt('vccmvFlowRampValue');
+        vccmvmaxValue = 60;
+        vccmvminValue = 1;
+        vccmvdefaultValue = preferences.getInt('vccmvdefaultValue');
+        vccmvparameterName = "RR";
+        vccmvparameterUnits = "";
+        vccmvRR = true;
+        vccmvIe = false;
+        vccmvPeep = false;
+        vccmvPcMin = false;
+        vccmvPcMax = false;
+        vccmvFio2 = false;
+        vccmvVt = false;
+        vccmvFlowRamp = false;
+        vccmvTih = false;
+      } else if (checkData == "vacv") {
+        vacvItrigValue = preferences.getInt('vacvItrigValue');
+        vacvRrValue = preferences.getInt('vacvRrValue');
+        vacvIeValue = preferences.getInt('vacvIeValue');
+        vacvPeepValue = preferences.getInt('vacvPeepValue');
+        vacvVtValue = preferences.getInt('vacvVtValue');
+        vacvPcMinValue = preferences.getInt('vacvPcMinValue');
+        vacvPcMaxValue = preferences.getInt('vacvPcMaxValue');
+        vacvFio2Value = preferences.getInt('vacvFio2Value');
+        vacvFlowRampValue = preferences.getInt('vacvFlowRampValue');
+        vacvmaxValue = 10;
+        vacvminValue = 1;
+        vacvdefaultValue = preferences.getInt('vacvdefaultValue');
+        vacvparameterName = "I Trig";
+        vacvparameterUnits = "cmH\u2082O Below Peep";
+        vacvItrig = true;
+        vacvRr = false;
+        vacvIe = false;
+        vacvPeep = false;
+        vacvVt = false;
+        vacvPcMin = false;
+        vacvPcMax = false;
+        vacvFio2 = false;
+        vacvFlowRamp = false;
+      } else if (checkData == "psimv") {
+        psimvItrig = true;
+        psimvRr = false;
+        psimvIe = false;
+        psimvPeep = false;
+        psimvPc = false;
+        psimvPs = false;
+        psimvVtMin = false;
+        psimvVtMax = false;
+        psimvFio2 = false;
+        psimvFlowRamp = false;
+
+        psimvItrigValue = preferences.getInt('psimvItrigValue');
+        psimvRrValue = preferences.getInt('psimvRrValue');
+        psimvPsValue = preferences.getInt('psimvPsValue');
+        psimvIeValue = preferences.getInt('psimvIeValue');
+        psimvPeepValue = preferences.getInt('psimvPeepValue');
+        psimvPcValue = preferences.getInt('psimvPcValue');
+        psimvVtMinValue = preferences.getInt('psimvVtMinValue');
+        psimvVtMaxValue = preferences.getInt('psimvVtMaxValue');
+        psimvFio2Value = preferences.getInt('psimvFio2Value');
+        psimvFlowRampValue = preferences.getInt('psimvFlowRampValue');
+        psimvmaxValue = 10;
+        psimvminValue = 1;
+        psimvdefaultValue = preferences.getInt('psimvdefaultValue');
+        psimvparameterName = "I Trig";
+        psimvparameterUnits = "cmH\u2082O  Below Peep";
+      } else if (checkData == "vsimv") {
+        vsimvItrig = true;
+        vsimvRr = false;
+        vsimvIe = false;
+        vsimvPeep = false;
+        vsimvVt = false;
+        vsimvPs = false;
+        vsimvPcMin = false;
+        vsimvPcMax = false;
+        vsimvFio2 = false;
+        vsimvFlowRamp = false;
+        vsimvItrigValue = preferences.getInt('vsimvItrigValue');
+        vsimvRrValue = preferences.getInt('vsimvRrValue');
+        vsimvIeValue = preferences.getInt('vsimvIeValue');
+        vsimvPeepValue = preferences.getInt('vsimvPeepValue');
+        vsimvVtValue = preferences.getInt('vsimvVtValue');
+        vsimvPsValue = preferences.getInt('vsimvPsValue');
+        vsimvPcMinValue = preferences.getInt('vsimvPcMinValue');
+        vsimvPcMaxValue = preferences.getInt('vsimvPcMaxValue');
+        vsimvFio2Value = preferences.getInt('vsimvFio2Value');
+        vsimvFlowRampValue = preferences.getInt('vsimvFlowRampValue');
+
+        vsimvdefaultValue = preferences.getInt('vsimvdefaultValue');
+        vsimvparameterName = "I Trig";
+        vsimvparameterUnits = "cmH\u2082O Below Peep";
+      } else if (checkData == "psv") {
+        psvItrigValue = preferences.getInt('psvItrigValue');
+        psvPeepValue = preferences.getInt('psvPeepValue');
+        psvIeValue = preferences.getInt('psvIeValue');
+        psvPsValue = preferences.getInt('psvPsValue');
+        psvTiValue = preferences.getInt('psvTiValue');
+        psvVtMinValue = preferences.getInt('psvVtMinValue');
+        psvVtMaxValue = preferences.getInt('psvVtMaxValue');
+        psvFio2Value = preferences.getInt('psvFio2Value');
+        psvAtimeValue = preferences.getInt('psvAtimeValue');
+        psvEtrigValue = preferences.getInt('psvEtrigValue');
+        psvBackupRrValue = preferences.getInt('psvBackupRrValue');
+        psvMinTeValue = preferences.getInt('psvMinTeValue');
+        psvFlowRampValue = preferences.getInt('psvFlowRampValue');
+        psvItrig = true;
+        psvPeep = false;
+        psvIe = false;
+        psvPs = false;
+        psvTi = false;
+        psvVtMin = false;
+        psvVtMax = false;
+        psvFio2 = false;
+        psvAtime = false;
+        psvEtrig = false;
+        psvBackupRr = false;
+        psvMinTe = false;
+        psvFlowRamp = false;
+        psvmaxValue = 10;
+        psvminValue = 1;
+        psvdefaultValue = preferences.getInt('psvdefaultValue');
+        psvparameterName = "I Trig";
+        psvparameterUnits = "cmH\u2082O Below Peep";
+      } else if (checkData == "prvc") {
+        vacvItrigValue = preferences.getInt('vacvItrigValue');
+        vacvRrValue = preferences.getInt('vacvRrValue');
+        vacvIeValue = preferences.getInt('vacvIeValue');
+        vacvPeepValue = preferences.getInt('vacvPeepValue');
+        vacvVtValue = preferences.getInt('vacvVtValue');
+        vacvPcMinValue = preferences.getInt('vacvPcMinValue');
+        vacvPcMaxValue = preferences.getInt('vacvPcMaxValue');
+        vacvFio2Value = preferences.getInt('vacvFio2Value');
+        vacvFlowRampValue = preferences.getInt('vacvFlowRampValue');
+        vacvmaxValue = 10;
+        vacvminValue = 1;
+        vacvdefaultValue = preferences.getInt('vacvdefaultValue');
+        vacvparameterName = "I Trig";
+        vacvparameterUnits = "cmH\u2082O Below Peep";
+        vacvItrig = true;
+        vacvRr = false;
+        vacvIe = false;
+        vacvPeep = false;
+        vacvVt = false;
+        vacvPcMin = false;
+        vacvPcMax = false;
+        vacvFio2 = false;
+        vacvFlowRamp = false;
+      }
     });
   }
 
@@ -1032,7 +1251,7 @@ class _CheckPageState extends State<Dashboard> {
         padding: 10.0,
         backgroundColor: Color(0xFF171e27),
         traceColor: Colors.green,
-        yAxisMax: 150.0,
+        yAxisMax: 200.0,
         yAxisMin: -90.0,
         dataSet: flowPoints);
 
@@ -1346,7 +1565,7 @@ class _CheckPageState extends State<Dashboard> {
                                 child: Text(
                                   peakFlowDisplay == null
                                       ? "0"
-                                      : ((peakFlowDisplay * 60) / 1000)
+                                      : (((peakFlowDisplay * 60) / 1000)*1.2)
                                           .toStringAsFixed(3),
                                   // "00",
                                   style: TextStyle(
@@ -1434,131 +1653,146 @@ class _CheckPageState extends State<Dashboard> {
                         )),
                       ),
                     ),
-                operatinModeR == 4 ||  operatinModeR==5  || operatinModeR==3  ?  Container(
-                      color: Color(0xFF171e27),
-                      width: 190,
-                      height: 85,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12, right: 12, top: 5, bottom: 5),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text("",
-                                    style: TextStyle(
-                                        color: Colors.pink, fontSize: 10)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.pink, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 5.0),
-                                child: Text(
-                                  spontaneousDisplay == null
-                                      ? "0"
-                                      : (spontaneousDisplay / 1000)
-                                          .toStringAsFixed(3),
-                                  // "00",
-                                  style: TextStyle(
-                                      color: Colors.blue, fontSize: 35),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 0.0, bottom: 60),
-                                child: Text(
-                                  "Spontaneous Volume",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  "ml",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 0),
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
+                    operatinModeR == 4 ||
+                            operatinModeR == 5 ||
+                            operatinModeR == 3
+                        ? Container(
+                            color: Color(0xFF171e27),
+                            width: 190,
+                            height: 85,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 12, right: 12, top: 5, bottom: 5),
+                              child: Center(
+                                  child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text("",
+                                          style: TextStyle(
+                                              color: Colors.pink,
+                                              fontSize: 10)),
                                     ),
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.pink, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.pink, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 18.0),
-                                  child: Divider(
-                                    color: Colors.white,
-                                    height: 1,
                                   ),
-                                )),
-                          ],
-                        )),
-                      ),
-                    ):Container() ,
+                                  Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text(
+                                        "",
+                                        style: TextStyle(
+                                            color: Colors.pink, fontSize: 10),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 5.0),
+                                      child: Text(
+                                        spontaneousDisplay == null
+                                            ? "0"
+                                            : (spontaneousDisplay / 1000)
+                                                .toStringAsFixed(3),
+                                        // "00",
+                                        style: TextStyle(
+                                            color: Colors.blue, fontSize: 35),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 0.0, bottom: 60),
+                                      child: Text(
+                                        "Spontaneous Volume",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Text(
+                                        "ml",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 0),
+                                    child: Align(
+                                      alignment: Alignment.topRight,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Text(
+                                            "",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                          ),
+                                          Text(
+                                            "",
+                                            style: TextStyle(
+                                                color: Colors.pink,
+                                                fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Text(
+                                            "",
+                                            style: TextStyle(
+                                                color: Colors.pink,
+                                                fontSize: 12),
+                                          ),
+                                          Text(
+                                            "",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 18.0),
+                                        child: Divider(
+                                          color: Colors.white,
+                                          height: 1,
+                                        ),
+                                      )),
+                                ],
+                              )),
+                            ),
+                          )
+                        : Container(),
                   ],
                 ),
               ),
@@ -2658,7 +2892,7 @@ class _CheckPageState extends State<Dashboard> {
                               setState(() {
                                 playOnEnabled = false;
                               });
-                              counterData();
+                              // counterData();
                               writeDataPlay();
                             },
                             child: Padding(
@@ -2674,7 +2908,7 @@ class _CheckPageState extends State<Dashboard> {
                                     setState(() {
                                       playOnEnabled = false;
                                     });
-                                    counterData();
+                                    // counterData();
                                     writeDataPlay();
                                   }),
                             ),
@@ -6429,7 +6663,7 @@ class _CheckPageState extends State<Dashboard> {
                 height: 126,
               )
             ]),
-        SizedBox(width:118),
+        SizedBox(width: 118),
         Column(
           children: [
             Container(
@@ -7977,10 +8211,9 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            
           ],
         ),
-         SizedBox(width:140),
+        SizedBox(width: 140),
         Column(
           children: [
             Container(
@@ -8021,7 +8254,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -9460,7 +9692,7 @@ class _CheckPageState extends State<Dashboard> {
             // )
           ],
         ),
-        SizedBox(width:140),
+        SizedBox(width: 140),
         Column(
           children: [
             Container(
@@ -9501,7 +9733,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -11073,7 +11304,7 @@ class _CheckPageState extends State<Dashboard> {
             // ),
           ],
         ),
-        SizedBox(width:140),
+        SizedBox(width: 140),
         Column(
           children: [
             Container(
@@ -11114,7 +11345,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -11129,7 +11359,7 @@ class _CheckPageState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                   Text("PEEP"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -11199,7 +11429,8 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvPeepValue != psimvminValue) {
                                   setState(() {
                                     psimvPeepValue = psimvPeepValue - 1;
-                                    if (psimvItrigValue > 1 && psimvItrigValue > psimvPeepValue) {
+                                    if (psimvItrigValue > 1 &&
+                                        psimvItrigValue > psimvPeepValue) {
                                       psimvItrigValue = psimvPeepValue;
                                     }
                                   });
@@ -11389,11 +11620,10 @@ class _CheckPageState extends State<Dashboard> {
                             min: psimvminValue.toDouble() ?? 0,
                             max: psimvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (psimvItrig == true && psimvItrigValue!=10) {
+                              if (psimvItrig == true && psimvItrigValue != 10) {
                                 setState(() {
                                   psimvItrigValue = psimvItrigValue + 1;
                                   if (psimvPeepValue <= psimvItrigValue) {
-                                    
                                     if (psimvPeepValue == 0) {
                                       psimvItrigValue = 1;
                                     } else {
@@ -11404,7 +11634,8 @@ class _CheckPageState extends State<Dashboard> {
                               } else if (psimvPeep == true) {
                                 setState(() {
                                   psimvPeepValue = value.toInt();
-                                  if (psimvItrigValue > 1 && psimvItrigValue > psimvPeepValue) {
+                                  if (psimvItrigValue > 1 &&
+                                      psimvItrigValue > psimvPeepValue) {
                                     psimvItrigValue = psimvPeepValue;
                                   }
                                 });
@@ -12461,7 +12692,7 @@ class _CheckPageState extends State<Dashboard> {
             )
           ],
         ),
-        SizedBox(width:140),
+        SizedBox(width: 140),
         Column(
           children: [
             Container(
@@ -12502,7 +12733,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -12558,320 +12788,316 @@ class _CheckPageState extends State<Dashboard> {
             SizedBox(
               height: 5,
             ),
-             Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Color(0xFFE0E0E0)),
-                  width: 400,
-                  height: 195,
-                  child: Center(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(
-                                Icons.remove,
-                                color: Colors.black,
-                                size: 55,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (pccmvRR == true &&
-                                      pccmvRRValue != pccmvminValue) {
-                                    setState(() {
-                                      pccmvRRValue = pccmvRRValue - 1;
-                                    });
-                                    sendRRData(pccmvRRValue);
-                                  } else if (pccmvIe == true &&
-                                      pccmvIeValue != pccmvminValue) {
-                                    setState(() {
-                                      pccmvIeValue = pccmvIeValue - 1;
-                                    });
-                                  } else if (pccmvPeep == true &&
-                                      pccmvPeepValue != pccmvminValue) {
-                                    setState(() {
-                                      pccmvPeepValue = pccmvPeepValue - 1;
-                                    });
-                                  } else if (pccmvPc == true &&
-                                      pccmvPcValue != pccmvminValue) {
-                                    setState(() {
-                                      pccmvPcValue = pccmvPcValue - 1;
-                                    });
-                                  } else if (pccmvFio2 == true &&
-                                      pccmvFio2Value != pccmvminValue) {
-                                    setState(() {
-                                      pccmvFio2Value = pccmvFio2Value - 1;
-                                    });
-                                  } else if (pccmvVtmin == true &&
-                                      pccmvVtminValue != pccmvminValue) {
-                                    setState(() {
-                                      pccmvVtminValue = pccmvVtminValue - 1;
-                                      // if (pccmvVtminValue >= pccmvVtmaxValue) {
-                                      //   pccmvVtmaxValue = pccmvVtmaxValue - 1;
-                                      // }
-                                    });
-                                  } else if (pccmvVtmax == true &&
-                                      pccmvVtmaxValue != pccmvVtminValue + 1) {
-                                    pccmvVtmaxValue = pccmvVtmaxValue - 1;
-                                    // if (pccmvVtmaxValue <=
-                                    //     pccmvVtminValue + 100) {
-                                    //   pccmvVtminValue = pccmvVtmaxValue - 100;
-                                    // }
-                                  } else if (pccmvFlowRamp == true &&
-                                      pccmvFlowRampValue != pccmvminValue) {
-                                    setState(() {
-                                      pccmvFlowRampValue =
-                                          pccmvFlowRampValue - 1;
-                                    });
-                                  }
-                                });
-                              },
+            Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xFFE0E0E0)),
+                width: 400,
+                height: 195,
+                child: Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(
+                              Icons.remove,
+                              color: Colors.black,
+                              size: 55,
                             ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            Text(
-                              pccmvparameterName,
-                              style: TextStyle(fontSize: 36),
-                            ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 55,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (pccmvRR == true &&
-                                      pccmvRRValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvRRValue = pccmvRRValue + 1;
-                                    });
-                                    sendRRData(pccmvRRValue);
-                                  } else if (pccmvIe == true &&
-                                      pccmvIeValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvIeValue = pccmvIeValue + 1;
-                                    });
-                                  } else if (pccmvPeep == true &&
-                                      pccmvPeepValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvPeepValue = pccmvPeepValue + 1;
-                                      if (pccmvPcValue <= pccmvPeepValue) {
-                                        pccmvPcValue = pccmvPeepValue + 1;
-                                      }
-                                    });
-                                  } else if (pccmvPc == true &&
-                                      pccmvPcValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvPcValue = pccmvPcValue + 1;
-                                    });
-                                  } else if (pccmvFio2 == true &&
-                                      pccmvFio2Value != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvFio2Value = pccmvFio2Value + 1;
-                                    });
-                                  } else if (pccmvVtmin == true &&
-                                      pccmvVtminValue != pccmvmaxValue) {
-                                    setState(() {
-                                      if (pccmvVtmaxValue < 1390) {
-                                        pccmvVtminValue = pccmvVtminValue + 1;
-                                        pccmvVtmaxValue = pccmvVtminValue + 1;
-                                      }
-                                    });
-                                  } else if (pccmvVtmax == true &&
-                                      pccmvVtmaxValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvVtmaxValue = pccmvVtmaxValue + 1;
-                                    });
-                                  } else if (pccmvFlowRamp == true &&
-                                      pccmvFlowRampValue != pccmvmaxValue) {
-                                    setState(() {
-                                      pccmvFlowRampValue =
-                                          pccmvFlowRampValue + 1;
-                                    });
-                                  }
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                pccmvRR
-                                    ? pccmvRRValue.toInt().toString()
-                                    // : pccmvIe
-                                    //     ? "1:" + pccmvIeValue.toInt().toString()
-
-                                    : pccmvIe
-                                        ? getIeData(pccmvIeValue, 1)
-                                        : pccmvPeep
-                                            ? pccmvPeepValue.toInt().toString()
-                                            : pccmvPc
-                                                ? pccmvPcValue
-                                                    .toInt()
-                                                    .toString()
-                                                : pccmvFio2
-                                                    ? pccmvFio2Value
-                                                        .toInt()
-                                                        .toString()
-                                                    : pccmvVtmin
-                                                        ? pccmvVtminValue
-                                                            .toInt()
-                                                            .toString()
-                                                        : pccmvVtmax
-                                                            ? pccmvVtmaxValue
-                                                                .toInt()
-                                                                .toString()
-                                                            : pccmvFlowRamp
-                                                                ? pccmvFlowRampValue
-                                                                            .toString() ==
-                                                                        "0"
-                                                                    ? "AF"
-                                                                    : pccmvFlowRampValue.toString() ==
-                                                                            "1"
-                                                                        ? "AS"
-                                                                        : pccmvFlowRampValue.toString() ==
-                                                                                "2"
-                                                                            ? "DF"
-                                                                            : pccmvFlowRampValue.toString() == "3"
-                                                                                ? "DS"
-                                                                                : pccmvFlowRampValue.toString() == "4" ? "S" : "S"
-                                                                : "",
-                                style: TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        // pccmvFio2
-                        //     ? Container()
-                        //     :
-                        Container(
-                          width: 350,
-                          child: Slider(
-                            activeColor: Colors.black,
-                            inactiveColor: Colors.black,
-                            min: pccmvminValue.toDouble() ?? 0,
-                            max: pccmvmaxValue.toDouble() ?? 0,
-                            value: pccmvRR
-                                ? pccmvRRValue.toDouble()
-                                : pccmvIe
-                                    ? pccmvIeValue.toDouble()
-                                    : pccmvPeep
-                                        ? pccmvPeepValue.toDouble()
-                                        : pccmvPc
-                                            ? pccmvPcValue.toDouble()
-                                            : pccmvFio2
-                                                ? pccmvFio2Value.toDouble()
-                                                : pccmvVtmin
-                                                    ? pccmvVtminValue.toDouble()
-                                                    : pccmvVtmax
-                                                        ? pccmvVtmaxValue
-                                                            .toDouble()
-                                                        : pccmvFlowRamp
-                                                            ? pccmvFlowRampValue
-                                                                .toDouble()
-                                                            : "",
-                            onChanged: (double value) {
+                            onPressed: () {
                               setState(() {
-                                if (pccmvRR == true) {
+                                if (pccmvRR == true &&
+                                    pccmvRRValue != pccmvminValue) {
                                   setState(() {
-                                    pccmvRRValue = value.toInt();
+                                    pccmvRRValue = pccmvRRValue - 1;
                                   });
                                   sendRRData(pccmvRRValue);
-                                } else if (pccmvIe == true) {
+                                } else if (pccmvIe == true &&
+                                    pccmvIeValue != pccmvminValue) {
                                   setState(() {
-                                    pccmvIeValue = value.toInt();
+                                    pccmvIeValue = pccmvIeValue - 1;
                                   });
-                                } else if (pccmvPeep == true) {
-                                  // if (pccmvPcValue <= pccmvPeepValue) {
+                                } else if (pccmvPeep == true &&
+                                    pccmvPeepValue != pccmvminValue) {
                                   setState(() {
-                                    // pccmvPcValue = value.toInt() + 1;
-                                    pccmvPeepValue = value.toInt();
+                                    pccmvPeepValue = pccmvPeepValue - 1;
                                   });
-                                  // } else {
-                                  //   pccmvPeepValue = value.toInt();
+                                } else if (pccmvPc == true &&
+                                    pccmvPcValue != pccmvminValue) {
+                                  setState(() {
+                                    pccmvPcValue = pccmvPcValue - 1;
+                                  });
+                                } else if (pccmvFio2 == true &&
+                                    pccmvFio2Value != pccmvminValue) {
+                                  setState(() {
+                                    pccmvFio2Value = pccmvFio2Value - 1;
+                                  });
+                                } else if (pccmvVtmin == true &&
+                                    pccmvVtminValue != pccmvminValue) {
+                                  setState(() {
+                                    pccmvVtminValue = pccmvVtminValue - 1;
+                                    // if (pccmvVtminValue >= pccmvVtmaxValue) {
+                                    //   pccmvVtmaxValue = pccmvVtmaxValue - 1;
+                                    // }
+                                  });
+                                } else if (pccmvVtmax == true &&
+                                    pccmvVtmaxValue != pccmvVtminValue + 1) {
+                                  pccmvVtmaxValue = pccmvVtmaxValue - 1;
+                                  // if (pccmvVtmaxValue <=
+                                  //     pccmvVtminValue + 100) {
+                                  //   pccmvVtminValue = pccmvVtmaxValue - 100;
                                   // }
-                                } else if (pccmvPc == true) {
+                                } else if (pccmvFlowRamp == true &&
+                                    pccmvFlowRampValue != pccmvminValue) {
                                   setState(() {
-                                    pccmvPcValue = value.toInt();
-                                  });
-                                } else if (pccmvFio2 == true) {
-                                  setState(() {
-                                    pccmvFio2Value = value.toInt();
-                                  });
-                                } else if (pccmvVtmin == true) {
-                                  if (value.toInt() < 1190) {
-                                    pccmvVtminValue = value.toInt();
-                                    if (pccmvVtmaxValue <= pccmvVtminValue) {
-                                      pccmvVtmaxValue = pccmvVtminValue + 1;
-                                    }
-                                  }
-                                  // if (pccmvVtminValue >=
-                                  //     (pccmvVtmaxValue) - 100) {
-                                  //   pccmvVtmaxValue = pccmvVtminValue + 100;
-                                  // }
-                                } else if (pccmvVtmax == true) {
-                                  setState(() {
-                                    if (value.toInt() <= pccmvVtminValue + 1) {
-                                      pccmvVtmaxValue = pccmvVtminValue + 1;
-                                    } else {
-                                      pccmvVtmaxValue = value.toInt();
-                                    }
-                                  });
-                                } else if (pccmvFlowRamp == true) {
-                                  setState(() {
-                                    pccmvFlowRampValue = value.toInt();
+                                    pccmvFlowRampValue = pccmvFlowRampValue - 1;
                                   });
                                 }
                               });
                             },
                           ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 45.0, right: 45.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(pccmvIe
-                                  ? getIeData(pccmvminValue, 1)
-                                  : pccmvminValue.toString()),
-                              Text(
-                                pccmvparameterUnits,
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              Text(pccmvIe
-                                  ? getIeData(pccmvmaxValue, 1)
-                                  : pccmvmaxValue.toString())
-                            ],
+                          SizedBox(
+                            width: 60,
                           ),
-                        )
-                      ],
-                    ),
-                  )),
+                          Text(
+                            pccmvparameterName,
+                            style: TextStyle(fontSize: 36),
+                          ),
+                          SizedBox(
+                            width: 60,
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.add,
+                              color: Colors.black,
+                              size: 55,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                if (pccmvRR == true &&
+                                    pccmvRRValue != pccmvmaxValue) {
+                                  setState(() {
+                                    pccmvRRValue = pccmvRRValue + 1;
+                                  });
+                                  sendRRData(pccmvRRValue);
+                                } else if (pccmvIe == true &&
+                                    pccmvIeValue != pccmvmaxValue) {
+                                  setState(() {
+                                    pccmvIeValue = pccmvIeValue + 1;
+                                  });
+                                } else if (pccmvPeep == true &&
+                                    pccmvPeepValue != pccmvmaxValue) {
+                                  setState(() {
+                                    pccmvPeepValue = pccmvPeepValue + 1;
+                                    if (pccmvPcValue <= pccmvPeepValue) {
+                                      pccmvPcValue = pccmvPeepValue + 1;
+                                    }
+                                  });
+                                } else if (pccmvPc == true &&
+                                    pccmvPcValue != pccmvmaxValue) {
+                                  setState(() {
+                                    pccmvPcValue = pccmvPcValue + 1;
+                                  });
+                                } else if (pccmvFio2 == true &&
+                                    pccmvFio2Value != pccmvmaxValue) {
+                                  setState(() {
+                                    pccmvFio2Value = pccmvFio2Value + 1;
+                                  });
+                                } else if (pccmvVtmin == true &&
+                                    pccmvVtminValue != pccmvmaxValue) {
+                                  setState(() {
+                                    if (pccmvVtmaxValue < 1390) {
+                                      pccmvVtminValue = pccmvVtminValue + 1;
+                                      pccmvVtmaxValue = pccmvVtminValue + 1;
+                                    }
+                                  });
+                                } else if (pccmvVtmax == true &&
+                                    pccmvVtmaxValue != pccmvmaxValue) {
+                                  setState(() {
+                                    pccmvVtmaxValue = pccmvVtmaxValue + 1;
+                                  });
+                                } else if (pccmvFlowRamp == true &&
+                                    pccmvFlowRampValue != pccmvmaxValue) {
+                                  setState(() {
+                                    pccmvFlowRampValue = pccmvFlowRampValue + 1;
+                                  });
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              pccmvRR
+                                  ? pccmvRRValue.toInt().toString()
+                                  // : pccmvIe
+                                  //     ? "1:" + pccmvIeValue.toInt().toString()
+
+                                  : pccmvIe
+                                      ? getIeData(pccmvIeValue, 1)
+                                      : pccmvPeep
+                                          ? pccmvPeepValue.toInt().toString()
+                                          : pccmvPc
+                                              ? pccmvPcValue.toInt().toString()
+                                              : pccmvFio2
+                                                  ? pccmvFio2Value
+                                                      .toInt()
+                                                      .toString()
+                                                  : pccmvVtmin
+                                                      ? pccmvVtminValue
+                                                          .toInt()
+                                                          .toString()
+                                                      : pccmvVtmax
+                                                          ? pccmvVtmaxValue
+                                                              .toInt()
+                                                              .toString()
+                                                          : pccmvFlowRamp
+                                                              ? pccmvFlowRampValue
+                                                                          .toString() ==
+                                                                      "0"
+                                                                  ? "AF"
+                                                                  : pccmvFlowRampValue
+                                                                              .toString() ==
+                                                                          "1"
+                                                                      ? "AS"
+                                                                      : pccmvFlowRampValue.toString() ==
+                                                                              "2"
+                                                                          ? "DF"
+                                                                          : pccmvFlowRampValue.toString() == "3"
+                                                                              ? "DS"
+                                                                              : pccmvFlowRampValue.toString() == "4" ? "S" : "S"
+                                                              : "",
+                              style: TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      // pccmvFio2
+                      //     ? Container()
+                      //     :
+                      Container(
+                        width: 350,
+                        child: Slider(
+                          activeColor: Colors.black,
+                          inactiveColor: Colors.black,
+                          min: pccmvminValue.toDouble() ?? 0,
+                          max: pccmvmaxValue.toDouble() ?? 0,
+                          value: pccmvRR
+                              ? pccmvRRValue.toDouble()
+                              : pccmvIe
+                                  ? pccmvIeValue.toDouble()
+                                  : pccmvPeep
+                                      ? pccmvPeepValue.toDouble()
+                                      : pccmvPc
+                                          ? pccmvPcValue.toDouble()
+                                          : pccmvFio2
+                                              ? pccmvFio2Value.toDouble()
+                                              : pccmvVtmin
+                                                  ? pccmvVtminValue.toDouble()
+                                                  : pccmvVtmax
+                                                      ? pccmvVtmaxValue
+                                                          .toDouble()
+                                                      : pccmvFlowRamp
+                                                          ? pccmvFlowRampValue
+                                                              .toDouble()
+                                                          : "",
+                          onChanged: (double value) {
+                            setState(() {
+                              if (pccmvRR == true) {
+                                setState(() {
+                                  pccmvRRValue = value.toInt();
+                                });
+                                sendRRData(pccmvRRValue);
+                              } else if (pccmvIe == true) {
+                                setState(() {
+                                  pccmvIeValue = value.toInt();
+                                });
+                              } else if (pccmvPeep == true) {
+                                // if (pccmvPcValue <= pccmvPeepValue) {
+                                setState(() {
+                                  // pccmvPcValue = value.toInt() + 1;
+                                  pccmvPeepValue = value.toInt();
+                                });
+                                // } else {
+                                //   pccmvPeepValue = value.toInt();
+                                // }
+                              } else if (pccmvPc == true) {
+                                setState(() {
+                                  pccmvPcValue = value.toInt();
+                                });
+                              } else if (pccmvFio2 == true) {
+                                setState(() {
+                                  pccmvFio2Value = value.toInt();
+                                });
+                              } else if (pccmvVtmin == true) {
+                                if (value.toInt() < 1190) {
+                                  pccmvVtminValue = value.toInt();
+                                  if (pccmvVtmaxValue <= pccmvVtminValue) {
+                                    pccmvVtmaxValue = pccmvVtminValue + 1;
+                                  }
+                                }
+                                // if (pccmvVtminValue >=
+                                //     (pccmvVtmaxValue) - 100) {
+                                //   pccmvVtmaxValue = pccmvVtminValue + 100;
+                                // }
+                              } else if (pccmvVtmax == true) {
+                                setState(() {
+                                  if (value.toInt() <= pccmvVtminValue + 1) {
+                                    pccmvVtmaxValue = pccmvVtminValue + 1;
+                                  } else {
+                                    pccmvVtmaxValue = value.toInt();
+                                  }
+                                });
+                              } else if (pccmvFlowRamp == true) {
+                                setState(() {
+                                  pccmvFlowRampValue = value.toInt();
+                                });
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 45.0, right: 45.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(pccmvIe
+                                ? getIeData(pccmvminValue, 1)
+                                : pccmvminValue.toString()),
+                            Text(
+                              pccmvparameterUnits,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(pccmvIe
+                                ? getIeData(pccmvmaxValue, 1)
+                                : pccmvmaxValue.toString())
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )),
           ],
         ),
       ],
@@ -13704,7 +13930,7 @@ class _CheckPageState extends State<Dashboard> {
             Container(width: 146),
           ],
         ),
-        SizedBox(width:140),
+        SizedBox(width: 140),
         Column(
           children: [
             Container(
@@ -13745,7 +13971,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -15294,7 +15519,7 @@ class _CheckPageState extends State<Dashboard> {
             // Container(height: 260),
           ],
         ),
-        SizedBox(width:140),
+        SizedBox(width: 140),
         Column(
           children: [
             Container(
@@ -15335,7 +15560,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -15350,7 +15574,7 @@ class _CheckPageState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                     Text("PEEP"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -15612,7 +15836,7 @@ class _CheckPageState extends State<Dashboard> {
                             min: vsimvminValue.toDouble() ?? 0,
                             max: vsimvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (vsimvItrig == true && vsimvItrigValue!=10) {
+                              if (vsimvItrig == true && vsimvItrigValue != 10) {
                                 setState(() {
                                   vsimvItrigValue = vsimvItrigValue + 1;
                                   if (vsimvPeepValue <= vsimvItrigValue) {
@@ -16782,10 +17006,9 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            
           ],
         ),
-         SizedBox(width:140),
+        SizedBox(width: 140),
         Column(
           children: [
             Container(
@@ -16826,7 +17049,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -16841,7 +17063,7 @@ class _CheckPageState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(top: 18.0),
                                 child: Column(
                                   children: [
-                                     Text("PEEP"),
+                                    Text("PEEP"),
                                     Text("$minpeep-$maxpeep"),
                                   ],
                                 ),
@@ -17100,7 +17322,7 @@ class _CheckPageState extends State<Dashboard> {
                             min: vacvminValue.toDouble(),
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (vacvItrig == true && vacvItrigValue!=10) {
+                              if (vacvItrig == true && vacvItrigValue != 10) {
                                 setState(() {
                                   vacvItrigValue = vacvItrigValue + 1;
                                   if (vacvPeepValue <= vacvItrigValue) {
@@ -17344,7 +17566,7 @@ class _CheckPageState extends State<Dashboard> {
                 Container(
                     margin: EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      "150 Lpm",
+                      "200 Lpm",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
@@ -17368,7 +17590,7 @@ class _CheckPageState extends State<Dashboard> {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 88,
+                    top: 96,
                   ),
                   color: Colors.grey,
                   height: 1,
@@ -17659,6 +17881,7 @@ class _CheckPageState extends State<Dashboard> {
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "PC-CMV");
+      preferences.setString("checkMode", "pccmv");
       preferences.setInt("rr", pccmvRRValue);
       preferences.setInt("ie", pccmvIeValue);
       preferences.setString("i", dataI1.toString());
@@ -17666,6 +17889,17 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("peep", pccmvPeepValue);
       preferences.setInt("fio2", pccmvFio2Value);
       preferences.setInt("ps", pccmvPcValue);
+
+      preferences.setInt('pccmvRRValue', pccmvRRValue);
+      preferences.setInt('pccmvIeValue', pccmvIeValue);
+      preferences.setInt('pccmvPeepValue', pccmvPeepValue);
+      preferences.setInt('pccmvPcValue', pccmvPcValue);
+      preferences.setInt('pccmvFio2Value', pccmvFio2Value);
+      preferences.setInt('pccmvVtminValue', pccmvVtminValue);
+      preferences.setInt('pccmvVtmaxValue', pccmvVtmaxValue);
+      preferences.setInt('pccmvTihValue', pccmvTihValue);
+      preferences.setInt('pccmvFlowRampValue', pccmvFlowRampValue);
+      preferences.setInt('pccmvdefaultValue', pccmvdefaultValue);
 
       //to calculate crc
       print(modeWriteList.toString());
@@ -17729,6 +17963,7 @@ class _CheckPageState extends State<Dashboard> {
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "VC-CMV");
+      preferences.setString("checkMode", "vccmv");
       preferences.setInt("rr", vccmvRRValue);
 
       preferences.setString("i", dataI1.toString());
@@ -17737,6 +17972,17 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", vccmvFio2Value);
       preferences.setInt("vt", vccmvVtValue);
+
+      preferences.setInt('vccmvRRValue', vccmvRRValue);
+      preferences.setInt('vccmvIeValue', vccmvIeValue);
+      preferences.setInt('vccmvPeepValue', vccmvPeepValue);
+      preferences.setInt('vccmvPcMinValue', vccmvPcMinValue);
+      preferences.setInt('vccmvPcMaxValue', vccmvPcMaxValue);
+      preferences.setInt('vccmvFio2Value', vccmvFio2Value);
+      preferences.setInt('vccmvVtValue', vccmvVtValue);
+      preferences.setInt('vccmvTihValue', vccmvTihValue);
+      preferences.setInt('vccmvFlowRampValue', vccmvFlowRampValue);
+      preferences.setInt('vccmvdefaultValue', vccmvdefaultValue);
 
       //to calculate crc
       print(modeWriteList.toString());
@@ -17802,6 +18048,7 @@ class _CheckPageState extends State<Dashboard> {
       });
 
       preferences = await SharedPreferences.getInstance();
+      preferences.setString("checkMode", "pacv");
       preferences.setString("mode", "PACV");
       preferences.setInt("rr", pacvRrValue);
       preferences.setInt("ie", pacvIeValue);
@@ -17811,7 +18058,19 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", pacvFio2Value);
       preferences.setInt("ps", pacvPcValue);
-      ;
+      //==
+      preferences.setInt('pacvItrigValue', pacvItrigValue);
+      preferences.setInt('pacvRrValue', pacvRrValue);
+      preferences.setInt('pacvIeValue', pacvIeValue);
+      preferences.setInt('pacvPeepValue', pacvPeepValue);
+      preferences.setInt('pacvPcValue', pacvPcValue);
+      preferences.setInt('pacvVtMinValue', pacvVtMinValue);
+      preferences.setInt('pacvVtMaxValue', pacvVtMaxValue);
+      preferences.setInt('pacvFio2Value', pacvFio2Value);
+      preferences.setInt('pacvFlowRampValue', pacvFlowRampValue);
+      preferences.setInt('pacvdefaultValue', pacvdefaultValue);
+
+      //==
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -17873,6 +18132,7 @@ class _CheckPageState extends State<Dashboard> {
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "VACV");
+      preferences.setString("checkMode", "vacv");
       preferences.setInt("rr", vacvRrValue);
       preferences.setInt("ie", vacvIeValue);
       preferences.setString("i", dataI1.toString());
@@ -17881,6 +18141,17 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
+
+      preferences.setInt('vacvItrigValue', vacvItrigValue);
+      preferences.setInt('vacvRrValue', vacvRrValue);
+      preferences.setInt('vacvIeValue', vacvIeValue);
+      preferences.setInt('vacvPeepValue', vacvPeepValue);
+      preferences.setInt('vacvVtValue', vacvVtValue);
+      preferences.setInt('vacvPcMinValue', vacvPcMinValue);
+      preferences.setInt('vacvPcMaxValue', vacvPcMaxValue);
+      preferences.setInt('vacvFio2Value', vacvFio2Value);
+      preferences.setInt('vacvFlowRampValue', vacvFlowRampValue);
+      preferences.setInt('vacvdefaultValue', vacvdefaultValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -17942,6 +18213,7 @@ class _CheckPageState extends State<Dashboard> {
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "PSIMV");
+      preferences.setString("checkMode", "psimv");
       preferences.setInt("rr", psimvRrValue);
       preferences.setInt("ie", psimvIeValue);
       preferences.setString("i", dataI1.toString());
@@ -17951,6 +18223,18 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", psimvFio2Value);
       preferences.setInt("ps", psimvPsValue);
       preferences.setInt("pc", psimvPcValue);
+
+      preferences.setInt('psimvItrigValue',psimvItrigValue); 
+ preferences.setInt('psimvRrValue',psimvRrValue);
+preferences.setInt('psimvPsValue',psimvPsValue); 
+preferences.setInt('psimvIeValue',psimvIeValue); 
+preferences.setInt('psimvPeepValue',psimvPeepValue); 
+ preferences.setInt('psimvPcValue',psimvPcValue); 
+ preferences.setInt('psimvVtMinValue',psimvVtMinValue);
+preferences.setInt('psimvVtMaxValue',psimvVtMaxValue); 
+preferences.setInt('psimvFio2Value',psimvFio2Value); 
+preferences.setInt('psimvFlowRampValue',psimvFlowRampValue);
+preferences.setInt('psimvdefaultValue',psimvdefaultValue); 
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -18014,6 +18298,7 @@ class _CheckPageState extends State<Dashboard> {
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "VSIMV");
+      preferences.setString("checkMode", "vsimv");
       preferences.setInt("rr", vsimvRrValue);
       preferences.setInt("ie", vsimvIeValue);
       preferences.setString("i", dataI1.toString());
@@ -18023,6 +18308,18 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", vsimvFio2Value);
       preferences.setInt("vt", vsimvVtValue);
       preferences.setInt("ps", vsimvPcMaxValue);
+
+      preferences.setInt('vsimvItrigValue',vsimvItrigValue);
+  preferences.setInt('vsimvRrValue',vsimvRrValue);
+  preferences.setInt('vsimvIeValue',vsimvIeValue);
+ preferences.setInt('vsimvPeepValue',vsimvPeepValue);
+  preferences.setInt('vsimvVtValue',vsimvVtValue);
+  preferences.setInt('vsimvPsValue',vsimvPsValue);
+  preferences.setInt('vsimvPcMinValue',vsimvPcMinValue);
+  preferences.setInt('vsimvPcMaxValue',vsimvPcMaxValue);
+ preferences.setInt('vsimvFio2Value',vsimvFio2Value);
+  preferences.setInt('vsimvFlowRampValue',vsimvFlowRampValue);
+  preferences.setInt('vsimvdefaultValue',vsimvdefaultValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -18095,6 +18392,7 @@ class _CheckPageState extends State<Dashboard> {
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "PSV");
+      preferences.setString("checkMode", "psv");
       preferences.setInt("rr", psvBackupRrValue);
       // preferences.setInt("ie", vsimvIeValue);
       preferences.setString("i", dataI1.toString());
@@ -18103,6 +18401,21 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", psvFio2Value);
       preferences.setInt("ps", psvPsValue);
+
+       preferences.setInt('psvItrigValue',psvItrigValue);
+  preferences.setInt('psvPeepValue',psvPeepValue);
+  preferences.setInt('psvIeValue',psvIeValue);
+ preferences.setInt('psvPsValue',psvPsValue);
+ preferences.setInt('psvTiValue',psvTiValue);
+  preferences.setInt('psvVtMinValue',psvVtMinValue);
+  preferences.setInt('psvVtMaxValue',psvVtMaxValue);
+ preferences.setInt('psvFio2Value',psvFio2Value);
+  preferences.setInt('psvAtimeValue',psvAtimeValue);
+ preferences.setInt('psvEtrigValue',psvEtrigValue);
+ preferences.setInt('psvBackupRrValue',psvBackupRrValue);
+ preferences.setInt('psvMinTeValue',psvMinTeValue);
+  preferences.setInt('psvFlowRampValue',psvFlowRampValue);
+ preferences.setInt('psvdefaultValue',psvdefaultValue);
       // preferences.setInt("pc", );
 
       if (_status == "Connected") {
@@ -18165,6 +18478,7 @@ class _CheckPageState extends State<Dashboard> {
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "PRVC");
+      preferences.setString("checkMode", "prvc");
       preferences.setInt("rr", vacvRrValue);
       preferences.setInt("ie", vacvIeValue);
       preferences.setString("i", dataI1.toString());
@@ -18173,6 +18487,17 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
+
+       preferences.setInt('vacvItrigValue',vacvItrigValue);
+  preferences.setInt('vacvRrValue',vacvRrValue);
+  preferences.setInt('vacvIeValue',vacvIeValue);
+  preferences.setInt('vacvPeepValue',vacvPeepValue);
+preferences.setInt('vacvVtValue',vacvVtValue);
+ preferences.setInt('vacvPcMinValue',vacvPcMinValue);
+preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
+ preferences.setInt('vacvFio2Value',vacvFio2Value);
+ preferences.setInt('vacvFlowRampValue',vacvFlowRampValue);
+ preferences.setInt('vacvdefaultValue',vacvdefaultValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -18453,6 +18778,16 @@ class _CheckPageState extends State<Dashboard> {
       alarmList.add(0x7F);
       // Fluttertoast.showToast(msg: alarmList.toString());
     });
+
+    preferences = await SharedPreferences.getInstance();
+    preferences.setInt("minrr", minRrtotal);
+    preferences.setInt("maxrr", maxRrtotal);
+    preferences.setInt("minvte", minvte);
+    preferences.setInt("maxvte", maxvte);
+    preferences.setInt("minppeak", minppeak);
+    preferences.setInt("maxppeak", maxppeak);
+    preferences.setInt("minpeep", minpeep);
+    preferences.setInt("maxpeep", maxpeep);
 
     await _port.write(Uint8List.fromList(alarmList));
     setState(() {
@@ -19228,165 +19563,209 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   serializeEventData(Uint8List event) async {
-    
-    
     if (event != null) {
       setState(() {
         respiratoryEnable = true;
         // playOnEnabled = false;
       });
-      if (event[0] == 126 ){
-        list=[];
-        listTemp=[];
-        int cIndex=0;
+      if (event[0] == 126) {
+        list = [];
+        listTemp = [];
+        int cIndex = 0;
         // turnOnScreen();
         list.addAll(event);
         list.removeAt(0);
 
+        for (int i = 0; i < list.length; i++) {
+          if (list[i] == 125) {
+            listTemp.insert(cIndex, list[i + 1] ^ 0x20);
+            i = i + 1;
+          } else {
+            listTemp.insert(cIndex, list[i]);
+          }
+          cIndex = cIndex + 1;
+        }
+        print(listTemp.length.toString());
+        serialiseReceivedPacket(listTemp);
+      } else {
+        list = [];
+      }
+    } else {
+      setState(() {
+        respiratoryEnable = false;
+      });
+      //  pressurePoints.clear();
+      //  volumePoints.clear();
+      //  flowPoints.clear();
+      list = [];
+    }
+  }
 
-            for (int i =0;i<list.length;i++){
-              
-
-                if(list[i]==125){
-                  listTemp.insert(cIndex,list[i+1] ^ 0x20);
-                  i = i+1;
-                }else{
-                  listTemp.insert(cIndex,list[i]);
-                }
-                cIndex = cIndex +1;
-            }
-            print(listTemp.length.toString());
-             serialiseReceivedPacket(listTemp);
-             }else{
-               list=[];
-             }
-           } else {
-             setState(() {
-               respiratoryEnable = false;
-             });
-            //  pressurePoints.clear();
-            //  volumePoints.clear();
-            //  flowPoints.clear();
-             list=[];
-           }
-         }
-       
   serialiseReceivedPacket(List<int> finalList) {
-            if(finalList.isNotEmpty && finalList.length==114){
-            var now = new DateTime.now();
-           
-           lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
+    if (finalList.isNotEmpty && finalList.length == 114) {
+      var now = new DateTime.now();
+
+      lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
 
       // bool data = await checkCrc(finalList, finalList.length);
       // if (data == false) {
       //   finalList.clear();
       // } else {
-        // print("page no " + finalList[112].toString());
-        // if (finalList[112] == 1) {
-        //   Navigator.pushAndRemoveUntil(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (BuildContext context) => SelfTestPage()),
-        //       ModalRoute.withName('/'));
-        // } else if (finalList[112] == 2) {
-        //   Navigator.pushAndRemoveUntil(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (BuildContext context) => CallibrationPage()),
-        //       ModalRoute.withName('/'));
-        // }
+      // print("page no " + finalList[112].toString());
+      // if (finalList[112] == 1) {
+      //   Navigator.pushAndRemoveUntil(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (BuildContext context) => SelfTestPage()),
+      //       ModalRoute.withName('/'));
+      // } else if (finalList[112] == 2) {
+      //   Navigator.pushAndRemoveUntil(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (BuildContext context) => CallibrationPage()),
+      //       ModalRoute.withName('/'));
+      // }
 
-        //=========================
+      //=========================
 
-        //=========================
+      //=========================
+      setState(() {
+        //=============
+
         setState(() {
-          //=============
+          var now = new DateTime.now();
 
-          setState(() {
-            var now = new DateTime.now();
+          int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
+          // print("vte "+vteValueCheck.toString());
 
-            int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
-            // print("vte "+vteValueCheck.toString());
-
-            if ((vteValueCheck != "" || vteValueCheck != null) &&
-                vteValueCheck.round() >= 0 &&
-                vteValueCheck.round() <= 2500) {
-              setState(() {
-                vteMinValue = vteValue - vtValue;
-                vteValue = ((finalList[4] << 8) + finalList[5]);
-              });
-            }
-            int mvValueCheck = (((finalList[8] << 8) + finalList[9])).toInt();
-
-            // if (mvValueCheck != "" && (mvValue/1000).toDouble() >0 && (mvValue/1000).toDouble()<100) {
+          if ((vteValueCheck != "" || vteValueCheck != null) &&
+              vteValueCheck.round() >= 0 &&
+              vteValueCheck.round() <= 2500) {
             setState(() {
-              mvValue = mvValueCheck;
+              vteMinValue = vteValue - vtValue;
+              vteValue = ((finalList[4] << 8) + finalList[5]);
             });
+          }
+          int mvValueCheck = (((finalList[8] << 8) + finalList[9])).toInt();
+
+          // if (mvValueCheck != "" && (mvValue/1000).toDouble() >0 && (mvValue/1000).toDouble()<100) {
+          setState(() {
+            mvValue = mvValueCheck;
+          });
+          // }
+
+          leakVolumeDisplay =
+              ((finalList[102] << 8) + finalList[103]); //103 104
+          peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
+          spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
+          // print("spon "+spontaneousDisplay.toString());
+
+          int rrtotalCheck =
+              ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
+
+          if (rrtotalCheck != "" &&
+              rrtotalCheck.round() >= 0 &&
+              rrtotalCheck.round() <= 100) {
+            setState(() {
+              rrDisplayValue = rrtotalCheck;
+            });
+          }
+          int pipValueCheck = (((finalList[14] << 8) + finalList[15]) / 100)
+              .round()
+              .toInt(); //15 16
+
+          if ((((finalList[16] << 8) + finalList[17]) / 100).round().toInt() >=
+                  0 &&
+              (((finalList[16] << 8) + finalList[17]) / 100).round().toInt() <=
+                  150) {
+            peepDisplayValue = (((finalList[16] << 8) + finalList[17]) / 100)
+                .round()
+                .toInt(); //17 18
+          }
+
+          if (pipValueCheck != 0 &&
+              pipValueCheck.round() >= 0 &&
+              pipValueCheck.round() <= 150) {
+            setState(() {
+              psValue1 = pipValueCheck;
+            });
+          }
+          paw = (((finalList[34] << 8) + finalList[35]) / 100).toInt();
+
+          if (paw > 200) {
+            setState(() {
+              paw = 0;
+            });
+          }
+
+          expiratoryPressureR =
+              (((finalList[36] << 8) + finalList[37]) / 100).toInt(); //37 38
+
+          if (((finalList[38] << 8) + finalList[39]).round() >= 20 &&
+              ((finalList[38] << 8) + finalList[39]).round() <= 100) {
+            fio2DisplayParameter =
+                ((finalList[38] << 8) + finalList[39]); // 39,40
+          }
+
+          checkTempData = finalList[31].toString();
+
+          if (finalList[108] == 1) {
+            presentCode = ((finalList[106] << 8) + finalList[107]);
+            alarmCounter = finalList[90];
+            // if (presentCode != 0 && presentCode > 0 && presentCode <= 23) {
+             
             // }
+            // Fluttertoast.showToast(msg: presentCode.toString()+" pre "+previousCode.toString() + "\n counter "+alarmCounter.toString()+"pre cnt "+alarmCounter.toString());
 
-            leakVolumeDisplay = ((finalList[102] << 8) + finalList[103]); //103 104
-            peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
-            spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
-            // print("spon "+spontaneousDisplay.toString());
+            if (presentCode != previousCode) {
+              previousCode = presentCode;
+               var data = AlarmsList(
+                  presentCode.toString(), this.globalCounterNo.toString());
+              dbHelpera.saveAlarm(data);
+              // alarmPrevCounter = alarmCounter;
+              _stopMusic();
 
-            int rrtotalCheck = ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
+              if (presentCode == 5 ||
+                  presentCode == 7 ||
+                  presentCode == 10 ||
+                  presentCode == 11 ||
+                  presentCode == 17) {
+                _playMusicHigh();
+                sendSoundOn();
+                audioEnable = true;
+              } else if (presentCode == 1 ||
+                  presentCode == 2 ||
+                  presentCode == 3 ||
+                  presentCode == 4 ||
+                  presentCode == 6 ||
+                  presentCode == 8 ||
+                  presentCode == 9 ||
+                  presentCode == 12 ||
+                  presentCode == 13 ||
+                  presentCode == 14 ||
+                  presentCode == 15 ||
+                  presentCode == 16 ||
+                  presentCode == 18 ||
+                  presentCode == 19 ||
+                  presentCode == 20 ||
+                  presentCode == 21 ||
+                  presentCode == 22) {
+                _playMusicMedium();
+                sendSoundOn();
 
-            if (rrtotalCheck != "" &&
-                rrtotalCheck.round() >= 0 &&
-                rrtotalCheck.round() <= 100) {
-              setState(() {
-                rrDisplayValue = rrtotalCheck;
-              });
-            }
-            int pipValueCheck =
-                (((finalList[14] << 8) + finalList[15]) / 100).round().toInt(); //15 16
-
-            if ((((finalList[16] << 8) + finalList[17]) / 100).round().toInt() >= 0 &&
-                (((finalList[16] << 8) + finalList[17]) / 100).round().toInt() <= 150) {
-              peepDisplayValue =
-                  (((finalList[16] << 8) + finalList[17]) / 100).round().toInt(); //17 18
-            }
-
-            if (pipValueCheck != 0 &&
-                pipValueCheck.round() >= 0 &&
-                pipValueCheck.round() <= 150) {
-              setState(() {
-                psValue1 = pipValueCheck;
-              });
-            }
-            paw = (((finalList[34] << 8) + finalList[35]) / 100).toInt();
-
-            if (paw > 200) {
-              setState(() {
-                paw = 0;
-              });
-            }
-
-            expiratoryPressureR =
-                (((finalList[36] << 8) + finalList[37]) / 100).toInt(); //37 38
-
-            if (((finalList[38] << 8) + finalList[39]).round() >= 20 &&
-                ((finalList[38] << 8) + finalList[39]).round() <= 100) {
-              fio2DisplayParameter = ((finalList[38] << 8) + finalList[39]); // 39,40
-            }
-
-            checkTempData = finalList[31].toString();
-
-            if (finalList[108] == 1) {
-              presentCode = ((finalList[106] << 8) + finalList[107]);
-              alarmCounter = finalList[90];
-              if (presentCode != 0 && presentCode > 0 && presentCode <= 23) {
-                var data = AlarmsList(
-                    presentCode.toString(), this.globalCounterNo.toString());
-                dbHelpera.saveAlarm(data);
+                audioEnable = true;
+              } else if (presentCode == 23) {
+                _playMusicLower();
+                sendSoundOn();
+                audioEnable = true;
               }
-              // Fluttertoast.showToast(msg: presentCode.toString()+" pre "+previousCode.toString() + "\n counter "+alarmCounter.toString()+"pre cnt "+alarmCounter.toString());
-
-              if (presentCode != previousCode) {
-                previousCode = presentCode;
-                // alarmPrevCounter = alarmCounter;
+            } else {
+              if (alarmCounter != alarmPrevCounter) {
+                alarmPrevCounter = alarmCounter;
+                 var data = AlarmsList(
+                  presentCode.toString(), this.globalCounterNo.toString());
+              dbHelpera.saveAlarm(data);
                 _stopMusic();
-              
                 if (presentCode == 5 ||
                     presentCode == 7 ||
                     presentCode == 10 ||
@@ -19421,374 +19800,339 @@ class _CheckPageState extends State<Dashboard> {
                   sendSoundOn();
                   audioEnable = true;
                 }
-              }else{
-                if(alarmCounter != alarmPrevCounter){
-                  alarmPrevCounter = alarmCounter;
-                  _stopMusic();
-                  if (presentCode == 5 ||
-                    presentCode == 7 ||
-                    presentCode == 10 ||
-                    presentCode == 11 ||
-                    presentCode == 17) {
-                  _playMusicHigh();
-                  sendSoundOn();
-                  audioEnable = true;
-                } else if (presentCode == 1 ||
-                    presentCode == 2 ||
-                    presentCode == 3 ||
-                    presentCode == 4 ||
-                    presentCode == 6 ||
-                    presentCode == 8 ||
-                    presentCode == 9 ||
-                    presentCode == 12 ||
-                    presentCode == 13 ||
-                    presentCode == 14 ||
-                    presentCode == 15 ||
-                    presentCode == 16 ||
-                    presentCode == 18 ||
-                    presentCode == 19 ||
-                    presentCode == 20 ||
-                    presentCode == 21 ||
-                    presentCode == 22) {
-                  _playMusicMedium();
-                  sendSoundOn();
-
-                  audioEnable = true;
-                } else if (presentCode == 23) {
-                  _playMusicLower();
-                  sendSoundOn();
-                  audioEnable = true;
-                }
-
-                }
               }
-            } else if (finalList[108] == 0) {
-              sendSoundOff();
-              _stopMusic();
             }
+          } else if (finalList[108] == 0) {
+            sendSoundOff();
+            _stopMusic();
+          }
 
-            // cdisplayParameter = ((finalList[106] << 8) + finalList[107]);
-            if(!vteValue.isNegative && vteValue!=null && vteValue!=0 && !pplateauDisplay.isNegative && pplateauDisplay!=null && pplateauDisplay!=0)
-            {
-            try{
-            var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString())))
-                .toInt();
-            if(dataC.isNegative){
-              // cdisplayParameter = 0;
-            }else{
-              cdisplayParameter = dataC;
-            }
-            }catch(e){
+          // cdisplayParameter = ((finalList[106] << 8) + finalList[107]);
+          if (!vteValue.isNegative &&
+              vteValue != null &&
+              vteValue != 0 &&
+              !pplateauDisplay.isNegative &&
+              pplateauDisplay != null &&
+              pplateauDisplay != 0) {
+            try {
+              var dataC = (double.tryParse(vteValue.toString()) /
+                      (pplateauDisplay -
+                          double.tryParse(peepDisplayValue.toString())))
+                  .toInt();
+              if (dataC.isNegative) {
+                // cdisplayParameter = 0;
+              } else {
+                cdisplayParameter = dataC;
+              }
+            } catch (e) {}
+          }
 
-            }
-            }
+          if (finalList[108] == 1) {
+            setState(() {
+              if (finalList[109] == 1 || finalList[109] == 0) {
+                ((finalList[106] << 8) + finalList[107]) == 5
+                    ? alarmMessage = "SYSTEM FAULT"
+                    : ((finalList[106] << 8) + finalList[107]) == 7
+                        ? alarmMessage = "FiO\u2082 SENSOR MISSING"
+                        : ((finalList[106] << 8) + finalList[107]) == 10
+                            ? alarmMessage = "HIGH LEAKAGE"
+                            : ((finalList[106] << 8) + finalList[107]) == 11
+                                ? alarmMessage = "HIGH PRESSURE"
+                                : ((finalList[106] << 8) + finalList[107]) == 17
+                                    ? alarmMessage = "PATIENT DISCONNECTED"
+                                    : alarmMessage = "";
+              } else if (finalList[109] == 2) {
+                // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
+                ((finalList[106] << 8) + finalList[107]) == 1
+                    ? alarmMessage = "POWER SUPPLY DISCONNECTED"
+                    : ((finalList[106] << 8) + finalList[107]) == 2
+                        ? alarmMessage = " LOW BATTERY"
+                        : ((finalList[106] << 8) + finalList[107]) == 3
+                            ? alarmMessage = "CALIBRATE FiO2"
+                            : ((finalList[106] << 8) + finalList[107]) == 4
+                                ? alarmMessage = "CALIBRATION FiO2 FAIL"
+                                : ((finalList[106] << 8) + finalList[107]) == 6
+                                    ? alarmMessage = "SELF TEST FAIL"
+                                    : ((finalList[106] << 8) + finalList[107]) == 8
+                                        ? alarmMessage = "HIGH FiO2"
+                                        : ((finalList[106] << 8) + finalList[107]) == 9
+                                            ? alarmMessage = "LOW FIO2"
+                                            : ((finalList[106] << 8) +
+                                                        finalList[107]) ==
+                                                    12
+                                                ? alarmMessage = "LOW PRESSURE"
+                                                : ((finalList[106] << 8) +
+                                                            finalList[107]) ==
+                                                        13
+                                                    ? alarmMessage = "LOW VTE"
+                                                    : ((finalList[106] << 8) + finalList[107]) == 14
+                                                        ? alarmMessage =
+                                                            "HIGH VTE"
+                                                        : ((finalList[106] << 8) + finalList[107]) == 15
+                                                            ? alarmMessage =
+                                                                "LOW VTI"
+                                                            : ((finalList[106] << 8) + finalList[107]) == 16
+                                                                ? alarmMessage =
+                                                                    "HIGH VTI"
+                                                                : ((finalList[106] << 8) + finalList[107]) == 18
+                                                                    ? alarmMessage =
+                                                                        "LOW O2  supply"
+                                                                    : ((finalList[106] << 8) + finalList[107]) ==
+                                                                            19
+                                                                        ? alarmMessage =
+                                                                            "LOW RR"
+                                                                        : ((finalList[106] << 8) + finalList[107]) == 20
+                                                                            ? alarmMessage = "HIGH RR"
+                                                                            : ((finalList[106] << 8) + finalList[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((finalList[106] << 8) + finalList[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
+              } else if (finalList[109] == 3) {
+                ((finalList[106] << 8) + finalList[107]) == 23
+                    ? alarmMessage = "Apnea backup"
+                    : alarmMessage = "";
+              }
+            });
+          }
 
+          if (paw <= 10) {
+            setState(() {
+              lungImage = 1;
+            });
+          } else if (paw <= 20 && paw >= 11) {
+            setState(() {
+              lungImage = 2;
+            });
+          } else if (paw <= 30 && paw >= 21) {
+            setState(() {
+              lungImage = 3;
+            });
+          } else if (paw <= 40 && paw >= 31) {
+            setState(() {
+              lungImage = 4;
+            });
+          } else if (paw <= 100 && paw >= 41) {
+            setState(() {
+              lungImage = 5;
+            });
+          }
+        });
+        setState(() {
+          String i = "", e = "", tempIe = "";
+          i = finalList[12].toString();
+          e = finalList[13].toString();
+          tempIe = i + ":" + e;
+        });
 
-            if (finalList[108] == 1) {
-              setState(() {
-                if (finalList[109] == 1 || finalList[109] == 0) {
-                  ((finalList[106] << 8) + finalList[107]) == 5
-                      ? alarmMessage = "SYSTEM FAULT"
-                      : ((finalList[106] << 8) + finalList[107]) == 7
-                          ? alarmMessage = "FiO\u2082 SENSOR MISSING"
-                          : ((finalList[106] << 8) + finalList[107]) == 10
-                              ? alarmMessage = "HIGH LEAKAGE"
-                              : ((finalList[106] << 8) + finalList[107]) == 11
-                                  ? alarmMessage = "HIGH PRESSURE"
-                                  : ((finalList[106] << 8) + finalList[107]) == 17
-                                      ? alarmMessage = "PATIENT DISCONNECTED"
-                                      : alarmMessage = "";
-                } else if (finalList[109] == 2) {
-                  // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
-                  ((finalList[106] << 8) + finalList[107]) == 1
-                      ? alarmMessage = "AC POWER DISCONNECTED"
-                      : ((finalList[106] << 8) + finalList[107]) == 2
-                          ? alarmMessage = " LOW BATTERY"
-                          : ((finalList[106] << 8) + finalList[107]) == 3
-                              ? alarmMessage = "CALIBRATE FiO2"
-                              : ((finalList[106] << 8) + finalList[107]) == 4
-                                  ? alarmMessage = "CALIBRATION FiO2 FAIL"
-                                  : ((finalList[106] << 8) + finalList[107]) == 6
-                                      ? alarmMessage = "SELF TEST FAIL"
-                                      : ((finalList[106] << 8) + finalList[107]) == 8
-                                          ? alarmMessage = "HIGH FiO2"
-                                          : ((finalList[106] << 8) + finalList[107]) == 9
-                                              ? alarmMessage = "LOW FIO2"
-                                              : ((finalList[106] << 8) + finalList[107]) == 12
-                                                  ? alarmMessage =
-                                                      "LOW PRESSURE"
-                                                  : ((finalList[106] << 8) + finalList[107]) == 13
-                                                      ? alarmMessage = "LOW VTE"
-                                                      : ((finalList[106] << 8) +
-                                                                  finalList[107]) ==
-                                                              14
-                                                          ? alarmMessage =
-                                                              "HIGH VTE"
-                                                          : ((finalList[106] << 8) +
-                                                                      finalList[
-                                                                          107]) ==
-                                                                  15
-                                                              ? alarmMessage =
-                                                                  "LOW VTI"
-                                                              : ((finalList[106] << 8) + finalList[107]) == 16
-                                                                  ? alarmMessage =
-                                                                      "HIGH VTI"
-                                                                  : ((finalList[106] << 8) + finalList[107]) == 18
-                                                                      ? alarmMessage =
-                                                                          "LOW O2  supply"
-                                                                      : ((finalList[106] << 8) + finalList[107]) ==
-                                                                              19
-                                                                          ? alarmMessage =
-                                                                              "LOW RR"
-                                                                          : ((finalList[106] << 8) + finalList[107]) == 20
-                                                                              ? alarmMessage = "HIGH RR"
-                                                                              : ((finalList[106] << 8) + finalList[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((finalList[106] << 8) + finalList[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
-                } else if (finalList[109] == 3) {
-                  ((finalList[106] << 8) + finalList[107]) == 23
-                      ? alarmMessage = "Apnea backup"
-                      : alarmMessage = "";
-                }
-              });
-            }
-
-            if (paw <= 10) {
-              setState(() {
-                lungImage = 1;
-              });
-            } else if (paw <= 20 && paw >= 11) {
-              setState(() {
-                lungImage = 2;
-              });
-            } else if (paw <= 30 && paw >= 21) {
-              setState(() {
-                lungImage = 3;
-              });
-            } else if (paw <= 40 && paw >= 31) {
-              setState(() {
-                lungImage = 4;
-              });
-            } else if (paw <= 100 && paw >= 41) {
-              setState(() {
-                lungImage = 5;
-              });
-            }
-          });
+        var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
+        if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
           setState(() {
-            String i = "", e = "", tempIe = "";
-            i = finalList[12].toString();
-            e = finalList[13].toString();
-            tempIe = i + ":" + e;
+            operatinModeR = ((finalList[104] << 8) + finalList[105]);
           });
+        }
 
-          var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
-          if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
-            setState(() {
-              operatinModeR = ((finalList[104] << 8) + finalList[105]);
-            });
-          }
-
-         
-            if (operatinModeR == 1) {
-              setState(() {
-                modeName = "VACV";
-              });
-            } else if (operatinModeR == 2) {
-              setState(() {
-                modeName = "PACV";
-              });
-            } else if (operatinModeR == 3) {
-              setState(() {
-                modeName = "PSV";
-              });
-            } else if (operatinModeR == 4) {
-              setState(() {
-                modeName = "PSIMV";
-              });
-            } else if (operatinModeR == 5) {
-              setState(() {
-                modeName = "VSIMV";
-              });
-            } else if (operatinModeR == 6) {
-              setState(() {
-                modeName = "PC-CMV";
-              });
-            } else if (operatinModeR == 7) {
-              setState(() {
-                modeName = "VC-CMV";
-              });
-            } else if (operatinModeR == 14) {
-              setState(() {
-                modeName = "PRVC";
-              });
-            }
-          
-
-          if ((((finalList[68] << 8) + finalList[69]) / 100).round().toInt() >= 0 &&
-              (((finalList[68] << 8) + finalList[69]) / 100).round().toInt() <= 150) {
-            mapDisplayValue = (((finalList[68] << 8) + finalList[69]) / 100).toInt();
-          }
-          if (finalList[84] == 1) {
-            ioreDisplayParamter = "I";
-          } else if (finalList[84] == 2) {
-            ioreDisplayParamter = "E";
-          } else {
-            ioreDisplayParamter = "";
-          }
-
-          displayTemperature = finalList[88];
-
+        if (operatinModeR == 1) {
           setState(() {
-            if (finalList[108] != 0 &&
-                ((finalList[106] << 8) + finalList[107]) != null &&
-                ((finalList[106] << 8) + finalList[107]) >= 1 &&
-                ((finalList[106] << 8) + finalList[107]) <= 23) {
-              alarmActive = finalList[108].toString();
-            } else {
-              alarmActive = 0.toString();
-            }
+            modeName = "VACV";
           });
+        } else if (operatinModeR == 2) {
+          setState(() {
+            modeName = "PACV";
+          });
+        } else if (operatinModeR == 3) {
+          setState(() {
+            modeName = "PSV";
+          });
+        } else if (operatinModeR == 4) {
+          setState(() {
+            modeName = "PSIMV";
+          });
+        } else if (operatinModeR == 5) {
+          setState(() {
+            modeName = "VSIMV";
+          });
+        } else if (operatinModeR == 6) {
+          setState(() {
+            modeName = "PC-CMV";
+          });
+        } else if (operatinModeR == 7) {
+          setState(() {
+            modeName = "VC-CMV";
+          });
+        } else if (operatinModeR == 14) {
+          setState(() {
+            modeName = "PRVC";
+          });
+        }
 
-          // pressure graph
-          double temp = (((finalList[34] << 8) + finalList[35]))
-              .toDouble(); // pressure points 35,36
+        if ((((finalList[68] << 8) + finalList[69]) / 100).round().toInt() >=
+                0 &&
+            (((finalList[68] << 8) + finalList[69]) / 100).round().toInt() <=
+                150) {
+          mapDisplayValue =
+              (((finalList[68] << 8) + finalList[69]) / 100).toInt();
+        }
+        if (finalList[84] == 1) {
+          ioreDisplayParamter = "I";
+        } else if (finalList[84] == 2) {
+          ioreDisplayParamter = "E";
+        } else {
+          ioreDisplayParamter = "";
+        }
 
-          if (temp > 40000) {
-            setState(() {
-              temp = -((65535 - temp) / 100);
-            });
+        displayTemperature = finalList[88];
+
+        setState(() {
+          if (finalList[108] != 0 &&
+              ((finalList[106] << 8) + finalList[107]) != null &&
+              ((finalList[106] << 8) + finalList[107]) >= 1 &&
+              ((finalList[106] << 8) + finalList[107]) <= 23) {
+            alarmActive = finalList[108].toString();
           } else {
-            setState(() {
-              temp = temp / 100;
-            });
+            alarmActive = 0.toString();
           }
+        });
 
-          // if(temp.round()>0 && temp.round()<150)
-          // {
-          if (pressurePoints.length >= 50) {
-            setState(() {
-              pressurePoints.removeAt(0);
-              pressurePoints.add(temp);
-            });
-          } else {
+        // pressure graph
+        double temp = (((finalList[34] << 8) + finalList[35]))
+            .toDouble(); // pressure points 35,36
+
+        if (temp > 40000) {
+          setState(() {
+            temp = -((65535 - temp) / 100);
+          });
+        } else {
+          setState(() {
+            temp = temp / 100;
+          });
+        }
+
+        // if(temp.round()>0 && temp.round()<150)
+        // {
+        if (pressurePoints.length >= 50) {
+          setState(() {
+            pressurePoints.removeAt(0);
             pressurePoints.add(temp);
-          }
-          // }else{
-          //   pressurePoints.add(0);
-          // }
-          if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
-              ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
-            pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
-          }
+          });
+        } else {
+          pressurePoints.add(temp);
+        }
+        // }else{
+        //   pressurePoints.add(0);
+        // }
+        if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
+            ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
+          pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
+        }
 
-          double temp1 =
-              ((finalList[58] << 8) + finalList[59]).toDouble(); // volume points 59,60
+        double temp1 = ((finalList[58] << 8) + finalList[59])
+            .toDouble(); // volume points 59,60
 
-          // if(temp1.round() >0 && temp1.round() < 2500)
-          // {
-          if (volumePoints.length >= 50) {
-            setState(() {
-              volumePoints.removeAt(0);
-              volumePoints.add(temp1);
-            });
-          } else {
+        // if(temp1.round() >0 && temp1.round() < 2500)
+        // {
+        if (volumePoints.length >= 50) {
+          setState(() {
+            volumePoints.removeAt(0);
             volumePoints.add(temp1);
-          }
-          // }else{
-          //   volumePoints.add(0);
-          // }
+          });
+        } else {
+          volumePoints.add(temp1);
+        }
+        // }else{
+        //   volumePoints.add(0);
+        // }
 
-          double temp3 =
-              ((((finalList[46] << 8) + finalList[47])) - (((finalList[48] << 8) + finalList[49])))
-                  .toDouble();
-          temp3 = temp3 * 0.06;
+        double temp3 = ((((finalList[46] << 8) + finalList[47])) -
+                (((finalList[48] << 8) + finalList[49])))
+            .toDouble();
+        temp3 = temp3 * 0.06;
 
-          // if(temp3.round()>-100 && temp3.round()<200){
-          if (flowPoints.length >= 50) {
-            setState(() {
-              flowPoints.removeAt(0);
-              flowPoints.add(temp3);
-            });
-          } else {
-            flowPoints.add(temp3);
-          }
-          // }else{
-          //   flowPoints.add(0);
-          // }
+        // if(temp3.round()>-100 && temp3.round()<200){
+        if (flowPoints.length >= 50) {
+          setState(() {
+            flowPoints.removeAt(0);
+            flowPoints.add(temp3*1.2);
+          });
+        } else {
+          flowPoints.add(temp3*1.2);
+        }
+        // }else{
+        //   flowPoints.add(0);
+        // }
 
-         setState(() {
-            powerIndication = finalList[64];
+        setState(() {
+          powerIndication = finalList[64];
           batteryPercentage = finalList[65];
           batteryStatus = finalList[78];
-         });
-
-          if (patientId != "") {
-            var data = VentilatorOMode(
-                patientId,
-                patientName.toString(),
-                psValue1.toString(),
-                vteValue.toString(),
-                peepDisplayValue.toString(),
-                rrDisplayValue.toString(),
-                fio2DisplayParameter.toString(),
-                mapDisplayValue.toString(),
-                mvValue.toString(),
-                cdisplayParameter.toString(),
-                ieDisplayValue.toString(),
-                rrValue.toString(),
-                checkI(i) + ":" + checkE(e).toString(),
-                peepValue.toString(),
-                psValue.toString(),
-                fio2Value.toString(),
-                vtValue.toString(),
-                tiValue.toString(),
-                teValue.toString(),
-                temp,
-                temp3,
-                temp1,
-                operatinModeR.toString(),
-                lungImage.toString(),
-                paw.toString(),
-                globalCounterNo.toString(),
-                ((finalList[106] << 8) + finalList[107]).toString(),
-                finalList[109].toString());
-            saveData(data, patientId);
-          } else {
-            var data = VentilatorOMode(
-                "SWASIT " + globalCounterNo.toString(),
-                patientName,
-                psValue1.toString(),
-                vteValue.toString(),
-                peepDisplayValue.toString(),
-                rrDisplayValue.toString(),
-                fio2DisplayParameter.toString(),
-                mapDisplayValue.toString(),
-                mvValue.toString(),
-                cdisplayParameter.toString(),
-                ieDisplayValue.toString(),
-                rrValue.toString(),
-                checkI(i) + ":" + checkE(e).toString(),
-                peepValue.toString(),
-                psValue.toString(),
-                fio2Value.toString(),
-                vtValue.toString(),
-                tiValue.toString(),
-                teValue.toString(),
-                temp,
-                temp3,
-                temp1,
-                operatinModeR.toString(),
-                lungImage.toString(),
-                paw.toString(),
-                globalCounterNo.toString(),
-                ((finalList[106] << 8) + finalList[107]).toString(),
-                finalList[109].toString());
-            saveData(data, patientId);
-          }
-          finalList=[];
-          list = [];
-          listTemp=[];
         });
+
+        if (patientId != "") {
+          var data = VentilatorOMode(
+              patientId,
+              patientName.toString(),
+              psValue1.toString(),
+              vteValue.toString(),
+              peepDisplayValue.toString(),
+              rrDisplayValue.toString(),
+              fio2DisplayParameter.toString(),
+              mapDisplayValue.toString(),
+              mvValue.toString(),
+              cdisplayParameter.toString(),
+              ieDisplayValue.toString(),
+              rrValue.toString(),
+              checkI(i) + ":" + checkE(e).toString(),
+              peepValue.toString(),
+              psValue.toString(),
+              fio2Value.toString(),
+              vtValue.toString(),
+              tiValue.toString(),
+              teValue.toString(),
+              temp,
+              temp3,
+              temp1,
+              operatinModeR.toString(),
+              lungImage.toString(),
+              paw.toString(),
+              globalCounterNo.toString(),
+              ((finalList[106] << 8) + finalList[107]).toString(),
+              finalList[109].toString(),
+              alarmActive);
+          saveData(data, patientId);
+        } else {
+          var data = VentilatorOMode(
+              "SWASIT " + globalCounterNo.toString(),
+              patientName,
+              psValue1.toString(),
+              vteValue.toString(),
+              peepDisplayValue.toString(),
+              rrDisplayValue.toString(),
+              fio2DisplayParameter.toString(),
+              mapDisplayValue.toString(),
+              mvValue.toString(),
+              cdisplayParameter.toString(),
+              ieDisplayValue.toString(),
+              rrValue.toString(),
+              checkI(i) + ":" + checkE(e).toString(),
+              peepValue.toString(),
+              psValue.toString(),
+              fio2Value.toString(),
+              vtValue.toString(),
+              tiValue.toString(),
+              teValue.toString(),
+              temp,
+              temp3,
+              temp1,
+              operatinModeR.toString(),
+              lungImage.toString(),
+              paw.toString(),
+              globalCounterNo.toString(),
+              ((finalList[106] << 8) + finalList[107]).toString(),
+              finalList[109].toString(),
+              alarmActive);
+          saveData(data, patientId);
+        }
+        finalList = [];
+        list = [];
+        listTemp = [];
+      });
       // }
-          }
-         }
+    }
+  }
 }

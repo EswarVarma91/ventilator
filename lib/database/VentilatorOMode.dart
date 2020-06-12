@@ -21,7 +21,7 @@ class VentilatorOMode {
       teS,globalCounterNo,vtValue;
   double pressureValues, flowValues, volumeValues;
   String dateTime;
-  String patientName,patientId,alarmC,alarmP;
+  String patientName,patientId,alarmC,alarmP,alarmActive;
 
   VentilatorOMode(
       this.patientId,
@@ -45,7 +45,7 @@ class VentilatorOMode {
       this.teS,
       this.pressureValues,
       this.flowValues,
-      this.volumeValues,this.operatingMode,this.lungImage,this.paw,this.globalCounterNo,this.alarmC,this.alarmP);
+      this.volumeValues,this.operatingMode,this.lungImage,this.paw,this.globalCounterNo,this.alarmC,this.alarmP,this.alarmActive);
 
   // Map<String, dynamic> toMap() {
   //   var map = <String, dynamic>{
@@ -109,6 +109,8 @@ class VentilatorOMode {
     globalCounterNo = map['globalCounterNo'];
     alarmC = map['alarmCodes'];
     alarmP = map['alarmPriority'];
+    alarmActive = map['alarmActive'];
+    
   }
 
   VentilatorOMode.fromJson(Map<String, dynamic> json)
@@ -137,7 +139,9 @@ class VentilatorOMode {
         dateTime = json['dateTime'],
          globalCounterNo = json['globalCounterNo'],
           alarmC = json['alarmCodes'],
-    alarmP = json['alarmPriority']
+    alarmP = json['alarmPriority'],
+    alarmActive = json['alarmActive']
+    
         ;
 
   VentilatorOMode.map(dynamic obj) {
@@ -167,6 +171,8 @@ class VentilatorOMode {
     this.globalCounterNo = obj['globalCounterNo'];
     this.alarmC = obj['alarmCodes'];
     this.alarmP = obj['alarmPriority'];
+    this.alarmActive = obj['alarmActive'];
+
   }
 }
 
@@ -198,10 +204,10 @@ class AlarmsList {
   AlarmsList(this.alarmCode,this.globalCounterNo);
 
    AlarmsList.fromMap(Map<String, dynamic> map) {
-    alarmId = map['id'];
-    alarmCode = map['alarmCodes'];
-    datetime = map['datetime'];
-    globalCounterNo = map['globalCounterNo'];
+    alarmId = map['id'].toString();
+    alarmCode = map['alarmCodes'].toString();
+    datetime = map['datetime'].toString();
+    // globalCounterNo = map['globalCounterNo'];
   }
 }
 

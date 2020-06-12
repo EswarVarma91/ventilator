@@ -37,6 +37,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       patientName = "",
       alarmActive = "0",
       alarmMessage = "0",
+      alarmPriority ="5",
       paw = "0",
       dateTime = "0";
   String ioreDisplayParamter = "I/E";
@@ -146,6 +147,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       patientName = vomL[currentValue]?.patientName ?? "";
       paw = vomL[currentValue]?.paw ?? "0";
       dateTime = vomL[currentValue].dateTime;
+      alarmActive = vomL[currentValue].alarmActive;
+      alarmMessage =vomL[currentValue].alarmC;
+      alarmPriority= vomL[currentValue].alarmP;
 
       if (operatinModeR == "1") {
         setState(() {
@@ -198,6 +202,71 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
           lungImage = "5";
         });
       }
+
+      if (alarmActive == '1') {
+              setState(() {
+                if (alarmPriority == '1' || alarmPriority == '0') {
+                  alarmMessage == '5'
+                      ? alarmMessage = "SYSTEM FAULT"
+                      : alarmMessage == '7'
+                          ? alarmMessage = "FiO\u2082 SENSOR MISSING"
+                          : alarmMessage == '10'
+                              ? alarmMessage = "HIGH LEAKAGE"
+                              : alarmMessage == '11'
+                                  ? alarmMessage = "HIGH PRESSURE"
+                                  : alarmMessage == '17'
+                                      ? alarmMessage = "PATIENT DISCONNECTED"
+                                      : alarmMessage = "";
+                } else if (alarmPriority == '2') {
+                  // print("alarm code "+((alarmMessage).toString());
+                  alarmMessage == '1'
+                      ? alarmMessage = "AC POWER DISCONNECTED"
+                      : alarmMessage == '2'
+                          ? alarmMessage = " LOW BATTERY"
+                          : alarmMessage == '3'
+                              ? alarmMessage = "CALIBRATE FiO2"
+                              : alarmMessage == '4'
+                                  ? alarmMessage = "CALIBRATION FiO2 FAIL"
+                                  : alarmMessage == '6'
+                                      ? alarmMessage = "SELF TEST FAIL"
+                                      : alarmMessage == '8'
+                                          ? alarmMessage = "HIGH FiO2"
+                                          : alarmMessage == '9'
+                                              ? alarmMessage = "LOW FIO2"
+                                              : alarmMessage == '12'
+                                                  ? alarmMessage =
+                                                      "LOW PRESSURE"
+                                                  : alarmMessage == '13'
+                                                      ? alarmMessage = "LOW VTE"
+                                                      : alarmMessage ==
+                                                              '14'
+                                                          ? alarmMessage =
+                                                              "HIGH VTE"
+                                                          : alarmMessage ==
+                                                                  '15'
+                                                              ? alarmMessage =
+                                                                  "LOW VTI"
+                                                              : alarmMessage == '16'
+                                                                  ? alarmMessage =
+                                                                      "HIGH VTI"
+                                                                  : alarmMessage == "18"
+                                                                      ? alarmMessage =
+                                                                          "LOW O2  supply"
+                                                                      : alarmMessage ==
+                                                                              '19'
+                                                                          ? alarmMessage =
+                                                                              "LOW RR"
+                                                                          : alarmMessage == '20'
+                                                                              ? alarmMessage = "HIGH RR"
+                                                                              : alarmMessage == '21' ? alarmMessage = "HIGH PEEP" : alarmMessage == '22' ? alarmMessage = "LOW PEEP" : alarmMessage = "";
+                } else if (alarmPriority == '3') {
+                  alarmMessage == '23'
+                      ? alarmMessage = "Apnea backup"
+                      : alarmMessage = "";
+                }
+              });
+            }
+      
       // ieValue
       // Fluttertoast.showToast(msg: psValue1, toastLength: Toast.LENGTH_SHORT);
     });
@@ -2121,8 +2190,6 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
             height: 70,
             child: Card(
               color: alarmActive == "1" ? Colors.red : Color(0xFF171e27),
-              // priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
-
               child: Center(
                   child: Align(
                 alignment: Alignment.centerLeft,
