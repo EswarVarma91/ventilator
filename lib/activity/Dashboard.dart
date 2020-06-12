@@ -508,7 +508,7 @@ class _CheckPageState extends State<Dashboard> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
-      // print(event);
+      // // print(event);
       // Fluttertoast.showToast(msg: event.length.toString() + " "+cc.toString() + );
       serializeEventData(event);
     });
@@ -528,7 +528,7 @@ class _CheckPageState extends State<Dashboard> {
       });
       // Fluttertoast.showToast(msg: _status);
     }
-    print(devices);
+    // print(devices);
     _connectTo(devices[0]);
   }
 
@@ -550,7 +550,7 @@ class _CheckPageState extends State<Dashboard> {
 
   // counterData() async {
   //   var data = await dbCounter.getCounterNo();
-  //   print(data);
+  //   // print(data);
   //   if (data.isEmpty) {
   //     globalCounter = globalCounter + 1;
   //     dbCounter.saveCounter(CounterValue(globalCounter.toString()));
@@ -703,16 +703,16 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   saveData(VentilatorOMode data, String patientId) async {
-    // print("data saving id : " + patientId);
+    // // print("data saving id : " + patientId);
     dbHelper.save(data);
   }
 
   Future<void> _sendShutdown() async {
     try {
       var result = await shutdownChannel.invokeMethod('sendShutdowndevice');
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
@@ -722,9 +722,9 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStartH');
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
@@ -734,9 +734,9 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStartM');
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
@@ -746,9 +746,9 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStartL');
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
@@ -758,36 +758,36 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStop');
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
   Future<void> sendSoundOn() async {
     try {
       var result = await shutdownChannel.invokeMethod('sendsoundon');
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
   Future<void> sendSoundOff() async {
     try {
       var result = await shutdownChannel.invokeMethod('sendsoundoff');
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
   Future<void> turnOffScreen() async {
     try {
       var result = await shutdownChannel.invokeMethod('turnOffScreen');
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
@@ -797,9 +797,9 @@ class _CheckPageState extends State<Dashboard> {
       Screen.keepOn(true);
       var result = await shutdownChannel.invokeMethod('turnOnScreen');
 
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
@@ -826,7 +826,7 @@ class _CheckPageState extends State<Dashboard> {
     // obj.insert(length + 1, (iCRC & 0xFF00) >> 8);
 
     // obj.insert(length + 1, 0x7F);
-    print(obj.toString());
+    // print(obj.toString());
 
     if (_status == "Connected") {
       // Fluttertoast.showToast(msg: obj.toString());
@@ -891,7 +891,7 @@ class _CheckPageState extends State<Dashboard> {
     // List<int> l = [];
     // l.insert(0,126);
     // l.addAll(obj);
-    // print(l);
+    // // print(l);
 
     while (index-- > 0) {
       r = ulCrc16Table[uiCrc & 0xF];
@@ -974,11 +974,11 @@ class _CheckPageState extends State<Dashboard> {
       tiValue =
           (double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
               (60000 / rrValue);
-      print(tiValue.toString());
+      // print(tiValue.toString());
       teValue =
           (double.tryParse(e) / (double.tryParse(i) + double.tryParse(e))) *
               (60000 / rrValue);
-      print(teValue.toString());
+      // print(teValue.toString());
       paw = preferences.getInt("paw");
       mvValue = 0;
       rrtotalValue = preferences.getInt("rrtotal");
@@ -2817,7 +2817,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.3",
+                  "V1.7.4",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -17821,10 +17821,10 @@ class _CheckPageState extends State<Dashboard> {
     if (res == 1) {
       return data;
     } else if (res == 2) {
-      print(dataI);
+      // print(dataI);
       return dataI;
     } else if (res == 3) {
-      print(dataE);
+      // print(dataE);
       return dataE;
     }
   }
@@ -17845,7 +17845,7 @@ class _CheckPageState extends State<Dashboard> {
 
       // int iEval = int.tryParse((double.tryParse(data))*10.0);
 
-      // print(iEval.toString());
+      // // print(iEval.toString());
       setState(() {
         modeWriteList.add(0x7E);
         modeWriteList.add(0);
@@ -17902,7 +17902,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('pccmvdefaultValue', pccmvdefaultValue);
 
       //to calculate crc
-      print(modeWriteList.toString());
+      // print(modeWriteList.toString());
       // Fluttertoast.showToast(msg: modeWriteList.toString());
 
       if (_status == "Connected") {
@@ -17985,7 +17985,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('vccmvdefaultValue', vccmvdefaultValue);
 
       //to calculate crc
-      print(modeWriteList.toString());
+      // print(modeWriteList.toString());
       // Fluttertoast.showToast(msg: modeWriteList.toString());
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -18531,7 +18531,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
     writePlay.add(0x7F);
 
     //to calculate crc
-    print(writePlay.toString());
+    // print(writePlay.toString());
     // Fluttertoast.showToast(msg: writePlay.toString());
 
     await _port.write(Uint8List.fromList(writePlay));
@@ -19585,7 +19585,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
           }
           cIndex = cIndex + 1;
         }
-        print(listTemp.length.toString());
+        // print(listTemp.length.toString());
         serialiseReceivedPacket(listTemp);
       } else {
         list = [];
@@ -19611,7 +19611,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
       // if (data == false) {
       //   finalList.clear();
       // } else {
-      // print("page no " + finalList[112].toString());
+      // // print("page no " + finalList[112].toString());
       // if (finalList[112] == 1) {
       //   Navigator.pushAndRemoveUntil(
       //       context,
@@ -19636,7 +19636,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
           var now = new DateTime.now();
 
           int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
-          // print("vte "+vteValueCheck.toString());
+          // // print("vte "+vteValueCheck.toString());
 
           if ((vteValueCheck != "" || vteValueCheck != null) &&
               vteValueCheck.round() >= 0 &&
@@ -19658,7 +19658,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
               ((finalList[102] << 8) + finalList[103]); //103 104
           peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
           spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
-          // print("spon "+spontaneousDisplay.toString());
+          // // print("spon "+spontaneousDisplay.toString());
 
           int rrtotalCheck =
               ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
@@ -19842,7 +19842,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
                                     ? alarmMessage = "PATIENT DISCONNECTED"
                                     : alarmMessage = "";
               } else if (finalList[109] == 2) {
-                // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
+                // // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
                 ((finalList[106] << 8) + finalList[107]) == 1
                     ? alarmMessage = "POWER SUPPLY DISCONNECTED"
                     : ((finalList[106] << 8) + finalList[107]) == 2

@@ -30,7 +30,7 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
 
   getPatientData() async {
     patientList = dbHelper.getAllPatients();
-    print(patientList);
+    // print(patientList);
   }
 
   @override
@@ -55,10 +55,11 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
       body: WillPopScope(
         onWillPop: () {
           // Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Dashboard()),
-          );
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), ModalRoute.withName('/'));
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => Dashboard()),
+          // );
         },
         child: FutureBuilder<List>(
           future: patientList,
