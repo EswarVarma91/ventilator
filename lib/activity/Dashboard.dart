@@ -19327,6 +19327,7 @@ class _CheckPageState extends State<Dashboard> {
             leakVolumeDisplay = ((finalList[102] << 8) + finalList[103]); //103 104
             peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
             spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
+            // print("spon "+spontaneousDisplay.toString());
 
             int rrtotalCheck = ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
 
@@ -19465,9 +19466,22 @@ class _CheckPageState extends State<Dashboard> {
               sendSoundOff();
               _stopMusic();
             }
-            // cdisplayParameter = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString())))
-            //     .toInt();
 
+            // cdisplayParameter = ((finalList[106] << 8) + finalList[107]);
+            if(!vteValue.isNegative && vteValue!=null && vteValue!=0 && !pplateauDisplay.isNegative && pplateauDisplay!=null && pplateauDisplay!=0)
+            {
+            try{
+            var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString())))
+                .toInt();
+            if(dataC.isNegative){
+              // cdisplayParameter = 0;
+            }else{
+              cdisplayParameter = dataC;
+            }
+            }catch(e){
+
+            }
+            }
 
 
             if (finalList[108] == 1) {
