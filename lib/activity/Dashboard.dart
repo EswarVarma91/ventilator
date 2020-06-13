@@ -17708,8 +17708,6 @@ class _CheckPageState extends State<Dashboard> {
           return CommonDialog(value);
         });
 
-    // Fluttertoast.showToast(msg: result.toString());
-
     var data = result.split("ab")[1];
     int peepHighL = 0, peepLowL = 0;
     if (data == "peep") {
@@ -17719,7 +17717,6 @@ class _CheckPageState extends State<Dashboard> {
       List<int> listObj = [01, 0x10, 00, 101, 0x00, 0x01, 0x02];
       listObj.add(peepHighL);
       listObj.add(peepLowL);
-      // Fluttertoast.showToast(msg: listObj.toString());
       // getCrcData(listObj);
     } else if (data == "ps") {
       int temp = int.tryParse(result.split("ab")[0]);
@@ -17728,7 +17725,6 @@ class _CheckPageState extends State<Dashboard> {
       List<int> listObj = [01, 0x10, 00, 102, 0x00, 0x01, 0x02];
       listObj.add(peepHighL);
       listObj.add(peepLowL);
-      // Fluttertoast.showToast(msg: listObj.toString());
       // getCrcData(listObj);
     } else if (data == "ie") {
       int temp = int.tryParse(result.split("ab")[0]);
@@ -17737,7 +17733,6 @@ class _CheckPageState extends State<Dashboard> {
       List<int> listObj = [01, 0x10, 00, 103, 0x00, 0x01, 0x02];
       listObj.add(peepHighL);
       listObj.add(peepLowL);
-      // Fluttertoast.showToast(msg: listObj.toString());
       // getCrcData(listObj);
     } else if (data == "rr") {
       int temp = int.tryParse(result.split("ab")[0]);
@@ -17746,7 +17741,6 @@ class _CheckPageState extends State<Dashboard> {
       List<int> listObj = [01, 0x10, 00, 104, 0x00, 0x01, 0x02];
       listObj.add(peepHighL);
       listObj.add(peepLowL);
-      // Fluttertoast.showToast(msg: listObj.toString());
       // getCrcData(listObj);
     } else if (data == "FiO\u2082") {
       int temp = int.tryParse(result.split("ab")[0]);
@@ -17755,7 +17749,6 @@ class _CheckPageState extends State<Dashboard> {
       List<int> listObj = [01, 0x10, 00, 105, 0x00, 0x01, 0x02];
       listObj.add(peepHighL);
       listObj.add(peepLowL);
-      // Fluttertoast.showToast(msg: listObj.toString());
       // getCrcData(listObj);
     } else if (data == "tih") {
       int temp = int.tryParse(result.split("ab")[0]);
@@ -17764,7 +17757,6 @@ class _CheckPageState extends State<Dashboard> {
       List<int> listObj = [01, 0x10, 00, 106, 0x00, 0x01, 0x02];
       listObj.add(peepHighL);
       listObj.add(peepLowL);
-      // Fluttertoast.showToast(msg: listObj.toString());
       // getCrcData(listObj);
     }
     if (result != null) {
