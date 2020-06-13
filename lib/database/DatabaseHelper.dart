@@ -52,7 +52,7 @@ class DatabaseHelper {
   static const String TABLE_NAME = 'counterV';
   static const String TABLE_ALARM = 'alarms';
   static const String TABLE = 'graphPoints';
-  static const String DATABASE = 'ddb';
+  static const String DATABASE = 'edb';
 
   Future<Database> get db async {
     if (_db != null) {

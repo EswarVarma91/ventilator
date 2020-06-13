@@ -40,6 +40,8 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       alarmPriority ="5",
       paw = "0",
       dateTime = "0";
+
+  
   String ioreDisplayParamter = "I/E";
   DatabaseHelper dbHelper;
   List<VentilatorOMode> vomL;
@@ -291,7 +293,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
         padding: 10.0,
         backgroundColor: Color(0xFF171e27),
         traceColor: Colors.green,
-        yAxisMax: 150.0,
+        yAxisMax: 200.0,
         yAxisMin: -90.0,
         dataSet: flowPoints);
 
@@ -1942,9 +1944,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
     );
   }
 
-  graphs() {
-     return Container(
-      padding: EdgeInsets.only(left: 170, right: 0, top: 25),
+ graphs() {
+    return Container(
+      padding: EdgeInsets.only(left: 170, right: 0, top: 45),
       child: Column(
         children: [
           Container(
@@ -1953,7 +1955,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
             child: Stack(
               children: [
                 Container(
-                    margin: EdgeInsets.only(left: 20, right: 10, top:20),
+                    margin: EdgeInsets.only(left: 20, right: 10, top: 10),
                     child: scopeOne),
                 Container(
                     margin: EdgeInsets.only(left: 10, top: 8),
@@ -1997,7 +1999,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 //       style: TextStyle(color: Colors.white),
                 //     )),
                 Container(
-                    margin: EdgeInsets.only(left: 502, top: 93),
+                    margin: EdgeInsets.only(left: 502, top: 90),
                     child: Text(
                       "s",
                       style: TextStyle(color: Colors.grey),
@@ -2075,7 +2077,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 Container(
                     margin: EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      "150 Lpm",
+                      "200 Lpm",
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
@@ -2099,7 +2101,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 Container(
                   margin: EdgeInsets.only(
                     left: 28,
-                    top: 79,
+                    top: 96,
                   ),
                   color: Colors.grey,
                   height: 1,
@@ -2120,7 +2122,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                 //       style: TextStyle(color: Colors.white),
                 //     )),
                 Container(
-                    margin: EdgeInsets.only(left: 502, top: 66),
+                    margin: EdgeInsets.only(left: 502, top: 86),
                     child: Text(
                       "s",
                       style: TextStyle(color: Colors.grey),
@@ -2190,6 +2192,8 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
             height: 70,
             child: Card(
               color: alarmActive == "1" ? Colors.red : Color(0xFF171e27),
+              // priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
+
               child: Center(
                   child: Align(
                 alignment: Alignment.centerLeft,

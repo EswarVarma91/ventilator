@@ -17488,7 +17488,7 @@ class _CheckPageState extends State<Dashboard> {
                 //       style: TextStyle(color: Colors.white),
                 //     )),
                 Container(
-                    margin: EdgeInsets.only(left: 502, top: 93),
+                    margin: EdgeInsets.only(left: 502, top: 90),
                     child: Text(
                       "s",
                       style: TextStyle(color: Colors.grey),
@@ -17611,7 +17611,7 @@ class _CheckPageState extends State<Dashboard> {
                 //       style: TextStyle(color: Colors.white),
                 //     )),
                 Container(
-                    margin: EdgeInsets.only(left: 502, top: 66),
+                    margin: EdgeInsets.only(left: 502, top: 86),
                     child: Text(
                       "s",
                       style: TextStyle(color: Colors.grey),
