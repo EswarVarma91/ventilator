@@ -28,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
     dbHelper = DatabaseHelper();
     // counter = counter+1;
     var res = dbHelper.delete7Daysdata();
-    print(res);
+    // print(res);
     getData();
     // saveData();
   }
@@ -39,9 +39,9 @@ class _SplashPageState extends State<SplashPage> {
     Screen.keepOn(true);
       var result = await shutdownChannel.invokeMethod('turnOnScreen');
       
-      print(result);
+      // print(result);
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
     }
   }
 

@@ -65,7 +65,7 @@ class _CallibrationPageState extends State<CallibrationPage> {
       });
       // Fluttertoast.showToast(msg: _status);
     }
-    print(devices);
+    // print(devices);
     _connectTo(devices[0]);
   }
 

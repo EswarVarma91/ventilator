@@ -134,7 +134,7 @@ class _ConnectionScreenState extends State<ConnectionPage> {
   _getPorts() async {
     _ports = [];
     List<UsbDevice> devices = await UsbSerial.listDevices();
-    print(devices);
+    // print(devices);
     _connectTo(devices[0]);
   }
 

@@ -54,7 +54,7 @@ class CounterDatabaseHelper {
   Future<List<CounterValue>> getCounterNo() async {
     var dbClient = await db;
     List<Map> data = await dbClient.rawQuery('SELECT * FROM $TABLE_NAME');
-    print(data);
+    // print(data);
     List<CounterValue> plist = [];
     if(data.length>0){
       for(int i=0; i<data.length;i++){

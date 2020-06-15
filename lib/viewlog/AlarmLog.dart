@@ -30,7 +30,7 @@ class _AlarmLogListState extends State<AlarmLog> {
 
   getPatientData() async {
     alarmList = dbHelper.getAllAlarms();
-    print(alarmList);
+    // print(alarmList);
   }
 
   getAlarmCode(int res){

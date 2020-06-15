@@ -31,7 +31,7 @@ class _PatientsDatainSlotsState extends State<PatientsDatainSlots> {
 
   getPatientDatesData() async {
     patientdatesList = dbHelper.splitData(widget.minTime,widget.maxTime);
-    print(patientdatesList);
+    // print(patientdatesList);
   }
 
   @override

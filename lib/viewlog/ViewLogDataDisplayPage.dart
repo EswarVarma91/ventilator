@@ -95,7 +95,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   getPatientData(var fromDate, var toDate) async {
     
     vomL = await dbHelper.getPatientsData(fromDate.toString(), toDate.toString());
-    print(vomL);
+    // print(vomL);
     pressurePoints = [];
     volumePoints=[];
     flowPoints=[];

@@ -31,7 +31,7 @@ class _patientsDatesState extends State<patientsDates> {
 
   getPatientDatesData() async {
     patientdatesList = dbHelper.patientDatesById(widget.patientId);
-    print(patientdatesList);
+    // print(patientdatesList);
   }
 
   @override

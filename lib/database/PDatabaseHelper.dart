@@ -51,7 +51,7 @@ class PDatabaseHelper {
             asl.patientHeight,
             DateFormat("yyyy-MM-dd HH:mm:ss").format(now)
           ]);
-          print("result data 1 : "+res.toString());
+          // print("result data 1 : "+res.toString());
 
           return res;
     }catch(Exception){

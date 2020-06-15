@@ -127,7 +127,7 @@ class _SelfTestPageState extends State<SelfTestPage> {
         _status = "Disconnected";
       });
     }
-    print(devices);
+    // print(devices);
     _connectTo(devices[0]);
   }
 
@@ -172,7 +172,7 @@ class _SelfTestPageState extends State<SelfTestPage> {
 
     transaction.stream.listen((event) async {
       // Fluttertoast.showToast(msg: event.toString());
-      print(event.length.toString());
+      // print(event.length.toString());
       if (event != null) {
         if (event[0] == 126 && event.length == 120) {
           list.addAll(event);
