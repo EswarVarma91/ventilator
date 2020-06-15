@@ -1565,7 +1565,7 @@ class _CheckPageState extends State<Dashboard> {
                                 child: Text(
                                   peakFlowDisplay == null
                                       ? "0"
-                                      : (((peakFlowDisplay * 60) / 1000)*1.2)
+                                      : ((peakFlowDisplay * 60) / 1000)
                                           .toStringAsFixed(3),
                                   // "00",
                                   style: TextStyle(
@@ -2817,7 +2817,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.4",
+                  "V1.7.5",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -6910,7 +6910,7 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (psvVtMin == true &&
                                     psvVtMinValue != pacvmaxValue) {
                                   setState(() {
-                                    if (psvVtMaxValue < 1190) {
+                                    if (psvVtMaxValue != 1190 && psvVtMinValue != 1189) {
                                       psvVtMinValue = psvVtMinValue + 1;
                                       psvVtMaxValue = psvVtMinValue + 1;
                                     }
@@ -7973,7 +7973,7 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 setState(() {
                   pacvmaxValue = 1200;
-                  pacvminValue = 100;
+                  pacvminValue = 200;
                   pacvparameterName = "Vt Max";
                   pacvparameterUnits = "mL";
                   pacvItrig = false;
@@ -8036,7 +8036,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "100",
+                              "200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvVtMax
@@ -8437,10 +8437,9 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     pacvPcValue = pacvPcValue + 1;
                                   });
-                                } else if (pacvVtMin == true &&
-                                    pacvVtMinValue != pacvmaxValue) {
+                                } else if (pacvVtMin == true && pacvVtMinValue != pacvmaxValue) {
                                   setState(() {
-                                    if (pacvVtMaxValue < 1190) {
+                                    if (pacvVtMaxValue != 1190 && pacvVtMinValue !=1189) {
                                       pacvVtMinValue = pacvVtMinValue + 1;
                                       pacvVtMaxValue = pacvVtMinValue + 1;
                                     }
@@ -8448,6 +8447,7 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (pacvVtMax == true &&
                                     pacvVtMaxValue != pacvmaxValue) {
                                   setState(() {
+                                    if(pacvVtMinValue < pacvVtMaxValue)
                                     pacvVtMaxValue = pacvVtMaxValue + 1;
                                   });
                                 } else if (pacvFio2 == true &&
@@ -10945,7 +10945,7 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 setState(() {
                   psimvmaxValue = 1200;
-                  psimvminValue = 100;
+                  psimvminValue = 200;
                   psimvparameterName = "Vt Max";
                   psimvparameterUnits = "mL";
                   psimvItrig = false;
@@ -11009,7 +11009,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "100",
+                              "200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvVtMax
@@ -11531,15 +11531,15 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvPcValue = psimvPcValue + 1;
                                   });
                                 } else if (psimvVtMin == true &&
-                                    psimvVtMinValue != pacvmaxValue) {
+                                    psimvVtMinValue != psimvmaxValue) {
                                   setState(() {
-                                    if (psimvVtMaxValue < 1190) {
+                                    if (psimvVtMaxValue != 1190 && psimvVtMinValue !=1189) {
                                       psimvVtMinValue = psimvVtMinValue + 1;
                                       psimvVtMaxValue = psimvVtMinValue + 1;
                                     }
                                   });
                                 } else if (psimvVtMax == true &&
-                                    psimvVtMaxValue != pacvmaxValue) {
+                                    psimvVtMaxValue != psimvmaxValue) {
                                   setState(() {
                                     psimvVtMaxValue = psimvVtMaxValue + 1;
                                   });
@@ -12512,7 +12512,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "100",
+                              "200",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvVtmax
@@ -12909,10 +12909,9 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     pccmvFio2Value = pccmvFio2Value + 1;
                                   });
-                                } else if (pccmvVtmin == true &&
-                                    pccmvVtminValue != pccmvmaxValue) {
+                                } else if (pccmvVtmin == true && pccmvVtminValue != pccmvmaxValue) {
                                   setState(() {
-                                    if (pccmvVtmaxValue < 1190) {
+                                    if (pccmvVtmaxValue != 1190 && pccmvVtminValue != 1189) {
                                       pccmvVtminValue = pccmvVtminValue + 1;
                                       pccmvVtmaxValue = pccmvVtminValue + 1;
                                     }
@@ -18563,7 +18562,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
         pccmvPeepValue = 10;
         pccmvPcValue = 30;
         pccmvFio2Value = 21;
-        pccmvVtminValue = 100;
+        pccmvVtminValue = 200;
         pccmvVtmaxValue = 400;
         pccmvTihValue = 50;
         pccmvFlowRampValue = 4;
@@ -20040,7 +20039,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
         if (flowPoints.length >= 50) {
           setState(() {
             flowPoints.removeAt(0);
-            flowPoints.add(temp3*1.2);
+            flowPoints.add(temp3);
           });
         } else {
           flowPoints.add(temp3*1.2);
