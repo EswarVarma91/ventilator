@@ -12912,7 +12912,7 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (pccmvVtmin == true &&
                                     pccmvVtminValue != pccmvmaxValue) {
                                   setState(() {
-                                    if (pccmvVtmaxValue < 1390) {
+                                    if (pccmvVtmaxValue < 1190) {
                                       pccmvVtminValue = pccmvVtminValue + 1;
                                       pccmvVtmaxValue = pccmvVtminValue + 1;
                                     }
