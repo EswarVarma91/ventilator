@@ -99,8 +99,8 @@ class _AlarmLogListState extends State<AlarmLog> {
               return Center(child: CircularProgressIndicator());
             else if (snapshot.data.isEmpty)
               return Center(
-                child: Text("No Data Found"),
-              ); //CIRCULAR INDICATOR
+                child: Text("No Data Available"),
+              );
             else {
               return ListView.builder(
                   itemCount: snapshot.data.length,

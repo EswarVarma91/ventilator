@@ -38,7 +38,7 @@ class _patientsDatesState extends State<patientsDates> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Patient List"),
+        title: Text(widget.patientId),
         actions: <Widget>[
           FlatButton(
             textColor: Colors.white,
@@ -64,12 +64,10 @@ class _patientsDatesState extends State<patientsDates> {
           future: patientdatesList,
           initialData: List(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData)
-              return Center(child: CircularProgressIndicator());
-            else if (snapshot.data.isEmpty)
-              return Center(
-                child: CircularProgressIndicator(),
-              ); //
+             if(snapshot.data.isEmpty)
+             return Center(
+                child: Text("No Data Available"),
+              );//
             else {
               return GridView.builder(
                   itemCount: snapshot.data.length,

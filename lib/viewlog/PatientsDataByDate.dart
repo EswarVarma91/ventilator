@@ -67,12 +67,10 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
           future: patientdatesList,
           initialData: List(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData)
-              return Center(child: CircularProgressIndicator());
-            else if (snapshot.data.isEmpty)
-              return Center(
-                child: Text("No Data Found"),
-              ); //CIRCULAR INDICATOR
+            if(snapshot.data.isEmpty)
+             return Center(
+                child: Text("No Data Available"),
+              );
             else {
               return ListView.builder(
                   itemCount: snapshot.data.length,

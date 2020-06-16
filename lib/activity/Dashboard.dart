@@ -5201,14 +5201,16 @@ class _CheckPageState extends State<Dashboard> {
                 padding: const EdgeInsets.only(
                     left: 10, right: 0, top: 4, bottom: 10),
                 child: Text(
-                  patientName.toString(),
+                  patientName != null && patientName != ""
+                      ? patientName.toString()
+                      : "                   ",
                   style: TextStyle(
                       color: Colors.blue,
                       fontSize: 12,
                       fontWeight: FontWeight.bold),
                 ),
               )),
-              SizedBox(width: 10),
+              SizedBox(width: 20),
               Material(
                   borderRadius: BorderRadius.circular(5),
                   child: Container(
@@ -6910,7 +6912,8 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (psvVtMin == true &&
                                     psvVtMinValue != pacvmaxValue) {
                                   setState(() {
-                                    if (psvVtMaxValue != 1190 && psvVtMinValue != 1189) {
+                                    if (psvVtMaxValue != 1190 &&
+                                        psvVtMinValue != 1189) {
                                       psvVtMinValue = psvVtMinValue + 1;
                                       psvVtMaxValue = psvVtMinValue + 1;
                                     }
@@ -8437,9 +8440,11 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     pacvPcValue = pacvPcValue + 1;
                                   });
-                                } else if (pacvVtMin == true && pacvVtMinValue != pacvmaxValue) {
+                                } else if (pacvVtMin == true &&
+                                    pacvVtMinValue != pacvmaxValue) {
                                   setState(() {
-                                    if (pacvVtMaxValue != 1190 && pacvVtMinValue !=1189) {
+                                    if (pacvVtMaxValue != 1190 &&
+                                        pacvVtMinValue != 1189) {
                                       pacvVtMinValue = pacvVtMinValue + 1;
                                       pacvVtMaxValue = pacvVtMinValue + 1;
                                     }
@@ -8447,8 +8452,8 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (pacvVtMax == true &&
                                     pacvVtMaxValue != pacvmaxValue) {
                                   setState(() {
-                                    if(pacvVtMinValue < pacvVtMaxValue)
-                                    pacvVtMaxValue = pacvVtMaxValue + 1;
+                                    if (pacvVtMinValue < pacvVtMaxValue)
+                                      pacvVtMaxValue = pacvVtMaxValue + 1;
                                   });
                                 } else if (pacvFio2 == true &&
                                     pacvFio2Value != pacvmaxValue) {
@@ -11533,7 +11538,8 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (psimvVtMin == true &&
                                     psimvVtMinValue != psimvmaxValue) {
                                   setState(() {
-                                    if (psimvVtMaxValue != 1190 && psimvVtMinValue !=1189) {
+                                    if (psimvVtMaxValue != 1190 &&
+                                        psimvVtMinValue != 1189) {
                                       psimvVtMinValue = psimvVtMinValue + 1;
                                       psimvVtMaxValue = psimvVtMinValue + 1;
                                     }
@@ -12909,9 +12915,11 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     pccmvFio2Value = pccmvFio2Value + 1;
                                   });
-                                } else if (pccmvVtmin == true && pccmvVtminValue != pccmvmaxValue) {
+                                } else if (pccmvVtmin == true &&
+                                    pccmvVtminValue != pccmvmaxValue) {
                                   setState(() {
-                                    if (pccmvVtmaxValue != 1190 && pccmvVtminValue != 1189) {
+                                    if (pccmvVtmaxValue != 1190 &&
+                                        pccmvVtminValue != 1189) {
                                       pccmvVtminValue = pccmvVtminValue + 1;
                                       pccmvVtmaxValue = pccmvVtminValue + 1;
                                     }
@@ -17452,7 +17460,7 @@ class _CheckPageState extends State<Dashboard> {
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                    margin: EdgeInsets.only(left: 15, top: 93),
+                    margin: EdgeInsets.only(left: 15, top: 88),
                     child: Text(
                       "0",
                       style: TextStyle(color: Colors.grey),
@@ -17461,7 +17469,7 @@ class _CheckPageState extends State<Dashboard> {
                   margin: EdgeInsets.only(left: 28, top: 24),
                   width: 1,
                   color: Colors.grey,
-                  height: 85,
+                  height: 76,
                 ),
                 Container(
                   margin: EdgeInsets.only(
@@ -17575,7 +17583,7 @@ class _CheckPageState extends State<Dashboard> {
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                    margin: EdgeInsets.only(left: 15, top: 66),
+                    margin: EdgeInsets.only(left: 15, top: 86),
                     child: Text(
                       "0",
                       style: TextStyle(color: Colors.grey),
@@ -17633,7 +17641,7 @@ class _CheckPageState extends State<Dashboard> {
                       style: TextStyle(color: Colors.grey),
                     )),
                 Container(
-                    margin: EdgeInsets.only(left: 15, top: 89),
+                    margin: EdgeInsets.only(left: 15, top: 86),
                     child: Text(
                       "0",
                       style: TextStyle(color: Colors.grey),
@@ -17646,12 +17654,12 @@ class _CheckPageState extends State<Dashboard> {
                 ),
                 Container(
                   margin: EdgeInsets.only(
-                    left: 28,
+                    left: 30,
                     top: 99,
                   ),
                   color: Colors.grey,
                   height: 1,
-                  width: 473,
+                  width: 470,
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 12, top: 35),
@@ -17678,21 +17686,23 @@ class _CheckPageState extends State<Dashboard> {
           Container(
             width: 480,
             height: 70,
-            child: Card(
-              color: alarmActive == "1" ? Colors.red : Color(0xFF171e27),
-              // priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
+            child: alarmActive == "1"
+                ? Card(
+                    color: alarmActive == "1" ? Colors.red : Color(0xFF171e27),
+                    // priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
 
-              child: Center(
-                  child: Align(
-                alignment: Alignment.centerLeft,
-                child: Center(
-                  child: Text(
-                    alarmActive == "1" ? alarmMessage.toUpperCase() : "",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-              )),
-            ),
+                    child: Center(
+                        child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Center(
+                        child: Text(
+                          alarmActive == "1" ? alarmMessage.toUpperCase() : "",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ),
+                    )),
+                  )
+                : Container(),
           ),
         ],
       ),
@@ -18215,17 +18225,17 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("ps", psimvPsValue);
       preferences.setInt("pc", psimvPcValue);
 
-      preferences.setInt('psimvItrigValue',psimvItrigValue); 
- preferences.setInt('psimvRrValue',psimvRrValue);
-preferences.setInt('psimvPsValue',psimvPsValue); 
-preferences.setInt('psimvIeValue',psimvIeValue); 
-preferences.setInt('psimvPeepValue',psimvPeepValue); 
- preferences.setInt('psimvPcValue',psimvPcValue); 
- preferences.setInt('psimvVtMinValue',psimvVtMinValue);
-preferences.setInt('psimvVtMaxValue',psimvVtMaxValue); 
-preferences.setInt('psimvFio2Value',psimvFio2Value); 
-preferences.setInt('psimvFlowRampValue',psimvFlowRampValue);
-preferences.setInt('psimvdefaultValue',psimvdefaultValue); 
+      preferences.setInt('psimvItrigValue', psimvItrigValue);
+      preferences.setInt('psimvRrValue', psimvRrValue);
+      preferences.setInt('psimvPsValue', psimvPsValue);
+      preferences.setInt('psimvIeValue', psimvIeValue);
+      preferences.setInt('psimvPeepValue', psimvPeepValue);
+      preferences.setInt('psimvPcValue', psimvPcValue);
+      preferences.setInt('psimvVtMinValue', psimvVtMinValue);
+      preferences.setInt('psimvVtMaxValue', psimvVtMaxValue);
+      preferences.setInt('psimvFio2Value', psimvFio2Value);
+      preferences.setInt('psimvFlowRampValue', psimvFlowRampValue);
+      preferences.setInt('psimvdefaultValue', psimvdefaultValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -18300,17 +18310,17 @@ preferences.setInt('psimvdefaultValue',psimvdefaultValue);
       preferences.setInt("vt", vsimvVtValue);
       preferences.setInt("ps", vsimvPcMaxValue);
 
-      preferences.setInt('vsimvItrigValue',vsimvItrigValue);
-  preferences.setInt('vsimvRrValue',vsimvRrValue);
-  preferences.setInt('vsimvIeValue',vsimvIeValue);
- preferences.setInt('vsimvPeepValue',vsimvPeepValue);
-  preferences.setInt('vsimvVtValue',vsimvVtValue);
-  preferences.setInt('vsimvPsValue',vsimvPsValue);
-  preferences.setInt('vsimvPcMinValue',vsimvPcMinValue);
-  preferences.setInt('vsimvPcMaxValue',vsimvPcMaxValue);
- preferences.setInt('vsimvFio2Value',vsimvFio2Value);
-  preferences.setInt('vsimvFlowRampValue',vsimvFlowRampValue);
-  preferences.setInt('vsimvdefaultValue',vsimvdefaultValue);
+      preferences.setInt('vsimvItrigValue', vsimvItrigValue);
+      preferences.setInt('vsimvRrValue', vsimvRrValue);
+      preferences.setInt('vsimvIeValue', vsimvIeValue);
+      preferences.setInt('vsimvPeepValue', vsimvPeepValue);
+      preferences.setInt('vsimvVtValue', vsimvVtValue);
+      preferences.setInt('vsimvPsValue', vsimvPsValue);
+      preferences.setInt('vsimvPcMinValue', vsimvPcMinValue);
+      preferences.setInt('vsimvPcMaxValue', vsimvPcMaxValue);
+      preferences.setInt('vsimvFio2Value', vsimvFio2Value);
+      preferences.setInt('vsimvFlowRampValue', vsimvFlowRampValue);
+      preferences.setInt('vsimvdefaultValue', vsimvdefaultValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -18393,20 +18403,20 @@ preferences.setInt('psimvdefaultValue',psimvdefaultValue);
       preferences.setInt("fio2", psvFio2Value);
       preferences.setInt("ps", psvPsValue);
 
-       preferences.setInt('psvItrigValue',psvItrigValue);
-  preferences.setInt('psvPeepValue',psvPeepValue);
-  preferences.setInt('psvIeValue',psvIeValue);
- preferences.setInt('psvPsValue',psvPsValue);
- preferences.setInt('psvTiValue',psvTiValue);
-  preferences.setInt('psvVtMinValue',psvVtMinValue);
-  preferences.setInt('psvVtMaxValue',psvVtMaxValue);
- preferences.setInt('psvFio2Value',psvFio2Value);
-  preferences.setInt('psvAtimeValue',psvAtimeValue);
- preferences.setInt('psvEtrigValue',psvEtrigValue);
- preferences.setInt('psvBackupRrValue',psvBackupRrValue);
- preferences.setInt('psvMinTeValue',psvMinTeValue);
-  preferences.setInt('psvFlowRampValue',psvFlowRampValue);
- preferences.setInt('psvdefaultValue',psvdefaultValue);
+      preferences.setInt('psvItrigValue', psvItrigValue);
+      preferences.setInt('psvPeepValue', psvPeepValue);
+      preferences.setInt('psvIeValue', psvIeValue);
+      preferences.setInt('psvPsValue', psvPsValue);
+      preferences.setInt('psvTiValue', psvTiValue);
+      preferences.setInt('psvVtMinValue', psvVtMinValue);
+      preferences.setInt('psvVtMaxValue', psvVtMaxValue);
+      preferences.setInt('psvFio2Value', psvFio2Value);
+      preferences.setInt('psvAtimeValue', psvAtimeValue);
+      preferences.setInt('psvEtrigValue', psvEtrigValue);
+      preferences.setInt('psvBackupRrValue', psvBackupRrValue);
+      preferences.setInt('psvMinTeValue', psvMinTeValue);
+      preferences.setInt('psvFlowRampValue', psvFlowRampValue);
+      preferences.setInt('psvdefaultValue', psvdefaultValue);
       // preferences.setInt("pc", );
 
       if (_status == "Connected") {
@@ -18479,16 +18489,16 @@ preferences.setInt('psimvdefaultValue',psimvdefaultValue);
       preferences.setInt("fio2", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
 
-       preferences.setInt('vacvItrigValue',vacvItrigValue);
-  preferences.setInt('vacvRrValue',vacvRrValue);
-  preferences.setInt('vacvIeValue',vacvIeValue);
-  preferences.setInt('vacvPeepValue',vacvPeepValue);
-preferences.setInt('vacvVtValue',vacvVtValue);
- preferences.setInt('vacvPcMinValue',vacvPcMinValue);
-preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
- preferences.setInt('vacvFio2Value',vacvFio2Value);
- preferences.setInt('vacvFlowRampValue',vacvFlowRampValue);
- preferences.setInt('vacvdefaultValue',vacvdefaultValue);
+      preferences.setInt('vacvItrigValue', vacvItrigValue);
+      preferences.setInt('vacvRrValue', vacvRrValue);
+      preferences.setInt('vacvIeValue', vacvIeValue);
+      preferences.setInt('vacvPeepValue', vacvPeepValue);
+      preferences.setInt('vacvVtValue', vacvVtValue);
+      preferences.setInt('vacvPcMinValue', vacvPcMinValue);
+      preferences.setInt('vacvPcMaxValue', vacvPcMaxValue);
+      preferences.setInt('vacvFio2Value', vacvFio2Value);
+      preferences.setInt('vacvFlowRampValue', vacvFlowRampValue);
+      preferences.setInt('vacvdefaultValue', vacvdefaultValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -19704,13 +19714,13 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
             presentCode = ((finalList[106] << 8) + finalList[107]);
             alarmCounter = finalList[90];
             // if (presentCode != 0 && presentCode > 0 && presentCode <= 23) {
-             
+
             // }
             // Fluttertoast.showToast(msg: presentCode.toString()+" pre "+previousCode.toString() + "\n counter "+alarmCounter.toString()+"pre cnt "+alarmCounter.toString());
 
             if (presentCode != previousCode) {
               previousCode = presentCode;
-               var data = AlarmsList(
+              var data = AlarmsList(
                   presentCode.toString(), this.globalCounterNo.toString());
               dbHelpera.saveAlarm(data);
               // alarmPrevCounter = alarmCounter;
@@ -19753,9 +19763,9 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
             } else {
               if (alarmCounter != alarmPrevCounter) {
                 alarmPrevCounter = alarmCounter;
-                 var data = AlarmsList(
-                  presentCode.toString(), this.globalCounterNo.toString());
-              dbHelpera.saveAlarm(data);
+                var data = AlarmsList(
+                    presentCode.toString(), this.globalCounterNo.toString());
+                dbHelpera.saveAlarm(data);
                 _stopMusic();
                 if (presentCode == 5 ||
                     presentCode == 7 ||
@@ -20042,7 +20052,7 @@ preferences.setInt('vacvPcMaxValue',vacvPcMaxValue);
             flowPoints.add(temp3);
           });
         } else {
-          flowPoints.add(temp3*1.2);
+          flowPoints.add(temp3 * 1.2);
         }
         // }else{
         //   flowPoints.add(0);

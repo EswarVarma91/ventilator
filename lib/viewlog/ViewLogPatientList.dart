@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:screen/screen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
@@ -35,21 +36,25 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       appBar: AppBar(
         title: Text("Patient List"),
         actions: <Widget>[
-          FlatButton(
-            textColor: Colors.white,
-            onPressed: () {
-                Navigator.push(
+          IconButton(icon: Icon(Icons.alarm),onPressed: (){
+            Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AlarmLog()),
               );
-            },
-            child: Icon(Icons.alarm),
-            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-          ),
+          },)
+          // FlatButton(
+          //   textColor: Colors.white,
+          //   onPressed: () {
+          //       
+          //   },
+          //   child: Icon(Icons.alarm),
+          //   shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+          // ),
         ],
       ),
       body: WillPopScope(
@@ -65,12 +70,10 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
           future: patientList,
           initialData: List(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData)
-              return Center(child: CircularProgressIndicator());
-            else if (snapshot.data.isEmpty)
-              return Center(
-                child: CircularProgressIndicator(),
-              ); //
+             if(snapshot.data.isEmpty)
+             return Center(
+                child: Text("No Data Available"),
+              ); 
             else {
               return GridView.builder(
                   itemCount: snapshot.data.length,
