@@ -81,7 +81,7 @@ class _patientsDatesState extends State<patientsDates> {
                        Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PatientsDataByDate(snapshot.data[index].datetimeP,widget.patientId)));
+                                  builder: (context) => PatientsDataByDate(snapshot.data[index].datetimeP,widget.patientId,DateFormat("dd-MM-yyyy").format(DateTime.parse(snapshot.data[index].datetimeP.toString())).toString())));
 //                          
                       },
                                           child: Card(

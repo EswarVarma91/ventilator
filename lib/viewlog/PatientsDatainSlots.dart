@@ -10,8 +10,8 @@ import 'AlarmLog.dart';
 import 'ViewLogDataDisplayPage.dart';
 
 class PatientsDatainSlots extends StatefulWidget {
-  String minTime,maxTime;
-  PatientsDatainSlots(this.minTime,this.maxTime);
+  String minTime,maxTime,minT,maxT;
+  PatientsDatainSlots(this.minTime,this.maxTime, this.minT, this.maxT);
   @override
   _PatientsDatainSlotsState createState() => _PatientsDatainSlotsState();
 }
@@ -39,7 +39,7 @@ class _PatientsDatainSlotsState extends State<PatientsDatainSlots> {
     return Scaffold(
       
       appBar: AppBar(
-        title: Text(widget.minTime + " - "+ widget.maxTime),
+        title: Text(widget.minT + " - "+ widget.maxT),
        actions: <Widget>[
         FlatButton(
           textColor: Colors.white,

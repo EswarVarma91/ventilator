@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:screen/screen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
@@ -9,8 +10,8 @@ import 'AlarmLog.dart';
 import 'PatientsDatainSlots.dart';
 
 class PatientsDataByDate extends StatefulWidget {
-  String datetimeW,patientId;
-  PatientsDataByDate(this.datetimeW,this.patientId);
+  String datetimeW,patientId,date;
+  PatientsDataByDate(this.datetimeW,this.patientId, this.date);
   @override
   _PatientsDataByDateState createState() => _PatientsDataByDateState();
 }
@@ -40,7 +41,7 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
     return Scaffold(
       
       appBar: AppBar(
-        title: Text(widget.patientId + " "+ widget.datetimeW),
+        title: Text(widget.patientId + " "+ widget.date),
        actions: <Widget>[
         FlatButton(
           textColor: Colors.white,
@@ -88,7 +89,7 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PatientsDatainSlots(snapshot.data[index].minTime,snapshot.data[index].maxTime,)));
+                                    builder: (context) => PatientsDatainSlots(snapshot.data[index].minTime,snapshot.data[index].maxTime,DateFormat("dd-MM-yyyy HH:mm:ss").format(DateTime.parse(snapshot.data[index].minTime.toString())).toString(),DateFormat("dd-MM-yyyy HH:mm:ss").format(DateTime.parse(snapshot.data[index].maxTime.toString())).toString())));
                             },
                           leading: Padding(
                             padding: const EdgeInsets.all(10.0),
@@ -131,7 +132,7 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
                                             children: <Widget>[
                                               Text("From : ",style:TextStyle(color: Colors.grey)),
                                               Text(
-                                                snapshot.data[index].minTime != null || snapshot.data[index].minTime != ""  ? snapshot.data[index].minTime.toString()
+                                                snapshot.data[index].minTime != null || snapshot.data[index].minTime != ""  ? DateFormat("dd-MM-yyyy HH:mm:ss").format(DateTime.parse(snapshot.data[index].minTime.toString())).toString()
                                                     : "NA",
                                                 style: TextStyle(fontSize: 22),
                                               ),
@@ -142,7 +143,7 @@ class _PatientsDataByDateState extends State<PatientsDataByDate> {
                                             children: <Widget>[
                                               Text("To : ",style:TextStyle(color: Colors.grey)),
                                               Text(
-                                                snapshot.data[index].maxTime != null || snapshot.data[index].maxTime != ""  ? snapshot.data[index].maxTime.toString()
+                                                snapshot.data[index].maxTime != null || snapshot.data[index].maxTime != ""  ? DateFormat("dd-MM-yyyy HH:mm:ss").format(DateTime.parse(snapshot.data[index].maxTime.toString())).toString()
                                                     : "NA",
                                                 style: TextStyle(fontSize: 22),
                                               ),

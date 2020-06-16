@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:screen/screen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
 import 'package:ventilator/database/ADatabaseHelper.dart';
@@ -33,52 +34,48 @@ class _AlarmLogListState extends State<AlarmLog> {
     // print(alarmList);
   }
 
-  getAlarmCode(int res){
-
-    var  data = res == 1
-                  ? "AC POWER DISCONNECTED"
-                  : res == 2
-                      ? " LOW BATTERY"
-                      : res == 3
-                          ? "CALIBRATE FiO2"
-                          : res == 04
-                              ? "CALIBRATION FiO2 FAIL"
-                              : res == 05
-                                  ? "SYSTEM FAULT"
-                                  : res == 06
-                                      ? "SELF TEST FAIL"
-                                      : res == 07
-                                          ? "FiO2 SENSOR MISSING"
-                                          : res == 08
-                                              ? "HIGH FiO2"
-                                              : res == 09
-                                                  ? "LOW FIO2"
-                                                  : res == 10
-                                                      ? 
-                                                          "HIGH LEAKAGE"
-                                                      : res ==
-                                                              11
-                                                          ? 
-                                                              "HIGH PRESSURE"
-                                                          : res ==
-                                                                  12
-                                                              ? 
-                                                                  "LOW PRESSURE"
-                                                              : res == 13
-                                                                  ? 
-                                                                      "LOW VTE"
-                                                                  : res == 14
-                                                                      ? 
-                                                                          "HIGH VTE"
-                                                                      : res ==
-                                                                              15
-                                                                          ? 
-                                                                              "LOW VTI"
-                                                                          : res == 16
-                                                                              ? "HIGH VTI"
-                                                                              : res == 17 ? "PATIENT DISCONNECTED" : res == 18 ? "LOW O2  supply" : res == 19 ? "LOW RR" : res == 20 ? "HIGH RR" : res == 21 ? "HIGH PEEP" : res == 22 ? "LOW PEEP" : res == 23 ? "Apnea backup" : "0";
-  return data;
-
+  getAlarmCode(int res) {
+    var data = res == 1
+        ? "AC POWER DISCONNECTED"
+        : res == 2
+            ? " LOW BATTERY"
+            : res == 3
+                ? "CALIBRATE FiO2"
+                : res == 04
+                    ? "CALIBRATION FiO2 FAIL"
+                    : res == 05
+                        ? "SYSTEM FAULT"
+                        : res == 06
+                            ? "SELF TEST FAIL"
+                            : res == 07
+                                ? "FiO2 SENSOR MISSING"
+                                : res == 08
+                                    ? "HIGH FiO2"
+                                    : res == 09
+                                        ? "LOW FIO2"
+                                        : res == 10
+                                            ? "HIGH LEAKAGE"
+                                            : res == 11
+                                                ? "HIGH PRESSURE"
+                                                : res == 12
+                                                    ? "LOW PRESSURE"
+                                                    : res == 13
+                                                        ? "LOW VTE"
+                                                        : res == 14
+                                                            ? "HIGH VTE"
+                                                            : res == 15
+                                                                ? "LOW VTI"
+                                                                : res == 16
+                                                                    ? "HIGH VTI"
+                                                                    : res == 17
+                                                                        ? "PATIENT DISCONNECTED"
+                                                                        : res ==
+                                                                                18
+                                                                            ? "LOW O2  supply"
+                                                                            : res == 19
+                                                                                ? "LOW RR"
+                                                                                : res == 20 ? "HIGH RR" : res == 21 ? "HIGH PEEP" : res == 22 ? "LOW PEEP" : res == 23 ? "Apnea backup" : "0";
+    return data;
   }
 
   @override
@@ -112,16 +109,7 @@ class _AlarmLogListState extends State<AlarmLog> {
                       height: 100,
                       child: Card(
                           child: ListTile(
-                        onTap: () {
-                          // selectDateandTimeRange();
-                          //  Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => ViewLogChooseDateandTime(snapshot.data[index].pId,
-                          //         snapshot.data[index].pName,
-                          //         snapshot.data[index].minTime,
-                          //         snapshot.data[index].maxTime)));
-                        },
+                        onTap: () {},
                         leading: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Icon(
@@ -129,36 +117,81 @@ class _AlarmLogListState extends State<AlarmLog> {
                             size: 35,
                           ),
                         ),
-                        // trailing: IconButton(icon: Icon(Icons.delete,size: 35,),onPressed: (){
-
-                        // },),
+                        trailing: Column(
+                          children: <Widget>[
+                            Text(
+                              snapshot.data[index].datetime != null
+                                  ? snapshot.data[index].datetime
+                                      .toString()
+                                      .split(" ")[0]
+                                      .toString()
+                                      .split("-")[2]
+                                      .toString()
+                                      .toUpperCase()
+                                  : "",
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              snapshot.data[index].datetime != null
+                                  ? snapshot.data[index].datetime
+                                      .toString()
+                                      .split(" ")[0]
+                                      .toString()
+                                      .split("-")[1]
+                                      .toString()
+                                      .toUpperCase()
+                                  : "",
+                              style: TextStyle(fontSize: 8),
+                            ),
+                            Text(
+                              snapshot.data[index].datetime != null
+                                  ? snapshot.data[index].datetime
+                                      .toString()
+                                      .split(" ")[0]
+                                      .toString()
+                                      .split("-")[0]
+                                      .toString()
+                                      .toUpperCase()
+                                  : "",
+                              style: TextStyle(
+                                  fontSize: 10, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
                         title: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Row(
                             children: [
-                              // Container(height: 50,width: 1,color: Colors.black,),
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                   Text(snapshot.data[index].alarmCode != null
-                                              ? getAlarmCode(int.tryParse(snapshot. data[index].alarmCode))
-                                                  .toString().toUpperCase()
-                                              : "",
-                                          style: TextStyle(fontSize: 22),
-                                        ),
-                                        SizedBox(
-                                          width: 30,
-                                        ),
-                                      Text(snapshot.data[index].datetime != null
-                                              ? snapshot.data[index].datetime
-                                                  .toString().toUpperCase()
-                                              : "",
-                                          style: TextStyle(fontSize: 10),
-                                        ),
-                                   
+                                    Text(
+                                      snapshot.data[index].alarmCode != null
+                                          ? getAlarmCode(int.tryParse(snapshot
+                                                  .data[index].alarmCode))
+                                              .toString()
+                                              .toUpperCase()
+                                          : "",
+                                      style: TextStyle(fontSize: 22),
+                                    ),
+                                    SizedBox(
+                                      width: 30,
+                                    ),
+                                    Text(
+                                      snapshot.data[index].datetime != null
+
+                                          // ? DateFormat("yyyy-MM-dd hh:mm:ss")
+                                          ? changeFormatDateTime(
+                                                  snapshot.data[index].datetime)
+                                              .toString()
+                                              .toUpperCase()
+                                          : "",
+                                      style: TextStyle(fontSize: 10),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -191,13 +224,21 @@ class _AlarmLogListState extends State<AlarmLog> {
     );
   }
 
+  changeFormatDateTime(datetime) {
+    if(datetime!=null){
+      return datetime.toString().split(" ")[0].toString().split("-")[2] + "-"+datetime.toString().split(" ")[0].toString().split("-")[1] +"-"+datetime.toString().split(" ")[0].toString().split("-")[0] +"  "+datetime.toString().split(" ")[01].toString();
+    }else{
+      return "";
+    }
+  }
+
   // selectDateandTimeRange() {
   //   DateTime now = new DateTime.now();
 
   //   DatePicker.showDateTimePicker(context,
   //       showTitleActions: true,
   //       minTime: DateTime(now.year, now.month, now.day-6, now.hour, now.minute,now.second),
-  //       maxTime: DateTime(now.year, now.month, now.day, now.hour, now.minute,now.second), 
+  //       maxTime: DateTime(now.year, now.month, now.day, now.hour, now.minute,now.second),
   //     onChanged: (date) {
   //     print('change $date in time zone ' +
   //         date.timeZoneOffset.inHours.toString());
