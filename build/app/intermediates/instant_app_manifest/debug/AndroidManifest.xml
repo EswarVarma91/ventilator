@@ -40,7 +40,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:label="Ventilator" >
+        android:label="Ventilator"
+        android:testOnly="true" >
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

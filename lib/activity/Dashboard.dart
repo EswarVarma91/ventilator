@@ -580,6 +580,14 @@ class _CheckPageState extends State<Dashboard> {
     });
     _getPorts();
 
+    // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) { 
+    //   if(_status != "Connected"){
+    //   // UsbSerial.usbEventStream.listen((UsbEvent event) {
+    //   _getPorts();
+    // // });
+    //   }
+    // });
+
     _timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
       counter = counter + 1;
       List<int> obj = [0x7E, 0, 20, 0, 11, 0];
@@ -617,6 +625,7 @@ class _CheckPageState extends State<Dashboard> {
             setState(() {
               respiratoryEnable = false;
               insExpButtonEnable = false;
+              // sendSoundOff();
               // powerButtonEnabled = true;
               // psValue1 = 0;
               // cc = 0;
@@ -751,6 +760,7 @@ class _CheckPageState extends State<Dashboard> {
       // print(e);
     }
   }
+  
 
   Future<void> _stopMusic() async {
     setState(() {
@@ -2864,7 +2874,9 @@ class _CheckPageState extends State<Dashboard> {
                 powerButtonEnabled
                     ? InkWell(
                         onTap: () {
+                          sendSoundOff();
                           turnOffScreen();
+                          
                         },
                         child: Padding(
                           padding:
