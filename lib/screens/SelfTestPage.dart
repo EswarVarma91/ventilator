@@ -25,7 +25,7 @@ class _SelfTestPageState extends State<SelfTestPage> {
   Transaction<String> _transaction;
   SharedPreferences preferences;
   int _deviceId;
-  Timer _timer, _timer1,_timer2;
+  Timer _timer, _timer1, _timer2;
   List<int> list = [];
   bool stateSetted = false;
   int counter = 0;
@@ -59,64 +59,64 @@ class _SelfTestPageState extends State<SelfTestPage> {
       counter = counter + 1;
       List<int> obj = [0x7E, 0, 20, 0, 11, 0];
       if (counter <= 250) {
-        if(mounted){
+        if (mounted) {
           setState(() {
-          obj.add(counter);
-          obj.add(1);
-          obj.add(0x7F);
-        });
+            obj.add(counter);
+            obj.add(1);
+            obj.add(0x7F);
+          });
         }
         // Fluttertoast.showToast(msg: obj.toString());
         if (_status == "Connected") {
           await _port.write(Uint8List.fromList(obj));
         } else {}
       } else {
-        if(mounted){
+        if (mounted) {
           setState(() {
-          counter = 0;
-        });
+            counter = 0;
+          });
         }
       }
     });
 
-    _timer2 = Timer.periodic(Duration(seconds: 17), (timer) {
-       Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => CallibrationPage()),
-              ModalRoute.withName('/'));
-     });
+    // _timer2 = Timer.periodic(Duration(seconds: 17), (timer) {
+    //    Navigator.pushAndRemoveUntil(
+    //           context,
+    //           MaterialPageRoute(
+    //               builder: (BuildContext context) => CallibrationPage()),
+    //           ModalRoute.withName('/'));
+    //  });
 
-    _timer1 = Timer.periodic(Duration(seconds: 15), (timer) async {
-      if(mounted){
-        setState(() {
-        if(stateSetted==false){
-          stateSetted = true;
-           o2pressuresensor = 2;
-            mtpressuresensor = 2;
-            exhalationflowsensor = 2;
-            inhalationflowsensor = 2;
+    // _timer1 = Timer.periodic(Duration(seconds: 15), (timer) async {
+    //   if(mounted){
+    //     setState(() {
+    //     if(stateSetted==false){
+    //       stateSetted = true;
+    //        o2pressuresensor = 2;
+    //         mtpressuresensor = 2;
+    //         exhalationflowsensor = 2;
+    //         inhalationflowsensor = 2;
 
-            exhalationpressure = 2;
-            inhalationpressure = 2;
-            o2sensor = 2;
-            inhalationvalve = 2;
+    //         exhalationpressure = 2;
+    //         inhalationpressure = 2;
+    //         o2sensor = 2;
+    //         inhalationvalve = 2;
 
-            exhalationvalve = 2;
-            ventvalue = 2;
-            mainpower = 2;
-            battery = 2;
+    //         exhalationvalve = 2;
+    //         ventvalue = 2;
+    //         mainpower = 2;
+    //         battery = 2;
 
-            communication = 2;
-            compressor = 2;
-            blender = 2;
-            checkOfffset = 1;
-            }
-      });
-      }
+    //         communication = 2;
+    //         compressor = 2;
+    //         blender = 2;
+    //         checkOfffset = 1;
+    //         }
+    //   });
+    //   }
 
-      await sleep(Duration(seconds: 0));    
-    });
+    //   await sleep(Duration(seconds: 0));
+    // });
   }
 
   _getPorts() async {
@@ -174,42 +174,48 @@ class _SelfTestPageState extends State<SelfTestPage> {
       // Fluttertoast.showToast(msg: event.toString());
       // print(event.length.toString());
       if (event != null) {
-        if (event[0] == 126 && event.length == 120) {
+        if (event[0] == 126) {
           list.addAll(event);
           list.removeAt(0);
         }
 
-        if (list[112] == 2) {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => CallibrationPage()),
-              ModalRoute.withName('/'));
-        }
+        // if (list[112] == 2) {
+        //   Navigator.pushAndRemoveUntil(
+        //       context,
+        //       MaterialPageRoute(
+        //           builder: (BuildContext context) => CallibrationPage()),
+        //       ModalRoute.withName('/'));
+        // }
 
         setState(() {
-          // list[113]=(0x55);
-          // list[114]=(0x55);
-          // list[115]=(0x55);
-          // list[116]=(0x55);
-          // o2pressuresensor = ((list[113] & 0x3) >> 0);
-          // mtpressuresensor = ((list[113] & 0xC) >> 2);
-          // exhalationflowsensor = ((list[113] & 0x30) >> 4);
-          // inhalationflowsensor = ((list[113] & 0xC0) >> 6);
+          // list[26]=(0x55);
+          // list[27]=(0x55);
+          // list[28]=(0x55);
+          // list[29]=(0x55);
+          o2pressuresensor = ((list[26] & 0x3) >> 0);
+          mtpressuresensor = ((list[26] & 0xC) >> 2);
+          exhalationflowsensor = ((list[26] & 0x30) >> 4);
+          inhalationflowsensor = ((list[26] & 0xC0) >> 6);
 
-          // exhalationpressure = ((list[114] & 0x3) >> 0);
-          // inhalationpressure = ((list[114] & 0xC) >> 2);
-          // o2sensor = ((list[114] & 0x30) >> 4);
-          // inhalationvalve = ((list[114] & 0xC0) >> 6);
+          exhalationpressure = ((list[27] & 0x3) >> 0);
+          inhalationpressure = ((list[27] & 0xC) >> 2);
+          o2sensor = ((list[27] & 0x30) >> 4);
+          inhalationvalve = ((list[27] & 0xC0) >> 6);
 
-          // exhalationvalve = ((list[115] & 0x3) >> 0);
-          // ventvalue = ((list[115] & 0xC) >> 2);
-          // mainpower = ((list[115] & 0x30) >> 4);
-          // battery = ((list[115] & 0xC0) >> 6);
+          exhalationvalve = ((list[28] & 0x3) >> 0);
+          ventvalue = ((list[28] & 0xC) >> 2);
+          mainpower = ((list[28] & 0x30) >> 4);
+          battery = ((list[28] & 0xC0) >> 6);
 
-          // communication = ((list[116] & 0x3) >> 0);
-          // compressor = ((list[116] & 0xC) >> 2);
-          // blender = ((list[116] & 0x30) >> 4);
+          communication = ((list[29] & 0x3) >> 0);
+          compressor = ((list[29] & 0xC) >> 2);
+          blender = ((list[29] & 0x30) >> 4);
+          checkOfffset = ((list[29] & 0xC0) >> 6);
+
+          if(checkOfffset==2){
+            _port.close();
+            _status="Disconnected";
+          }
 
           // Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
         });
@@ -673,14 +679,19 @@ class _SelfTestPageState extends State<SelfTestPage> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Card(
-                          color: battery == 1 ? Colors.red :Colors.grey,
+                          color: battery == 1 ? Colors.red : Colors.grey,
                           child: Row(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Text(
                                   "Battery         ",
-                                  style: TextStyle(color: battery==0 ? Colors.black : battery==1 ? Colors.white : Colors.black),
+                                  style: TextStyle(
+                                      color: battery == 0
+                                          ? Colors.black
+                                          : battery == 1
+                                              ? Colors.white
+                                              : Colors.black),
                                 ),
                               ),
                               Checkbox(
@@ -763,8 +774,29 @@ class _SelfTestPageState extends State<SelfTestPage> {
               SizedBox(
                 height: 15,
               ),
-              checkOfffset == 0
-                  ? Row(
+              checkOfffset == 2
+                  ? 
+                  InkWell(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CallibrationPage()),
+                            ModalRoute.withName('/'));
+                      },
+                      child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text("Test Completed"),
+                          )),
+                        ),
+                      ),
+                    ):
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -780,17 +812,7 @@ class _SelfTestPageState extends State<SelfTestPage> {
                         ),
                         CircularProgressIndicator()
                       ],
-                    )
-                  : Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                            child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text("Test Completed"),
-                        )),
-                      ),
-                    )
+                    )  
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ventilator"
+    package="swasit.zyna.ventilator"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -31,22 +31,22 @@
 
     <uses-feature
         android:name="android.hardware.usb.host"
-        android:required="true" />
-
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" /> <!-- <uses-feature android:name="android.hardware.usb.host" -->
+        android:required="true" /> <!-- <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/> -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- <uses-feature android:name="android.hardware.usb.host" -->
     <!-- android:required="true"/> -->
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:label="Ventilator"
-        android:testOnly="true" >
+        android:label="Ventilator" >
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
 
         <activity
-            android:name="com.example.ventilator.MainActivity"
+            android:name="swasit.zyna.ventilator.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="false"
@@ -77,7 +77,7 @@
         </activity>
 
         <receiver
-            android:name="com.example.ventilator.MyDeviceAdminReceiver"
+            android:name="swasit.zyna.ventilator.MyDeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
                 android:name="android.app.device_admin"
@@ -89,6 +89,20 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="swasit.zyna.ventilator.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
+        <activity
+            android:name="com.nabinbhandari.android.permissions.PermissionsActivity"
+            android:theme="@style/Permissions.TransparentTheme" />
     </application>
 
 </manifest>

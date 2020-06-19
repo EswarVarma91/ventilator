@@ -9,7 +9,7 @@ import 'package:usb_serial/usb_serial.dart';
 import 'package:ventilator/activity/Dashboard.dart';
 
 class CallibrationPage extends StatefulWidget {
-  CallibrationPage({Key key}) : super(key: key);
+ 
 
   @override
   _CallibrationPageState createState() => _CallibrationPageState();
@@ -146,24 +146,24 @@ class _CallibrationPageState extends State<CallibrationPage> {
                     ),
                     child: InkWell(
                       onTap: () {
-                        // setState(() {
-                        //   testingText= true;
-                        //   textText = "Testing 0 \u2082..";
-                        // });
-                        // sendFullTest();
+                        setState(() {
+                          testingText= true;
+                          textText = "Testing 0 \u2082..";
+                        });
+                        sendFullTest();
 
-                        //  setState(() {
-                        //   testingText= true;
-                        //   textText = "Testing 0\u2082..";
-                        // });
+                         setState(() {
+                          testingText= true;
+                          textText = "Testing 0\u2082..";
+                        });
 
-                        //  _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
-                        //     setState(() async {                                                                                                                                                                                                                                           
-                        //       testingText=true;
-                        //       textText = "Calibration Completed.";
-                        //       // await sleep(Duration(seconds:1));
-                        //     });
-                        // });
+                         _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
+                            setState(() async {                                                                                                                                                                                                                                           
+                              testingText=true;
+                              textText = "Calibration Completed.";
+                              // await sleep(Duration(seconds:1));
+                            });
+                        });
 
                        
                       },
@@ -253,6 +253,8 @@ class _CallibrationPageState extends State<CallibrationPage> {
                     ),
                     child: InkWell(
                       onTap: () {
+                        _port.close();
+                        _status="Disconnected";
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => Dashboard()),

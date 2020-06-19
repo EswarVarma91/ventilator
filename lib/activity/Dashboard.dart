@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:screen/screen.dart';
@@ -24,7 +23,9 @@ import 'package:ventilator/screens/CallibrationPage.dart';
 import 'package:ventilator/screens/SelfTestPage.dart';
 import 'package:ventilator/viewlog/ViewLogDataDisplayPage.dart';
 import 'package:ventilator/viewlog/ViewLogPatientList.dart';
-import 'NewTreatmentScreen.dart';
+import 'package:ventilator/activity/About.dart';
+import 'package:ventilator/activity/NewTreatmentScreen.dart';
+
 
 class Dashboard extends StatefulWidget {
   UsbDevice device;
@@ -535,7 +536,7 @@ class _CheckPageState extends State<Dashboard> {
   int counter = 0, counterlength = 0;
   var presentTime;
   bool playing = false;
-  String i = "1", e = "3";
+  String i = "1.0", e = "3.0";
   int _start = 30;
   bool _loopActive = false;
   int timerCounter = 00;
@@ -578,10 +579,10 @@ class _CheckPageState extends State<Dashboard> {
     UsbSerial.usbEventStream.listen((UsbEvent event) {
       _getPorts();
     });
-    _getPorts();
+    // _getPorts();
 
     // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) { 
-    //   if(_status != "Connected"){
+    //   if(_status == "Disconnected"){
     //   // UsbSerial.usbEventStream.listen((UsbEvent event) {
     //   _getPorts();
     // // });
@@ -2953,10 +2954,37 @@ class _CheckPageState extends State<Dashboard> {
                     //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                     SizedBox(
                       height:
-                          playOnEnabled ? 148 : powerButtonEnabled ? 181 : 300,
+                          playOnEnabled ? 99 : powerButtonEnabled ? 201 : 300,
                     ),
                   ],
                 ),
+                playOnEnabled
+                    ? InkWell(
+                  onTap: () {
+                    setState(() {
+                      Navigator.push(context,MaterialPageRoute(builder:(context)=> About()));
+                    });
+                  },
+                  child: Center(
+                    child: Container(
+                      width: 120,
+                      child: Card(
+                        color: modesEnabled ? Colors.blue : Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Center(
+                              child: Text(
+                            "About",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    modesEnabled ? Colors.white : Colors.black),
+                          )),
+                        ),
+                      ),
+                    ),
+                  ),
+                ):Container(),
                 playOnEnabled
                     ? Column(
                         children: [
@@ -3035,6 +3063,7 @@ class _CheckPageState extends State<Dashboard> {
                         ],
                       )
                     : Container(),
+                 
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -3093,6 +3122,7 @@ class _CheckPageState extends State<Dashboard> {
                     ),
                   ),
                 ),
+               
 
                 audioEnable
                     ? InkWell(
@@ -3148,58 +3178,7 @@ class _CheckPageState extends State<Dashboard> {
                 // ),
 
                 // Text(checkTempData=="1" ? "L" :checkTempData=="0" ? "U":"",style:TextStyle(color:Colors.red))
-                // InkWell(
-                //   onTap: () {
-                //     setState(() {
-                //       newTreatEnabled = !newTreatEnabled;
-                //     });
-                //   },
-                //   child: Center(
-                //     child: Container(
-                //       width: 120,
-                //       child: Card(
-                //         color: newTreatEnabled ? Colors.blue : Colors.white,
-                //         child: Padding(
-                //           padding: const EdgeInsets.all(12.0),
-                //           child: Center(
-                //               child: Text(
-                //             "Alarms",
-                //             style: TextStyle(
-                //                 fontWeight: FontWeight.bold,
-                //                 color: newTreatEnabled
-                //                     ? Colors.white
-                //                     : Colors.black),
-                //           )),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // InkWell(
-                //   onTap: () {
-                //     setState(() {
-                //       // editbbEnabled = !editbbEnabled;
-                //     });
-                //   },
-                //   child: Center(
-                //     child: Container(
-                //       width: 120,
-                //       child: Card(
-                //         color: editbbEnabled ? Colors.blue : Colors.white,
-                //         child: Padding(
-                //           padding: const EdgeInsets.all(12.0),
-                //           child: Center(
-                //               child: Text("Settings",
-                //                   style: TextStyle(
-                //                       fontWeight: FontWeight.bold,
-                //                       color: editbbEnabled
-                //                           ? Colors.white
-                //                           : Colors.black))),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                
               ],
             ),
           ),
@@ -5228,14 +5207,11 @@ class _CheckPageState extends State<Dashboard> {
                   child: Container(
                       height: 40,
                       width: 80,
-                      child: batteryStatus == 0
-                          ? batteryPercentage != null
-                              ? Center(
+                      child: batteryStatus == 2 ? Center(
                                   child: Text(
                                       batteryPercentage.toString() + " %",
                                       style: TextStyle(fontSize: 20)))
-                              : Image.asset("assets/images/nobattery.png",
-                                  width: 28, color: Colors.black)
+                             
                           : batteryStatus == 1
                               ? Image.asset("assets/images/chargingbattery.png",
                                   width: 28, color: Colors.black)
@@ -19614,11 +19590,13 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  serialiseReceivedPacket(List<int> finalList) {
+  serialiseReceivedPacket(List<int> finalList) async{
     if (finalList.isNotEmpty && finalList.length == 114) {
       var now = new DateTime.now();
 
       lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
+      preferences = await SharedPreferences.getInstance();
+      preferences.setString("lastRecordTime", lastRecordTime);
 
       // bool data = await checkCrc(finalList, finalList.length);
       // if (data == false) {

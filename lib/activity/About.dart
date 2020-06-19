@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'Dashboard.dart';
 import 'DowngradeAppScreen.dart';
@@ -12,21 +11,14 @@ class About extends StatefulWidget {
 
 class _AboutState extends State<About> {
   static const shutdownChannel = const MethodChannel("shutdown");
-  PermissionStatus _status;
+
 
   @override
   void initState() {
     super.initState();
-    PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.storage)
-        .then(_updateStatus);
   }
 
-  void _updateStatus(PermissionStatus value) {
-    setState(() {
-      _status = value;
-    });
-  }
+ 
 
   Future<void> checkforUpdates() async {
     var params = <String, dynamic>{

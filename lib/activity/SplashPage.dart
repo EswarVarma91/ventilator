@@ -5,6 +5,7 @@ import 'package:screen/screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
+import 'package:ventilator/database/ADatabaseHelper.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/screens/SelfTestPage.dart';
 
@@ -18,6 +19,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   SharedPreferences preferences;
   DatabaseHelper dbHelper;
+  ADatabaseHelper dbHelper1;
   static const shutdownChannel = const MethodChannel("shutdown");
   // int counter=0;
 
@@ -26,9 +28,9 @@ class _SplashPageState extends State<SplashPage> {
     turnOnScreen();
     super.initState();
     dbHelper = DatabaseHelper();
+    dbHelper1 = ADatabaseHelper();
     // counter = counter+1;
-    var res = dbHelper.delete7Daysdata();
-    // print(res);
+   
     getData();
     // saveData();
   }
@@ -95,6 +97,10 @@ class _SplashPageState extends State<SplashPage> {
      preferences.setInt('maxppeak',100);
      preferences.setInt('minpeep',0);
      preferences.setInt('maxpeep',40);
+    // var dateS = preferences.getString('lastRecordTime');
+    //  var res = dbHelper.delete7Daysdata(dateS);
+    // var res1 = dbHelper1.delete1Daysdata(dateS);
+    // print(res.toString()+"  "+res1.toString());
    
     //  preferences.setInt('noTimes', counter);
     // await sleep(Duration(seconds: 2));
@@ -108,7 +114,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: SplashScreen(
           seconds: 2,
-          navigateAfterSeconds: Dashboard(),
+          navigateAfterSeconds: SelfTestPage(),
           backgroundColor: Colors.white,
           loaderColor: Colors.black,
         ),
