@@ -265,7 +265,7 @@ class _CheckPageState extends State<Dashboard> {
       psvEtrigValue = 10,
       psvBackupRrValue = 20,
       psvMinTeValue = 1,
-      psvPcValue = 80;
+      psvPcValue = 30;
 
   int psvmaxValue = 10, psvminValue = 1, psvdefaultValue = 6;
   String psvparameterName = "I Trig",
@@ -4669,8 +4669,7 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-            modeName != "PSV"
-                ? InkWell(
+            InkWell(
                     onTap: () {
                       //  CommonClick("PS") ;
                     },
@@ -4733,16 +4732,14 @@ class _CheckPageState extends State<Dashboard> {
                                     padding: const EdgeInsets.only(top: 17.0),
                                     child: Text(
                                       operatinModeR == 6 ||
-                                              operatinModeR == 2 ||
-                                              operatinModeR == 3
+                                              operatinModeR == 2 
                                           ? psValue.toString()
                                           : operatinModeR == 7 ||
                                                   operatinModeR == 1 ||
                                                   operatinModeR == 5
                                               ? vtValue.toString()
                                               : modeName == "PC-CMV" ||
-                                                      modeName == "PACV" ||
-                                                      modeName == "PSV"
+                                                      modeName == "PACV" 
                                                   ? pcValue.toString()
                                                   : modeName == "VC-CMV" ||
                                                           modeName == "VACV" ||
@@ -4770,70 +4767,9 @@ class _CheckPageState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                  )
-                : InkWell(
-                    onTap: () {
-                      //  CommonClick("PS") ;
-                    },
-                    child: Center(
-                      child: Container(
-                        width: 120,
-                        height: 110,
-                        child: Card(
-                          elevation: 40,
-                          color: Color(0xFF213855),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Center(
-                                child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "PS",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Text(
-                                    "",
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 17.0),
-                                    child: Text(
-                                      psValue.toString(),
-                                      style: TextStyle(
-                                          fontSize: 30, color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                // Align(
-                                //   alignment: Alignment.bottomCenter,
-                                //   child: LinearProgressIndicator(
-                                //     backgroundColor: Colors.grey,
-                                //     valueColor: AlwaysStoppedAnimation<Color>(
-                                //       Colors.white,
-                                //     ),
-                                //     value: psValue != null ? psValue / 60 : 0,
-                                //   ),
-                                // )
-                              ],
-                            )),
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
-            operatinModeR == 4 || modeName == "PSIMV"
+                
+            operatinModeR == 4 || modeName == "PSIMV" || operatinModeR==3 || modeName == "PSV" || modeName == "VSIMV" || operatinModeR == 5
                 ? InkWell(
                     onTap: () {
                       //  CommonClick("PS") ;
@@ -5114,7 +5050,7 @@ class _CheckPageState extends State<Dashboard> {
             //   ),
             // ),
             SizedBox(
-              width: operatinModeR == 4 || modeName == "PSIMV" ? 10 : 130,
+              width: operatinModeR == 4 || modeName == "PSIMV" || operatinModeR==3 || modeName == "PSV" || modeName == "VSIMV" || operatinModeR == 5 ? 10 : 130,
             ),
             respiratoryEnable == true
                 ? InkWell(
@@ -6662,8 +6598,8 @@ class _CheckPageState extends State<Dashboard> {
                     psvAtime = false;
                     psvBackupRr = false;
                     psvEtrig = false;
-                    psvPc = false;
-                    psvMinTe = true;
+                    psvPc = true;
+                    psvMinTe = false;
                   });
                 },
                 child: Center(
@@ -18407,7 +18343,8 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", vsimvFio2Value);
       preferences.setInt("vt", vsimvVtValue);
-      preferences.setInt("ps", vsimvPcMaxValue);
+      preferences.setInt("ps", vsimvPsValue);
+      preferences.setInt("pc", vsimvPcMaxValue);
 
       preferences.setInt('vsimvItrigValue', vsimvItrigValue);
       preferences.setInt('vsimvRrValue', vsimvRrValue);
@@ -18486,11 +18423,13 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList.add((psvMinTeValue & 0xFF00) >> 8); //17
         modeWriteList.add((psvMinTeValue & 0x00FF));
+        
 
         modeWriteList.add((psvPcValue & 0xFF00) >> 8); //17
         modeWriteList.add((psvPcValue & 0x00FF));
 
         modeWriteList.add(0x7F); //23
+        
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -18504,6 +18443,8 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", psvFio2Value);
       preferences.setInt("ps", psvPsValue);
+      preferences.setInt("pc", psvPcValue);
+      // Fluttertoast.showToast(msg:psvPsValue.toString() +" pc "+psvPcValue.toString());
 
       preferences.setInt('psvItrigValue', psvItrigValue);
       preferences.setInt('psvPeepValue', psvPeepValue);
@@ -18763,7 +18704,7 @@ class _CheckPageState extends State<Dashboard> {
         psvEtrigValue = 10;
         psvBackupRrValue = 20;
         psvMinTeValue = 1;
-        psvPcValue = 80;
+        psvPcValue = 30;
         psvItrig = true;
         psvPeep = false;
         psvIe = false;
