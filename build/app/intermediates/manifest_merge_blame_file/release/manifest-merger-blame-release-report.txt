@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="swasit.zyna.ventilator"
+3    package="com.example.ventilator"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -78,8 +78,8 @@
 45
 46        <activity
 46-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:9-63:20
-47            android:name="swasit.zyna.ventilator.MainActivity"
-47-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:19-69
+47            android:name="com.example.ventilator.MainActivity"
+47-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:19-47
 48            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 48-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:40:13-144
 49            android:exported="true"
@@ -136,8 +136,8 @@
 76
 77        <receiver
 77-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:65:9-77:20
-78            android:name="swasit.zyna.ventilator.MyDeviceAdminReceiver"
-78-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:66:13-72
+78            android:name="com.example.ventilator.MyDeviceAdminReceiver"
+78-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:66:13-50
 79            android:permission="android.permission.BIND_DEVICE_ADMIN" >
 79-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:67:13-70
 80            <meta-data
@@ -164,7 +164,7 @@
 91        <provider
 92            android:name="androidx.core.content.FileProvider"
 92-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:80:13-62
-93            android:authorities="swasit.zyna.ventilator.provider"
+93            android:authorities="com.example.ventilator.provider"
 93-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:81:13-60
 94            android:exported="false"
 94-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:82:13-37

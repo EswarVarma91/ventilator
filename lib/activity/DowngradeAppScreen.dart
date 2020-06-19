@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart';
 import 'About.dart';
 
 class DowngradeAppScreen extends StatefulWidget {
@@ -9,8 +12,27 @@ class DowngradeAppScreen extends StatefulWidget {
 
 class _DowngradeAppScreenState extends State<DowngradeAppScreen> {
   static const shutdownChannel = const MethodChannel("shutdown");
+  List<dynamic> data;
 
- Future<void> checkforUpdates() async {
+  @override
+  void initState() {
+    super.initState();
+    getLatestUrl();
+  }
+
+  getLatestUrl() async {
+    // make GET request
+    String url =
+        'https://www.eagleaspect.com:9000/ventilator-apk-manager/getAllAPKS';
+    Response response = await get(url);
+    setState(() {
+      data = jsonDecode(response.body);
+      // print(data.length);
+      // Fluttertoast.showToast(msg: downloadUrl);
+    });
+  }
+
+  Future<void> checkforUpdates() async {
     var params = <String, dynamic>{
       "urlFlutter": "https://eagleaspect.com:9000/static/apks/v1.7.5.apk"
     };
@@ -30,58 +52,37 @@ class _DowngradeAppScreenState extends State<DowngradeAppScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: WillPopScope(
-        onWillPop: _willPopCallback,
-        child: Container(
-          color: Color(0xFF171e27),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 12.0,
-                          ),
-                          child: IconButton(
-                            icon: Icon(Icons.arrow_back,
-                                size: 25, color: Colors.white),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => About()),
-                              );
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 28.0),
-                          child: Text(
-                            "Downgrade to version",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        ),
-                      ],
-                    ),  
-                  ],
-                ), 
-              ],
-            ),
-          ),
+        appBar: AppBar(
+          title: Text("Downgrade Version"),
         ),
-      ),
-    );
+        body: Container(
+          color: Color(0xFF171e27),
+          child: data != null
+              ? ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (BuildContext ctxt, int index) {
+                    return ListTile(
+                      leading: Icon(Icons.file_download,color: Colors.white,),
+                      title: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Container(
+                              child: Text(
+                            _checkData(data[index]),
+                            style: TextStyle(color: Colors.white),
+                            textAlign: TextAlign.start,
+                          )),
+                        ),
+                    );
+                  })
+              : Container(),
+        ));
+  }
+
+  String _checkData(data) {
+    if(data==null){
+      return "";
+    }else{
+      return data.toString().split(".apk")[0].toString();
+    }
   }
 }

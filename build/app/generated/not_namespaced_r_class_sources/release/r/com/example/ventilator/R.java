@@ -6160,39 +6160,39 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ActionBar_background swasit.zyna.ventilator:background}</code></td><td>Specifies a background drawable for the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_backgroundSplit swasit.zyna.ventilator:backgroundSplit}</code></td><td>Specifies a background drawable for the bottom component of a split action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_backgroundStacked swasit.zyna.ventilator:backgroundStacked}</code></td><td>Specifies a background drawable for a second stacked row of the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetEnd swasit.zyna.ventilator:contentInsetEnd}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetEndWithActions swasit.zyna.ventilator:contentInsetEndWithActions}</code></td><td>Minimum inset for content views within a bar when actions from a menu
+     * <tr><td><code>{@link #ActionBar_background com.example.ventilator:background}</code></td><td>Specifies a background drawable for the action bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_backgroundSplit com.example.ventilator:backgroundSplit}</code></td><td>Specifies a background drawable for the bottom component of a split action bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_backgroundStacked com.example.ventilator:backgroundStacked}</code></td><td>Specifies a background drawable for a second stacked row of the action bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetEnd com.example.ventilator:contentInsetEnd}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetEndWithActions com.example.ventilator:contentInsetEndWithActions}</code></td><td>Minimum inset for content views within a bar when actions from a menu
      * are present.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetLeft swasit.zyna.ventilator:contentInsetLeft}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetRight swasit.zyna.ventilator:contentInsetRight}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetStart swasit.zyna.ventilator:contentInsetStart}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetStartWithNavigation swasit.zyna.ventilator:contentInsetStartWithNavigation}</code></td><td>Minimum inset for content views within a bar when a navigation button
+     * <tr><td><code>{@link #ActionBar_contentInsetLeft com.example.ventilator:contentInsetLeft}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetRight com.example.ventilator:contentInsetRight}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetStart com.example.ventilator:contentInsetStart}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetStartWithNavigation com.example.ventilator:contentInsetStartWithNavigation}</code></td><td>Minimum inset for content views within a bar when a navigation button
      * is present, such as the Up button.</td></tr>
-     * <tr><td><code>{@link #ActionBar_customNavigationLayout swasit.zyna.ventilator:customNavigationLayout}</code></td><td>Specifies a layout for custom navigation.</td></tr>
-     * <tr><td><code>{@link #ActionBar_displayOptions swasit.zyna.ventilator:displayOptions}</code></td><td>Options affecting how the action bar is displayed.</td></tr>
-     * <tr><td><code>{@link #ActionBar_divider swasit.zyna.ventilator:divider}</code></td><td>Specifies the drawable used for item dividers.</td></tr>
-     * <tr><td><code>{@link #ActionBar_elevation swasit.zyna.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #ActionBar_height swasit.zyna.ventilator:height}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ActionBar_hideOnContentScroll swasit.zyna.ventilator:hideOnContentScroll}</code></td><td>Set true to hide the action bar on a vertical nested scroll of content.</td></tr>
-     * <tr><td><code>{@link #ActionBar_homeAsUpIndicator swasit.zyna.ventilator:homeAsUpIndicator}</code></td><td>Specifies a drawable to use for the 'home as up' indicator.</td></tr>
-     * <tr><td><code>{@link #ActionBar_homeLayout swasit.zyna.ventilator:homeLayout}</code></td><td>Specifies a layout to use for the "home" section of the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_icon swasit.zyna.ventilator:icon}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ActionBar_indeterminateProgressStyle swasit.zyna.ventilator:indeterminateProgressStyle}</code></td><td>Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
-     * <tr><td><code>{@link #ActionBar_itemPadding swasit.zyna.ventilator:itemPadding}</code></td><td>Specifies padding that should be applied to the left and right sides of
+     * <tr><td><code>{@link #ActionBar_customNavigationLayout com.example.ventilator:customNavigationLayout}</code></td><td>Specifies a layout for custom navigation.</td></tr>
+     * <tr><td><code>{@link #ActionBar_displayOptions com.example.ventilator:displayOptions}</code></td><td>Options affecting how the action bar is displayed.</td></tr>
+     * <tr><td><code>{@link #ActionBar_divider com.example.ventilator:divider}</code></td><td>Specifies the drawable used for item dividers.</td></tr>
+     * <tr><td><code>{@link #ActionBar_elevation com.example.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #ActionBar_height com.example.ventilator:height}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ActionBar_hideOnContentScroll com.example.ventilator:hideOnContentScroll}</code></td><td>Set true to hide the action bar on a vertical nested scroll of content.</td></tr>
+     * <tr><td><code>{@link #ActionBar_homeAsUpIndicator com.example.ventilator:homeAsUpIndicator}</code></td><td>Specifies a drawable to use for the 'home as up' indicator.</td></tr>
+     * <tr><td><code>{@link #ActionBar_homeLayout com.example.ventilator:homeLayout}</code></td><td>Specifies a layout to use for the "home" section of the action bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_icon com.example.ventilator:icon}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ActionBar_indeterminateProgressStyle com.example.ventilator:indeterminateProgressStyle}</code></td><td>Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
+     * <tr><td><code>{@link #ActionBar_itemPadding com.example.ventilator:itemPadding}</code></td><td>Specifies padding that should be applied to the left and right sides of
      * system-provided items in the bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_logo swasit.zyna.ventilator:logo}</code></td><td>Specifies the drawable used for the application logo.</td></tr>
-     * <tr><td><code>{@link #ActionBar_navigationMode swasit.zyna.ventilator:navigationMode}</code></td><td>The type of navigation to use.</td></tr>
-     * <tr><td><code>{@link #ActionBar_popupTheme swasit.zyna.ventilator:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
+     * <tr><td><code>{@link #ActionBar_logo com.example.ventilator:logo}</code></td><td>Specifies the drawable used for the application logo.</td></tr>
+     * <tr><td><code>{@link #ActionBar_navigationMode com.example.ventilator:navigationMode}</code></td><td>The type of navigation to use.</td></tr>
+     * <tr><td><code>{@link #ActionBar_popupTheme com.example.ventilator:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
      * shown by widgets in the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_progressBarPadding swasit.zyna.ventilator:progressBarPadding}</code></td><td>Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_progressBarStyle swasit.zyna.ventilator:progressBarStyle}</code></td><td>Specifies a style resource to use for an embedded progress bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_subtitle swasit.zyna.ventilator:subtitle}</code></td><td>Specifies subtitle text used for navigationMode="normal"</td></tr>
-     * <tr><td><code>{@link #ActionBar_subtitleTextStyle swasit.zyna.ventilator:subtitleTextStyle}</code></td><td>Specifies a style to use for subtitle text.</td></tr>
-     * <tr><td><code>{@link #ActionBar_title swasit.zyna.ventilator:title}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ActionBar_titleTextStyle swasit.zyna.ventilator:titleTextStyle}</code></td><td>Specifies a style to use for title text.</td></tr>
+     * <tr><td><code>{@link #ActionBar_progressBarPadding com.example.ventilator:progressBarPadding}</code></td><td>Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_progressBarStyle com.example.ventilator:progressBarStyle}</code></td><td>Specifies a style resource to use for an embedded progress bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_subtitle com.example.ventilator:subtitle}</code></td><td>Specifies subtitle text used for navigationMode="normal"</td></tr>
+     * <tr><td><code>{@link #ActionBar_subtitleTextStyle com.example.ventilator:subtitleTextStyle}</code></td><td>Specifies a style to use for subtitle text.</td></tr>
+     * <tr><td><code>{@link #ActionBar_title com.example.ventilator:title}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ActionBar_titleTextStyle com.example.ventilator:titleTextStyle}</code></td><td>Specifies a style to use for title text.</td></tr>
      * </table>
      * @see #ActionBar_background
      * @see #ActionBar_backgroundSplit
@@ -6244,7 +6244,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:background
+     * @attr name com.example.ventilator:background
      */
     public static final int ActionBar_background=0;
     /**
@@ -6260,7 +6260,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:backgroundSplit
+     * @attr name com.example.ventilator:backgroundSplit
      */
     public static final int ActionBar_backgroundSplit=1;
     /**
@@ -6276,7 +6276,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:backgroundStacked
+     * @attr name com.example.ventilator:backgroundStacked
      */
     public static final int ActionBar_backgroundStacked=2;
     /**
@@ -6291,7 +6291,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetEnd
+     * @attr name com.example.ventilator:contentInsetEnd
      */
     public static final int ActionBar_contentInsetEnd=3;
     /**
@@ -6306,7 +6306,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetEndWithActions
+     * @attr name com.example.ventilator:contentInsetEndWithActions
      */
     public static final int ActionBar_contentInsetEndWithActions=4;
     /**
@@ -6321,7 +6321,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetLeft
+     * @attr name com.example.ventilator:contentInsetLeft
      */
     public static final int ActionBar_contentInsetLeft=5;
     /**
@@ -6336,7 +6336,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetRight
+     * @attr name com.example.ventilator:contentInsetRight
      */
     public static final int ActionBar_contentInsetRight=6;
     /**
@@ -6351,7 +6351,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetStart
+     * @attr name com.example.ventilator:contentInsetStart
      */
     public static final int ActionBar_contentInsetStart=7;
     /**
@@ -6366,7 +6366,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetStartWithNavigation
+     * @attr name com.example.ventilator:contentInsetStartWithNavigation
      */
     public static final int ActionBar_contentInsetStartWithNavigation=8;
     /**
@@ -6379,7 +6379,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:customNavigationLayout
+     * @attr name com.example.ventilator:customNavigationLayout
      */
     public static final int ActionBar_customNavigationLayout=9;
     /**
@@ -6402,7 +6402,7 @@ public final class R {
      * <tr><td>useLogo</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:displayOptions
+     * @attr name com.example.ventilator:displayOptions
      */
     public static final int ActionBar_displayOptions=10;
     /**
@@ -6415,7 +6415,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:divider
+     * @attr name com.example.ventilator:divider
      */
     public static final int ActionBar_divider=11;
     /**
@@ -6429,7 +6429,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:elevation
+     * @attr name com.example.ventilator:elevation
      */
     public static final int ActionBar_elevation=12;
     /**
@@ -6443,7 +6443,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:height
+     * @attr name com.example.ventilator:height
      */
     public static final int ActionBar_height=13;
     /**
@@ -6454,7 +6454,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:hideOnContentScroll
+     * @attr name com.example.ventilator:hideOnContentScroll
      */
     public static final int ActionBar_hideOnContentScroll=14;
     /**
@@ -6467,7 +6467,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:homeAsUpIndicator
+     * @attr name com.example.ventilator:homeAsUpIndicator
      */
     public static final int ActionBar_homeAsUpIndicator=15;
     /**
@@ -6480,7 +6480,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:homeLayout
+     * @attr name com.example.ventilator:homeLayout
      */
     public static final int ActionBar_homeLayout=16;
     /**
@@ -6493,7 +6493,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:icon
+     * @attr name com.example.ventilator:icon
      */
     public static final int ActionBar_icon=17;
     /**
@@ -6506,7 +6506,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:indeterminateProgressStyle
+     * @attr name com.example.ventilator:indeterminateProgressStyle
      */
     public static final int ActionBar_indeterminateProgressStyle=18;
     /**
@@ -6521,7 +6521,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:itemPadding
+     * @attr name com.example.ventilator:itemPadding
      */
     public static final int ActionBar_itemPadding=19;
     /**
@@ -6534,7 +6534,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:logo
+     * @attr name com.example.ventilator:logo
      */
     public static final int ActionBar_logo=20;
     /**
@@ -6553,7 +6553,7 @@ public final class R {
      * <tr><td>tabMode</td><td>2</td><td>The action bar will use a series of horizontal tabs for navigation.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:navigationMode
+     * @attr name com.example.ventilator:navigationMode
      */
     public static final int ActionBar_navigationMode=21;
     /**
@@ -6567,7 +6567,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:popupTheme
+     * @attr name com.example.ventilator:popupTheme
      */
     public static final int ActionBar_popupTheme=22;
     /**
@@ -6581,7 +6581,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:progressBarPadding
+     * @attr name com.example.ventilator:progressBarPadding
      */
     public static final int ActionBar_progressBarPadding=23;
     /**
@@ -6594,7 +6594,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:progressBarStyle
+     * @attr name com.example.ventilator:progressBarStyle
      */
     public static final int ActionBar_progressBarStyle=24;
     /**
@@ -6605,7 +6605,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:subtitle
+     * @attr name com.example.ventilator:subtitle
      */
     public static final int ActionBar_subtitle=25;
     /**
@@ -6618,7 +6618,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:subtitleTextStyle
+     * @attr name com.example.ventilator:subtitleTextStyle
      */
     public static final int ActionBar_subtitleTextStyle=26;
     /**
@@ -6629,7 +6629,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:title
+     * @attr name com.example.ventilator:title
      */
     public static final int ActionBar_title=27;
     /**
@@ -6642,7 +6642,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:titleTextStyle
+     * @attr name com.example.ventilator:titleTextStyle
      */
     public static final int ActionBar_titleTextStyle=28;
     /**
@@ -6724,12 +6724,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ActionMode_background swasit.zyna.ventilator:background}</code></td><td>Specifies a background drawable for the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionMode_backgroundSplit swasit.zyna.ventilator:backgroundSplit}</code></td><td>Specifies a background drawable for the bottom component of a split action bar.</td></tr>
-     * <tr><td><code>{@link #ActionMode_closeItemLayout swasit.zyna.ventilator:closeItemLayout}</code></td><td>Specifies a layout to use for the "close" item at the starting edge.</td></tr>
-     * <tr><td><code>{@link #ActionMode_height swasit.zyna.ventilator:height}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ActionMode_subtitleTextStyle swasit.zyna.ventilator:subtitleTextStyle}</code></td><td>Specifies a style to use for subtitle text.</td></tr>
-     * <tr><td><code>{@link #ActionMode_titleTextStyle swasit.zyna.ventilator:titleTextStyle}</code></td><td>Specifies a style to use for title text.</td></tr>
+     * <tr><td><code>{@link #ActionMode_background com.example.ventilator:background}</code></td><td>Specifies a background drawable for the action bar.</td></tr>
+     * <tr><td><code>{@link #ActionMode_backgroundSplit com.example.ventilator:backgroundSplit}</code></td><td>Specifies a background drawable for the bottom component of a split action bar.</td></tr>
+     * <tr><td><code>{@link #ActionMode_closeItemLayout com.example.ventilator:closeItemLayout}</code></td><td>Specifies a layout to use for the "close" item at the starting edge.</td></tr>
+     * <tr><td><code>{@link #ActionMode_height com.example.ventilator:height}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ActionMode_subtitleTextStyle com.example.ventilator:subtitleTextStyle}</code></td><td>Specifies a style to use for subtitle text.</td></tr>
+     * <tr><td><code>{@link #ActionMode_titleTextStyle com.example.ventilator:titleTextStyle}</code></td><td>Specifies a style to use for title text.</td></tr>
      * </table>
      * @see #ActionMode_background
      * @see #ActionMode_backgroundSplit
@@ -6752,7 +6752,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:background
+     * @attr name com.example.ventilator:background
      */
     public static final int ActionMode_background=0;
     /**
@@ -6768,7 +6768,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:backgroundSplit
+     * @attr name com.example.ventilator:backgroundSplit
      */
     public static final int ActionMode_backgroundSplit=1;
     /**
@@ -6781,7 +6781,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:closeItemLayout
+     * @attr name com.example.ventilator:closeItemLayout
      */
     public static final int ActionMode_closeItemLayout=2;
     /**
@@ -6795,7 +6795,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:height
+     * @attr name com.example.ventilator:height
      */
     public static final int ActionMode_height=3;
     /**
@@ -6808,7 +6808,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:subtitleTextStyle
+     * @attr name com.example.ventilator:subtitleTextStyle
      */
     public static final int ActionMode_subtitleTextStyle=4;
     /**
@@ -6821,7 +6821,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:titleTextStyle
+     * @attr name com.example.ventilator:titleTextStyle
      */
     public static final int ActionMode_titleTextStyle=5;
     /**
@@ -6831,8 +6831,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable swasit.zyna.ventilator:expandActivityOverflowButtonDrawable}</code></td><td>The drawable to show in the button for expanding the activities overflow popup.</td></tr>
-     * <tr><td><code>{@link #ActivityChooserView_initialActivityCount swasit.zyna.ventilator:initialActivityCount}</code></td><td>The maximal number of items initially shown in the activity list.</td></tr>
+     * <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable com.example.ventilator:expandActivityOverflowButtonDrawable}</code></td><td>The drawable to show in the button for expanding the activities overflow popup.</td></tr>
+     * <tr><td><code>{@link #ActivityChooserView_initialActivityCount com.example.ventilator:initialActivityCount}</code></td><td>The maximal number of items initially shown in the activity list.</td></tr>
      * </table>
      * @see #ActivityChooserView_expandActivityOverflowButtonDrawable
      * @see #ActivityChooserView_initialActivityCount
@@ -6854,7 +6854,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:expandActivityOverflowButtonDrawable
+     * @attr name com.example.ventilator:expandActivityOverflowButtonDrawable
      */
     public static final int ActivityChooserView_expandActivityOverflowButtonDrawable=0;
     /**
@@ -6865,7 +6865,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:initialActivityCount
+     * @attr name com.example.ventilator:initialActivityCount
      */
     public static final int ActivityChooserView_initialActivityCount=1;
     /**
@@ -6876,13 +6876,13 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AlertDialog_android_layout android:layout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_buttonIconDimen swasit.zyna.ventilator:buttonIconDimen}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_buttonPanelSideLayout swasit.zyna.ventilator:buttonPanelSideLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_listItemLayout swasit.zyna.ventilator:listItemLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_listLayout swasit.zyna.ventilator:listLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_multiChoiceItemLayout swasit.zyna.ventilator:multiChoiceItemLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_showTitle swasit.zyna.ventilator:showTitle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_singleChoiceItemLayout swasit.zyna.ventilator:singleChoiceItemLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_buttonIconDimen com.example.ventilator:buttonIconDimen}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_buttonPanelSideLayout com.example.ventilator:buttonPanelSideLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_listItemLayout com.example.ventilator:listItemLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_listLayout com.example.ventilator:listLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_multiChoiceItemLayout com.example.ventilator:multiChoiceItemLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_showTitle com.example.ventilator:showTitle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_singleChoiceItemLayout com.example.ventilator:singleChoiceItemLayout}</code></td><td></td></tr>
      * </table>
      * @see #AlertDialog_android_layout
      * @see #AlertDialog_buttonIconDimen
@@ -6910,7 +6910,7 @@ public final class R {
      */
     public static final int AlertDialog_android_layout=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#buttonIconDimen}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#buttonIconDimen}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -6919,11 +6919,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:buttonIconDimen
+     * @attr name com.example.ventilator:buttonIconDimen
      */
     public static final int AlertDialog_buttonIconDimen=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#buttonPanelSideLayout}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#buttonPanelSideLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -6931,11 +6931,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonPanelSideLayout
+     * @attr name com.example.ventilator:buttonPanelSideLayout
      */
     public static final int AlertDialog_buttonPanelSideLayout=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#listItemLayout}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#listItemLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -6943,11 +6943,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:listItemLayout
+     * @attr name com.example.ventilator:listItemLayout
      */
     public static final int AlertDialog_listItemLayout=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#listLayout}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#listLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -6955,11 +6955,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:listLayout
+     * @attr name com.example.ventilator:listLayout
      */
     public static final int AlertDialog_listLayout=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#multiChoiceItemLayout}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#multiChoiceItemLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -6967,21 +6967,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:multiChoiceItemLayout
+     * @attr name com.example.ventilator:multiChoiceItemLayout
      */
     public static final int AlertDialog_multiChoiceItemLayout=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#showTitle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#showTitle}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:showTitle
+     * @attr name com.example.ventilator:showTitle
      */
     public static final int AlertDialog_showTitle=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#singleChoiceItemLayout}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#singleChoiceItemLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -6989,7 +6989,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:singleChoiceItemLayout
+     * @attr name com.example.ventilator:singleChoiceItemLayout
      */
     public static final int AlertDialog_singleChoiceItemLayout=7;
     /**
@@ -7215,9 +7215,9 @@ public final class R {
      * <tr><td><code>{@link #AppBarLayout_android_background android:background}</code></td><td></td></tr>
      * <tr><td><code>{@link #AppBarLayout_android_touchscreenBlocksFocus android:touchscreenBlocksFocus}</code></td><td></td></tr>
      * <tr><td><code>{@link #AppBarLayout_android_keyboardNavigationCluster android:keyboardNavigationCluster}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayout_elevation swasit.zyna.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #AppBarLayout_expanded swasit.zyna.ventilator:expanded}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayout_liftOnScroll swasit.zyna.ventilator:liftOnScroll}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayout_elevation com.example.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #AppBarLayout_expanded com.example.ventilator:expanded}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayout_liftOnScroll com.example.ventilator:liftOnScroll}</code></td><td></td></tr>
      * </table>
      * @see #AppBarLayout_android_background
      * @see #AppBarLayout_android_touchscreenBlocksFocus
@@ -7276,27 +7276,27 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:elevation
+     * @attr name com.example.ventilator:elevation
      */
     public static final int AppBarLayout_elevation=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#expanded}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#expanded}
      * attribute's value can be found in the {@link #AppBarLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:expanded
+     * @attr name com.example.ventilator:expanded
      */
     public static final int AppBarLayout_expanded=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#liftOnScroll}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#liftOnScroll}
      * attribute's value can be found in the {@link #AppBarLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:liftOnScroll
+     * @attr name com.example.ventilator:liftOnScroll
      */
     public static final int AppBarLayout_liftOnScroll=5;
     /**
@@ -7306,10 +7306,10 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #AppBarLayoutStates_state_collapsed swasit.zyna.ventilator:state_collapsed}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayoutStates_state_collapsible swasit.zyna.ventilator:state_collapsible}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayoutStates_state_liftable swasit.zyna.ventilator:state_liftable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayoutStates_state_lifted swasit.zyna.ventilator:state_lifted}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayoutStates_state_collapsed com.example.ventilator:state_collapsed}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayoutStates_state_collapsible com.example.ventilator:state_collapsible}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayoutStates_state_liftable com.example.ventilator:state_liftable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayoutStates_state_lifted com.example.ventilator:state_lifted}</code></td><td></td></tr>
      * </table>
      * @see #AppBarLayoutStates_state_collapsed
      * @see #AppBarLayoutStates_state_collapsible
@@ -7320,43 +7320,43 @@ public final class R {
       0x7f0301af, 0x7f0301b0, 0x7f0301b1, 0x7f0301b2
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#state_collapsed}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#state_collapsed}
      * attribute's value can be found in the {@link #AppBarLayoutStates} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:state_collapsed
+     * @attr name com.example.ventilator:state_collapsed
      */
     public static final int AppBarLayoutStates_state_collapsed=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#state_collapsible}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#state_collapsible}
      * attribute's value can be found in the {@link #AppBarLayoutStates} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:state_collapsible
+     * @attr name com.example.ventilator:state_collapsible
      */
     public static final int AppBarLayoutStates_state_collapsible=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#state_liftable}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#state_liftable}
      * attribute's value can be found in the {@link #AppBarLayoutStates} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:state_liftable
+     * @attr name com.example.ventilator:state_liftable
      */
     public static final int AppBarLayoutStates_state_liftable=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#state_lifted}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#state_lifted}
      * attribute's value can be found in the {@link #AppBarLayoutStates} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:state_lifted
+     * @attr name com.example.ventilator:state_lifted
      */
     public static final int AppBarLayoutStates_state_lifted=3;
     /**
@@ -7366,8 +7366,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #AppBarLayout_Layout_layout_scrollFlags swasit.zyna.ventilator:layout_scrollFlags}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayout_Layout_layout_scrollInterpolator swasit.zyna.ventilator:layout_scrollInterpolator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayout_Layout_layout_scrollFlags com.example.ventilator:layout_scrollFlags}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayout_Layout_layout_scrollInterpolator com.example.ventilator:layout_scrollInterpolator}</code></td><td></td></tr>
      * </table>
      * @see #AppBarLayout_Layout_layout_scrollFlags
      * @see #AppBarLayout_Layout_layout_scrollInterpolator
@@ -7376,7 +7376,7 @@ public final class R {
       0x7f030155, 0x7f030156
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_scrollFlags}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_scrollFlags}
      * attribute's value can be found in the {@link #AppBarLayout_Layout} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -7393,11 +7393,11 @@ public final class R {
      * <tr><td>snapMargins</td><td>20</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_scrollFlags
+     * @attr name com.example.ventilator:layout_scrollFlags
      */
     public static final int AppBarLayout_Layout_layout_scrollFlags=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_scrollInterpolator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_scrollInterpolator}
      * attribute's value can be found in the {@link #AppBarLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7405,7 +7405,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_scrollInterpolator
+     * @attr name com.example.ventilator:layout_scrollInterpolator
      */
     public static final int AppBarLayout_Layout_layout_scrollInterpolator=1;
     /**
@@ -7416,9 +7416,9 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AppCompatImageView_android_src android:src}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatImageView_srcCompat swasit.zyna.ventilator:srcCompat}</code></td><td>Sets a drawable as the content of this ImageView.</td></tr>
-     * <tr><td><code>{@link #AppCompatImageView_tint swasit.zyna.ventilator:tint}</code></td><td>Tint to apply to the image source.</td></tr>
-     * <tr><td><code>{@link #AppCompatImageView_tintMode swasit.zyna.ventilator:tintMode}</code></td><td>Blending mode used to apply the image source tint.</td></tr>
+     * <tr><td><code>{@link #AppCompatImageView_srcCompat com.example.ventilator:srcCompat}</code></td><td>Sets a drawable as the content of this ImageView.</td></tr>
+     * <tr><td><code>{@link #AppCompatImageView_tint com.example.ventilator:tint}</code></td><td>Tint to apply to the image source.</td></tr>
+     * <tr><td><code>{@link #AppCompatImageView_tintMode com.example.ventilator:tintMode}</code></td><td>Blending mode used to apply the image source tint.</td></tr>
      * </table>
      * @see #AppCompatImageView_android_src
      * @see #AppCompatImageView_srcCompat
@@ -7454,7 +7454,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:srcCompat
+     * @attr name com.example.ventilator:srcCompat
      */
     public static final int AppCompatImageView_srcCompat=1;
     /**
@@ -7466,7 +7466,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tint
+     * @attr name com.example.ventilator:tint
      */
     public static final int AppCompatImageView_tint=2;
     /**
@@ -7493,7 +7493,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:tintMode
+     * @attr name com.example.ventilator:tintMode
      */
     public static final int AppCompatImageView_tintMode=3;
     /**
@@ -7504,9 +7504,9 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AppCompatSeekBar_android_thumb android:thumb}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatSeekBar_tickMark swasit.zyna.ventilator:tickMark}</code></td><td>Drawable displayed at each progress position on a seekbar.</td></tr>
-     * <tr><td><code>{@link #AppCompatSeekBar_tickMarkTint swasit.zyna.ventilator:tickMarkTint}</code></td><td>Tint to apply to the tick mark drawable.</td></tr>
-     * <tr><td><code>{@link #AppCompatSeekBar_tickMarkTintMode swasit.zyna.ventilator:tickMarkTintMode}</code></td><td>Blending mode used to apply the tick mark tint.</td></tr>
+     * <tr><td><code>{@link #AppCompatSeekBar_tickMark com.example.ventilator:tickMark}</code></td><td>Drawable displayed at each progress position on a seekbar.</td></tr>
+     * <tr><td><code>{@link #AppCompatSeekBar_tickMarkTint com.example.ventilator:tickMarkTint}</code></td><td>Tint to apply to the tick mark drawable.</td></tr>
+     * <tr><td><code>{@link #AppCompatSeekBar_tickMarkTintMode com.example.ventilator:tickMarkTintMode}</code></td><td>Blending mode used to apply the tick mark tint.</td></tr>
      * </table>
      * @see #AppCompatSeekBar_android_thumb
      * @see #AppCompatSeekBar_tickMark
@@ -7538,7 +7538,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tickMark
+     * @attr name com.example.ventilator:tickMark
      */
     public static final int AppCompatSeekBar_tickMark=1;
     /**
@@ -7550,7 +7550,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tickMarkTint
+     * @attr name com.example.ventilator:tickMarkTint
      */
     public static final int AppCompatSeekBar_tickMarkTint=2;
     /**
@@ -7577,7 +7577,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:tickMarkTintMode
+     * @attr name com.example.ventilator:tickMarkTintMode
      */
     public static final int AppCompatSeekBar_tickMarkTintMode=3;
     /**
@@ -7717,29 +7717,29 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AppCompatTextView_android_textAppearance android:textAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizeMaxTextSize swasit.zyna.ventilator:autoSizeMaxTextSize}</code></td><td>The maximum text size constraint to be used when auto-sizing text.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizeMinTextSize swasit.zyna.ventilator:autoSizeMinTextSize}</code></td><td>The minimum text size constraint to be used when auto-sizing text.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizePresetSizes swasit.zyna.ventilator:autoSizePresetSizes}</code></td><td>Resource array of dimensions to be used in conjunction with
+     * <tr><td><code>{@link #AppCompatTextView_autoSizeMaxTextSize com.example.ventilator:autoSizeMaxTextSize}</code></td><td>The maximum text size constraint to be used when auto-sizing text.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_autoSizeMinTextSize com.example.ventilator:autoSizeMinTextSize}</code></td><td>The minimum text size constraint to be used when auto-sizing text.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_autoSizePresetSizes com.example.ventilator:autoSizePresetSizes}</code></td><td>Resource array of dimensions to be used in conjunction with
      * <code>autoSizeTextType</code> set to <code>uniform</code>.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizeStepGranularity swasit.zyna.ventilator:autoSizeStepGranularity}</code></td><td>Specify the auto-size step size if <code>autoSizeTextType</code> is set to
+     * <tr><td><code>{@link #AppCompatTextView_autoSizeStepGranularity com.example.ventilator:autoSizeStepGranularity}</code></td><td>Specify the auto-size step size if <code>autoSizeTextType</code> is set to
      * <code>uniform</code>.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizeTextType swasit.zyna.ventilator:autoSizeTextType}</code></td><td>Specify the type of auto-size.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_drawableBottomCompat swasit.zyna.ventilator:drawableBottomCompat}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_drawableEndCompat swasit.zyna.ventilator:drawableEndCompat}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_drawableLeftCompat swasit.zyna.ventilator:drawableLeftCompat}</code></td><td>Compound drawables allowing the use of vector drawable when running on older versions
+     * <tr><td><code>{@link #AppCompatTextView_autoSizeTextType com.example.ventilator:autoSizeTextType}</code></td><td>Specify the type of auto-size.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_drawableBottomCompat com.example.ventilator:drawableBottomCompat}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_drawableEndCompat com.example.ventilator:drawableEndCompat}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_drawableLeftCompat com.example.ventilator:drawableLeftCompat}</code></td><td>Compound drawables allowing the use of vector drawable when running on older versions
      * of the platform.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_drawableRightCompat swasit.zyna.ventilator:drawableRightCompat}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_drawableStartCompat swasit.zyna.ventilator:drawableStartCompat}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_drawableTint swasit.zyna.ventilator:drawableTint}</code></td><td>Tint to apply to the compound (left, top, etc.) drawables.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_drawableTintMode swasit.zyna.ventilator:drawableTintMode}</code></td><td>Blending mode used to apply the compound (left, top, etc.) drawables tint.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_drawableTopCompat swasit.zyna.ventilator:drawableTopCompat}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_firstBaselineToTopHeight swasit.zyna.ventilator:firstBaselineToTopHeight}</code></td><td>Distance from the top of the TextView to the first text baseline.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_fontFamily swasit.zyna.ventilator:fontFamily}</code></td><td>The attribute for the font family.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_fontVariationSettings swasit.zyna.ventilator:fontVariationSettings}</code></td><td>The variation settings to be applied to the font.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_lastBaselineToBottomHeight swasit.zyna.ventilator:lastBaselineToBottomHeight}</code></td><td>Distance from the bottom of the TextView to the last text baseline.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_lineHeight swasit.zyna.ventilator:lineHeight}</code></td><td>Explicit height between lines of text.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_textAllCaps swasit.zyna.ventilator:textAllCaps}</code></td><td>Present the text in ALL CAPS.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_textLocale swasit.zyna.ventilator:textLocale}</code></td><td>Set the textLocale by a comma-separated language tag string,
+     * <tr><td><code>{@link #AppCompatTextView_drawableRightCompat com.example.ventilator:drawableRightCompat}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_drawableStartCompat com.example.ventilator:drawableStartCompat}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_drawableTint com.example.ventilator:drawableTint}</code></td><td>Tint to apply to the compound (left, top, etc.) drawables.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_drawableTintMode com.example.ventilator:drawableTintMode}</code></td><td>Blending mode used to apply the compound (left, top, etc.) drawables tint.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_drawableTopCompat com.example.ventilator:drawableTopCompat}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_firstBaselineToTopHeight com.example.ventilator:firstBaselineToTopHeight}</code></td><td>Distance from the top of the TextView to the first text baseline.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_fontFamily com.example.ventilator:fontFamily}</code></td><td>The attribute for the font family.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_fontVariationSettings com.example.ventilator:fontVariationSettings}</code></td><td>The variation settings to be applied to the font.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_lastBaselineToBottomHeight com.example.ventilator:lastBaselineToBottomHeight}</code></td><td>Distance from the bottom of the TextView to the last text baseline.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_lineHeight com.example.ventilator:lineHeight}</code></td><td>Explicit height between lines of text.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_textAllCaps com.example.ventilator:textAllCaps}</code></td><td>Present the text in ALL CAPS.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_textLocale com.example.ventilator:textLocale}</code></td><td>Set the textLocale by a comma-separated language tag string,
      * for example "ja-JP,zh-CN".</td></tr>
      * </table>
      * @see #AppCompatTextView_android_textAppearance
@@ -7795,7 +7795,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:autoSizeMaxTextSize
+     * @attr name com.example.ventilator:autoSizeMaxTextSize
      */
     public static final int AppCompatTextView_autoSizeMaxTextSize=1;
     /**
@@ -7809,7 +7809,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:autoSizeMinTextSize
+     * @attr name com.example.ventilator:autoSizeMinTextSize
      */
     public static final int AppCompatTextView_autoSizeMinTextSize=2;
     /**
@@ -7824,7 +7824,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:autoSizePresetSizes
+     * @attr name com.example.ventilator:autoSizePresetSizes
      */
     public static final int AppCompatTextView_autoSizePresetSizes=3;
     /**
@@ -7840,7 +7840,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:autoSizeStepGranularity
+     * @attr name com.example.ventilator:autoSizeStepGranularity
      */
     public static final int AppCompatTextView_autoSizeStepGranularity=4;
     /**
@@ -7860,11 +7860,11 @@ public final class R {
      * container.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:autoSizeTextType
+     * @attr name com.example.ventilator:autoSizeTextType
      */
     public static final int AppCompatTextView_autoSizeTextType=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#drawableBottomCompat}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#drawableBottomCompat}
      * attribute's value can be found in the {@link #AppCompatTextView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7872,11 +7872,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:drawableBottomCompat
+     * @attr name com.example.ventilator:drawableBottomCompat
      */
     public static final int AppCompatTextView_drawableBottomCompat=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#drawableEndCompat}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#drawableEndCompat}
      * attribute's value can be found in the {@link #AppCompatTextView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7884,7 +7884,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:drawableEndCompat
+     * @attr name com.example.ventilator:drawableEndCompat
      */
     public static final int AppCompatTextView_drawableEndCompat=7;
     /**
@@ -7898,11 +7898,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:drawableLeftCompat
+     * @attr name com.example.ventilator:drawableLeftCompat
      */
     public static final int AppCompatTextView_drawableLeftCompat=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#drawableRightCompat}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#drawableRightCompat}
      * attribute's value can be found in the {@link #AppCompatTextView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7910,11 +7910,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:drawableRightCompat
+     * @attr name com.example.ventilator:drawableRightCompat
      */
     public static final int AppCompatTextView_drawableRightCompat=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#drawableStartCompat}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#drawableStartCompat}
      * attribute's value can be found in the {@link #AppCompatTextView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7922,7 +7922,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:drawableStartCompat
+     * @attr name com.example.ventilator:drawableStartCompat
      */
     public static final int AppCompatTextView_drawableStartCompat=10;
     /**
@@ -7934,7 +7934,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:drawableTint
+     * @attr name com.example.ventilator:drawableTint
      */
     public static final int AppCompatTextView_drawableTint=11;
     /**
@@ -7961,11 +7961,11 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:drawableTintMode
+     * @attr name com.example.ventilator:drawableTintMode
      */
     public static final int AppCompatTextView_drawableTintMode=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#drawableTopCompat}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#drawableTopCompat}
      * attribute's value can be found in the {@link #AppCompatTextView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7973,7 +7973,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:drawableTopCompat
+     * @attr name com.example.ventilator:drawableTopCompat
      */
     public static final int AppCompatTextView_drawableTopCompat=13;
     /**
@@ -7988,7 +7988,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:firstBaselineToTopHeight
+     * @attr name com.example.ventilator:firstBaselineToTopHeight
      */
     public static final int AppCompatTextView_firstBaselineToTopHeight=14;
     /**
@@ -7999,7 +7999,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:fontFamily
+     * @attr name com.example.ventilator:fontFamily
      */
     public static final int AppCompatTextView_fontFamily=15;
     /**
@@ -8010,7 +8010,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:fontVariationSettings
+     * @attr name com.example.ventilator:fontVariationSettings
      */
     public static final int AppCompatTextView_fontVariationSettings=16;
     /**
@@ -8025,7 +8025,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:lastBaselineToBottomHeight
+     * @attr name com.example.ventilator:lastBaselineToBottomHeight
      */
     public static final int AppCompatTextView_lastBaselineToBottomHeight=17;
     /**
@@ -8040,7 +8040,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:lineHeight
+     * @attr name com.example.ventilator:lineHeight
      */
     public static final int AppCompatTextView_lineHeight=18;
     /**
@@ -8055,7 +8055,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:textAllCaps
+     * @attr name com.example.ventilator:textAllCaps
      */
     public static final int AppCompatTextView_textAllCaps=19;
     /**
@@ -8070,7 +8070,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:textLocale
+     * @attr name com.example.ventilator:textLocale
      */
     public static final int AppCompatTextView_textLocale=20;
     /**
@@ -8082,146 +8082,146 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AppCompatTheme_android_windowIsFloating android:windowIsFloating}</code></td><td></td></tr>
      * <tr><td><code>{@link #AppCompatTheme_android_windowAnimationStyle android:windowAnimationStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarDivider swasit.zyna.ventilator:actionBarDivider}</code></td><td>Custom divider drawable to use for elements in the action bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarItemBackground swasit.zyna.ventilator:actionBarItemBackground}</code></td><td>Custom item state list drawable background for action bar items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarPopupTheme swasit.zyna.ventilator:actionBarPopupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
+     * <tr><td><code>{@link #AppCompatTheme_actionBarDivider com.example.ventilator:actionBarDivider}</code></td><td>Custom divider drawable to use for elements in the action bar.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarItemBackground com.example.ventilator:actionBarItemBackground}</code></td><td>Custom item state list drawable background for action bar items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarPopupTheme com.example.ventilator:actionBarPopupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
      * shown by widgets in the action bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarSize swasit.zyna.ventilator:actionBarSize}</code></td><td>Size of the Action Bar, including the contextual
+     * <tr><td><code>{@link #AppCompatTheme_actionBarSize com.example.ventilator:actionBarSize}</code></td><td>Size of the Action Bar, including the contextual
      * bar used to present Action Modes.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarSplitStyle swasit.zyna.ventilator:actionBarSplitStyle}</code></td><td>Reference to a style for the split Action Bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarStyle swasit.zyna.ventilator:actionBarStyle}</code></td><td>Reference to a style for the Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarTabBarStyle swasit.zyna.ventilator:actionBarTabBarStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarTabStyle swasit.zyna.ventilator:actionBarTabStyle}</code></td><td>Default style for tabs within an action bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarTabTextStyle swasit.zyna.ventilator:actionBarTabTextStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarTheme swasit.zyna.ventilator:actionBarTheme}</code></td><td>Reference to a theme that should be used to inflate the
+     * <tr><td><code>{@link #AppCompatTheme_actionBarSplitStyle com.example.ventilator:actionBarSplitStyle}</code></td><td>Reference to a style for the split Action Bar.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarStyle com.example.ventilator:actionBarStyle}</code></td><td>Reference to a style for the Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarTabBarStyle com.example.ventilator:actionBarTabBarStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarTabStyle com.example.ventilator:actionBarTabStyle}</code></td><td>Default style for tabs within an action bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarTabTextStyle com.example.ventilator:actionBarTabTextStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarTheme com.example.ventilator:actionBarTheme}</code></td><td>Reference to a theme that should be used to inflate the
      * action bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarWidgetTheme swasit.zyna.ventilator:actionBarWidgetTheme}</code></td><td>Reference to a theme that should be used to inflate widgets
+     * <tr><td><code>{@link #AppCompatTheme_actionBarWidgetTheme com.example.ventilator:actionBarWidgetTheme}</code></td><td>Reference to a theme that should be used to inflate widgets
      * and layouts destined for the action bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionButtonStyle swasit.zyna.ventilator:actionButtonStyle}</code></td><td>Default action button style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionDropDownStyle swasit.zyna.ventilator:actionDropDownStyle}</code></td><td>Default ActionBar dropdown style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionMenuTextAppearance swasit.zyna.ventilator:actionMenuTextAppearance}</code></td><td>TextAppearance style that will be applied to text that
+     * <tr><td><code>{@link #AppCompatTheme_actionButtonStyle com.example.ventilator:actionButtonStyle}</code></td><td>Default action button style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionDropDownStyle com.example.ventilator:actionDropDownStyle}</code></td><td>Default ActionBar dropdown style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionMenuTextAppearance com.example.ventilator:actionMenuTextAppearance}</code></td><td>TextAppearance style that will be applied to text that
      * appears within action menu items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionMenuTextColor swasit.zyna.ventilator:actionMenuTextColor}</code></td><td>Color for text that appears within action menu items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeBackground swasit.zyna.ventilator:actionModeBackground}</code></td><td>Background drawable to use for action mode UI</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeCloseButtonStyle swasit.zyna.ventilator:actionModeCloseButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeCloseDrawable swasit.zyna.ventilator:actionModeCloseDrawable}</code></td><td>Drawable to use for the close action mode button</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeCopyDrawable swasit.zyna.ventilator:actionModeCopyDrawable}</code></td><td>Drawable to use for the Copy action button in Contextual Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeCutDrawable swasit.zyna.ventilator:actionModeCutDrawable}</code></td><td>Drawable to use for the Cut action button in Contextual Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeFindDrawable swasit.zyna.ventilator:actionModeFindDrawable}</code></td><td>Drawable to use for the Find action button in WebView selection action modes</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModePasteDrawable swasit.zyna.ventilator:actionModePasteDrawable}</code></td><td>Drawable to use for the Paste action button in Contextual Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModePopupWindowStyle swasit.zyna.ventilator:actionModePopupWindowStyle}</code></td><td>PopupWindow style to use for action modes when showing as a window overlay.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeSelectAllDrawable swasit.zyna.ventilator:actionModeSelectAllDrawable}</code></td><td>Drawable to use for the Select all action button in Contextual Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeShareDrawable swasit.zyna.ventilator:actionModeShareDrawable}</code></td><td>Drawable to use for the Share action button in WebView selection action modes</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeSplitBackground swasit.zyna.ventilator:actionModeSplitBackground}</code></td><td>Background drawable to use for action mode UI in the lower split bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeStyle swasit.zyna.ventilator:actionModeStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeWebSearchDrawable swasit.zyna.ventilator:actionModeWebSearchDrawable}</code></td><td>Drawable to use for the Web Search action button in WebView selection action modes</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionOverflowButtonStyle swasit.zyna.ventilator:actionOverflowButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionOverflowMenuStyle swasit.zyna.ventilator:actionOverflowMenuStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_activityChooserViewStyle swasit.zyna.ventilator:activityChooserViewStyle}</code></td><td>Default ActivityChooserView style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_alertDialogButtonGroupStyle swasit.zyna.ventilator:alertDialogButtonGroupStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_alertDialogCenterButtons swasit.zyna.ventilator:alertDialogCenterButtons}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_alertDialogStyle swasit.zyna.ventilator:alertDialogStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_alertDialogTheme swasit.zyna.ventilator:alertDialogTheme}</code></td><td>Theme to use for alert dialogs spawned from this theme.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_autoCompleteTextViewStyle swasit.zyna.ventilator:autoCompleteTextViewStyle}</code></td><td>Default AutoCompleteTextView style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_borderlessButtonStyle swasit.zyna.ventilator:borderlessButtonStyle}</code></td><td>Style for buttons without an explicit border, often used in groups.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarButtonStyle swasit.zyna.ventilator:buttonBarButtonStyle}</code></td><td>Style for buttons within button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarNegativeButtonStyle swasit.zyna.ventilator:buttonBarNegativeButtonStyle}</code></td><td>Style for the "negative" buttons within button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarNeutralButtonStyle swasit.zyna.ventilator:buttonBarNeutralButtonStyle}</code></td><td>Style for the "neutral" buttons within button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarPositiveButtonStyle swasit.zyna.ventilator:buttonBarPositiveButtonStyle}</code></td><td>Style for the "positive" buttons within button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarStyle swasit.zyna.ventilator:buttonBarStyle}</code></td><td>Style for button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonStyle swasit.zyna.ventilator:buttonStyle}</code></td><td>Normal Button style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonStyleSmall swasit.zyna.ventilator:buttonStyleSmall}</code></td><td>Small Button style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_checkboxStyle swasit.zyna.ventilator:checkboxStyle}</code></td><td>Default Checkbox style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_checkedTextViewStyle swasit.zyna.ventilator:checkedTextViewStyle}</code></td><td>Default CheckedTextView style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorAccent swasit.zyna.ventilator:colorAccent}</code></td><td>Bright complement to the primary branding color.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorBackgroundFloating swasit.zyna.ventilator:colorBackgroundFloating}</code></td><td>Default color of background imagery for floating components, ex.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorButtonNormal swasit.zyna.ventilator:colorButtonNormal}</code></td><td>The color applied to framework buttons in their normal state.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorControlActivated swasit.zyna.ventilator:colorControlActivated}</code></td><td>The color applied to framework controls in their activated (ex.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorControlHighlight swasit.zyna.ventilator:colorControlHighlight}</code></td><td>The color applied to framework control highlights (ex.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorControlNormal swasit.zyna.ventilator:colorControlNormal}</code></td><td>The color applied to framework controls in their normal state.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorError swasit.zyna.ventilator:colorError}</code></td><td>Color used for error states and things that need to be drawn to
+     * <tr><td><code>{@link #AppCompatTheme_actionMenuTextColor com.example.ventilator:actionMenuTextColor}</code></td><td>Color for text that appears within action menu items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeBackground com.example.ventilator:actionModeBackground}</code></td><td>Background drawable to use for action mode UI</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeCloseButtonStyle com.example.ventilator:actionModeCloseButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeCloseDrawable com.example.ventilator:actionModeCloseDrawable}</code></td><td>Drawable to use for the close action mode button</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeCopyDrawable com.example.ventilator:actionModeCopyDrawable}</code></td><td>Drawable to use for the Copy action button in Contextual Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeCutDrawable com.example.ventilator:actionModeCutDrawable}</code></td><td>Drawable to use for the Cut action button in Contextual Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeFindDrawable com.example.ventilator:actionModeFindDrawable}</code></td><td>Drawable to use for the Find action button in WebView selection action modes</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModePasteDrawable com.example.ventilator:actionModePasteDrawable}</code></td><td>Drawable to use for the Paste action button in Contextual Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModePopupWindowStyle com.example.ventilator:actionModePopupWindowStyle}</code></td><td>PopupWindow style to use for action modes when showing as a window overlay.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeSelectAllDrawable com.example.ventilator:actionModeSelectAllDrawable}</code></td><td>Drawable to use for the Select all action button in Contextual Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeShareDrawable com.example.ventilator:actionModeShareDrawable}</code></td><td>Drawable to use for the Share action button in WebView selection action modes</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeSplitBackground com.example.ventilator:actionModeSplitBackground}</code></td><td>Background drawable to use for action mode UI in the lower split bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeStyle com.example.ventilator:actionModeStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeWebSearchDrawable com.example.ventilator:actionModeWebSearchDrawable}</code></td><td>Drawable to use for the Web Search action button in WebView selection action modes</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionOverflowButtonStyle com.example.ventilator:actionOverflowButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionOverflowMenuStyle com.example.ventilator:actionOverflowMenuStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_activityChooserViewStyle com.example.ventilator:activityChooserViewStyle}</code></td><td>Default ActivityChooserView style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_alertDialogButtonGroupStyle com.example.ventilator:alertDialogButtonGroupStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_alertDialogCenterButtons com.example.ventilator:alertDialogCenterButtons}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_alertDialogStyle com.example.ventilator:alertDialogStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_alertDialogTheme com.example.ventilator:alertDialogTheme}</code></td><td>Theme to use for alert dialogs spawned from this theme.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_autoCompleteTextViewStyle com.example.ventilator:autoCompleteTextViewStyle}</code></td><td>Default AutoCompleteTextView style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_borderlessButtonStyle com.example.ventilator:borderlessButtonStyle}</code></td><td>Style for buttons without an explicit border, often used in groups.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarButtonStyle com.example.ventilator:buttonBarButtonStyle}</code></td><td>Style for buttons within button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarNegativeButtonStyle com.example.ventilator:buttonBarNegativeButtonStyle}</code></td><td>Style for the "negative" buttons within button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarNeutralButtonStyle com.example.ventilator:buttonBarNeutralButtonStyle}</code></td><td>Style for the "neutral" buttons within button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarPositiveButtonStyle com.example.ventilator:buttonBarPositiveButtonStyle}</code></td><td>Style for the "positive" buttons within button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarStyle com.example.ventilator:buttonBarStyle}</code></td><td>Style for button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonStyle com.example.ventilator:buttonStyle}</code></td><td>Normal Button style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonStyleSmall com.example.ventilator:buttonStyleSmall}</code></td><td>Small Button style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_checkboxStyle com.example.ventilator:checkboxStyle}</code></td><td>Default Checkbox style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_checkedTextViewStyle com.example.ventilator:checkedTextViewStyle}</code></td><td>Default CheckedTextView style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorAccent com.example.ventilator:colorAccent}</code></td><td>Bright complement to the primary branding color.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorBackgroundFloating com.example.ventilator:colorBackgroundFloating}</code></td><td>Default color of background imagery for floating components, ex.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorButtonNormal com.example.ventilator:colorButtonNormal}</code></td><td>The color applied to framework buttons in their normal state.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorControlActivated com.example.ventilator:colorControlActivated}</code></td><td>The color applied to framework controls in their activated (ex.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorControlHighlight com.example.ventilator:colorControlHighlight}</code></td><td>The color applied to framework control highlights (ex.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorControlNormal com.example.ventilator:colorControlNormal}</code></td><td>The color applied to framework controls in their normal state.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorError com.example.ventilator:colorError}</code></td><td>Color used for error states and things that need to be drawn to
      * the user's attention.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorPrimary swasit.zyna.ventilator:colorPrimary}</code></td><td>The primary branding color for the app.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorPrimaryDark swasit.zyna.ventilator:colorPrimaryDark}</code></td><td>Dark variant of the primary branding color.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorSwitchThumbNormal swasit.zyna.ventilator:colorSwitchThumbNormal}</code></td><td>The color applied to framework switch thumbs in their normal state.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_controlBackground swasit.zyna.ventilator:controlBackground}</code></td><td>The background used by framework controls.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dialogCornerRadius swasit.zyna.ventilator:dialogCornerRadius}</code></td><td>Preferred corner radius of dialogs.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dialogPreferredPadding swasit.zyna.ventilator:dialogPreferredPadding}</code></td><td>Preferred padding for dialog content.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dialogTheme swasit.zyna.ventilator:dialogTheme}</code></td><td>Theme to use for dialogs spawned from this theme.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dividerHorizontal swasit.zyna.ventilator:dividerHorizontal}</code></td><td>A drawable that may be used as a horizontal divider between visual elements.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dividerVertical swasit.zyna.ventilator:dividerVertical}</code></td><td>A drawable that may be used as a vertical divider between visual elements.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dropDownListViewStyle swasit.zyna.ventilator:dropDownListViewStyle}</code></td><td>ListPopupWindow compatibility</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dropdownListPreferredItemHeight swasit.zyna.ventilator:dropdownListPreferredItemHeight}</code></td><td>The preferred item height for dropdown lists.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_editTextBackground swasit.zyna.ventilator:editTextBackground}</code></td><td>EditText background drawable.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_editTextColor swasit.zyna.ventilator:editTextColor}</code></td><td>EditText text foreground color.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_editTextStyle swasit.zyna.ventilator:editTextStyle}</code></td><td>Default EditText style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_homeAsUpIndicator swasit.zyna.ventilator:homeAsUpIndicator}</code></td><td>Specifies a drawable to use for the 'home as up' indicator.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_imageButtonStyle swasit.zyna.ventilator:imageButtonStyle}</code></td><td>ImageButton background drawable.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listChoiceBackgroundIndicator swasit.zyna.ventilator:listChoiceBackgroundIndicator}</code></td><td>Drawable used as a background for selected list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listChoiceIndicatorMultipleAnimated swasit.zyna.ventilator:listChoiceIndicatorMultipleAnimated}</code></td><td>Animated Drawable to use for single choice indicators.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listChoiceIndicatorSingleAnimated swasit.zyna.ventilator:listChoiceIndicatorSingleAnimated}</code></td><td>Animated Drawable to use for multiple choice indicators.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listDividerAlertDialog swasit.zyna.ventilator:listDividerAlertDialog}</code></td><td>The list divider used in alert dialogs.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listMenuViewStyle swasit.zyna.ventilator:listMenuViewStyle}</code></td><td>Default menu-style ListView style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPopupWindowStyle swasit.zyna.ventilator:listPopupWindowStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeight swasit.zyna.ventilator:listPreferredItemHeight}</code></td><td>The preferred list item height.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeightLarge swasit.zyna.ventilator:listPreferredItemHeightLarge}</code></td><td>A larger, more robust list item height.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeightSmall swasit.zyna.ventilator:listPreferredItemHeightSmall}</code></td><td>A smaller, sleeker list item height.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingEnd swasit.zyna.ventilator:listPreferredItemPaddingEnd}</code></td><td>The preferred padding along the end edge of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingLeft swasit.zyna.ventilator:listPreferredItemPaddingLeft}</code></td><td>The preferred padding along the left edge of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingRight swasit.zyna.ventilator:listPreferredItemPaddingRight}</code></td><td>The preferred padding along the right edge of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingStart swasit.zyna.ventilator:listPreferredItemPaddingStart}</code></td><td>The preferred padding along the start edge of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_panelBackground swasit.zyna.ventilator:panelBackground}</code></td><td>The background of a panel when it is inset from the left and right edges of the screen.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_panelMenuListTheme swasit.zyna.ventilator:panelMenuListTheme}</code></td><td>Default Panel Menu style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_panelMenuListWidth swasit.zyna.ventilator:panelMenuListWidth}</code></td><td>Default Panel Menu width.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_popupMenuStyle swasit.zyna.ventilator:popupMenuStyle}</code></td><td>Default PopupMenu style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_popupWindowStyle swasit.zyna.ventilator:popupWindowStyle}</code></td><td>Default PopupWindow style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_radioButtonStyle swasit.zyna.ventilator:radioButtonStyle}</code></td><td>Default RadioButton style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyle swasit.zyna.ventilator:ratingBarStyle}</code></td><td>Default RatingBar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyleIndicator swasit.zyna.ventilator:ratingBarStyleIndicator}</code></td><td>Indicator RatingBar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyleSmall swasit.zyna.ventilator:ratingBarStyleSmall}</code></td><td>Small indicator RatingBar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_searchViewStyle swasit.zyna.ventilator:searchViewStyle}</code></td><td>Style for the search query widget.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_seekBarStyle swasit.zyna.ventilator:seekBarStyle}</code></td><td>Default SeekBar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_selectableItemBackground swasit.zyna.ventilator:selectableItemBackground}</code></td><td>A style that may be applied to buttons or other selectable items
+     * <tr><td><code>{@link #AppCompatTheme_colorPrimary com.example.ventilator:colorPrimary}</code></td><td>The primary branding color for the app.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorPrimaryDark com.example.ventilator:colorPrimaryDark}</code></td><td>Dark variant of the primary branding color.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorSwitchThumbNormal com.example.ventilator:colorSwitchThumbNormal}</code></td><td>The color applied to framework switch thumbs in their normal state.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_controlBackground com.example.ventilator:controlBackground}</code></td><td>The background used by framework controls.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dialogCornerRadius com.example.ventilator:dialogCornerRadius}</code></td><td>Preferred corner radius of dialogs.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dialogPreferredPadding com.example.ventilator:dialogPreferredPadding}</code></td><td>Preferred padding for dialog content.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dialogTheme com.example.ventilator:dialogTheme}</code></td><td>Theme to use for dialogs spawned from this theme.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dividerHorizontal com.example.ventilator:dividerHorizontal}</code></td><td>A drawable that may be used as a horizontal divider between visual elements.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dividerVertical com.example.ventilator:dividerVertical}</code></td><td>A drawable that may be used as a vertical divider between visual elements.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dropDownListViewStyle com.example.ventilator:dropDownListViewStyle}</code></td><td>ListPopupWindow compatibility</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dropdownListPreferredItemHeight com.example.ventilator:dropdownListPreferredItemHeight}</code></td><td>The preferred item height for dropdown lists.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_editTextBackground com.example.ventilator:editTextBackground}</code></td><td>EditText background drawable.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_editTextColor com.example.ventilator:editTextColor}</code></td><td>EditText text foreground color.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_editTextStyle com.example.ventilator:editTextStyle}</code></td><td>Default EditText style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_homeAsUpIndicator com.example.ventilator:homeAsUpIndicator}</code></td><td>Specifies a drawable to use for the 'home as up' indicator.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_imageButtonStyle com.example.ventilator:imageButtonStyle}</code></td><td>ImageButton background drawable.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listChoiceBackgroundIndicator com.example.ventilator:listChoiceBackgroundIndicator}</code></td><td>Drawable used as a background for selected list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listChoiceIndicatorMultipleAnimated com.example.ventilator:listChoiceIndicatorMultipleAnimated}</code></td><td>Animated Drawable to use for single choice indicators.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listChoiceIndicatorSingleAnimated com.example.ventilator:listChoiceIndicatorSingleAnimated}</code></td><td>Animated Drawable to use for multiple choice indicators.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listDividerAlertDialog com.example.ventilator:listDividerAlertDialog}</code></td><td>The list divider used in alert dialogs.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listMenuViewStyle com.example.ventilator:listMenuViewStyle}</code></td><td>Default menu-style ListView style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPopupWindowStyle com.example.ventilator:listPopupWindowStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeight com.example.ventilator:listPreferredItemHeight}</code></td><td>The preferred list item height.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeightLarge com.example.ventilator:listPreferredItemHeightLarge}</code></td><td>A larger, more robust list item height.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeightSmall com.example.ventilator:listPreferredItemHeightSmall}</code></td><td>A smaller, sleeker list item height.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingEnd com.example.ventilator:listPreferredItemPaddingEnd}</code></td><td>The preferred padding along the end edge of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingLeft com.example.ventilator:listPreferredItemPaddingLeft}</code></td><td>The preferred padding along the left edge of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingRight com.example.ventilator:listPreferredItemPaddingRight}</code></td><td>The preferred padding along the right edge of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingStart com.example.ventilator:listPreferredItemPaddingStart}</code></td><td>The preferred padding along the start edge of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_panelBackground com.example.ventilator:panelBackground}</code></td><td>The background of a panel when it is inset from the left and right edges of the screen.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_panelMenuListTheme com.example.ventilator:panelMenuListTheme}</code></td><td>Default Panel Menu style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_panelMenuListWidth com.example.ventilator:panelMenuListWidth}</code></td><td>Default Panel Menu width.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_popupMenuStyle com.example.ventilator:popupMenuStyle}</code></td><td>Default PopupMenu style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_popupWindowStyle com.example.ventilator:popupWindowStyle}</code></td><td>Default PopupWindow style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_radioButtonStyle com.example.ventilator:radioButtonStyle}</code></td><td>Default RadioButton style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyle com.example.ventilator:ratingBarStyle}</code></td><td>Default RatingBar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyleIndicator com.example.ventilator:ratingBarStyleIndicator}</code></td><td>Indicator RatingBar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyleSmall com.example.ventilator:ratingBarStyleSmall}</code></td><td>Small indicator RatingBar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_searchViewStyle com.example.ventilator:searchViewStyle}</code></td><td>Style for the search query widget.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_seekBarStyle com.example.ventilator:seekBarStyle}</code></td><td>Default SeekBar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_selectableItemBackground com.example.ventilator:selectableItemBackground}</code></td><td>A style that may be applied to buttons or other selectable items
      * that should react to pressed and focus states, but that do not
      * have a clear visual border along the edges.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_selectableItemBackgroundBorderless swasit.zyna.ventilator:selectableItemBackgroundBorderless}</code></td><td>Background drawable for borderless standalone items that need focus/pressed states.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_spinnerDropDownItemStyle swasit.zyna.ventilator:spinnerDropDownItemStyle}</code></td><td>Default Spinner style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_spinnerStyle swasit.zyna.ventilator:spinnerStyle}</code></td><td>Default Spinner style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_switchStyle swasit.zyna.ventilator:switchStyle}</code></td><td>Default style for the Switch widget.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceLargePopupMenu swasit.zyna.ventilator:textAppearanceLargePopupMenu}</code></td><td>Text color, typeface, size, and style for the text inside of a popup menu.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItem swasit.zyna.ventilator:textAppearanceListItem}</code></td><td>The preferred TextAppearance for the primary text of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItemSecondary swasit.zyna.ventilator:textAppearanceListItemSecondary}</code></td><td>The preferred TextAppearance for the secondary text of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItemSmall swasit.zyna.ventilator:textAppearanceListItemSmall}</code></td><td>The preferred TextAppearance for the primary text of small list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearancePopupMenuHeader swasit.zyna.ventilator:textAppearancePopupMenuHeader}</code></td><td>Text color, typeface, size, and style for header text inside of a popup menu.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSearchResultSubtitle swasit.zyna.ventilator:textAppearanceSearchResultSubtitle}</code></td><td>Text color, typeface, size, and style for system search result subtitle.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSearchResultTitle swasit.zyna.ventilator:textAppearanceSearchResultTitle}</code></td><td>Text color, typeface, size, and style for system search result title.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSmallPopupMenu swasit.zyna.ventilator:textAppearanceSmallPopupMenu}</code></td><td>Text color, typeface, size, and style for small text inside of a popup menu.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textColorAlertDialogListItem swasit.zyna.ventilator:textColorAlertDialogListItem}</code></td><td>Color of list item text in alert dialogs.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textColorSearchUrl swasit.zyna.ventilator:textColorSearchUrl}</code></td><td>Text color for urls in search suggestions, used by things like global search</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_toolbarNavigationButtonStyle swasit.zyna.ventilator:toolbarNavigationButtonStyle}</code></td><td>Default Toolar NavigationButtonStyle</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_toolbarStyle swasit.zyna.ventilator:toolbarStyle}</code></td><td>Default Toolbar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_tooltipForegroundColor swasit.zyna.ventilator:tooltipForegroundColor}</code></td><td>Foreground color to use for tooltips</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_tooltipFrameBackground swasit.zyna.ventilator:tooltipFrameBackground}</code></td><td>Background to use for tooltips</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_viewInflaterClass swasit.zyna.ventilator:viewInflaterClass}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowActionBar swasit.zyna.ventilator:windowActionBar}</code></td><td>Flag indicating whether this window should have an Action Bar
+     * <tr><td><code>{@link #AppCompatTheme_selectableItemBackgroundBorderless com.example.ventilator:selectableItemBackgroundBorderless}</code></td><td>Background drawable for borderless standalone items that need focus/pressed states.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_spinnerDropDownItemStyle com.example.ventilator:spinnerDropDownItemStyle}</code></td><td>Default Spinner style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_spinnerStyle com.example.ventilator:spinnerStyle}</code></td><td>Default Spinner style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_switchStyle com.example.ventilator:switchStyle}</code></td><td>Default style for the Switch widget.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceLargePopupMenu com.example.ventilator:textAppearanceLargePopupMenu}</code></td><td>Text color, typeface, size, and style for the text inside of a popup menu.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItem com.example.ventilator:textAppearanceListItem}</code></td><td>The preferred TextAppearance for the primary text of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItemSecondary com.example.ventilator:textAppearanceListItemSecondary}</code></td><td>The preferred TextAppearance for the secondary text of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItemSmall com.example.ventilator:textAppearanceListItemSmall}</code></td><td>The preferred TextAppearance for the primary text of small list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearancePopupMenuHeader com.example.ventilator:textAppearancePopupMenuHeader}</code></td><td>Text color, typeface, size, and style for header text inside of a popup menu.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSearchResultSubtitle com.example.ventilator:textAppearanceSearchResultSubtitle}</code></td><td>Text color, typeface, size, and style for system search result subtitle.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSearchResultTitle com.example.ventilator:textAppearanceSearchResultTitle}</code></td><td>Text color, typeface, size, and style for system search result title.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSmallPopupMenu com.example.ventilator:textAppearanceSmallPopupMenu}</code></td><td>Text color, typeface, size, and style for small text inside of a popup menu.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textColorAlertDialogListItem com.example.ventilator:textColorAlertDialogListItem}</code></td><td>Color of list item text in alert dialogs.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textColorSearchUrl com.example.ventilator:textColorSearchUrl}</code></td><td>Text color for urls in search suggestions, used by things like global search</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_toolbarNavigationButtonStyle com.example.ventilator:toolbarNavigationButtonStyle}</code></td><td>Default Toolar NavigationButtonStyle</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_toolbarStyle com.example.ventilator:toolbarStyle}</code></td><td>Default Toolbar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_tooltipForegroundColor com.example.ventilator:tooltipForegroundColor}</code></td><td>Foreground color to use for tooltips</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_tooltipFrameBackground com.example.ventilator:tooltipFrameBackground}</code></td><td>Background to use for tooltips</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_viewInflaterClass com.example.ventilator:viewInflaterClass}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_windowActionBar com.example.ventilator:windowActionBar}</code></td><td>Flag indicating whether this window should have an Action Bar
      * in place of the usual title bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowActionBarOverlay swasit.zyna.ventilator:windowActionBarOverlay}</code></td><td>Flag indicating whether this window's Action Bar should overlay
+     * <tr><td><code>{@link #AppCompatTheme_windowActionBarOverlay com.example.ventilator:windowActionBarOverlay}</code></td><td>Flag indicating whether this window's Action Bar should overlay
      * application content.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowActionModeOverlay swasit.zyna.ventilator:windowActionModeOverlay}</code></td><td>Flag indicating whether action modes should overlay window content
+     * <tr><td><code>{@link #AppCompatTheme_windowActionModeOverlay com.example.ventilator:windowActionModeOverlay}</code></td><td>Flag indicating whether action modes should overlay window content
      * when there is not reserved space for their UI (such as an Action Bar).</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowFixedHeightMajor swasit.zyna.ventilator:windowFixedHeightMajor}</code></td><td>A fixed height for the window along the major axis of the screen,
+     * <tr><td><code>{@link #AppCompatTheme_windowFixedHeightMajor com.example.ventilator:windowFixedHeightMajor}</code></td><td>A fixed height for the window along the major axis of the screen,
      * that is, when in portrait.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowFixedHeightMinor swasit.zyna.ventilator:windowFixedHeightMinor}</code></td><td>A fixed height for the window along the minor axis of the screen,
+     * <tr><td><code>{@link #AppCompatTheme_windowFixedHeightMinor com.example.ventilator:windowFixedHeightMinor}</code></td><td>A fixed height for the window along the minor axis of the screen,
      * that is, when in landscape.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowFixedWidthMajor swasit.zyna.ventilator:windowFixedWidthMajor}</code></td><td>A fixed width for the window along the major axis of the screen,
+     * <tr><td><code>{@link #AppCompatTheme_windowFixedWidthMajor com.example.ventilator:windowFixedWidthMajor}</code></td><td>A fixed width for the window along the major axis of the screen,
      * that is, when in landscape.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowFixedWidthMinor swasit.zyna.ventilator:windowFixedWidthMinor}</code></td><td>A fixed width for the window along the minor axis of the screen,
+     * <tr><td><code>{@link #AppCompatTheme_windowFixedWidthMinor com.example.ventilator:windowFixedWidthMinor}</code></td><td>A fixed width for the window along the minor axis of the screen,
      * that is, when in portrait.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowMinWidthMajor swasit.zyna.ventilator:windowMinWidthMajor}</code></td><td>The minimum width the window is allowed to be, along the major
+     * <tr><td><code>{@link #AppCompatTheme_windowMinWidthMajor com.example.ventilator:windowMinWidthMajor}</code></td><td>The minimum width the window is allowed to be, along the major
      * axis of the screen.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowMinWidthMinor swasit.zyna.ventilator:windowMinWidthMinor}</code></td><td>The minimum width the window is allowed to be, along the minor
+     * <tr><td><code>{@link #AppCompatTheme_windowMinWidthMinor com.example.ventilator:windowMinWidthMinor}</code></td><td>The minimum width the window is allowed to be, along the minor
      * axis of the screen.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowNoTitle swasit.zyna.ventilator:windowNoTitle}</code></td><td>Flag indicating whether there should be no title on this window.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_windowNoTitle com.example.ventilator:windowNoTitle}</code></td><td>Flag indicating whether there should be no title on this window.</td></tr>
      * </table>
      * @see #AppCompatTheme_android_windowIsFloating
      * @see #AppCompatTheme_android_windowAnimationStyle
@@ -8415,7 +8415,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarDivider
+     * @attr name com.example.ventilator:actionBarDivider
      */
     public static final int AppCompatTheme_actionBarDivider=2;
     /**
@@ -8428,7 +8428,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarItemBackground
+     * @attr name com.example.ventilator:actionBarItemBackground
      */
     public static final int AppCompatTheme_actionBarItemBackground=3;
     /**
@@ -8442,7 +8442,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarPopupTheme
+     * @attr name com.example.ventilator:actionBarPopupTheme
      */
     public static final int AppCompatTheme_actionBarPopupTheme=4;
     /**
@@ -8465,7 +8465,7 @@ public final class R {
      * <tr><td>wrap_content</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:actionBarSize
+     * @attr name com.example.ventilator:actionBarSize
      */
     public static final int AppCompatTheme_actionBarSize=5;
     /**
@@ -8481,7 +8481,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarSplitStyle
+     * @attr name com.example.ventilator:actionBarSplitStyle
      */
     public static final int AppCompatTheme_actionBarSplitStyle=6;
     /**
@@ -8494,11 +8494,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarStyle
+     * @attr name com.example.ventilator:actionBarStyle
      */
     public static final int AppCompatTheme_actionBarStyle=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#actionBarTabBarStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#actionBarTabBarStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8506,7 +8506,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarTabBarStyle
+     * @attr name com.example.ventilator:actionBarTabBarStyle
      */
     public static final int AppCompatTheme_actionBarTabBarStyle=8;
     /**
@@ -8519,11 +8519,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarTabStyle
+     * @attr name com.example.ventilator:actionBarTabStyle
      */
     public static final int AppCompatTheme_actionBarTabStyle=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#actionBarTabTextStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#actionBarTabTextStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8531,7 +8531,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarTabTextStyle
+     * @attr name com.example.ventilator:actionBarTabTextStyle
      */
     public static final int AppCompatTheme_actionBarTabTextStyle=10;
     /**
@@ -8546,7 +8546,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarTheme
+     * @attr name com.example.ventilator:actionBarTheme
      */
     public static final int AppCompatTheme_actionBarTheme=11;
     /**
@@ -8565,7 +8565,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionBarWidgetTheme
+     * @attr name com.example.ventilator:actionBarWidgetTheme
      */
     public static final int AppCompatTheme_actionBarWidgetTheme=12;
     /**
@@ -8578,7 +8578,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionButtonStyle
+     * @attr name com.example.ventilator:actionButtonStyle
      */
     public static final int AppCompatTheme_actionButtonStyle=13;
     /**
@@ -8591,7 +8591,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionDropDownStyle
+     * @attr name com.example.ventilator:actionDropDownStyle
      */
     public static final int AppCompatTheme_actionDropDownStyle=14;
     /**
@@ -8605,7 +8605,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionMenuTextAppearance
+     * @attr name com.example.ventilator:actionMenuTextAppearance
      */
     public static final int AppCompatTheme_actionMenuTextAppearance=15;
     /**
@@ -8621,7 +8621,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionMenuTextColor
+     * @attr name com.example.ventilator:actionMenuTextColor
      */
     public static final int AppCompatTheme_actionMenuTextColor=16;
     /**
@@ -8634,11 +8634,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeBackground
+     * @attr name com.example.ventilator:actionModeBackground
      */
     public static final int AppCompatTheme_actionModeBackground=17;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#actionModeCloseButtonStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#actionModeCloseButtonStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8646,7 +8646,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeCloseButtonStyle
+     * @attr name com.example.ventilator:actionModeCloseButtonStyle
      */
     public static final int AppCompatTheme_actionModeCloseButtonStyle=18;
     /**
@@ -8659,7 +8659,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeCloseDrawable
+     * @attr name com.example.ventilator:actionModeCloseDrawable
      */
     public static final int AppCompatTheme_actionModeCloseDrawable=19;
     /**
@@ -8672,7 +8672,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeCopyDrawable
+     * @attr name com.example.ventilator:actionModeCopyDrawable
      */
     public static final int AppCompatTheme_actionModeCopyDrawable=20;
     /**
@@ -8685,7 +8685,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeCutDrawable
+     * @attr name com.example.ventilator:actionModeCutDrawable
      */
     public static final int AppCompatTheme_actionModeCutDrawable=21;
     /**
@@ -8698,7 +8698,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeFindDrawable
+     * @attr name com.example.ventilator:actionModeFindDrawable
      */
     public static final int AppCompatTheme_actionModeFindDrawable=22;
     /**
@@ -8711,7 +8711,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModePasteDrawable
+     * @attr name com.example.ventilator:actionModePasteDrawable
      */
     public static final int AppCompatTheme_actionModePasteDrawable=23;
     /**
@@ -8724,7 +8724,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModePopupWindowStyle
+     * @attr name com.example.ventilator:actionModePopupWindowStyle
      */
     public static final int AppCompatTheme_actionModePopupWindowStyle=24;
     /**
@@ -8737,7 +8737,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeSelectAllDrawable
+     * @attr name com.example.ventilator:actionModeSelectAllDrawable
      */
     public static final int AppCompatTheme_actionModeSelectAllDrawable=25;
     /**
@@ -8750,7 +8750,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeShareDrawable
+     * @attr name com.example.ventilator:actionModeShareDrawable
      */
     public static final int AppCompatTheme_actionModeShareDrawable=26;
     /**
@@ -8763,11 +8763,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeSplitBackground
+     * @attr name com.example.ventilator:actionModeSplitBackground
      */
     public static final int AppCompatTheme_actionModeSplitBackground=27;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#actionModeStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#actionModeStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8775,7 +8775,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeStyle
+     * @attr name com.example.ventilator:actionModeStyle
      */
     public static final int AppCompatTheme_actionModeStyle=28;
     /**
@@ -8788,11 +8788,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionModeWebSearchDrawable
+     * @attr name com.example.ventilator:actionModeWebSearchDrawable
      */
     public static final int AppCompatTheme_actionModeWebSearchDrawable=29;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#actionOverflowButtonStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#actionOverflowButtonStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8800,11 +8800,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionOverflowButtonStyle
+     * @attr name com.example.ventilator:actionOverflowButtonStyle
      */
     public static final int AppCompatTheme_actionOverflowButtonStyle=30;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#actionOverflowMenuStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#actionOverflowMenuStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8812,7 +8812,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionOverflowMenuStyle
+     * @attr name com.example.ventilator:actionOverflowMenuStyle
      */
     public static final int AppCompatTheme_actionOverflowMenuStyle=31;
     /**
@@ -8825,11 +8825,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:activityChooserViewStyle
+     * @attr name com.example.ventilator:activityChooserViewStyle
      */
     public static final int AppCompatTheme_activityChooserViewStyle=32;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#alertDialogButtonGroupStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#alertDialogButtonGroupStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8837,21 +8837,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:alertDialogButtonGroupStyle
+     * @attr name com.example.ventilator:alertDialogButtonGroupStyle
      */
     public static final int AppCompatTheme_alertDialogButtonGroupStyle=33;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#alertDialogCenterButtons}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#alertDialogCenterButtons}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:alertDialogCenterButtons
+     * @attr name com.example.ventilator:alertDialogCenterButtons
      */
     public static final int AppCompatTheme_alertDialogCenterButtons=34;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#alertDialogStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#alertDialogStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8859,7 +8859,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:alertDialogStyle
+     * @attr name com.example.ventilator:alertDialogStyle
      */
     public static final int AppCompatTheme_alertDialogStyle=35;
     /**
@@ -8872,7 +8872,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:alertDialogTheme
+     * @attr name com.example.ventilator:alertDialogTheme
      */
     public static final int AppCompatTheme_alertDialogTheme=36;
     /**
@@ -8885,7 +8885,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:autoCompleteTextViewStyle
+     * @attr name com.example.ventilator:autoCompleteTextViewStyle
      */
     public static final int AppCompatTheme_autoCompleteTextViewStyle=37;
     /**
@@ -8898,7 +8898,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:borderlessButtonStyle
+     * @attr name com.example.ventilator:borderlessButtonStyle
      */
     public static final int AppCompatTheme_borderlessButtonStyle=38;
     /**
@@ -8911,7 +8911,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonBarButtonStyle
+     * @attr name com.example.ventilator:buttonBarButtonStyle
      */
     public static final int AppCompatTheme_buttonBarButtonStyle=39;
     /**
@@ -8924,7 +8924,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonBarNegativeButtonStyle
+     * @attr name com.example.ventilator:buttonBarNegativeButtonStyle
      */
     public static final int AppCompatTheme_buttonBarNegativeButtonStyle=40;
     /**
@@ -8937,7 +8937,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonBarNeutralButtonStyle
+     * @attr name com.example.ventilator:buttonBarNeutralButtonStyle
      */
     public static final int AppCompatTheme_buttonBarNeutralButtonStyle=41;
     /**
@@ -8950,7 +8950,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonBarPositiveButtonStyle
+     * @attr name com.example.ventilator:buttonBarPositiveButtonStyle
      */
     public static final int AppCompatTheme_buttonBarPositiveButtonStyle=42;
     /**
@@ -8963,7 +8963,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonBarStyle
+     * @attr name com.example.ventilator:buttonBarStyle
      */
     public static final int AppCompatTheme_buttonBarStyle=43;
     /**
@@ -8976,7 +8976,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonStyle
+     * @attr name com.example.ventilator:buttonStyle
      */
     public static final int AppCompatTheme_buttonStyle=44;
     /**
@@ -8989,7 +8989,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonStyleSmall
+     * @attr name com.example.ventilator:buttonStyleSmall
      */
     public static final int AppCompatTheme_buttonStyleSmall=45;
     /**
@@ -9002,7 +9002,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:checkboxStyle
+     * @attr name com.example.ventilator:checkboxStyle
      */
     public static final int AppCompatTheme_checkboxStyle=46;
     /**
@@ -9015,7 +9015,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:checkedTextViewStyle
+     * @attr name com.example.ventilator:checkedTextViewStyle
      */
     public static final int AppCompatTheme_checkedTextViewStyle=47;
     /**
@@ -9028,7 +9028,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorAccent
+     * @attr name com.example.ventilator:colorAccent
      */
     public static final int AppCompatTheme_colorAccent=48;
     /**
@@ -9040,7 +9040,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorBackgroundFloating
+     * @attr name com.example.ventilator:colorBackgroundFloating
      */
     public static final int AppCompatTheme_colorBackgroundFloating=49;
     /**
@@ -9052,7 +9052,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorButtonNormal
+     * @attr name com.example.ventilator:colorButtonNormal
      */
     public static final int AppCompatTheme_colorButtonNormal=50;
     /**
@@ -9064,7 +9064,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorControlActivated
+     * @attr name com.example.ventilator:colorControlActivated
      */
     public static final int AppCompatTheme_colorControlActivated=51;
     /**
@@ -9076,7 +9076,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorControlHighlight
+     * @attr name com.example.ventilator:colorControlHighlight
      */
     public static final int AppCompatTheme_colorControlHighlight=52;
     /**
@@ -9088,7 +9088,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorControlNormal
+     * @attr name com.example.ventilator:colorControlNormal
      */
     public static final int AppCompatTheme_colorControlNormal=53;
     /**
@@ -9105,7 +9105,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorError
+     * @attr name com.example.ventilator:colorError
      */
     public static final int AppCompatTheme_colorError=54;
     /**
@@ -9118,7 +9118,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorPrimary
+     * @attr name com.example.ventilator:colorPrimary
      */
     public static final int AppCompatTheme_colorPrimary=55;
     /**
@@ -9131,7 +9131,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorPrimaryDark
+     * @attr name com.example.ventilator:colorPrimaryDark
      */
     public static final int AppCompatTheme_colorPrimaryDark=56;
     /**
@@ -9143,7 +9143,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorSwitchThumbNormal
+     * @attr name com.example.ventilator:colorSwitchThumbNormal
      */
     public static final int AppCompatTheme_colorSwitchThumbNormal=57;
     /**
@@ -9156,7 +9156,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:controlBackground
+     * @attr name com.example.ventilator:controlBackground
      */
     public static final int AppCompatTheme_controlBackground=58;
     /**
@@ -9170,7 +9170,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:dialogCornerRadius
+     * @attr name com.example.ventilator:dialogCornerRadius
      */
     public static final int AppCompatTheme_dialogCornerRadius=59;
     /**
@@ -9184,7 +9184,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:dialogPreferredPadding
+     * @attr name com.example.ventilator:dialogPreferredPadding
      */
     public static final int AppCompatTheme_dialogPreferredPadding=60;
     /**
@@ -9197,7 +9197,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:dialogTheme
+     * @attr name com.example.ventilator:dialogTheme
      */
     public static final int AppCompatTheme_dialogTheme=61;
     /**
@@ -9210,7 +9210,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:dividerHorizontal
+     * @attr name com.example.ventilator:dividerHorizontal
      */
     public static final int AppCompatTheme_dividerHorizontal=62;
     /**
@@ -9223,7 +9223,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:dividerVertical
+     * @attr name com.example.ventilator:dividerVertical
      */
     public static final int AppCompatTheme_dividerVertical=63;
     /**
@@ -9236,7 +9236,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:dropDownListViewStyle
+     * @attr name com.example.ventilator:dropDownListViewStyle
      */
     public static final int AppCompatTheme_dropDownListViewStyle=64;
     /**
@@ -9250,7 +9250,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:dropdownListPreferredItemHeight
+     * @attr name com.example.ventilator:dropdownListPreferredItemHeight
      */
     public static final int AppCompatTheme_dropdownListPreferredItemHeight=65;
     /**
@@ -9263,7 +9263,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:editTextBackground
+     * @attr name com.example.ventilator:editTextBackground
      */
     public static final int AppCompatTheme_editTextBackground=66;
     /**
@@ -9279,7 +9279,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:editTextColor
+     * @attr name com.example.ventilator:editTextColor
      */
     public static final int AppCompatTheme_editTextColor=67;
     /**
@@ -9292,7 +9292,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:editTextStyle
+     * @attr name com.example.ventilator:editTextStyle
      */
     public static final int AppCompatTheme_editTextStyle=68;
     /**
@@ -9305,7 +9305,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:homeAsUpIndicator
+     * @attr name com.example.ventilator:homeAsUpIndicator
      */
     public static final int AppCompatTheme_homeAsUpIndicator=69;
     /**
@@ -9318,7 +9318,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:imageButtonStyle
+     * @attr name com.example.ventilator:imageButtonStyle
      */
     public static final int AppCompatTheme_imageButtonStyle=70;
     /**
@@ -9331,7 +9331,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:listChoiceBackgroundIndicator
+     * @attr name com.example.ventilator:listChoiceBackgroundIndicator
      */
     public static final int AppCompatTheme_listChoiceBackgroundIndicator=71;
     /**
@@ -9344,7 +9344,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:listChoiceIndicatorMultipleAnimated
+     * @attr name com.example.ventilator:listChoiceIndicatorMultipleAnimated
      */
     public static final int AppCompatTheme_listChoiceIndicatorMultipleAnimated=72;
     /**
@@ -9357,7 +9357,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:listChoiceIndicatorSingleAnimated
+     * @attr name com.example.ventilator:listChoiceIndicatorSingleAnimated
      */
     public static final int AppCompatTheme_listChoiceIndicatorSingleAnimated=73;
     /**
@@ -9370,7 +9370,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:listDividerAlertDialog
+     * @attr name com.example.ventilator:listDividerAlertDialog
      */
     public static final int AppCompatTheme_listDividerAlertDialog=74;
     /**
@@ -9383,11 +9383,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:listMenuViewStyle
+     * @attr name com.example.ventilator:listMenuViewStyle
      */
     public static final int AppCompatTheme_listMenuViewStyle=75;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#listPopupWindowStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#listPopupWindowStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -9395,7 +9395,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:listPopupWindowStyle
+     * @attr name com.example.ventilator:listPopupWindowStyle
      */
     public static final int AppCompatTheme_listPopupWindowStyle=76;
     /**
@@ -9409,7 +9409,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:listPreferredItemHeight
+     * @attr name com.example.ventilator:listPreferredItemHeight
      */
     public static final int AppCompatTheme_listPreferredItemHeight=77;
     /**
@@ -9423,7 +9423,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:listPreferredItemHeightLarge
+     * @attr name com.example.ventilator:listPreferredItemHeightLarge
      */
     public static final int AppCompatTheme_listPreferredItemHeightLarge=78;
     /**
@@ -9437,7 +9437,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:listPreferredItemHeightSmall
+     * @attr name com.example.ventilator:listPreferredItemHeightSmall
      */
     public static final int AppCompatTheme_listPreferredItemHeightSmall=79;
     /**
@@ -9451,7 +9451,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:listPreferredItemPaddingEnd
+     * @attr name com.example.ventilator:listPreferredItemPaddingEnd
      */
     public static final int AppCompatTheme_listPreferredItemPaddingEnd=80;
     /**
@@ -9465,7 +9465,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:listPreferredItemPaddingLeft
+     * @attr name com.example.ventilator:listPreferredItemPaddingLeft
      */
     public static final int AppCompatTheme_listPreferredItemPaddingLeft=81;
     /**
@@ -9479,7 +9479,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:listPreferredItemPaddingRight
+     * @attr name com.example.ventilator:listPreferredItemPaddingRight
      */
     public static final int AppCompatTheme_listPreferredItemPaddingRight=82;
     /**
@@ -9493,7 +9493,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:listPreferredItemPaddingStart
+     * @attr name com.example.ventilator:listPreferredItemPaddingStart
      */
     public static final int AppCompatTheme_listPreferredItemPaddingStart=83;
     /**
@@ -9506,7 +9506,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:panelBackground
+     * @attr name com.example.ventilator:panelBackground
      */
     public static final int AppCompatTheme_panelBackground=84;
     /**
@@ -9519,7 +9519,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:panelMenuListTheme
+     * @attr name com.example.ventilator:panelMenuListTheme
      */
     public static final int AppCompatTheme_panelMenuListTheme=85;
     /**
@@ -9533,7 +9533,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:panelMenuListWidth
+     * @attr name com.example.ventilator:panelMenuListWidth
      */
     public static final int AppCompatTheme_panelMenuListWidth=86;
     /**
@@ -9546,7 +9546,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:popupMenuStyle
+     * @attr name com.example.ventilator:popupMenuStyle
      */
     public static final int AppCompatTheme_popupMenuStyle=87;
     /**
@@ -9559,7 +9559,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:popupWindowStyle
+     * @attr name com.example.ventilator:popupWindowStyle
      */
     public static final int AppCompatTheme_popupWindowStyle=88;
     /**
@@ -9572,7 +9572,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:radioButtonStyle
+     * @attr name com.example.ventilator:radioButtonStyle
      */
     public static final int AppCompatTheme_radioButtonStyle=89;
     /**
@@ -9585,7 +9585,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:ratingBarStyle
+     * @attr name com.example.ventilator:ratingBarStyle
      */
     public static final int AppCompatTheme_ratingBarStyle=90;
     /**
@@ -9598,7 +9598,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:ratingBarStyleIndicator
+     * @attr name com.example.ventilator:ratingBarStyleIndicator
      */
     public static final int AppCompatTheme_ratingBarStyleIndicator=91;
     /**
@@ -9611,7 +9611,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:ratingBarStyleSmall
+     * @attr name com.example.ventilator:ratingBarStyleSmall
      */
     public static final int AppCompatTheme_ratingBarStyleSmall=92;
     /**
@@ -9624,7 +9624,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:searchViewStyle
+     * @attr name com.example.ventilator:searchViewStyle
      */
     public static final int AppCompatTheme_searchViewStyle=93;
     /**
@@ -9637,7 +9637,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:seekBarStyle
+     * @attr name com.example.ventilator:seekBarStyle
      */
     public static final int AppCompatTheme_seekBarStyle=94;
     /**
@@ -9652,7 +9652,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:selectableItemBackground
+     * @attr name com.example.ventilator:selectableItemBackground
      */
     public static final int AppCompatTheme_selectableItemBackground=95;
     /**
@@ -9665,7 +9665,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:selectableItemBackgroundBorderless
+     * @attr name com.example.ventilator:selectableItemBackgroundBorderless
      */
     public static final int AppCompatTheme_selectableItemBackgroundBorderless=96;
     /**
@@ -9678,7 +9678,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:spinnerDropDownItemStyle
+     * @attr name com.example.ventilator:spinnerDropDownItemStyle
      */
     public static final int AppCompatTheme_spinnerDropDownItemStyle=97;
     /**
@@ -9691,7 +9691,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:spinnerStyle
+     * @attr name com.example.ventilator:spinnerStyle
      */
     public static final int AppCompatTheme_spinnerStyle=98;
     /**
@@ -9704,7 +9704,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:switchStyle
+     * @attr name com.example.ventilator:switchStyle
      */
     public static final int AppCompatTheme_switchStyle=99;
     /**
@@ -9717,7 +9717,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceLargePopupMenu
+     * @attr name com.example.ventilator:textAppearanceLargePopupMenu
      */
     public static final int AppCompatTheme_textAppearanceLargePopupMenu=100;
     /**
@@ -9730,7 +9730,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceListItem
+     * @attr name com.example.ventilator:textAppearanceListItem
      */
     public static final int AppCompatTheme_textAppearanceListItem=101;
     /**
@@ -9743,7 +9743,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceListItemSecondary
+     * @attr name com.example.ventilator:textAppearanceListItemSecondary
      */
     public static final int AppCompatTheme_textAppearanceListItemSecondary=102;
     /**
@@ -9756,7 +9756,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceListItemSmall
+     * @attr name com.example.ventilator:textAppearanceListItemSmall
      */
     public static final int AppCompatTheme_textAppearanceListItemSmall=103;
     /**
@@ -9769,7 +9769,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearancePopupMenuHeader
+     * @attr name com.example.ventilator:textAppearancePopupMenuHeader
      */
     public static final int AppCompatTheme_textAppearancePopupMenuHeader=104;
     /**
@@ -9782,7 +9782,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceSearchResultSubtitle
+     * @attr name com.example.ventilator:textAppearanceSearchResultSubtitle
      */
     public static final int AppCompatTheme_textAppearanceSearchResultSubtitle=105;
     /**
@@ -9795,7 +9795,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceSearchResultTitle
+     * @attr name com.example.ventilator:textAppearanceSearchResultTitle
      */
     public static final int AppCompatTheme_textAppearanceSearchResultTitle=106;
     /**
@@ -9808,7 +9808,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceSmallPopupMenu
+     * @attr name com.example.ventilator:textAppearanceSmallPopupMenu
      */
     public static final int AppCompatTheme_textAppearanceSmallPopupMenu=107;
     /**
@@ -9824,7 +9824,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textColorAlertDialogListItem
+     * @attr name com.example.ventilator:textColorAlertDialogListItem
      */
     public static final int AppCompatTheme_textColorAlertDialogListItem=108;
     /**
@@ -9840,7 +9840,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textColorSearchUrl
+     * @attr name com.example.ventilator:textColorSearchUrl
      */
     public static final int AppCompatTheme_textColorSearchUrl=109;
     /**
@@ -9853,7 +9853,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:toolbarNavigationButtonStyle
+     * @attr name com.example.ventilator:toolbarNavigationButtonStyle
      */
     public static final int AppCompatTheme_toolbarNavigationButtonStyle=110;
     /**
@@ -9866,7 +9866,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:toolbarStyle
+     * @attr name com.example.ventilator:toolbarStyle
      */
     public static final int AppCompatTheme_toolbarStyle=111;
     /**
@@ -9882,7 +9882,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tooltipForegroundColor
+     * @attr name com.example.ventilator:tooltipForegroundColor
      */
     public static final int AppCompatTheme_tooltipForegroundColor=112;
     /**
@@ -9895,17 +9895,17 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tooltipFrameBackground
+     * @attr name com.example.ventilator:tooltipFrameBackground
      */
     public static final int AppCompatTheme_tooltipFrameBackground=113;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#viewInflaterClass}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#viewInflaterClass}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:viewInflaterClass
+     * @attr name com.example.ventilator:viewInflaterClass
      */
     public static final int AppCompatTheme_viewInflaterClass=114;
     /**
@@ -9917,7 +9917,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:windowActionBar
+     * @attr name com.example.ventilator:windowActionBar
      */
     public static final int AppCompatTheme_windowActionBar=115;
     /**
@@ -9930,7 +9930,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:windowActionBarOverlay
+     * @attr name com.example.ventilator:windowActionBarOverlay
      */
     public static final int AppCompatTheme_windowActionBarOverlay=116;
     /**
@@ -9942,7 +9942,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:windowActionModeOverlay
+     * @attr name com.example.ventilator:windowActionModeOverlay
      */
     public static final int AppCompatTheme_windowActionModeOverlay=117;
     /**
@@ -9962,7 +9962,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name swasit.zyna.ventilator:windowFixedHeightMajor
+     * @attr name com.example.ventilator:windowFixedHeightMajor
      */
     public static final int AppCompatTheme_windowFixedHeightMajor=118;
     /**
@@ -9982,7 +9982,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name swasit.zyna.ventilator:windowFixedHeightMinor
+     * @attr name com.example.ventilator:windowFixedHeightMinor
      */
     public static final int AppCompatTheme_windowFixedHeightMinor=119;
     /**
@@ -10002,7 +10002,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name swasit.zyna.ventilator:windowFixedWidthMajor
+     * @attr name com.example.ventilator:windowFixedWidthMajor
      */
     public static final int AppCompatTheme_windowFixedWidthMajor=120;
     /**
@@ -10022,7 +10022,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name swasit.zyna.ventilator:windowFixedWidthMinor
+     * @attr name com.example.ventilator:windowFixedWidthMinor
      */
     public static final int AppCompatTheme_windowFixedWidthMinor=121;
     /**
@@ -10043,7 +10043,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name swasit.zyna.ventilator:windowMinWidthMajor
+     * @attr name com.example.ventilator:windowMinWidthMajor
      */
     public static final int AppCompatTheme_windowMinWidthMajor=122;
     /**
@@ -10064,7 +10064,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name swasit.zyna.ventilator:windowMinWidthMinor
+     * @attr name com.example.ventilator:windowMinWidthMinor
      */
     public static final int AppCompatTheme_windowMinWidthMinor=123;
     /**
@@ -10075,7 +10075,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:windowNoTitle
+     * @attr name com.example.ventilator:windowNoTitle
      */
     public static final int AppCompatTheme_windowNoTitle=124;
     /**
@@ -10085,12 +10085,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #BottomAppBar_backgroundTint swasit.zyna.ventilator:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
-     * <tr><td><code>{@link #BottomAppBar_fabAlignmentMode swasit.zyna.ventilator:fabAlignmentMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomAppBar_fabCradleMargin swasit.zyna.ventilator:fabCradleMargin}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomAppBar_fabCradleRoundedCornerRadius swasit.zyna.ventilator:fabCradleRoundedCornerRadius}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomAppBar_fabCradleVerticalOffset swasit.zyna.ventilator:fabCradleVerticalOffset}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomAppBar_hideOnScroll swasit.zyna.ventilator:hideOnScroll}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_backgroundTint com.example.ventilator:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
+     * <tr><td><code>{@link #BottomAppBar_fabAlignmentMode com.example.ventilator:fabAlignmentMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_fabCradleMargin com.example.ventilator:fabCradleMargin}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_fabCradleRoundedCornerRadius com.example.ventilator:fabCradleRoundedCornerRadius}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_fabCradleVerticalOffset com.example.ventilator:fabCradleVerticalOffset}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_hideOnScroll com.example.ventilator:hideOnScroll}</code></td><td></td></tr>
      * </table>
      * @see #BottomAppBar_backgroundTint
      * @see #BottomAppBar_fabAlignmentMode
@@ -10112,11 +10112,11 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:backgroundTint
+     * @attr name com.example.ventilator:backgroundTint
      */
     public static final int BottomAppBar_backgroundTint=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fabAlignmentMode}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fabAlignmentMode}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -10129,11 +10129,11 @@ public final class R {
      * <tr><td>end</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:fabAlignmentMode
+     * @attr name com.example.ventilator:fabAlignmentMode
      */
     public static final int BottomAppBar_fabAlignmentMode=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fabCradleMargin}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fabCradleMargin}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10142,11 +10142,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:fabCradleMargin
+     * @attr name com.example.ventilator:fabCradleMargin
      */
     public static final int BottomAppBar_fabCradleMargin=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fabCradleRoundedCornerRadius}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fabCradleRoundedCornerRadius}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10155,11 +10155,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:fabCradleRoundedCornerRadius
+     * @attr name com.example.ventilator:fabCradleRoundedCornerRadius
      */
     public static final int BottomAppBar_fabCradleRoundedCornerRadius=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fabCradleVerticalOffset}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fabCradleVerticalOffset}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10168,17 +10168,17 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:fabCradleVerticalOffset
+     * @attr name com.example.ventilator:fabCradleVerticalOffset
      */
     public static final int BottomAppBar_fabCradleVerticalOffset=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#hideOnScroll}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#hideOnScroll}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:hideOnScroll
+     * @attr name com.example.ventilator:hideOnScroll
      */
     public static final int BottomAppBar_hideOnScroll=5;
     /**
@@ -10188,16 +10188,16 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #BottomNavigationView_elevation swasit.zyna.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemBackground swasit.zyna.ventilator:itemBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemHorizontalTranslationEnabled swasit.zyna.ventilator:itemHorizontalTranslationEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemIconSize swasit.zyna.ventilator:itemIconSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemIconTint swasit.zyna.ventilator:itemIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemTextAppearanceActive swasit.zyna.ventilator:itemTextAppearanceActive}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemTextAppearanceInactive swasit.zyna.ventilator:itemTextAppearanceInactive}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemTextColor swasit.zyna.ventilator:itemTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_labelVisibilityMode swasit.zyna.ventilator:labelVisibilityMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_menu swasit.zyna.ventilator:menu}</code></td><td>Menu resource to inflate to be shown in the toolbar</td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_elevation com.example.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemBackground com.example.ventilator:itemBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemHorizontalTranslationEnabled com.example.ventilator:itemHorizontalTranslationEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemIconSize com.example.ventilator:itemIconSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemIconTint com.example.ventilator:itemIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemTextAppearanceActive com.example.ventilator:itemTextAppearanceActive}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemTextAppearanceInactive com.example.ventilator:itemTextAppearanceInactive}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemTextColor com.example.ventilator:itemTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_labelVisibilityMode com.example.ventilator:labelVisibilityMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_menu com.example.ventilator:menu}</code></td><td>Menu resource to inflate to be shown in the toolbar</td></tr>
      * </table>
      * @see #BottomNavigationView_elevation
      * @see #BottomNavigationView_itemBackground
@@ -10226,11 +10226,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:elevation
+     * @attr name com.example.ventilator:elevation
      */
     public static final int BottomNavigationView_elevation=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemBackground}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemBackground}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10238,21 +10238,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemBackground
+     * @attr name com.example.ventilator:itemBackground
      */
     public static final int BottomNavigationView_itemBackground=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemHorizontalTranslationEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemHorizontalTranslationEnabled}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:itemHorizontalTranslationEnabled
+     * @attr name com.example.ventilator:itemHorizontalTranslationEnabled
      */
     public static final int BottomNavigationView_itemHorizontalTranslationEnabled=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemIconSize}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemIconSize}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10261,22 +10261,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:itemIconSize
+     * @attr name com.example.ventilator:itemIconSize
      */
     public static final int BottomNavigationView_itemIconSize=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemIconTint}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemIconTint}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemIconTint
+     * @attr name com.example.ventilator:itemIconTint
      */
     public static final int BottomNavigationView_itemIconTint=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemTextAppearanceActive}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemTextAppearanceActive}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10284,11 +10284,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemTextAppearanceActive
+     * @attr name com.example.ventilator:itemTextAppearanceActive
      */
     public static final int BottomNavigationView_itemTextAppearanceActive=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemTextAppearanceInactive}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemTextAppearanceInactive}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10296,22 +10296,22 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemTextAppearanceInactive
+     * @attr name com.example.ventilator:itemTextAppearanceInactive
      */
     public static final int BottomNavigationView_itemTextAppearanceInactive=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemTextColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemTextColor}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemTextColor
+     * @attr name com.example.ventilator:itemTextColor
      */
     public static final int BottomNavigationView_itemTextColor=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#labelVisibilityMode}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#labelVisibilityMode}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -10326,7 +10326,7 @@ public final class R {
      * <tr><td>unlabeled</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:labelVisibilityMode
+     * @attr name com.example.ventilator:labelVisibilityMode
      */
     public static final int BottomNavigationView_labelVisibilityMode=8;
     /**
@@ -10339,7 +10339,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:menu
+     * @attr name com.example.ventilator:menu
      */
     public static final int BottomNavigationView_menu=9;
     /**
@@ -10349,10 +10349,10 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_fitToContents swasit.zyna.ventilator:behavior_fitToContents}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_hideable swasit.zyna.ventilator:behavior_hideable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_peekHeight swasit.zyna.ventilator:behavior_peekHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_skipCollapsed swasit.zyna.ventilator:behavior_skipCollapsed}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_fitToContents com.example.ventilator:behavior_fitToContents}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_hideable com.example.ventilator:behavior_hideable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_peekHeight com.example.ventilator:behavior_peekHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_skipCollapsed com.example.ventilator:behavior_skipCollapsed}</code></td><td></td></tr>
      * </table>
      * @see #BottomSheetBehavior_Layout_behavior_fitToContents
      * @see #BottomSheetBehavior_Layout_behavior_hideable
@@ -10363,27 +10363,27 @@ public final class R {
       0x7f03003a, 0x7f03003b, 0x7f03003d, 0x7f03003e
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#behavior_fitToContents}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#behavior_fitToContents}
      * attribute's value can be found in the {@link #BottomSheetBehavior_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:behavior_fitToContents
+     * @attr name com.example.ventilator:behavior_fitToContents
      */
     public static final int BottomSheetBehavior_Layout_behavior_fitToContents=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#behavior_hideable}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#behavior_hideable}
      * attribute's value can be found in the {@link #BottomSheetBehavior_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:behavior_hideable
+     * @attr name com.example.ventilator:behavior_hideable
      */
     public static final int BottomSheetBehavior_Layout_behavior_hideable=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#behavior_peekHeight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#behavior_peekHeight}
      * attribute's value can be found in the {@link #BottomSheetBehavior_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10400,17 +10400,17 @@ public final class R {
      * <tr><td>auto</td><td>ffffffff</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:behavior_peekHeight
+     * @attr name com.example.ventilator:behavior_peekHeight
      */
     public static final int BottomSheetBehavior_Layout_behavior_peekHeight=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#behavior_skipCollapsed}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#behavior_skipCollapsed}
      * attribute's value can be found in the {@link #BottomSheetBehavior_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:behavior_skipCollapsed
+     * @attr name com.example.ventilator:behavior_skipCollapsed
      */
     public static final int BottomSheetBehavior_Layout_behavior_skipCollapsed=3;
     /**
@@ -10420,7 +10420,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ButtonBarLayout_allowStacking swasit.zyna.ventilator:allowStacking}</code></td><td>Whether to automatically stack the buttons when there is not
+     * <tr><td><code>{@link #ButtonBarLayout_allowStacking com.example.ventilator:allowStacking}</code></td><td>Whether to automatically stack the buttons when there is not
      * enough space to lay them out side-by-side.</td></tr>
      * </table>
      * @see #ButtonBarLayout_allowStacking
@@ -10437,7 +10437,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:allowStacking
+     * @attr name com.example.ventilator:allowStacking
      */
     public static final int ButtonBarLayout_allowStacking=0;
     /**
@@ -10449,17 +10449,17 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #CardView_android_minWidth android:minWidth}</code></td><td></td></tr>
      * <tr><td><code>{@link #CardView_android_minHeight android:minHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CardView_cardBackgroundColor swasit.zyna.ventilator:cardBackgroundColor}</code></td><td>Background color for CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_cardCornerRadius swasit.zyna.ventilator:cardCornerRadius}</code></td><td>Corner radius for CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_cardElevation swasit.zyna.ventilator:cardElevation}</code></td><td>Elevation for CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_cardMaxElevation swasit.zyna.ventilator:cardMaxElevation}</code></td><td>Maximum Elevation for CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_cardPreventCornerOverlap swasit.zyna.ventilator:cardPreventCornerOverlap}</code></td><td>Add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.</td></tr>
-     * <tr><td><code>{@link #CardView_cardUseCompatPadding swasit.zyna.ventilator:cardUseCompatPadding}</code></td><td>Add padding in API v21+ as well to have the same measurements with previous versions.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPadding swasit.zyna.ventilator:contentPadding}</code></td><td>Inner padding between the edges of the Card and children of the CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPaddingBottom swasit.zyna.ventilator:contentPaddingBottom}</code></td><td>Inner padding between the bottom edge of the Card and children of the CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPaddingLeft swasit.zyna.ventilator:contentPaddingLeft}</code></td><td>Inner padding between the left edge of the Card and children of the CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPaddingRight swasit.zyna.ventilator:contentPaddingRight}</code></td><td>Inner padding between the right edge of the Card and children of the CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPaddingTop swasit.zyna.ventilator:contentPaddingTop}</code></td><td>Inner padding between the top edge of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardBackgroundColor com.example.ventilator:cardBackgroundColor}</code></td><td>Background color for CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardCornerRadius com.example.ventilator:cardCornerRadius}</code></td><td>Corner radius for CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardElevation com.example.ventilator:cardElevation}</code></td><td>Elevation for CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardMaxElevation com.example.ventilator:cardMaxElevation}</code></td><td>Maximum Elevation for CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardPreventCornerOverlap com.example.ventilator:cardPreventCornerOverlap}</code></td><td>Add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.</td></tr>
+     * <tr><td><code>{@link #CardView_cardUseCompatPadding com.example.ventilator:cardUseCompatPadding}</code></td><td>Add padding in API v21+ as well to have the same measurements with previous versions.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPadding com.example.ventilator:contentPadding}</code></td><td>Inner padding between the edges of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPaddingBottom com.example.ventilator:contentPaddingBottom}</code></td><td>Inner padding between the bottom edge of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPaddingLeft com.example.ventilator:contentPaddingLeft}</code></td><td>Inner padding between the left edge of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPaddingRight com.example.ventilator:contentPaddingRight}</code></td><td>Inner padding between the right edge of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPaddingTop com.example.ventilator:contentPaddingTop}</code></td><td>Inner padding between the top edge of the Card and children of the CardView.</td></tr>
      * </table>
      * @see #CardView_android_minWidth
      * @see #CardView_android_minHeight
@@ -10518,7 +10518,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:cardBackgroundColor
+     * @attr name com.example.ventilator:cardBackgroundColor
      */
     public static final int CardView_cardBackgroundColor=2;
     /**
@@ -10532,7 +10532,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:cardCornerRadius
+     * @attr name com.example.ventilator:cardCornerRadius
      */
     public static final int CardView_cardCornerRadius=3;
     /**
@@ -10546,7 +10546,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:cardElevation
+     * @attr name com.example.ventilator:cardElevation
      */
     public static final int CardView_cardElevation=4;
     /**
@@ -10560,7 +10560,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:cardMaxElevation
+     * @attr name com.example.ventilator:cardMaxElevation
      */
     public static final int CardView_cardMaxElevation=5;
     /**
@@ -10571,7 +10571,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:cardPreventCornerOverlap
+     * @attr name com.example.ventilator:cardPreventCornerOverlap
      */
     public static final int CardView_cardPreventCornerOverlap=6;
     /**
@@ -10582,7 +10582,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:cardUseCompatPadding
+     * @attr name com.example.ventilator:cardUseCompatPadding
      */
     public static final int CardView_cardUseCompatPadding=7;
     /**
@@ -10596,7 +10596,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentPadding
+     * @attr name com.example.ventilator:contentPadding
      */
     public static final int CardView_contentPadding=8;
     /**
@@ -10610,7 +10610,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentPaddingBottom
+     * @attr name com.example.ventilator:contentPaddingBottom
      */
     public static final int CardView_contentPaddingBottom=9;
     /**
@@ -10624,7 +10624,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentPaddingLeft
+     * @attr name com.example.ventilator:contentPaddingLeft
      */
     public static final int CardView_contentPaddingLeft=10;
     /**
@@ -10638,7 +10638,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentPaddingRight
+     * @attr name com.example.ventilator:contentPaddingRight
      */
     public static final int CardView_contentPaddingRight=11;
     /**
@@ -10652,7 +10652,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentPaddingTop
+     * @attr name com.example.ventilator:contentPaddingTop
      */
     public static final int CardView_contentPaddingTop=12;
     /**
@@ -10667,35 +10667,35 @@ public final class R {
      * <tr><td><code>{@link #Chip_android_maxWidth android:maxWidth}</code></td><td></td></tr>
      * <tr><td><code>{@link #Chip_android_text android:text}</code></td><td></td></tr>
      * <tr><td><code>{@link #Chip_android_checkable android:checkable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_checkedIcon swasit.zyna.ventilator:checkedIcon}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_checkedIconEnabled swasit.zyna.ventilator:checkedIconEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_checkedIconVisible swasit.zyna.ventilator:checkedIconVisible}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipBackgroundColor swasit.zyna.ventilator:chipBackgroundColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipCornerRadius swasit.zyna.ventilator:chipCornerRadius}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipEndPadding swasit.zyna.ventilator:chipEndPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIcon swasit.zyna.ventilator:chipIcon}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIconEnabled swasit.zyna.ventilator:chipIconEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIconSize swasit.zyna.ventilator:chipIconSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIconTint swasit.zyna.ventilator:chipIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIconVisible swasit.zyna.ventilator:chipIconVisible}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipMinHeight swasit.zyna.ventilator:chipMinHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipStartPadding swasit.zyna.ventilator:chipStartPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipStrokeColor swasit.zyna.ventilator:chipStrokeColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipStrokeWidth swasit.zyna.ventilator:chipStrokeWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIcon swasit.zyna.ventilator:closeIcon}</code></td><td>Close button icon</td></tr>
-     * <tr><td><code>{@link #Chip_closeIconEnabled swasit.zyna.ventilator:closeIconEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconEndPadding swasit.zyna.ventilator:closeIconEndPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconSize swasit.zyna.ventilator:closeIconSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconStartPadding swasit.zyna.ventilator:closeIconStartPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconTint swasit.zyna.ventilator:closeIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconVisible swasit.zyna.ventilator:closeIconVisible}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_hideMotionSpec swasit.zyna.ventilator:hideMotionSpec}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_iconEndPadding swasit.zyna.ventilator:iconEndPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_iconStartPadding swasit.zyna.ventilator:iconStartPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_rippleColor swasit.zyna.ventilator:rippleColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_showMotionSpec swasit.zyna.ventilator:showMotionSpec}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_textEndPadding swasit.zyna.ventilator:textEndPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_textStartPadding swasit.zyna.ventilator:textStartPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_checkedIcon com.example.ventilator:checkedIcon}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_checkedIconEnabled com.example.ventilator:checkedIconEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_checkedIconVisible com.example.ventilator:checkedIconVisible}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipBackgroundColor com.example.ventilator:chipBackgroundColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipCornerRadius com.example.ventilator:chipCornerRadius}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipEndPadding com.example.ventilator:chipEndPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIcon com.example.ventilator:chipIcon}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIconEnabled com.example.ventilator:chipIconEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIconSize com.example.ventilator:chipIconSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIconTint com.example.ventilator:chipIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIconVisible com.example.ventilator:chipIconVisible}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipMinHeight com.example.ventilator:chipMinHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipStartPadding com.example.ventilator:chipStartPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipStrokeColor com.example.ventilator:chipStrokeColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipStrokeWidth com.example.ventilator:chipStrokeWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIcon com.example.ventilator:closeIcon}</code></td><td>Close button icon</td></tr>
+     * <tr><td><code>{@link #Chip_closeIconEnabled com.example.ventilator:closeIconEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconEndPadding com.example.ventilator:closeIconEndPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconSize com.example.ventilator:closeIconSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconStartPadding com.example.ventilator:closeIconStartPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconTint com.example.ventilator:closeIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconVisible com.example.ventilator:closeIconVisible}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_hideMotionSpec com.example.ventilator:hideMotionSpec}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_iconEndPadding com.example.ventilator:iconEndPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_iconStartPadding com.example.ventilator:iconStartPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_rippleColor com.example.ventilator:rippleColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_showMotionSpec com.example.ventilator:showMotionSpec}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_textEndPadding com.example.ventilator:textEndPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_textStartPadding com.example.ventilator:textStartPadding}</code></td><td></td></tr>
      * </table>
      * @see #Chip_android_textAppearance
      * @see #Chip_android_ellipsize
@@ -10809,7 +10809,7 @@ public final class R {
      */
     public static final int Chip_android_checkable=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#checkedIcon}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#checkedIcon}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10817,42 +10817,42 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:checkedIcon
+     * @attr name com.example.ventilator:checkedIcon
      */
     public static final int Chip_checkedIcon=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#checkedIconEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#checkedIconEnabled}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:checkedIconEnabled
+     * @attr name com.example.ventilator:checkedIconEnabled
      */
     public static final int Chip_checkedIconEnabled=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#checkedIconVisible}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#checkedIconVisible}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:checkedIconVisible
+     * @attr name com.example.ventilator:checkedIconVisible
      */
     public static final int Chip_checkedIconVisible=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipBackgroundColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipBackgroundColor}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:chipBackgroundColor
+     * @attr name com.example.ventilator:chipBackgroundColor
      */
     public static final int Chip_chipBackgroundColor=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipCornerRadius}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipCornerRadius}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10861,11 +10861,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipCornerRadius
+     * @attr name com.example.ventilator:chipCornerRadius
      */
     public static final int Chip_chipCornerRadius=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipEndPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipEndPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10874,11 +10874,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipEndPadding
+     * @attr name com.example.ventilator:chipEndPadding
      */
     public static final int Chip_chipEndPadding=10;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipIcon}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipIcon}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10886,21 +10886,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:chipIcon
+     * @attr name com.example.ventilator:chipIcon
      */
     public static final int Chip_chipIcon=11;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipIconEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipIconEnabled}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:chipIconEnabled
+     * @attr name com.example.ventilator:chipIconEnabled
      */
     public static final int Chip_chipIconEnabled=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipIconSize}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipIconSize}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10909,32 +10909,32 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipIconSize
+     * @attr name com.example.ventilator:chipIconSize
      */
     public static final int Chip_chipIconSize=13;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipIconTint}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipIconTint}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:chipIconTint
+     * @attr name com.example.ventilator:chipIconTint
      */
     public static final int Chip_chipIconTint=14;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipIconVisible}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipIconVisible}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:chipIconVisible
+     * @attr name com.example.ventilator:chipIconVisible
      */
     public static final int Chip_chipIconVisible=15;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipMinHeight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipMinHeight}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10943,11 +10943,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipMinHeight
+     * @attr name com.example.ventilator:chipMinHeight
      */
     public static final int Chip_chipMinHeight=16;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipStartPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipStartPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10956,22 +10956,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipStartPadding
+     * @attr name com.example.ventilator:chipStartPadding
      */
     public static final int Chip_chipStartPadding=17;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipStrokeColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipStrokeColor}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:chipStrokeColor
+     * @attr name com.example.ventilator:chipStrokeColor
      */
     public static final int Chip_chipStrokeColor=18;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipStrokeWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipStrokeWidth}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10980,7 +10980,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipStrokeWidth
+     * @attr name com.example.ventilator:chipStrokeWidth
      */
     public static final int Chip_chipStrokeWidth=19;
     /**
@@ -10993,21 +10993,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:closeIcon
+     * @attr name com.example.ventilator:closeIcon
      */
     public static final int Chip_closeIcon=20;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#closeIconEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#closeIconEnabled}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:closeIconEnabled
+     * @attr name com.example.ventilator:closeIconEnabled
      */
     public static final int Chip_closeIconEnabled=21;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#closeIconEndPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#closeIconEndPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11016,11 +11016,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:closeIconEndPadding
+     * @attr name com.example.ventilator:closeIconEndPadding
      */
     public static final int Chip_closeIconEndPadding=22;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#closeIconSize}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#closeIconSize}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11029,11 +11029,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:closeIconSize
+     * @attr name com.example.ventilator:closeIconSize
      */
     public static final int Chip_closeIconSize=23;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#closeIconStartPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#closeIconStartPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11042,32 +11042,32 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:closeIconStartPadding
+     * @attr name com.example.ventilator:closeIconStartPadding
      */
     public static final int Chip_closeIconStartPadding=24;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#closeIconTint}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#closeIconTint}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:closeIconTint
+     * @attr name com.example.ventilator:closeIconTint
      */
     public static final int Chip_closeIconTint=25;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#closeIconVisible}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#closeIconVisible}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:closeIconVisible
+     * @attr name com.example.ventilator:closeIconVisible
      */
     public static final int Chip_closeIconVisible=26;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#hideMotionSpec}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#hideMotionSpec}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11075,11 +11075,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:hideMotionSpec
+     * @attr name com.example.ventilator:hideMotionSpec
      */
     public static final int Chip_hideMotionSpec=27;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#iconEndPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#iconEndPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11088,11 +11088,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:iconEndPadding
+     * @attr name com.example.ventilator:iconEndPadding
      */
     public static final int Chip_iconEndPadding=28;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#iconStartPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#iconStartPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11101,22 +11101,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:iconStartPadding
+     * @attr name com.example.ventilator:iconStartPadding
      */
     public static final int Chip_iconStartPadding=29;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#rippleColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#rippleColor}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:rippleColor
+     * @attr name com.example.ventilator:rippleColor
      */
     public static final int Chip_rippleColor=30;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#showMotionSpec}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#showMotionSpec}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11124,11 +11124,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:showMotionSpec
+     * @attr name com.example.ventilator:showMotionSpec
      */
     public static final int Chip_showMotionSpec=31;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textEndPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textEndPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11137,11 +11137,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:textEndPadding
+     * @attr name com.example.ventilator:textEndPadding
      */
     public static final int Chip_textEndPadding=32;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textStartPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textStartPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11150,7 +11150,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:textStartPadding
+     * @attr name com.example.ventilator:textStartPadding
      */
     public static final int Chip_textStartPadding=33;
     /**
@@ -11160,12 +11160,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ChipGroup_checkedChip swasit.zyna.ventilator:checkedChip}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_chipSpacing swasit.zyna.ventilator:chipSpacing}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_chipSpacingHorizontal swasit.zyna.ventilator:chipSpacingHorizontal}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_chipSpacingVertical swasit.zyna.ventilator:chipSpacingVertical}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_singleLine swasit.zyna.ventilator:singleLine}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_singleSelection swasit.zyna.ventilator:singleSelection}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_checkedChip com.example.ventilator:checkedChip}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_chipSpacing com.example.ventilator:chipSpacing}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_chipSpacingHorizontal com.example.ventilator:chipSpacingHorizontal}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_chipSpacingVertical com.example.ventilator:chipSpacingVertical}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_singleLine com.example.ventilator:singleLine}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_singleSelection com.example.ventilator:singleSelection}</code></td><td></td></tr>
      * </table>
      * @see #ChipGroup_checkedChip
      * @see #ChipGroup_chipSpacing
@@ -11179,7 +11179,7 @@ public final class R {
       0x7f0301a3, 0x7f0301a4
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#checkedChip}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#checkedChip}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11187,11 +11187,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:checkedChip
+     * @attr name com.example.ventilator:checkedChip
      */
     public static final int ChipGroup_checkedChip=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipSpacing}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipSpacing}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11200,11 +11200,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipSpacing
+     * @attr name com.example.ventilator:chipSpacing
      */
     public static final int ChipGroup_chipSpacing=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipSpacingHorizontal}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipSpacingHorizontal}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11213,11 +11213,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipSpacingHorizontal
+     * @attr name com.example.ventilator:chipSpacingHorizontal
      */
     public static final int ChipGroup_chipSpacingHorizontal=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipSpacingVertical}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipSpacingVertical}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11226,27 +11226,27 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:chipSpacingVertical
+     * @attr name com.example.ventilator:chipSpacingVertical
      */
     public static final int ChipGroup_chipSpacingVertical=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#singleLine}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#singleLine}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:singleLine
+     * @attr name com.example.ventilator:singleLine
      */
     public static final int ChipGroup_singleLine=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#singleSelection}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#singleSelection}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:singleSelection
+     * @attr name com.example.ventilator:singleSelection
      */
     public static final int ChipGroup_singleSelection=5;
     /**
@@ -11256,22 +11256,22 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_collapsedTitleGravity swasit.zyna.ventilator:collapsedTitleGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_collapsedTitleTextAppearance swasit.zyna.ventilator:collapsedTitleTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_contentScrim swasit.zyna.ventilator:contentScrim}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleGravity swasit.zyna.ventilator:expandedTitleGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMargin swasit.zyna.ventilator:expandedTitleMargin}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginBottom swasit.zyna.ventilator:expandedTitleMarginBottom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginEnd swasit.zyna.ventilator:expandedTitleMarginEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginStart swasit.zyna.ventilator:expandedTitleMarginStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginTop swasit.zyna.ventilator:expandedTitleMarginTop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleTextAppearance swasit.zyna.ventilator:expandedTitleTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_scrimAnimationDuration swasit.zyna.ventilator:scrimAnimationDuration}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_scrimVisibleHeightTrigger swasit.zyna.ventilator:scrimVisibleHeightTrigger}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_statusBarScrim swasit.zyna.ventilator:statusBarScrim}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_title swasit.zyna.ventilator:title}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_titleEnabled swasit.zyna.ventilator:titleEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_toolbarId swasit.zyna.ventilator:toolbarId}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_collapsedTitleGravity com.example.ventilator:collapsedTitleGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_collapsedTitleTextAppearance com.example.ventilator:collapsedTitleTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_contentScrim com.example.ventilator:contentScrim}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleGravity com.example.ventilator:expandedTitleGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMargin com.example.ventilator:expandedTitleMargin}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginBottom com.example.ventilator:expandedTitleMarginBottom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginEnd com.example.ventilator:expandedTitleMarginEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginStart com.example.ventilator:expandedTitleMarginStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginTop com.example.ventilator:expandedTitleMarginTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleTextAppearance com.example.ventilator:expandedTitleTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_scrimAnimationDuration com.example.ventilator:scrimAnimationDuration}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_scrimVisibleHeightTrigger com.example.ventilator:scrimVisibleHeightTrigger}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_statusBarScrim com.example.ventilator:statusBarScrim}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_title com.example.ventilator:title}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_titleEnabled com.example.ventilator:titleEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_toolbarId com.example.ventilator:toolbarId}</code></td><td></td></tr>
      * </table>
      * @see #CollapsingToolbarLayout_collapsedTitleGravity
      * @see #CollapsingToolbarLayout_collapsedTitleTextAppearance
@@ -11297,7 +11297,7 @@ public final class R {
       0x7f0301b4, 0x7f030202, 0x7f030203, 0x7f03020d
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#collapsedTitleGravity}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#collapsedTitleGravity}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -11318,11 +11318,11 @@ public final class R {
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:collapsedTitleGravity
+     * @attr name com.example.ventilator:collapsedTitleGravity
      */
     public static final int CollapsingToolbarLayout_collapsedTitleGravity=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#collapsedTitleTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#collapsedTitleTextAppearance}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11330,22 +11330,22 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:collapsedTitleTextAppearance
+     * @attr name com.example.ventilator:collapsedTitleTextAppearance
      */
     public static final int CollapsingToolbarLayout_collapsedTitleTextAppearance=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#contentScrim}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#contentScrim}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:contentScrim
+     * @attr name com.example.ventilator:contentScrim
      */
     public static final int CollapsingToolbarLayout_contentScrim=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#expandedTitleGravity}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#expandedTitleGravity}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -11366,11 +11366,11 @@ public final class R {
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:expandedTitleGravity
+     * @attr name com.example.ventilator:expandedTitleGravity
      */
     public static final int CollapsingToolbarLayout_expandedTitleGravity=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#expandedTitleMargin}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#expandedTitleMargin}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11379,11 +11379,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:expandedTitleMargin
+     * @attr name com.example.ventilator:expandedTitleMargin
      */
     public static final int CollapsingToolbarLayout_expandedTitleMargin=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#expandedTitleMarginBottom}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#expandedTitleMarginBottom}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11392,11 +11392,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:expandedTitleMarginBottom
+     * @attr name com.example.ventilator:expandedTitleMarginBottom
      */
     public static final int CollapsingToolbarLayout_expandedTitleMarginBottom=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#expandedTitleMarginEnd}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#expandedTitleMarginEnd}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11405,11 +11405,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:expandedTitleMarginEnd
+     * @attr name com.example.ventilator:expandedTitleMarginEnd
      */
     public static final int CollapsingToolbarLayout_expandedTitleMarginEnd=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#expandedTitleMarginStart}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#expandedTitleMarginStart}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11418,11 +11418,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:expandedTitleMarginStart
+     * @attr name com.example.ventilator:expandedTitleMarginStart
      */
     public static final int CollapsingToolbarLayout_expandedTitleMarginStart=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#expandedTitleMarginTop}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#expandedTitleMarginTop}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11431,11 +11431,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:expandedTitleMarginTop
+     * @attr name com.example.ventilator:expandedTitleMarginTop
      */
     public static final int CollapsingToolbarLayout_expandedTitleMarginTop=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#expandedTitleTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#expandedTitleTextAppearance}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11443,20 +11443,20 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:expandedTitleTextAppearance
+     * @attr name com.example.ventilator:expandedTitleTextAppearance
      */
     public static final int CollapsingToolbarLayout_expandedTitleTextAppearance=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#scrimAnimationDuration}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#scrimAnimationDuration}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:scrimAnimationDuration
+     * @attr name com.example.ventilator:scrimAnimationDuration
      */
     public static final int CollapsingToolbarLayout_scrimAnimationDuration=10;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#scrimVisibleHeightTrigger}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#scrimVisibleHeightTrigger}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11465,42 +11465,42 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:scrimVisibleHeightTrigger
+     * @attr name com.example.ventilator:scrimVisibleHeightTrigger
      */
     public static final int CollapsingToolbarLayout_scrimVisibleHeightTrigger=11;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#statusBarScrim}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#statusBarScrim}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:statusBarScrim
+     * @attr name com.example.ventilator:statusBarScrim
      */
     public static final int CollapsingToolbarLayout_statusBarScrim=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#title}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#title}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:title
+     * @attr name com.example.ventilator:title
      */
     public static final int CollapsingToolbarLayout_title=13;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#titleEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#titleEnabled}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:titleEnabled
+     * @attr name com.example.ventilator:titleEnabled
      */
     public static final int CollapsingToolbarLayout_titleEnabled=14;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#toolbarId}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#toolbarId}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11508,7 +11508,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:toolbarId
+     * @attr name com.example.ventilator:toolbarId
      */
     public static final int CollapsingToolbarLayout_toolbarId=15;
     /**
@@ -11518,8 +11518,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_Layout_layout_collapseMode swasit.zyna.ventilator:layout_collapseMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier swasit.zyna.ventilator:layout_collapseParallaxMultiplier}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_Layout_layout_collapseMode com.example.ventilator:layout_collapseMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier com.example.ventilator:layout_collapseParallaxMultiplier}</code></td><td></td></tr>
      * </table>
      * @see #CollapsingToolbarLayout_Layout_layout_collapseMode
      * @see #CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier
@@ -11528,7 +11528,7 @@ public final class R {
       0x7f03011e, 0x7f03011f
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_collapseMode}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_collapseMode}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout_Layout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -11542,16 +11542,16 @@ public final class R {
      * <tr><td>pin</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_collapseMode
+     * @attr name com.example.ventilator:layout_collapseMode
      */
     public static final int CollapsingToolbarLayout_Layout_layout_collapseMode=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_collapseParallaxMultiplier}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_collapseParallaxMultiplier}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_collapseParallaxMultiplier
+     * @attr name com.example.ventilator:layout_collapseParallaxMultiplier
      */
     public static final int CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier=1;
     /**
@@ -11563,7 +11563,7 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #ColorStateListItem_android_color android:color}</code></td><td></td></tr>
      * <tr><td><code>{@link #ColorStateListItem_android_alpha android:alpha}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ColorStateListItem_alpha swasit.zyna.ventilator:alpha}</code></td><td>Alpha multiplier applied to the base color.</td></tr>
+     * <tr><td><code>{@link #ColorStateListItem_alpha com.example.ventilator:alpha}</code></td><td>Alpha multiplier applied to the base color.</td></tr>
      * </table>
      * @see #ColorStateListItem_android_color
      * @see #ColorStateListItem_android_alpha
@@ -11600,7 +11600,7 @@ public final class R {
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:alpha
+     * @attr name com.example.ventilator:alpha
      */
     public static final int ColorStateListItem_alpha=2;
     /**
@@ -11611,9 +11611,9 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #CompoundButton_android_button android:button}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CompoundButton_buttonCompat swasit.zyna.ventilator:buttonCompat}</code></td><td>Compat attr to load backported drawable types</td></tr>
-     * <tr><td><code>{@link #CompoundButton_buttonTint swasit.zyna.ventilator:buttonTint}</code></td><td>Tint to apply to the button drawable.</td></tr>
-     * <tr><td><code>{@link #CompoundButton_buttonTintMode swasit.zyna.ventilator:buttonTintMode}</code></td><td>Blending mode used to apply the button tint.</td></tr>
+     * <tr><td><code>{@link #CompoundButton_buttonCompat com.example.ventilator:buttonCompat}</code></td><td>Compat attr to load backported drawable types</td></tr>
+     * <tr><td><code>{@link #CompoundButton_buttonTint com.example.ventilator:buttonTint}</code></td><td>Tint to apply to the button drawable.</td></tr>
+     * <tr><td><code>{@link #CompoundButton_buttonTintMode com.example.ventilator:buttonTintMode}</code></td><td>Blending mode used to apply the button tint.</td></tr>
      * </table>
      * @see #CompoundButton_android_button
      * @see #CompoundButton_buttonCompat
@@ -11645,7 +11645,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonCompat
+     * @attr name com.example.ventilator:buttonCompat
      */
     public static final int CompoundButton_buttonCompat=1;
     /**
@@ -11657,7 +11657,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:buttonTint
+     * @attr name com.example.ventilator:buttonTint
      */
     public static final int CompoundButton_buttonTint=2;
     /**
@@ -11684,7 +11684,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:buttonTintMode
+     * @attr name com.example.ventilator:buttonTintMode
      */
     public static final int CompoundButton_buttonTintMode=3;
     /**
@@ -11699,61 +11699,61 @@ public final class R {
      * <tr><td><code>{@link #ConstraintLayout_Layout_android_maxHeight android:maxHeight}</code></td><td></td></tr>
      * <tr><td><code>{@link #ConstraintLayout_Layout_android_minWidth android:minWidth}</code></td><td></td></tr>
      * <tr><td><code>{@link #ConstraintLayout_Layout_android_minHeight android:minHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_barrierAllowsGoneWidgets swasit.zyna.ventilator:barrierAllowsGoneWidgets}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_barrierDirection swasit.zyna.ventilator:barrierDirection}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_chainUseRtl swasit.zyna.ventilator:chainUseRtl}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_constraintSet swasit.zyna.ventilator:constraintSet}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_constraint_referenced_ids swasit.zyna.ventilator:constraint_referenced_ids}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constrainedHeight swasit.zyna.ventilator:layout_constrainedHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constrainedWidth swasit.zyna.ventilator:layout_constrainedWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBaseline_creator swasit.zyna.ventilator:layout_constraintBaseline_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBaseline_toBaselineOf swasit.zyna.ventilator:layout_constraintBaseline_toBaselineOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBottom_creator swasit.zyna.ventilator:layout_constraintBottom_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBottom_toBottomOf swasit.zyna.ventilator:layout_constraintBottom_toBottomOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBottom_toTopOf swasit.zyna.ventilator:layout_constraintBottom_toTopOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintCircle swasit.zyna.ventilator:layout_constraintCircle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintCircleAngle swasit.zyna.ventilator:layout_constraintCircleAngle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintCircleRadius swasit.zyna.ventilator:layout_constraintCircleRadius}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintDimensionRatio swasit.zyna.ventilator:layout_constraintDimensionRatio}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintEnd_toEndOf swasit.zyna.ventilator:layout_constraintEnd_toEndOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintEnd_toStartOf swasit.zyna.ventilator:layout_constraintEnd_toStartOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintGuide_begin swasit.zyna.ventilator:layout_constraintGuide_begin}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintGuide_end swasit.zyna.ventilator:layout_constraintGuide_end}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintGuide_percent swasit.zyna.ventilator:layout_constraintGuide_percent}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHeight_default swasit.zyna.ventilator:layout_constraintHeight_default}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHeight_max swasit.zyna.ventilator:layout_constraintHeight_max}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHeight_min swasit.zyna.ventilator:layout_constraintHeight_min}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHeight_percent swasit.zyna.ventilator:layout_constraintHeight_percent}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHorizontal_bias swasit.zyna.ventilator:layout_constraintHorizontal_bias}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHorizontal_chainStyle swasit.zyna.ventilator:layout_constraintHorizontal_chainStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHorizontal_weight swasit.zyna.ventilator:layout_constraintHorizontal_weight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintLeft_creator swasit.zyna.ventilator:layout_constraintLeft_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintLeft_toLeftOf swasit.zyna.ventilator:layout_constraintLeft_toLeftOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintLeft_toRightOf swasit.zyna.ventilator:layout_constraintLeft_toRightOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintRight_creator swasit.zyna.ventilator:layout_constraintRight_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintRight_toLeftOf swasit.zyna.ventilator:layout_constraintRight_toLeftOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintRight_toRightOf swasit.zyna.ventilator:layout_constraintRight_toRightOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintStart_toEndOf swasit.zyna.ventilator:layout_constraintStart_toEndOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintStart_toStartOf swasit.zyna.ventilator:layout_constraintStart_toStartOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintTop_creator swasit.zyna.ventilator:layout_constraintTop_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintTop_toBottomOf swasit.zyna.ventilator:layout_constraintTop_toBottomOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintTop_toTopOf swasit.zyna.ventilator:layout_constraintTop_toTopOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintVertical_bias swasit.zyna.ventilator:layout_constraintVertical_bias}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintVertical_chainStyle swasit.zyna.ventilator:layout_constraintVertical_chainStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintVertical_weight swasit.zyna.ventilator:layout_constraintVertical_weight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintWidth_default swasit.zyna.ventilator:layout_constraintWidth_default}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintWidth_max swasit.zyna.ventilator:layout_constraintWidth_max}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintWidth_min swasit.zyna.ventilator:layout_constraintWidth_min}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintWidth_percent swasit.zyna.ventilator:layout_constraintWidth_percent}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_editor_absoluteX swasit.zyna.ventilator:layout_editor_absoluteX}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_editor_absoluteY swasit.zyna.ventilator:layout_editor_absoluteY}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginBottom swasit.zyna.ventilator:layout_goneMarginBottom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginEnd swasit.zyna.ventilator:layout_goneMarginEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginLeft swasit.zyna.ventilator:layout_goneMarginLeft}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginRight swasit.zyna.ventilator:layout_goneMarginRight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginStart swasit.zyna.ventilator:layout_goneMarginStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginTop swasit.zyna.ventilator:layout_goneMarginTop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_optimizationLevel swasit.zyna.ventilator:layout_optimizationLevel}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_barrierAllowsGoneWidgets com.example.ventilator:barrierAllowsGoneWidgets}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_barrierDirection com.example.ventilator:barrierDirection}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_chainUseRtl com.example.ventilator:chainUseRtl}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_constraintSet com.example.ventilator:constraintSet}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_constraint_referenced_ids com.example.ventilator:constraint_referenced_ids}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constrainedHeight com.example.ventilator:layout_constrainedHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constrainedWidth com.example.ventilator:layout_constrainedWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBaseline_creator com.example.ventilator:layout_constraintBaseline_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBaseline_toBaselineOf com.example.ventilator:layout_constraintBaseline_toBaselineOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBottom_creator com.example.ventilator:layout_constraintBottom_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBottom_toBottomOf com.example.ventilator:layout_constraintBottom_toBottomOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintBottom_toTopOf com.example.ventilator:layout_constraintBottom_toTopOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintCircle com.example.ventilator:layout_constraintCircle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintCircleAngle com.example.ventilator:layout_constraintCircleAngle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintCircleRadius com.example.ventilator:layout_constraintCircleRadius}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintDimensionRatio com.example.ventilator:layout_constraintDimensionRatio}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintEnd_toEndOf com.example.ventilator:layout_constraintEnd_toEndOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintEnd_toStartOf com.example.ventilator:layout_constraintEnd_toStartOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintGuide_begin com.example.ventilator:layout_constraintGuide_begin}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintGuide_end com.example.ventilator:layout_constraintGuide_end}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintGuide_percent com.example.ventilator:layout_constraintGuide_percent}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHeight_default com.example.ventilator:layout_constraintHeight_default}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHeight_max com.example.ventilator:layout_constraintHeight_max}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHeight_min com.example.ventilator:layout_constraintHeight_min}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHeight_percent com.example.ventilator:layout_constraintHeight_percent}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHorizontal_bias com.example.ventilator:layout_constraintHorizontal_bias}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHorizontal_chainStyle com.example.ventilator:layout_constraintHorizontal_chainStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintHorizontal_weight com.example.ventilator:layout_constraintHorizontal_weight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintLeft_creator com.example.ventilator:layout_constraintLeft_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintLeft_toLeftOf com.example.ventilator:layout_constraintLeft_toLeftOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintLeft_toRightOf com.example.ventilator:layout_constraintLeft_toRightOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintRight_creator com.example.ventilator:layout_constraintRight_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintRight_toLeftOf com.example.ventilator:layout_constraintRight_toLeftOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintRight_toRightOf com.example.ventilator:layout_constraintRight_toRightOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintStart_toEndOf com.example.ventilator:layout_constraintStart_toEndOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintStart_toStartOf com.example.ventilator:layout_constraintStart_toStartOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintTop_creator com.example.ventilator:layout_constraintTop_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintTop_toBottomOf com.example.ventilator:layout_constraintTop_toBottomOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintTop_toTopOf com.example.ventilator:layout_constraintTop_toTopOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintVertical_bias com.example.ventilator:layout_constraintVertical_bias}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintVertical_chainStyle com.example.ventilator:layout_constraintVertical_chainStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintVertical_weight com.example.ventilator:layout_constraintVertical_weight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintWidth_default com.example.ventilator:layout_constraintWidth_default}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintWidth_max com.example.ventilator:layout_constraintWidth_max}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintWidth_min com.example.ventilator:layout_constraintWidth_min}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_constraintWidth_percent com.example.ventilator:layout_constraintWidth_percent}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_editor_absoluteX com.example.ventilator:layout_editor_absoluteX}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_editor_absoluteY com.example.ventilator:layout_editor_absoluteY}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginBottom com.example.ventilator:layout_goneMarginBottom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginEnd com.example.ventilator:layout_goneMarginEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginLeft com.example.ventilator:layout_goneMarginLeft}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginRight com.example.ventilator:layout_goneMarginRight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginStart com.example.ventilator:layout_goneMarginStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_goneMarginTop com.example.ventilator:layout_goneMarginTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_Layout_layout_optimizationLevel com.example.ventilator:layout_optimizationLevel}</code></td><td></td></tr>
      * </table>
      * @see #ConstraintLayout_Layout_android_orientation
      * @see #ConstraintLayout_Layout_android_maxWidth
@@ -11903,17 +11903,17 @@ public final class R {
      */
     public static final int ConstraintLayout_Layout_android_minHeight=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#barrierAllowsGoneWidgets}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#barrierAllowsGoneWidgets}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:barrierAllowsGoneWidgets
+     * @attr name com.example.ventilator:barrierAllowsGoneWidgets
      */
     public static final int ConstraintLayout_Layout_barrierAllowsGoneWidgets=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#barrierDirection}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#barrierDirection}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -11930,21 +11930,21 @@ public final class R {
      * <tr><td>top</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:barrierDirection
+     * @attr name com.example.ventilator:barrierDirection
      */
     public static final int ConstraintLayout_Layout_barrierDirection=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chainUseRtl}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chainUseRtl}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:chainUseRtl
+     * @attr name com.example.ventilator:chainUseRtl
      */
     public static final int ConstraintLayout_Layout_chainUseRtl=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#constraintSet}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#constraintSet}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11952,50 +11952,50 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:constraintSet
+     * @attr name com.example.ventilator:constraintSet
      */
     public static final int ConstraintLayout_Layout_constraintSet=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#constraint_referenced_ids}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#constraint_referenced_ids}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:constraint_referenced_ids
+     * @attr name com.example.ventilator:constraint_referenced_ids
      */
     public static final int ConstraintLayout_Layout_constraint_referenced_ids=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constrainedHeight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constrainedHeight}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constrainedHeight
+     * @attr name com.example.ventilator:layout_constrainedHeight
      */
     public static final int ConstraintLayout_Layout_layout_constrainedHeight=10;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constrainedWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constrainedWidth}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constrainedWidth
+     * @attr name com.example.ventilator:layout_constrainedWidth
      */
     public static final int ConstraintLayout_Layout_layout_constrainedWidth=11;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBaseline_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBaseline_creator}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBaseline_creator
+     * @attr name com.example.ventilator:layout_constraintBaseline_creator
      */
     public static final int ConstraintLayout_Layout_layout_constraintBaseline_creator=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBaseline_toBaselineOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBaseline_toBaselineOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12011,20 +12011,20 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBaseline_toBaselineOf
+     * @attr name com.example.ventilator:layout_constraintBaseline_toBaselineOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintBaseline_toBaselineOf=13;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBottom_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBottom_creator}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBottom_creator
+     * @attr name com.example.ventilator:layout_constraintBottom_creator
      */
     public static final int ConstraintLayout_Layout_layout_constraintBottom_creator=14;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBottom_toBottomOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBottom_toBottomOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12040,11 +12040,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBottom_toBottomOf
+     * @attr name com.example.ventilator:layout_constraintBottom_toBottomOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintBottom_toBottomOf=15;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBottom_toTopOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBottom_toTopOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12060,11 +12060,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBottom_toTopOf
+     * @attr name com.example.ventilator:layout_constraintBottom_toTopOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintBottom_toTopOf=16;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintCircle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintCircle}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12072,20 +12072,20 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintCircle
+     * @attr name com.example.ventilator:layout_constraintCircle
      */
     public static final int ConstraintLayout_Layout_layout_constraintCircle=17;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintCircleAngle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintCircleAngle}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintCircleAngle
+     * @attr name com.example.ventilator:layout_constraintCircleAngle
      */
     public static final int ConstraintLayout_Layout_layout_constraintCircleAngle=18;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintCircleRadius}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintCircleRadius}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12094,21 +12094,21 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintCircleRadius
+     * @attr name com.example.ventilator:layout_constraintCircleRadius
      */
     public static final int ConstraintLayout_Layout_layout_constraintCircleRadius=19;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintDimensionRatio}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintDimensionRatio}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintDimensionRatio
+     * @attr name com.example.ventilator:layout_constraintDimensionRatio
      */
     public static final int ConstraintLayout_Layout_layout_constraintDimensionRatio=20;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintEnd_toEndOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintEnd_toEndOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12124,11 +12124,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintEnd_toEndOf
+     * @attr name com.example.ventilator:layout_constraintEnd_toEndOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintEnd_toEndOf=21;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintEnd_toStartOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintEnd_toStartOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12144,11 +12144,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintEnd_toStartOf
+     * @attr name com.example.ventilator:layout_constraintEnd_toStartOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintEnd_toStartOf=22;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintGuide_begin}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintGuide_begin}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12157,11 +12157,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintGuide_begin
+     * @attr name com.example.ventilator:layout_constraintGuide_begin
      */
     public static final int ConstraintLayout_Layout_layout_constraintGuide_begin=23;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintGuide_end}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintGuide_end}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12170,20 +12170,20 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintGuide_end
+     * @attr name com.example.ventilator:layout_constraintGuide_end
      */
     public static final int ConstraintLayout_Layout_layout_constraintGuide_end=24;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintGuide_percent}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintGuide_percent}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintGuide_percent
+     * @attr name com.example.ventilator:layout_constraintGuide_percent
      */
     public static final int ConstraintLayout_Layout_layout_constraintGuide_percent=25;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHeight_default}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHeight_default}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12197,11 +12197,11 @@ public final class R {
      * <tr><td>wrap</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHeight_default
+     * @attr name com.example.ventilator:layout_constraintHeight_default
      */
     public static final int ConstraintLayout_Layout_layout_constraintHeight_default=26;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHeight_max}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHeight_max}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12218,11 +12218,11 @@ public final class R {
      * <tr><td>wrap</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHeight_max
+     * @attr name com.example.ventilator:layout_constraintHeight_max
      */
     public static final int ConstraintLayout_Layout_layout_constraintHeight_max=27;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHeight_min}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHeight_min}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12239,29 +12239,29 @@ public final class R {
      * <tr><td>wrap</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHeight_min
+     * @attr name com.example.ventilator:layout_constraintHeight_min
      */
     public static final int ConstraintLayout_Layout_layout_constraintHeight_min=28;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHeight_percent}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHeight_percent}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHeight_percent
+     * @attr name com.example.ventilator:layout_constraintHeight_percent
      */
     public static final int ConstraintLayout_Layout_layout_constraintHeight_percent=29;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHorizontal_bias}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHorizontal_bias}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHorizontal_bias
+     * @attr name com.example.ventilator:layout_constraintHorizontal_bias
      */
     public static final int ConstraintLayout_Layout_layout_constraintHorizontal_bias=30;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHorizontal_chainStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHorizontal_chainStyle}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12275,29 +12275,29 @@ public final class R {
      * <tr><td>spread_inside</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHorizontal_chainStyle
+     * @attr name com.example.ventilator:layout_constraintHorizontal_chainStyle
      */
     public static final int ConstraintLayout_Layout_layout_constraintHorizontal_chainStyle=31;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHorizontal_weight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHorizontal_weight}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHorizontal_weight
+     * @attr name com.example.ventilator:layout_constraintHorizontal_weight
      */
     public static final int ConstraintLayout_Layout_layout_constraintHorizontal_weight=32;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintLeft_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintLeft_creator}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintLeft_creator
+     * @attr name com.example.ventilator:layout_constraintLeft_creator
      */
     public static final int ConstraintLayout_Layout_layout_constraintLeft_creator=33;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintLeft_toLeftOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintLeft_toLeftOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12313,11 +12313,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintLeft_toLeftOf
+     * @attr name com.example.ventilator:layout_constraintLeft_toLeftOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintLeft_toLeftOf=34;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintLeft_toRightOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintLeft_toRightOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12333,20 +12333,20 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintLeft_toRightOf
+     * @attr name com.example.ventilator:layout_constraintLeft_toRightOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintLeft_toRightOf=35;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintRight_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintRight_creator}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintRight_creator
+     * @attr name com.example.ventilator:layout_constraintRight_creator
      */
     public static final int ConstraintLayout_Layout_layout_constraintRight_creator=36;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintRight_toLeftOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintRight_toLeftOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12362,11 +12362,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintRight_toLeftOf
+     * @attr name com.example.ventilator:layout_constraintRight_toLeftOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintRight_toLeftOf=37;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintRight_toRightOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintRight_toRightOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12382,11 +12382,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintRight_toRightOf
+     * @attr name com.example.ventilator:layout_constraintRight_toRightOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintRight_toRightOf=38;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintStart_toEndOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintStart_toEndOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12402,11 +12402,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintStart_toEndOf
+     * @attr name com.example.ventilator:layout_constraintStart_toEndOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintStart_toEndOf=39;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintStart_toStartOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintStart_toStartOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12422,20 +12422,20 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintStart_toStartOf
+     * @attr name com.example.ventilator:layout_constraintStart_toStartOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintStart_toStartOf=40;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintTop_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintTop_creator}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintTop_creator
+     * @attr name com.example.ventilator:layout_constraintTop_creator
      */
     public static final int ConstraintLayout_Layout_layout_constraintTop_creator=41;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintTop_toBottomOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintTop_toBottomOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12451,11 +12451,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintTop_toBottomOf
+     * @attr name com.example.ventilator:layout_constraintTop_toBottomOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintTop_toBottomOf=42;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintTop_toTopOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintTop_toTopOf}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12471,20 +12471,20 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintTop_toTopOf
+     * @attr name com.example.ventilator:layout_constraintTop_toTopOf
      */
     public static final int ConstraintLayout_Layout_layout_constraintTop_toTopOf=43;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintVertical_bias}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintVertical_bias}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintVertical_bias
+     * @attr name com.example.ventilator:layout_constraintVertical_bias
      */
     public static final int ConstraintLayout_Layout_layout_constraintVertical_bias=44;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintVertical_chainStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintVertical_chainStyle}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12498,20 +12498,20 @@ public final class R {
      * <tr><td>spread_inside</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintVertical_chainStyle
+     * @attr name com.example.ventilator:layout_constraintVertical_chainStyle
      */
     public static final int ConstraintLayout_Layout_layout_constraintVertical_chainStyle=45;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintVertical_weight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintVertical_weight}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintVertical_weight
+     * @attr name com.example.ventilator:layout_constraintVertical_weight
      */
     public static final int ConstraintLayout_Layout_layout_constraintVertical_weight=46;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintWidth_default}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintWidth_default}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12525,11 +12525,11 @@ public final class R {
      * <tr><td>wrap</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintWidth_default
+     * @attr name com.example.ventilator:layout_constraintWidth_default
      */
     public static final int ConstraintLayout_Layout_layout_constraintWidth_default=47;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintWidth_max}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintWidth_max}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12546,11 +12546,11 @@ public final class R {
      * <tr><td>wrap</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintWidth_max
+     * @attr name com.example.ventilator:layout_constraintWidth_max
      */
     public static final int ConstraintLayout_Layout_layout_constraintWidth_max=48;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintWidth_min}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintWidth_min}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12567,20 +12567,20 @@ public final class R {
      * <tr><td>wrap</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintWidth_min
+     * @attr name com.example.ventilator:layout_constraintWidth_min
      */
     public static final int ConstraintLayout_Layout_layout_constraintWidth_min=49;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintWidth_percent}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintWidth_percent}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintWidth_percent
+     * @attr name com.example.ventilator:layout_constraintWidth_percent
      */
     public static final int ConstraintLayout_Layout_layout_constraintWidth_percent=50;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_editor_absoluteX}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_editor_absoluteX}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12589,11 +12589,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_editor_absoluteX
+     * @attr name com.example.ventilator:layout_editor_absoluteX
      */
     public static final int ConstraintLayout_Layout_layout_editor_absoluteX=51;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_editor_absoluteY}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_editor_absoluteY}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12602,11 +12602,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_editor_absoluteY
+     * @attr name com.example.ventilator:layout_editor_absoluteY
      */
     public static final int ConstraintLayout_Layout_layout_editor_absoluteY=52;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginBottom}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginBottom}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12615,11 +12615,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginBottom
+     * @attr name com.example.ventilator:layout_goneMarginBottom
      */
     public static final int ConstraintLayout_Layout_layout_goneMarginBottom=53;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginEnd}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginEnd}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12628,11 +12628,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginEnd
+     * @attr name com.example.ventilator:layout_goneMarginEnd
      */
     public static final int ConstraintLayout_Layout_layout_goneMarginEnd=54;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginLeft}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginLeft}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12641,11 +12641,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginLeft
+     * @attr name com.example.ventilator:layout_goneMarginLeft
      */
     public static final int ConstraintLayout_Layout_layout_goneMarginLeft=55;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginRight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginRight}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12654,11 +12654,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginRight
+     * @attr name com.example.ventilator:layout_goneMarginRight
      */
     public static final int ConstraintLayout_Layout_layout_goneMarginRight=56;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginStart}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginStart}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12667,11 +12667,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginStart
+     * @attr name com.example.ventilator:layout_goneMarginStart
      */
     public static final int ConstraintLayout_Layout_layout_goneMarginStart=57;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginTop}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginTop}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12680,11 +12680,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginTop
+     * @attr name com.example.ventilator:layout_goneMarginTop
      */
     public static final int ConstraintLayout_Layout_layout_goneMarginTop=58;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_optimizationLevel}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_optimizationLevel}
      * attribute's value can be found in the {@link #ConstraintLayout_Layout} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -12702,7 +12702,7 @@ public final class R {
      * <tr><td>standard</td><td>7</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_optimizationLevel
+     * @attr name com.example.ventilator:layout_optimizationLevel
      */
     public static final int ConstraintLayout_Layout_layout_optimizationLevel=59;
     /**
@@ -12712,8 +12712,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ConstraintLayout_placeholder_content swasit.zyna.ventilator:content}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintLayout_placeholder_emptyVisibility swasit.zyna.ventilator:emptyVisibility}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_placeholder_content com.example.ventilator:content}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintLayout_placeholder_emptyVisibility com.example.ventilator:emptyVisibility}</code></td><td></td></tr>
      * </table>
      * @see #ConstraintLayout_placeholder_content
      * @see #ConstraintLayout_placeholder_emptyVisibility
@@ -12722,7 +12722,7 @@ public final class R {
       0x7f030096, 0x7f0300c5
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#content}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#content}
      * attribute's value can be found in the {@link #ConstraintLayout_placeholder} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12730,11 +12730,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:content
+     * @attr name com.example.ventilator:content
      */
     public static final int ConstraintLayout_placeholder_content=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#emptyVisibility}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#emptyVisibility}
      * attribute's value can be found in the {@link #ConstraintLayout_placeholder} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12747,7 +12747,7 @@ public final class R {
      * <tr><td>invisible</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:emptyVisibility
+     * @attr name com.example.ventilator:emptyVisibility
      */
     public static final int ConstraintLayout_placeholder_emptyVisibility=1;
     /**
@@ -12784,59 +12784,59 @@ public final class R {
      * <tr><td><code>{@link #ConstraintSet_android_layout_marginEnd android:layout_marginEnd}</code></td><td></td></tr>
      * <tr><td><code>{@link #ConstraintSet_android_translationZ android:translationZ}</code></td><td></td></tr>
      * <tr><td><code>{@link #ConstraintSet_android_elevation android:elevation}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_barrierAllowsGoneWidgets swasit.zyna.ventilator:barrierAllowsGoneWidgets}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_barrierDirection swasit.zyna.ventilator:barrierDirection}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_chainUseRtl swasit.zyna.ventilator:chainUseRtl}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_constraint_referenced_ids swasit.zyna.ventilator:constraint_referenced_ids}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constrainedHeight swasit.zyna.ventilator:layout_constrainedHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constrainedWidth swasit.zyna.ventilator:layout_constrainedWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintBaseline_creator swasit.zyna.ventilator:layout_constraintBaseline_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintBaseline_toBaselineOf swasit.zyna.ventilator:layout_constraintBaseline_toBaselineOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintBottom_creator swasit.zyna.ventilator:layout_constraintBottom_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintBottom_toBottomOf swasit.zyna.ventilator:layout_constraintBottom_toBottomOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintBottom_toTopOf swasit.zyna.ventilator:layout_constraintBottom_toTopOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintCircle swasit.zyna.ventilator:layout_constraintCircle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintCircleAngle swasit.zyna.ventilator:layout_constraintCircleAngle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintCircleRadius swasit.zyna.ventilator:layout_constraintCircleRadius}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintDimensionRatio swasit.zyna.ventilator:layout_constraintDimensionRatio}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintEnd_toEndOf swasit.zyna.ventilator:layout_constraintEnd_toEndOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintEnd_toStartOf swasit.zyna.ventilator:layout_constraintEnd_toStartOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintGuide_begin swasit.zyna.ventilator:layout_constraintGuide_begin}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintGuide_end swasit.zyna.ventilator:layout_constraintGuide_end}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintGuide_percent swasit.zyna.ventilator:layout_constraintGuide_percent}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintHeight_default swasit.zyna.ventilator:layout_constraintHeight_default}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintHeight_max swasit.zyna.ventilator:layout_constraintHeight_max}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintHeight_min swasit.zyna.ventilator:layout_constraintHeight_min}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintHeight_percent swasit.zyna.ventilator:layout_constraintHeight_percent}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintHorizontal_bias swasit.zyna.ventilator:layout_constraintHorizontal_bias}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintHorizontal_chainStyle swasit.zyna.ventilator:layout_constraintHorizontal_chainStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintHorizontal_weight swasit.zyna.ventilator:layout_constraintHorizontal_weight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintLeft_creator swasit.zyna.ventilator:layout_constraintLeft_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintLeft_toLeftOf swasit.zyna.ventilator:layout_constraintLeft_toLeftOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintLeft_toRightOf swasit.zyna.ventilator:layout_constraintLeft_toRightOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintRight_creator swasit.zyna.ventilator:layout_constraintRight_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintRight_toLeftOf swasit.zyna.ventilator:layout_constraintRight_toLeftOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintRight_toRightOf swasit.zyna.ventilator:layout_constraintRight_toRightOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintStart_toEndOf swasit.zyna.ventilator:layout_constraintStart_toEndOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintStart_toStartOf swasit.zyna.ventilator:layout_constraintStart_toStartOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintTop_creator swasit.zyna.ventilator:layout_constraintTop_creator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintTop_toBottomOf swasit.zyna.ventilator:layout_constraintTop_toBottomOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintTop_toTopOf swasit.zyna.ventilator:layout_constraintTop_toTopOf}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintVertical_bias swasit.zyna.ventilator:layout_constraintVertical_bias}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintVertical_chainStyle swasit.zyna.ventilator:layout_constraintVertical_chainStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintVertical_weight swasit.zyna.ventilator:layout_constraintVertical_weight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintWidth_default swasit.zyna.ventilator:layout_constraintWidth_default}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintWidth_max swasit.zyna.ventilator:layout_constraintWidth_max}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintWidth_min swasit.zyna.ventilator:layout_constraintWidth_min}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_constraintWidth_percent swasit.zyna.ventilator:layout_constraintWidth_percent}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_editor_absoluteX swasit.zyna.ventilator:layout_editor_absoluteX}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_editor_absoluteY swasit.zyna.ventilator:layout_editor_absoluteY}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginBottom swasit.zyna.ventilator:layout_goneMarginBottom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginEnd swasit.zyna.ventilator:layout_goneMarginEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginLeft swasit.zyna.ventilator:layout_goneMarginLeft}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginRight swasit.zyna.ventilator:layout_goneMarginRight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginStart swasit.zyna.ventilator:layout_goneMarginStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginTop swasit.zyna.ventilator:layout_goneMarginTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_barrierAllowsGoneWidgets com.example.ventilator:barrierAllowsGoneWidgets}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_barrierDirection com.example.ventilator:barrierDirection}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_chainUseRtl com.example.ventilator:chainUseRtl}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_constraint_referenced_ids com.example.ventilator:constraint_referenced_ids}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constrainedHeight com.example.ventilator:layout_constrainedHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constrainedWidth com.example.ventilator:layout_constrainedWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintBaseline_creator com.example.ventilator:layout_constraintBaseline_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintBaseline_toBaselineOf com.example.ventilator:layout_constraintBaseline_toBaselineOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintBottom_creator com.example.ventilator:layout_constraintBottom_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintBottom_toBottomOf com.example.ventilator:layout_constraintBottom_toBottomOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintBottom_toTopOf com.example.ventilator:layout_constraintBottom_toTopOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintCircle com.example.ventilator:layout_constraintCircle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintCircleAngle com.example.ventilator:layout_constraintCircleAngle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintCircleRadius com.example.ventilator:layout_constraintCircleRadius}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintDimensionRatio com.example.ventilator:layout_constraintDimensionRatio}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintEnd_toEndOf com.example.ventilator:layout_constraintEnd_toEndOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintEnd_toStartOf com.example.ventilator:layout_constraintEnd_toStartOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintGuide_begin com.example.ventilator:layout_constraintGuide_begin}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintGuide_end com.example.ventilator:layout_constraintGuide_end}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintGuide_percent com.example.ventilator:layout_constraintGuide_percent}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintHeight_default com.example.ventilator:layout_constraintHeight_default}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintHeight_max com.example.ventilator:layout_constraintHeight_max}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintHeight_min com.example.ventilator:layout_constraintHeight_min}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintHeight_percent com.example.ventilator:layout_constraintHeight_percent}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintHorizontal_bias com.example.ventilator:layout_constraintHorizontal_bias}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintHorizontal_chainStyle com.example.ventilator:layout_constraintHorizontal_chainStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintHorizontal_weight com.example.ventilator:layout_constraintHorizontal_weight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintLeft_creator com.example.ventilator:layout_constraintLeft_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintLeft_toLeftOf com.example.ventilator:layout_constraintLeft_toLeftOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintLeft_toRightOf com.example.ventilator:layout_constraintLeft_toRightOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintRight_creator com.example.ventilator:layout_constraintRight_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintRight_toLeftOf com.example.ventilator:layout_constraintRight_toLeftOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintRight_toRightOf com.example.ventilator:layout_constraintRight_toRightOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintStart_toEndOf com.example.ventilator:layout_constraintStart_toEndOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintStart_toStartOf com.example.ventilator:layout_constraintStart_toStartOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintTop_creator com.example.ventilator:layout_constraintTop_creator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintTop_toBottomOf com.example.ventilator:layout_constraintTop_toBottomOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintTop_toTopOf com.example.ventilator:layout_constraintTop_toTopOf}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintVertical_bias com.example.ventilator:layout_constraintVertical_bias}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintVertical_chainStyle com.example.ventilator:layout_constraintVertical_chainStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintVertical_weight com.example.ventilator:layout_constraintVertical_weight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintWidth_default com.example.ventilator:layout_constraintWidth_default}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintWidth_max com.example.ventilator:layout_constraintWidth_max}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintWidth_min com.example.ventilator:layout_constraintWidth_min}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_constraintWidth_percent com.example.ventilator:layout_constraintWidth_percent}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_editor_absoluteX com.example.ventilator:layout_editor_absoluteX}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_editor_absoluteY com.example.ventilator:layout_editor_absoluteY}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginBottom com.example.ventilator:layout_goneMarginBottom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginEnd com.example.ventilator:layout_goneMarginEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginLeft com.example.ventilator:layout_goneMarginLeft}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginRight com.example.ventilator:layout_goneMarginRight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginStart com.example.ventilator:layout_goneMarginStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ConstraintSet_layout_goneMarginTop com.example.ventilator:layout_goneMarginTop}</code></td><td></td></tr>
      * </table>
      * @see #ConstraintSet_android_orientation
      * @see #ConstraintSet_android_id
@@ -13297,17 +13297,17 @@ public final class R {
      */
     public static final int ConstraintSet_android_elevation=26;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#barrierAllowsGoneWidgets}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#barrierAllowsGoneWidgets}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:barrierAllowsGoneWidgets
+     * @attr name com.example.ventilator:barrierAllowsGoneWidgets
      */
     public static final int ConstraintSet_barrierAllowsGoneWidgets=27;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#barrierDirection}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#barrierDirection}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -13324,60 +13324,60 @@ public final class R {
      * <tr><td>top</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:barrierDirection
+     * @attr name com.example.ventilator:barrierDirection
      */
     public static final int ConstraintSet_barrierDirection=28;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chainUseRtl}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chainUseRtl}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:chainUseRtl
+     * @attr name com.example.ventilator:chainUseRtl
      */
     public static final int ConstraintSet_chainUseRtl=29;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#constraint_referenced_ids}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#constraint_referenced_ids}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:constraint_referenced_ids
+     * @attr name com.example.ventilator:constraint_referenced_ids
      */
     public static final int ConstraintSet_constraint_referenced_ids=30;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constrainedHeight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constrainedHeight}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constrainedHeight
+     * @attr name com.example.ventilator:layout_constrainedHeight
      */
     public static final int ConstraintSet_layout_constrainedHeight=31;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constrainedWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constrainedWidth}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constrainedWidth
+     * @attr name com.example.ventilator:layout_constrainedWidth
      */
     public static final int ConstraintSet_layout_constrainedWidth=32;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBaseline_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBaseline_creator}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBaseline_creator
+     * @attr name com.example.ventilator:layout_constraintBaseline_creator
      */
     public static final int ConstraintSet_layout_constraintBaseline_creator=33;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBaseline_toBaselineOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBaseline_toBaselineOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13393,20 +13393,20 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBaseline_toBaselineOf
+     * @attr name com.example.ventilator:layout_constraintBaseline_toBaselineOf
      */
     public static final int ConstraintSet_layout_constraintBaseline_toBaselineOf=34;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBottom_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBottom_creator}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBottom_creator
+     * @attr name com.example.ventilator:layout_constraintBottom_creator
      */
     public static final int ConstraintSet_layout_constraintBottom_creator=35;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBottom_toBottomOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBottom_toBottomOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13422,11 +13422,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBottom_toBottomOf
+     * @attr name com.example.ventilator:layout_constraintBottom_toBottomOf
      */
     public static final int ConstraintSet_layout_constraintBottom_toBottomOf=36;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintBottom_toTopOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintBottom_toTopOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13442,11 +13442,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintBottom_toTopOf
+     * @attr name com.example.ventilator:layout_constraintBottom_toTopOf
      */
     public static final int ConstraintSet_layout_constraintBottom_toTopOf=37;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintCircle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintCircle}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13454,20 +13454,20 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintCircle
+     * @attr name com.example.ventilator:layout_constraintCircle
      */
     public static final int ConstraintSet_layout_constraintCircle=38;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintCircleAngle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintCircleAngle}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintCircleAngle
+     * @attr name com.example.ventilator:layout_constraintCircleAngle
      */
     public static final int ConstraintSet_layout_constraintCircleAngle=39;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintCircleRadius}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintCircleRadius}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13476,21 +13476,21 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintCircleRadius
+     * @attr name com.example.ventilator:layout_constraintCircleRadius
      */
     public static final int ConstraintSet_layout_constraintCircleRadius=40;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintDimensionRatio}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintDimensionRatio}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintDimensionRatio
+     * @attr name com.example.ventilator:layout_constraintDimensionRatio
      */
     public static final int ConstraintSet_layout_constraintDimensionRatio=41;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintEnd_toEndOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintEnd_toEndOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13506,11 +13506,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintEnd_toEndOf
+     * @attr name com.example.ventilator:layout_constraintEnd_toEndOf
      */
     public static final int ConstraintSet_layout_constraintEnd_toEndOf=42;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintEnd_toStartOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintEnd_toStartOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13526,11 +13526,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintEnd_toStartOf
+     * @attr name com.example.ventilator:layout_constraintEnd_toStartOf
      */
     public static final int ConstraintSet_layout_constraintEnd_toStartOf=43;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintGuide_begin}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintGuide_begin}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13539,11 +13539,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintGuide_begin
+     * @attr name com.example.ventilator:layout_constraintGuide_begin
      */
     public static final int ConstraintSet_layout_constraintGuide_begin=44;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintGuide_end}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintGuide_end}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13552,20 +13552,20 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintGuide_end
+     * @attr name com.example.ventilator:layout_constraintGuide_end
      */
     public static final int ConstraintSet_layout_constraintGuide_end=45;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintGuide_percent}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintGuide_percent}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintGuide_percent
+     * @attr name com.example.ventilator:layout_constraintGuide_percent
      */
     public static final int ConstraintSet_layout_constraintGuide_percent=46;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHeight_default}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHeight_default}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -13579,11 +13579,11 @@ public final class R {
      * <tr><td>wrap</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHeight_default
+     * @attr name com.example.ventilator:layout_constraintHeight_default
      */
     public static final int ConstraintSet_layout_constraintHeight_default=47;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHeight_max}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHeight_max}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13600,11 +13600,11 @@ public final class R {
      * <tr><td>wrap</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHeight_max
+     * @attr name com.example.ventilator:layout_constraintHeight_max
      */
     public static final int ConstraintSet_layout_constraintHeight_max=48;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHeight_min}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHeight_min}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13621,29 +13621,29 @@ public final class R {
      * <tr><td>wrap</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHeight_min
+     * @attr name com.example.ventilator:layout_constraintHeight_min
      */
     public static final int ConstraintSet_layout_constraintHeight_min=49;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHeight_percent}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHeight_percent}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHeight_percent
+     * @attr name com.example.ventilator:layout_constraintHeight_percent
      */
     public static final int ConstraintSet_layout_constraintHeight_percent=50;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHorizontal_bias}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHorizontal_bias}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHorizontal_bias
+     * @attr name com.example.ventilator:layout_constraintHorizontal_bias
      */
     public static final int ConstraintSet_layout_constraintHorizontal_bias=51;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHorizontal_chainStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHorizontal_chainStyle}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -13657,29 +13657,29 @@ public final class R {
      * <tr><td>spread_inside</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHorizontal_chainStyle
+     * @attr name com.example.ventilator:layout_constraintHorizontal_chainStyle
      */
     public static final int ConstraintSet_layout_constraintHorizontal_chainStyle=52;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintHorizontal_weight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintHorizontal_weight}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintHorizontal_weight
+     * @attr name com.example.ventilator:layout_constraintHorizontal_weight
      */
     public static final int ConstraintSet_layout_constraintHorizontal_weight=53;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintLeft_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintLeft_creator}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintLeft_creator
+     * @attr name com.example.ventilator:layout_constraintLeft_creator
      */
     public static final int ConstraintSet_layout_constraintLeft_creator=54;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintLeft_toLeftOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintLeft_toLeftOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13695,11 +13695,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintLeft_toLeftOf
+     * @attr name com.example.ventilator:layout_constraintLeft_toLeftOf
      */
     public static final int ConstraintSet_layout_constraintLeft_toLeftOf=55;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintLeft_toRightOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintLeft_toRightOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13715,20 +13715,20 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintLeft_toRightOf
+     * @attr name com.example.ventilator:layout_constraintLeft_toRightOf
      */
     public static final int ConstraintSet_layout_constraintLeft_toRightOf=56;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintRight_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintRight_creator}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintRight_creator
+     * @attr name com.example.ventilator:layout_constraintRight_creator
      */
     public static final int ConstraintSet_layout_constraintRight_creator=57;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintRight_toLeftOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintRight_toLeftOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13744,11 +13744,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintRight_toLeftOf
+     * @attr name com.example.ventilator:layout_constraintRight_toLeftOf
      */
     public static final int ConstraintSet_layout_constraintRight_toLeftOf=58;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintRight_toRightOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintRight_toRightOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13764,11 +13764,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintRight_toRightOf
+     * @attr name com.example.ventilator:layout_constraintRight_toRightOf
      */
     public static final int ConstraintSet_layout_constraintRight_toRightOf=59;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintStart_toEndOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintStart_toEndOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13784,11 +13784,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintStart_toEndOf
+     * @attr name com.example.ventilator:layout_constraintStart_toEndOf
      */
     public static final int ConstraintSet_layout_constraintStart_toEndOf=60;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintStart_toStartOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintStart_toStartOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13804,20 +13804,20 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintStart_toStartOf
+     * @attr name com.example.ventilator:layout_constraintStart_toStartOf
      */
     public static final int ConstraintSet_layout_constraintStart_toStartOf=61;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintTop_creator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintTop_creator}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintTop_creator
+     * @attr name com.example.ventilator:layout_constraintTop_creator
      */
     public static final int ConstraintSet_layout_constraintTop_creator=62;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintTop_toBottomOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintTop_toBottomOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13833,11 +13833,11 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintTop_toBottomOf
+     * @attr name com.example.ventilator:layout_constraintTop_toBottomOf
      */
     public static final int ConstraintSet_layout_constraintTop_toBottomOf=63;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintTop_toTopOf}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintTop_toTopOf}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -13853,20 +13853,20 @@ public final class R {
      * <tr><td>parent</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintTop_toTopOf
+     * @attr name com.example.ventilator:layout_constraintTop_toTopOf
      */
     public static final int ConstraintSet_layout_constraintTop_toTopOf=64;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintVertical_bias}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintVertical_bias}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintVertical_bias
+     * @attr name com.example.ventilator:layout_constraintVertical_bias
      */
     public static final int ConstraintSet_layout_constraintVertical_bias=65;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintVertical_chainStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintVertical_chainStyle}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -13880,20 +13880,20 @@ public final class R {
      * <tr><td>spread_inside</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintVertical_chainStyle
+     * @attr name com.example.ventilator:layout_constraintVertical_chainStyle
      */
     public static final int ConstraintSet_layout_constraintVertical_chainStyle=66;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintVertical_weight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintVertical_weight}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintVertical_weight
+     * @attr name com.example.ventilator:layout_constraintVertical_weight
      */
     public static final int ConstraintSet_layout_constraintVertical_weight=67;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintWidth_default}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintWidth_default}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -13907,11 +13907,11 @@ public final class R {
      * <tr><td>wrap</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintWidth_default
+     * @attr name com.example.ventilator:layout_constraintWidth_default
      */
     public static final int ConstraintSet_layout_constraintWidth_default=68;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintWidth_max}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintWidth_max}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13928,11 +13928,11 @@ public final class R {
      * <tr><td>wrap</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintWidth_max
+     * @attr name com.example.ventilator:layout_constraintWidth_max
      */
     public static final int ConstraintSet_layout_constraintWidth_max=69;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintWidth_min}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintWidth_min}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13949,20 +13949,20 @@ public final class R {
      * <tr><td>wrap</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintWidth_min
+     * @attr name com.example.ventilator:layout_constraintWidth_min
      */
     public static final int ConstraintSet_layout_constraintWidth_min=70;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_constraintWidth_percent}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_constraintWidth_percent}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_constraintWidth_percent
+     * @attr name com.example.ventilator:layout_constraintWidth_percent
      */
     public static final int ConstraintSet_layout_constraintWidth_percent=71;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_editor_absoluteX}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_editor_absoluteX}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13971,11 +13971,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_editor_absoluteX
+     * @attr name com.example.ventilator:layout_editor_absoluteX
      */
     public static final int ConstraintSet_layout_editor_absoluteX=72;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_editor_absoluteY}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_editor_absoluteY}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13984,11 +13984,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_editor_absoluteY
+     * @attr name com.example.ventilator:layout_editor_absoluteY
      */
     public static final int ConstraintSet_layout_editor_absoluteY=73;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginBottom}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginBottom}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -13997,11 +13997,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginBottom
+     * @attr name com.example.ventilator:layout_goneMarginBottom
      */
     public static final int ConstraintSet_layout_goneMarginBottom=74;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginEnd}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginEnd}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14010,11 +14010,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginEnd
+     * @attr name com.example.ventilator:layout_goneMarginEnd
      */
     public static final int ConstraintSet_layout_goneMarginEnd=75;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginLeft}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginLeft}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14023,11 +14023,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginLeft
+     * @attr name com.example.ventilator:layout_goneMarginLeft
      */
     public static final int ConstraintSet_layout_goneMarginLeft=76;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginRight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginRight}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14036,11 +14036,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginRight
+     * @attr name com.example.ventilator:layout_goneMarginRight
      */
     public static final int ConstraintSet_layout_goneMarginRight=77;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginStart}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginStart}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14049,11 +14049,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginStart
+     * @attr name com.example.ventilator:layout_goneMarginStart
      */
     public static final int ConstraintSet_layout_goneMarginStart=78;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#layout_goneMarginTop}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#layout_goneMarginTop}
      * attribute's value can be found in the {@link #ConstraintSet} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14062,7 +14062,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:layout_goneMarginTop
+     * @attr name com.example.ventilator:layout_goneMarginTop
      */
     public static final int ConstraintSet_layout_goneMarginTop=79;
     /**
@@ -14072,9 +14072,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_keylines swasit.zyna.ventilator:keylines}</code></td><td>A reference to an array of integers representing the
+     * <tr><td><code>{@link #CoordinatorLayout_keylines com.example.ventilator:keylines}</code></td><td>A reference to an array of integers representing the
      * locations of horizontal keylines in dp from the starting edge.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_statusBarBackground swasit.zyna.ventilator:statusBarBackground}</code></td><td>Drawable to display behind the status bar when the view is set to draw behind it.</td></tr>
+     * <tr><td><code>{@link #CoordinatorLayout_statusBarBackground com.example.ventilator:statusBarBackground}</code></td><td>Drawable to display behind the status bar when the view is set to draw behind it.</td></tr>
      * </table>
      * @see #CoordinatorLayout_keylines
      * @see #CoordinatorLayout_statusBarBackground
@@ -14096,7 +14096,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:keylines
+     * @attr name com.example.ventilator:keylines
      */
     public static final int CoordinatorLayout_keylines=0;
     /**
@@ -14112,7 +14112,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:statusBarBackground
+     * @attr name com.example.ventilator:statusBarBackground
      */
     public static final int CoordinatorLayout_statusBarBackground=1;
     /**
@@ -14123,15 +14123,15 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #CoordinatorLayout_Layout_android_layout_gravity android:layout_gravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_anchor swasit.zyna.ventilator:layout_anchor}</code></td><td>The id of an anchor view that this view should position relative to.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_anchorGravity swasit.zyna.ventilator:layout_anchorGravity}</code></td><td>Specifies how an object should position relative to an anchor, on both the X and Y axes,
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_anchor com.example.ventilator:layout_anchor}</code></td><td>The id of an anchor view that this view should position relative to.</td></tr>
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_anchorGravity com.example.ventilator:layout_anchorGravity}</code></td><td>Specifies how an object should position relative to an anchor, on both the X and Y axes,
      * within its parent's bounds.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_behavior swasit.zyna.ventilator:layout_behavior}</code></td><td>The class name of a Behavior class defining special runtime behavior
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_behavior com.example.ventilator:layout_behavior}</code></td><td>The class name of a Behavior class defining special runtime behavior
      * for this child view.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_dodgeInsetEdges swasit.zyna.ventilator:layout_dodgeInsetEdges}</code></td><td>Specifies how this view dodges the inset edges of the CoordinatorLayout.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_insetEdge swasit.zyna.ventilator:layout_insetEdge}</code></td><td>Specifies how this view insets the CoordinatorLayout and make some other views
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_dodgeInsetEdges com.example.ventilator:layout_dodgeInsetEdges}</code></td><td>Specifies how this view dodges the inset edges of the CoordinatorLayout.</td></tr>
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_insetEdge com.example.ventilator:layout_insetEdge}</code></td><td>Specifies how this view insets the CoordinatorLayout and make some other views
      * dodge it.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_keyline swasit.zyna.ventilator:layout_keyline}</code></td><td>The index of a keyline this view should position relative to.</td></tr>
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_keyline com.example.ventilator:layout_keyline}</code></td><td>The index of a keyline this view should position relative to.</td></tr>
      * </table>
      * @see #CoordinatorLayout_Layout_android_layout_gravity
      * @see #CoordinatorLayout_Layout_layout_anchor
@@ -14184,7 +14184,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_anchor
+     * @attr name com.example.ventilator:layout_anchor
      */
     public static final int CoordinatorLayout_Layout_layout_anchor=1;
     /**
@@ -14221,7 +14221,7 @@ public final class R {
      * <tr><td>top</td><td>30</td><td>Push object to the top of its container, not changing its size.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_anchorGravity
+     * @attr name com.example.ventilator:layout_anchorGravity
      */
     public static final int CoordinatorLayout_Layout_layout_anchorGravity=2;
     /**
@@ -14233,7 +14233,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:layout_behavior
+     * @attr name com.example.ventilator:layout_behavior
      */
     public static final int CoordinatorLayout_Layout_layout_behavior=3;
     /**
@@ -14257,7 +14257,7 @@ public final class R {
      * <tr><td>top</td><td>30</td><td>Dodge the top inset edge.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_dodgeInsetEdges
+     * @attr name com.example.ventilator:layout_dodgeInsetEdges
      */
     public static final int CoordinatorLayout_Layout_layout_dodgeInsetEdges=4;
     /**
@@ -14281,7 +14281,7 @@ public final class R {
      * <tr><td>top</td><td>30</td><td>Inset the top edge.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:layout_insetEdge
+     * @attr name com.example.ventilator:layout_insetEdge
      */
     public static final int CoordinatorLayout_Layout_layout_insetEdge=5;
     /**
@@ -14293,7 +14293,7 @@ public final class R {
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:layout_keyline
+     * @attr name com.example.ventilator:layout_keyline
      */
     public static final int CoordinatorLayout_Layout_layout_keyline=6;
     /**
@@ -14303,8 +14303,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #DesignTheme_bottomSheetDialogTheme swasit.zyna.ventilator:bottomSheetDialogTheme}</code></td><td></td></tr>
-     * <tr><td><code>{@link #DesignTheme_bottomSheetStyle swasit.zyna.ventilator:bottomSheetStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #DesignTheme_bottomSheetDialogTheme com.example.ventilator:bottomSheetDialogTheme}</code></td><td></td></tr>
+     * <tr><td><code>{@link #DesignTheme_bottomSheetStyle com.example.ventilator:bottomSheetStyle}</code></td><td></td></tr>
      * </table>
      * @see #DesignTheme_bottomSheetDialogTheme
      * @see #DesignTheme_bottomSheetStyle
@@ -14313,7 +14313,7 @@ public final class R {
       0x7f030043, 0x7f030044
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#bottomSheetDialogTheme}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#bottomSheetDialogTheme}
      * attribute's value can be found in the {@link #DesignTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14321,11 +14321,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:bottomSheetDialogTheme
+     * @attr name com.example.ventilator:bottomSheetDialogTheme
      */
     public static final int DesignTheme_bottomSheetDialogTheme=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#bottomSheetStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#bottomSheetStyle}
      * attribute's value can be found in the {@link #DesignTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14333,7 +14333,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:bottomSheetStyle
+     * @attr name com.example.ventilator:bottomSheetStyle
      */
     public static final int DesignTheme_bottomSheetStyle=1;
     /**
@@ -14343,14 +14343,14 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_arrowHeadLength swasit.zyna.ventilator:arrowHeadLength}</code></td><td>The length of the arrow head when formed to make an arrow</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_arrowShaftLength swasit.zyna.ventilator:arrowShaftLength}</code></td><td>The length of the shaft when formed to make an arrow</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_barLength swasit.zyna.ventilator:barLength}</code></td><td>The length of the bars when they are parallel to each other</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_color swasit.zyna.ventilator:color}</code></td><td>The drawing color for the bars</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_drawableSize swasit.zyna.ventilator:drawableSize}</code></td><td>The total size of the drawable</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_gapBetweenBars swasit.zyna.ventilator:gapBetweenBars}</code></td><td>The max gap between the bars when they are parallel to each other</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_spinBars swasit.zyna.ventilator:spinBars}</code></td><td>Whether bars should rotate or not during transition</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_thickness swasit.zyna.ventilator:thickness}</code></td><td>The thickness (stroke size) for the bar paint</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_arrowHeadLength com.example.ventilator:arrowHeadLength}</code></td><td>The length of the arrow head when formed to make an arrow</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_arrowShaftLength com.example.ventilator:arrowShaftLength}</code></td><td>The length of the shaft when formed to make an arrow</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_barLength com.example.ventilator:barLength}</code></td><td>The length of the bars when they are parallel to each other</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_color com.example.ventilator:color}</code></td><td>The drawing color for the bars</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_drawableSize com.example.ventilator:drawableSize}</code></td><td>The total size of the drawable</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_gapBetweenBars com.example.ventilator:gapBetweenBars}</code></td><td>The max gap between the bars when they are parallel to each other</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_spinBars com.example.ventilator:spinBars}</code></td><td>Whether bars should rotate or not during transition</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_thickness com.example.ventilator:thickness}</code></td><td>The thickness (stroke size) for the bar paint</td></tr>
      * </table>
      * @see #DrawerArrowToggle_arrowHeadLength
      * @see #DrawerArrowToggle_arrowShaftLength
@@ -14376,7 +14376,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:arrowHeadLength
+     * @attr name com.example.ventilator:arrowHeadLength
      */
     public static final int DrawerArrowToggle_arrowHeadLength=0;
     /**
@@ -14390,7 +14390,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:arrowShaftLength
+     * @attr name com.example.ventilator:arrowShaftLength
      */
     public static final int DrawerArrowToggle_arrowShaftLength=1;
     /**
@@ -14404,7 +14404,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:barLength
+     * @attr name com.example.ventilator:barLength
      */
     public static final int DrawerArrowToggle_barLength=2;
     /**
@@ -14416,7 +14416,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:color
+     * @attr name com.example.ventilator:color
      */
     public static final int DrawerArrowToggle_color=3;
     /**
@@ -14430,7 +14430,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:drawableSize
+     * @attr name com.example.ventilator:drawableSize
      */
     public static final int DrawerArrowToggle_drawableSize=4;
     /**
@@ -14444,7 +14444,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:gapBetweenBars
+     * @attr name com.example.ventilator:gapBetweenBars
      */
     public static final int DrawerArrowToggle_gapBetweenBars=5;
     /**
@@ -14455,7 +14455,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:spinBars
+     * @attr name com.example.ventilator:spinBars
      */
     public static final int DrawerArrowToggle_spinBars=6;
     /**
@@ -14469,7 +14469,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:thickness
+     * @attr name com.example.ventilator:thickness
      */
     public static final int DrawerArrowToggle_thickness=7;
     /**
@@ -14479,19 +14479,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FloatingActionButton_backgroundTint swasit.zyna.ventilator:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_backgroundTintMode swasit.zyna.ventilator:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_borderWidth swasit.zyna.ventilator:borderWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_elevation swasit.zyna.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_fabCustomSize swasit.zyna.ventilator:fabCustomSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_fabSize swasit.zyna.ventilator:fabSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_hideMotionSpec swasit.zyna.ventilator:hideMotionSpec}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_hoveredFocusedTranslationZ swasit.zyna.ventilator:hoveredFocusedTranslationZ}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_maxImageSize swasit.zyna.ventilator:maxImageSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_pressedTranslationZ swasit.zyna.ventilator:pressedTranslationZ}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_rippleColor swasit.zyna.ventilator:rippleColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_showMotionSpec swasit.zyna.ventilator:showMotionSpec}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_useCompatPadding swasit.zyna.ventilator:useCompatPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_backgroundTint com.example.ventilator:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_backgroundTintMode com.example.ventilator:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_borderWidth com.example.ventilator:borderWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_elevation com.example.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_fabCustomSize com.example.ventilator:fabCustomSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_fabSize com.example.ventilator:fabSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_hideMotionSpec com.example.ventilator:hideMotionSpec}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_hoveredFocusedTranslationZ com.example.ventilator:hoveredFocusedTranslationZ}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_maxImageSize com.example.ventilator:maxImageSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_pressedTranslationZ com.example.ventilator:pressedTranslationZ}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_rippleColor com.example.ventilator:rippleColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_showMotionSpec com.example.ventilator:showMotionSpec}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_useCompatPadding com.example.ventilator:useCompatPadding}</code></td><td></td></tr>
      * </table>
      * @see #FloatingActionButton_backgroundTint
      * @see #FloatingActionButton_backgroundTintMode
@@ -14522,7 +14522,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:backgroundTint
+     * @attr name com.example.ventilator:backgroundTint
      */
     public static final int FloatingActionButton_backgroundTint=0;
     /**
@@ -14549,11 +14549,11 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:backgroundTintMode
+     * @attr name com.example.ventilator:backgroundTintMode
      */
     public static final int FloatingActionButton_backgroundTintMode=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#borderWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#borderWidth}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14562,7 +14562,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:borderWidth
+     * @attr name com.example.ventilator:borderWidth
      */
     public static final int FloatingActionButton_borderWidth=2;
     /**
@@ -14576,11 +14576,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:elevation
+     * @attr name com.example.ventilator:elevation
      */
     public static final int FloatingActionButton_elevation=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fabCustomSize}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fabCustomSize}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14589,11 +14589,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:fabCustomSize
+     * @attr name com.example.ventilator:fabCustomSize
      */
     public static final int FloatingActionButton_fabCustomSize=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fabSize}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fabSize}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -14607,11 +14607,11 @@ public final class R {
      * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:fabSize
+     * @attr name com.example.ventilator:fabSize
      */
     public static final int FloatingActionButton_fabSize=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#hideMotionSpec}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#hideMotionSpec}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14619,11 +14619,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:hideMotionSpec
+     * @attr name com.example.ventilator:hideMotionSpec
      */
     public static final int FloatingActionButton_hideMotionSpec=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#hoveredFocusedTranslationZ}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#hoveredFocusedTranslationZ}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14632,11 +14632,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:hoveredFocusedTranslationZ
+     * @attr name com.example.ventilator:hoveredFocusedTranslationZ
      */
     public static final int FloatingActionButton_hoveredFocusedTranslationZ=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#maxImageSize}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#maxImageSize}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14645,11 +14645,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:maxImageSize
+     * @attr name com.example.ventilator:maxImageSize
      */
     public static final int FloatingActionButton_maxImageSize=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#pressedTranslationZ}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#pressedTranslationZ}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14658,22 +14658,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:pressedTranslationZ
+     * @attr name com.example.ventilator:pressedTranslationZ
      */
     public static final int FloatingActionButton_pressedTranslationZ=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#rippleColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#rippleColor}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:rippleColor
+     * @attr name com.example.ventilator:rippleColor
      */
     public static final int FloatingActionButton_rippleColor=10;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#showMotionSpec}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#showMotionSpec}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14681,17 +14681,17 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:showMotionSpec
+     * @attr name com.example.ventilator:showMotionSpec
      */
     public static final int FloatingActionButton_showMotionSpec=11;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#useCompatPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#useCompatPadding}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:useCompatPadding
+     * @attr name com.example.ventilator:useCompatPadding
      */
     public static final int FloatingActionButton_useCompatPadding=12;
     /**
@@ -14701,7 +14701,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FloatingActionButton_Behavior_Layout_behavior_autoHide swasit.zyna.ventilator:behavior_autoHide}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_Behavior_Layout_behavior_autoHide com.example.ventilator:behavior_autoHide}</code></td><td></td></tr>
      * </table>
      * @see #FloatingActionButton_Behavior_Layout_behavior_autoHide
      */
@@ -14709,13 +14709,13 @@ public final class R {
       0x7f030039
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#behavior_autoHide}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#behavior_autoHide}
      * attribute's value can be found in the {@link #FloatingActionButton_Behavior_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:behavior_autoHide
+     * @attr name com.example.ventilator:behavior_autoHide
      */
     public static final int FloatingActionButton_Behavior_Layout_behavior_autoHide=0;
     /**
@@ -14725,8 +14725,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FlowLayout_itemSpacing swasit.zyna.ventilator:itemSpacing}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FlowLayout_lineSpacing swasit.zyna.ventilator:lineSpacing}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FlowLayout_itemSpacing com.example.ventilator:itemSpacing}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FlowLayout_lineSpacing com.example.ventilator:lineSpacing}</code></td><td></td></tr>
      * </table>
      * @see #FlowLayout_itemSpacing
      * @see #FlowLayout_lineSpacing
@@ -14735,7 +14735,7 @@ public final class R {
       0x7f030111, 0x7f030159
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemSpacing}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemSpacing}
      * attribute's value can be found in the {@link #FlowLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14744,11 +14744,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:itemSpacing
+     * @attr name com.example.ventilator:itemSpacing
      */
     public static final int FlowLayout_itemSpacing=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#lineSpacing}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#lineSpacing}
      * attribute's value can be found in the {@link #FlowLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14757,7 +14757,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:lineSpacing
+     * @attr name com.example.ventilator:lineSpacing
      */
     public static final int FlowLayout_lineSpacing=1;
     /**
@@ -14767,12 +14767,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderAuthority swasit.zyna.ventilator:fontProviderAuthority}</code></td><td>The authority of the Font Provider to be used for the request.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderCerts swasit.zyna.ventilator:fontProviderCerts}</code></td><td>The sets of hashes for the certificates the provider should be signed with.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderFetchStrategy swasit.zyna.ventilator:fontProviderFetchStrategy}</code></td><td>The strategy to be used when fetching font data from a font provider in XML layouts.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderFetchTimeout swasit.zyna.ventilator:fontProviderFetchTimeout}</code></td><td>The length of the timeout during fetching.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderPackage swasit.zyna.ventilator:fontProviderPackage}</code></td><td>The package for the Font Provider to be used for the request.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderQuery swasit.zyna.ventilator:fontProviderQuery}</code></td><td>The query to be sent over to the provider.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderAuthority com.example.ventilator:fontProviderAuthority}</code></td><td>The authority of the Font Provider to be used for the request.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderCerts com.example.ventilator:fontProviderCerts}</code></td><td>The sets of hashes for the certificates the provider should be signed with.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderFetchStrategy com.example.ventilator:fontProviderFetchStrategy}</code></td><td>The strategy to be used when fetching font data from a font provider in XML layouts.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderFetchTimeout com.example.ventilator:fontProviderFetchTimeout}</code></td><td>The length of the timeout during fetching.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderPackage com.example.ventilator:fontProviderPackage}</code></td><td>The package for the Font Provider to be used for the request.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderQuery com.example.ventilator:fontProviderQuery}</code></td><td>The query to be sent over to the provider.</td></tr>
      * </table>
      * @see #FontFamily_fontProviderAuthority
      * @see #FontFamily_fontProviderCerts
@@ -14793,7 +14793,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:fontProviderAuthority
+     * @attr name com.example.ventilator:fontProviderAuthority
      */
     public static final int FontFamily_fontProviderAuthority=0;
     /**
@@ -14810,7 +14810,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:fontProviderCerts
+     * @attr name com.example.ventilator:fontProviderCerts
      */
     public static final int FontFamily_fontProviderCerts=1;
     /**
@@ -14842,7 +14842,7 @@ public final class R {
      * default typeface will be used instead.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:fontProviderFetchStrategy
+     * @attr name com.example.ventilator:fontProviderFetchStrategy
      */
     public static final int FontFamily_fontProviderFetchStrategy=2;
     /**
@@ -14861,7 +14861,7 @@ public final class R {
      * timeout and wait until a reply is received from the font provider.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:fontProviderFetchTimeout
+     * @attr name com.example.ventilator:fontProviderFetchTimeout
      */
     public static final int FontFamily_fontProviderFetchTimeout=3;
     /**
@@ -14873,7 +14873,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:fontProviderPackage
+     * @attr name com.example.ventilator:fontProviderPackage
      */
     public static final int FontFamily_fontProviderPackage=4;
     /**
@@ -14885,7 +14885,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:fontProviderQuery
+     * @attr name com.example.ventilator:fontProviderQuery
      */
     public static final int FontFamily_fontProviderQuery=5;
     /**
@@ -14900,11 +14900,11 @@ public final class R {
      * <tr><td><code>{@link #FontFamilyFont_android_fontStyle android:fontStyle}</code></td><td></td></tr>
      * <tr><td><code>{@link #FontFamilyFont_android_ttcIndex android:ttcIndex}</code></td><td></td></tr>
      * <tr><td><code>{@link #FontFamilyFont_android_fontVariationSettings android:fontVariationSettings}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_font swasit.zyna.ventilator:font}</code></td><td>The reference to the font file to be used.</td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_fontStyle swasit.zyna.ventilator:fontStyle}</code></td><td>The style of the given font file.</td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_fontVariationSettings swasit.zyna.ventilator:fontVariationSettings}</code></td><td>The variation settings to be applied to the font.</td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_fontWeight swasit.zyna.ventilator:fontWeight}</code></td><td>The weight of the given font file.</td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_ttcIndex swasit.zyna.ventilator:ttcIndex}</code></td><td>The index of the font in the tcc font file.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_font com.example.ventilator:font}</code></td><td>The reference to the font file to be used.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_fontStyle com.example.ventilator:fontStyle}</code></td><td>The style of the given font file.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_fontVariationSettings com.example.ventilator:fontVariationSettings}</code></td><td>The variation settings to be applied to the font.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_fontWeight com.example.ventilator:fontWeight}</code></td><td>The weight of the given font file.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_ttcIndex com.example.ventilator:ttcIndex}</code></td><td>The index of the font in the tcc font file.</td></tr>
      * </table>
      * @see #FontFamilyFont_android_font
      * @see #FontFamilyFont_android_fontWeight
@@ -14991,7 +14991,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:font
+     * @attr name com.example.ventilator:font
      */
     public static final int FontFamilyFont_font=5;
     /**
@@ -15011,7 +15011,7 @@ public final class R {
      * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:fontStyle
+     * @attr name com.example.ventilator:fontStyle
      */
     public static final int FontFamilyFont_fontStyle=6;
     /**
@@ -15025,7 +15025,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:fontVariationSettings
+     * @attr name com.example.ventilator:fontVariationSettings
      */
     public static final int FontFamilyFont_fontVariationSettings=7;
     /**
@@ -15039,7 +15039,7 @@ public final class R {
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:fontWeight
+     * @attr name com.example.ventilator:fontWeight
      */
     public static final int FontFamilyFont_fontWeight=8;
     /**
@@ -15050,7 +15050,7 @@ public final class R {
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:ttcIndex
+     * @attr name com.example.ventilator:ttcIndex
      */
     public static final int FontFamilyFont_ttcIndex=9;
     /**
@@ -15062,7 +15062,7 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #ForegroundLinearLayout_android_foreground android:foreground}</code></td><td></td></tr>
      * <tr><td><code>{@link #ForegroundLinearLayout_android_foregroundGravity android:foregroundGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ForegroundLinearLayout_foregroundInsidePadding swasit.zyna.ventilator:foregroundInsidePadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ForegroundLinearLayout_foregroundInsidePadding com.example.ventilator:foregroundInsidePadding}</code></td><td></td></tr>
      * </table>
      * @see #ForegroundLinearLayout_android_foreground
      * @see #ForegroundLinearLayout_android_foregroundGravity
@@ -15114,13 +15114,13 @@ public final class R {
      */
     public static final int ForegroundLinearLayout_android_foregroundGravity=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#foregroundInsidePadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#foregroundInsidePadding}
      * attribute's value can be found in the {@link #ForegroundLinearLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:foregroundInsidePadding
+     * @attr name com.example.ventilator:foregroundInsidePadding
      */
     public static final int ForegroundLinearLayout_foregroundInsidePadding=2;
     /**
@@ -15409,11 +15409,11 @@ public final class R {
      * <tr><td><code>{@link #LinearLayoutCompat_android_baselineAligned android:baselineAligned}</code></td><td></td></tr>
      * <tr><td><code>{@link #LinearLayoutCompat_android_baselineAlignedChildIndex android:baselineAlignedChildIndex}</code></td><td></td></tr>
      * <tr><td><code>{@link #LinearLayoutCompat_android_weightSum android:weightSum}</code></td><td></td></tr>
-     * <tr><td><code>{@link #LinearLayoutCompat_divider swasit.zyna.ventilator:divider}</code></td><td>Specifies the drawable used for item dividers.</td></tr>
-     * <tr><td><code>{@link #LinearLayoutCompat_dividerPadding swasit.zyna.ventilator:dividerPadding}</code></td><td>Size of padding on either end of a divider.</td></tr>
-     * <tr><td><code>{@link #LinearLayoutCompat_measureWithLargestChild swasit.zyna.ventilator:measureWithLargestChild}</code></td><td>When set to true, all children with a weight will be considered having
+     * <tr><td><code>{@link #LinearLayoutCompat_divider com.example.ventilator:divider}</code></td><td>Specifies the drawable used for item dividers.</td></tr>
+     * <tr><td><code>{@link #LinearLayoutCompat_dividerPadding com.example.ventilator:dividerPadding}</code></td><td>Size of padding on either end of a divider.</td></tr>
+     * <tr><td><code>{@link #LinearLayoutCompat_measureWithLargestChild com.example.ventilator:measureWithLargestChild}</code></td><td>When set to true, all children with a weight will be considered having
      * the minimum size of the largest child.</td></tr>
-     * <tr><td><code>{@link #LinearLayoutCompat_showDividers swasit.zyna.ventilator:showDividers}</code></td><td>Setting for which dividers to show.</td></tr>
+     * <tr><td><code>{@link #LinearLayoutCompat_showDividers com.example.ventilator:showDividers}</code></td><td>Setting for which dividers to show.</td></tr>
      * </table>
      * @see #LinearLayoutCompat_android_gravity
      * @see #LinearLayoutCompat_android_orientation
@@ -15528,7 +15528,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:divider
+     * @attr name com.example.ventilator:divider
      */
     public static final int LinearLayoutCompat_divider=5;
     /**
@@ -15542,7 +15542,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:dividerPadding
+     * @attr name com.example.ventilator:dividerPadding
      */
     public static final int LinearLayoutCompat_dividerPadding=6;
     /**
@@ -15555,7 +15555,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:measureWithLargestChild
+     * @attr name com.example.ventilator:measureWithLargestChild
      */
     public static final int LinearLayoutCompat_measureWithLargestChild=7;
     /**
@@ -15575,7 +15575,7 @@ public final class R {
      * <tr><td>none</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:showDividers
+     * @attr name com.example.ventilator:showDividers
      */
     public static final int LinearLayoutCompat_showDividers=8;
     /**
@@ -15737,18 +15737,18 @@ public final class R {
      * <tr><td><code>{@link #MaterialButton_android_insetRight android:insetRight}</code></td><td></td></tr>
      * <tr><td><code>{@link #MaterialButton_android_insetTop android:insetTop}</code></td><td></td></tr>
      * <tr><td><code>{@link #MaterialButton_android_insetBottom android:insetBottom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_backgroundTint swasit.zyna.ventilator:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
-     * <tr><td><code>{@link #MaterialButton_backgroundTintMode swasit.zyna.ventilator:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
-     * <tr><td><code>{@link #MaterialButton_cornerRadius swasit.zyna.ventilator:cornerRadius}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_icon swasit.zyna.ventilator:icon}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconGravity swasit.zyna.ventilator:iconGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconPadding swasit.zyna.ventilator:iconPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconSize swasit.zyna.ventilator:iconSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconTint swasit.zyna.ventilator:iconTint}</code></td><td>Tint to apply to the icon.</td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconTintMode swasit.zyna.ventilator:iconTintMode}</code></td><td>Blending mode used to apply the icon tint.</td></tr>
-     * <tr><td><code>{@link #MaterialButton_rippleColor swasit.zyna.ventilator:rippleColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_strokeColor swasit.zyna.ventilator:strokeColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_strokeWidth swasit.zyna.ventilator:strokeWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_backgroundTint com.example.ventilator:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
+     * <tr><td><code>{@link #MaterialButton_backgroundTintMode com.example.ventilator:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
+     * <tr><td><code>{@link #MaterialButton_cornerRadius com.example.ventilator:cornerRadius}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_icon com.example.ventilator:icon}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconGravity com.example.ventilator:iconGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconPadding com.example.ventilator:iconPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconSize com.example.ventilator:iconSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconTint com.example.ventilator:iconTint}</code></td><td>Tint to apply to the icon.</td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconTintMode com.example.ventilator:iconTintMode}</code></td><td>Blending mode used to apply the icon tint.</td></tr>
+     * <tr><td><code>{@link #MaterialButton_rippleColor com.example.ventilator:rippleColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_strokeColor com.example.ventilator:strokeColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_strokeWidth com.example.ventilator:strokeWidth}</code></td><td></td></tr>
      * </table>
      * @see #MaterialButton_android_insetLeft
      * @see #MaterialButton_android_insetRight
@@ -15850,7 +15850,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:backgroundTint
+     * @attr name com.example.ventilator:backgroundTint
      */
     public static final int MaterialButton_backgroundTint=4;
     /**
@@ -15877,11 +15877,11 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:backgroundTintMode
+     * @attr name com.example.ventilator:backgroundTintMode
      */
     public static final int MaterialButton_backgroundTintMode=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#cornerRadius}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#cornerRadius}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -15890,11 +15890,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:cornerRadius
+     * @attr name com.example.ventilator:cornerRadius
      */
     public static final int MaterialButton_cornerRadius=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#icon}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#icon}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15902,11 +15902,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:icon
+     * @attr name com.example.ventilator:icon
      */
     public static final int MaterialButton_icon=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#iconGravity}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#iconGravity}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -15919,11 +15919,11 @@ public final class R {
      * <tr><td>textStart</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:iconGravity
+     * @attr name com.example.ventilator:iconGravity
      */
     public static final int MaterialButton_iconGravity=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#iconPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#iconPadding}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -15932,11 +15932,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:iconPadding
+     * @attr name com.example.ventilator:iconPadding
      */
     public static final int MaterialButton_iconPadding=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#iconSize}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#iconSize}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -15945,7 +15945,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:iconSize
+     * @attr name com.example.ventilator:iconSize
      */
     public static final int MaterialButton_iconSize=10;
     /**
@@ -15957,7 +15957,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:iconTint
+     * @attr name com.example.ventilator:iconTint
      */
     public static final int MaterialButton_iconTint=11;
     /**
@@ -15984,33 +15984,33 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:iconTintMode
+     * @attr name com.example.ventilator:iconTintMode
      */
     public static final int MaterialButton_iconTintMode=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#rippleColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#rippleColor}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:rippleColor
+     * @attr name com.example.ventilator:rippleColor
      */
     public static final int MaterialButton_rippleColor=13;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#strokeColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#strokeColor}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:strokeColor
+     * @attr name com.example.ventilator:strokeColor
      */
     public static final int MaterialButton_strokeColor=14;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#strokeWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#strokeWidth}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -16019,7 +16019,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:strokeWidth
+     * @attr name com.example.ventilator:strokeWidth
      */
     public static final int MaterialButton_strokeWidth=15;
     /**
@@ -16029,8 +16029,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #MaterialCardView_strokeColor swasit.zyna.ventilator:strokeColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialCardView_strokeWidth swasit.zyna.ventilator:strokeWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialCardView_strokeColor com.example.ventilator:strokeColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialCardView_strokeWidth com.example.ventilator:strokeWidth}</code></td><td></td></tr>
      * </table>
      * @see #MaterialCardView_strokeColor
      * @see #MaterialCardView_strokeWidth
@@ -16039,18 +16039,18 @@ public final class R {
       0x7f0301b5, 0x7f0301b6
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#strokeColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#strokeColor}
      * attribute's value can be found in the {@link #MaterialCardView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:strokeColor
+     * @attr name com.example.ventilator:strokeColor
      */
     public static final int MaterialCardView_strokeColor=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#strokeWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#strokeWidth}
      * attribute's value can be found in the {@link #MaterialCardView} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -16059,7 +16059,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:strokeWidth
+     * @attr name com.example.ventilator:strokeWidth
      */
     public static final int MaterialCardView_strokeWidth=1;
     /**
@@ -16069,38 +16069,38 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_bottomSheetDialogTheme swasit.zyna.ventilator:bottomSheetDialogTheme}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_bottomSheetStyle swasit.zyna.ventilator:bottomSheetStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_chipGroupStyle swasit.zyna.ventilator:chipGroupStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_chipStandaloneStyle swasit.zyna.ventilator:chipStandaloneStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_chipStyle swasit.zyna.ventilator:chipStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorAccent swasit.zyna.ventilator:colorAccent}</code></td><td>Bright complement to the primary branding color.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorBackgroundFloating swasit.zyna.ventilator:colorBackgroundFloating}</code></td><td>Default color of background imagery for floating components, ex.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorPrimary swasit.zyna.ventilator:colorPrimary}</code></td><td>The primary branding color for the app.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorPrimaryDark swasit.zyna.ventilator:colorPrimaryDark}</code></td><td>Dark variant of the primary branding color.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorSecondary swasit.zyna.ventilator:colorSecondary}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_editTextStyle swasit.zyna.ventilator:editTextStyle}</code></td><td>Default EditText style.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_floatingActionButtonStyle swasit.zyna.ventilator:floatingActionButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_materialButtonStyle swasit.zyna.ventilator:materialButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_materialCardViewStyle swasit.zyna.ventilator:materialCardViewStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_navigationViewStyle swasit.zyna.ventilator:navigationViewStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_scrimBackground swasit.zyna.ventilator:scrimBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_snackbarButtonStyle swasit.zyna.ventilator:snackbarButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_tabStyle swasit.zyna.ventilator:tabStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceBody1 swasit.zyna.ventilator:textAppearanceBody1}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceBody2 swasit.zyna.ventilator:textAppearanceBody2}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceButton swasit.zyna.ventilator:textAppearanceButton}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceCaption swasit.zyna.ventilator:textAppearanceCaption}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline1 swasit.zyna.ventilator:textAppearanceHeadline1}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline2 swasit.zyna.ventilator:textAppearanceHeadline2}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline3 swasit.zyna.ventilator:textAppearanceHeadline3}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline4 swasit.zyna.ventilator:textAppearanceHeadline4}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline5 swasit.zyna.ventilator:textAppearanceHeadline5}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline6 swasit.zyna.ventilator:textAppearanceHeadline6}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceOverline swasit.zyna.ventilator:textAppearanceOverline}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceSubtitle1 swasit.zyna.ventilator:textAppearanceSubtitle1}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceSubtitle2 swasit.zyna.ventilator:textAppearanceSubtitle2}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textInputStyle swasit.zyna.ventilator:textInputStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_bottomSheetDialogTheme com.example.ventilator:bottomSheetDialogTheme}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_bottomSheetStyle com.example.ventilator:bottomSheetStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_chipGroupStyle com.example.ventilator:chipGroupStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_chipStandaloneStyle com.example.ventilator:chipStandaloneStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_chipStyle com.example.ventilator:chipStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorAccent com.example.ventilator:colorAccent}</code></td><td>Bright complement to the primary branding color.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorBackgroundFloating com.example.ventilator:colorBackgroundFloating}</code></td><td>Default color of background imagery for floating components, ex.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorPrimary com.example.ventilator:colorPrimary}</code></td><td>The primary branding color for the app.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorPrimaryDark com.example.ventilator:colorPrimaryDark}</code></td><td>Dark variant of the primary branding color.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorSecondary com.example.ventilator:colorSecondary}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_editTextStyle com.example.ventilator:editTextStyle}</code></td><td>Default EditText style.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_floatingActionButtonStyle com.example.ventilator:floatingActionButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_materialButtonStyle com.example.ventilator:materialButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_materialCardViewStyle com.example.ventilator:materialCardViewStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_navigationViewStyle com.example.ventilator:navigationViewStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_scrimBackground com.example.ventilator:scrimBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_snackbarButtonStyle com.example.ventilator:snackbarButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_tabStyle com.example.ventilator:tabStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceBody1 com.example.ventilator:textAppearanceBody1}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceBody2 com.example.ventilator:textAppearanceBody2}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceButton com.example.ventilator:textAppearanceButton}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceCaption com.example.ventilator:textAppearanceCaption}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline1 com.example.ventilator:textAppearanceHeadline1}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline2 com.example.ventilator:textAppearanceHeadline2}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline3 com.example.ventilator:textAppearanceHeadline3}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline4 com.example.ventilator:textAppearanceHeadline4}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline5 com.example.ventilator:textAppearanceHeadline5}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline6 com.example.ventilator:textAppearanceHeadline6}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceOverline com.example.ventilator:textAppearanceOverline}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceSubtitle1 com.example.ventilator:textAppearanceSubtitle1}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceSubtitle2 com.example.ventilator:textAppearanceSubtitle2}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textInputStyle com.example.ventilator:textInputStyle}</code></td><td></td></tr>
      * </table>
      * @see #MaterialComponentsTheme_bottomSheetDialogTheme
      * @see #MaterialComponentsTheme_bottomSheetStyle
@@ -16146,7 +16146,7 @@ public final class R {
       0x7f0301eb, 0x7f0301f0, 0x7f0301f1, 0x7f0301f5
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#bottomSheetDialogTheme}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#bottomSheetDialogTheme}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16154,11 +16154,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:bottomSheetDialogTheme
+     * @attr name com.example.ventilator:bottomSheetDialogTheme
      */
     public static final int MaterialComponentsTheme_bottomSheetDialogTheme=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#bottomSheetStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#bottomSheetStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16166,11 +16166,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:bottomSheetStyle
+     * @attr name com.example.ventilator:bottomSheetStyle
      */
     public static final int MaterialComponentsTheme_bottomSheetStyle=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipGroupStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipGroupStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16178,11 +16178,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:chipGroupStyle
+     * @attr name com.example.ventilator:chipGroupStyle
      */
     public static final int MaterialComponentsTheme_chipGroupStyle=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipStandaloneStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipStandaloneStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16190,11 +16190,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:chipStandaloneStyle
+     * @attr name com.example.ventilator:chipStandaloneStyle
      */
     public static final int MaterialComponentsTheme_chipStandaloneStyle=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#chipStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#chipStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16202,7 +16202,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:chipStyle
+     * @attr name com.example.ventilator:chipStyle
      */
     public static final int MaterialComponentsTheme_chipStyle=4;
     /**
@@ -16215,7 +16215,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorAccent
+     * @attr name com.example.ventilator:colorAccent
      */
     public static final int MaterialComponentsTheme_colorAccent=5;
     /**
@@ -16227,7 +16227,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorBackgroundFloating
+     * @attr name com.example.ventilator:colorBackgroundFloating
      */
     public static final int MaterialComponentsTheme_colorBackgroundFloating=6;
     /**
@@ -16240,7 +16240,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorPrimary
+     * @attr name com.example.ventilator:colorPrimary
      */
     public static final int MaterialComponentsTheme_colorPrimary=7;
     /**
@@ -16253,18 +16253,18 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorPrimaryDark
+     * @attr name com.example.ventilator:colorPrimaryDark
      */
     public static final int MaterialComponentsTheme_colorPrimaryDark=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#colorSecondary}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#colorSecondary}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:colorSecondary
+     * @attr name com.example.ventilator:colorSecondary
      */
     public static final int MaterialComponentsTheme_colorSecondary=9;
     /**
@@ -16277,11 +16277,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:editTextStyle
+     * @attr name com.example.ventilator:editTextStyle
      */
     public static final int MaterialComponentsTheme_editTextStyle=10;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#floatingActionButtonStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#floatingActionButtonStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16307,11 +16307,11 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name swasit.zyna.ventilator:floatingActionButtonStyle
+     * @attr name com.example.ventilator:floatingActionButtonStyle
      */
     public static final int MaterialComponentsTheme_floatingActionButtonStyle=11;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#materialButtonStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#materialButtonStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16319,11 +16319,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:materialButtonStyle
+     * @attr name com.example.ventilator:materialButtonStyle
      */
     public static final int MaterialComponentsTheme_materialButtonStyle=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#materialCardViewStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#materialCardViewStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16331,11 +16331,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:materialCardViewStyle
+     * @attr name com.example.ventilator:materialCardViewStyle
      */
     public static final int MaterialComponentsTheme_materialCardViewStyle=13;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#navigationViewStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#navigationViewStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16343,11 +16343,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:navigationViewStyle
+     * @attr name com.example.ventilator:navigationViewStyle
      */
     public static final int MaterialComponentsTheme_navigationViewStyle=14;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#scrimBackground}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#scrimBackground}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16358,11 +16358,11 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:scrimBackground
+     * @attr name com.example.ventilator:scrimBackground
      */
     public static final int MaterialComponentsTheme_scrimBackground=15;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#snackbarButtonStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#snackbarButtonStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16370,11 +16370,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:snackbarButtonStyle
+     * @attr name com.example.ventilator:snackbarButtonStyle
      */
     public static final int MaterialComponentsTheme_snackbarButtonStyle=16;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16382,11 +16382,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabStyle
+     * @attr name com.example.ventilator:tabStyle
      */
     public static final int MaterialComponentsTheme_tabStyle=17;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceBody1}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceBody1}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16394,11 +16394,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceBody1
+     * @attr name com.example.ventilator:textAppearanceBody1
      */
     public static final int MaterialComponentsTheme_textAppearanceBody1=18;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceBody2}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceBody2}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16406,11 +16406,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceBody2
+     * @attr name com.example.ventilator:textAppearanceBody2
      */
     public static final int MaterialComponentsTheme_textAppearanceBody2=19;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceButton}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceButton}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16418,11 +16418,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceButton
+     * @attr name com.example.ventilator:textAppearanceButton
      */
     public static final int MaterialComponentsTheme_textAppearanceButton=20;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceCaption}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceCaption}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16430,11 +16430,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceCaption
+     * @attr name com.example.ventilator:textAppearanceCaption
      */
     public static final int MaterialComponentsTheme_textAppearanceCaption=21;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceHeadline1}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceHeadline1}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16442,11 +16442,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceHeadline1
+     * @attr name com.example.ventilator:textAppearanceHeadline1
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline1=22;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceHeadline2}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceHeadline2}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16454,11 +16454,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceHeadline2
+     * @attr name com.example.ventilator:textAppearanceHeadline2
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline2=23;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceHeadline3}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceHeadline3}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16466,11 +16466,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceHeadline3
+     * @attr name com.example.ventilator:textAppearanceHeadline3
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline3=24;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceHeadline4}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceHeadline4}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16478,11 +16478,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceHeadline4
+     * @attr name com.example.ventilator:textAppearanceHeadline4
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline4=25;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceHeadline5}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceHeadline5}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16490,11 +16490,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceHeadline5
+     * @attr name com.example.ventilator:textAppearanceHeadline5
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline5=26;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceHeadline6}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceHeadline6}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16502,11 +16502,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceHeadline6
+     * @attr name com.example.ventilator:textAppearanceHeadline6
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline6=27;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceOverline}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceOverline}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16514,11 +16514,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceOverline
+     * @attr name com.example.ventilator:textAppearanceOverline
      */
     public static final int MaterialComponentsTheme_textAppearanceOverline=28;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceSubtitle1}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceSubtitle1}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16526,11 +16526,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceSubtitle1
+     * @attr name com.example.ventilator:textAppearanceSubtitle1
      */
     public static final int MaterialComponentsTheme_textAppearanceSubtitle1=29;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textAppearanceSubtitle2}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textAppearanceSubtitle2}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16538,11 +16538,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textAppearanceSubtitle2
+     * @attr name com.example.ventilator:textAppearanceSubtitle2
      */
     public static final int MaterialComponentsTheme_textAppearanceSubtitle2=30;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#textInputStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#textInputStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16550,7 +16550,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:textInputStyle
+     * @attr name com.example.ventilator:textInputStyle
      */
     public static final int MaterialComponentsTheme_textInputStyle=31;
     /**
@@ -16684,18 +16684,18 @@ public final class R {
      * <tr><td><code>{@link #MenuItem_android_numericShortcut android:numericShortcut}</code></td><td></td></tr>
      * <tr><td><code>{@link #MenuItem_android_checkable android:checkable}</code></td><td></td></tr>
      * <tr><td><code>{@link #MenuItem_android_onClick android:onClick}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MenuItem_actionLayout swasit.zyna.ventilator:actionLayout}</code></td><td>An optional layout to be used as an action view.</td></tr>
-     * <tr><td><code>{@link #MenuItem_actionProviderClass swasit.zyna.ventilator:actionProviderClass}</code></td><td>The name of an optional ActionProvider class to instantiate an action view
+     * <tr><td><code>{@link #MenuItem_actionLayout com.example.ventilator:actionLayout}</code></td><td>An optional layout to be used as an action view.</td></tr>
+     * <tr><td><code>{@link #MenuItem_actionProviderClass com.example.ventilator:actionProviderClass}</code></td><td>The name of an optional ActionProvider class to instantiate an action view
      * and perform operations such as default action for that menu item.</td></tr>
-     * <tr><td><code>{@link #MenuItem_actionViewClass swasit.zyna.ventilator:actionViewClass}</code></td><td>The name of an optional View class to instantiate and use as an
+     * <tr><td><code>{@link #MenuItem_actionViewClass com.example.ventilator:actionViewClass}</code></td><td>The name of an optional View class to instantiate and use as an
      * action view.</td></tr>
-     * <tr><td><code>{@link #MenuItem_alphabeticModifiers swasit.zyna.ventilator:alphabeticModifiers}</code></td><td>The alphabetic modifier key.</td></tr>
-     * <tr><td><code>{@link #MenuItem_contentDescription swasit.zyna.ventilator:contentDescription}</code></td><td>The content description associated with the item.</td></tr>
-     * <tr><td><code>{@link #MenuItem_iconTint swasit.zyna.ventilator:iconTint}</code></td><td>Tint to apply to the icon.</td></tr>
-     * <tr><td><code>{@link #MenuItem_iconTintMode swasit.zyna.ventilator:iconTintMode}</code></td><td>Blending mode used to apply the icon tint.</td></tr>
-     * <tr><td><code>{@link #MenuItem_numericModifiers swasit.zyna.ventilator:numericModifiers}</code></td><td>The numeric modifier key.</td></tr>
-     * <tr><td><code>{@link #MenuItem_showAsAction swasit.zyna.ventilator:showAsAction}</code></td><td>How this item should display in the Action Bar, if present.</td></tr>
-     * <tr><td><code>{@link #MenuItem_tooltipText swasit.zyna.ventilator:tooltipText}</code></td><td>The tooltip text associated with the item.</td></tr>
+     * <tr><td><code>{@link #MenuItem_alphabeticModifiers com.example.ventilator:alphabeticModifiers}</code></td><td>The alphabetic modifier key.</td></tr>
+     * <tr><td><code>{@link #MenuItem_contentDescription com.example.ventilator:contentDescription}</code></td><td>The content description associated with the item.</td></tr>
+     * <tr><td><code>{@link #MenuItem_iconTint com.example.ventilator:iconTint}</code></td><td>Tint to apply to the icon.</td></tr>
+     * <tr><td><code>{@link #MenuItem_iconTintMode com.example.ventilator:iconTintMode}</code></td><td>Blending mode used to apply the icon tint.</td></tr>
+     * <tr><td><code>{@link #MenuItem_numericModifiers com.example.ventilator:numericModifiers}</code></td><td>The numeric modifier key.</td></tr>
+     * <tr><td><code>{@link #MenuItem_showAsAction com.example.ventilator:showAsAction}</code></td><td>How this item should display in the Action Bar, if present.</td></tr>
+     * <tr><td><code>{@link #MenuItem_tooltipText com.example.ventilator:tooltipText}</code></td><td>The tooltip text associated with the item.</td></tr>
      * </table>
      * @see #MenuItem_android_icon
      * @see #MenuItem_android_enabled
@@ -16904,7 +16904,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:actionLayout
+     * @attr name com.example.ventilator:actionLayout
      */
     public static final int MenuItem_actionLayout=13;
     /**
@@ -16918,7 +16918,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:actionProviderClass
+     * @attr name com.example.ventilator:actionProviderClass
      */
     public static final int MenuItem_actionProviderClass=14;
     /**
@@ -16931,7 +16931,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:actionViewClass
+     * @attr name com.example.ventilator:actionViewClass
      */
     public static final int MenuItem_actionViewClass=15;
     /**
@@ -16954,7 +16954,7 @@ public final class R {
      * <tr><td>SYM</td><td>4</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:alphabeticModifiers
+     * @attr name com.example.ventilator:alphabeticModifiers
      */
     public static final int MenuItem_alphabeticModifiers=16;
     /**
@@ -16965,7 +16965,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:contentDescription
+     * @attr name com.example.ventilator:contentDescription
      */
     public static final int MenuItem_contentDescription=17;
     /**
@@ -16977,7 +16977,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:iconTint
+     * @attr name com.example.ventilator:iconTint
      */
     public static final int MenuItem_iconTint=18;
     /**
@@ -17004,7 +17004,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:iconTintMode
+     * @attr name com.example.ventilator:iconTintMode
      */
     public static final int MenuItem_iconTintMode=19;
     /**
@@ -17027,7 +17027,7 @@ public final class R {
      * <tr><td>SYM</td><td>4</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:numericModifiers
+     * @attr name com.example.ventilator:numericModifiers
      */
     public static final int MenuItem_numericModifiers=20;
     /**
@@ -17057,7 +17057,7 @@ public final class R {
      * label with it even if it has an icon representation.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:showAsAction
+     * @attr name com.example.ventilator:showAsAction
      */
     public static final int MenuItem_showAsAction=21;
     /**
@@ -17068,7 +17068,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:tooltipText
+     * @attr name com.example.ventilator:tooltipText
      */
     public static final int MenuItem_tooltipText=22;
     /**
@@ -17085,8 +17085,8 @@ public final class R {
      * <tr><td><code>{@link #MenuView_android_headerBackground android:headerBackground}</code></td><td></td></tr>
      * <tr><td><code>{@link #MenuView_android_itemBackground android:itemBackground}</code></td><td></td></tr>
      * <tr><td><code>{@link #MenuView_android_itemIconDisabledAlpha android:itemIconDisabledAlpha}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MenuView_preserveIconSpacing swasit.zyna.ventilator:preserveIconSpacing}</code></td><td>Whether space should be reserved in layout when an icon is missing.</td></tr>
-     * <tr><td><code>{@link #MenuView_subMenuArrow swasit.zyna.ventilator:subMenuArrow}</code></td><td>Drawable for the arrow icon indicating a particular item is a submenu.</td></tr>
+     * <tr><td><code>{@link #MenuView_preserveIconSpacing com.example.ventilator:preserveIconSpacing}</code></td><td>Whether space should be reserved in layout when an icon is missing.</td></tr>
+     * <tr><td><code>{@link #MenuView_subMenuArrow com.example.ventilator:subMenuArrow}</code></td><td>Drawable for the arrow icon indicating a particular item is a submenu.</td></tr>
      * </table>
      * @see #MenuView_android_windowAnimationStyle
      * @see #MenuView_android_itemTextAppearance
@@ -17205,7 +17205,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:preserveIconSpacing
+     * @attr name com.example.ventilator:preserveIconSpacing
      */
     public static final int MenuView_preserveIconSpacing=7;
     /**
@@ -17218,7 +17218,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:subMenuArrow
+     * @attr name com.example.ventilator:subMenuArrow
      */
     public static final int MenuView_subMenuArrow=8;
     /**
@@ -17231,15 +17231,15 @@ public final class R {
      * <tr><td><code>{@link #NavigationView_android_background android:background}</code></td><td></td></tr>
      * <tr><td><code>{@link #NavigationView_android_fitsSystemWindows android:fitsSystemWindows}</code></td><td></td></tr>
      * <tr><td><code>{@link #NavigationView_android_maxWidth android:maxWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_elevation swasit.zyna.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #NavigationView_headerLayout swasit.zyna.ventilator:headerLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemBackground swasit.zyna.ventilator:itemBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemHorizontalPadding swasit.zyna.ventilator:itemHorizontalPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemIconPadding swasit.zyna.ventilator:itemIconPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemIconTint swasit.zyna.ventilator:itemIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemTextAppearance swasit.zyna.ventilator:itemTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemTextColor swasit.zyna.ventilator:itemTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_menu swasit.zyna.ventilator:menu}</code></td><td>Menu resource to inflate to be shown in the toolbar</td></tr>
+     * <tr><td><code>{@link #NavigationView_elevation com.example.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #NavigationView_headerLayout com.example.ventilator:headerLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemBackground com.example.ventilator:itemBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemHorizontalPadding com.example.ventilator:itemHorizontalPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemIconPadding com.example.ventilator:itemIconPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemIconTint com.example.ventilator:itemIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemTextAppearance com.example.ventilator:itemTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemTextColor com.example.ventilator:itemTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_menu com.example.ventilator:menu}</code></td><td>Menu resource to inflate to be shown in the toolbar</td></tr>
      * </table>
      * @see #NavigationView_android_background
      * @see #NavigationView_android_fitsSystemWindows
@@ -17308,11 +17308,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:elevation
+     * @attr name com.example.ventilator:elevation
      */
     public static final int NavigationView_elevation=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#headerLayout}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#headerLayout}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17320,11 +17320,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:headerLayout
+     * @attr name com.example.ventilator:headerLayout
      */
     public static final int NavigationView_headerLayout=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemBackground}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemBackground}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17332,11 +17332,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemBackground
+     * @attr name com.example.ventilator:itemBackground
      */
     public static final int NavigationView_itemBackground=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemHorizontalPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemHorizontalPadding}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17345,11 +17345,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:itemHorizontalPadding
+     * @attr name com.example.ventilator:itemHorizontalPadding
      */
     public static final int NavigationView_itemHorizontalPadding=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemIconPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemIconPadding}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17358,22 +17358,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:itemIconPadding
+     * @attr name com.example.ventilator:itemIconPadding
      */
     public static final int NavigationView_itemIconPadding=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemIconTint}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemIconTint}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemIconTint
+     * @attr name com.example.ventilator:itemIconTint
      */
     public static final int NavigationView_itemIconTint=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemTextAppearance}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17381,18 +17381,18 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemTextAppearance
+     * @attr name com.example.ventilator:itemTextAppearance
      */
     public static final int NavigationView_itemTextAppearance=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#itemTextColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#itemTextColor}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:itemTextColor
+     * @attr name com.example.ventilator:itemTextColor
      */
     public static final int NavigationView_itemTextColor=10;
     /**
@@ -17405,7 +17405,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:menu
+     * @attr name com.example.ventilator:menu
      */
     public static final int NavigationView_menu=11;
     /**
@@ -17417,7 +17417,7 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #PopupWindow_android_popupBackground android:popupBackground}</code></td><td></td></tr>
      * <tr><td><code>{@link #PopupWindow_android_popupAnimationStyle android:popupAnimationStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #PopupWindow_overlapAnchor swasit.zyna.ventilator:overlapAnchor}</code></td><td>Whether the popup window should overlap its anchor view.</td></tr>
+     * <tr><td><code>{@link #PopupWindow_overlapAnchor com.example.ventilator:overlapAnchor}</code></td><td>Whether the popup window should overlap its anchor view.</td></tr>
      * </table>
      * @see #PopupWindow_android_popupBackground
      * @see #PopupWindow_android_popupAnimationStyle
@@ -17461,7 +17461,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:overlapAnchor
+     * @attr name com.example.ventilator:overlapAnchor
      */
     public static final int PopupWindow_overlapAnchor=2;
     /**
@@ -17471,7 +17471,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #PopupWindowBackgroundState_state_above_anchor swasit.zyna.ventilator:state_above_anchor}</code></td><td>State identifier indicating the popup will be above the anchor.</td></tr>
+     * <tr><td><code>{@link #PopupWindowBackgroundState_state_above_anchor com.example.ventilator:state_above_anchor}</code></td><td>State identifier indicating the popup will be above the anchor.</td></tr>
      * </table>
      * @see #PopupWindowBackgroundState_state_above_anchor
      */
@@ -17486,7 +17486,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:state_above_anchor
+     * @attr name com.example.ventilator:state_above_anchor
      */
     public static final int PopupWindowBackgroundState_state_above_anchor=0;
     /**
@@ -17496,8 +17496,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #RecycleListView_paddingBottomNoButtons swasit.zyna.ventilator:paddingBottomNoButtons}</code></td><td>Bottom padding to use when no buttons are present.</td></tr>
-     * <tr><td><code>{@link #RecycleListView_paddingTopNoTitle swasit.zyna.ventilator:paddingTopNoTitle}</code></td><td>Top padding to use when no title is present.</td></tr>
+     * <tr><td><code>{@link #RecycleListView_paddingBottomNoButtons com.example.ventilator:paddingBottomNoButtons}</code></td><td>Bottom padding to use when no buttons are present.</td></tr>
+     * <tr><td><code>{@link #RecycleListView_paddingTopNoTitle com.example.ventilator:paddingTopNoTitle}</code></td><td>Top padding to use when no title is present.</td></tr>
      * </table>
      * @see #RecycleListView_paddingBottomNoButtons
      * @see #RecycleListView_paddingTopNoTitle
@@ -17516,7 +17516,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:paddingBottomNoButtons
+     * @attr name com.example.ventilator:paddingBottomNoButtons
      */
     public static final int RecycleListView_paddingBottomNoButtons=0;
     /**
@@ -17530,7 +17530,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:paddingTopNoTitle
+     * @attr name com.example.ventilator:paddingTopNoTitle
      */
     public static final int RecycleListView_paddingTopNoTitle=1;
     /**
@@ -17542,15 +17542,15 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #RecyclerView_android_orientation android:orientation}</code></td><td></td></tr>
      * <tr><td><code>{@link #RecyclerView_android_descendantFocusability android:descendantFocusability}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollEnabled swasit.zyna.ventilator:fastScrollEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollHorizontalThumbDrawable swasit.zyna.ventilator:fastScrollHorizontalThumbDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollHorizontalTrackDrawable swasit.zyna.ventilator:fastScrollHorizontalTrackDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollVerticalThumbDrawable swasit.zyna.ventilator:fastScrollVerticalThumbDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollVerticalTrackDrawable swasit.zyna.ventilator:fastScrollVerticalTrackDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_layoutManager swasit.zyna.ventilator:layoutManager}</code></td><td>Class name of the Layout Manager to be used.</td></tr>
-     * <tr><td><code>{@link #RecyclerView_reverseLayout swasit.zyna.ventilator:reverseLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_spanCount swasit.zyna.ventilator:spanCount}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_stackFromEnd swasit.zyna.ventilator:stackFromEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollEnabled com.example.ventilator:fastScrollEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollHorizontalThumbDrawable com.example.ventilator:fastScrollHorizontalThumbDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollHorizontalTrackDrawable com.example.ventilator:fastScrollHorizontalTrackDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollVerticalThumbDrawable com.example.ventilator:fastScrollVerticalThumbDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollVerticalTrackDrawable com.example.ventilator:fastScrollVerticalTrackDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_layoutManager com.example.ventilator:layoutManager}</code></td><td>Class name of the Layout Manager to be used.</td></tr>
+     * <tr><td><code>{@link #RecyclerView_reverseLayout com.example.ventilator:reverseLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_spanCount com.example.ventilator:spanCount}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_stackFromEnd com.example.ventilator:stackFromEnd}</code></td><td></td></tr>
      * </table>
      * @see #RecyclerView_android_orientation
      * @see #RecyclerView_android_descendantFocusability
@@ -17605,17 +17605,17 @@ public final class R {
      */
     public static final int RecyclerView_android_descendantFocusability=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fastScrollEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fastScrollEnabled}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:fastScrollEnabled
+     * @attr name com.example.ventilator:fastScrollEnabled
      */
     public static final int RecyclerView_fastScrollEnabled=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fastScrollHorizontalThumbDrawable}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fastScrollHorizontalThumbDrawable}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17623,11 +17623,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:fastScrollHorizontalThumbDrawable
+     * @attr name com.example.ventilator:fastScrollHorizontalThumbDrawable
      */
     public static final int RecyclerView_fastScrollHorizontalThumbDrawable=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fastScrollHorizontalTrackDrawable}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fastScrollHorizontalTrackDrawable}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17635,11 +17635,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:fastScrollHorizontalTrackDrawable
+     * @attr name com.example.ventilator:fastScrollHorizontalTrackDrawable
      */
     public static final int RecyclerView_fastScrollHorizontalTrackDrawable=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fastScrollVerticalThumbDrawable}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fastScrollVerticalThumbDrawable}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17647,11 +17647,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:fastScrollVerticalThumbDrawable
+     * @attr name com.example.ventilator:fastScrollVerticalThumbDrawable
      */
     public static final int RecyclerView_fastScrollVerticalThumbDrawable=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#fastScrollVerticalTrackDrawable}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#fastScrollVerticalTrackDrawable}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17659,7 +17659,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:fastScrollVerticalTrackDrawable
+     * @attr name com.example.ventilator:fastScrollVerticalTrackDrawable
      */
     public static final int RecyclerView_fastScrollVerticalTrackDrawable=6;
     /**
@@ -17678,36 +17678,36 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:layoutManager
+     * @attr name com.example.ventilator:layoutManager
      */
     public static final int RecyclerView_layoutManager=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#reverseLayout}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#reverseLayout}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:reverseLayout
+     * @attr name com.example.ventilator:reverseLayout
      */
     public static final int RecyclerView_reverseLayout=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#spanCount}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#spanCount}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:spanCount
+     * @attr name com.example.ventilator:spanCount
      */
     public static final int RecyclerView_spanCount=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#stackFromEnd}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#stackFromEnd}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:stackFromEnd
+     * @attr name com.example.ventilator:stackFromEnd
      */
     public static final int RecyclerView_stackFromEnd=10;
     /**
@@ -17717,7 +17717,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ScrimInsetsFrameLayout_insetForeground swasit.zyna.ventilator:insetForeground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ScrimInsetsFrameLayout_insetForeground com.example.ventilator:insetForeground}</code></td><td></td></tr>
      * </table>
      * @see #ScrimInsetsFrameLayout_insetForeground
      */
@@ -17725,7 +17725,7 @@ public final class R {
       0x7f030108
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#insetForeground}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#insetForeground}
      * attribute's value can be found in the {@link #ScrimInsetsFrameLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17736,7 +17736,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:insetForeground
+     * @attr name com.example.ventilator:insetForeground
      */
     public static final int ScrimInsetsFrameLayout_insetForeground=0;
     /**
@@ -17746,7 +17746,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ScrollingViewBehavior_Layout_behavior_overlapTop swasit.zyna.ventilator:behavior_overlapTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ScrollingViewBehavior_Layout_behavior_overlapTop com.example.ventilator:behavior_overlapTop}</code></td><td></td></tr>
      * </table>
      * @see #ScrollingViewBehavior_Layout_behavior_overlapTop
      */
@@ -17754,7 +17754,7 @@ public final class R {
       0x7f03003c
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#behavior_overlapTop}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#behavior_overlapTop}
      * attribute's value can be found in the {@link #ScrollingViewBehavior_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17763,7 +17763,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:behavior_overlapTop
+     * @attr name com.example.ventilator:behavior_overlapTop
      */
     public static final int ScrollingViewBehavior_Layout_behavior_overlapTop=0;
     /**
@@ -17777,20 +17777,20 @@ public final class R {
      * <tr><td><code>{@link #SearchView_android_maxWidth android:maxWidth}</code></td><td></td></tr>
      * <tr><td><code>{@link #SearchView_android_inputType android:inputType}</code></td><td></td></tr>
      * <tr><td><code>{@link #SearchView_android_imeOptions android:imeOptions}</code></td><td></td></tr>
-     * <tr><td><code>{@link #SearchView_closeIcon swasit.zyna.ventilator:closeIcon}</code></td><td>Close button icon</td></tr>
-     * <tr><td><code>{@link #SearchView_commitIcon swasit.zyna.ventilator:commitIcon}</code></td><td>Commit icon shown in the query suggestion row</td></tr>
-     * <tr><td><code>{@link #SearchView_defaultQueryHint swasit.zyna.ventilator:defaultQueryHint}</code></td><td>Default query hint used when {@code queryHint} is undefined and
+     * <tr><td><code>{@link #SearchView_closeIcon com.example.ventilator:closeIcon}</code></td><td>Close button icon</td></tr>
+     * <tr><td><code>{@link #SearchView_commitIcon com.example.ventilator:commitIcon}</code></td><td>Commit icon shown in the query suggestion row</td></tr>
+     * <tr><td><code>{@link #SearchView_defaultQueryHint com.example.ventilator:defaultQueryHint}</code></td><td>Default query hint used when {@code queryHint} is undefined and
      * the search view's {@code SearchableInfo} does not provide a hint.</td></tr>
-     * <tr><td><code>{@link #SearchView_goIcon swasit.zyna.ventilator:goIcon}</code></td><td>Go button icon</td></tr>
-     * <tr><td><code>{@link #SearchView_iconifiedByDefault swasit.zyna.ventilator:iconifiedByDefault}</code></td><td>The default state of the SearchView.</td></tr>
-     * <tr><td><code>{@link #SearchView_layout swasit.zyna.ventilator:layout}</code></td><td>The layout to use for the search view.</td></tr>
-     * <tr><td><code>{@link #SearchView_queryBackground swasit.zyna.ventilator:queryBackground}</code></td><td>Background for the section containing the search query</td></tr>
-     * <tr><td><code>{@link #SearchView_queryHint swasit.zyna.ventilator:queryHint}</code></td><td>An optional user-defined query hint string to be displayed in the empty query field.</td></tr>
-     * <tr><td><code>{@link #SearchView_searchHintIcon swasit.zyna.ventilator:searchHintIcon}</code></td><td>Search icon displayed as a text field hint</td></tr>
-     * <tr><td><code>{@link #SearchView_searchIcon swasit.zyna.ventilator:searchIcon}</code></td><td>Search icon</td></tr>
-     * <tr><td><code>{@link #SearchView_submitBackground swasit.zyna.ventilator:submitBackground}</code></td><td>Background for the section containing the action (e.g.</td></tr>
-     * <tr><td><code>{@link #SearchView_suggestionRowLayout swasit.zyna.ventilator:suggestionRowLayout}</code></td><td>Layout for query suggestion rows</td></tr>
-     * <tr><td><code>{@link #SearchView_voiceIcon swasit.zyna.ventilator:voiceIcon}</code></td><td>Voice button icon</td></tr>
+     * <tr><td><code>{@link #SearchView_goIcon com.example.ventilator:goIcon}</code></td><td>Go button icon</td></tr>
+     * <tr><td><code>{@link #SearchView_iconifiedByDefault com.example.ventilator:iconifiedByDefault}</code></td><td>The default state of the SearchView.</td></tr>
+     * <tr><td><code>{@link #SearchView_layout com.example.ventilator:layout}</code></td><td>The layout to use for the search view.</td></tr>
+     * <tr><td><code>{@link #SearchView_queryBackground com.example.ventilator:queryBackground}</code></td><td>Background for the section containing the search query</td></tr>
+     * <tr><td><code>{@link #SearchView_queryHint com.example.ventilator:queryHint}</code></td><td>An optional user-defined query hint string to be displayed in the empty query field.</td></tr>
+     * <tr><td><code>{@link #SearchView_searchHintIcon com.example.ventilator:searchHintIcon}</code></td><td>Search icon displayed as a text field hint</td></tr>
+     * <tr><td><code>{@link #SearchView_searchIcon com.example.ventilator:searchIcon}</code></td><td>Search icon</td></tr>
+     * <tr><td><code>{@link #SearchView_submitBackground com.example.ventilator:submitBackground}</code></td><td>Background for the section containing the action (e.g.</td></tr>
+     * <tr><td><code>{@link #SearchView_suggestionRowLayout com.example.ventilator:suggestionRowLayout}</code></td><td>Layout for query suggestion rows</td></tr>
+     * <tr><td><code>{@link #SearchView_voiceIcon com.example.ventilator:voiceIcon}</code></td><td>Voice button icon</td></tr>
      * </table>
      * @see #SearchView_android_focusable
      * @see #SearchView_android_maxWidth
@@ -17940,7 +17940,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:closeIcon
+     * @attr name com.example.ventilator:closeIcon
      */
     public static final int SearchView_closeIcon=4;
     /**
@@ -17953,7 +17953,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:commitIcon
+     * @attr name com.example.ventilator:commitIcon
      */
     public static final int SearchView_commitIcon=5;
     /**
@@ -17965,7 +17965,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:defaultQueryHint
+     * @attr name com.example.ventilator:defaultQueryHint
      */
     public static final int SearchView_defaultQueryHint=6;
     /**
@@ -17978,7 +17978,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:goIcon
+     * @attr name com.example.ventilator:goIcon
      */
     public static final int SearchView_goIcon=7;
     /**
@@ -17990,7 +17990,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:iconifiedByDefault
+     * @attr name com.example.ventilator:iconifiedByDefault
      */
     public static final int SearchView_iconifiedByDefault=8;
     /**
@@ -18003,7 +18003,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:layout
+     * @attr name com.example.ventilator:layout
      */
     public static final int SearchView_layout=9;
     /**
@@ -18016,7 +18016,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:queryBackground
+     * @attr name com.example.ventilator:queryBackground
      */
     public static final int SearchView_queryBackground=10;
     /**
@@ -18027,7 +18027,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:queryHint
+     * @attr name com.example.ventilator:queryHint
      */
     public static final int SearchView_queryHint=11;
     /**
@@ -18040,7 +18040,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:searchHintIcon
+     * @attr name com.example.ventilator:searchHintIcon
      */
     public static final int SearchView_searchHintIcon=12;
     /**
@@ -18053,7 +18053,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:searchIcon
+     * @attr name com.example.ventilator:searchIcon
      */
     public static final int SearchView_searchIcon=13;
     /**
@@ -18066,7 +18066,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:submitBackground
+     * @attr name com.example.ventilator:submitBackground
      */
     public static final int SearchView_submitBackground=14;
     /**
@@ -18079,7 +18079,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:suggestionRowLayout
+     * @attr name com.example.ventilator:suggestionRowLayout
      */
     public static final int SearchView_suggestionRowLayout=15;
     /**
@@ -18092,7 +18092,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:voiceIcon
+     * @attr name com.example.ventilator:voiceIcon
      */
     public static final int SearchView_voiceIcon=16;
     /**
@@ -18102,8 +18102,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #Snackbar_snackbarButtonStyle swasit.zyna.ventilator:snackbarButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Snackbar_snackbarStyle swasit.zyna.ventilator:snackbarStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Snackbar_snackbarButtonStyle com.example.ventilator:snackbarButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Snackbar_snackbarStyle com.example.ventilator:snackbarStyle}</code></td><td></td></tr>
      * </table>
      * @see #Snackbar_snackbarButtonStyle
      * @see #Snackbar_snackbarStyle
@@ -18112,7 +18112,7 @@ public final class R {
       0x7f0301a5, 0x7f0301a6
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#snackbarButtonStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#snackbarButtonStyle}
      * attribute's value can be found in the {@link #Snackbar} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18120,11 +18120,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:snackbarButtonStyle
+     * @attr name com.example.ventilator:snackbarButtonStyle
      */
     public static final int Snackbar_snackbarButtonStyle=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#snackbarStyle}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#snackbarStyle}
      * attribute's value can be found in the {@link #Snackbar} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18132,7 +18132,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:snackbarStyle
+     * @attr name com.example.ventilator:snackbarStyle
      */
     public static final int Snackbar_snackbarStyle=1;
     /**
@@ -18143,8 +18143,8 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #SnackbarLayout_android_maxWidth android:maxWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #SnackbarLayout_elevation swasit.zyna.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #SnackbarLayout_maxActionInlineWidth swasit.zyna.ventilator:maxActionInlineWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #SnackbarLayout_elevation com.example.ventilator:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #SnackbarLayout_maxActionInlineWidth com.example.ventilator:maxActionInlineWidth}</code></td><td></td></tr>
      * </table>
      * @see #SnackbarLayout_android_maxWidth
      * @see #SnackbarLayout_elevation
@@ -18177,11 +18177,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:elevation
+     * @attr name com.example.ventilator:elevation
      */
     public static final int SnackbarLayout_elevation=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#maxActionInlineWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#maxActionInlineWidth}
      * attribute's value can be found in the {@link #SnackbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18190,7 +18190,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:maxActionInlineWidth
+     * @attr name com.example.ventilator:maxActionInlineWidth
      */
     public static final int SnackbarLayout_maxActionInlineWidth=2;
     /**
@@ -18204,7 +18204,7 @@ public final class R {
      * <tr><td><code>{@link #Spinner_android_popupBackground android:popupBackground}</code></td><td></td></tr>
      * <tr><td><code>{@link #Spinner_android_prompt android:prompt}</code></td><td></td></tr>
      * <tr><td><code>{@link #Spinner_android_dropDownWidth android:dropDownWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Spinner_popupTheme swasit.zyna.ventilator:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
+     * <tr><td><code>{@link #Spinner_popupTheme com.example.ventilator:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
      * shown by widgets in the action bar.</td></tr>
      * </table>
      * @see #Spinner_android_entries
@@ -18293,7 +18293,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:popupTheme
+     * @attr name com.example.ventilator:popupTheme
      */
     public static final int Spinner_popupTheme=4;
     /**
@@ -18433,17 +18433,17 @@ public final class R {
      * <tr><td><code>{@link #SwitchCompat_android_textOn android:textOn}</code></td><td></td></tr>
      * <tr><td><code>{@link #SwitchCompat_android_textOff android:textOff}</code></td><td></td></tr>
      * <tr><td><code>{@link #SwitchCompat_android_thumb android:thumb}</code></td><td></td></tr>
-     * <tr><td><code>{@link #SwitchCompat_showText swasit.zyna.ventilator:showText}</code></td><td>Whether to draw on/off text.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_splitTrack swasit.zyna.ventilator:splitTrack}</code></td><td>Whether to split the track and leave a gap for the thumb drawable.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_switchMinWidth swasit.zyna.ventilator:switchMinWidth}</code></td><td>Minimum width for the switch component</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_switchPadding swasit.zyna.ventilator:switchPadding}</code></td><td>Minimum space between the switch and caption text</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_switchTextAppearance swasit.zyna.ventilator:switchTextAppearance}</code></td><td>TextAppearance style for text displayed on the switch thumb.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_thumbTextPadding swasit.zyna.ventilator:thumbTextPadding}</code></td><td>Amount of padding on either side of text within the switch thumb.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_thumbTint swasit.zyna.ventilator:thumbTint}</code></td><td>Tint to apply to the thumb drawable.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_thumbTintMode swasit.zyna.ventilator:thumbTintMode}</code></td><td>Blending mode used to apply the thumb tint.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_track swasit.zyna.ventilator:track}</code></td><td>Drawable to use as the "track" that the switch thumb slides within.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_trackTint swasit.zyna.ventilator:trackTint}</code></td><td>Tint to apply to the track.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_trackTintMode swasit.zyna.ventilator:trackTintMode}</code></td><td>Blending mode used to apply the track tint.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_showText com.example.ventilator:showText}</code></td><td>Whether to draw on/off text.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_splitTrack com.example.ventilator:splitTrack}</code></td><td>Whether to split the track and leave a gap for the thumb drawable.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_switchMinWidth com.example.ventilator:switchMinWidth}</code></td><td>Minimum width for the switch component</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_switchPadding com.example.ventilator:switchPadding}</code></td><td>Minimum space between the switch and caption text</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_switchTextAppearance com.example.ventilator:switchTextAppearance}</code></td><td>TextAppearance style for text displayed on the switch thumb.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_thumbTextPadding com.example.ventilator:thumbTextPadding}</code></td><td>Amount of padding on either side of text within the switch thumb.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_thumbTint com.example.ventilator:thumbTint}</code></td><td>Tint to apply to the thumb drawable.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_thumbTintMode com.example.ventilator:thumbTintMode}</code></td><td>Blending mode used to apply the thumb tint.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_track com.example.ventilator:track}</code></td><td>Drawable to use as the "track" that the switch thumb slides within.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_trackTint com.example.ventilator:trackTint}</code></td><td>Tint to apply to the track.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_trackTintMode com.example.ventilator:trackTintMode}</code></td><td>Blending mode used to apply the track tint.</td></tr>
      * </table>
      * @see #SwitchCompat_android_textOn
      * @see #SwitchCompat_android_textOff
@@ -18509,7 +18509,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:showText
+     * @attr name com.example.ventilator:showText
      */
     public static final int SwitchCompat_showText=3;
     /**
@@ -18520,7 +18520,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:splitTrack
+     * @attr name com.example.ventilator:splitTrack
      */
     public static final int SwitchCompat_splitTrack=4;
     /**
@@ -18534,7 +18534,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:switchMinWidth
+     * @attr name com.example.ventilator:switchMinWidth
      */
     public static final int SwitchCompat_switchMinWidth=5;
     /**
@@ -18548,7 +18548,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:switchPadding
+     * @attr name com.example.ventilator:switchPadding
      */
     public static final int SwitchCompat_switchPadding=6;
     /**
@@ -18561,7 +18561,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:switchTextAppearance
+     * @attr name com.example.ventilator:switchTextAppearance
      */
     public static final int SwitchCompat_switchTextAppearance=7;
     /**
@@ -18575,7 +18575,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:thumbTextPadding
+     * @attr name com.example.ventilator:thumbTextPadding
      */
     public static final int SwitchCompat_thumbTextPadding=8;
     /**
@@ -18587,7 +18587,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:thumbTint
+     * @attr name com.example.ventilator:thumbTint
      */
     public static final int SwitchCompat_thumbTint=9;
     /**
@@ -18614,7 +18614,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:thumbTintMode
+     * @attr name com.example.ventilator:thumbTintMode
      */
     public static final int SwitchCompat_thumbTintMode=10;
     /**
@@ -18627,7 +18627,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:track
+     * @attr name com.example.ventilator:track
      */
     public static final int SwitchCompat_track=11;
     /**
@@ -18639,7 +18639,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:trackTint
+     * @attr name com.example.ventilator:trackTint
      */
     public static final int SwitchCompat_trackTint=12;
     /**
@@ -18666,7 +18666,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:trackTintMode
+     * @attr name com.example.ventilator:trackTintMode
      */
     public static final int SwitchCompat_trackTintMode=13;
     /**
@@ -18728,31 +18728,31 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #TabLayout_tabBackground swasit.zyna.ventilator:tabBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabContentStart swasit.zyna.ventilator:tabContentStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabGravity swasit.zyna.ventilator:tabGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIconTint swasit.zyna.ventilator:tabIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIconTintMode swasit.zyna.ventilator:tabIconTintMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicator swasit.zyna.ventilator:tabIndicator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorAnimationDuration swasit.zyna.ventilator:tabIndicatorAnimationDuration}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorColor swasit.zyna.ventilator:tabIndicatorColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorFullWidth swasit.zyna.ventilator:tabIndicatorFullWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorGravity swasit.zyna.ventilator:tabIndicatorGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorHeight swasit.zyna.ventilator:tabIndicatorHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabInlineLabel swasit.zyna.ventilator:tabInlineLabel}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabMaxWidth swasit.zyna.ventilator:tabMaxWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabMinWidth swasit.zyna.ventilator:tabMinWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabMode swasit.zyna.ventilator:tabMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPadding swasit.zyna.ventilator:tabPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPaddingBottom swasit.zyna.ventilator:tabPaddingBottom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPaddingEnd swasit.zyna.ventilator:tabPaddingEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPaddingStart swasit.zyna.ventilator:tabPaddingStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPaddingTop swasit.zyna.ventilator:tabPaddingTop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabRippleColor swasit.zyna.ventilator:tabRippleColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabSelectedTextColor swasit.zyna.ventilator:tabSelectedTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabTextAppearance swasit.zyna.ventilator:tabTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabTextColor swasit.zyna.ventilator:tabTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabUnboundedRipple swasit.zyna.ventilator:tabUnboundedRipple}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabBackground com.example.ventilator:tabBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabContentStart com.example.ventilator:tabContentStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabGravity com.example.ventilator:tabGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIconTint com.example.ventilator:tabIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIconTintMode com.example.ventilator:tabIconTintMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicator com.example.ventilator:tabIndicator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorAnimationDuration com.example.ventilator:tabIndicatorAnimationDuration}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorColor com.example.ventilator:tabIndicatorColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorFullWidth com.example.ventilator:tabIndicatorFullWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorGravity com.example.ventilator:tabIndicatorGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorHeight com.example.ventilator:tabIndicatorHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabInlineLabel com.example.ventilator:tabInlineLabel}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabMaxWidth com.example.ventilator:tabMaxWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabMinWidth com.example.ventilator:tabMinWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabMode com.example.ventilator:tabMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPadding com.example.ventilator:tabPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPaddingBottom com.example.ventilator:tabPaddingBottom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPaddingEnd com.example.ventilator:tabPaddingEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPaddingStart com.example.ventilator:tabPaddingStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPaddingTop com.example.ventilator:tabPaddingTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabRippleColor com.example.ventilator:tabRippleColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabSelectedTextColor com.example.ventilator:tabSelectedTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabTextAppearance com.example.ventilator:tabTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabTextColor com.example.ventilator:tabTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabUnboundedRipple com.example.ventilator:tabUnboundedRipple}</code></td><td></td></tr>
      * </table>
      * @see #TabLayout_tabBackground
      * @see #TabLayout_tabContentStart
@@ -18790,7 +18790,7 @@ public final class R {
       0x7f0301db
     };
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabBackground}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabBackground}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18798,11 +18798,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabBackground
+     * @attr name com.example.ventilator:tabBackground
      */
     public static final int TabLayout_tabBackground=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabContentStart}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabContentStart}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18811,11 +18811,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabContentStart
+     * @attr name com.example.ventilator:tabContentStart
      */
     public static final int TabLayout_tabContentStart=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabGravity}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabGravity}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -18828,22 +18828,22 @@ public final class R {
      * <tr><td>fill</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:tabGravity
+     * @attr name com.example.ventilator:tabGravity
      */
     public static final int TabLayout_tabGravity=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabIconTint}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabIconTint}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabIconTint
+     * @attr name com.example.ventilator:tabIconTint
      */
     public static final int TabLayout_tabIconTint=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabIconTintMode}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabIconTintMode}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -18860,11 +18860,11 @@ public final class R {
      * <tr><td>src_over</td><td>3</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:tabIconTintMode
+     * @attr name com.example.ventilator:tabIconTintMode
      */
     public static final int TabLayout_tabIconTintMode=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabIndicator}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabIndicator}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18872,41 +18872,41 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabIndicator
+     * @attr name com.example.ventilator:tabIndicator
      */
     public static final int TabLayout_tabIndicator=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabIndicatorAnimationDuration}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabIndicatorAnimationDuration}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:tabIndicatorAnimationDuration
+     * @attr name com.example.ventilator:tabIndicatorAnimationDuration
      */
     public static final int TabLayout_tabIndicatorAnimationDuration=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabIndicatorColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabIndicatorColor}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabIndicatorColor
+     * @attr name com.example.ventilator:tabIndicatorColor
      */
     public static final int TabLayout_tabIndicatorColor=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabIndicatorFullWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabIndicatorFullWidth}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:tabIndicatorFullWidth
+     * @attr name com.example.ventilator:tabIndicatorFullWidth
      */
     public static final int TabLayout_tabIndicatorFullWidth=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabIndicatorGravity}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabIndicatorGravity}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -18921,11 +18921,11 @@ public final class R {
      * <tr><td>top</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:tabIndicatorGravity
+     * @attr name com.example.ventilator:tabIndicatorGravity
      */
     public static final int TabLayout_tabIndicatorGravity=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabIndicatorHeight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabIndicatorHeight}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18934,21 +18934,21 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabIndicatorHeight
+     * @attr name com.example.ventilator:tabIndicatorHeight
      */
     public static final int TabLayout_tabIndicatorHeight=10;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabInlineLabel}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabInlineLabel}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:tabInlineLabel
+     * @attr name com.example.ventilator:tabInlineLabel
      */
     public static final int TabLayout_tabInlineLabel=11;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabMaxWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabMaxWidth}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18957,11 +18957,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabMaxWidth
+     * @attr name com.example.ventilator:tabMaxWidth
      */
     public static final int TabLayout_tabMaxWidth=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabMinWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabMinWidth}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18970,11 +18970,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabMinWidth
+     * @attr name com.example.ventilator:tabMinWidth
      */
     public static final int TabLayout_tabMinWidth=13;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabMode}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabMode}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -18987,11 +18987,11 @@ public final class R {
      * <tr><td>scrollable</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:tabMode
+     * @attr name com.example.ventilator:tabMode
      */
     public static final int TabLayout_tabMode=14;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabPadding}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabPadding}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19000,11 +19000,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabPadding
+     * @attr name com.example.ventilator:tabPadding
      */
     public static final int TabLayout_tabPadding=15;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabPaddingBottom}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabPaddingBottom}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19013,11 +19013,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabPaddingBottom
+     * @attr name com.example.ventilator:tabPaddingBottom
      */
     public static final int TabLayout_tabPaddingBottom=16;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabPaddingEnd}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabPaddingEnd}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19026,11 +19026,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabPaddingEnd
+     * @attr name com.example.ventilator:tabPaddingEnd
      */
     public static final int TabLayout_tabPaddingEnd=17;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabPaddingStart}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabPaddingStart}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19039,11 +19039,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabPaddingStart
+     * @attr name com.example.ventilator:tabPaddingStart
      */
     public static final int TabLayout_tabPaddingStart=18;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabPaddingTop}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabPaddingTop}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19052,33 +19052,33 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:tabPaddingTop
+     * @attr name com.example.ventilator:tabPaddingTop
      */
     public static final int TabLayout_tabPaddingTop=19;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabRippleColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabRippleColor}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabRippleColor
+     * @attr name com.example.ventilator:tabRippleColor
      */
     public static final int TabLayout_tabRippleColor=20;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabSelectedTextColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabSelectedTextColor}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabSelectedTextColor
+     * @attr name com.example.ventilator:tabSelectedTextColor
      */
     public static final int TabLayout_tabSelectedTextColor=21;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabTextAppearance}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19086,28 +19086,28 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabTextAppearance
+     * @attr name com.example.ventilator:tabTextAppearance
      */
     public static final int TabLayout_tabTextAppearance=22;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabTextColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabTextColor}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:tabTextColor
+     * @attr name com.example.ventilator:tabTextColor
      */
     public static final int TabLayout_tabTextColor=23;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#tabUnboundedRipple}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#tabUnboundedRipple}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:tabUnboundedRipple
+     * @attr name com.example.ventilator:tabUnboundedRipple
      */
     public static final int TabLayout_tabUnboundedRipple=24;
     /**
@@ -19129,10 +19129,10 @@ public final class R {
      * <tr><td><code>{@link #TextAppearance_android_shadowRadius android:shadowRadius}</code></td><td></td></tr>
      * <tr><td><code>{@link #TextAppearance_android_fontFamily android:fontFamily}</code></td><td></td></tr>
      * <tr><td><code>{@link #TextAppearance_android_textFontWeight android:textFontWeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextAppearance_fontFamily swasit.zyna.ventilator:fontFamily}</code></td><td>The attribute for the font family.</td></tr>
-     * <tr><td><code>{@link #TextAppearance_fontVariationSettings swasit.zyna.ventilator:fontVariationSettings}</code></td><td>The variation settings to be applied to the font.</td></tr>
-     * <tr><td><code>{@link #TextAppearance_textAllCaps swasit.zyna.ventilator:textAllCaps}</code></td><td>Present the text in ALL CAPS.</td></tr>
-     * <tr><td><code>{@link #TextAppearance_textLocale swasit.zyna.ventilator:textLocale}</code></td><td>Set the textLocale by a comma-separated language tag string,
+     * <tr><td><code>{@link #TextAppearance_fontFamily com.example.ventilator:fontFamily}</code></td><td>The attribute for the font family.</td></tr>
+     * <tr><td><code>{@link #TextAppearance_fontVariationSettings com.example.ventilator:fontVariationSettings}</code></td><td>The variation settings to be applied to the font.</td></tr>
+     * <tr><td><code>{@link #TextAppearance_textAllCaps com.example.ventilator:textAllCaps}</code></td><td>Present the text in ALL CAPS.</td></tr>
+     * <tr><td><code>{@link #TextAppearance_textLocale com.example.ventilator:textLocale}</code></td><td>Set the textLocale by a comma-separated language tag string,
      * for example "ja-JP,zh-CN".</td></tr>
      * </table>
      * @see #TextAppearance_android_textSize
@@ -19339,7 +19339,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:fontFamily
+     * @attr name com.example.ventilator:fontFamily
      */
     public static final int TextAppearance_fontFamily=12;
     /**
@@ -19350,7 +19350,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:fontVariationSettings
+     * @attr name com.example.ventilator:fontVariationSettings
      */
     public static final int TextAppearance_fontVariationSettings=13;
     /**
@@ -19365,7 +19365,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:textAllCaps
+     * @attr name com.example.ventilator:textAllCaps
      */
     public static final int TextAppearance_textAllCaps=14;
     /**
@@ -19380,7 +19380,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:textLocale
+     * @attr name com.example.ventilator:textLocale
      */
     public static final int TextAppearance_textLocale=15;
     /**
@@ -19392,32 +19392,32 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #TextInputLayout_android_textColorHint android:textColorHint}</code></td><td></td></tr>
      * <tr><td><code>{@link #TextInputLayout_android_hint android:hint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxBackgroundColor swasit.zyna.ventilator:boxBackgroundColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxBackgroundMode swasit.zyna.ventilator:boxBackgroundMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCollapsedPaddingTop swasit.zyna.ventilator:boxCollapsedPaddingTop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusBottomEnd swasit.zyna.ventilator:boxCornerRadiusBottomEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusBottomStart swasit.zyna.ventilator:boxCornerRadiusBottomStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusTopEnd swasit.zyna.ventilator:boxCornerRadiusTopEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusTopStart swasit.zyna.ventilator:boxCornerRadiusTopStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxStrokeColor swasit.zyna.ventilator:boxStrokeColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxStrokeWidth swasit.zyna.ventilator:boxStrokeWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_counterEnabled swasit.zyna.ventilator:counterEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_counterMaxLength swasit.zyna.ventilator:counterMaxLength}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_counterOverflowTextAppearance swasit.zyna.ventilator:counterOverflowTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_counterTextAppearance swasit.zyna.ventilator:counterTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_errorEnabled swasit.zyna.ventilator:errorEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_errorTextAppearance swasit.zyna.ventilator:errorTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_helperText swasit.zyna.ventilator:helperText}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_helperTextEnabled swasit.zyna.ventilator:helperTextEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_helperTextTextAppearance swasit.zyna.ventilator:helperTextTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_hintAnimationEnabled swasit.zyna.ventilator:hintAnimationEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_hintEnabled swasit.zyna.ventilator:hintEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_hintTextAppearance swasit.zyna.ventilator:hintTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleContentDescription swasit.zyna.ventilator:passwordToggleContentDescription}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleDrawable swasit.zyna.ventilator:passwordToggleDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleEnabled swasit.zyna.ventilator:passwordToggleEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleTint swasit.zyna.ventilator:passwordToggleTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleTintMode swasit.zyna.ventilator:passwordToggleTintMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxBackgroundColor com.example.ventilator:boxBackgroundColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxBackgroundMode com.example.ventilator:boxBackgroundMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCollapsedPaddingTop com.example.ventilator:boxCollapsedPaddingTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusBottomEnd com.example.ventilator:boxCornerRadiusBottomEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusBottomStart com.example.ventilator:boxCornerRadiusBottomStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusTopEnd com.example.ventilator:boxCornerRadiusTopEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusTopStart com.example.ventilator:boxCornerRadiusTopStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxStrokeColor com.example.ventilator:boxStrokeColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxStrokeWidth com.example.ventilator:boxStrokeWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_counterEnabled com.example.ventilator:counterEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_counterMaxLength com.example.ventilator:counterMaxLength}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_counterOverflowTextAppearance com.example.ventilator:counterOverflowTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_counterTextAppearance com.example.ventilator:counterTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_errorEnabled com.example.ventilator:errorEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_errorTextAppearance com.example.ventilator:errorTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_helperText com.example.ventilator:helperText}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_helperTextEnabled com.example.ventilator:helperTextEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_helperTextTextAppearance com.example.ventilator:helperTextTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_hintAnimationEnabled com.example.ventilator:hintAnimationEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_hintEnabled com.example.ventilator:hintEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_hintTextAppearance com.example.ventilator:hintTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleContentDescription com.example.ventilator:passwordToggleContentDescription}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleDrawable com.example.ventilator:passwordToggleDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleEnabled com.example.ventilator:passwordToggleEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleTint com.example.ventilator:passwordToggleTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleTintMode com.example.ventilator:passwordToggleTintMode}</code></td><td></td></tr>
      * </table>
      * @see #TextInputLayout_android_textColorHint
      * @see #TextInputLayout_android_hint
@@ -19483,18 +19483,18 @@ public final class R {
      */
     public static final int TextInputLayout_android_hint=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxBackgroundColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxBackgroundColor}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:boxBackgroundColor
+     * @attr name com.example.ventilator:boxBackgroundColor
      */
     public static final int TextInputLayout_boxBackgroundColor=2;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxBackgroundMode}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxBackgroundMode}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -19508,11 +19508,11 @@ public final class R {
      * <tr><td>outline</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:boxBackgroundMode
+     * @attr name com.example.ventilator:boxBackgroundMode
      */
     public static final int TextInputLayout_boxBackgroundMode=3;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxCollapsedPaddingTop}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxCollapsedPaddingTop}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19521,11 +19521,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:boxCollapsedPaddingTop
+     * @attr name com.example.ventilator:boxCollapsedPaddingTop
      */
     public static final int TextInputLayout_boxCollapsedPaddingTop=4;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxCornerRadiusBottomEnd}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxCornerRadiusBottomEnd}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19534,11 +19534,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:boxCornerRadiusBottomEnd
+     * @attr name com.example.ventilator:boxCornerRadiusBottomEnd
      */
     public static final int TextInputLayout_boxCornerRadiusBottomEnd=5;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxCornerRadiusBottomStart}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxCornerRadiusBottomStart}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19547,11 +19547,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:boxCornerRadiusBottomStart
+     * @attr name com.example.ventilator:boxCornerRadiusBottomStart
      */
     public static final int TextInputLayout_boxCornerRadiusBottomStart=6;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxCornerRadiusTopEnd}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxCornerRadiusTopEnd}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19560,11 +19560,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:boxCornerRadiusTopEnd
+     * @attr name com.example.ventilator:boxCornerRadiusTopEnd
      */
     public static final int TextInputLayout_boxCornerRadiusTopEnd=7;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxCornerRadiusTopStart}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxCornerRadiusTopStart}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19573,22 +19573,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:boxCornerRadiusTopStart
+     * @attr name com.example.ventilator:boxCornerRadiusTopStart
      */
     public static final int TextInputLayout_boxCornerRadiusTopStart=8;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxStrokeColor}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxStrokeColor}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:boxStrokeColor
+     * @attr name com.example.ventilator:boxStrokeColor
      */
     public static final int TextInputLayout_boxStrokeColor=9;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#boxStrokeWidth}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#boxStrokeWidth}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19597,30 +19597,30 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:boxStrokeWidth
+     * @attr name com.example.ventilator:boxStrokeWidth
      */
     public static final int TextInputLayout_boxStrokeWidth=10;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#counterEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#counterEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:counterEnabled
+     * @attr name com.example.ventilator:counterEnabled
      */
     public static final int TextInputLayout_counterEnabled=11;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#counterMaxLength}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#counterMaxLength}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name swasit.zyna.ventilator:counterMaxLength
+     * @attr name com.example.ventilator:counterMaxLength
      */
     public static final int TextInputLayout_counterMaxLength=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#counterOverflowTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#counterOverflowTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19628,11 +19628,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:counterOverflowTextAppearance
+     * @attr name com.example.ventilator:counterOverflowTextAppearance
      */
     public static final int TextInputLayout_counterOverflowTextAppearance=13;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#counterTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#counterTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19640,21 +19640,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:counterTextAppearance
+     * @attr name com.example.ventilator:counterTextAppearance
      */
     public static final int TextInputLayout_counterTextAppearance=14;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#errorEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#errorEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:errorEnabled
+     * @attr name com.example.ventilator:errorEnabled
      */
     public static final int TextInputLayout_errorEnabled=15;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#errorTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#errorTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19662,31 +19662,31 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:errorTextAppearance
+     * @attr name com.example.ventilator:errorTextAppearance
      */
     public static final int TextInputLayout_errorTextAppearance=16;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#helperText}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#helperText}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:helperText
+     * @attr name com.example.ventilator:helperText
      */
     public static final int TextInputLayout_helperText=17;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#helperTextEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#helperTextEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:helperTextEnabled
+     * @attr name com.example.ventilator:helperTextEnabled
      */
     public static final int TextInputLayout_helperTextEnabled=18;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#helperTextTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#helperTextTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19694,31 +19694,31 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:helperTextTextAppearance
+     * @attr name com.example.ventilator:helperTextTextAppearance
      */
     public static final int TextInputLayout_helperTextTextAppearance=19;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#hintAnimationEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#hintAnimationEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:hintAnimationEnabled
+     * @attr name com.example.ventilator:hintAnimationEnabled
      */
     public static final int TextInputLayout_hintAnimationEnabled=20;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#hintEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#hintEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:hintEnabled
+     * @attr name com.example.ventilator:hintEnabled
      */
     public static final int TextInputLayout_hintEnabled=21;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#hintTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#hintTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19726,21 +19726,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:hintTextAppearance
+     * @attr name com.example.ventilator:hintTextAppearance
      */
     public static final int TextInputLayout_hintTextAppearance=22;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#passwordToggleContentDescription}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#passwordToggleContentDescription}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:passwordToggleContentDescription
+     * @attr name com.example.ventilator:passwordToggleContentDescription
      */
     public static final int TextInputLayout_passwordToggleContentDescription=23;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#passwordToggleDrawable}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#passwordToggleDrawable}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19748,32 +19748,32 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:passwordToggleDrawable
+     * @attr name com.example.ventilator:passwordToggleDrawable
      */
     public static final int TextInputLayout_passwordToggleDrawable=24;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#passwordToggleEnabled}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#passwordToggleEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:passwordToggleEnabled
+     * @attr name com.example.ventilator:passwordToggleEnabled
      */
     public static final int TextInputLayout_passwordToggleEnabled=25;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#passwordToggleTint}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#passwordToggleTint}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:passwordToggleTint
+     * @attr name com.example.ventilator:passwordToggleTint
      */
     public static final int TextInputLayout_passwordToggleTint=26;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#passwordToggleTintMode}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#passwordToggleTintMode}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -19789,7 +19789,7 @@ public final class R {
      * <tr><td>src_over</td><td>3</td><td></td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:passwordToggleTintMode
+     * @attr name com.example.ventilator:passwordToggleTintMode
      */
     public static final int TextInputLayout_passwordToggleTintMode=27;
     /**
@@ -19800,8 +19800,8 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #ThemeEnforcement_android_textAppearance android:textAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ThemeEnforcement_enforceMaterialTheme swasit.zyna.ventilator:enforceMaterialTheme}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ThemeEnforcement_enforceTextAppearance swasit.zyna.ventilator:enforceTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ThemeEnforcement_enforceMaterialTheme com.example.ventilator:enforceMaterialTheme}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ThemeEnforcement_enforceTextAppearance com.example.ventilator:enforceTextAppearance}</code></td><td></td></tr>
      * </table>
      * @see #ThemeEnforcement_android_textAppearance
      * @see #ThemeEnforcement_enforceMaterialTheme
@@ -19823,23 +19823,23 @@ public final class R {
      */
     public static final int ThemeEnforcement_android_textAppearance=0;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#enforceMaterialTheme}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#enforceMaterialTheme}
      * attribute's value can be found in the {@link #ThemeEnforcement} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:enforceMaterialTheme
+     * @attr name com.example.ventilator:enforceMaterialTheme
      */
     public static final int ThemeEnforcement_enforceMaterialTheme=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#enforceTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#enforceTextAppearance}
      * attribute's value can be found in the {@link #ThemeEnforcement} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name swasit.zyna.ventilator:enforceTextAppearance
+     * @attr name com.example.ventilator:enforceTextAppearance
      */
     public static final int ThemeEnforcement_enforceTextAppearance=2;
     /**
@@ -19851,41 +19851,41 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #Toolbar_android_gravity android:gravity}</code></td><td></td></tr>
      * <tr><td><code>{@link #Toolbar_android_minHeight android:minHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_buttonGravity swasit.zyna.ventilator:buttonGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_collapseContentDescription swasit.zyna.ventilator:collapseContentDescription}</code></td><td>Text to set as the content description for the collapse button.</td></tr>
-     * <tr><td><code>{@link #Toolbar_collapseIcon swasit.zyna.ventilator:collapseIcon}</code></td><td>Icon drawable to use for the collapse button.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetEnd swasit.zyna.ventilator:contentInsetEnd}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetEndWithActions swasit.zyna.ventilator:contentInsetEndWithActions}</code></td><td>Minimum inset for content views within a bar when actions from a menu
+     * <tr><td><code>{@link #Toolbar_buttonGravity com.example.ventilator:buttonGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_collapseContentDescription com.example.ventilator:collapseContentDescription}</code></td><td>Text to set as the content description for the collapse button.</td></tr>
+     * <tr><td><code>{@link #Toolbar_collapseIcon com.example.ventilator:collapseIcon}</code></td><td>Icon drawable to use for the collapse button.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetEnd com.example.ventilator:contentInsetEnd}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetEndWithActions com.example.ventilator:contentInsetEndWithActions}</code></td><td>Minimum inset for content views within a bar when actions from a menu
      * are present.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetLeft swasit.zyna.ventilator:contentInsetLeft}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetRight swasit.zyna.ventilator:contentInsetRight}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetStart swasit.zyna.ventilator:contentInsetStart}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetStartWithNavigation swasit.zyna.ventilator:contentInsetStartWithNavigation}</code></td><td>Minimum inset for content views within a bar when a navigation button
+     * <tr><td><code>{@link #Toolbar_contentInsetLeft com.example.ventilator:contentInsetLeft}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetRight com.example.ventilator:contentInsetRight}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetStart com.example.ventilator:contentInsetStart}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetStartWithNavigation com.example.ventilator:contentInsetStartWithNavigation}</code></td><td>Minimum inset for content views within a bar when a navigation button
      * is present, such as the Up button.</td></tr>
-     * <tr><td><code>{@link #Toolbar_logo swasit.zyna.ventilator:logo}</code></td><td>Specifies the drawable used for the application logo.</td></tr>
-     * <tr><td><code>{@link #Toolbar_logoDescription swasit.zyna.ventilator:logoDescription}</code></td><td>A content description string to describe the appearance of the
+     * <tr><td><code>{@link #Toolbar_logo com.example.ventilator:logo}</code></td><td>Specifies the drawable used for the application logo.</td></tr>
+     * <tr><td><code>{@link #Toolbar_logoDescription com.example.ventilator:logoDescription}</code></td><td>A content description string to describe the appearance of the
      * associated logo image.</td></tr>
-     * <tr><td><code>{@link #Toolbar_maxButtonHeight swasit.zyna.ventilator:maxButtonHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_menu swasit.zyna.ventilator:menu}</code></td><td>Menu resource to inflate to be shown in the toolbar</td></tr>
-     * <tr><td><code>{@link #Toolbar_navigationContentDescription swasit.zyna.ventilator:navigationContentDescription}</code></td><td>Text to set as the content description for the navigation button
+     * <tr><td><code>{@link #Toolbar_maxButtonHeight com.example.ventilator:maxButtonHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_menu com.example.ventilator:menu}</code></td><td>Menu resource to inflate to be shown in the toolbar</td></tr>
+     * <tr><td><code>{@link #Toolbar_navigationContentDescription com.example.ventilator:navigationContentDescription}</code></td><td>Text to set as the content description for the navigation button
      * located at the start of the toolbar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_navigationIcon swasit.zyna.ventilator:navigationIcon}</code></td><td>Icon drawable to use for the navigation button located at
+     * <tr><td><code>{@link #Toolbar_navigationIcon com.example.ventilator:navigationIcon}</code></td><td>Icon drawable to use for the navigation button located at
      * the start of the toolbar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_popupTheme swasit.zyna.ventilator:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
+     * <tr><td><code>{@link #Toolbar_popupTheme com.example.ventilator:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
      * shown by widgets in the action bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_subtitle swasit.zyna.ventilator:subtitle}</code></td><td>Specifies subtitle text used for navigationMode="normal"</td></tr>
-     * <tr><td><code>{@link #Toolbar_subtitleTextAppearance swasit.zyna.ventilator:subtitleTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_subtitleTextColor swasit.zyna.ventilator:subtitleTextColor}</code></td><td>A color to apply to the subtitle string.</td></tr>
-     * <tr><td><code>{@link #Toolbar_title swasit.zyna.ventilator:title}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMargin swasit.zyna.ventilator:titleMargin}</code></td><td>Specifies extra space on the left, start, right and end sides
+     * <tr><td><code>{@link #Toolbar_subtitle com.example.ventilator:subtitle}</code></td><td>Specifies subtitle text used for navigationMode="normal"</td></tr>
+     * <tr><td><code>{@link #Toolbar_subtitleTextAppearance com.example.ventilator:subtitleTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_subtitleTextColor com.example.ventilator:subtitleTextColor}</code></td><td>A color to apply to the subtitle string.</td></tr>
+     * <tr><td><code>{@link #Toolbar_title com.example.ventilator:title}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMargin com.example.ventilator:titleMargin}</code></td><td>Specifies extra space on the left, start, right and end sides
      * of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMarginBottom swasit.zyna.ventilator:titleMarginBottom}</code></td><td>Specifies extra space on the bottom side of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMarginEnd swasit.zyna.ventilator:titleMarginEnd}</code></td><td>Specifies extra space on the end side of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMarginStart swasit.zyna.ventilator:titleMarginStart}</code></td><td>Specifies extra space on the start side of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMarginTop swasit.zyna.ventilator:titleMarginTop}</code></td><td>Specifies extra space on the top side of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMargins swasit.zyna.ventilator:titleMargins}</code></td><td>{@deprecated Use titleMargin}</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleTextAppearance swasit.zyna.ventilator:titleTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_titleTextColor swasit.zyna.ventilator:titleTextColor}</code></td><td>A color to apply to the title string.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMarginBottom com.example.ventilator:titleMarginBottom}</code></td><td>Specifies extra space on the bottom side of the toolbar's title.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMarginEnd com.example.ventilator:titleMarginEnd}</code></td><td>Specifies extra space on the end side of the toolbar's title.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMarginStart com.example.ventilator:titleMarginStart}</code></td><td>Specifies extra space on the start side of the toolbar's title.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMarginTop com.example.ventilator:titleMarginTop}</code></td><td>Specifies extra space on the top side of the toolbar's title.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMargins com.example.ventilator:titleMargins}</code></td><td>{@deprecated Use titleMargin}</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleTextAppearance com.example.ventilator:titleTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_titleTextColor com.example.ventilator:titleTextColor}</code></td><td>A color to apply to the title string.</td></tr>
      * </table>
      * @see #Toolbar_android_gravity
      * @see #Toolbar_android_minHeight
@@ -19972,7 +19972,7 @@ public final class R {
      */
     public static final int Toolbar_android_minHeight=1;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#buttonGravity}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#buttonGravity}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -19986,7 +19986,7 @@ public final class R {
      * <tr><td>top</td><td>30</td><td>Push object to the top of its container, not changing its size.</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:buttonGravity
+     * @attr name com.example.ventilator:buttonGravity
      */
     public static final int Toolbar_buttonGravity=2;
     /**
@@ -19997,7 +19997,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:collapseContentDescription
+     * @attr name com.example.ventilator:collapseContentDescription
      */
     public static final int Toolbar_collapseContentDescription=3;
     /**
@@ -20010,7 +20010,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:collapseIcon
+     * @attr name com.example.ventilator:collapseIcon
      */
     public static final int Toolbar_collapseIcon=4;
     /**
@@ -20025,7 +20025,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetEnd
+     * @attr name com.example.ventilator:contentInsetEnd
      */
     public static final int Toolbar_contentInsetEnd=5;
     /**
@@ -20040,7 +20040,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetEndWithActions
+     * @attr name com.example.ventilator:contentInsetEndWithActions
      */
     public static final int Toolbar_contentInsetEndWithActions=6;
     /**
@@ -20055,7 +20055,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetLeft
+     * @attr name com.example.ventilator:contentInsetLeft
      */
     public static final int Toolbar_contentInsetLeft=7;
     /**
@@ -20070,7 +20070,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetRight
+     * @attr name com.example.ventilator:contentInsetRight
      */
     public static final int Toolbar_contentInsetRight=8;
     /**
@@ -20085,7 +20085,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetStart
+     * @attr name com.example.ventilator:contentInsetStart
      */
     public static final int Toolbar_contentInsetStart=9;
     /**
@@ -20100,7 +20100,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:contentInsetStartWithNavigation
+     * @attr name com.example.ventilator:contentInsetStartWithNavigation
      */
     public static final int Toolbar_contentInsetStartWithNavigation=10;
     /**
@@ -20114,7 +20114,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:logo
+     * @attr name com.example.ventilator:logo
      */
     public static final int Toolbar_logo=11;
     /**
@@ -20126,11 +20126,11 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:logoDescription
+     * @attr name com.example.ventilator:logoDescription
      */
     public static final int Toolbar_logoDescription=12;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#maxButtonHeight}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#maxButtonHeight}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -20139,7 +20139,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:maxButtonHeight
+     * @attr name com.example.ventilator:maxButtonHeight
      */
     public static final int Toolbar_maxButtonHeight=13;
     /**
@@ -20152,7 +20152,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:menu
+     * @attr name com.example.ventilator:menu
      */
     public static final int Toolbar_menu=14;
     /**
@@ -20164,7 +20164,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:navigationContentDescription
+     * @attr name com.example.ventilator:navigationContentDescription
      */
     public static final int Toolbar_navigationContentDescription=15;
     /**
@@ -20178,7 +20178,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:navigationIcon
+     * @attr name com.example.ventilator:navigationIcon
      */
     public static final int Toolbar_navigationIcon=16;
     /**
@@ -20192,7 +20192,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:popupTheme
+     * @attr name com.example.ventilator:popupTheme
      */
     public static final int Toolbar_popupTheme=17;
     /**
@@ -20203,11 +20203,11 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:subtitle
+     * @attr name com.example.ventilator:subtitle
      */
     public static final int Toolbar_subtitle=18;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#subtitleTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#subtitleTextAppearance}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -20215,7 +20215,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:subtitleTextAppearance
+     * @attr name com.example.ventilator:subtitleTextAppearance
      */
     public static final int Toolbar_subtitleTextAppearance=19;
     /**
@@ -20227,17 +20227,17 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:subtitleTextColor
+     * @attr name com.example.ventilator:subtitleTextColor
      */
     public static final int Toolbar_subtitleTextColor=20;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#title}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#title}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name swasit.zyna.ventilator:title
+     * @attr name com.example.ventilator:title
      */
     public static final int Toolbar_title=21;
     /**
@@ -20252,7 +20252,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:titleMargin
+     * @attr name com.example.ventilator:titleMargin
      */
     public static final int Toolbar_titleMargin=22;
     /**
@@ -20268,7 +20268,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:titleMarginBottom
+     * @attr name com.example.ventilator:titleMarginBottom
      */
     public static final int Toolbar_titleMarginBottom=23;
     /**
@@ -20284,7 +20284,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:titleMarginEnd
+     * @attr name com.example.ventilator:titleMarginEnd
      */
     public static final int Toolbar_titleMarginEnd=24;
     /**
@@ -20300,7 +20300,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:titleMarginStart
+     * @attr name com.example.ventilator:titleMarginStart
      */
     public static final int Toolbar_titleMarginStart=25;
     /**
@@ -20316,7 +20316,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:titleMarginTop
+     * @attr name com.example.ventilator:titleMarginTop
      */
     public static final int Toolbar_titleMarginTop=26;
     /**
@@ -20330,12 +20330,12 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:titleMargins
+     * @attr name com.example.ventilator:titleMargins
      */
     @Deprecated
     public static final int Toolbar_titleMargins=27;
     /**
-     * <p>This symbol is the offset where the {@link swasit.zyna.ventilator.R.attr#titleTextAppearance}
+     * <p>This symbol is the offset where the {@link com.example.ventilator.R.attr#titleTextAppearance}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -20343,7 +20343,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:titleTextAppearance
+     * @attr name com.example.ventilator:titleTextAppearance
      */
     public static final int Toolbar_titleTextAppearance=28;
     /**
@@ -20355,7 +20355,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:titleTextColor
+     * @attr name com.example.ventilator:titleTextColor
      */
     public static final int Toolbar_titleTextColor=29;
     /**
@@ -20367,9 +20367,9 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #View_android_theme android:theme}</code></td><td></td></tr>
      * <tr><td><code>{@link #View_android_focusable android:focusable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #View_paddingEnd swasit.zyna.ventilator:paddingEnd}</code></td><td>Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}.</td></tr>
-     * <tr><td><code>{@link #View_paddingStart swasit.zyna.ventilator:paddingStart}</code></td><td>Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}.</td></tr>
-     * <tr><td><code>{@link #View_theme swasit.zyna.ventilator:theme}</code></td><td>Deprecated.</td></tr>
+     * <tr><td><code>{@link #View_paddingEnd com.example.ventilator:paddingEnd}</code></td><td>Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}.</td></tr>
+     * <tr><td><code>{@link #View_paddingStart com.example.ventilator:paddingStart}</code></td><td>Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}.</td></tr>
+     * <tr><td><code>{@link #View_theme com.example.ventilator:theme}</code></td><td>Deprecated.</td></tr>
      * </table>
      * @see #View_android_theme
      * @see #View_android_focusable
@@ -20431,7 +20431,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:paddingEnd
+     * @attr name com.example.ventilator:paddingEnd
      */
     public static final int View_paddingEnd=2;
     /**
@@ -20445,7 +20445,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name swasit.zyna.ventilator:paddingStart
+     * @attr name com.example.ventilator:paddingStart
      */
     public static final int View_paddingStart=3;
     /**
@@ -20458,7 +20458,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:theme
+     * @attr name com.example.ventilator:theme
      */
     public static final int View_theme=4;
     /**
@@ -20469,8 +20469,8 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #ViewBackgroundHelper_android_background android:background}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ViewBackgroundHelper_backgroundTint swasit.zyna.ventilator:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
-     * <tr><td><code>{@link #ViewBackgroundHelper_backgroundTintMode swasit.zyna.ventilator:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
+     * <tr><td><code>{@link #ViewBackgroundHelper_backgroundTint com.example.ventilator:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
+     * <tr><td><code>{@link #ViewBackgroundHelper_backgroundTintMode com.example.ventilator:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
      * </table>
      * @see #ViewBackgroundHelper_android_background
      * @see #ViewBackgroundHelper_backgroundTint
@@ -20503,7 +20503,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name swasit.zyna.ventilator:backgroundTint
+     * @attr name com.example.ventilator:backgroundTint
      */
     public static final int ViewBackgroundHelper_backgroundTint=1;
     /**
@@ -20530,7 +20530,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name swasit.zyna.ventilator:backgroundTintMode
+     * @attr name com.example.ventilator:backgroundTintMode
      */
     public static final int ViewBackgroundHelper_backgroundTintMode=2;
     /**

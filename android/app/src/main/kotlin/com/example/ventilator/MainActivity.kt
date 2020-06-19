@@ -1,4 +1,4 @@
-package swasit.zyna.ventilator
+package com.example.ventilator
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -13,14 +13,13 @@ import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
-import com.example.ventilator.R
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-import swasit.zyna.ventilator.util.DownloadController
+import com.example.ventilator.util.DownloadController
 
 
 class MainActivity: FlutterActivity() {
@@ -192,11 +191,21 @@ class MainActivity: FlutterActivity() {
                 try {
 //                  //mute audio
                     val amanager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                    amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true)
-                    amanager.setStreamMute(AudioManager.STREAM_ALARM, true)
-                    amanager.setStreamMute(AudioManager.STREAM_MUSIC, true)
-                    amanager.setStreamMute(AudioManager.STREAM_RING, true)
-                    amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true)
+                    // Change the stream to your stream of choice.
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        amanager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                        amanager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0)
+                        amanager.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0)
+                        amanager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0)
+                        amanager.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0)
+                    } else {
+                        amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+                        amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true)
+                        amanager.setStreamMute(AudioManager.STREAM_ALARM, true)
+                        amanager.setStreamMute(AudioManager.STREAM_RING, true)
+                        amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true)
+                    }
+
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
@@ -205,11 +214,19 @@ class MainActivity: FlutterActivity() {
                 try {
 //                  // unmute audio
                     val amanager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                    amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
-                    amanager.setStreamMute(AudioManager.STREAM_ALARM, false)
-                    amanager.setStreamMute(AudioManager.STREAM_MUSIC, false)
-                    amanager.setStreamMute(AudioManager.STREAM_RING, false)
-                    amanager.setStreamMute(AudioManager.STREAM_SYSTEM, false)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        amanager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
+                        amanager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_UNMUTE, 0)
+                        amanager.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_UNMUTE, 0)
+                        amanager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0)
+                        amanager.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_UNMUTE, 0)
+                    } else {
+                        amanager.setStreamMute(AudioManager.STREAM_MUSIC, false);
+                        amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
+                        amanager.setStreamMute(AudioManager.STREAM_ALARM, false)
+                        amanager.setStreamMute(AudioManager.STREAM_RING, false)
+                        amanager.setStreamMute(AudioManager.STREAM_SYSTEM, false)
+                    }
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }

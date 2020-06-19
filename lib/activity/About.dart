@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart';
 
 import 'Dashboard.dart';
 import 'DowngradeAppScreen.dart';
@@ -11,23 +12,34 @@ class About extends StatefulWidget {
 
 class _AboutState extends State<About> {
   static const shutdownChannel = const MethodChannel("shutdown");
-
+  String downloadUrl = "";
 
   @override
   void initState() {
     super.initState();
+    getLatestUrl();
   }
 
- 
+  getLatestUrl() async {
+    // make GET request
+    String url = 'https://www.eagleaspect.com:9000/ventilator-apk-manager/getLatestAPK';
+    Response response = await get(url);
+    setState(() {
+      downloadUrl = response.body.toString();
+      // Fluttertoast.showToast(msg: downloadUrl);
+    });
+
+
+  }
 
   Future<void> checkforUpdates() async {
     var params = <String, dynamic>{
-      "urlFlutter": "https://eagleaspect.com:9000/static/apks/v1.7.5.apk"
+      "urlFlutter": downloadUrl
     };
     try {
       var result =
           await shutdownChannel.invokeMethod('checkforUpdates', params);
-      // // print(result);
+      print(result);
     } on PlatformException catch (e) {
       print(e);
     }
@@ -106,10 +118,10 @@ class _AboutState extends State<About> {
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DowngradeAppScreen()),
-                                );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DowngradeAppScreen()),
+                        );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -134,7 +146,8 @@ class _AboutState extends State<About> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DowngradeAppScreen()),
+                                      builder: (context) =>
+                                          DowngradeAppScreen()),
                                 );
                               },
                             ),

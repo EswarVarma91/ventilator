@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="swasit.zyna.ventilator"
+    package="com.example.ventilator"
     android:targetSandboxVersion="2"
     android:versionCode="1"
     android:versionName="1.0.0" >
@@ -47,7 +47,7 @@
             android:value="2" />
 
         <activity
-            android:name="swasit.zyna.ventilator.MainActivity"
+            android:name="com.example.ventilator.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="false"
@@ -78,7 +78,7 @@
         </activity>
 
         <receiver
-            android:name="swasit.zyna.ventilator.MyDeviceAdminReceiver"
+            android:name="com.example.ventilator.MyDeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
                 android:name="android.app.device_admin"
@@ -93,7 +93,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="swasit.zyna.ventilator.provider"
+            android:authorities="com.example.ventilator.provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data

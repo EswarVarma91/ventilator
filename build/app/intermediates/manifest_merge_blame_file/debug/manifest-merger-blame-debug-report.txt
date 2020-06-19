@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="swasit.zyna.ventilator"
+3    package="com.example.ventilator"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -78,8 +78,8 @@
 47
 48        <activity
 48-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:9-63:20
-49            android:name="swasit.zyna.ventilator.MainActivity"
-49-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:19-69
+49            android:name="com.example.ventilator.MainActivity"
+49-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:19-47
 50            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 50-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:40:13-144
 51            android:exported="true"
@@ -136,8 +136,8 @@
 78
 79        <receiver
 79-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:65:9-77:20
-80            android:name="swasit.zyna.ventilator.MyDeviceAdminReceiver"
-80-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:66:13-72
+80            android:name="com.example.ventilator.MyDeviceAdminReceiver"
+80-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:66:13-50
 81            android:permission="android.permission.BIND_DEVICE_ADMIN" >
 81-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:67:13-70
 82            <meta-data
@@ -163,7 +163,7 @@
 92
 93        <provider
 94            android:name="androidx.core.content.FileProvider"
-95            android:authorities="swasit.zyna.ventilator.provider"
+95            android:authorities="com.example.ventilator.provider"
 96            android:exported="false"
 97            android:grantUriPermissions="true" >
 98            <meta-data

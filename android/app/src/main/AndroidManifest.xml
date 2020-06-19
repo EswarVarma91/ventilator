@@ -35,7 +35,7 @@
         android:label="Ventilator">
         <meta-data android:name="flutterEmbedding" android:value="2" />
 
-        <activity android:name="swasit.zyna.ventilator.MainActivity"
+        <activity android:name=".MainActivity"
             android:screenOrientation="fullSensor"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="false"
@@ -63,7 +63,7 @@
         </activity>
 
         <receiver
-            android:name="swasit.zyna.ventilator.MyDeviceAdminReceiver"
+            android:name=".MyDeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"

@@ -1,4 +1,4 @@
-package swasit.zyna.ventilator
+package com.example.ventilator
 
 import android.app.admin.DeviceAdminReceiver
 import android.content.ComponentName

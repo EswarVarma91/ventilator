@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:screen/screen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
 import 'package:ventilator/viewlog/AlarmLog.dart';
-import 'package:ventilator/viewlog/ViewLogDataDisplayPage.dart';
 import 'package:ventilator/viewlog/patientsDates.dart';
 
 class ViewLogPatientList extends StatefulWidget {

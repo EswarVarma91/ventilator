@@ -114,7 +114,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: SplashScreen(
           seconds: 2,
-          navigateAfterSeconds: SelfTestPage(),
+          navigateAfterSeconds: Dashboard(),
           backgroundColor: Colors.white,
           loaderColor: Colors.black,
         ),

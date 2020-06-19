@@ -1,4 +1,4 @@
-package swasit.zyna.ventilator.util
+package com.example.ventilator.util
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity

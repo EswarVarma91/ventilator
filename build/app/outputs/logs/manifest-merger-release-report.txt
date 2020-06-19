@@ -155,7 +155,7 @@ ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/s
 		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:52-69
 	android:name
 		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:20-51
-activity#swasit.zyna.ventilator.MainActivity
+activity#com.example.ventilator.MainActivity
 ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:9-63:20
 	android:screenOrientation
 		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:39:13-51
@@ -172,7 +172,7 @@ ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/s
 	android:theme
 		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:44:13-47
 	android:name
-		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:19-69
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:19-47
 meta-data#io.flutter.app.android.SplashScreenUntilFirstFrame
 ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:13-113
 	android:value
@@ -209,12 +209,12 @@ ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/s
 		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:61:17-54
 	android:name
 		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:60:24-86
-receiver#swasit.zyna.ventilator.MyDeviceAdminReceiver
+receiver#com.example.ventilator.MyDeviceAdminReceiver
 ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:65:9-77:20
 	android:permission
 		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:67:13-70
 	android:name
-		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:66:13-72
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:66:13-50
 meta-data#android.app.device_admin
 ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:68:13-70:65
 	android:resource
