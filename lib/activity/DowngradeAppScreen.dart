@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'About.dart';
 
@@ -27,19 +28,17 @@ class _DowngradeAppScreenState extends State<DowngradeAppScreen> {
     Response response = await get(url);
     setState(() {
       data = jsonDecode(response.body);
-      // print(data.length);
-      // Fluttertoast.showToast(msg: downloadUrl);
     });
   }
 
-  Future<void> checkforUpdates() async {
+  Future<void> checkforUpdates(String dataUrl) async {
     var params = <String, dynamic>{
-      "urlFlutter": "https://eagleaspect.com:9000/static/apks/v1.7.5.apk"
+      "urlFlutter": dataUrl
     };
     try {
       var result =
           await shutdownChannel.invokeMethod('checkforUpdates', params);
-      // // print(result);
+      print(result);
     } on PlatformException catch (e) {
       print(e);
     }
@@ -62,16 +61,25 @@ class _DowngradeAppScreenState extends State<DowngradeAppScreen> {
                   itemCount: data.length,
                   itemBuilder: (BuildContext ctxt, int index) {
                     return ListTile(
-                      leading: Icon(Icons.file_download,color: Colors.white,),
-                      title: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Container(
-                              child: Text(
-                            _checkData(data[index]),
-                            style: TextStyle(color: Colors.white),
-                            textAlign: TextAlign.start,
-                          )),
+                      onTap: () {
+                        checkforUpdates(data[index].toString());
+                      },
+                      leading: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.file_download,
+                          color: Colors.white,
                         ),
+                      ),
+                      title: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Container(
+                            child: Text(
+                          _checkData(data[index]),
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.start,
+                        )),
+                      ),
                     );
                   })
               : Container(),
@@ -79,10 +87,11 @@ class _DowngradeAppScreenState extends State<DowngradeAppScreen> {
   }
 
   String _checkData(data) {
-    if(data==null){
+    if (data == null) {
       return "";
-    }else{
-      return data.toString().split(".apk")[0].toString();
+    } else {
+      List arr= data.toString().split("/");
+      return (arr[arr.length-1]).toString().split(".apk")[0];
     }
   }
 }

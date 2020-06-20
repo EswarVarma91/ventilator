@@ -17,7 +17,6 @@ import 'package:ventilator/database/CounterDatabaseHelper.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
 import 'package:ventilator/database/VentilatorOMode.dart';
 import 'package:ventilator/graphs/Oscilloscope.dart';
-import 'package:ventilator/screens/SelfTestPage.dart';
 import 'package:ventilator/viewlog/ViewLogPatientList.dart';
 import 'package:ventilator/activity/About.dart';
 import 'package:ventilator/activity/NewTreatmentScreen.dart';
@@ -176,6 +175,8 @@ class _CheckPageState extends State<Dashboard> {
       usbConnected = false,
       modesEnabled = false,
       alarmEnabled = false,
+      selfTestingEnabled = false,
+      callibrationEnabled = false,
       newTreatEnabled = false,
       monitorEnabled = false,
       pccmvEnabled = true,
@@ -458,6 +459,24 @@ class _CheckPageState extends State<Dashboard> {
   int powerIndication = 0, batteryPercentage, batteryStatus = 0;
   String sendBattery;
   List<int> listTemp = [];
+  bool testingText = false;
+  String textText="";
+  var o2pressuresensor = 0,
+      mtpressuresensor = 0,
+      exhalationflowsensor = 0,
+      inhalationflowsensor = 0,
+      exhalationpressure = 0,
+      inhalationpressure = 0,
+      o2sensor = 0,
+      inhalationvalve = 0,
+      exhalationvalve = 0,
+      ventvalue = 0,
+      mainpower = 0,
+      battery = 0,
+      communication = 0,
+      compressor = 0,
+      blender = 0,
+      checkOfffset = 0;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -1868,7 +1887,7 @@ class _CheckPageState extends State<Dashboard> {
                       //     ? Navigator.push(
                       //             context,
                       //             MaterialPageRoute(builder: (context) => NewTreatmentScreen()),)
-                      : monitorEnabled ? monitorClick() : Container(),
+                      : monitorEnabled ? monitorClick() : selfTestingEnabled ? selfTestingData(): callibrationEnabled ? callibrationData() : Container(),
 
               // _buttonPressed
               //     ? Center(
@@ -1891,6 +1910,798 @@ class _CheckPageState extends State<Dashboard> {
             ],
           ),
         ));
+  }
+
+  sendFullTest() async {
+    List<int> objSelfTestData = [0x7E, 0, 20, 0, 13, 0, 1, 0x7F];
+    if (_status == "Connected") {
+      await _port.write(Uint8List.fromList(objSelfTestData));
+    }
+  }
+
+  sendCalibrationText() async {
+    List<int> objSelfTestData = [0x7E, 0, 20, 0, 14, 0, 1, 0x7F];
+    if (_status == "Connected") {
+      await _port.write(Uint8List.fromList(objSelfTestData));
+    }
+  }
+
+  callibrationData(){
+    return Container(
+            color: Color(0xFF171e27),
+        child: Center(
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: IconButton(icon: Icon(Icons.settings,color: Colors.white,size: 40,), onPressed: (){
+                      Navigator.push(context,MaterialPageRoute(builder:(context)=> About()));
+                    }),
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top:10.0,left:10,right:10,bottom: 5),
+                  //   child: Text("About",style: TextStyle(color: Colors.white,fontSize: 20),),
+                  // ),
+                ],
+              ),
+              Container(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 242,
+                ),
+              ),
+             testingText ?  Text("$textText",style: TextStyle(color: Colors.white,fontSize: 30),):Text("",style: TextStyle(color: Colors.white,fontSize: 30),),
+              SizedBox(height: 60,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          testingText= true;
+                          textText = "Testing 0 \u2082..";
+                        });
+                        sendFullTest();
+
+                         setState(() {
+                          testingText= true;
+                          textText = "Testing 0\u2082..";
+                        });
+
+                         _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
+                            setState(() async {                                                                                                                                                                                                                                           
+                              testingText=true;
+                              textText = "Calibration Completed.";
+                              // await sleep(Duration(seconds:1));
+                            });
+                        });
+
+                       
+                      },
+                      child: Container(
+                        width: 220,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Continue \n with".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "Full Test".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        // sendCalibrationText();
+                        setState(() {
+                          testingText= true;
+                          textText = "Calibrating 0\u2082..";
+                        });
+
+                         _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
+                            setState(() async {                                                                                                                                                                                                                                           
+                              testingText=true;
+                              textText = "Calibration Completed.";
+                              // await sleep(Duration(seconds:1));
+                            });
+                        });
+                      },
+                      child: Container(
+                        width: 220,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Continue \n with".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "Calibration".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        // selfTestingEnabled = false;
+                        setState(() {
+                        callibrationEnabled = false;
+                        });
+                      },
+                      child: Container(
+                        width: 220,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Continue \n with".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "Treatment".toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+  }
+
+  selfTestingData(){
+    return Container(
+        color: Color(0xFF171e27),
+        child: Center(
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: IconButton(icon: Icon(Icons.settings,color: Colors.white,size: 40,), onPressed: (){
+                      Navigator.push(context,MaterialPageRoute(builder:(context)=> About()));
+                    }),
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top:10.0,left:10,right:10,bottom: 5),
+                  //   child: Text("About",style: TextStyle(color: Colors.white,fontSize: 20),),
+                  // ),
+                ],
+              ),
+              Container(
+                child: Text(
+                  "SWASIT",
+                  style: TextStyle(
+                      color: Colors.orange,
+                      fontSize: 72,
+                      fontFamily: "appleFont"),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              // CircularProgressIndicator()   o2pressuresensor.toString()=="1" ? "Passed" : o2pressuresensor.toString()=="0"? "Failed" : ""
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "O\u2082 Pressure Sensor  ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: o2pressuresensor == 0
+                                    ? false
+                                    : o2pressuresensor == 1
+                                        ? false
+                                        : o2pressuresensor == 2 ? true : false,
+                                activeColor: o2pressuresensor == 1
+                                    ? Colors.red
+                                    : o2pressuresensor == 2
+                                        ? Colors.blue
+                                        : Colors.green,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "MT Pressure Sensor",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: mtpressuresensor == 0
+                                    ? false
+                                    : mtpressuresensor == 1
+                                        ? false
+                                        : mtpressuresensor == 2 ? true : false,
+                                activeColor: mtpressuresensor == 1
+                                    ? Colors.red
+                                    : mtpressuresensor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Inhalation Valve        ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: inhalationvalve == 0
+                                    ? false
+                                    : inhalationvalve == 1
+                                        ? false
+                                        : inhalationvalve == 2 ? true : false,
+                                activeColor: inhalationvalve == 1
+                                    ? Colors.red
+                                    : inhalationvalve == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Exhalation Valve      ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: exhalationvalve == 0
+                                    ? false
+                                    : exhalationvalve == 1
+                                        ? false
+                                        : exhalationvalve == 2 ? true : false,
+                                activeColor: exhalationvalve == 1
+                                    ? Colors.red
+                                    : exhalationvalve == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Exhalation Flow Sensor        ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: exhalationflowsensor == 0
+                                    ? false
+                                    : exhalationflowsensor == 1
+                                        ? false
+                                        : exhalationflowsensor == 2
+                                            ? true
+                                            : false,
+                                activeColor: exhalationflowsensor == 1
+                                    ? Colors.red
+                                    : exhalationflowsensor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Inhalation Flow Sensor         ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: inhalationflowsensor == 0
+                                    ? false
+                                    : inhalationflowsensor == 1
+                                        ? false
+                                        : inhalationflowsensor == 2
+                                            ? true
+                                            : false,
+                                activeColor: inhalationflowsensor == 1
+                                    ? Colors.red
+                                    : inhalationflowsensor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Exhalation Pressure Sensor",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: exhalationpressure == 0
+                                    ? false
+                                    : exhalationpressure == 1
+                                        ? false
+                                        : exhalationpressure == 2
+                                            ? true
+                                            : false,
+                                activeColor: exhalationpressure == 1
+                                    ? Colors.red
+                                    : exhalationpressure == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Inhalation Pressure Sensor",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: inhalationpressure == 0
+                                    ? false
+                                    : inhalationpressure == 1
+                                        ? false
+                                        : inhalationpressure == 2
+                                            ? true
+                                            : false,
+                                activeColor: inhalationpressure == 1
+                                    ? Colors.red
+                                    : inhalationpressure == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "O \u2082 Sensor          ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: o2sensor == 0
+                                    ? false
+                                    : o2sensor == 1
+                                        ? false
+                                        : o2sensor == 2 ? true : false,
+                                activeColor: o2sensor == 1
+                                    ? Colors.red
+                                    : o2sensor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Vent Value        ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: ventvalue == 0
+                                    ? false
+                                    : ventvalue == 1
+                                        ? false
+                                        : ventvalue == 2 ? true : false,
+                                activeColor: ventvalue == 1
+                                    ? Colors.red
+                                    : ventvalue == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Communication",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: communication == 0
+                                    ? false
+                                    : communication == 1
+                                        ? false
+                                        : communication == 2 ? true : false,
+                                activeColor: communication == 1
+                                    ? Colors.red
+                                    : communication == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Main Power       ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: mainpower == 0
+                                    ? false
+                                    : mainpower == 1
+                                        ? false
+                                        : mainpower == 2 ? true : false,
+                                activeColor: mainpower == 1
+                                    ? Colors.red
+                                    : mainpower == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: battery == 1 ? Colors.red : Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Battery         ",
+                                  style: TextStyle(
+                                      color: battery == 0
+                                          ? Colors.black
+                                          : battery == 1
+                                              ? Colors.white
+                                              : Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: battery == 0
+                                    ? false
+                                    : battery == 1
+                                        ? false
+                                        : battery == 2 ? true : false,
+                                activeColor: battery == 1
+                                    ? Colors.red
+                                    : battery == 2 ? Colors.blue : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Compressor",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: compressor == 0
+                                    ? false
+                                    : compressor == 1
+                                        ? false
+                                        : compressor == 2 ? true : false,
+                                activeColor: compressor == 1
+                                    ? Colors.red
+                                    : compressor == 2
+                                        ? Colors.blue
+                                        : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  "Blender        ",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              Checkbox(
+                                value: blender == 0
+                                    ? false
+                                    : blender == 1
+                                        ? false
+                                        : blender == 2 ? true : false,
+                                activeColor: blender == 1
+                                    ? Colors.red
+                                    : blender == 2 ? Colors.blue : Colors.black,
+                                onChanged: (bool value) {},
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              checkOfffset == 2
+                  ? InkWell(
+                      onTap: () {
+                        setState(() {
+                          selfTestingEnabled = false;
+                          callibrationEnabled = true;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color(0xFF171e27)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              "Test Completed",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          )),
+                        ),
+                      ),
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Self test in progress..",
+                            style: TextStyle(fontSize: 30, color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 40,
+                        ),
+                        CircularProgressIndicator()
+                      ],
+                    )
+            ],
+          ),
+        ),
+      );
+  }
+
+  sendSelfTestData() async {
+    List<int> objSelfTestData = [0x7E, 0, 20, 0, 12, 0, 1, 0x7F];
+    if (_status == "Connected") {
+      await _port.write(Uint8List.fromList(objSelfTestData));
+    }
+    setState(() {
+    selfTestingEnabled = false;
+    callibrationEnabled = true;
+    });
   }
 
   modesClick() {
@@ -2823,7 +3634,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.5",
+                  "V1.7.6",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -3238,7 +4049,7 @@ class _CheckPageState extends State<Dashboard> {
                                                       const EdgeInsets.all(2.0),
                                                   child: Text("",
                                                       style: TextStyle(
-                                                          color: Colors.green,
+                                                          color: Colors.yellow,
                                                           fontSize: 10)),
                                                 ),
                                               ),
@@ -3267,7 +4078,7 @@ class _CheckPageState extends State<Dashboard> {
                                                     mapDisplayValue.toString(),
                                                     // "000",
                                                     style: TextStyle(
-                                                        color: Colors.green,
+                                                        color: Colors.yellow,
                                                         fontSize: 35),
                                                   ),
                                                 ),
@@ -3351,7 +4162,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         .toStringAsFixed(3),
                                                     // "0000",
                                                     style: TextStyle(
-                                                        color: Colors.yellow,
+                                                        color: Colors.green,
                                                         fontSize: 35),
                                                   ),
                                                 ),
@@ -3885,7 +4696,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Text(
                               "",
                               style:
-                                  TextStyle(color: Colors.green, fontSize: 10),
+                                  TextStyle(color: Colors.yellow, fontSize: 10),
                             ),
                           ),
                         ),
@@ -3896,7 +4707,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Text(
                               psValue1.toString(),
                               style:
-                                  TextStyle(color: Colors.green, fontSize: 38),
+                                  TextStyle(color: Colors.yellow, fontSize: 38),
                             ),
                           ),
                         ),
@@ -3939,7 +4750,7 @@ class _CheckPageState extends State<Dashboard> {
                                 Text(
                                   maxppeak.toString(),
                                   style: TextStyle(
-                                      color: Colors.green, fontSize: 12),
+                                      color: Colors.yellow, fontSize: 12),
                                 ),
                               ],
                             ),
@@ -3956,7 +4767,7 @@ class _CheckPageState extends State<Dashboard> {
                                 Text(
                                   minppeak.toString(),
                                   style: TextStyle(
-                                      color: Colors.green, fontSize: 12),
+                                      color: Colors.yellow, fontSize: 12),
                                 ),
                                 Text(
                                   "MIN",
@@ -3997,7 +4808,7 @@ class _CheckPageState extends State<Dashboard> {
                             padding: const EdgeInsets.all(2.0),
                             child: Text("",
                                 style: TextStyle(
-                                    color: Colors.yellow, fontSize: 10)),
+                                    color: Colors.green, fontSize: 10)),
                           ),
                         ),
                         Align(
@@ -4007,7 +4818,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Text(
                               "",
                               style:
-                                  TextStyle(color: Colors.yellow, fontSize: 10),
+                                  TextStyle(color: Colors.green, fontSize: 10),
                             ),
                           ),
                         ),
@@ -4019,7 +4830,7 @@ class _CheckPageState extends State<Dashboard> {
                               vteValue.toString(),
                               // "0000",
                               style:
-                                  TextStyle(color: Colors.yellow, fontSize: 35),
+                                  TextStyle(color: Colors.green, fontSize: 35),
                             ),
                           ),
                         ),
@@ -4062,7 +4873,7 @@ class _CheckPageState extends State<Dashboard> {
                                 Text(
                                   maxvte.toString(),
                                   style: TextStyle(
-                                      color: Colors.yellow, fontSize: 12),
+                                      color: Colors.green, fontSize: 12),
                                 ),
                               ],
                             ),
@@ -4085,7 +4896,7 @@ class _CheckPageState extends State<Dashboard> {
                                   minvte.toString(),
                                   ////""
                                   style: TextStyle(
-                                      color: Colors.yellow, fontSize: 12),
+                                      color: Colors.green, fontSize: 12),
                                 ),
                                 Text(
                                   "MIN",
@@ -5153,11 +5964,7 @@ class _CheckPageState extends State<Dashboard> {
                   borderRadius: BorderRadius.circular(5),
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => SelfTestPage()),
-                      );
+                     selfTestingEnabled = true;
                     },
                     child: Container(
                         height: 40,
@@ -12858,7 +13665,6 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     pccmvRRValue = pccmvRRValue - 1;
                                   });
-                                  sendRRData(pccmvRRValue);
                                 } else if (pccmvIe == true &&
                                     pccmvIeValue != pccmvminValue) {
                                   setState(() {
@@ -12926,7 +13732,6 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     pccmvRRValue = pccmvRRValue + 1;
                                   });
-                                  sendRRData(pccmvRRValue);
                                 } else if (pccmvIe == true &&
                                     pccmvIeValue != pccmvmaxValue) {
                                   setState(() {
@@ -13066,7 +13871,6 @@ class _CheckPageState extends State<Dashboard> {
                                 setState(() {
                                   pccmvRRValue = value.toInt();
                                 });
-                                sendRRData(pccmvRRValue);
                               } else if (pccmvIe == true) {
                                 setState(() {
                                   pccmvIeValue = value.toInt();
@@ -19569,7 +20373,6 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   showAlertDialog(BuildContext context) {
-    // set up the button
     showDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
@@ -19589,38 +20392,16 @@ class _CheckPageState extends State<Dashboard> {
             ));
   }
 
-  sendRRData(int rrValueIE) {
-    //  double iData = ((120-rrValueIE)/rrValueIE);
-    //  double imul = iData*10;
-    //  int itoint = imul.toInt();
-    //  double iLimit = itoint.toDouble()/10;
-
-    //  double eData = ((200-rrValueIE)/rrValueIE);
-    //  double emul = eData*10;
-    //  int etoint = emul.toInt();
-    //  double eLimit = etoint.toDouble()/10;
-
-    //  if(iLimit>=4){
-    //    iLimit=4.0;
-    //  }
-    //  if(eLimit>=4){
-    //    eLimit=4.0;
-    //  }
-
-    // var lowerLevel  = iLimit;
-  }
 
   serializeEventData(Uint8List event) async {
     if (event != null) {
       setState(() {
         respiratoryEnable = true;
-        // playOnEnabled = false;
       });
       if (event[0] == 126) {
         list = [];
         listTemp = [];
         int cIndex = 0;
-        // turnOnScreen();
         list.addAll(event);
         list.removeAt(0);
 
@@ -19633,7 +20414,6 @@ class _CheckPageState extends State<Dashboard> {
           }
           cIndex = cIndex + 1;
         }
-        // print(listTemp.length.toString());
         serialiseReceivedPacket(listTemp);
       } else {
         list = [];
@@ -19642,9 +20422,6 @@ class _CheckPageState extends State<Dashboard> {
       setState(() {
         respiratoryEnable = false;
       });
-      //  pressurePoints.clear();
-      //  volumePoints.clear();
-      //  flowPoints.clear();
       list = [];
     }
   }
@@ -19675,18 +20452,12 @@ class _CheckPageState extends State<Dashboard> {
       //           builder: (BuildContext context) => CallibrationPage()),
       //       ModalRoute.withName('/'));
       // }
-
-      //=========================
-
-      //=========================
       setState(() {
-        //=============
 
         setState(() {
           var now = new DateTime.now();
 
           int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
-          // // print("vte "+vteValueCheck.toString());
 
           if ((vteValueCheck != "" || vteValueCheck != null) &&
               vteValueCheck.round() >= 0 &&
@@ -19698,17 +20469,15 @@ class _CheckPageState extends State<Dashboard> {
           }
           int mvValueCheck = (((finalList[8] << 8) + finalList[9])).toInt();
 
-          // if (mvValueCheck != "" && (mvValue/1000).toDouble() >0 && (mvValue/1000).toDouble()<100) {
           setState(() {
             mvValue = mvValueCheck;
           });
-          // }
-
+          
           leakVolumeDisplay =
               ((finalList[102] << 8) + finalList[103]); //103 104
           peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
           spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
-          // // print("spon "+spontaneousDisplay.toString());
+
 
           int rrtotalCheck =
               ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
@@ -19762,10 +20531,6 @@ class _CheckPageState extends State<Dashboard> {
           if (finalList[108] == 1) {
             presentCode = ((finalList[106] << 8) + finalList[107]);
             alarmCounter = finalList[90];
-            // if (presentCode != 0 && presentCode > 0 && presentCode <= 23) {
-
-            // }
-            // Fluttertoast.showToast(msg: presentCode.toString()+" pre "+previousCode.toString() + "\n counter "+alarmCounter.toString()+"pre cnt "+alarmCounter.toString());
 
             if (presentCode != previousCode) {
               previousCode = presentCode;
@@ -19857,7 +20622,6 @@ class _CheckPageState extends State<Dashboard> {
             _stopMusic();
           }
 
-          // cdisplayParameter = ((finalList[106] << 8) + finalList[107]);
           if (!vteValue.isNegative &&
               vteValue != null &&
               vteValue != 0 &&
@@ -19971,6 +20735,39 @@ class _CheckPageState extends State<Dashboard> {
           tempIe = i + ":" + e;
         });
 
+        setState(() {
+          // list[26]=(0x55);
+          // list[27]=(0x55);
+          // list[28]=(0x55);
+          // list[29]=(0x55);
+          o2pressuresensor = ((list[26] & 0x3) >> 0);
+          mtpressuresensor = ((list[26] & 0xC) >> 2);
+          exhalationflowsensor = ((list[26] & 0x30) >> 4);
+          inhalationflowsensor = ((list[26] & 0xC0) >> 6);
+
+          exhalationpressure = ((list[27] & 0x3) >> 0);
+          inhalationpressure = ((list[27] & 0xC) >> 2);
+          o2sensor = ((list[27] & 0x30) >> 4);
+          inhalationvalve = ((list[27] & 0xC0) >> 6);
+
+          exhalationvalve = ((list[28] & 0x3) >> 0);
+          ventvalue = ((list[28] & 0xC) >> 2);
+          mainpower = ((list[28] & 0x30) >> 4);
+          battery = ((list[28] & 0xC0) >> 6);
+
+          communication = ((list[29] & 0x3) >> 0);
+          compressor = ((list[29] & 0xC) >> 2);
+          blender = ((list[29] & 0x30) >> 4);
+          checkOfffset = ((list[29] & 0xC0) >> 6);
+
+          if (checkOfffset == 2) {
+            _port.close();
+            _status = "Disconnected";
+          }
+
+          // Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
+        });
+
         var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
         if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
           setState(() {
@@ -20054,8 +20851,6 @@ class _CheckPageState extends State<Dashboard> {
           });
         }
 
-        // if(temp.round()>0 && temp.round()<150)
-        // {
         if (pressurePoints.length >= 50) {
           setState(() {
             pressurePoints.removeAt(0);
@@ -20064,9 +20859,7 @@ class _CheckPageState extends State<Dashboard> {
         } else {
           pressurePoints.add(temp);
         }
-        // }else{
-        //   pressurePoints.add(0);
-        // }
+
         if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
             ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
           pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
@@ -20075,8 +20868,6 @@ class _CheckPageState extends State<Dashboard> {
         double temp1 = ((finalList[58] << 8) + finalList[59])
             .toDouble(); // volume points 59,60
 
-        // if(temp1.round() >0 && temp1.round() < 2500)
-        // {
         if (volumePoints.length >= 50) {
           setState(() {
             volumePoints.removeAt(0);
@@ -20085,16 +20876,13 @@ class _CheckPageState extends State<Dashboard> {
         } else {
           volumePoints.add(temp1);
         }
-        // }else{
-        //   volumePoints.add(0);
-        // }
+
 
         double temp3 = ((((finalList[46] << 8) + finalList[47])) -
                 (((finalList[48] << 8) + finalList[49])))
             .toDouble();
         temp3 = temp3 * 0.06;
 
-        // if(temp3.round()>-100 && temp3.round()<200){
         if (flowPoints.length >= 50) {
           setState(() {
             flowPoints.removeAt(0);
@@ -20103,9 +20891,7 @@ class _CheckPageState extends State<Dashboard> {
         } else {
           flowPoints.add(temp3 * 1.2);
         }
-        // }else{
-        //   flowPoints.add(0);
-        // }
+
 
         setState(() {
           powerIndication = finalList[64];

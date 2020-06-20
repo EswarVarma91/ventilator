@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
+import 'package:ventilator/activity/Constants.dart';
 
 import 'Dashboard.dart';
 import 'DowngradeAppScreen.dart';
@@ -22,20 +24,19 @@ class _AboutState extends State<About> {
 
   getLatestUrl() async {
     // make GET request
-    String url = 'https://www.eagleaspect.com:9000/ventilator-apk-manager/getLatestAPK';
+    String url =
+        'https://www.eagleaspect.com:9000/ventilator-apk-manager/getLatestAPK';
     Response response = await get(url);
     setState(() {
-      downloadUrl = response.body.toString();
+      setState(() {
+        downloadUrl = response.body.toString();
+      });
       // Fluttertoast.showToast(msg: downloadUrl);
     });
-
-
   }
 
   Future<void> checkforUpdates() async {
-    var params = <String, dynamic>{
-      "urlFlutter": downloadUrl
-    };
+    var params = <String, dynamic>{"urlFlutter": downloadUrl};
     try {
       var result =
           await shutdownChannel.invokeMethod('checkforUpdates', params);
@@ -188,16 +189,20 @@ class _AboutState extends State<About> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white),
-                      child: FlatButton(
+                      child: downloadUrl!=null ?  FlatButton(
                         child: Text(
                           "Check for Update",
                           style: TextStyle(color: Colors.black, fontSize: 20),
                         ),
                         onPressed: () {
-                          // print("a");
-                          checkforUpdates();
+                          // Fluttertoast.showToast(msg: Constants.versionNew.toString() +"   "+ versionCheck(downloadUrl)).toString();
+                          if (Constants.versionNew == versionCheck(downloadUrl)) {
+                            // Fluttertoast.showToast(msg:"no updates found.!");
+                          }else{
+                            checkforUpdates();
+                          }
                         },
-                      ),
+                      ):Container(),
                     ),
                     SizedBox(
                       height: 18,
@@ -210,5 +215,10 @@ class _AboutState extends State<About> {
         ),
       ),
     );
+  }
+
+   versionCheck(String downloadUrl) {
+    //  Fluttertoast.showToast(msg: downloadUrl.split("/v")[1].toString().split(".apk")[0].toString());
+    return downloadUrl.split("/v")[1].toString().split(".apk")[0].toString();
   }
 }

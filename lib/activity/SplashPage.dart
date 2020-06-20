@@ -4,10 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:screen/screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'package:usb_serial/usb_serial.dart';
 import 'package:ventilator/activity/Dashboard.dart';
+import 'package:ventilator/calibration/CalibrationPage.dart';
 import 'package:ventilator/database/ADatabaseHelper.dart';
 import 'package:ventilator/database/DatabaseHelper.dart';
-import 'package:ventilator/screens/SelfTestPage.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key}) : super(key: key);
@@ -21,6 +22,7 @@ class _SplashPageState extends State<SplashPage> {
   DatabaseHelper dbHelper;
   ADatabaseHelper dbHelper1;
   static const shutdownChannel = const MethodChannel("shutdown");
+  UsbPort port;
   // int counter=0;
 
   @override
