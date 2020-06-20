@@ -92,6 +92,12 @@
       "languageVersion": "2.2"
     },
     {
+      "name": "floating_action_row",
+      "rootUri": "file:///Users/eswarvarmapanumetcha/.pub-cache/hosted/pub.dartlang.org/floating_action_row-0.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///Users/eswarvarmapanumetcha/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -404,7 +410,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-06-20T09:05:12.343506Z",
+  "generated": "2020-06-20T18:16:18.740858Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }

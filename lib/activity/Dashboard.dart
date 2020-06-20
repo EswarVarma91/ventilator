@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cupertino_range_slider/cupertino_range_slider.dart';
+import 'package:floating_action_row/floating_action_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -502,6 +503,7 @@ class _CheckPageState extends State<Dashboard> {
       compressor = 0,
       blender = 0,
       checkOfffset = 0;
+    var checkO2CalibrationValue;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -1318,6 +1320,10 @@ class _CheckPageState extends State<Dashboard> {
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         key: _scaffoldKey, //_scaffoldKey.currentState.openDrawer(),
+        // floatingActionButton: FloatingActionRowButton(
+        //     icon: Icon(Icons.arrow_forward),
+        //     onTap: () {}
+        // ),
         drawer: Container(
           width: 190,
           child: Theme(
@@ -1944,8 +1950,67 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
+  showAlertCalibarationDialog(){
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)), //this right here
+            child: Container(
+              height: 200,
+              width:320,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    
+                   Text(
+                      "Ensure lung connected.",
+                      style: TextStyle(color: Colors.red, fontSize: 25),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Align(
+                        alignment: Alignment.bottomCenter,
+                        child: RaisedButton(
+                          onPressed: () async {
+                            sendCalibrationText();
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "ok",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          color: const Color(0xFF1BC0C5),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+   sendSelfTest() async {
+    List<int> objSelfTestData = [0x7E, 0, 20, 0, 16, 0, 2, 0x7F];
+    if (_status == "Connected") {
+      await _port.write(Uint8List.fromList(objSelfTestData));
+    }
+  }
+
   sendCalibrationText() async {
-    List<int> objSelfTestData = [0x7E, 0, 20, 0, 14, 0, 1, 0x7F];
+    List<int> objSelfTestData = [0x7E, 0, 20, 0, 16, 0, 1, 0x7F];
     if (_status == "Connected") {
       await _port.write(Uint8List.fromList(objSelfTestData));
     }
@@ -1980,7 +2045,7 @@ class _CheckPageState extends State<Dashboard> {
                   width: 242,
                 ),
               ),
-             testingText ?  Text("$textText",style: TextStyle(color: Colors.white,fontSize: 30),):Text("",style: TextStyle(color: Colors.white,fontSize: 30),),
+              Text("$textText",style: TextStyle(color: checkO2CalibrationValue == 1 ? Colors.red : Colors.white,fontSize: 30),),
               SizedBox(height: 60,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -2049,19 +2114,19 @@ class _CheckPageState extends State<Dashboard> {
                     ),
                     child: InkWell(
                       onTap: () {
+                        showAlertCalibarationDialog();
                         // sendCalibrationText();
-                        setState(() {
-                          testingText= true;
-                          textText = "Calibrating 0\u2082..";
-                        });
+                        // setState(() {
+                        //   testingText= true;
+                        //   textText = "Calibrating 0\u2082..";
+                        // });
 
-                         _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
-                            setState(() async {                                                                                                                                                                                                                                           
-                              testingText=true;
-                              textText = "Calibration Completed.";
-                              // await sleep(Duration(seconds:1));
-                            });
-                        });
+                        //  _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
+                        //     setState(() async {                                                                                                                                                                                                                                           
+                        //       testingText=true;
+                        //       textText = "Calibration Completed.";
+                        //     });
+                        // });
                       },
                       child: Container(
                         width: 220,
@@ -5274,6 +5339,19 @@ class _CheckPageState extends State<Dashboard> {
             ],
           ),
         )),
+
+        
+
+        // InkWell(
+        //     onTap: (){
+        //       _scaffoldKey.currentState.openDrawer();
+        //     },
+        //     child: Padding(
+        //     padding: const EdgeInsets.only(top:40.0),
+        //     child: Container(
+        //       width:8,height:60,color:Colors.orangeAccent.withOpacity(0.3)),
+        //   ),
+        // )
       ],
     );
   }
@@ -5942,10 +6020,18 @@ class _CheckPageState extends State<Dashboard> {
         children: <Widget>[
           Row(
             children: [
+              InkWell(
+                onTap:(){
+                  _scaffoldKey.currentState.openDrawer();
+                },
+                child: Container(decoration:BoxDecoration(borderRadius:BorderRadius.circular(5),color:Colors.white),
+                  child: Icon(Icons.keyboard_arrow_right,size:40,color:Colors.black.withOpacity(0.9))),
+              ),
+
               Container(
                   child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 25, right: 0, top: 4, bottom: 4),
+                    left: 9, right: 0, top: 4, bottom: 4),
                 child: Text(
                   modeName.toString(),
                   style: TextStyle(
@@ -5989,6 +6075,7 @@ class _CheckPageState extends State<Dashboard> {
                   borderRadius: BorderRadius.circular(5),
                   child: InkWell(
                     onTap: () {
+                      sendSelfTest();
                      selfTestingEnabled = true;
                     },
                     child: Container(
@@ -20680,6 +20767,24 @@ class _CheckPageState extends State<Dashboard> {
 
           // Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
         });
+        setState(() {
+          checkO2CalibrationValue = finalList[30];
+        });
+        
+        // Fluttertoast.showToast(msg:checkO2CalibrationValue.toString());
+        if(checkO2CalibrationValue==1){
+            setState(() {
+              textText = "Lung Disconnected";
+            });
+        }else if(checkO2CalibrationValue==2){
+            setState(() {
+              textText = "Calibrating 0\u2082..";
+            });
+        }else if(checkO2CalibrationValue==3){
+            setState(() {
+              textText = "Calibrating Completed..";
+            });
+        }
 
         var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
         if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
