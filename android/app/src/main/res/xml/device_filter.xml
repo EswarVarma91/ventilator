@@ -28,6 +28,6 @@
     <usb-device vendor-id="1240" />
 
     <!--    ventilator-->
-    <!-- <usb-device vendor-id="04D8" product-id="000A"/> -->
+    <usb-device vendor-id="04D8" product-id="000A"/>
     
 </resources>

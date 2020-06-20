@@ -9863,7 +9863,7 @@ class _CheckPageState extends State<Dashboard> {
                 setState(() {
                   prvcmaxValue = 1200;
                   prvcminValue = 200;
-                  prvcparameterName = "Vt";
+                  prvcparameterName = "Target Vt";
                   prvcparameterUnits = "mL";
                   prvcItrig = false;
                   prvcRr = false;
@@ -9891,7 +9891,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Vt",
+                              "Target Vt",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -17415,7 +17415,7 @@ class _CheckPageState extends State<Dashboard> {
                   vacvmaxValue = 100;
                   vacvminValue = 10;
                   vacvparameterName = "PC Min";
-                  vacvparameterUnits = "mL";
+                  vacvparameterUnits = "cmH\u2082O"; //TODO
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -17454,7 +17454,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "mL",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvPcMin
@@ -17529,7 +17529,7 @@ class _CheckPageState extends State<Dashboard> {
                   vacvmaxValue = 100;
                   vacvminValue = 10;
                   vacvparameterName = "PC Max";
-                  vacvparameterUnits = "mL";
+                  vacvparameterUnits = "cmH\u2082O";
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -17568,7 +17568,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "mL",
+                              "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvPcMax
