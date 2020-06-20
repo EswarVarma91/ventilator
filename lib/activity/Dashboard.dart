@@ -240,6 +240,30 @@ class _CheckPageState extends State<Dashboard> {
   String vacvparameterName = "I Trig",
       vacvparameterUnits = "cmH\u2082O Below Peep";
 
+       bool prvcItrig = true,
+      prvcRr = false,
+      prvcIe = false,
+      prvcPeep = false,
+      prvcVt = false,
+      prvcPcMin = false,
+      prvcPcMax = false,
+      prvcFio2 = false,
+      prvcFlowRamp = false;
+
+  int prvcItrigValue = 3,
+      prvcRrValue = 20,
+      prvcIeValue = 51,
+      prvcPeepValue = 10,
+      prvcVtValue = 400,
+      prvcPcMinValue = 20,
+      prvcPcMaxValue = 60,
+      prvcFio2Value = 21,
+      prvcFlowRampValue = 4;
+
+  int prvcmaxValue = 10, prvcminValue = 1, prvcdefaultValue = 6;
+  String prvcparameterName = "I Trig",
+      prvcparameterUnits = "cmH\u2082O Below Peep";
+
   bool psvItrig = true,
       psvPeep = false,
       psvIe = false,
@@ -326,8 +350,9 @@ class _CheckPageState extends State<Dashboard> {
 
   bool prvcApnea = true;
   int prvcApneaValue = 30;
-  int prvcmaxValue = 60, prvcminValue = 1, prvcdefaultValue = 30;
-  String prvcparameterName = "Apnea", prvcparameterUnits = "s";
+
+  // int prvcmaxValue = 60, prvcminValue = 1, prvcdefaultValue = 30;
+  // String prvcparameterName = "Apnea", prvcparameterUnits = "s";
 
   bool pccmvRR = true, pccmvRRChanged = false;
   bool pccmvIe = false, pccmvIeChanged = false;
@@ -593,7 +618,7 @@ class _CheckPageState extends State<Dashboard> {
     UsbSerial.usbEventStream.listen((UsbEvent event) {
       _getPorts();
     });
-    // _getPorts();
+    _getPorts();
 
     // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) { 
     //   if(_status == "Disconnected"){
@@ -1218,29 +1243,29 @@ class _CheckPageState extends State<Dashboard> {
         psvparameterName = "I Trig";
         psvparameterUnits = "cmH\u2082O Below Peep";
       } else if (checkData == "prvc") {
-        vacvItrigValue = preferences.getInt('vacvItrigValue');
-        vacvRrValue = preferences.getInt('vacvRrValue');
-        vacvIeValue = preferences.getInt('vacvIeValue');
-        vacvPeepValue = preferences.getInt('vacvPeepValue');
-        vacvVtValue = preferences.getInt('vacvVtValue');
-        vacvPcMinValue = preferences.getInt('vacvPcMinValue');
-        vacvPcMaxValue = preferences.getInt('vacvPcMaxValue');
-        vacvFio2Value = preferences.getInt('vacvFio2Value');
-        vacvFlowRampValue = preferences.getInt('vacvFlowRampValue');
-        vacvmaxValue = 10;
-        vacvminValue = 1;
-        vacvdefaultValue = preferences.getInt('vacvdefaultValue');
-        vacvparameterName = "I Trig";
-        vacvparameterUnits = "cmH\u2082O Below Peep";
-        vacvItrig = true;
-        vacvRr = false;
-        vacvIe = false;
-        vacvPeep = false;
-        vacvVt = false;
-        vacvPcMin = false;
-        vacvPcMax = false;
-        vacvFio2 = false;
-        vacvFlowRamp = false;
+        prvcItrigValue = preferences.getInt('prvcItrigValue');
+        prvcRrValue = preferences.getInt('prvcRrValue');
+        prvcIeValue = preferences.getInt('prvcIeValue');
+        prvcPeepValue = preferences.getInt('prvcPeepValue');
+        prvcVtValue = preferences.getInt('prvcVtValue');
+        prvcPcMinValue = preferences.getInt('prvcPcMinValue');
+        prvcPcMaxValue = preferences.getInt('prvcPcMaxValue');
+        prvcFio2Value = preferences.getInt('prvcFio2Value');
+        prvcFlowRampValue = preferences.getInt('prvcFlowRampValue');
+        prvcmaxValue = 10;
+        prvcminValue = 1;
+        prvcdefaultValue = preferences.getInt('prvcdefaultValue');
+        prvcparameterName = "I Trig";
+        prvcparameterUnits = "cmH\u2082O Below Peep";
+        prvcItrig = true;
+        prvcRr = false;
+        prvcIe = false;
+        prvcPeep = false;
+        prvcVt = false;
+        prvcPcMin = false;
+        prvcPcMax = false;
+        prvcFio2 = false;
+        prvcFlowRamp = false;
       }
     });
   }
@@ -9479,6 +9504,7 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   prvcData() {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -9490,19 +9516,19 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 60;
-                  vacvminValue = 1;
-                  vacvparameterName = "RR";
-                  vacvparameterUnits = "bpm";
-                  vacvItrig = false;
-                  vacvRr = true;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
+                  prvcmaxValue = 60;
+                  prvcminValue = 1;
+                  prvcparameterName = "RR";
+                  prvcparameterUnits = "bpm";
+                  prvcItrig = false;
+                  prvcRr = true;
+                  prvcIe = false;
+                  prvcPeep = false;
+                  prvcVt = false;
+                  prvcPcMin = false;
+                  prvcPcMax = false;
+                  prvcFio2 = false;
+                  prvcFlowRamp = false;
                 });
               },
               child: Center(
@@ -9511,7 +9537,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 130,
                   child: Card(
                     elevation: 40,
-                    color: vacvRr ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    color: prvcRr ? Color(0xFFE0E0E0) : Color(0xFF213855),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Center(
@@ -9524,7 +9550,7 @@ class _CheckPageState extends State<Dashboard> {
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: vacvRr
+                                  color: prvcRr
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9535,7 +9561,7 @@ class _CheckPageState extends State<Dashboard> {
                               "bpm",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvRr
+                                  color: prvcRr
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9546,7 +9572,7 @@ class _CheckPageState extends State<Dashboard> {
                               "60",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvRr
+                                  color: prvcRr
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9557,7 +9583,7 @@ class _CheckPageState extends State<Dashboard> {
                               "1",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvRr
+                                  color: prvcRr
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9567,10 +9593,10 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Text(
-                                vacvRrValue.toString(),
+                                prvcRrValue.toString(),
                                 style: TextStyle(
                                     fontSize: 35,
-                                    color: vacvRr
+                                    color: prvcRr
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -9584,12 +9610,12 @@ class _CheckPageState extends State<Dashboard> {
                               child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvRr
+                                  prvcRr
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    vacvRrValue != null ? vacvRrValue / 60 : 0,
+                                    prvcRrValue != null ? prvcRrValue / 60 : 0,
                               ),
                             ),
                           )
@@ -9603,19 +9629,19 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 61;
-                  vacvminValue = 1;
-                  vacvparameterName = "I:E";
-                  vacvparameterUnits = "";
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = true;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
+                  prvcmaxValue = 61;
+                  prvcminValue = 1;
+                  prvcparameterName = "I:E";
+                  prvcparameterUnits = "";
+                  prvcItrig = false;
+                  prvcRr = false;
+                  prvcIe = true;
+                  prvcPeep = false;
+                  prvcVt = false;
+                  prvcPcMin = false;
+                  prvcPcMax = false;
+                  prvcFio2 = false;
+                  prvcFlowRamp = false;
                 });
               },
               child: Center(
@@ -9624,7 +9650,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 130,
                   child: Card(
                     elevation: 40,
-                    color: vacvIe ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    color: prvcIe ? Color(0xFFE0E0E0) : Color(0xFF213855),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Center(
@@ -9637,7 +9663,7 @@ class _CheckPageState extends State<Dashboard> {
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: vacvIe
+                                  color: prvcIe
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9648,7 +9674,7 @@ class _CheckPageState extends State<Dashboard> {
                               "",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvIe
+                                  color: prvcIe
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9659,7 +9685,7 @@ class _CheckPageState extends State<Dashboard> {
                               "1:4.0",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvIe
+                                  color: prvcIe
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9670,7 +9696,7 @@ class _CheckPageState extends State<Dashboard> {
                               "4.0:1",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvIe
+                                  color: prvcIe
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9680,11 +9706,11 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Text(
-                                // vacvIeValue,
-                                getIeData(vacvIeValue, 1),
+                                // prvcIeValue,
+                                getIeData(prvcIeValue, 1),
                                 style: TextStyle(
                                     fontSize: 35,
-                                    color: vacvIe
+                                    color: prvcIe
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -9698,12 +9724,12 @@ class _CheckPageState extends State<Dashboard> {
                               child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvIe
+                                  prvcIe
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    vacvIeValue != null ? vacvIeValue / 4 : 0,
+                                    prvcIeValue != null ? prvcIeValue / 4 : 0,
                               ),
                             ),
                           )
@@ -9717,19 +9743,19 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 30;
-                  vacvminValue = 0;
-                  vacvparameterName = "PEEP";
-                  vacvparameterUnits = "cmH\u2082O";
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = true;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
+                  prvcmaxValue = 30;
+                  prvcminValue = 0;
+                  prvcparameterName = "PEEP";
+                  prvcparameterUnits = "cmH\u2082O";
+                  prvcItrig = false;
+                  prvcRr = false;
+                  prvcIe = false;
+                  prvcPeep = true;
+                  prvcVt = false;
+                  prvcPcMin = false;
+                  prvcPcMax = false;
+                  prvcFio2 = false;
+                  prvcFlowRamp = false;
                 });
               },
               child: Center(
@@ -9738,7 +9764,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 130,
                   child: Card(
                     elevation: 40,
-                    color: vacvPeep ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    color: prvcPeep ? Color(0xFFE0E0E0) : Color(0xFF213855),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Center(
@@ -9751,7 +9777,7 @@ class _CheckPageState extends State<Dashboard> {
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: vacvPeep
+                                  color: prvcPeep
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9762,7 +9788,7 @@ class _CheckPageState extends State<Dashboard> {
                               "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvPeep
+                                  color: prvcPeep
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9773,7 +9799,7 @@ class _CheckPageState extends State<Dashboard> {
                               "30",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvPeep
+                                  color: prvcPeep
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9784,7 +9810,7 @@ class _CheckPageState extends State<Dashboard> {
                               "0",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvPeep
+                                  color: prvcPeep
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9794,10 +9820,10 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Text(
-                                vacvPeepValue.toString(),
+                                prvcPeepValue.toString(),
                                 style: TextStyle(
                                     fontSize: 35,
-                                    color: vacvPeep
+                                    color: prvcPeep
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -9811,12 +9837,12 @@ class _CheckPageState extends State<Dashboard> {
                               child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvPeep
+                                  prvcPeep
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0),
                                 ),
-                                value: vacvPeepValue != null
-                                    ? vacvPeepValue / 30
+                                value: prvcPeepValue != null
+                                    ? prvcPeepValue / 30
                                     : 0,
                               ),
                             ),
@@ -9835,19 +9861,19 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 1200;
-                  vacvminValue = 200;
-                  vacvparameterName = "Vt";
-                  vacvparameterUnits = "mL";
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = true;
-                  vacvPcMin = false;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
+                  prvcmaxValue = 1200;
+                  prvcminValue = 200;
+                  prvcparameterName = "Vt";
+                  prvcparameterUnits = "mL";
+                  prvcItrig = false;
+                  prvcRr = false;
+                  prvcIe = false;
+                  prvcPeep = false;
+                  prvcVt = true;
+                  prvcPcMin = false;
+                  prvcPcMax = false;
+                  prvcFio2 = false;
+                  prvcFlowRamp = false;
                 });
               },
               child: Center(
@@ -9856,7 +9882,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 130,
                   child: Card(
                     elevation: 40,
-                    color: vacvVt ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    color: prvcVt ? Color(0xFFE0E0E0) : Color(0xFF213855),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Center(
@@ -9869,7 +9895,7 @@ class _CheckPageState extends State<Dashboard> {
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: vacvVt
+                                  color: prvcVt
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9880,7 +9906,7 @@ class _CheckPageState extends State<Dashboard> {
                               "mL",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvVt
+                                  color: prvcVt
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9891,7 +9917,7 @@ class _CheckPageState extends State<Dashboard> {
                               "1200",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvVt
+                                  color: prvcVt
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9902,7 +9928,7 @@ class _CheckPageState extends State<Dashboard> {
                               "200",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvVt
+                                  color: prvcVt
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9912,10 +9938,10 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Text(
-                                vacvVtValue.toString(),
+                                prvcVtValue.toString(),
                                 style: TextStyle(
                                     fontSize: 35,
-                                    color: vacvVt
+                                    color: prvcVt
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -9929,12 +9955,12 @@ class _CheckPageState extends State<Dashboard> {
                               child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvVt
+                                  prvcVt
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0),
                                 ),
-                                value: vacvVtValue != null
-                                    ? vacvVtValue / 1200
+                                value: prvcVtValue != null
+                                    ? prvcVtValue / 1200
                                     : 0,
                               ),
                             ),
@@ -9949,19 +9975,19 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 100;
-                  vacvminValue = 21;
-                  vacvparameterName = "FiO\u2082";
-                  vacvparameterUnits = "%";
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = false;
-                  vacvFio2 = true;
-                  vacvFlowRamp = false;
+                  prvcmaxValue = 100;
+                  prvcminValue = 21;
+                  prvcparameterName = "FiO\u2082";
+                  prvcparameterUnits = "%";
+                  prvcItrig = false;
+                  prvcRr = false;
+                  prvcIe = false;
+                  prvcPeep = false;
+                  prvcVt = false;
+                  prvcPcMin = false;
+                  prvcPcMax = false;
+                  prvcFio2 = true;
+                  prvcFlowRamp = false;
                 });
               },
               child: Center(
@@ -9970,7 +9996,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 130,
                   child: Card(
                     elevation: 40,
-                    color: vacvFio2 ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    color: prvcFio2 ? Color(0xFFE0E0E0) : Color(0xFF213855),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Center(
@@ -9983,7 +10009,7 @@ class _CheckPageState extends State<Dashboard> {
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: vacvFio2
+                                  color: prvcFio2
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -9994,7 +10020,7 @@ class _CheckPageState extends State<Dashboard> {
                               "%",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvFio2
+                                  color: prvcFio2
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10005,7 +10031,7 @@ class _CheckPageState extends State<Dashboard> {
                               "100",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvFio2
+                                  color: prvcFio2
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10016,7 +10042,7 @@ class _CheckPageState extends State<Dashboard> {
                               "21",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvFio2
+                                  color: prvcFio2
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10026,10 +10052,10 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Text(
-                                vacvFio2Value.toString(),
+                                prvcFio2Value.toString(),
                                 style: TextStyle(
                                     fontSize: 35,
-                                    color: vacvFio2
+                                    color: prvcFio2
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -10043,12 +10069,12 @@ class _CheckPageState extends State<Dashboard> {
                               child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvFio2
+                                  prvcFio2
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0),
                                 ),
-                                value: vacvFio2Value != null
-                                    ? vacvFio2Value / 100
+                                value: prvcFio2Value != null
+                                    ? prvcFio2Value / 100
                                     : 0,
                               ),
                             ),
@@ -10063,19 +10089,19 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 10;
-                  vacvminValue = 1;
-                  vacvparameterName = "I Trig";
-                  vacvparameterUnits = "cmH\u2082O Below PEEP";
-                  vacvItrig = true;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
+                  prvcmaxValue = 10;
+                  prvcminValue = 1;
+                  prvcparameterName = "I Trig";
+                  prvcparameterUnits = "cmH\u2082O Below PEEP";
+                  prvcItrig = true;
+                  prvcRr = false;
+                  prvcIe = false;
+                  prvcPeep = false;
+                  prvcVt = false;
+                  prvcPcMin = false;
+                  prvcPcMax = false;
+                  prvcFio2 = false;
+                  prvcFlowRamp = false;
                 });
               },
               child: Center(
@@ -10084,7 +10110,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 130,
                   child: Card(
                     elevation: 40,
-                    color: vacvItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    color: prvcItrig ? Color(0xFFE0E0E0) : Color(0xFF213855),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Center(
@@ -10097,7 +10123,7 @@ class _CheckPageState extends State<Dashboard> {
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: vacvItrig
+                                  color: prvcItrig
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10108,7 +10134,7 @@ class _CheckPageState extends State<Dashboard> {
                               "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvItrig
+                                  color: prvcItrig
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10119,7 +10145,7 @@ class _CheckPageState extends State<Dashboard> {
                               "-10",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvItrig
+                                  color: prvcItrig
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10130,7 +10156,7 @@ class _CheckPageState extends State<Dashboard> {
                               "-1",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvItrig
+                                  color: prvcItrig
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10140,10 +10166,10 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Text(
-                                "-" + vacvItrigValue.toString(),
+                                "-" + prvcItrigValue.toString(),
                                 style: TextStyle(
                                     fontSize: 35,
-                                    color: vacvItrig
+                                    color: prvcItrig
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -10157,12 +10183,12 @@ class _CheckPageState extends State<Dashboard> {
                               child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvItrig
+                                  prvcItrig
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0),
                                 ),
-                                value: vacvItrigValue != null
-                                    ? vacvItrigValue / 10
+                                value: prvcItrigValue != null
+                                    ? prvcItrigValue / 10
                                     : 0,
                               ),
                             ),
@@ -10178,22 +10204,23 @@ class _CheckPageState extends State<Dashboard> {
         ),
         Column(
           children: [
+            
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 100;
-                  vacvminValue = 10;
-                  vacvparameterName = "PC Min";
-                  vacvparameterUnits = "cmH\u2082O";
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = true;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
+                  prvcmaxValue = 100;
+                  prvcminValue = 10;
+                  prvcparameterName = "PC Max";
+                  prvcparameterUnits = "cmH\u2082O";
+                  prvcItrig = false;
+                  prvcRr = false;
+                  prvcIe = false;
+                  prvcPeep = false;
+                  prvcVt = false;
+                  prvcPcMin = false;
+                  prvcPcMax = true;
+                  prvcFio2 = false;
+                  prvcFlowRamp = false;
                 });
               },
               child: Center(
@@ -10202,121 +10229,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 130,
                   child: Card(
                     elevation: 40,
-                    color: vacvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH\u2082O",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "10",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vacvPcMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vacvPcMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vacvPcMinValue != null
-                                    ? vacvPcMinValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vacvmaxValue = 100;
-                  vacvminValue = 10;
-                  vacvparameterName = "PC Max";
-                  vacvparameterUnits = "cmH\u2082O";
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = false;
-                  vacvPcMax = true;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vacvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    color: prvcPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Center(
@@ -10329,7 +10242,7 @@ class _CheckPageState extends State<Dashboard> {
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: vacvPcMax
+                                  color: prvcPcMax
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10340,7 +10253,7 @@ class _CheckPageState extends State<Dashboard> {
                               "cmH\u2082O",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvPcMax
+                                  color: prvcPcMax
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10351,7 +10264,7 @@ class _CheckPageState extends State<Dashboard> {
                               "100",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvPcMax
+                                  color: prvcPcMax
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10362,7 +10275,7 @@ class _CheckPageState extends State<Dashboard> {
                               "10",
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: vacvPcMax
+                                  color: prvcPcMax
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
@@ -10372,10 +10285,10 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1.0),
                               child: Text(
-                                vacvPcMaxValue.toString(),
+                                prvcPcMaxValue.toString(),
                                 style: TextStyle(
                                     fontSize: 35,
-                                    color: vacvPcMax
+                                    color: prvcPcMax
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -10389,12 +10302,12 @@ class _CheckPageState extends State<Dashboard> {
                               child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvPcMax
+                                  prvcPcMax
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0),
                                 ),
-                                value: vacvPcMaxValue != null
-                                    ? vacvPcMaxValue / 100
+                                value: prvcPcMaxValue != null
+                                    ? prvcPcMaxValue / 100
                                     : 0,
                               ),
                             ),
@@ -10410,19 +10323,19 @@ class _CheckPageState extends State<Dashboard> {
             // InkWell(
             //   onTap: () {
             //     setState(() {
-            //       vacvmaxValue = 4;
-            //       vacvminValue = 0;
-            //       vacvparameterName = "Flow Ramp";
-            //       vacvparameterUnits = "";
-            //       vacvItrig = false;
-            //       vacvRr = false;
-            //       vacvIe = false;
-            //       vacvPeep = false;
-            //       vacvVt = false;
-            //       vacvPcMin = false;
-            //       vacvPcMax = false;
-            //       vacvFio2 = false;
-            //       vacvFlowRamp = true;
+            //       prvcmaxValue = 4;
+            //       prvcminValue = 0;
+            //       prvcparameterName = "Flow Ramp";
+            //       prvcparameterUnits = "";
+            //       prvcItrig = false;
+            //       prvcRr = false;
+            //       prvcIe = false;
+            //       prvcPeep = false;
+            //       prvcVt = false;
+            //       prvcPcMin = false;
+            //       prvcPcMax = false;
+            //       prvcFio2 = false;
+            //       prvcFlowRamp = true;
             //     });
             //   },
             //   child: Center(
@@ -10431,7 +10344,7 @@ class _CheckPageState extends State<Dashboard> {
             //       height: 130,
             //       child: Card(
             //         elevation: 40,
-            //         color: vacvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         color: prvcFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
             //           padding: const EdgeInsets.all(6.0),
             //           child: Center(
@@ -10444,7 +10357,7 @@ class _CheckPageState extends State<Dashboard> {
             //                   style: TextStyle(
             //                       fontSize: 15,
             //                       fontWeight: FontWeight.bold,
-            //                       color: vacvFlowRamp
+            //                       color: prvcFlowRamp
             //                           ? Color(0xFF213855)
             //                           : Color(0xFFE0E0E0)),
             //                 ),
@@ -10455,7 +10368,7 @@ class _CheckPageState extends State<Dashboard> {
             //                   "",
             //                   style: TextStyle(
             //                       fontSize: 12,
-            //                       color: vacvFlowRamp
+            //                       color: prvcFlowRamp
             //                           ? Color(0xFF213855)
             //                           : Color(0xFFE0E0E0)),
             //                 ),
@@ -10466,7 +10379,7 @@ class _CheckPageState extends State<Dashboard> {
             //                   "4",
             //                   style: TextStyle(
             //                       fontSize: 12,
-            //                       color: vacvFlowRamp
+            //                       color: prvcFlowRamp
             //                           ? Color(0xFF213855)
             //                           : Color(0xFFE0E0E0)),
             //                 ),
@@ -10477,7 +10390,7 @@ class _CheckPageState extends State<Dashboard> {
             //                   "0",
             //                   style: TextStyle(
             //                       fontSize: 12,
-            //                       color: vacvFlowRamp
+            //                       color: prvcFlowRamp
             //                           ? Color(0xFF213855)
             //                           : Color(0xFFE0E0E0)),
             //                 ),
@@ -10487,23 +10400,23 @@ class _CheckPageState extends State<Dashboard> {
             //                 child: Padding(
             //                   padding: const EdgeInsets.only(top: 1.0),
             //                   child: Text(
-            //                     vacvFlowRampValue.toString() == "0"
+            //                     prvcFlowRampValue.toString() == "0"
             //                         ? "AF"
-            //                         : vacvFlowRampValue.toString() == "1"
+            //                         : prvcFlowRampValue.toString() == "1"
             //                             ? "AS"
-            //                             : vacvFlowRampValue.toString() == "2"
+            //                             : prvcFlowRampValue.toString() == "2"
             //                                 ? "DF"
-            //                                 : vacvFlowRampValue.toString() ==
+            //                                 : prvcFlowRampValue.toString() ==
             //                                         "3"
             //                                     ? "DS"
-            //                                     : vacvFlowRampValue
+            //                                     : prvcFlowRampValue
             //                                                 .toString() ==
             //                                             "4"
             //                                         ? "S"
             //                                         : "S",
             //                     style: TextStyle(
             //                         fontSize: 35,
-            //                         color: vacvFlowRamp
+            //                         color: prvcFlowRamp
             //                             ? Color(0xFF213855)
             //                             : Color(0xFFE0E0E0)),
             //                   ),
@@ -10517,12 +10430,12 @@ class _CheckPageState extends State<Dashboard> {
             //                   child: LinearProgressIndicator(
             //                     backgroundColor: Colors.grey,
             //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vacvFlowRamp
+            //                       prvcFlowRamp
             //                           ? Color(0xFF213855)
             //                           : Color(0xFFE0E0E0),
             //                     ),
-            //                     value: vacvFlowRampValue != null
-            //                         ? vacvFlowRampValue / 4
+            //                     value: prvcFlowRampValue != null
+            //                         ? prvcFlowRampValue / 4
             //                         : 0,
             //                   ),
             //                 ),
@@ -10658,55 +10571,55 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             onPressed: () {
                               setState(() {
-                                if (vacvItrig == true &&
-                                    vacvItrigValue != vacvminValue) {
+                                if (prvcItrig == true &&
+                                    prvcItrigValue != prvcminValue) {
                                   setState(() {
-                                    vacvItrigValue = vacvItrigValue - 1;
+                                    prvcItrigValue = prvcItrigValue - 1;
                                   });
-                                } else if (vacvPeep == true &&
-                                    vacvPeepValue != vacvminValue) {
+                                } else if (prvcPeep == true &&
+                                    prvcPeepValue != prvcminValue) {
                                   setState(() {
-                                    vacvPeepValue = vacvPeepValue - 1;
-                                    if (vacvItrigValue > 1 &&
-                                        vacvItrigValue > vacvPeepValue) {
-                                      vacvItrigValue = vacvPeepValue;
+                                    prvcPeepValue = prvcPeepValue - 1;
+                                    if (prvcItrigValue > 1 &&
+                                        prvcItrigValue > prvcPeepValue) {
+                                      prvcItrigValue = prvcPeepValue;
                                     }
                                   });
-                                } else if (vacvRr == true &&
-                                    vacvRrValue != vacvminValue) {
+                                } else if (prvcRr == true &&
+                                    prvcRrValue != prvcminValue) {
                                   setState(() {
-                                    vacvRrValue = vacvRrValue - 1;
+                                    prvcRrValue = prvcRrValue - 1;
                                   });
-                                } else if (vacvIe == true &&
-                                    vacvIeValue != vacvminValue) {
+                                } else if (prvcIe == true &&
+                                    prvcIeValue != prvcminValue) {
                                   setState(() {
-                                    vacvIeValue = vacvIeValue - 1;
+                                    prvcIeValue = prvcIeValue - 1;
                                   });
-                                } else if (vacvVt == true &&
-                                    vacvVtValue != vacvminValue) {
+                                } else if (prvcVt == true &&
+                                    prvcVtValue != prvcminValue) {
                                   setState(() {
-                                    vacvVtValue = vacvVtValue - 1;
+                                    prvcVtValue = prvcVtValue - 1;
                                   });
-                                } else if (vacvPcMin == true &&
-                                    vacvPcMinValue != vacvminValue) {
+                                } else if (prvcPcMin == true &&
+                                    prvcPcMinValue != prvcminValue) {
                                   setState(() {
-                                    vacvPcMinValue = vacvPcMinValue - 1;
-                                    // if (vacvPcMinValue >= vacvPcMaxValue) {
-                                    //   vacvPcMaxValue = vacvPcMaxValue - 1;
+                                    prvcPcMinValue = prvcPcMinValue - 1;
+                                    // if (prvcPcMinValue >= prvcPcMaxValue) {
+                                    //   prvcPcMaxValue = prvcPcMaxValue - 1;
                                     // }
                                   });
-                                } else if (vacvPcMax == true &&
-                                    vacvPcMaxValue != vacvPcMinValue + 1) {
-                                  vacvPcMaxValue = vacvPcMaxValue - 1;
-                                } else if (vacvFio2 == true &&
-                                    vacvFio2Value != vacvminValue) {
+                                } else if (prvcPcMax == true &&
+                                    prvcPcMaxValue != prvcminValue ) {
+                                  prvcPcMaxValue = prvcPcMaxValue - 1;
+                                } else if (prvcFio2 == true &&
+                                    prvcFio2Value != prvcminValue) {
                                   setState(() {
-                                    vacvFio2Value = vacvFio2Value - 1;
+                                    prvcFio2Value = prvcFio2Value - 1;
                                   });
-                                } else if (vacvFlowRamp == true &&
-                                    vacvFlowRampValue != vacvminValue) {
+                                } else if (prvcFlowRamp == true &&
+                                    prvcFlowRampValue != prvcminValue) {
                                   setState(() {
-                                    vacvFlowRampValue = vacvFlowRampValue - 1;
+                                    prvcFlowRampValue = prvcFlowRampValue - 1;
                                   });
                                 }
                               });
@@ -10716,7 +10629,7 @@ class _CheckPageState extends State<Dashboard> {
                             width: 60,
                           ),
                           Text(
-                            vacvparameterName,
+                            prvcparameterName,
                             style: TextStyle(
                                 fontSize: 36, fontWeight: FontWeight.normal),
                           ),
@@ -10731,66 +10644,66 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             onPressed: () {
                               setState(() {
-                                if (vacvItrig == true &&
-                                    vacvItrigValue != vacvmaxValue) {
+                                if (prvcItrig == true &&
+                                    prvcItrigValue != prvcmaxValue) {
                                   setState(() {
-                                    vacvItrigValue = vacvItrigValue + 1;
-                                    if (vacvPeepValue <= vacvItrigValue) {
-                                      if (vacvPeepValue == 0) {
-                                        vacvItrigValue = 1;
+                                    prvcItrigValue = prvcItrigValue + 1;
+                                    if (prvcPeepValue <= prvcItrigValue) {
+                                      if (prvcPeepValue == 0) {
+                                        prvcItrigValue = 1;
                                       } else {
-                                        vacvItrigValue = vacvPeepValue;
+                                        prvcItrigValue = prvcPeepValue;
                                       }
                                     }
                                   });
-                                } else if (vacvPeep == true &&
-                                    vacvPeepValue != vacvmaxValue) {
+                                } else if (prvcPeep == true &&
+                                    prvcPeepValue != prvcmaxValue) {
                                   setState(() {
-                                    vacvPeepValue = vacvPeepValue + 1;
-                                    // if (vacvPcMinValue <= vacvPeepValue) {
-                                    //   vacvPcMinValue = vacvPeepValue + 1;
-                                    //   if (vacvPcMaxValue <= vacvPcMinValue) {
-                                    //     vacvPcMaxValue = vacvPcMinValue + 1;
+                                    prvcPeepValue = prvcPeepValue + 1;
+                                    // if (prvcPcMinValue <= prvcPeepValue) {
+                                    //   prvcPcMinValue = prvcPeepValue + 1;
+                                    //   if (prvcPcMaxValue <= prvcPcMinValue) {
+                                    //     prvcPcMaxValue = prvcPcMinValue + 1;
                                     //   }
                                     // }
                                   });
-                                } else if (vacvRr == true &&
-                                    vacvRrValue != vacvmaxValue) {
+                                } else if (prvcRr == true &&
+                                    prvcRrValue != prvcmaxValue) {
                                   setState(() {
-                                    vacvRrValue = vacvRrValue + 1;
+                                    prvcRrValue = prvcRrValue + 1;
                                   });
-                                } else if (vacvIe == true &&
-                                    vacvIeValue != vacvmaxValue) {
+                                } else if (prvcIe == true &&
+                                    prvcIeValue != prvcmaxValue) {
                                   setState(() {
-                                    vacvIeValue = vacvIeValue + 1;
+                                    prvcIeValue = prvcIeValue + 1;
                                   });
-                                } else if (vacvVt == true &&
-                                    vacvVtValue != vacvmaxValue) {
+                                } else if (prvcVt == true &&
+                                    prvcVtValue != prvcmaxValue) {
                                   setState(() {
-                                    vacvVtValue = vacvVtValue + 1;
+                                    prvcVtValue = prvcVtValue + 1;
                                   });
-                                } else if (vacvPcMin == true &&
-                                    vacvPcMinValue != vacvmaxValue) {
+                                } else if (prvcPcMin == true &&
+                                    prvcPcMinValue != prvcmaxValue) {
                                   setState(() {
-                                    if (vacvPcMaxValue < 90) {
-                                      vacvPcMinValue = vacvPcMinValue + 1;
-                                      vacvPcMaxValue = vacvPcMinValue + 1;
-                                    }
+                                    // if (prvcPcMaxValue < 90) {
+                                      // prvcPcMinValue = prvcPcMinValue + 1;
+                                      prvcPcMaxValue = prvcPcMaxValue + 1;
+                                    // }
                                   });
-                                } else if (vacvPcMax == true &&
-                                    vacvPcMaxValue != vacvmaxValue) {
+                                } else if (prvcPcMax == true &&
+                                    prvcPcMaxValue != prvcmaxValue) {
                                   setState(() {
-                                    vacvPcMaxValue = vacvPcMaxValue + 1;
+                                    prvcPcMaxValue = prvcPcMaxValue + 1;
                                   });
-                                } else if (vacvFio2 == true &&
-                                    vacvFio2Value != vacvmaxValue) {
+                                } else if (prvcFio2 == true &&
+                                    prvcFio2Value != prvcmaxValue) {
                                   setState(() {
-                                    vacvFio2Value = vacvFio2Value + 1;
+                                    prvcFio2Value = prvcFio2Value + 1;
                                   });
-                                } else if (vacvFlowRamp == true &&
-                                    vacvFlowRampValue != vacvmaxValue) {
+                                } else if (prvcFlowRamp == true &&
+                                    prvcFlowRampValue != prvcmaxValue) {
                                   setState(() {
-                                    vacvFlowRampValue = vacvFlowRampValue + 1;
+                                    prvcFlowRampValue = prvcFlowRampValue + 1;
                                   });
                                 }
                               });
@@ -10804,32 +10717,32 @@ class _CheckPageState extends State<Dashboard> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              vacvItrig
-                                  ? "-" + vacvItrigValue.toInt().toString()
-                                  : vacvPeep
-                                      ? vacvPeepValue.toInt().toString()
-                                      : vacvRr
-                                          ? vacvRrValue.toInt().toString()
-                                          : vacvIe
-                                              ? getIeData(vacvIeValue, 1)
-                                              : vacvVt
-                                                  ? vacvVtValue
+                              prvcItrig
+                                  ? "-" + prvcItrigValue.toInt().toString()
+                                  : prvcPeep
+                                      ? prvcPeepValue.toInt().toString()
+                                      : prvcRr
+                                          ? prvcRrValue.toInt().toString()
+                                          : prvcIe
+                                              ? getIeData(prvcIeValue, 1)
+                                              : prvcVt
+                                                  ? prvcVtValue
                                                       .toInt()
                                                       .toString()
-                                                  : vacvPcMin
-                                                      ? vacvPcMinValue
+                                                  : prvcPcMin
+                                                      ? prvcPcMinValue
                                                           .toInt()
                                                           .toString()
-                                                      : vacvPcMax
-                                                          ? vacvPcMaxValue
+                                                      : prvcPcMax
+                                                          ? prvcPcMaxValue
                                                               .toInt()
                                                               .toString()
-                                                          : vacvFio2
-                                                              ? vacvFio2Value
+                                                          : prvcFio2
+                                                              ? prvcFio2Value
                                                                   .toInt()
                                                                   .toString()
-                                                              : vacvFlowRamp
-                                                                  ? vacvFlowRampValue
+                                                              : prvcFlowRamp
+                                                                  ? prvcFlowRampValue
                                                                       .toInt()
                                                                       .toString()
                                                                   : "",
@@ -10844,89 +10757,89 @@ class _CheckPageState extends State<Dashboard> {
                       SizedBox(
                         height: 5,
                       ),
-                      // vacvFio2
+                      // prvcFio2
                       //     ? Container()
                       //     :
                       Container(
                           width: 350,
                           child: Slider(
-                            min: vacvminValue.toDouble(),
-                            max: vacvmaxValue.toDouble(),
+                            min: prvcminValue.toDouble(),
+                            max: prvcmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (vacvItrig == true && vacvItrigValue != 10) {
+                              if (prvcItrig == true && prvcItrigValue != 10) {
                                 setState(() {
-                                  vacvItrigValue = vacvItrigValue + 1;
-                                  if (vacvPeepValue <= vacvItrigValue) {
-                                    if (vacvPeepValue == 0) {
-                                      vacvItrigValue = 1;
+                                  prvcItrigValue = prvcItrigValue + 1;
+                                  if (prvcPeepValue <= prvcItrigValue) {
+                                    if (prvcPeepValue == 0) {
+                                      prvcItrigValue = 1;
                                     } else {
-                                      vacvItrigValue = vacvPeepValue;
+                                      prvcItrigValue = prvcPeepValue;
                                     }
                                   }
                                 });
-                              } else if (vacvPeep == true) {
+                              } else if (prvcPeep == true) {
                                 setState(() {
-                                  vacvPeepValue = value.toInt();
-                                  if (vacvItrigValue > 1 &&
-                                      vacvItrigValue > vacvPeepValue) {
-                                    vacvItrigValue = vacvPeepValue;
+                                  prvcPeepValue = value.toInt();
+                                  if (prvcItrigValue > 1 &&
+                                      prvcItrigValue > prvcPeepValue) {
+                                    prvcItrigValue = prvcPeepValue;
                                   }
                                 });
-                              } else if (vacvRr == true) {
+                              } else if (prvcRr == true) {
                                 setState(() {
-                                  vacvRrValue = value.toInt();
+                                  prvcRrValue = value.toInt();
                                 });
-                              } else if (vacvIe == true) {
+                              } else if (prvcIe == true) {
                                 setState(() {
-                                  vacvIeValue = value.toInt();
+                                  prvcIeValue = value.toInt();
                                 });
-                              } else if (vacvVt == true) {
+                              } else if (prvcVt == true) {
                                 setState(() {
-                                  vacvVtValue = value.toInt();
+                                  prvcVtValue = value.toInt();
                                 });
-                              } else if (vacvPcMin == true) {
+                              } else if (prvcPcMin == true) {
                                 if (value.toInt() < 90) {
-                                  vacvPcMinValue = value.toInt();
-                                  vacvPcMaxValue = vacvPcMinValue + 1;
+                                  prvcPcMinValue = value.toInt();
+                                  prvcPcMaxValue = prvcPcMinValue + 1;
                                 }
-                              } else if (vacvPcMax == true) {
+                              } else if (prvcPcMax == true) {
                                 setState(() {
-                                  if (value.toInt() <= vacvPcMinValue + 1) {
-                                    vacvPcMaxValue = vacvPcMinValue + 1;
-                                  } else {
-                                    vacvPcMaxValue = value.toInt();
-                                  }
+                                  // if (value.toInt() <= prvcminValue ) {
+                                  //   prvcPcMaxValue = prvcPcMinValue + 1;
+                                  // } else {
+                                    prvcPcMaxValue = value.toInt();
+                                  // }
                                 });
-                              } else if (vacvFio2 == true) {
+                              } else if (prvcFio2 == true) {
                                 setState(() {
-                                  vacvFio2Value = value.toInt();
+                                  prvcFio2Value = value.toInt();
                                 });
-                              } else if (vacvFlowRamp == true) {
+                              } else if (prvcFlowRamp == true) {
                                 setState(() {
-                                  vacvFlowRampValue = value.toInt();
+                                  prvcFlowRampValue = value.toInt();
                                 });
                               }
                             },
-                            value: vacvItrig
-                                ? vacvItrigValue.toDouble()
-                                : vacvPeep
-                                    ? vacvPeepValue.toDouble()
-                                    : vacvRr
-                                        ? vacvRrValue.toDouble()
-                                        : vacvIe
-                                            ? vacvIeValue.toDouble()
-                                            : vacvVt
-                                                ? vacvVtValue.toDouble()
-                                                : vacvPcMin
-                                                    ? vacvPcMinValue.toDouble()
-                                                    : vacvPcMax
-                                                        ? vacvPcMaxValue
+                            value: prvcItrig
+                                ? prvcItrigValue.toDouble()
+                                : prvcPeep
+                                    ? prvcPeepValue.toDouble()
+                                    : prvcRr
+                                        ? prvcRrValue.toDouble()
+                                        : prvcIe
+                                            ? prvcIeValue.toDouble()
+                                            : prvcVt
+                                                ? prvcVtValue.toDouble()
+                                                : prvcPcMin
+                                                    ? prvcPcMinValue.toDouble()
+                                                    : prvcPcMax
+                                                        ? prvcPcMaxValue
                                                             .toDouble()
-                                                        : vacvFio2
-                                                            ? vacvFio2Value
+                                                        : prvcFio2
+                                                            ? prvcFio2Value
                                                                 .toDouble()
-                                                            : vacvFlowRamp
-                                                                ? vacvFlowRampValue
+                                                            : prvcFlowRamp
+                                                                ? prvcFlowRampValue
                                                                     .toDouble()
                                                                 : "",
                           )),
@@ -10938,20 +10851,20 @@ class _CheckPageState extends State<Dashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(vacvIe
-                                ? getIeData(vacvminValue, 1)
-                                : vacvItrig
-                                    ? "-" + vacvminValue.toString()
-                                    : vacvminValue.toString()),
+                            Text(prvcIe
+                                ? getIeData(prvcminValue, 1)
+                                : prvcItrig
+                                    ? "-" + prvcminValue.toString()
+                                    : prvcminValue.toString()),
                             Text(
-                              vacvparameterUnits,
+                              prvcparameterUnits,
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(vacvIe
-                                ? getIeData(vacvminValue, 1)
-                                : vacvItrig
-                                    ? "-" + vacvmaxValue.toString()
-                                    : vacvmaxValue.toString())
+                            Text(prvcIe
+                                ? getIeData(prvcminValue, 1)
+                                : prvcItrig
+                                    ? "-" + prvcmaxValue.toString()
+                                    : prvcmaxValue.toString())
                           ],
                         ),
                       )
@@ -19281,11 +19194,11 @@ class _CheckPageState extends State<Dashboard> {
       newTreatEnabled = false;
       monitorEnabled = false;
     } else if (prvcEnabled == true) {
-      var dataI = getIeData(vacvIeValue, 2);
+      var dataI = getIeData(prvcIeValue, 2);
       var dataI1 = double.tryParse(dataI);
       var dataI2 = (dataI1 * 10).toInt();
 
-      var dataE = getIeData(vacvIeValue, 3);
+      var dataE = getIeData(prvcIeValue, 3);
       var dataE1 = double.tryParse(dataE);
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
@@ -19294,32 +19207,32 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add(20);
         modeWriteList.add(0);
         modeWriteList.add(14);
-        modeWriteList.add((-vacvItrigValue & 0xFF00) >> 8);
-        modeWriteList.add((-vacvItrigValue & 0x00FF));
+        modeWriteList.add((-prvcItrigValue & 0xFF00) >> 8);
+        modeWriteList.add((-prvcItrigValue & 0x00FF));
 
-        modeWriteList.add((vacvRrValue & 0xFF00) >> 8);
-        modeWriteList.add((vacvRrValue & 0x00FF));
+        modeWriteList.add((prvcRrValue & 0xFF00) >> 8);
+        modeWriteList.add((prvcRrValue & 0x00FF));
 
         modeWriteList.add((dataI2 & 0x00FF));
         modeWriteList.add((dataE2 & 0x00FF));
 
-        modeWriteList.add((vacvPeepValue & 0xFF00) >> 8);
-        modeWriteList.add((vacvPeepValue & 0x00FF));
+        modeWriteList.add((prvcPeepValue & 0xFF00) >> 8);
+        modeWriteList.add((prvcPeepValue & 0x00FF));
 
-        modeWriteList.add((vacvVtValue & 0xFF00) >> 8);
-        modeWriteList.add((vacvVtValue & 0x00FF));
+        modeWriteList.add((prvcVtValue & 0xFF00) >> 8);
+        modeWriteList.add((prvcVtValue & 0x00FF));
 
-        modeWriteList.add((vacvPcMinValue & 0xFF00) >> 8);
-        modeWriteList.add((vacvPcMinValue & 0x00FF));
+        // modeWriteList.add((prvcPcMinValue & 0xFF00) >> 8);
+        // modeWriteList.add((prvcPcMinValue & 0x00FF));
 
-        modeWriteList.add((vacvPcMaxValue & 0xFF00) >> 8);
-        modeWriteList.add((vacvPcMaxValue & 0x00FF));
+        modeWriteList.add((prvcPcMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((prvcPcMaxValue & 0x00FF));
 
-        modeWriteList.add((vacvFio2Value & 0xFF00) >> 8);
-        modeWriteList.add((vacvFio2Value & 0x00FF));
+        modeWriteList.add((prvcFio2Value & 0xFF00) >> 8);
+        modeWriteList.add((prvcFio2Value & 0x00FF));
 
-        // modeWriteList.add((vacvFlowRampValue & 0xFF00) >> 8);
-        // modeWriteList.add((vacvFlowRampValue & 0x00FF));
+        // modeWriteList.add((prvcFlowRampValue & 0xFF00) >> 8);
+        // modeWriteList.add((prvcFlowRampValue & 0x00FF));
 
         modeWriteList.add(0x7F);
       });
@@ -19327,25 +19240,25 @@ class _CheckPageState extends State<Dashboard> {
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "PRVC");
       preferences.setString("checkMode", "prvc");
-      preferences.setInt("rr", vacvRrValue);
-      preferences.setInt("ie", vacvIeValue);
+      preferences.setInt("rr", prvcRrValue);
+      preferences.setInt("ie", prvcIeValue);
       preferences.setString("i", dataI1.toString());
       preferences.setString("e", dataE1.toString());
-      preferences.setInt("peep", vacvPeepValue);
+      preferences.setInt("peep", prvcPeepValue);
       // preferences.setInt("ps", 40);
-      preferences.setInt("fio2", vacvFio2Value);
-      preferences.setInt("vt", vacvVtValue);
+      preferences.setInt("fio2", prvcFio2Value);
+      preferences.setInt("vt", prvcVtValue);
 
-      preferences.setInt('vacvItrigValue', vacvItrigValue);
-      preferences.setInt('vacvRrValue', vacvRrValue);
-      preferences.setInt('vacvIeValue', vacvIeValue);
-      preferences.setInt('vacvPeepValue', vacvPeepValue);
-      preferences.setInt('vacvVtValue', vacvVtValue);
-      preferences.setInt('vacvPcMinValue', vacvPcMinValue);
-      preferences.setInt('vacvPcMaxValue', vacvPcMaxValue);
-      preferences.setInt('vacvFio2Value', vacvFio2Value);
-      preferences.setInt('vacvFlowRampValue', vacvFlowRampValue);
-      preferences.setInt('vacvdefaultValue', vacvdefaultValue);
+      preferences.setInt('prvcItrigValue', prvcItrigValue);
+      preferences.setInt('prvcRrValue', prvcRrValue);
+      preferences.setInt('prvcIeValue', prvcIeValue);
+      preferences.setInt('prvcPeepValue', prvcPeepValue);
+      preferences.setInt('prvcVtValue', prvcVtValue);
+      preferences.setInt('prvcPcMinValue', prvcPcMinValue);
+      preferences.setInt('prvcPcMaxValue', prvcPcMaxValue);
+      preferences.setInt('prvcFio2Value', prvcFio2Value);
+      preferences.setInt('prvcFlowRampValue', prvcFlowRampValue);
+      preferences.setInt('prvcdefaultValue', prvcdefaultValue);
 
       if (_status == "Connected") {
         await _port.write(Uint8List.fromList(modeWriteList));
@@ -20760,10 +20673,10 @@ class _CheckPageState extends State<Dashboard> {
           blender = ((list[29] & 0x30) >> 4);
           checkOfffset = ((list[29] & 0xC0) >> 6);
 
-          if (checkOfffset == 2) {
-            _port.close();
-            _status = "Disconnected";
-          }
+          // if (checkOfffset == 2) {
+          //   _port.close();
+          //   _status = "Disconnected";
+          // }
 
           // Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
         });
