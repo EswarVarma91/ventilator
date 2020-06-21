@@ -22,9 +22,7 @@ import 'package:ventilator/viewlog/ViewLogPatientList.dart';
 import 'package:ventilator/activity/About.dart';
 import 'package:ventilator/activity/NewTreatmentScreen.dart';
 
-
 class Dashboard extends StatefulWidget {
-
   @override
   _CheckPageState createState() => _CheckPageState();
 }
@@ -208,8 +206,8 @@ class _CheckPageState extends State<Dashboard> {
       pacvIeValue = 51,
       pacvPeepValue = 10,
       pacvPcValue = 30,
-      pacvVtMinValue = 100,
-      pacvVtMaxValue = 1200,
+      pacvVtMinValue = 0,
+      pacvVtMaxValue = 2400,
       pacvFio2Value = 21,
       pacvFlowRampValue = 3;
 
@@ -241,7 +239,7 @@ class _CheckPageState extends State<Dashboard> {
   String vacvparameterName = "I Trig",
       vacvparameterUnits = "cmH\u2082O Below Peep";
 
-       bool prvcItrig = true,
+  bool prvcItrig = true,
       prvcRr = false,
       prvcIe = false,
       prvcPeep = false,
@@ -284,8 +282,8 @@ class _CheckPageState extends State<Dashboard> {
       psvIeValue = 51,
       psvPsValue = 30,
       psvTiValue = 5,
-      psvVtMinValue = 100,
-      psvVtMaxValue = 1200,
+      psvVtMinValue = 0,
+      psvVtMaxValue = 2400,
       psvFio2Value = 21,
       psvAtimeValue = 10,
       psvEtrigValue = 10,
@@ -314,8 +312,8 @@ class _CheckPageState extends State<Dashboard> {
       psimvIeValue = 51,
       psimvPeepValue = 10,
       psimvPcValue = 30,
-      psimvVtMinValue = 100,
-      psimvVtMaxValue = 1200,
+      psimvVtMinValue = 0,
+      psimvVtMaxValue = 2400,
       psimvFio2Value = 21,
       psimvFlowRampValue = 3;
 
@@ -339,7 +337,7 @@ class _CheckPageState extends State<Dashboard> {
       vsimvIeValue = 51,
       vsimvPeepValue = 10,
       vsimvVtValue = 400,
-      vsimvPsValue = 22,
+      vsimvPsValue = 30,
       vsimvPcMinValue = 20,
       vsimvPcMaxValue = 60,
       vsimvFio2Value = 21,
@@ -370,8 +368,8 @@ class _CheckPageState extends State<Dashboard> {
       pccmvPeepValue = 10,
       pccmvPcValue = 30,
       pccmvFio2Value = 21,
-      pccmvVtminValue = 100,
-      pccmvVtmaxValue = 1200,
+      pccmvVtminValue = 0,
+      pccmvVtmaxValue = 2400,
       pccmvTihValue = 50,
       pccmvRRValueTemp = 20,
       pccmvIeValueTemp = 51,
@@ -470,7 +468,7 @@ class _CheckPageState extends State<Dashboard> {
       patientHeight,
       patientWeight;
 
-  bool newTreatmentEnabled = false, powerButtonEnabled = true;
+  bool newTreatmentEnabled = false, powerButtonEnabled = false;
   bool isplaying = false,
       _buttonPressed = false,
       respiratoryEnable = false,
@@ -486,7 +484,7 @@ class _CheckPageState extends State<Dashboard> {
   String sendBattery;
   List<int> listTemp = [];
   bool testingText = false;
-  String textText="";
+  String textText = "";
   var o2pressuresensor = 0,
       mtpressuresensor = 0,
       exhalationflowsensor = 0,
@@ -503,7 +501,7 @@ class _CheckPageState extends State<Dashboard> {
       compressor = 0,
       blender = 0,
       checkOfffset = 0;
-    var checkO2CalibrationValue;
+  var checkO2CalibrationValue;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -622,7 +620,7 @@ class _CheckPageState extends State<Dashboard> {
     });
     _getPorts();
 
-    // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) { 
+    // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) {
     //   if(_status == "Disconnected"){
     //   // UsbSerial.usbEventStream.listen((UsbEvent event) {
     //   _getPorts();
@@ -651,10 +649,11 @@ class _CheckPageState extends State<Dashboard> {
     });
 
     _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
-      if (_status == "Connected") {
+      if (_status != "Connected") {
         // String lastTime = await dbHelper.getLastRecordTime();
         // String lastRecordTime =
         //     lastTime.split("[{datetimeP: ")[1].split("}]")[0];
+        // Fluttertoast.showToast(msg: lastRecordTime.toString());
 
         var now = new DateTime.now();
         setState(() {
@@ -667,8 +666,8 @@ class _CheckPageState extends State<Dashboard> {
             setState(() {
               respiratoryEnable = false;
               insExpButtonEnable = false;
-              // sendSoundOff();
-              // powerButtonEnabled = true;
+              sendSoundOff();
+              powerButtonEnabled = true;
               // psValue1 = 0;
               // cc = 0;
               // mvValue = 0;
@@ -710,6 +709,8 @@ class _CheckPageState extends State<Dashboard> {
             });
           }
         });
+      }else{
+        // Fluttertoast.showToast(msg:"null");
       }
     });
     _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
@@ -802,7 +803,6 @@ class _CheckPageState extends State<Dashboard> {
       // print(e);
     }
   }
-  
 
   Future<void> _stopMusic() async {
     setState(() {
@@ -1918,7 +1918,13 @@ class _CheckPageState extends State<Dashboard> {
                       //     ? Navigator.push(
                       //             context,
                       //             MaterialPageRoute(builder: (context) => NewTreatmentScreen()),)
-                      : monitorEnabled ? monitorClick() : selfTestingEnabled ? selfTestingData(): callibrationEnabled ? callibrationData() : Container(),
+                      : monitorEnabled
+                          ? monitorClick()
+                          : selfTestingEnabled
+                              ? selfTestingData()
+                              : callibrationEnabled
+                                  ? callibrationData()
+                                  : Container(),
 
               // _buttonPressed
               //     ? Center(
@@ -1950,59 +1956,71 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  showAlertCalibarationDialog(){
+  showAlertCalibarationDialog() {
     showDialog(
         context: context,
-        barrierDismissible: true,
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return Dialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
             child: Container(
-              height: 200,
-              width:320,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                height: 200,
+                width: 400,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    
-                   Text(
-                      "Ensure lung connected.",
-                      style: TextStyle(color: Colors.red, fontSize: 25),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Align(
-                        alignment: Alignment.bottomCenter,
-                        child: RaisedButton(
-                          onPressed: () async {
-                            sendCalibrationText();
-                            Navigator.pop(context);
-                          },
+                  children: <Widget>[
+                    Center(
+                        child: Text("Please Connect Lung.",
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold))),
+                    SizedBox(height: 60),
+                    InkWell(
+                      onTap: () {
+                        sendCalibrationText();
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.orange),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "ok",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          color: const Color(0xFF1BC0C5),
-                        ),
-                      ),
+                            padding: const EdgeInsets.only(
+                                top: 8.0, bottom: 8, left: 60, right: 60),
+                            child: Text("Ok",
+                                style: TextStyle(
+                                    fontSize: 25, color: Colors.white)),
+                          )),
+                    ),
                   ],
-                ),
-              ),
-            ),
+                )),
           );
         });
   }
 
-   sendSelfTest() async {
+  sendSelfTest() async {
+    setState(() {
+      textText = "";
+      o2pressuresensor = 0;
+      mtpressuresensor = 0;
+      exhalationflowsensor = 0;
+      inhalationflowsensor = 0;
+      exhalationpressure = 0;
+      inhalationpressure = 0;
+      o2sensor = 0;
+      inhalationvalve = 0;
+      exhalationvalve = 0;
+      ventvalue = 0;
+      mainpower = 0;
+      battery = 0;
+      communication = 0;
+      compressor = 0;
+      blender = 0;
+      checkOfffset = 0;
+    });
     List<int> objSelfTestData = [0x7E, 0, 20, 0, 16, 0, 2, 0x7F];
     if (_status == "Connected") {
       await _port.write(Uint8List.fromList(objSelfTestData));
@@ -2016,771 +2034,778 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  callibrationData(){
+  callibrationData() {
     return Container(
-            color: Color(0xFF171e27),
-        child: Center(
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: IconButton(icon: Icon(Icons.settings,color: Colors.white,size: 40,), onPressed: (){
-                      Navigator.push(context,MaterialPageRoute(builder:(context)=> About()));
-                    }),
-                  ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top:10.0,left:10,right:10,bottom: 5),
-                  //   child: Text("About",style: TextStyle(color: Colors.white,fontSize: 20),),
-                  // ),
-                ],
-              ),
-              Container(
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 242,
+      color: Color(0xFF171e27),
+      child: Center(
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => About()));
+                      }),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top:10.0,left:10,right:10,bottom: 5),
+                //   child: Text("About",style: TextStyle(color: Colors.white,fontSize: 20),),
+                // ),
+              ],
+            ),
+            Container(
+              child: Image.asset(
+                'assets/images/logo.png',
+                width: 242,
               ),
-              Text("$textText",style: TextStyle(color: checkO2CalibrationValue == 1 ? Colors.red : Colors.white,fontSize: 30),),
-              SizedBox(height: 60,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          testingText= true;
-                          textText = "Testing 0 \u2082..";
-                        });
-                        sendFullTest();
+            ),
+            Text(
+              "$textText",
+              style: TextStyle(
+                  color:
+                      checkO2CalibrationValue == 1 ? Colors.red : Colors.white,
+                  fontSize: 30),
+            ),
+            SizedBox(
+              height: 60,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Card(
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(15.0),
+                //   ),
+                //   child: InkWell(
+                //     onTap: () {
+                //       setState(() {
+                //         testingText= true;
+                //         textText = "Testing 0 \u2082..";
+                //       });
+                //       sendFullTest();
 
-                         setState(() {
-                          testingText= true;
-                          textText = "Testing 0\u2082..";
-                        });
+                //        setState(() {
+                //         testingText= true;
+                //         textText = "Testing 0\u2082..";
+                //       });
 
-                         _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
-                            setState(() async {                                                                                                                                                                                                                                           
-                              testingText=true;
-                              textText = "Calibration Completed.";
-                              // await sleep(Duration(seconds:1));
-                            });
-                        });
+                //        _timer = Timer.periodic(Duration(seconds: 15), (timer) {
+                //           setState(() async {
+                //             testingText=true;
+                //             textText = "Calibration Completed.";
+                //             // await sleep(Duration(seconds:1));
+                //           });
+                //       });
 
-                       
-                      },
-                      child: Container(
-                        width: 220,
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Continue \n with".toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                                textAlign: TextAlign.center,
+                //     },
+                //     child: Container(
+                //       width: 220,
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(18.0),
+                //         child: Column(
+                //           children: [
+                //             Text(
+                //               "Continue \n with".toUpperCase(),
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.bold,
+                //                 fontSize: 15,
+                //               ),
+                //               textAlign: TextAlign.center,
+                //             ),
+                //             Text(
+                //               "Full Test".toUpperCase(),
+                //               style: TextStyle(
+                //                 color: Colors.black,
+                //                 fontWeight: FontWeight.bold,
+                //                 fontSize: 22,
+                //               ),
+                //               textAlign: TextAlign.center,
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      showAlertCalibarationDialog();
+                      // sendCalibrationText();
+                      // setState(() {
+                      //   testingText= true;
+                      //   textText = "Calibrating 0\u2082..";
+                      // });
+
+                      //  _timer = Timer.periodic(Duration(seconds: 15), (timer) {
+                      //     setState(() async {
+                      //       testingText=true;
+                      //       textText = "Calibration Completed.";
+                      //     });
+                      // });
+                    },
+                    child: Container(
+                      width: 220,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Continue \n with 0\u2082".toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                               ),
-                              Text(
-                                "Full Test".toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                ),
-                                textAlign: TextAlign.center,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "Calibration".toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
                               ),
-                            ],
-                          ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        showAlertCalibarationDialog();
-                        // sendCalibrationText();
-                        // setState(() {
-                        //   testingText= true;
-                        //   textText = "Calibrating 0\u2082..";
-                        // });
-
-                        //  _timer = Timer.periodic(Duration(seconds: 15), (timer) { 
-                        //     setState(() async {                                                                                                                                                                                                                                           
-                        //       testingText=true;
-                        //       textText = "Calibration Completed.";
-                        //     });
-                        // });
-                      },
-                      child: Container(
-                        width: 220,
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Continue \n with".toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                "Calibration".toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        // selfTestingEnabled = false;
-                        setState(() {
+                  child: InkWell(
+                    onTap: () {
+                      // selfTestingEnabled = false;
+                      setState(() {
                         callibrationEnabled = false;
-                        });
-                      },
-                      child: Container(
-                        width: 220,
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Continue \n with".toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                                textAlign: TextAlign.center,
+                      });
+                    },
+                    child: Container(
+                      width: 220,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Continue \n with".toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                               ),
-                              Text(
-                                "Treatment".toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                ),
-                                textAlign: TextAlign.center,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "Treatment".toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
                               ),
-                            ],
-                          ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 
-  selfTestingData(){
+  selfTestingData() {
     return Container(
-        color: Color(0xFF171e27),
-        child: Center(
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: IconButton(icon: Icon(Icons.settings,color: Colors.white,size: 40,), onPressed: (){
-                      Navigator.push(context,MaterialPageRoute(builder:(context)=> About()));
-                    }),
-                  ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top:10.0,left:10,right:10,bottom: 5),
-                  //   child: Text("About",style: TextStyle(color: Colors.white,fontSize: 20),),
-                  // ),
-                ],
-              ),
-              Container(
-                child: Text(
-                  "SWASIT",
-                  style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 72,
-                      fontFamily: "appleFont"),
+      color: Color(0xFF171e27),
+      child: Center(
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => About()));
+                      }),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top:10.0,left:10,right:10,bottom: 5),
+                //   child: Text("About",style: TextStyle(color: Colors.white,fontSize: 20),),
+                // ),
+              ],
+            ),
+            Container(
+              child: Text(
+                "SWASIT",
+                style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 72,
+                    fontFamily: "appleFont"),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              // CircularProgressIndicator()   o2pressuresensor.toString()=="1" ? "Passed" : o2pressuresensor.toString()=="0"? "Failed" : ""
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            // CircularProgressIndicator()   o2pressuresensor.toString()=="1" ? "Passed" : o2pressuresensor.toString()=="0"? "Failed" : ""
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "O\u2082 Pressure Sensor  ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: o2pressuresensor == 0
+                                  ? false
+                                  : o2pressuresensor == 1
+                                      ? false
+                                      : o2pressuresensor == 2 ? true : false,
+                              activeColor: o2pressuresensor == 1
+                                  ? Colors.red
+                                  : o2pressuresensor == 2
+                                      ? Colors.blue
+                                      : Colors.green,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "MT Pressure Sensor",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: mtpressuresensor == 0
+                                  ? false
+                                  : mtpressuresensor == 1
+                                      ? false
+                                      : mtpressuresensor == 2 ? true : false,
+                              activeColor: mtpressuresensor == 1
+                                  ? Colors.red
+                                  : mtpressuresensor == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Inhalation Valve        ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: inhalationvalve == 0
+                                  ? false
+                                  : inhalationvalve == 1
+                                      ? false
+                                      : inhalationvalve == 2 ? true : false,
+                              activeColor: inhalationvalve == 1
+                                  ? Colors.red
+                                  : inhalationvalve == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Exhalation Valve      ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: exhalationvalve == 0
+                                  ? false
+                                  : exhalationvalve == 1
+                                      ? false
+                                      : exhalationvalve == 2 ? true : false,
+                              activeColor: exhalationvalve == 1
+                                  ? Colors.red
+                                  : exhalationvalve == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Exhalation Flow Sensor        ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: exhalationflowsensor == 0
+                                  ? false
+                                  : exhalationflowsensor == 1
+                                      ? false
+                                      : exhalationflowsensor == 2
+                                          ? true
+                                          : false,
+                              activeColor: exhalationflowsensor == 1
+                                  ? Colors.red
+                                  : exhalationflowsensor == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Inhalation Flow Sensor         ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: inhalationflowsensor == 0
+                                  ? false
+                                  : inhalationflowsensor == 1
+                                      ? false
+                                      : inhalationflowsensor == 2
+                                          ? true
+                                          : false,
+                              activeColor: inhalationflowsensor == 1
+                                  ? Colors.red
+                                  : inhalationflowsensor == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Exhalation Pressure Sensor",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: exhalationpressure == 0
+                                  ? false
+                                  : exhalationpressure == 1
+                                      ? false
+                                      : exhalationpressure == 2 ? true : false,
+                              activeColor: exhalationpressure == 1
+                                  ? Colors.red
+                                  : exhalationpressure == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Inhalation Pressure Sensor",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: inhalationpressure == 0
+                                  ? false
+                                  : inhalationpressure == 1
+                                      ? false
+                                      : inhalationpressure == 2 ? true : false,
+                              activeColor: inhalationpressure == 1
+                                  ? Colors.red
+                                  : inhalationpressure == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "O \u2082 Sensor          ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: o2sensor == 0
+                                  ? false
+                                  : o2sensor == 1
+                                      ? false
+                                      : o2sensor == 2 ? true : false,
+                              activeColor: o2sensor == 1
+                                  ? Colors.red
+                                  : o2sensor == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Vent Value        ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: ventvalue == 0
+                                  ? false
+                                  : ventvalue == 1
+                                      ? false
+                                      : ventvalue == 2 ? true : false,
+                              activeColor: ventvalue == 1
+                                  ? Colors.red
+                                  : ventvalue == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Communication",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: communication == 0
+                                  ? false
+                                  : communication == 1
+                                      ? false
+                                      : communication == 2 ? true : false,
+                              activeColor: communication == 1
+                                  ? Colors.red
+                                  : communication == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Main Power       ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: mainpower == 0
+                                  ? false
+                                  : mainpower == 1
+                                      ? false
+                                      : mainpower == 2 ? true : false,
+                              activeColor: mainpower == 1
+                                  ? Colors.red
+                                  : mainpower == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: battery == 1 ? Colors.red : Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Battery         ",
+                                style: TextStyle(
+                                    color: battery == 0
+                                        ? Colors.black
+                                        : battery == 1
+                                            ? Colors.white
+                                            : Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: battery == 0
+                                  ? false
+                                  : battery == 1
+                                      ? false
+                                      : battery == 2 ? true : false,
+                              activeColor: battery == 1
+                                  ? Colors.red
+                                  : battery == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Compressor",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: compressor == 0
+                                  ? false
+                                  : compressor == 1
+                                      ? false
+                                      : compressor == 2 ? true : false,
+                              activeColor: compressor == 1
+                                  ? Colors.red
+                                  : compressor == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Blender        ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: blender == 0
+                                  ? false
+                                  : blender == 1
+                                      ? false
+                                      : blender == 2 ? true : false,
+                              activeColor: blender == 1
+                                  ? Colors.red
+                                  : blender == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            checkOfffset == 2
+                ? InkWell(
+                    onTap: () {
+                      setState(() {
+                        selfTestingEnabled = false;
+                        callibrationEnabled = true;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.orange.withOpacity(0.8)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 18.0, bottom: 18.0, left: 40.0, right: 40.0),
+                        child: Text("Test Completed",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24)),
+                      ),
+                    ),
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "O\u2082 Pressure Sensor  ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: o2pressuresensor == 0
-                                    ? false
-                                    : o2pressuresensor == 1
-                                        ? false
-                                        : o2pressuresensor == 2 ? true : false,
-                                activeColor: o2pressuresensor == 1
-                                    ? Colors.red
-                                    : o2pressuresensor == 2
-                                        ? Colors.blue
-                                        : Colors.green,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Self test in progress..",
+                          style: TextStyle(fontSize: 30, color: Colors.white),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "MT Pressure Sensor",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: mtpressuresensor == 0
-                                    ? false
-                                    : mtpressuresensor == 1
-                                        ? false
-                                        : mtpressuresensor == 2 ? true : false,
-                                activeColor: mtpressuresensor == 1
-                                    ? Colors.red
-                                    : mtpressuresensor == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
+                      SizedBox(
+                        width: 40,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Inhalation Valve        ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: inhalationvalve == 0
-                                    ? false
-                                    : inhalationvalve == 1
-                                        ? false
-                                        : inhalationvalve == 2 ? true : false,
-                                activeColor: inhalationvalve == 1
-                                    ? Colors.red
-                                    : inhalationvalve == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Exhalation Valve      ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: exhalationvalve == 0
-                                    ? false
-                                    : exhalationvalve == 1
-                                        ? false
-                                        : exhalationvalve == 2 ? true : false,
-                                activeColor: exhalationvalve == 1
-                                    ? Colors.red
-                                    : exhalationvalve == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Exhalation Flow Sensor        ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: exhalationflowsensor == 0
-                                    ? false
-                                    : exhalationflowsensor == 1
-                                        ? false
-                                        : exhalationflowsensor == 2
-                                            ? true
-                                            : false,
-                                activeColor: exhalationflowsensor == 1
-                                    ? Colors.red
-                                    : exhalationflowsensor == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Inhalation Flow Sensor         ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: inhalationflowsensor == 0
-                                    ? false
-                                    : inhalationflowsensor == 1
-                                        ? false
-                                        : inhalationflowsensor == 2
-                                            ? true
-                                            : false,
-                                activeColor: inhalationflowsensor == 1
-                                    ? Colors.red
-                                    : inhalationflowsensor == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Exhalation Pressure Sensor",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: exhalationpressure == 0
-                                    ? false
-                                    : exhalationpressure == 1
-                                        ? false
-                                        : exhalationpressure == 2
-                                            ? true
-                                            : false,
-                                activeColor: exhalationpressure == 1
-                                    ? Colors.red
-                                    : exhalationpressure == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Inhalation Pressure Sensor",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: inhalationpressure == 0
-                                    ? false
-                                    : inhalationpressure == 1
-                                        ? false
-                                        : inhalationpressure == 2
-                                            ? true
-                                            : false,
-                                activeColor: inhalationpressure == 1
-                                    ? Colors.red
-                                    : inhalationpressure == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "O \u2082 Sensor          ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: o2sensor == 0
-                                    ? false
-                                    : o2sensor == 1
-                                        ? false
-                                        : o2sensor == 2 ? true : false,
-                                activeColor: o2sensor == 1
-                                    ? Colors.red
-                                    : o2sensor == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Vent Value        ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: ventvalue == 0
-                                    ? false
-                                    : ventvalue == 1
-                                        ? false
-                                        : ventvalue == 2 ? true : false,
-                                activeColor: ventvalue == 1
-                                    ? Colors.red
-                                    : ventvalue == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Communication",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: communication == 0
-                                    ? false
-                                    : communication == 1
-                                        ? false
-                                        : communication == 2 ? true : false,
-                                activeColor: communication == 1
-                                    ? Colors.red
-                                    : communication == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Main Power       ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: mainpower == 0
-                                    ? false
-                                    : mainpower == 1
-                                        ? false
-                                        : mainpower == 2 ? true : false,
-                                activeColor: mainpower == 1
-                                    ? Colors.red
-                                    : mainpower == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: battery == 1 ? Colors.red : Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Battery         ",
-                                  style: TextStyle(
-                                      color: battery == 0
-                                          ? Colors.black
-                                          : battery == 1
-                                              ? Colors.white
-                                              : Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: battery == 0
-                                    ? false
-                                    : battery == 1
-                                        ? false
-                                        : battery == 2 ? true : false,
-                                activeColor: battery == 1
-                                    ? Colors.red
-                                    : battery == 2 ? Colors.blue : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Compressor",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: compressor == 0
-                                    ? false
-                                    : compressor == 1
-                                        ? false
-                                        : compressor == 2 ? true : false,
-                                activeColor: compressor == 1
-                                    ? Colors.red
-                                    : compressor == 2
-                                        ? Colors.blue
-                                        : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          color: Colors.grey,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                  "Blender        ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              Checkbox(
-                                value: blender == 0
-                                    ? false
-                                    : blender == 1
-                                        ? false
-                                        : blender == 2 ? true : false,
-                                activeColor: blender == 1
-                                    ? Colors.red
-                                    : blender == 2 ? Colors.blue : Colors.black,
-                                onChanged: (bool value) {},
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      CircularProgressIndicator()
                     ],
                   )
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              checkOfffset == 2
-                  ? InkWell(
-                      onTap: () {
-                        setState(() {
-                          selfTestingEnabled = false;
-                          callibrationEnabled = true;
-                        });
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Color(0xFF171e27)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Text(
-                              "Test Completed",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          )),
-                        ),
-                      ),
-                    )
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Self test in progress..",
-                            style: TextStyle(fontSize: 30, color: Colors.white),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 40,
-                        ),
-                        CircularProgressIndicator()
-                      ],
-                    )
-            ],
-          ),
+          ],
         ),
-      );
+      ),
+    );
   }
 
   sendSelfTestData() async {
@@ -2789,8 +2814,8 @@ class _CheckPageState extends State<Dashboard> {
       await _port.write(Uint8List.fromList(objSelfTestData));
     }
     setState(() {
-    selfTestingEnabled = false;
-    callibrationEnabled = true;
+      selfTestingEnabled = false;
+      callibrationEnabled = true;
     });
   }
 
@@ -3724,7 +3749,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.6",
+                  "V1.7.7",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -3773,7 +3798,6 @@ class _CheckPageState extends State<Dashboard> {
                         onTap: () {
                           sendSoundOff();
                           turnOffScreen();
-                          
                         },
                         child: Padding(
                           padding:
@@ -3850,37 +3874,42 @@ class _CheckPageState extends State<Dashboard> {
                     //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                     SizedBox(
                       height:
-                          playOnEnabled ? 99 : powerButtonEnabled ? 201 : 300,
+                          playOnEnabled ? 167 : powerButtonEnabled ? 201 : 268,
                     ),
                   ],
                 ),
                 playOnEnabled
                     ? InkWell(
-                  onTap: () {
-                    setState(() {
-                      Navigator.push(context,MaterialPageRoute(builder:(context)=> About()));
-                    });
-                  },
-                  child: Center(
-                    child: Container(
-                      width: 120,
-                      child: Card(
-                        color: modesEnabled ? Colors.blue : Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                              child: Text(
-                            "About",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    modesEnabled ? Colors.white : Colors.black),
-                          )),
+                        onTap: () {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => About()));
+                          });
+                        },
+                        child: Center(
+                          child: Container(
+                            width: 120,
+                            child: Card(
+                              color: modesEnabled ? Colors.blue : Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Center(
+                                    child: Text(
+                                  "About",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: modesEnabled
+                                          ? Colors.white
+                                          : Colors.black),
+                                )),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                ):Container(),
+                      )
+                    : Container(),
                 playOnEnabled
                     ? Column(
                         children: [
@@ -3959,7 +3988,7 @@ class _CheckPageState extends State<Dashboard> {
                         ],
                       )
                     : Container(),
-                 
+
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -4018,7 +4047,6 @@ class _CheckPageState extends State<Dashboard> {
                     ),
                   ),
                 ),
-               
 
                 audioEnable
                     ? InkWell(
@@ -4074,7 +4102,6 @@ class _CheckPageState extends State<Dashboard> {
                 // ),
 
                 // Text(checkTempData=="1" ? "L" :checkTempData=="0" ? "U":"",style:TextStyle(color:Colors.red))
-                
               ],
             ),
           ),
@@ -5340,8 +5367,6 @@ class _CheckPageState extends State<Dashboard> {
           ),
         )),
 
-        
-
         // InkWell(
         //     onTap: (){
         //       _scaffoldKey.currentState.openDrawer();
@@ -5584,106 +5609,114 @@ class _CheckPageState extends State<Dashboard> {
               ),
             ),
             InkWell(
-                    onTap: () {
-                      //  CommonClick("PS") ;
-                    },
-                    child: Center(
-                      child: Container(
-                        width: 120,
-                        height: 110,
-                        child: Card(
-                          elevation: 40,
-                          color: Color(0xFF213855),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Center(
-                                child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    operatinModeR == 6 || operatinModeR == 2
-                                        ? "PC"
-                                        : operatinModeR == 7 ||
-                                                operatinModeR == 1 ||
-                                                operatinModeR == 5
-                                            ? "Vt"
-                                            : modeName == "PC-CMV" ||
-                                                    modeName == "PACV"
-                                                ? "PC"
-                                                : modeName == "VC-CMV" ||
-                                                        modeName == "VACV" ||
-                                                        modeName == "VSIMV"
-                                                    ? "Vt"
-                                                    : "PC",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Text(
-                                    "",
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.white),
-                                  ),
-                                ),
-                                // Align(
-                                //   alignment: Alignment.centerRight,
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.only(top: 17.0),
-                                //     child: Icon(
-                                //         editbbEnabled ? Icons.lock_open : Icons.lock,
-                                //         color: Colors.white,
-                                //         size: 15),
-                                //   ),
-                                // ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 17.0),
-                                    child: Text(
-                                      operatinModeR == 6 ||
-                                              operatinModeR == 2 
-                                          ? psValue.toString()
-                                          : operatinModeR == 7 ||
-                                                  operatinModeR == 1 ||
-                                                  operatinModeR == 5
-                                              ? vtValue.toString()
-                                              : modeName == "PC-CMV" ||
-                                                      modeName == "PACV" 
-                                                  ? pcValue.toString()
-                                                  : modeName == "VC-CMV" ||
-                                                          modeName == "VACV" ||
-                                                          modeName == "VSIMV"
-                                                      ? vtValue.toString()
-                                                      : pcValue.toString(),
-                                      style: TextStyle(
-                                          fontSize: 30, color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                // Align(
-                                //   alignment: Alignment.bottomCenter,
-                                //   child: LinearProgressIndicator(
-                                //     backgroundColor: Colors.grey,
-                                //     valueColor: AlwaysStoppedAnimation<Color>(
-                                //       Colors.white,
-                                //     ),
-                                //     value: psValue != null ? psValue / 60 : 0,
-                                //   ),
-                                // )
-                              ],
-                            )),
+              onTap: () {
+                //  CommonClick("PS") ;
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              operatinModeR == 6 || operatinModeR == 2
+                                  ? "PC"
+                                  : operatinModeR == 7 ||
+                                          operatinModeR == 1 ||
+                                          operatinModeR == 5 ||
+                                          operatinModeR == 14
+                                      ? "Vt"
+                                      : modeName == "PC-CMV" ||
+                                              modeName == "PACV"
+                                          ? "PC"
+                                          : modeName == "VC-CMV" ||
+                                                  modeName == "VACV" ||
+                                                  modeName == "VSIMV" ||
+                                                  modeName == "PRVC"
+                                              ? "Vt"
+                                              : "PC",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
                           ),
-                        ),
-                      ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                operatinModeR == 6 || operatinModeR == 2
+                                    ? psValue.toString()
+                                    : operatinModeR == 7 ||
+                                            operatinModeR == 1 ||
+                                            operatinModeR == 5 ||
+                                            operatinModeR == 14
+                                        ? vtValue.toString()
+                                        : modeName == "PC-CMV" ||
+                                                modeName == "PACV"
+                                            ? pcValue.toString()
+                                            : modeName == "VC-CMV" ||
+                                                    modeName == "VACV" ||
+                                                    modeName == "VSIMV" ||
+                                                    modeName == "PRVC"
+                                                ? vtValue.toString()
+                                                : pcValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: psValue != null ? psValue / 60 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
                     ),
                   ),
-                
-            operatinModeR == 4 || modeName == "PSIMV" || operatinModeR==3 || modeName == "PSV" || modeName == "VSIMV" || operatinModeR == 5
+                ),
+              ),
+            ),
+
+            operatinModeR == 4 ||
+                    modeName == "PSIMV" ||
+                    operatinModeR == 3 ||
+                    modeName == "PSV" ||
+                    modeName == "VSIMV" ||
+                    operatinModeR == 5
                 ? InkWell(
                     onTap: () {
                       //  CommonClick("PS") ;
@@ -5964,7 +5997,14 @@ class _CheckPageState extends State<Dashboard> {
             //   ),
             // ),
             SizedBox(
-              width: operatinModeR == 4 || modeName == "PSIMV" || operatinModeR==3 || modeName == "PSV" || modeName == "VSIMV" || operatinModeR == 5 ? 10 : 130,
+              width: operatinModeR == 4 ||
+                      modeName == "PSIMV" ||
+                      operatinModeR == 3 ||
+                      modeName == "PSV" ||
+                      modeName == "VSIMV" ||
+                      operatinModeR == 5
+                  ? 10
+                  : 130,
             ),
             respiratoryEnable == true
                 ? InkWell(
@@ -6021,17 +6061,20 @@ class _CheckPageState extends State<Dashboard> {
           Row(
             children: [
               InkWell(
-                onTap:(){
+                onTap: () {
                   _scaffoldKey.currentState.openDrawer();
                 },
-                child: Container(decoration:BoxDecoration(borderRadius:BorderRadius.circular(5),color:Colors.white),
-                  child: Icon(Icons.keyboard_arrow_right,size:40,color:Colors.black.withOpacity(0.9))),
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white),
+                    child: Icon(Icons.keyboard_arrow_right,
+                        size: 40, color: Colors.black.withOpacity(0.9))),
               ),
-
               Container(
                   child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 9, right: 0, top: 4, bottom: 4),
+                padding:
+                    const EdgeInsets.only(left: 20, right: 0, top: 4, bottom: 4),
                 child: Text(
                   modeName.toString(),
                   style: TextStyle(
@@ -6060,11 +6103,10 @@ class _CheckPageState extends State<Dashboard> {
                   child: Container(
                       height: 40,
                       width: 80,
-                      child: batteryStatus == 2 ? Center(
-                                  child: Text(
-                                      batteryPercentage.toString() + " %",
-                                      style: TextStyle(fontSize: 20)))
-                             
+                      child: batteryStatus == 2
+                          ? Center(
+                              child: Text(batteryPercentage.toString() + " %",
+                                  style: TextStyle(fontSize: 20)))
                           : batteryStatus == 1
                               ? Image.asset("assets/images/chargingbattery.png",
                                   width: 28, color: Colors.black)
@@ -6076,7 +6118,7 @@ class _CheckPageState extends State<Dashboard> {
                   child: InkWell(
                     onTap: () {
                       sendSelfTest();
-                     selfTestingEnabled = true;
+                      selfTestingEnabled = true;
                     },
                     child: Container(
                         height: 40,
@@ -6583,7 +6625,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Apena Time",
+                              "Apnea Time",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -6906,242 +6948,242 @@ class _CheckPageState extends State<Dashboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 1200;
-                    psvminValue = 100;
-                    psvparameterName = "Vt Min";
-                    psvparameterUnits = "mL";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = false;
-                    psvTi = false;
-                    psvVtMin = true;
-                    psvVtMax = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvEtrig = false;
-                    psvBackupRr = false;
-                    psvPc = false;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Vt Min",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "mL",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "1200",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "100",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvVtMinValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvVtMin
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value: psvVtMinValue != null
-                                      ? psvVtMinValue / 1200
-                                      : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 1200;
-                    psvminValue = 100;
-                    psvparameterName = "Vt Max";
-                    psvparameterUnits = "mL";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = false;
-                    psvTi = false;
-                    psvVtMin = false;
-                    psvVtMax = true;
-                    psvBackupRr = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvEtrig = false;
-                    psvPc = false;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Vt Max",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "mL",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "1200",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "100",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvVtMaxValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvVtMax
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value: psvVtMaxValue != null
-                                      ? psvVtMaxValue / 1200
-                                      : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     setState(() {
+              //       psvmaxValue = 1200;
+              //       psvminValue = 100;
+              //       psvparameterName = "Vt Min";
+              //       psvparameterUnits = "mL";
+              //       psvItrig = false;
+              //       psvPeep = false;
+              //       psvIe = false;
+              //       psvPs = false;
+              //       psvTi = false;
+              //       psvVtMin = true;
+              //       psvVtMax = false;
+              //       psvFio2 = false;
+              //       psvAtime = false;
+              //       psvEtrig = false;
+              //       psvBackupRr = false;
+              //       psvPc = false;
+              //       psvMinTe = false;
+              //     });
+              //   },
+              //   child: Center(
+              //     child: Container(
+              //       width: 130,
+              //       height: 130,
+              //       child: Card(
+              //         elevation: 40,
+              //         color: psvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+              //         child: Padding(
+              //           padding: const EdgeInsets.all(6.0),
+              //           child: Center(
+              //               child: Stack(
+              //             children: [
+              //               Align(
+              //                 alignment: Alignment.topLeft,
+              //                 child: Text(
+              //                   "Vt Min",
+              //                   style: TextStyle(
+              //                       fontSize: 15,
+              //                       fontWeight: FontWeight.bold,
+              //                       color: psvVtMin
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.topRight,
+              //                 child: Text(
+              //                   "mL",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvVtMin
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.bottomRight,
+              //                 child: Text(
+              //                   "1200",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvVtMin
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.bottomLeft,
+              //                 child: Text(
+              //                   "100",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvVtMin
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.center,
+              //                 child: Padding(
+              //                   padding: const EdgeInsets.only(top: 1.0),
+              //                   child: Text(
+              //                     psvVtMinValue.toString(),
+              //                     style: TextStyle(
+              //                         fontSize: 35,
+              //                         color: psvVtMin
+              //                             ? Color(0xFF213855)
+              //                             : Color(0xFFE0E0E0)),
+              //                   ),
+              //                 ),
+              //               ),
+              //               Padding(
+              //                 padding: const EdgeInsets.only(
+              //                     bottom: 20.0, left: 10, right: 10),
+              //                 child: Align(
+              //                   alignment: Alignment.bottomCenter,
+              //                   child: LinearProgressIndicator(
+              //                     backgroundColor: Colors.grey,
+              //                     valueColor: AlwaysStoppedAnimation<Color>(
+              //                       psvVtMin
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0),
+              //                     ),
+              //                     value: psvVtMinValue != null
+              //                         ? psvVtMinValue / 1200
+              //                         : 0,
+              //                   ),
+              //                 ),
+              //               )
+              //             ],
+              //           )),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     setState(() {
+              //       psvmaxValue = 1200;
+              //       psvminValue = 100;
+              //       psvparameterName = "Vt Max";
+              //       psvparameterUnits = "mL";
+              //       psvItrig = false;
+              //       psvPeep = false;
+              //       psvIe = false;
+              //       psvPs = false;
+              //       psvTi = false;
+              //       psvVtMin = false;
+              //       psvVtMax = true;
+              //       psvBackupRr = false;
+              //       psvFio2 = false;
+              //       psvAtime = false;
+              //       psvEtrig = false;
+              //       psvPc = false;
+              //       psvMinTe = false;
+              //     });
+              //   },
+              //   child: Center(
+              //     child: Container(
+              //       width: 130,
+              //       height: 130,
+              //       child: Card(
+              //         elevation: 40,
+              //         color: psvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+              //         child: Padding(
+              //           padding: const EdgeInsets.all(6.0),
+              //           child: Center(
+              //               child: Stack(
+              //             children: [
+              //               Align(
+              //                 alignment: Alignment.topLeft,
+              //                 child: Text(
+              //                   "Vt Max",
+              //                   style: TextStyle(
+              //                       fontSize: 15,
+              //                       fontWeight: FontWeight.bold,
+              //                       color: psvVtMax
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.topRight,
+              //                 child: Text(
+              //                   "mL",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvVtMax
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.bottomRight,
+              //                 child: Text(
+              //                   "1200",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvVtMax
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.bottomLeft,
+              //                 child: Text(
+              //                   "100",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvVtMax
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.center,
+              //                 child: Padding(
+              //                   padding: const EdgeInsets.only(top: 1.0),
+              //                   child: Text(
+              //                     psvVtMaxValue.toString(),
+              //                     style: TextStyle(
+              //                         fontSize: 35,
+              //                         color: psvVtMax
+              //                             ? Color(0xFF213855)
+              //                             : Color(0xFFE0E0E0)),
+              //                   ),
+              //                 ),
+              //               ),
+              //               Padding(
+              //                 padding: const EdgeInsets.only(
+              //                     bottom: 20.0, left: 10, right: 10),
+              //                 child: Align(
+              //                   alignment: Alignment.bottomCenter,
+              //                   child: LinearProgressIndicator(
+              //                     backgroundColor: Colors.grey,
+              //                     valueColor: AlwaysStoppedAnimation<Color>(
+              //                       psvVtMax
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0),
+              //                     ),
+              //                     value: psvVtMaxValue != null
+              //                         ? psvVtMaxValue / 1200
+              //                         : 0,
+              //                   ),
+              //                 ),
+              //               )
+              //             ],
+              //           )),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               InkWell(
                 onTap: () {
                   setState(() {
@@ -7381,124 +7423,124 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 5;
-                    psvminValue = 1;
-                    psvparameterName = "Min Te";
-                    psvparameterUnits = "s";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = false;
-                    psvTi = false;
-                    psvVtMin = false;
-                    psvVtMax = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvBackupRr = false;
-                    psvEtrig = false;
-                    psvPc = false;
-                    psvMinTe = true;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvMinTe ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Min Te",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvMinTe
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "s",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvMinTe
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "5",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvMinTe
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "1",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvMinTe
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvMinTeValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvMinTe
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvMinTe
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value: psvMinTeValue != null
-                                      ? psvMinTeValue / 5
-                                      : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     setState(() {
+              //       psvmaxValue = 5;
+              //       psvminValue = 1;
+              //       psvparameterName = "Min Te";
+              //       psvparameterUnits = "s";
+              //       psvItrig = false;
+              //       psvPeep = false;
+              //       psvIe = false;
+              //       psvPs = false;
+              //       psvTi = false;
+              //       psvVtMin = false;
+              //       psvVtMax = false;
+              //       psvFio2 = false;
+              //       psvAtime = false;
+              //       psvBackupRr = false;
+              //       psvEtrig = false;
+              //       psvPc = false;
+              //       psvMinTe = true;
+              //     });
+              //   },
+              //   child: Center(
+              //     child: Container(
+              //       width: 130,
+              //       height: 130,
+              //       child: Card(
+              //         elevation: 40,
+              //         color: psvMinTe ? Color(0xFFE0E0E0) : Color(0xFF213855),
+              //         child: Padding(
+              //           padding: const EdgeInsets.all(6.0),
+              //           child: Center(
+              //               child: Stack(
+              //             children: [
+              //               Align(
+              //                 alignment: Alignment.topLeft,
+              //                 child: Text(
+              //                   "Min Te",
+              //                   style: TextStyle(
+              //                       fontSize: 15,
+              //                       fontWeight: FontWeight.bold,
+              //                       color: psvMinTe
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.topRight,
+              //                 child: Text(
+              //                   "s",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvMinTe
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.bottomRight,
+              //                 child: Text(
+              //                   "5",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvMinTe
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.bottomLeft,
+              //                 child: Text(
+              //                   "1",
+              //                   style: TextStyle(
+              //                       fontSize: 12,
+              //                       color: psvMinTe
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0)),
+              //                 ),
+              //               ),
+              //               Align(
+              //                 alignment: Alignment.center,
+              //                 child: Padding(
+              //                   padding: const EdgeInsets.only(top: 1.0),
+              //                   child: Text(
+              //                     psvMinTeValue.toString(),
+              //                     style: TextStyle(
+              //                         fontSize: 35,
+              //                         color: psvMinTe
+              //                             ? Color(0xFF213855)
+              //                             : Color(0xFFE0E0E0)),
+              //                   ),
+              //                 ),
+              //               ),
+              //               Padding(
+              //                 padding: const EdgeInsets.only(
+              //                     bottom: 20.0, left: 10, right: 10),
+              //                 child: Align(
+              //                   alignment: Alignment.bottomCenter,
+              //                   child: LinearProgressIndicator(
+              //                     backgroundColor: Colors.grey,
+              //                     valueColor: AlwaysStoppedAnimation<Color>(
+              //                       psvMinTe
+              //                           ? Color(0xFF213855)
+              //                           : Color(0xFFE0E0E0),
+              //                     ),
+              //                     value: psvMinTeValue != null
+              //                         ? psvMinTeValue / 5
+              //                         : 0,
+              //                   ),
+              //                 ),
+              //               )
+              //             ],
+              //           )),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               InkWell(
                 onTap: () {
                   setState(() {
@@ -7604,9 +7646,8 @@ class _CheckPageState extends State<Dashboard> {
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0),
                                   ),
-                                  value: psvPcValue != null
-                                      ? psvPcValue / 80
-                                      : 0,
+                                  value:
+                                      psvPcValue != null ? psvPcValue / 80 : 0,
                                 ),
                               ),
                             )
@@ -7617,7 +7658,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ),
-              
+              Container(height: 130)
             ]),
         SizedBox(width: 118),
         Column(
@@ -8812,234 +8853,234 @@ class _CheckPageState extends State<Dashboard> {
         ),
         Column(
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  pacvmaxValue = 1200;
-                  pacvminValue = 100;
-                  pacvparameterName = "Vt Min";
-                  pacvparameterUnits = "mL";
-                  pacvItrig = false;
-                  pacvRr = false;
-                  pacvIe = false;
-                  pacvPeep = false;
-                  pacvPc = false;
-                  pacvVtMin = true;
-                  pacvVtMax = false;
-                  pacvFio2 = false;
-                  pacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: pacvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vt Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "mL",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "1200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                pacvVtMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: pacvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  pacvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: pacvVtMinValue != null
-                                    ? pacvVtMinValue / 1200
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  pacvmaxValue = 1200;
-                  pacvminValue = 200;
-                  pacvparameterName = "Vt Max";
-                  pacvparameterUnits = "mL";
-                  pacvItrig = false;
-                  pacvRr = false;
-                  pacvIe = false;
-                  pacvPeep = false;
-                  pacvPc = false;
-                  pacvVtMin = false;
-                  pacvVtMax = true;
-                  pacvFio2 = false;
-                  pacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: pacvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vt Max",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "mL",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "1200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                pacvVtMaxValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: pacvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  pacvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: pacvVtMaxValue != null
-                                    ? pacvVtMaxValue / 1200
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       pacvmaxValue = 1200;
+            //       pacvminValue = 100;
+            //       pacvparameterName = "Vt Min";
+            //       pacvparameterUnits = "mL";
+            //       pacvItrig = false;
+            //       pacvRr = false;
+            //       pacvIe = false;
+            //       pacvPeep = false;
+            //       pacvPc = false;
+            //       pacvVtMin = true;
+            //       pacvVtMax = false;
+            //       pacvFio2 = false;
+            //       pacvFlowRamp = false;
+            //     });
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: pacvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "Vt Min",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: pacvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "mL",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pacvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "1200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pacvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "100",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pacvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     pacvVtMinValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: pacvVtMin
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       pacvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: pacvVtMinValue != null
+            //                         ? pacvVtMinValue / 1200
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       pacvmaxValue = 1200;
+            //       pacvminValue = 200;
+            //       pacvparameterName = "Vt Max";
+            //       pacvparameterUnits = "mL";
+            //       pacvItrig = false;
+            //       pacvRr = false;
+            //       pacvIe = false;
+            //       pacvPeep = false;
+            //       pacvPc = false;
+            //       pacvVtMin = false;
+            //       pacvVtMax = true;
+            //       pacvFio2 = false;
+            //       pacvFlowRamp = false;
+            //     });
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: pacvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "Vt Max",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: pacvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "mL",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pacvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "1200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pacvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pacvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     pacvVtMaxValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: pacvVtMax
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       pacvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: pacvVtMaxValue != null
+            //                         ? pacvVtMaxValue / 1200
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
             // InkWell(
             //   onTap: () {
@@ -9168,6 +9209,7 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
+            Container(width:146)
           ],
         ),
         SizedBox(width: 140),
@@ -9591,7 +9633,6 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   prvcData() {
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -9603,7 +9644,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  prvcmaxValue = 60;
+                  prvcmaxValue = 30;
                   prvcminValue = 1;
                   prvcparameterName = "RR";
                   prvcparameterUnits = "bpm";
@@ -9656,7 +9697,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "60",
+                              "30",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: prvcRr
@@ -9702,7 +9743,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    prvcRrValue != null ? prvcRrValue / 60 : 0,
+                                    prvcRrValue != null ? prvcRrValue / 30 : 0,
                               ),
                             ),
                           )
@@ -10291,7 +10332,6 @@ class _CheckPageState extends State<Dashboard> {
         ),
         Column(
           children: [
-            
             InkWell(
               onTap: () {
                 setState(() {
@@ -10696,7 +10736,7 @@ class _CheckPageState extends State<Dashboard> {
                                     // }
                                   });
                                 } else if (prvcPcMax == true &&
-                                    prvcPcMaxValue != prvcminValue ) {
+                                    prvcPcMaxValue != prvcminValue) {
                                   prvcPcMaxValue = prvcPcMaxValue - 1;
                                 } else if (prvcFio2 == true &&
                                     prvcFio2Value != prvcminValue) {
@@ -10773,8 +10813,8 @@ class _CheckPageState extends State<Dashboard> {
                                     prvcPcMinValue != prvcmaxValue) {
                                   setState(() {
                                     // if (prvcPcMaxValue < 90) {
-                                      // prvcPcMinValue = prvcPcMinValue + 1;
-                                      prvcPcMaxValue = prvcPcMaxValue + 1;
+                                    // prvcPcMinValue = prvcPcMinValue + 1;
+                                    prvcPcMaxValue = prvcPcMaxValue + 1;
                                     // }
                                   });
                                 } else if (prvcPcMax == true &&
@@ -10894,7 +10934,7 @@ class _CheckPageState extends State<Dashboard> {
                                   // if (value.toInt() <= prvcminValue ) {
                                   //   prvcPcMaxValue = prvcPcMinValue + 1;
                                   // } else {
-                                    prvcPcMaxValue = value.toInt();
+                                  prvcPcMaxValue = value.toInt();
                                   // }
                                 });
                               } else if (prvcFio2 == true) {
@@ -10972,7 +11012,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  psimvmaxValue = 60;
+                  psimvmaxValue = 30;
                   psimvminValue = 1;
                   psimvparameterName = "RR";
                   psimvparameterUnits = "bpm";
@@ -11026,7 +11066,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "60",
+                              "30",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvRr
@@ -11072,7 +11112,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: psimvRrValue != null
-                                    ? psimvRrValue / 60
+                                    ? psimvRrValue / 30
                                     : 0,
                               ),
                             ),
@@ -11672,237 +11712,237 @@ class _CheckPageState extends State<Dashboard> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psimvmaxValue = 1200;
-                  psimvminValue = 100;
-                  psimvparameterName = "Vt Min";
-                  psimvparameterUnits = "mL";
-                  psimvItrig = false;
-                  psimvRr = false;
-                  psimvIe = false;
-                  psimvPeep = false;
-                  psimvPc = false;
-                  psimvVtMin = true;
-                  psimvVtMax = false;
-                  psimvFio2 = false;
-                  psimvFlowRamp = false;
-                  psimvPs = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psimvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vt Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "mL",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "1200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                psimvVtMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: psimvVtMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psimvVtMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psimvVtMinValue != null
-                                    ? psimvVtMinValue / 1200
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       psimvmaxValue = 1200;
+            //       psimvminValue = 100;
+            //       psimvparameterName = "Vt Min";
+            //       psimvparameterUnits = "mL";
+            //       psimvItrig = false;
+            //       psimvRr = false;
+            //       psimvIe = false;
+            //       psimvPeep = false;
+            //       psimvPc = false;
+            //       psimvVtMin = true;
+            //       psimvVtMax = false;
+            //       psimvFio2 = false;
+            //       psimvFlowRamp = false;
+            //       psimvPs = false;
+            //     });
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: psimvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "Vt Min",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: psimvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "mL",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: psimvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "1200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: psimvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "100",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: psimvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     psimvVtMinValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: psimvVtMin
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       psimvVtMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: psimvVtMinValue != null
+            //                         ? psimvVtMinValue / 1200
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psimvmaxValue = 1200;
-                  psimvminValue = 200;
-                  psimvparameterName = "Vt Max";
-                  psimvparameterUnits = "mL";
-                  psimvItrig = false;
-                  psimvRr = false;
-                  psimvIe = false;
-                  psimvPeep = false;
-                  psimvPc = false;
-                  psimvVtMin = false;
-                  psimvVtMax = true;
-                  psimvFio2 = false;
-                  psimvFlowRamp = false;
-                  psimvPs = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psimvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vt Max",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "mL",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "1200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                psimvVtMaxValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: psimvVtMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psimvVtMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psimvVtMaxValue != null
-                                    ? psimvVtMaxValue / 1200
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       psimvmaxValue = 1200;
+            //       psimvminValue = 200;
+            //       psimvparameterName = "Vt Max";
+            //       psimvparameterUnits = "mL";
+            //       psimvItrig = false;
+            //       psimvRr = false;
+            //       psimvIe = false;
+            //       psimvPeep = false;
+            //       psimvPc = false;
+            //       psimvVtMin = false;
+            //       psimvVtMax = true;
+            //       psimvFio2 = false;
+            //       psimvFlowRamp = false;
+            //       psimvPs = false;
+            //     });
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: psimvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "Vt Max",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: psimvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "mL",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: psimvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "1200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: psimvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: psimvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     psimvVtMaxValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: psimvVtMax
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       psimvVtMax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: psimvVtMaxValue != null
+            //                         ? psimvVtMaxValue / 1200
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
             InkWell(
               onTap: () {
@@ -12019,8 +12059,7 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-            // Container(height: 260,)s
-
+            Container(height: 260,)
             // InkWell(
             //   onTap: () {
             //     setState(() {
@@ -13179,234 +13218,234 @@ class _CheckPageState extends State<Dashboard> {
         ),
         Column(
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  pccmvmaxValue = 1200;
-                  pccmvminValue = 100;
-                  pccmvparameterName = "VTmin";
-                  pccmvparameterUnits = "mL";
-                  pccmvRR = false;
-                  pccmvIe = false;
-                  pccmvPeep = false;
-                  pccmvPc = false;
-                  pccmvFio2 = false;
-                  pccmvVtmin = true;
-                  pccmvVtmax = false;
-                  pccmvFlowRamp = false;
-                  pccmvTih = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: pccmvVtmin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "VTmin",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: pccmvVtmin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "mL",
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  color: pccmvVtmin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "1200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pccmvVtmin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pccmvVtmin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                pccmvVtminValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: pccmvVtmin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  pccmvVtmin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: pccmvVtminValue != null
-                                    ? pccmvVtminValue / 1200
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  pccmvmaxValue = 1200;
-                  pccmvminValue = 200;
-                  pccmvparameterName = "VTmax";
-                  pccmvparameterUnits = "mL";
-                  pccmvRR = false;
-                  pccmvIe = false;
-                  pccmvPeep = false;
-                  pccmvPc = false;
-                  pccmvFio2 = false;
-                  pccmvVtmin = false;
-                  pccmvVtmax = true;
-                  pccmvFlowRamp = false;
-                  pccmvTih = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: pccmvVtmax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "VTmax",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: pccmvVtmax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "mL",
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  color: pccmvVtmax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "1200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pccmvVtmax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "200",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: pccmvVtmax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                pccmvVtmaxValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: pccmvVtmax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  pccmvVtmax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: pccmvVtmaxValue != null
-                                    ? pccmvVtmaxValue / 1200
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       pccmvmaxValue = 1200;
+            //       pccmvminValue = 100;
+            //       pccmvparameterName = "VTmin";
+            //       pccmvparameterUnits = "mL";
+            //       pccmvRR = false;
+            //       pccmvIe = false;
+            //       pccmvPeep = false;
+            //       pccmvPc = false;
+            //       pccmvFio2 = false;
+            //       pccmvVtmin = true;
+            //       pccmvVtmax = false;
+            //       pccmvFlowRamp = false;
+            //       pccmvTih = false;
+            //     });
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: pccmvVtmin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "VTmin",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: pccmvVtmin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "mL",
+            //                   style: TextStyle(
+            //                       fontSize: 9,
+            //                       color: pccmvVtmin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "1200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pccmvVtmin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "100",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pccmvVtmin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     pccmvVtminValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: pccmvVtmin
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       pccmvVtmin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: pccmvVtminValue != null
+            //                         ? pccmvVtminValue / 1200
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       pccmvmaxValue = 1200;
+            //       pccmvminValue = 200;
+            //       pccmvparameterName = "VTmax";
+            //       pccmvparameterUnits = "mL";
+            //       pccmvRR = false;
+            //       pccmvIe = false;
+            //       pccmvPeep = false;
+            //       pccmvPc = false;
+            //       pccmvFio2 = false;
+            //       pccmvVtmin = false;
+            //       pccmvVtmax = true;
+            //       pccmvFlowRamp = false;
+            //       pccmvTih = false;
+            //     });
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: pccmvVtmax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "VTmax",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: pccmvVtmax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "mL",
+            //                   style: TextStyle(
+            //                       fontSize: 9,
+            //                       color: pccmvVtmax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "1200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pccmvVtmax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "200",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: pccmvVtmax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     pccmvVtmaxValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: pccmvVtmax
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       pccmvVtmax
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: pccmvVtmaxValue != null
+            //                         ? pccmvVtmaxValue / 1200
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             // InkWell(
             //   onTap: () {
             //     setState(() {
@@ -13536,7 +13575,7 @@ class _CheckPageState extends State<Dashboard> {
             //   ),
             // ),
             Container(
-              width: 136,
+              width: 146,
             )
           ],
         ),
@@ -14543,121 +14582,121 @@ class _CheckPageState extends State<Dashboard> {
         ),
         Column(
           children: [
-            InkWell(
-              onTap: () async {
-                setState(() {
-                  vccmvmaxValue = 100;
-                  vccmvminValue = 10;
-                  vccmvparameterName = "PC Min";
-                  vccmvparameterUnits = "cmH\u2082O";
-                  vccmvRR = false;
-                  vccmvIe = false;
-                  vccmvPeep = false;
-                  vccmvVt = false;
-                  vccmvPcMax = false;
-                  vccmvPcMin = true;
-                  vccmvFio2 = false;
-                  vccmvFlowRamp = false;
-                  vccmvTih = false;
-                });
-                sleep(const Duration(milliseconds: 200));
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vccmvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vccmvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH\u2082O",
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  color: vccmvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vccmvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "10",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vccmvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vccmvPcMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vccmvPcMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vccmvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vccmvPcMinValue != null
-                                    ? vccmvPcMinValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () async {
+            //     setState(() {
+            //       vccmvmaxValue = 100;
+            //       vccmvminValue = 10;
+            //       vccmvparameterName = "PC Min";
+            //       vccmvparameterUnits = "cmH\u2082O";
+            //       vccmvRR = false;
+            //       vccmvIe = false;
+            //       vccmvPeep = false;
+            //       vccmvVt = false;
+            //       vccmvPcMax = false;
+            //       vccmvPcMin = true;
+            //       vccmvFio2 = false;
+            //       vccmvFlowRamp = false;
+            //       vccmvTih = false;
+            //     });
+            //     sleep(const Duration(milliseconds: 200));
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: vccmvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "PC Min",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: vccmvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "cmH\u2082O",
+            //                   style: TextStyle(
+            //                       fontSize: 9,
+            //                       color: vccmvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "100",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: vccmvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "10",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: vccmvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     vccmvPcMinValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: vccmvPcMin
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       vccmvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: vccmvPcMinValue != null
+            //                         ? vccmvPcMinValue / 100
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             InkWell(
               onTap: () {
                 setState(() {
@@ -15191,7 +15230,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vsimvmaxValue = 60;
+                  vsimvmaxValue = 30;
                   vsimvminValue = 1;
                   vsimvparameterName = "RR";
                   vsimvparameterUnits = "bpm";
@@ -15245,7 +15284,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "60",
+                              "30",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvRr
@@ -15291,7 +15330,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vsimvRrValue != null
-                                    ? vsimvRrValue / 60
+                                    ? vsimvRrValue / 30
                                     : 0,
                               ),
                             ),
@@ -15887,121 +15926,121 @@ class _CheckPageState extends State<Dashboard> {
         ),
         Column(
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vsimvmaxValue = 100;
-                  vsimvminValue = 10;
-                  vsimvparameterName = "PC Min";
-                  vsimvparameterUnits = "cmH\u2082O";
-                  vsimvItrig = false;
-                  vsimvRr = false;
-                  vsimvIe = false;
-                  vsimvPeep = false;
-                  vsimvVt = false;
-                  vsimvPcMin = true;
-                  vsimvPcMax = false;
-                  vsimvFio2 = false;
-                  vsimvFlowRamp = false;
-                  vsimvPs = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vsimvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH\u2082O",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "10",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vsimvPcMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vsimvPcMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vsimvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vsimvPcMinValue != null
-                                    ? vsimvPcMinValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       vsimvmaxValue = 100;
+            //       vsimvminValue = 10;
+            //       vsimvparameterName = "PC Min";
+            //       vsimvparameterUnits = "cmH\u2082O";
+            //       vsimvItrig = false;
+            //       vsimvRr = false;
+            //       vsimvIe = false;
+            //       vsimvPeep = false;
+            //       vsimvVt = false;
+            //       vsimvPcMin = true;
+            //       vsimvPcMax = false;
+            //       vsimvFio2 = false;
+            //       vsimvFlowRamp = false;
+            //       vsimvPs = false;
+            //     });
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: vsimvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "PC Min",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: vsimvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "cmH\u2082O",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: vsimvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "100",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: vsimvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "10",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: vsimvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     vsimvPcMinValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: vsimvPcMin
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       vsimvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: vsimvPcMinValue != null
+            //                         ? vsimvPcMinValue / 100
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             InkWell(
               onTap: () {
                 setState(() {
@@ -16362,7 +16401,7 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            // Container(height: 260),
+            Container(height: 130),
           ],
         ),
         SizedBox(width: 140),
@@ -17496,120 +17535,120 @@ class _CheckPageState extends State<Dashboard> {
         ),
         Column(
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vacvmaxValue = 100;
-                  vacvminValue = 10;
-                  vacvparameterName = "PC Min";
-                  vacvparameterUnits = "cmH\u2082O"; //TODO
-                  vacvItrig = false;
-                  vacvRr = false;
-                  vacvIe = false;
-                  vacvPeep = false;
-                  vacvVt = false;
-                  vacvPcMin = true;
-                  vacvPcMax = false;
-                  vacvFio2 = false;
-                  vacvFlowRamp = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vacvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Min",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH\u2082O",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "10",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vacvPcMinValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vacvPcMin
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vacvPcMin
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vacvPcMinValue != null
-                                    ? vacvPcMinValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       vacvmaxValue = 100;
+            //       vacvminValue = 10;
+            //       vacvparameterName = "PC Min";
+            //       vacvparameterUnits = "cmH\u2082O"; //TODO
+            //       vacvItrig = false;
+            //       vacvRr = false;
+            //       vacvIe = false;
+            //       vacvPeep = false;
+            //       vacvVt = false;
+            //       vacvPcMin = true;
+            //       vacvPcMax = false;
+            //       vacvFio2 = false;
+            //       vacvFlowRamp = false;
+            //     });
+            //   },
+            //   child: Center(
+            //     child: Container(
+            //       width: 146,
+            //       height: 130,
+            //       child: Card(
+            //         elevation: 40,
+            //         color: vacvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(6.0),
+            //           child: Center(
+            //               child: Stack(
+            //             children: [
+            //               Align(
+            //                 alignment: Alignment.topLeft,
+            //                 child: Text(
+            //                   "PC Min",
+            //                   style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.bold,
+            //                       color: vacvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.topRight,
+            //                 child: Text(
+            //                   "cmH\u2082O",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: vacvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomRight,
+            //                 child: Text(
+            //                   "100",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: vacvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.bottomLeft,
+            //                 child: Text(
+            //                   "10",
+            //                   style: TextStyle(
+            //                       fontSize: 12,
+            //                       color: vacvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0)),
+            //                 ),
+            //               ),
+            //               Align(
+            //                 alignment: Alignment.center,
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.only(top: 1.0),
+            //                   child: Text(
+            //                     vacvPcMinValue.toString(),
+            //                     style: TextStyle(
+            //                         fontSize: 35,
+            //                         color: vacvPcMin
+            //                             ? Color(0xFF213855)
+            //                             : Color(0xFFE0E0E0)),
+            //                   ),
+            //                 ),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(
+            //                     bottom: 20.0, left: 10, right: 10),
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: LinearProgressIndicator(
+            //                     backgroundColor: Colors.grey,
+            //                     valueColor: AlwaysStoppedAnimation<Color>(
+            //                       vacvPcMin
+            //                           ? Color(0xFF213855)
+            //                           : Color(0xFFE0E0E0),
+            //                     ),
+            //                     value: vacvPcMinValue != null
+            //                         ? vacvPcMinValue / 100
+            //                         : 0,
+            //                   ),
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             InkWell(
               onTap: () {
                 setState(() {
@@ -19227,13 +19266,11 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList.add((psvMinTeValue & 0xFF00) >> 8); //17
         modeWriteList.add((psvMinTeValue & 0x00FF));
-        
 
         modeWriteList.add((psvPcValue & 0xFF00) >> 8); //17
         modeWriteList.add((psvPcValue & 0x00FF));
 
         modeWriteList.add(0x7F); //23
-        
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -19365,10 +19402,24 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   writeDataPlay() async {
-    if(_status=="Connected"){
-      await _port.write(Uint8List.fromList(modeWriteList));
+    // if(_status=="Connected"){
+    //   await _port.write(Uint8List.fromList(modeWriteList));
+    // }
+    writePlay = [];
+    writePlay.add(0x7E);
+    writePlay.add(0);
+    writePlay.add(20);
+    writePlay.add(0);
+    writePlay.add(31);
+    writePlay.add(0x7F);
+
+    //to calculate crc
+    // print(writePlay.toString());
+    // Fluttertoast.showToast(msg: writePlay.toString());
+
+    if (_status == "Connected") {
+      await _port.write(Uint8List.fromList(writePlay));
     }
-    
   }
 
   writeDataPause() async {
@@ -19377,14 +19428,14 @@ class _CheckPageState extends State<Dashboard> {
     writePlay.add(0);
     writePlay.add(20);
     writePlay.add(0);
-    writePlay.add(0);
+    writePlay.add(30);
     writePlay.add(0x7F);
 
     //to calculate crc
     // print(writePlay.toString());
     // Fluttertoast.showToast(msg: writePlay.toString());
 
-    if(_status=="Connected"){
+    if (_status == "Connected") {
       await _port.write(Uint8List.fromList(writePlay));
     }
   }
@@ -19397,8 +19448,8 @@ class _CheckPageState extends State<Dashboard> {
         pacvIeValue = 51;
         pacvPeepValue = 10;
         pacvPcValue = 30;
-        pacvVtMinValue = 200;
-        pacvVtMaxValue = 1200;
+        pacvVtMinValue = 0;
+        pacvVtMaxValue = 2400;
         pacvFio2Value = 21;
         pacvFlowRampValue = 3;
         pacvmaxValue = 10;
@@ -19423,8 +19474,8 @@ class _CheckPageState extends State<Dashboard> {
         pccmvPeepValue = 10;
         pccmvPcValue = 30;
         pccmvFio2Value = 21;
-        pccmvVtminValue = 200;
-        pccmvVtmaxValue = 400;
+        pccmvVtminValue = 0;
+        pccmvVtmaxValue = 2400;
         pccmvTihValue = 50;
         pccmvFlowRampValue = 4;
         pccmvmaxValue = 60;
@@ -19501,8 +19552,8 @@ class _CheckPageState extends State<Dashboard> {
         psvIeValue = 51;
         psvPsValue = 30;
         psvTiValue = 5;
-        psvVtMinValue = 100;
-        psvVtMaxValue = 400;
+        psvVtMinValue = 0;
+        psvVtMaxValue = 2400;
         psvFio2Value = 21;
         psvAtimeValue = 10;
         psvEtrigValue = 10;
@@ -19545,7 +19596,7 @@ class _CheckPageState extends State<Dashboard> {
         vsimvIeValue = 51;
         vsimvPeepValue = 10;
         vsimvVtValue = 200;
-        vsimvPsValue = 22;
+        vsimvPsValue = 30;
         vsimvPcMinValue = 20;
         vsimvPcMaxValue = 60;
         vsimvFio2Value = 21;
@@ -19573,7 +19624,7 @@ class _CheckPageState extends State<Dashboard> {
         vsimvIeValue = 51;
         vsimvPeepValue = 10;
         vsimvVtValue = 200;
-        vsimvPsValue = 22;
+        vsimvPsValue = 30;
         vsimvPcMinValue = 20;
         vsimvPcMaxValue = 60;
         vsimvFio2Value = 22;
@@ -20392,11 +20443,11 @@ class _CheckPageState extends State<Dashboard> {
             ));
   }
 
-
   serializeEventData(Uint8List event) async {
     if (event != null) {
       setState(() {
         respiratoryEnable = true;
+        powerButtonEnabled = false;
       });
       if (event[0] == 126) {
         list = [];
@@ -20426,7 +20477,7 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  serialiseReceivedPacket(List<int> finalList) async{
+  serialiseReceivedPacket(List<int> finalList) async {
     if (finalList.isNotEmpty && finalList.length == 114) {
       var now = new DateTime.now();
 
@@ -20453,7 +20504,6 @@ class _CheckPageState extends State<Dashboard> {
       //       ModalRoute.withName('/'));
       // }
       setState(() {
-
         setState(() {
           var now = new DateTime.now();
 
@@ -20472,12 +20522,11 @@ class _CheckPageState extends State<Dashboard> {
           setState(() {
             mvValue = mvValueCheck;
           });
-          
+
           leakVolumeDisplay =
               ((finalList[102] << 8) + finalList[103]); //103 104
           peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
           spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
-
 
           int rrtotalCheck =
               ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
@@ -20770,20 +20819,24 @@ class _CheckPageState extends State<Dashboard> {
         setState(() {
           checkO2CalibrationValue = finalList[30];
         });
-        
+
         // Fluttertoast.showToast(msg:checkO2CalibrationValue.toString());
-        if(checkO2CalibrationValue==1){
-            setState(() {
-              textText = "Lung Disconnected";
-            });
-        }else if(checkO2CalibrationValue==2){
-            setState(() {
-              textText = "Calibrating 0\u2082..";
-            });
-        }else if(checkO2CalibrationValue==3){
-            setState(() {
-              textText = "Calibrating Completed..";
-            });
+        if (checkO2CalibrationValue == 1) {
+          setState(() {
+            textText = "Lung Disconnected";
+          });
+        } else if (checkO2CalibrationValue == 2) {
+          setState(() {
+            textText = "Calibrating 0\u2082..";
+          });
+        } else if (checkO2CalibrationValue == 3) {
+          setState(() {
+            textText = "Calibrating Completed..";
+          });
+        }else if(checkO2CalibrationValue ==0){
+          setState((){
+            checkO2CalibrationValue ="";
+          });
         }
 
         var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
@@ -20895,7 +20948,6 @@ class _CheckPageState extends State<Dashboard> {
           volumePoints.add(temp1);
         }
 
-
         double temp3 = ((((finalList[46] << 8) + finalList[47])) -
                 (((finalList[48] << 8) + finalList[49])))
             .toDouble();
@@ -20909,7 +20961,6 @@ class _CheckPageState extends State<Dashboard> {
         } else {
           flowPoints.add(temp3 * 1.2);
         }
-
 
         setState(() {
           powerIndication = finalList[64];
