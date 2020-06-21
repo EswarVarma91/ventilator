@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cupertino_range_slider/cupertino_range_slider.dart';
-import 'package:floating_action_row/floating_action_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -191,8 +190,8 @@ class _CheckPageState extends State<Dashboard> {
       editbbEnabled = false,
       alarmsSetting2 = false;
 
-  bool pacvItrig = true,
-      pacvRr = false,
+  bool pacvItrig = false,
+      pacvRr = true,
       pacvIe = false,
       pacvPeep = false,
       pacvPc = false,
@@ -211,12 +210,12 @@ class _CheckPageState extends State<Dashboard> {
       pacvFio2Value = 21,
       pacvFlowRampValue = 3;
 
-  int pacvmaxValue = 10, pacvminValue = 1, pacvdefaultValue = 6;
-  String pacvparameterName = "I Trig",
-      pacvparameterUnits = "cmH\u2082O Below Peep";
+  int pacvmaxValue = 60, pacvminValue = 1, pacvdefaultValue = 20;
+  String pacvparameterName = "RR",
+      pacvparameterUnits = "bpm";
 
-  bool vacvItrig = true,
-      vacvRr = false,
+  bool vacvItrig = false,
+      vacvRr = true,
       vacvIe = false,
       vacvPeep = false,
       vacvVt = false,
@@ -235,12 +234,12 @@ class _CheckPageState extends State<Dashboard> {
       vacvFio2Value = 21,
       vacvFlowRampValue = 4;
 
-  int vacvmaxValue = 10, vacvminValue = 1, vacvdefaultValue = 6;
-  String vacvparameterName = "I Trig",
-      vacvparameterUnits = "cmH\u2082O Below Peep";
+  int vacvmaxValue = 60, vacvminValue = 1, vacvdefaultValue = 20;
+  String vacvparameterName = "RR",
+      vacvparameterUnits = "bpm";
 
-  bool prvcItrig = true,
-      prvcRr = false,
+  bool prvcItrig = false,
+      prvcRr = true,
       prvcIe = false,
       prvcPeep = false,
       prvcVt = false,
@@ -259,14 +258,14 @@ class _CheckPageState extends State<Dashboard> {
       prvcFio2Value = 21,
       prvcFlowRampValue = 4;
 
-  int prvcmaxValue = 10, prvcminValue = 1, prvcdefaultValue = 6;
-  String prvcparameterName = "I Trig",
-      prvcparameterUnits = "cmH\u2082O Below Peep";
+  int prvcmaxValue = 30, prvcminValue = 1, prvcdefaultValue = 20;
+  String prvcparameterName = "RR",
+      prvcparameterUnits = "bpm";
 
-  bool psvItrig = true,
+  bool psvItrig = false,
       psvPeep = false,
       psvIe = false,
-      psvPs = false,
+      psvPs = true,
       psvTi = false,
       psvVtMin = false,
       psvVtMax = false,
@@ -281,7 +280,7 @@ class _CheckPageState extends State<Dashboard> {
       psvPeepValue = 10,
       psvIeValue = 51,
       psvPsValue = 30,
-      psvTiValue = 5,
+      psvTiValue = 1,
       psvVtMinValue = 0,
       psvVtMaxValue = 2400,
       psvFio2Value = 21,
@@ -291,12 +290,12 @@ class _CheckPageState extends State<Dashboard> {
       psvMinTeValue = 1,
       psvPcValue = 30;
 
-  int psvmaxValue = 10, psvminValue = 1, psvdefaultValue = 6;
-  String psvparameterName = "I Trig",
+  int psvmaxValue = 80, psvminValue = 1, psvdefaultValue = 30;
+  String psvparameterName = "PS",
       psvparameterUnits = "cmH\u2082O  Below Peep";
 
-  bool psimvItrig = true,
-      psimvRr = false,
+  bool psimvItrig = false,
+      psimvRr = true,
       psimvIe = false,
       psimvPeep = false,
       psimvPc = false,
@@ -317,12 +316,12 @@ class _CheckPageState extends State<Dashboard> {
       psimvFio2Value = 21,
       psimvFlowRampValue = 3;
 
-  int psimvmaxValue = 10, psimvminValue = 1, psimvdefaultValue = 6;
-  String psimvparameterName = "I Trig",
-      psimvparameterUnits = "cmH\u2082O  Below Peep";
+  int psimvmaxValue = 30, psimvminValue = 1, psimvdefaultValue = 20;
+  String psimvparameterName = "RR",
+      psimvparameterUnits = "bpm";
 
-  bool vsimvItrig = true,
-      vsimvRr = false,
+  bool vsimvItrig = false,
+      vsimvRr = true,
       vsimvIe = false,
       vsimvPeep = false,
       vsimvVt = false,
@@ -343,9 +342,9 @@ class _CheckPageState extends State<Dashboard> {
       vsimvFio2Value = 21,
       vsimvFlowRampValue = 4;
 
-  int vsimvmaxValue = 10, vsimvminValue = 1, vsimvdefaultValue = 6;
-  String vsimvparameterName = "I Trig",
-      vsimvparameterUnits = "cmH\u2082O Below Peep";
+  int vsimvmaxValue = 30, vsimvminValue = 1, vsimvdefaultValue = 20;
+  String vsimvparameterName = "RR",
+      vsimvparameterUnits = "bpm";
 
   bool prvcApnea = true;
   int prvcApneaValue = 30;
@@ -404,8 +403,8 @@ class _CheckPageState extends State<Dashboard> {
       vccmvTihValue = 50;
   int vccmvFlowRampValue = 4;
 
-  int vccmvmaxValue = 60, vccmvminValue = 1, vccmvdefaultValue = 12;
-  String vccmvparameterName = "RR", vccmvparameterUnits = "";
+  int vccmvmaxValue = 60, vccmvminValue = 1, vccmvdefaultValue = 20;
+  String vccmvparameterName = "RR", vccmvparameterUnits = "bpm";
 
   List<int> listCheckLength = new List();
 
@@ -1024,12 +1023,11 @@ class _CheckPageState extends State<Dashboard> {
       vteValue = preferences.getInt("vte");
       fio2Value = preferences.getInt("fio2");
       tiValue =
-          (double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
-              (60000 / rrValue);
+          (((double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
+              (60000 / rrValue))/1000);
       // print(tiValue.toString());
       teValue =
-          (double.tryParse(e) / (double.tryParse(i) + double.tryParse(e))) *
-              (60000 / rrValue);
+          (((double.tryParse(e) / (double.tryParse(i) + double.tryParse(e))) * (60000 / rrValue))/1000);
       // print(teValue.toString());
       paw = preferences.getInt("paw");
       mvValue = 0;
@@ -1073,21 +1071,21 @@ class _CheckPageState extends State<Dashboard> {
         pacvVtMaxValue = preferences.getInt('pacvVtMaxValue');
         pacvFio2Value = preferences.getInt('pacvFio2Value');
         pacvFlowRampValue = preferences.getInt('pacvFlowRampValue');
-        pacvmaxValue = 10;
-        pacvminValue = 1;
-        pacvdefaultValue = preferences.getInt('pacvdefaultValue');
+        // pacvmaxValue = 10;
+        // pacvminValue = 1;
+        // pacvdefaultValue = preferences.getInt('pacvdefaultValue');
 
-        pacvparameterName = "I Trig";
-        pacvparameterUnits = "cmH\u2082O Below Peep";
-        pacvItrig = true;
-        pacvRr = false;
-        pacvIe = false;
-        pacvPeep = false;
-        pacvPc = false;
-        pacvVtMin = false;
-        pacvVtMax = false;
-        pacvFio2 = false;
-        pacvFlowRamp = false;
+        // pacvparameterName = "I Trig";
+        // pacvparameterUnits = "cmH\u2082O Below PEEP";
+        // pacvItrig = false;
+        // pacvRr = false;
+        // pacvIe = false;
+        // pacvPeep = false;
+        // pacvPc = false;
+        // pacvVtMin = false;
+        // pacvVtMax = false;
+        // pacvFio2 = false;
+        // pacvFlowRamp = false;
       } else if (checkData == "pccmv") {
         pccmvRRValue = preferences.getInt('pccmvRRValue');
         pccmvIeValue = preferences.getInt('pccmvIeValue');
@@ -1098,20 +1096,20 @@ class _CheckPageState extends State<Dashboard> {
         pccmvVtmaxValue = preferences.getInt('pccmvVtmaxValue');
         pccmvTihValue = preferences.getInt('pccmvTihValue');
         pccmvFlowRampValue = preferences.getInt('pccmvFlowRampValue');
-        pccmvmaxValue = 60;
-        pccmvminValue = 1;
-        pccmvdefaultValue = preferences.getInt('pccmvdefaultValue');
+        // pccmvmaxValue = 60;
+        // pccmvminValue = 1;
+        // pccmvdefaultValue = preferences.getInt('pccmvdefaultValue');
 
-        pccmvparameterName = "RR";
-        pccmvparameterUnits = "";
-        pccmvRR = true;
-        pccmvIe = false;
-        pccmvPeep = false;
-        pccmvPc = false;
-        pccmvFio2 = false;
-        pccmvVtmin = false;
-        pccmvVtmax = false;
-        pccmvFlowRamp = false;
+        // pccmvparameterName = "RR";
+        // pccmvparameterUnits = "";
+        // pccmvRR = true;
+        // pccmvIe = false;
+        // pccmvPeep = false;
+        // pccmvPc = false;
+        // pccmvFio2 = false;
+        // pccmvVtmin = false;
+        // pccmvVtmax = false;
+        // pccmvFlowRamp = false;
       } else if (checkData == "vccmv") {
         vccmvRRValue = preferences.getInt('vccmvRRValue');
         vccmvIeValue = preferences.getInt('vccmvIeValue');
@@ -1122,20 +1120,20 @@ class _CheckPageState extends State<Dashboard> {
         vccmvVtValue = preferences.getInt('vccmvVtValue');
         vccmvTihValue = preferences.getInt('vccmvTihValue');
         vccmvFlowRampValue = preferences.getInt('vccmvFlowRampValue');
-        vccmvmaxValue = 60;
-        vccmvminValue = 1;
-        vccmvdefaultValue = preferences.getInt('vccmvdefaultValue');
-        vccmvparameterName = "RR";
-        vccmvparameterUnits = "";
-        vccmvRR = true;
-        vccmvIe = false;
-        vccmvPeep = false;
-        vccmvPcMin = false;
-        vccmvPcMax = false;
-        vccmvFio2 = false;
-        vccmvVt = false;
-        vccmvFlowRamp = false;
-        vccmvTih = false;
+        // vccmvmaxValue = 60;
+        // vccmvminValue = 1;
+        // vccmvdefaultValue = preferences.getInt('vccmvdefaultValue');
+        // vccmvparameterName = "RR";
+        // vccmvparameterUnits = "";
+        // vccmvRR = true;
+        // vccmvIe = false;
+        // vccmvPeep = false;
+        // vccmvPcMin = false;
+        // vccmvPcMax = false;
+        // vccmvFio2 = false;
+        // vccmvVt = false;
+        // vccmvFlowRamp = false;
+        // vccmvTih = false;
       } else if (checkData == "vacv") {
         vacvItrigValue = preferences.getInt('vacvItrigValue');
         vacvRrValue = preferences.getInt('vacvRrValue');
@@ -1146,31 +1144,31 @@ class _CheckPageState extends State<Dashboard> {
         vacvPcMaxValue = preferences.getInt('vacvPcMaxValue');
         vacvFio2Value = preferences.getInt('vacvFio2Value');
         vacvFlowRampValue = preferences.getInt('vacvFlowRampValue');
-        vacvmaxValue = 10;
-        vacvminValue = 1;
-        vacvdefaultValue = preferences.getInt('vacvdefaultValue');
-        vacvparameterName = "I Trig";
-        vacvparameterUnits = "cmH\u2082O Below Peep";
-        vacvItrig = true;
-        vacvRr = false;
-        vacvIe = false;
-        vacvPeep = false;
-        vacvVt = false;
-        vacvPcMin = false;
-        vacvPcMax = false;
-        vacvFio2 = false;
-        vacvFlowRamp = false;
+        // vacvmaxValue = 10;
+        // vacvminValue = 1;
+        // vacvdefaultValue = preferences.getInt('vacvdefaultValue');
+        // vacvparameterName = "I Trig";
+        // vacvparameterUnits = "cmH\u2082O Below PEEp";
+        // vacvItrig = true;
+        // vacvRr = false;
+        // vacvIe = false;
+        // vacvPeep = false;
+        // vacvVt = false;
+        // vacvPcMin = false;
+        // vacvPcMax = false;
+        // vacvFio2 = false;
+        // vacvFlowRamp = false;
       } else if (checkData == "psimv") {
-        psimvItrig = true;
-        psimvRr = false;
-        psimvIe = false;
-        psimvPeep = false;
-        psimvPc = false;
-        psimvPs = false;
-        psimvVtMin = false;
-        psimvVtMax = false;
-        psimvFio2 = false;
-        psimvFlowRamp = false;
+        // psimvItrig = true;
+        // psimvRr = false;
+        // psimvIe = false;
+        // psimvPeep = false;
+        // psimvPc = false;
+        // psimvPs = false;
+        // psimvVtMin = false;
+        // psimvVtMax = false;
+        // psimvFio2 = false;
+        // psimvFlowRamp = false;
 
         psimvItrigValue = preferences.getInt('psimvItrigValue');
         psimvRrValue = preferences.getInt('psimvRrValue');
@@ -1182,22 +1180,22 @@ class _CheckPageState extends State<Dashboard> {
         psimvVtMaxValue = preferences.getInt('psimvVtMaxValue');
         psimvFio2Value = preferences.getInt('psimvFio2Value');
         psimvFlowRampValue = preferences.getInt('psimvFlowRampValue');
-        psimvmaxValue = 10;
-        psimvminValue = 1;
-        psimvdefaultValue = preferences.getInt('psimvdefaultValue');
-        psimvparameterName = "I Trig";
-        psimvparameterUnits = "cmH\u2082O  Below Peep";
+        // psimvmaxValue = 10;
+        // psimvminValue = 1;
+        // psimvdefaultValue = preferences.getInt('psimvdefaultValue');
+        // psimvparameterName = "I Trig";
+        // psimvparameterUnits = "cmH\u2082O  Below Peep";
       } else if (checkData == "vsimv") {
-        vsimvItrig = true;
-        vsimvRr = false;
-        vsimvIe = false;
-        vsimvPeep = false;
-        vsimvVt = false;
-        vsimvPs = false;
-        vsimvPcMin = false;
-        vsimvPcMax = false;
-        vsimvFio2 = false;
-        vsimvFlowRamp = false;
+        // vsimvItrig = true;
+        // vsimvRr = false;
+        // vsimvIe = false;
+        // vsimvPeep = false;
+        // vsimvVt = false;
+        // vsimvPs = false;
+        // vsimvPcMin = false;
+        // vsimvPcMax = false;
+        // vsimvFio2 = false;
+        // vsimvFlowRamp = false;
         vsimvItrigValue = preferences.getInt('vsimvItrigValue');
         vsimvRrValue = preferences.getInt('vsimvRrValue');
         vsimvIeValue = preferences.getInt('vsimvIeValue');
@@ -1209,9 +1207,9 @@ class _CheckPageState extends State<Dashboard> {
         vsimvFio2Value = preferences.getInt('vsimvFio2Value');
         vsimvFlowRampValue = preferences.getInt('vsimvFlowRampValue');
 
-        vsimvdefaultValue = preferences.getInt('vsimvdefaultValue');
-        vsimvparameterName = "I Trig";
-        vsimvparameterUnits = "cmH\u2082O Below Peep";
+        // vsimvdefaultValue = preferences.getInt('vsimvdefaultValue');
+        // vsimvparameterName = "I Trig";
+        // vsimvparameterUnits = "cmH\u2082O Below PEEP";
       } else if (checkData == "psv") {
         psvItrigValue = preferences.getInt('psvItrigValue');
         psvPeepValue = preferences.getInt('psvPeepValue');
@@ -1226,24 +1224,24 @@ class _CheckPageState extends State<Dashboard> {
         psvBackupRrValue = preferences.getInt('psvBackupRrValue');
         psvMinTeValue = preferences.getInt('psvMinTeValue');
         psvPcValue = preferences.getInt('psvPcValue');
-        psvItrig = true;
-        psvPeep = false;
-        psvIe = false;
-        psvPs = false;
-        psvTi = false;
-        psvVtMin = false;
-        psvVtMax = false;
-        psvFio2 = false;
-        psvAtime = false;
-        psvEtrig = false;
-        psvBackupRr = false;
-        psvMinTe = false;
-        psvPc = false;
-        psvmaxValue = 10;
-        psvminValue = 1;
-        psvdefaultValue = preferences.getInt('psvdefaultValue');
-        psvparameterName = "I Trig";
-        psvparameterUnits = "cmH\u2082O Below Peep";
+        // psvItrig = true;
+        // psvPeep = false;
+        // psvIe = false;
+        // psvPs = false;
+        // psvTi = false;
+        // psvVtMin = false;
+        // psvVtMax = false;
+        // psvFio2 = false;
+        // psvAtime = false;
+        // psvEtrig = false;
+        // psvBackupRr = false;
+        // psvMinTe = false;
+        // psvPc = false;
+        // psvmaxValue = 10;
+        // psvminValue = 1;
+        // psvdefaultValue = preferences.getInt('psvdefaultValue');
+        // psvparameterName = "I Trig";
+        // psvparameterUnits = "cmH\u2082O Below PEEP";
       } else if (checkData == "prvc") {
         prvcItrigValue = preferences.getInt('prvcItrigValue');
         prvcRrValue = preferences.getInt('prvcRrValue');
@@ -1254,20 +1252,20 @@ class _CheckPageState extends State<Dashboard> {
         prvcPcMaxValue = preferences.getInt('prvcPcMaxValue');
         prvcFio2Value = preferences.getInt('prvcFio2Value');
         prvcFlowRampValue = preferences.getInt('prvcFlowRampValue');
-        prvcmaxValue = 10;
-        prvcminValue = 1;
-        prvcdefaultValue = preferences.getInt('prvcdefaultValue');
-        prvcparameterName = "I Trig";
-        prvcparameterUnits = "cmH\u2082O Below Peep";
-        prvcItrig = true;
-        prvcRr = false;
-        prvcIe = false;
-        prvcPeep = false;
-        prvcVt = false;
-        prvcPcMin = false;
-        prvcPcMax = false;
-        prvcFio2 = false;
-        prvcFlowRamp = false;
+        // prvcmaxValue = 10;
+        // prvcminValue = 1;
+        // prvcdefaultValue = preferences.getInt('prvcdefaultValue');
+        // prvcparameterName = "I Trig";
+        // prvcparameterUnits = "cmH\u2082O Below PEEP";
+        // prvcItrig = true;
+        // prvcRr = false;
+        // prvcIe = false;
+        // prvcPeep = false;
+        // prvcVt = false;
+        // prvcPcMin = false;
+        // prvcPcMax = false;
+        // prvcFio2 = false;
+        // prvcFlowRamp = false;
       }
     });
   }
@@ -4359,8 +4357,8 @@ class _CheckPageState extends State<Dashboard> {
                                                       const EdgeInsets.only(
                                                           right: 8.0),
                                                   child: Text(
-                                                    pplateauDisplay
-                                                        .toStringAsFixed(0),
+                                                  _buttonPressed ?  pplateauDisplay
+                                                        .toStringAsFixed(0) : "--",
                                                     // "0000",
                                                     style: TextStyle(
                                                         color: Colors.pink,
@@ -4433,7 +4431,7 @@ class _CheckPageState extends State<Dashboard> {
                                                           const EdgeInsets.all(
                                                               2.0),
                                                       child: Text(
-                                                        "ms",
+                                                        "s",
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 10),
@@ -4448,7 +4446,7 @@ class _CheckPageState extends State<Dashboard> {
                                                               right: 8.0),
                                                       child: Text(
                                                         tiValue
-                                                            .toStringAsFixed(0),
+                                                            .toStringAsFixed(1),
                                                         // "0000",
                                                         style: TextStyle(
                                                             color: Colors.blue,
@@ -4521,7 +4519,7 @@ class _CheckPageState extends State<Dashboard> {
                                                           const EdgeInsets.all(
                                                               2.0),
                                                       child: Text(
-                                                        "ms",
+                                                        "s",
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 10),
@@ -4536,7 +4534,7 @@ class _CheckPageState extends State<Dashboard> {
                                                               right: 8.0),
                                                       child: Text(
                                                         teValue
-                                                            .toStringAsFixed(0),
+                                                            .toStringAsFixed(1),
                                                         // "0000",
                                                         style: TextStyle(
                                                             color: Colors.blue,
@@ -6232,243 +6230,244 @@ class _CheckPageState extends State<Dashboard> {
         Column(
           children: [
             InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 60;
-                  psvminValue = 1;
-                  psvparameterName = "Backup RR";
-                  psvparameterUnits = "bpm";
-                  psvItrig = false;
-                  psvPeep = false;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = false;
-                  psvEtrig = false;
-                  psvPc = false;
-                  psvBackupRr = true;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvBackupRr ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Backup RR",
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "bpm",
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "60",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "1",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+                onTap: () {
+                  setState(() {
+                    psvmaxValue = 80;
+                    psvminValue = 1;
+                    psvparameterName = "PS";
+                    psvparameterUnits = "cmH\u2082O above PEEP";
+                    psvItrig = false;
+                    psvPeep = false;
+                    psvIe = false;
+                    psvPs = true;
+                    psvTi = false;
+                    psvVtMin = false;
+                    psvVtMax = false;
+                    psvFio2 = false;
+                    psvAtime = false;
+                    psvEtrig = false;
+                    psvPc = false;
+                    psvBackupRr = false;
+                    psvMinTe = false;
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 130,
+                    height: 130,
+                    child: Card(
+                      elevation: 40,
+                      color: psvPs ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Center(
+                            child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
                               child: Text(
-                                psvBackupRrValue.toString(),
+                                "PS",
                                 style: TextStyle(
-                                    fontSize: 35,
-                                    color: psvBackupRr
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: psvPs
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psvBackupRrValue != null
-                                    ? psvBackupRrValue / 60
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 61;
-                  psvminValue = 1;
-                  psvparameterName = "Backup I:E";
-                  psvparameterUnits = "";
-                  psvItrig = false;
-                  psvPeep = false;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = false;
-                  psvIe = true;
-                  psvPc = false;
-                  psvBackupRr = false;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvIe ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Backup I:E",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvIe
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvIe
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "1:4.0",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvIe
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "4.0:1",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvIe
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+                            Align(
+                              alignment: Alignment.topRight,
                               child: Text(
-                                // psvIeValue,
-                                getIeData(psvIeValue, 1),
+                                "cmH\u2082O",
                                 style: TextStyle(
-                                    fontSize: 35,
-                                    color: psvIe
+                                    fontSize: 12,
+                                    color: psvPs
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvIe ? Color(0xFF213855) : Color(0xFFE0E0E0),
-                                ),
-                                value: psvIeValue != null ? psvIeValue / 61 : 0,
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                "80",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvPs
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          )
-                        ],
-                      )),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "1",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvPs
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: Text(
+                                  psvPsValue.toString(),
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: psvPs
+                                          ? Color(0xFF213855)
+                                          : Color(0xFFE0E0E0)),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 20.0, left: 10, right: 10),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: LinearProgressIndicator(
+                                  backgroundColor: Colors.grey,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    psvPs
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0),
+                                  ),
+                                  value:
+                                      psvPsValue != null ? psvPsValue / 80 : 0,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            InkWell(
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    psvmaxValue = 80;
+                    psvminValue = 1;
+                    psvparameterName = "PC";
+                    psvparameterUnits = "cmH2O above PEEP";
+                    psvItrig = false;
+                    psvPeep = false;
+                    psvIe = false;
+                    psvPs = false;
+                    psvTi = false;
+                    psvVtMin = false;
+                    psvVtMax = false;
+                    psvFio2 = false;
+                    psvAtime = false;
+                    psvBackupRr = false;
+                    psvEtrig = false;
+                    psvPc = true;
+                    psvMinTe = false;
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 130,
+                    height: 130,
+                    child: Card(
+                      elevation: 40,
+                      color: psvPc ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Center(
+                            child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "PC",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: psvPc
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                "cmH2O",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvPc
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                "80",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvPc
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "1",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvPc
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: Text(
+                                  psvPcValue.toString(),
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: psvPc
+                                          ? Color(0xFF213855)
+                                          : Color(0xFFE0E0E0)),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 20.0, left: 10, right: 10),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: LinearProgressIndicator(
+                                  backgroundColor: Colors.grey,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    psvPc
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0),
+                                  ),
+                                  value:
+                                      psvPcValue != null ? psvPcValue / 80 : 0,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
               onTap: () {
                 setState(() {
                   psvmaxValue = 30;
-                  psvminValue = 1;
+                  psvminValue = 0;
                   psvparameterName = "PEEP";
                   psvparameterUnits = "";
                   psvItrig = false;
@@ -6582,6 +6581,14 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+            ]),
+        Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+             
+           
+            
           ],
         ),
         Column(
@@ -6591,7 +6598,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  psvmaxValue = 30;
+                  psvmaxValue = 55;
                   psvminValue = 5;
                   psvparameterName = "A Time";
                   psvparameterUnits = "s";
@@ -6884,7 +6891,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "10",
+                              "-10",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psvItrig
@@ -6895,7 +6902,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "1",
+                              "-1",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psvItrig
@@ -7184,245 +7191,7 @@ class _CheckPageState extends State<Dashboard> {
               //     ),
               //   ),
               // ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 80;
-                    psvminValue = 1;
-                    psvparameterName = "PS";
-                    psvparameterUnits = "cmH\u2082O";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = true;
-                    psvTi = false;
-                    psvVtMin = false;
-                    psvVtMax = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvEtrig = false;
-                    psvPc = false;
-                    psvBackupRr = false;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvPs ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "PS",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "cmH\u2082O",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "80",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "1",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvPsValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvPs
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value:
-                                      psvPsValue != null ? psvPsValue / 80 : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ]),
-        Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 30;
-                    psvminValue = 0;
-                    psvparameterName = "Ti";
-                    psvparameterUnits = "s";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = false;
-                    psvTi = true;
-                    psvVtMin = false;
-                    psvVtMax = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvEtrig = false;
-                    psvPc = false;
-                    psvBackupRr = false;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvTi ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Ti",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvTi
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "s",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvTi
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "30",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvTi
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "0",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvTi
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvTiValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvTi
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvTi
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value:
-                                      psvTiValue != null ? psvTiValue / 60 : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              
               // InkWell(
               //   onTap: () {
               //     setState(() {
@@ -7541,25 +7310,258 @@ class _CheckPageState extends State<Dashboard> {
               //     ),
               //   ),
               // ),
-              InkWell(
+               InkWell(
+              onTap: () {
+                setState(() {
+                  psvmaxValue = 60;
+                  psvminValue = 1;
+                  psvparameterName = "Backup RR";
+                  psvparameterUnits = "bpm";
+                  psvItrig = false;
+                  psvPeep = false;
+                  psvIe = false;
+                  psvPs = false;
+                  psvTi = false;
+                  psvVtMin = false;
+                  psvVtMax = false;
+                  psvFio2 = false;
+                  psvAtime = false;
+                  psvEtrig = false;
+                  psvPc = false;
+                  psvBackupRr = true;
+                  psvMinTe = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psvBackupRr ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Backup RR",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: psvBackupRr
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "bpm",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: psvBackupRr
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "60",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvBackupRr
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvBackupRr
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                psvBackupRrValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psvBackupRr
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psvBackupRr
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: psvBackupRrValue != null
+                                    ? psvBackupRrValue / 60
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  psvmaxValue = 61;
+                  psvminValue = 1;
+                  psvparameterName = "Backup I:E";
+                  psvparameterUnits = "";
+                  psvItrig = false;
+                  psvPeep = false;
+                  psvIe = false;
+                  psvPs = false;
+                  psvTi = false;
+                  psvVtMin = false;
+                  psvVtMax = false;
+                  psvFio2 = false;
+                  psvAtime = false;
+                  psvIe = true;
+                  psvPc = false;
+                  psvBackupRr = false;
+                  psvMinTe = false;
+                });
+              },
+              child: Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: psvIe ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Backup I:E",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: psvIe
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvIe
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "1:4.0",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvIe
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "4.0:1",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: psvIe
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                // psvIeValue,
+                                getIeData(psvIeValue, 1),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: psvIe
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  psvIe ? Color(0xFF213855) : Color(0xFFE0E0E0),
+                                ),
+                                value: psvIeValue != null ? psvIeValue / 61 : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+             InkWell(
                 onTap: () {
                   setState(() {
-                    psvmaxValue = 80;
+                    psvmaxValue = 46;
                     psvminValue = 1;
-                    psvparameterName = "PC";
-                    psvparameterUnits = "cmH2O";
+                    psvparameterName = "Ti";
+                    psvparameterUnits = "s";
                     psvItrig = false;
                     psvPeep = false;
                     psvIe = false;
                     psvPs = false;
-                    psvTi = false;
+                    psvTi = true;
                     psvVtMin = false;
                     psvVtMax = false;
                     psvFio2 = false;
                     psvAtime = false;
-                    psvBackupRr = false;
                     psvEtrig = false;
-                    psvPc = true;
+                    psvPc = false;
+                    psvBackupRr = false;
                     psvMinTe = false;
                   });
                 },
@@ -7569,7 +7571,7 @@ class _CheckPageState extends State<Dashboard> {
                     height: 130,
                     child: Card(
                       elevation: 40,
-                      color: psvPc ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      color: psvTi ? Color(0xFFE0E0E0) : Color(0xFF213855),
                       child: Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Center(
@@ -7578,11 +7580,11 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                "PC",
+                                "Ti",
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
-                                    color: psvPc
+                                    color: psvTi
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -7590,10 +7592,10 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.topRight,
                               child: Text(
-                                "cmH2O",
+                                "s",
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: psvPc
+                                    color: psvTi
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -7601,10 +7603,10 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: Text(
-                                "80",
+                                "5.0",
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: psvPc
+                                    color: psvTi
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -7612,10 +7614,10 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.bottomLeft,
                               child: Text(
-                                "1",
+                                "0.5",
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: psvPc
+                                    color: psvTi
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
@@ -7625,10 +7627,10 @@ class _CheckPageState extends State<Dashboard> {
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 1.0),
                                 child: Text(
-                                  psvPcValue.toString(),
+                                  getTiValue(psvTiValue).toString(),
                                   style: TextStyle(
                                       fontSize: 35,
-                                      color: psvPc
+                                      color: psvTi
                                           ? Color(0xFF213855)
                                           : Color(0xFFE0E0E0)),
                                 ),
@@ -7642,12 +7644,12 @@ class _CheckPageState extends State<Dashboard> {
                                 child: LinearProgressIndicator(
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvPc
+                                    psvTi
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0),
                                   ),
                                   value:
-                                      psvPcValue != null ? psvPcValue / 80 : 0,
+                                      psvTiValue != null ? psvTiValue / 46 : 0,
                                 ),
                               ),
                             )
@@ -7658,9 +7660,10 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ),
-              Container(height: 130)
+              
+              // Container(width: 146)
             ]),
-        SizedBox(width: 118),
+        SizedBox(width: 250),
         Column(
           children: [
             Container(
@@ -7970,8 +7973,7 @@ class _CheckPageState extends State<Dashboard> {
                                               // ? psvIeValue.toInt().toString()
                                               ? getIeData(psvIeValue, 1)
                                               : psvTi
-                                                  ? psvTiValue
-                                                      .toInt()
+                                                  ? getTiValue(psvTiValue)                                                      
                                                       .toString()
                                                   : psvVtMin
                                                       ? psvVtMinValue
@@ -8017,24 +8019,28 @@ class _CheckPageState extends State<Dashboard> {
                             min: psvminValue.toDouble(),
                             max: psvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (psvItrig == true && psvItrigValue != 10) {
+                              if (psvItrig == true ) {
                                 setState(() {
-                                  psvItrigValue = psvItrigValue + 1;
-                                  if (psvPeepValue <= psvItrigValue) {
-                                    if (psvPeepValue == 0) {
-                                      psvItrigValue = 1;
-                                    } else {
+                                 if(psvPeepValue==0){
+                                        psvItrigValue = 1;
+                                      }else{
+                                    if (value.toInt() > psvPeepValue) {
                                       psvItrigValue = psvPeepValue;
+                                    } else {
+                                      psvItrigValue = value.toInt();
                                     }
-                                  }
+                                      }
                                 });
                               } else if (psvPeep == true) {
                                 setState(() {
-                                  psvPeepValue = value.toInt();
-                                  if (psvItrigValue > 1 &&
-                                      psvItrigValue > psvPeepValue) {
-                                    psvItrigValue = psvPeepValue;
+                                      psvPeepValue = value.toInt();
+                                if (psvItrigValue > 1 && psvItrigValue > psvPeepValue) {
+                                  if(psvPeepValue==0){
+                                    psvItrigValue = 1;
+                                  }else{
+                                  psvItrigValue = psvPeepValue;
                                   }
+                                }
                                 });
                               } else if (psvPs == true) {
                                 setState(() {
@@ -8133,7 +8139,7 @@ class _CheckPageState extends State<Dashboard> {
                                 ? getIeData(psvminValue, 1)
                                 : psvItrig
                                     ? "-" + psvminValue.toString()
-                                    : psvminValue.toString()),
+                                    : psvTi ? getTiValue(psvminValue).toString() :psvminValue.toString()),
                             Text(
                               psvparameterUnits,
                               style: TextStyle(fontSize: 16),
@@ -8142,7 +8148,7 @@ class _CheckPageState extends State<Dashboard> {
                                 ? getIeData(psvmaxValue, 1)
                                 : psvItrig
                                     ? "-" + psvmaxValue.toString()
-                                    : psvmaxValue.toString())
+                                    : psvTi ? getTiValue(psvmaxValue).toString() :psvmaxValue.toString())
                           ],
                         ),
                       )
@@ -8628,7 +8634,7 @@ class _CheckPageState extends State<Dashboard> {
                   pacvmaxValue = 80;
                   pacvminValue = 1;
                   pacvparameterName = "PC";
-                  pacvparameterUnits = "cmH\u2082O";
+                  pacvparameterUnits = "cmH\u2082O above PEEP";
                   pacvItrig = false;
                   pacvRr = false;
                   pacvIe = false;
@@ -9522,23 +9528,26 @@ class _CheckPageState extends State<Dashboard> {
                             min: pacvminValue.toDouble() ?? 0,
                             max: pacvmaxValue.toDouble() ?? 0,
                             onChanged: (double value) {
-                              if (pacvItrig == true &&
-                                  pacvItrigValue != pacvPeepValue) {
+                              if (pacvItrig == true ) {
                                 setState(() {
-                                  pacvItrigValue = value.toInt();
-                                  if (pacvPeepValue <= pacvItrigValue) {
-                                    if (pacvPeepValue == 0) {
-                                      pacvItrigValue = 1;
-                                    } else {
+                                      if(pacvPeepValue==0){
+                                        pacvItrigValue = 1;
+                                      }else{
+                                    if (value.toInt() > pacvPeepValue) {
                                       pacvItrigValue = pacvPeepValue;
+                                    } else {
+                                      pacvItrigValue = value.toInt();
                                     }
-                                  }
+                                      }
                                 });
                               } else if (pacvPeep == true) {
                                 pacvPeepValue = value.toInt();
-                                if (pacvItrigValue > 1 &&
-                                    pacvItrigValue > pacvPeepValue) {
+                                if (pacvItrigValue > 1 && pacvItrigValue > pacvPeepValue) {
+                                  if(pacvPeepValue==0){
+                                    pacvItrigValue = 1;
+                                  }else{
                                   pacvItrigValue = pacvPeepValue;
+                                  }
                                 }
                               } else if (pacvRr == true) {
                                 setState(() {
@@ -10895,22 +10904,26 @@ class _CheckPageState extends State<Dashboard> {
                             onChanged: (double value) {
                               if (prvcItrig == true && prvcItrigValue != 10) {
                                 setState(() {
-                                  prvcItrigValue = prvcItrigValue + 1;
-                                  if (prvcPeepValue <= prvcItrigValue) {
-                                    if (prvcPeepValue == 0) {
-                                      prvcItrigValue = 1;
-                                    } else {
+                                 if(prvcPeepValue==0){
+                                        prvcItrigValue = 1;
+                                      }else{
+                                    if (value.toInt() > prvcPeepValue) {
                                       prvcItrigValue = prvcPeepValue;
+                                    } else {
+                                      prvcItrigValue = value.toInt();
                                     }
-                                  }
+                                      }
                                 });
                               } else if (prvcPeep == true) {
                                 setState(() {
-                                  prvcPeepValue = value.toInt();
-                                  if (prvcItrigValue > 1 &&
-                                      prvcItrigValue > prvcPeepValue) {
-                                    prvcItrigValue = prvcPeepValue;
+                                      prvcPeepValue = value.toInt();
+                                if (prvcItrigValue > 1 && prvcItrigValue > prvcPeepValue) {
+                                  if(prvcPeepValue==0){
+                                    prvcItrigValue = 1;
+                                  }else{
+                                  prvcItrigValue = prvcPeepValue;
                                   }
+                                }
                                 });
                               } else if (prvcRr == true) {
                                 setState(() {
@@ -11367,7 +11380,7 @@ class _CheckPageState extends State<Dashboard> {
                   psimvmaxValue = 80;
                   psimvminValue = 1;
                   psimvparameterName = "PC";
-                  psimvparameterUnits = "cmH\u2082O";
+                  psimvparameterUnits = "cmH\u2082O above PEEP";
                   psimvItrig = false;
                   psimvRr = false;
                   psimvIe = false;
@@ -11950,7 +11963,7 @@ class _CheckPageState extends State<Dashboard> {
                   psimvmaxValue = 70;
                   psimvminValue = 1;
                   psimvparameterName = "PS";
-                  psimvparameterUnits = "cmH\u2082O";
+                  psimvparameterUnits = "cmH\u2082O above PEEP";
                   psimvItrig = false;
                   psimvRr = false;
                   psimvIe = false;
@@ -12507,24 +12520,28 @@ class _CheckPageState extends State<Dashboard> {
                             min: psimvminValue.toDouble() ?? 0,
                             max: psimvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (psimvItrig == true && psimvItrigValue != 10) {
+                              if (psimvItrig == true){
                                 setState(() {
-                                  psimvItrigValue = psimvItrigValue + 1;
-                                  if (psimvPeepValue <= psimvItrigValue) {
-                                    if (psimvPeepValue == 0) {
-                                      psimvItrigValue = 1;
-                                    } else {
+                                  if(psimvPeepValue==0){
+                                        psimvItrigValue = 1;
+                                      }else{
+                                    if (value.toInt() > psimvPeepValue) {
                                       psimvItrigValue = psimvPeepValue;
+                                    } else {
+                                      psimvItrigValue = value.toInt();
                                     }
-                                  }
+                                      }
                                 });
                               } else if (psimvPeep == true) {
                                 setState(() {
-                                  psimvPeepValue = value.toInt();
-                                  if (psimvItrigValue > 1 &&
-                                      psimvItrigValue > psimvPeepValue) {
-                                    psimvItrigValue = psimvPeepValue;
+                                         psimvPeepValue = value.toInt();
+                                if (psimvItrigValue > 1 && psimvItrigValue > psimvPeepValue) {
+                                  if(psimvPeepValue==0){
+                                    psimvItrigValue = 1;
+                                  }else{
+                                  psimvItrigValue = psimvPeepValue;
                                   }
+                                }
                                 });
                               } else if (psimvRr == true) {
                                 setState(() {
@@ -12992,7 +13009,7 @@ class _CheckPageState extends State<Dashboard> {
                   pccmvmaxValue = 80;
                   pccmvminValue = 1;
                   pccmvparameterName = "PC";
-                  pccmvparameterUnits = "cmH\u2082O";
+                  pccmvparameterUnits = "cmH\u2082O above PEEP";
                   pccmvRR = false;
                   pccmvIe = false;
                   pccmvPeep = false;
@@ -15864,7 +15881,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "10",
+                              "-10",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvItrig
@@ -15875,7 +15892,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "1",
+                              "-1",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvItrig
@@ -16163,7 +16180,7 @@ class _CheckPageState extends State<Dashboard> {
                   vsimvmaxValue = 70;
                   vsimvminValue = 1;
                   vsimvparameterName = "PS";
-                  vsimvparameterUnits = "cmH\u2082O";
+                  vsimvparameterUnits = "cmH\u2082O above PEEP";
                   vsimvItrig = false;
                   vsimvRr = false;
                   vsimvIe = false;
@@ -16723,22 +16740,26 @@ class _CheckPageState extends State<Dashboard> {
                             onChanged: (double value) {
                               if (vsimvItrig == true && vsimvItrigValue != 10) {
                                 setState(() {
-                                  vsimvItrigValue = vsimvItrigValue + 1;
-                                  if (vsimvPeepValue <= vsimvItrigValue) {
-                                    if (vsimvPeepValue == 0) {
-                                      vsimvItrigValue = 1;
-                                    } else {
+                                 if(vsimvPeepValue==0){
+                                        vsimvItrigValue = 1;
+                                      }else{
+                                    if (value.toInt() > vsimvPeepValue) {
                                       vsimvItrigValue = vsimvPeepValue;
+                                    } else {
+                                      vsimvItrigValue = value.toInt();
                                     }
-                                  }
+                                      }
                                 });
                               } else if (vsimvPeep == true) {
                                 setState(() {
-                                  vsimvPeepValue = value.toInt();
-                                  if (vsimvItrigValue > 1 &&
-                                      vsimvItrigValue > vsimvPeepValue) {
-                                    vsimvItrigValue = vsimvPeepValue;
+                                    vsimvPeepValue = value.toInt();
+                                if (vsimvItrigValue > 1 && vsimvItrigValue > vsimvPeepValue) {
+                                  if(vsimvPeepValue==0){
+                                    vsimvItrigValue = 1;
+                                  }else{
+                                  vsimvItrigValue = vsimvPeepValue;
                                   }
+                                }
                                 });
                               } else if (vsimvRr == true) {
                                 setState(() {
@@ -18207,24 +18228,28 @@ class _CheckPageState extends State<Dashboard> {
                             min: vacvminValue.toDouble(),
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (vacvItrig == true && vacvItrigValue != 10) {
+                              if (vacvItrig == true ) {
                                 setState(() {
-                                  vacvItrigValue = vacvItrigValue + 1;
-                                  if (vacvPeepValue <= vacvItrigValue) {
-                                    if (vacvPeepValue == 0) {
-                                      vacvItrigValue = 1;
-                                    } else {
+                                   if(vacvPeepValue==0){
+                                        vacvItrigValue = 1;
+                                      }else{
+                                    if (value.toInt() > vacvPeepValue) {
                                       vacvItrigValue = vacvPeepValue;
+                                    } else {
+                                      vacvItrigValue = value.toInt();
                                     }
-                                  }
+                                      }
                                 }); // slider itrig
                               } else if (vacvPeep == true) {
                                 setState(() {
-                                  vacvPeepValue = value.toInt();
-                                  if (vacvItrigValue > 1 &&
-                                      vacvItrigValue > vacvPeepValue) {
-                                    vacvItrigValue = vacvPeepValue;
+                                vacvPeepValue = value.toInt();
+                                if (vacvItrigValue > 1 && vacvItrigValue > vacvPeepValue) {
+                                  if(vacvPeepValue==0){
+                                    vacvItrigValue = 1;
+                                  }else{
+                                  vacvItrigValue = vacvPeepValue;
                                   }
+                                }
                                 });
                               } else if (vacvRr == true) {
                                 setState(() {
@@ -18649,6 +18674,57 @@ class _CheckPageState extends State<Dashboard> {
     if (result != null) {
       getData();
     }
+  }
+
+  getTiValue(checkTi){
+    var data = checkTi == 1 ? "0.5" :
+checkTi == 2 ? "0.6":
+checkTi == 3 ? "0.7":
+checkTi == 4 ? "0.8":
+checkTi == 5 ? "0.9":
+checkTi == 6 ? "1.0":
+checkTi == 7 ? "1.1":
+checkTi == 8 ? "1.2":
+checkTi == 9 ? "1.3":
+checkTi == 10 ? "1.4":
+checkTi == 11 ? "1.5":
+checkTi == 12 ? "1.6":
+checkTi == 13 ? "1.7":
+checkTi == 14 ? "1.8":
+checkTi == 15 ? "1.9":
+checkTi == 16 ? "2.0":
+checkTi == 17 ? "2.1":
+checkTi == 18 ? "2.2":
+checkTi == 19 ? "2.3":
+checkTi == 20 ? "2.4":
+checkTi == 21 ? "2.5":
+checkTi == 22 ? "2.6":
+checkTi == 23 ? "2.7":
+checkTi == 24 ? "2.8":
+checkTi == 25 ? "2.9":
+checkTi == 26 ? "3.0":
+checkTi == 27 ? "3.1":
+checkTi == 28 ? "3.2":
+checkTi == 29 ? "3.3":
+checkTi == 30 ? "3.4":
+checkTi == 31 ? "3.5":
+checkTi == 32 ? "3.6":
+checkTi == 33 ? "3.7":
+checkTi == 34 ? "3.8":
+checkTi == 35 ? "3.9":
+checkTi == 36 ? "4.0":
+checkTi == 37 ? "4.1":
+checkTi == 38 ? "4.2":
+checkTi == 39 ? "4.3":
+checkTi == 40 ? "4.4":
+checkTi == 41 ? "4.5":
+checkTi == 42 ? "4.6":
+checkTi == 43 ? "4.7":
+checkTi == 44 ? "4.8":
+checkTi == 45 ? "4.9":
+checkTi == 46 ? "5.0" : "0.5";
+
+return data;
   }
 
   getIeData(pccmvIeValue, int res) {
@@ -19223,6 +19299,13 @@ class _CheckPageState extends State<Dashboard> {
       var dataE = getIeData(psvIeValue, 3);
       var dataE1 = double.tryParse(dataE);
       var dataE2 = (dataE1 * 10).toInt();
+
+      var calTi = getTiValue(psvTiValue);
+      var calTi1 = double.tryParse(calTi);
+      var calTi2 = (calTi1 * 1000).toInt();
+
+      // var calTi = (double.tryParse(getTiValue(psvTiValue)) * 1000).toInt();
+
       setState(() {
         modeWriteList.add(0x7E);
         modeWriteList.add(0);
@@ -19250,10 +19333,10 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add((dataI2 & 0x00FF));
         modeWriteList.add((dataE2 & 0x00FF));
 
-        var calTi = psvTiValue * 1000;
+        
 
-        modeWriteList.add((calTi & 0xFF00) >> 8); //11
-        modeWriteList.add((calTi & 0x00FF)); //12
+        modeWriteList.add((calTi2 & 0xFF00) >> 8); //11
+        modeWriteList.add((calTi2 & 0x00FF)); //12
 
         modeWriteList.add((psvBackupRrValue & 0xFF00) >> 8); //19
         modeWriteList.add((psvBackupRrValue & 0x00FF));
@@ -19271,6 +19354,7 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add((psvPcValue & 0x00FF));
 
         modeWriteList.add(0x7F); //23
+        // Fluttertoast.showToast(msg: modeWriteList.toString());
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -19456,7 +19540,7 @@ class _CheckPageState extends State<Dashboard> {
         pacvminValue = 1;
         pacvdefaultValue = 6;
         pacvparameterName = "I Trig";
-        pacvparameterUnits = "cmH\u2082O Below Peep";
+        pacvparameterUnits = "cmH\u2082O Below PEEP";
         pacvItrig = true;
         pacvRr = false;
         pacvIe = false;
@@ -19534,7 +19618,7 @@ class _CheckPageState extends State<Dashboard> {
         vacvminValue = 1;
         vacvdefaultValue = 6;
         vacvparameterName = "I Trig";
-        vacvparameterUnits = "cmH\u2082O Below Peep";
+        vacvparameterUnits = "cmH\u2082O Below PEEP";
         vacvItrig = true;
         vacvRr = false;
         vacvIe = false;
@@ -19551,7 +19635,7 @@ class _CheckPageState extends State<Dashboard> {
         psvPeepValue = 10;
         psvIeValue = 51;
         psvPsValue = 30;
-        psvTiValue = 5;
+        psvTiValue = 1;
         psvVtMinValue = 0;
         psvVtMaxValue = 2400;
         psvFio2Value = 21;
@@ -19577,7 +19661,7 @@ class _CheckPageState extends State<Dashboard> {
         psvminValue = 1;
         psvdefaultValue = 6;
         psvparameterName = "I Trig";
-        psvparameterUnits = "cmH\u2082O Below Peep";
+        psvparameterUnits = "cmH\u2082O Below PEEP";
       });
     } else if (vsimvEnabled == true) {
       setState(() {
@@ -19605,7 +19689,7 @@ class _CheckPageState extends State<Dashboard> {
         vsimvminValue = 1;
         vsimvdefaultValue = 6;
         vsimvparameterName = "I Trig";
-        vsimvparameterUnits = "cmH\u2082O Below Peep";
+        vsimvparameterUnits = "cmH\u2082O Below PEEP";
       });
     } else if (psimvEnabled == true) {
       setState(() {
@@ -19633,7 +19717,7 @@ class _CheckPageState extends State<Dashboard> {
         vsimvminValue = 1;
         vsimvdefaultValue = 6;
         vsimvparameterName = "I Trig";
-        vsimvparameterUnits = "cmH\u2082O Below Peep";
+        vsimvparameterUnits = "cmH\u2082O Below PEEP";
       });
     }
   }
