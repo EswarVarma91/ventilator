@@ -66,9 +66,7 @@ class _PatientsDatainSlotsState extends State<PatientsDatainSlots> {
           initialData: List(),
           builder: (context, snapshot) {
              if(snapshot.data.isEmpty)
-             return Center(
-                child: Text("No Data Available"),
-              );
+             return Center(child: CircularProgressIndicator());
             else {
               return GridView.builder(
                   itemCount: snapshot.data.length,

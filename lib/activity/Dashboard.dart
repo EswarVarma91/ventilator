@@ -175,6 +175,7 @@ class _CheckPageState extends State<Dashboard> {
       alarmEnabled = false,
       selfTestingEnabled = false,
       callibrationEnabled = false,
+      selfTestingButtonEnabled = false,
       newTreatEnabled = false,
       monitorEnabled = false,
       pccmvEnabled = true,
@@ -470,6 +471,7 @@ class _CheckPageState extends State<Dashboard> {
   bool newTreatmentEnabled = false, powerButtonEnabled = false;
   bool isplaying = false,
       _buttonPressed = false,
+      _buttonPressedE = false,
       respiratoryEnable = false,
       insExpButtonEnable = false;
   int previousCode = 101,
@@ -665,6 +667,7 @@ class _CheckPageState extends State<Dashboard> {
             setState(() {
               respiratoryEnable = false;
               insExpButtonEnable = false;
+              selfTestingButtonEnabled = false;
               sendSoundOff();
               powerButtonEnabled = true;
               // psValue1 = 0;
@@ -674,12 +677,10 @@ class _CheckPageState extends State<Dashboard> {
               // peepDisplayValue = 0;
               // rrtotalValue = 0;
               // mapDisplayValue = 0;
-              // peepDisplayValue = 0;
               // fio2DisplayParameter = 0;
               // pressurePoints.clear();
               // volumePoints.clear();
               // flowPoints.clear();
-              // playOnEnabled = false;
             });
             // if (playOnEnabled) {
             //   if (mounted) {
@@ -706,10 +707,14 @@ class _CheckPageState extends State<Dashboard> {
             setState(() {
               // powerButtonEnabled = false;
             });
+            
           }
+          // Fluttertoast.showToast(msg:"timeout "+differnceD.inSeconds.toString());
+          // if(differnceD.inSeconds>61){
+          //   turnOffScreen();
+          // }
         });
       }else{
-        // Fluttertoast.showToast(msg:"null");
       }
     });
     _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
@@ -729,28 +734,6 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
     });
-// _timer2 = Timer.periodic(Duration(minutes: 12), (timer) async {
-//       if (_status == "Connected") {
-
-//         var now = new DateTime.now();
-//         setState(() {
-//           presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-//           DateTime date1 =
-//               DateFormat("yyyy-MM-dd HH:mm:ss").parse(lastRecordTime);
-//           DateTime date2 = DateFormat("yyyy-MM-dd HH:mm:ss").parse(presentTime);
-//           var differnceD = date2.difference(date1);
-//           if (differnceD.inSeconds > 1200) {
-//             setState(() {
-//               powerButtonEnabled = true;
-//             });
-//           } else {
-//             setState(() {
-//               powerButtonEnabled = false;
-//             });
-//           }
-//         });
-//       }
-//     });
   }
 
   saveData(VentilatorOMode data, String patientId) async {
@@ -906,6 +889,37 @@ class _CheckPageState extends State<Dashboard> {
           setState(() {
             //  sleep(Duration(seconds: 2));
             _buttonPressed = false;
+            // _loopActive = true;
+          });
+        }
+      });
+      // Fluttertoast.showToast(msg: timerCounter.toString());
+
+      // wait a bit
+      await Future.delayed(Duration(seconds: 1));
+    }
+
+    _loopActive = false;
+  }
+
+   void _increaseCounterWhilePressedE() async {
+    // writeRespiratoryPauseData();
+    // make sure that only one loop is active
+    if (_loopActive) return;
+
+    _loopActive = true;
+
+    while (_buttonPressedE) {
+      // do your thing
+      setState(() {
+        if (timerCounter <= 29) {
+          timerCounter++;
+        }
+        if (timerCounter == 30) {
+          writeRespiratoryPauseData(0);
+          setState(() {
+            //  sleep(Duration(seconds: 2));
+            _buttonPressedE = false;
             // _loopActive = true;
           });
         }
@@ -3746,7 +3760,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.8",
+                  "V1.7.10",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -3819,11 +3833,7 @@ class _CheckPageState extends State<Dashboard> {
                     playOnEnabled
                         ? InkWell(
                             onTap: () {
-                              setState(() {
-                                playOnEnabled = false;
-                              });
-                              // counterData();
-                              writeDataPlay();
+                              showDialogPlay();
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -3835,20 +3845,13 @@ class _CheckPageState extends State<Dashboard> {
                                     size: 50,
                                   ),
                                   onPressed: () {
-                                    setState(() {
-                                      playOnEnabled = false;
-                                    });
-                                    // counterData();
-                                    writeDataPlay();
+                                    showDialogPlay();
                                   }),
                             ),
                           )
                         : InkWell(
                             onTap: () {
-                              setState(() {
-                                playOnEnabled = true;
-                              });
-                              writeDataPause();
+                               showDialogPause();
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -3860,10 +3863,7 @@ class _CheckPageState extends State<Dashboard> {
                                     size: 50,
                                   ),
                                   onPressed: () {
-                                    setState(() {
-                                      playOnEnabled = true;
-                                    });
-                                    writeDataPause();
+                                    showDialogPause();
                                   }),
                             ),
                           ),
@@ -4631,7 +4631,11 @@ class _CheckPageState extends State<Dashboard> {
                                         : Column(
                                             children: <Widget>[
                                               Center(
-                                                child: Listener(
+                                                child:  
+                                                // GestureDetector(
+                                                // onTapDown : _writeRespiratoryDataStart(), 
+                                                // onTapUp: _writeRespiratoryDataStop(),
+                                                Listener(
                                                   onPointerDown: (details) {
                                                     writeRespiratoryPauseData(
                                                         1);
@@ -4648,46 +4652,49 @@ class _CheckPageState extends State<Dashboard> {
                                                       // _inpirationPressed = false;
                                                     });
                                                   },
-                                                  child: Material(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4.0),
-                                                    color: Colors.green,
-                                                    child: Container(
-                                                      width: 135,
-                                                      height: 58.5,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(4.0),
-                                                        child: Center(
-                                                            child: Stack(
-                                                          children: [
-                                                            Align(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              child: Text(
-                                                                "Inspiratory \n Pause",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    color: Colors
-                                                                        .white),
-                                                                textAlign:
-                                                                    TextAlign
+                                                 child: Container(
+                                                   child: Material(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.0),
+                                                      color: Colors.green,
+                                                      child: Container(
+                                                        width: 135,
+                                                        height: 58.5,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(4.0),
+                                                          child: Center(
+                                                              child: Stack(
+                                                            children: [
+                                                              Align(
+                                                                alignment:
+                                                                    Alignment
                                                                         .center,
+                                                                child: Text(
+                                                                  "Inspiratory \n Pause",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .white),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        )),
+                                                            ],
+                                                          )),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
+                                                 ),
                                                 ),
+                                                // ),
                                               ),
                                               SizedBox(height: 5),
                                               Center(
@@ -4695,54 +4702,56 @@ class _CheckPageState extends State<Dashboard> {
                                                   onPointerDown: (details) {
                                                     writeRespiratoryPauseData(
                                                         2);
-                                                    _buttonPressed = true;
-                                                    _increaseCounterWhilePressed();
+                                                    _buttonPressedE = true;
+                                                    _increaseCounterWhilePressedE();
                                                   },
                                                   onPointerUp: (details) {
                                                     writeRespiratoryPauseData(
                                                         0);
                                                     setState(() {
                                                       timerCounter = 0;
-                                                      _buttonPressed = false;
+                                                      _buttonPressedE = false;
                                                       // _expiratoryPressed = false;
                                                     });
                                                   },
-                                                  child: Material(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4.0),
-                                                    color: Colors.green,
-                                                    child: Container(
-                                                      width: 135,
-                                                      height: 58.5,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(4.0),
-                                                        child: Center(
-                                                            child: Stack(
-                                                          children: [
-                                                            Align(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              child: Text(
-                                                                "Expiratory \n Pause",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    color: Colors
-                                                                        .white),
-                                                                textAlign:
-                                                                    TextAlign
+                                                  child: Container(
+                                                    child: Material(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.0),
+                                                      color: Colors.green,
+                                                      child: Container(
+                                                        width: 135,
+                                                        height: 58.5,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(4.0),
+                                                          child: Center(
+                                                              child: Stack(
+                                                            children: [
+                                                              Align(
+                                                                alignment:
+                                                                    Alignment
                                                                         .center,
+                                                                child: Text(
+                                                                  "Expiratory \n Pause",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .white),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        )),
+                                                            ],
+                                                          )),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -4775,6 +4784,25 @@ class _CheckPageState extends State<Dashboard> {
       ],
     );
   }
+
+  _writeRespiratoryDataStart(){
+    writeRespiratoryPauseData(1);
+    // _inpirationPressed = true;
+    setState((){
+      _buttonPressed = true;
+    });
+    _increaseCounterWhilePressed();
+  }
+
+  _writeRespiratoryDataStop(){
+   writeRespiratoryPauseData(0);
+   setState(() {
+   timerCounter = 0;
+   _buttonPressed = false;
+   // _inpirationPressed = false;
+   });
+  }
+  
 
   psvBottomBar(){
     return Container(
@@ -6580,7 +6608,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontWeight: FontWeight.bold),
                 ),
               )),
-              SizedBox(width: 20),
+              SizedBox(width: 10),
               Material(
                   borderRadius: BorderRadius.circular(5),
                   child: Container(
@@ -6596,7 +6624,7 @@ class _CheckPageState extends State<Dashboard> {
                               : Image.asset("assets/images/nobattery.png",
                                   width: 28, color: Colors.black))),
               SizedBox(width: 10),
-              Material(
+             selfTestingButtonEnabled ? Material(
                   borderRadius: BorderRadius.circular(5),
                   child: InkWell(
                     onTap: () {
@@ -6610,8 +6638,8 @@ class _CheckPageState extends State<Dashboard> {
                           "assets/images/calibrate.png",
                           width: 60,
                         )),
-                  )),
-              SizedBox(width: 10),
+                  )) :Container(),
+              selfTestingButtonEnabled ? SizedBox(width: 10) :Container(),
               timerCounter != 0
                   ? Material(
                       borderRadius: BorderRadius.circular(14.0),
@@ -6649,18 +6677,18 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(color: Colors.green, fontSize: 20)),
                         )),
                       )),
-              SizedBox(width: 10),
-              Material(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Container(
-                      width: 80,
-                      height: 40,
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(displayTemperature.toString() + "\u2103",
-                            style: TextStyle(fontSize: 20)),
-                      )))),
+              // SizedBox(width: 10),
+              // Material(
+              //     borderRadius: BorderRadius.circular(5),
+              //     child: Container(
+              //         width: 80,
+              //         height: 40,
+              //         child: Center(
+              //             child: Padding(
+              //           padding: const EdgeInsets.all(8.0),
+              //           child: Text(displayTemperature.toString() + "\u2103",
+              //               style: TextStyle(fontSize: 20)),
+              //         )))),
               SizedBox(width: 10),
               Material(
                   borderRadius: BorderRadius.circular(5),
@@ -18047,7 +18075,7 @@ class _CheckPageState extends State<Dashboard> {
             //       vacvmaxValue = 100;
             //       vacvminValue = 10;
             //       vacvparameterName = "PC Min";
-            //       vacvparameterUnits = "cmH\u2082O"; //TODO
+            //       vacvparameterUnits = "cmH\u2082O"; 
             //       vacvItrig = false;
             //       vacvRr = false;
             //       vacvIe = false;
@@ -20009,6 +20037,62 @@ return data;
     }
   }
 
+  showDialogPause(){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+              title: new Text("Confirm Standby Mode"),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                  child: Text("Confirm"),
+                  onPressed: () {
+                    writeDataPause();
+                    setState(() {
+                      playOnEnabled = true;
+                      selfTestingButtonEnabled= true;
+                      Navigator.pop(context);
+                     });
+                  },
+                ),
+                CupertinoDialogAction(
+                  child: Text("Cancel"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ));
+  }
+
+  showDialogPlay(){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+              title: new Text("Confirm Start Off Treatment"),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                  child: Text("Confirm"),
+                  onPressed: () {
+                    writeDataPlay();
+                    setState(() {
+                      playOnEnabled = false;
+                      selfTestingButtonEnabled= true;
+                      Navigator.pop(context);
+                     });
+                  },
+                ),
+                CupertinoDialogAction(
+                  child: Text("Cancel"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ));
+  }
+
+
+
   void setData() {
     if (pacvEnabled == true) {
       setState(() {
@@ -21015,8 +21099,10 @@ return data;
   serializeEventData(Uint8List event) async {
     if (event != null) {
       setState(() {
+        turnOnScreen();
         respiratoryEnable = true;
         powerButtonEnabled = false;
+        // playOnEnabled= false;
       });
       if (event[0] == 126) {
         list = [];
@@ -21418,34 +21504,46 @@ return data;
         if (operatinModeR == 1) {
           setState(() {
             modeName = "VACV";
+            selfTestingButtonEnabled = false;
           });
         } else if (operatinModeR == 2) {
           setState(() {
             modeName = "PACV";
+            selfTestingButtonEnabled = false;
           });
         } else if (operatinModeR == 3) {
           setState(() {
             modeName = "PSV";
+            selfTestingButtonEnabled = false;
           });
         } else if (operatinModeR == 4) {
           setState(() {
             modeName = "PSIMV";
+            selfTestingButtonEnabled = false;
           });
         } else if (operatinModeR == 5) {
           setState(() {
             modeName = "VSIMV";
+            selfTestingButtonEnabled = false;
           });
         } else if (operatinModeR == 6) {
           setState(() {
             modeName = "PC-CMV";
+            selfTestingButtonEnabled = false;
           });
         } else if (operatinModeR == 7) {
           setState(() {
             modeName = "VC-CMV";
+            selfTestingButtonEnabled = false;
           });
         } else if (operatinModeR == 14) {
           setState(() {
             modeName = "PRVC";
+            selfTestingButtonEnabled = false;
+          });
+        }else{
+          setState((){
+            selfTestingButtonEnabled = true;
           });
         }
 

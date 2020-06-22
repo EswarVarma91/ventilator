@@ -197,8 +197,9 @@ class _AboutState extends State<About> {
                         onPressed: () {
                           // Fluttertoast.showToast(msg: Constants.versionNew.toString() +"   "+ versionCheck(downloadUrl)).toString();
                           if (Constants.versionNew == versionCheck(downloadUrl)) {
-                            // Fluttertoast.showToast(msg:"no updates found.!");
+                            Fluttertoast.showToast(msg:"no updates found.!");
                           }else{
+                            getLatestUrl();
                             checkforUpdates();
                           }
                         },
