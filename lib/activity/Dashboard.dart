@@ -1383,7 +1383,7 @@ class _CheckPageState extends State<Dashboard> {
                                 padding: const EdgeInsets.only(
                                     left: 0.0, bottom: 65),
                                 child: Text(
-                                  "Compliance",
+                                  "Static Compliance",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 12),
                                 ),
@@ -1494,8 +1494,7 @@ class _CheckPageState extends State<Dashboard> {
                                 child: Text(
                                   leakVolumeDisplay == null
                                       ? "0"
-                                      : (leakVolumeDisplay / 1000)
-                                          .toStringAsFixed(3),
+                                      : (leakVolumeDisplay).toInt().toString(),
                                   // "0000",
                                   style: TextStyle(
                                       color: Colors.yellow, fontSize: 35),
@@ -3049,7 +3048,7 @@ class _CheckPageState extends State<Dashboard> {
                                                     ? Colors.blue
                                                     : Colors.white,
                                                 child: Container(
-                                                  width: 98,
+                                                  width: 148,
                                                   height: 70,
                                                   child: Align(
                                                       alignment:
@@ -3058,7 +3057,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         padding:
                                                             const EdgeInsets
                                                                 .all(8.0),
-                                                        child: Text("PSIMV",
+                                                        child: Text("PSIMV + PS",
                                                             style: TextStyle(
                                                                 fontSize: 20,
                                                                 color: psimvEnabled
@@ -3092,7 +3091,7 @@ class _CheckPageState extends State<Dashboard> {
                                                     ? Colors.blue
                                                     : Colors.white,
                                                 child: Container(
-                                                  width: 98,
+                                                  width: 148,
                                                   height: 70,
                                                   child: Align(
                                                       alignment:
@@ -3101,7 +3100,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         padding:
                                                             const EdgeInsets
                                                                 .all(8.0),
-                                                        child: Text("VSIMV",
+                                                        child: Text("VSIMV + PS",
                                                             style: TextStyle(
                                                                 fontSize: 20,
                                                                 color: vsimvEnabled
@@ -4760,7 +4759,7 @@ class _CheckPageState extends State<Dashboard> {
                         ],
                       ),
                     ),
-                    bottombar(),
+                   modeName=="PSV" || operatinModeR == 3 ? psvBottomBar() : bottombar(),
                   ],
                 ),
               ),
@@ -4774,6 +4773,492 @@ class _CheckPageState extends State<Dashboard> {
           ],
         ),
       ],
+    );
+  }
+
+  psvBottomBar(){
+    return Container(
+      color: Color(0xFF171e27),
+      width: 904,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+             InkWell(
+                    onTap: () {
+                      //  CommonClick("PS") ;
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 110,
+                        child: Card(
+                          elevation: 40,
+                          color: Color(0xFF213855),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "PS",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 17.0),
+                                    child: Text(
+                                      psValue.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                // Align(
+                                //   alignment: Alignment.bottomCenter,
+                                //   child: LinearProgressIndicator(
+                                //     backgroundColor: Colors.grey,
+                                //     valueColor: AlwaysStoppedAnimation<Color>(
+                                //       Colors.white,
+                                //     ),
+                                //     value: psValue != null ? psValue / 60 : 0,
+                                //   ),
+                                // )
+                              ],
+                            )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  InkWell(
+              onTap: () {
+                //  CommonClick("PEEP") ;
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "peep".toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                peepValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: peepValue != null ? peepValue / 30 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+             InkWell(
+              onTap: () {
+                // CommonClick("FiO\u2082");
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "FiO\u2082",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "%",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                fio2Value.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: fio2Value != null ? fio2Value / 100 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            
+                
+            InkWell(
+              onTap: () {
+                // CommonClick("RR");
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Backup RR",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                rrValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: rrValue != null ? rrValue / 60 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                // CommonClick("I:E");
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Backup I:E",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                checkI(i) + ":" + checkE(e),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: ieValue != null ? int.parse(ieValue)/ 4 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            
+            InkWell(
+              onTap: () {
+                //  CommonClick("PS") ;
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text("PC",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(pcValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: psValue != null ? psValue / 60 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+           
+           
+            SizedBox(
+              width: 10,
+            ),
+            respiratoryEnable == true
+                ? InkWell(
+                    onTap: () {
+                      insExpButtonEnable = !insExpButtonEnable;
+                    },
+                    child: Center(
+                      child: Material(
+                        borderRadius: BorderRadius.circular(24.0),
+                        color: insExpButtonEnable ? Colors.white : Colors.green,
+                        child: Container(
+                          width: 160,
+                          height: 110,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Respiratory \n Pause",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: insExpButtonEnable
+                                            ? Colors.black
+                                            : Colors.white),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
+          ],
+        ),
+      ),
     );
   }
 

@@ -25,7 +25,7 @@ class _AboutState extends State<About> {
   getLatestUrl() async {
     // make GET request
     String url =
-        'https://www.eagleaspect.com:9000/ventilator-apk-manager/getLatestAPK';
+        'http://www.zynamedtech.com/ventilator-apk-manager/getLatestAPK';
     Response response = await get(url);
     setState(() {
       setState(() {
