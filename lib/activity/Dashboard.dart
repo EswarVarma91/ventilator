@@ -292,7 +292,7 @@ class _CheckPageState extends State<Dashboard> {
 
   int psvmaxValue = 80, psvminValue = 1, psvdefaultValue = 30;
   String psvparameterName = "PS",
-      psvparameterUnits = "cmH\u2082O  Below Peep";
+      psvparameterUnits = "cmH\u2082O  Below PEEP";
 
   bool psimvItrig = false,
       psimvRr = true,
@@ -3872,7 +3872,7 @@ class _CheckPageState extends State<Dashboard> {
                     //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                     SizedBox(
                       height:
-                          playOnEnabled ? 167 : powerButtonEnabled ? 201 : 268,
+                        playOnEnabled &&  powerButtonEnabled ? 98 :playOnEnabled ? 167 : powerButtonEnabled ? 201 : 268,
                     ),
                   ],
                 ),
@@ -6352,7 +6352,7 @@ class _CheckPageState extends State<Dashboard> {
                     psvmaxValue = 80;
                     psvminValue = 1;
                     psvparameterName = "PC";
-                    psvparameterUnits = "cmH2O above PEEP";
+                    psvparameterUnits = "cmH\u2082O above PEEP";
                     psvItrig = false;
                     psvPeep = false;
                     psvIe = false;
@@ -6395,7 +6395,7 @@ class _CheckPageState extends State<Dashboard> {
                             Align(
                               alignment: Alignment.topRight,
                               child: Text(
-                                "cmH2O",
+                                "cmH\u2082O",
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: psvPc

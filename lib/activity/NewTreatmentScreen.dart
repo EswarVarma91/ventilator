@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ventilator/activity/Dashboard.dart';
+import 'package:ventilator/database/DatabaseHelper.dart';
+import 'package:ventilator/database/VentilatorOMode.dart';
 import 'package:virtual_keyboard/virtual_keyboard.dart';
 
 class NewTreatmentScreen extends StatefulWidget {
@@ -31,6 +33,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
   double commonValue = 0;
   String calculatingIn = "cm";
   SharedPreferences preferences;
+  var dbHelper = DatabaseHelper();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -549,6 +552,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
     } else if (int.tryParse(heightId.text)<=134 || int.tryParse(heightId.text)>=200) {
       Fluttertoast.showToast(msg: "Enter height between 134cm to 200cm");
     } else {
+      dbHelper.savePatient(PatientsSaveList(patientId.text,nameId.text,ageId.text,maleEnabled ? "1": "2",heightId.text));
       preferences = await SharedPreferences.getInstance();
       preferences.setString("pid", patientId.text.toString());
       preferences.setString("pname", nameId.text.toString());

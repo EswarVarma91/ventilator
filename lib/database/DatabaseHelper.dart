@@ -81,6 +81,27 @@ class DatabaseHelper {
     //     'CREATE TABLE $TABLE_ALARM($ID INTERGER PRIMARY KEY,$ALARM TEXT,$DATE_TIME TEXT,$GLOBAL_COUNTER_NO TEXT)');
   }
 
+  Future<int> savePatient(PatientsSaveList psl) async {
+    var now = DateTime.now();
+    try {
+      var dbClient = await db;
+      var res = await dbClient.rawInsert(
+          "INSERT into $TABLE_PATIENT ($PATIENTID,$PATIENTNAME,$PATIENT_AGE,$PATIENT_GENDER,$PATIENT_HEIGHT,$DATE_TIME) VALUES (?,?,?,?,?,?)",
+          [
+            psl.patientId,
+            psl.patientName,
+            psl.patientAge,
+            psl.patientGender,
+            psl.patientHeight,
+            DateFormat("yyyy-MM-dd HH:mm:ss").format(now), 
+          ]);
+        //  Fluttertoast.showToast(msg: " patient saved in db "+res.toString());
+      return res;
+    } catch (Exception) {
+      return null;
+    }
+  }
+
   Future<int> save(VentilatorOMode vom) async {
     var now = new DateTime.now();
     try {
