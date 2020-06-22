@@ -706,8 +706,7 @@ class _CheckPageState extends State<Dashboard> {
           } else {
             setState(() {
               // powerButtonEnabled = false;
-            });
-            
+            }); 
           }
           // Fluttertoast.showToast(msg:"timeout "+differnceD.inSeconds.toString());
           // if(differnceD.inSeconds>61){
