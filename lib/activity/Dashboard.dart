@@ -3747,7 +3747,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.7",
+                  "V1.7.8",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
