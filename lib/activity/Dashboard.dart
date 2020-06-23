@@ -21349,10 +21349,7 @@ return data;
               pplateauDisplay != null &&
               pplateauDisplay != 0) {
             try {
-              var dataC = (double.tryParse(vteValue.toString()) /
-                      (pplateauDisplay -
-                          double.tryParse(peepDisplayValue.toString())))
-                  .toInt();
+              var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
               if (dataC.isNegative) {
                 // cdisplayParameter = 0;
               } else {
