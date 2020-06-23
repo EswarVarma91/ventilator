@@ -5197,7 +5197,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              "cmH\u2082O",
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
@@ -6162,7 +6162,22 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              "",
+                              operatinModeR == 6 || operatinModeR == 2
+                                  ? "cmH\u2082O"
+                                  : operatinModeR == 7 ||
+                                          operatinModeR == 1 ||
+                                          operatinModeR == 5 ||
+                                          operatinModeR == 14
+                                      ? "ml"
+                                      : modeName == "PC-CMV" ||
+                                              modeName == "PACV"
+                                          ? "cmH\u2082O"
+                                          : modeName == "VC-CMV" ||
+                                                  modeName == "VACV" ||
+                                                  modeName == "VSIMV" ||
+                                                  modeName == "PRVC"
+                                              ? "ml"
+                                              : "cmH\u2082O",
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
@@ -6221,75 +6236,7 @@ class _CheckPageState extends State<Dashboard> {
               ),
             ),
 
-            operatinModeR == 4 ||
-                    modeName == "PSIMV" ||
-                    operatinModeR == 3 ||
-                    modeName == "PSV" ||
-                    modeName == "VSIMV" ||
-                    operatinModeR == 5
-                ? InkWell(
-                    onTap: () {
-                      //  CommonClick("PS") ;
-                    },
-                    child: Center(
-                      child: Container(
-                        width: 120,
-                        height: 110,
-                        child: Card(
-                          elevation: 40,
-                          color: Color(0xFF213855),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Center(
-                                child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "PS",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Text(
-                                    "",
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 17.0),
-                                    child: Text(
-                                      psValue.toString(),
-                                      style: TextStyle(
-                                          fontSize: 30, color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                // Align(
-                                //   alignment: Alignment.bottomCenter,
-                                //   child: LinearProgressIndicator(
-                                //     backgroundColor: Colors.grey,
-                                //     valueColor: AlwaysStoppedAnimation<Color>(
-                                //       Colors.white,
-                                //     ),
-                                //     value: psValue != null ? psValue / 60 : 0,
-                                //   ),
-                                // )
-                              ],
-                            )),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                : Container(),
+            
             InkWell(
               onTap: () {
                 // CommonClick("FiO\u2082");
@@ -6362,6 +6309,75 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+            operatinModeR == 4 ||
+                    modeName == "PSIMV" ||
+                    operatinModeR == 3 ||
+                    modeName == "PSV" ||
+                    modeName == "VSIMV" ||
+                    operatinModeR == 5
+                ? InkWell(
+                    onTap: () {
+                      //  CommonClick("PS") ;
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 110,
+                        child: Card(
+                          elevation: 40,
+                          color: Color(0xFF213855),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "PS",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "cmH\u2082O",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 17.0),
+                                    child: Text(
+                                      psValue.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                // Align(
+                                //   alignment: Alignment.bottomCenter,
+                                //   child: LinearProgressIndicator(
+                                //     backgroundColor: Colors.grey,
+                                //     valueColor: AlwaysStoppedAnimation<Color>(
+                                //       Colors.white,
+                                //     ),
+                                //     value: psValue != null ? psValue / 60 : 0,
+                                //   ),
+                                // )
+                              ],
+                            )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
             // InkWell(
             //   onTap: () {
             //     editbbEnabled ? CommonClick("Tih") : Container();
@@ -6586,7 +6602,7 @@ class _CheckPageState extends State<Dashboard> {
                 padding:
                     const EdgeInsets.only(left: 20, right: 0, top: 4, bottom: 4),
                 child: Text(
-                  modeName.toString(),
+                  modeName=="VSIMV" ? "VSIMV + PS" : modeName=="PSIMV" ? "PSIMV + PS" : modeName.toString(),
                   style: TextStyle(
                       color: Colors.blue,
                       fontSize: 20,
@@ -10859,7 +10875,7 @@ class _CheckPageState extends State<Dashboard> {
                   prvcmaxValue = 100;
                   prvcminValue = 10;
                   prvcparameterName = "PC Max";
-                  prvcparameterUnits = "cmH\u2082O";
+                  prvcparameterUnits = "cmH\u2082O above PEEP";
                   prvcItrig = false;
                   prvcRr = false;
                   prvcIe = false;
@@ -15232,7 +15248,7 @@ class _CheckPageState extends State<Dashboard> {
                   vccmvmaxValue = 100;
                   vccmvminValue = 10;
                   vccmvparameterName = "PC Max";
-                  vccmvparameterUnits = "cmH\u2082O";
+                  vccmvparameterUnits = "cmH\u2082O above PEEP";
                   vccmvRR = false;
                   vccmvIe = false;
                   vccmvPeep = false;
@@ -16576,7 +16592,7 @@ class _CheckPageState extends State<Dashboard> {
                   vsimvmaxValue = 100;
                   vsimvminValue = 10;
                   vsimvparameterName = "PC Max";
-                  vsimvparameterUnits = "cmH\u2082O";
+                  vsimvparameterUnits = "cmH\u2082O above PEEP";
                   vsimvItrig = false;
                   vsimvRr = false;
                   vsimvIe = false;
@@ -18188,7 +18204,7 @@ class _CheckPageState extends State<Dashboard> {
                   vacvmaxValue = 100;
                   vacvminValue = 10;
                   vacvparameterName = "PC Max";
-                  vacvparameterUnits = "cmH\u2082O";
+                  vacvparameterUnits = "cmH\u2082O above PEEP";
                   vacvItrig = false;
                   vacvRr = false;
                   vacvIe = false;
@@ -21098,7 +21114,8 @@ return data;
   serializeEventData(Uint8List event) async {
     if (event != null) {
       setState(() {
-        turnOnScreen();
+        
+        // turnOnScreen();
         respiratoryEnable = true;
         powerButtonEnabled = false;
         // playOnEnabled= false;
@@ -21599,7 +21616,10 @@ return data;
 
         if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
             ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
-          pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
+              setState(() {
+                pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
+              });
+          
         }
 
         double temp1 = ((finalList[58] << 8) + finalList[59])

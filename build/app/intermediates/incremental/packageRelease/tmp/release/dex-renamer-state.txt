@@ -1,0 +1,4 @@
+#Tue Jun 23 07:28:54 IST 2020
+base.0=/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/transforms/r8/release/0/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
