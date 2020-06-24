@@ -146,7 +146,7 @@ class _CheckPageState extends State<Dashboard> {
       pcValue,
       psValue,
       vtValue,
-      psValue1 = 0,
+      pipValue = 0,
       peepDisplayValue = 0,
       fio2Value,
       ibytValue,
@@ -670,7 +670,7 @@ class _CheckPageState extends State<Dashboard> {
               selfTestingButtonEnabled = false;
               sendSoundOff();
               powerButtonEnabled = true;
-              // psValue1 = 0;
+              // pipValue = 0;
               // cc = 0;
               // mvValue = 0;
               // vteValue = 0;
@@ -685,7 +685,7 @@ class _CheckPageState extends State<Dashboard> {
             // if (playOnEnabled) {
             //   if (mounted) {
             //     setState(() {
-            //       psValue1 = 0;
+            //       pipValue = 0;
             //       mvValue = 0;
             //       vteValue = 0;
             //       fio2DisplayParameter = 0;
@@ -696,7 +696,7 @@ class _CheckPageState extends State<Dashboard> {
             //   }
             // }
             // Fluttertoast.showToast(msg: "Timeout.");
-            // psValue1 = 0;
+            // pipValue = 0;
             // mvValue = 0;
             // vteValue = 0;
             // fio2DisplayParameter = 0;
@@ -3759,7 +3759,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.7.10",
+                  "V1.8.0",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4355,8 +4355,10 @@ class _CheckPageState extends State<Dashboard> {
                                                       const EdgeInsets.only(
                                                           right: 8.0),
                                                   child: Text(
-                                                  _buttonPressed ?  pplateauDisplay
-                                                        .toStringAsFixed(0) : "--",
+                                                  _buttonPressed ?
+                                                    pplateauDisplay
+                                                        .toStringAsFixed(0) 
+                                                        : "--",
                                                     // "0000",
                                                     style: TextStyle(
                                                         color: Colors.pink,
@@ -5332,7 +5334,7 @@ class _CheckPageState extends State<Dashboard> {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 5.0),
                             child: Text(
-                              psValue1.toString(),
+                              pipValue.toString(),
                               style:
                                   TextStyle(color: Colors.yellow, fontSize: 38),
                             ),
@@ -21226,7 +21228,7 @@ return data;
               pipValueCheck.round() >= 0 &&
               pipValueCheck.round() <= 150) {
             setState(() {
-              psValue1 = pipValueCheck;
+              pipValue = pipValueCheck;
             });
           }
           paw = (((finalList[34] << 8) + finalList[35]) / 100).toInt();
@@ -21349,7 +21351,8 @@ return data;
               pplateauDisplay != null &&
               pplateauDisplay != 0) {
             try {
-              var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
+              // var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
+              var dataC = (vteValue /(pipValue - peepDisplayValue)).toInt();
               if (dataC.isNegative) {
                 // cdisplayParameter = 0;
               } else {
@@ -21655,7 +21658,7 @@ return data;
           var data = VentilatorOMode(
               patientId,
               patientName.toString(),
-              psValue1.toString(),
+              pipValue.toString(),
               vteValue.toString(),
               peepDisplayValue.toString(),
               rrDisplayValue.toString(),
@@ -21687,7 +21690,7 @@ return data;
           var data = VentilatorOMode(
               "SWASIT " + globalCounterNo.toString(),
               patientName,
-              psValue1.toString(),
+              pipValue.toString(),
               vteValue.toString(),
               peepDisplayValue.toString(),
               rrDisplayValue.toString(),
