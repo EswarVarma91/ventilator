@@ -226,13 +226,43 @@ class _CommonDialogState extends State<CommonDialog> {
                           SizedBox(
                             height: 90,
                           ),
-                          Text(
-                            prefix
-                                ? getIeData(commomValue.toInt(), 1).toString()
-                                : suffix
-                                    ? commomValue.round().toString() + "%"
-                                    : commomValue.round().toString(),
-                            style: TextStyle(fontSize: 40),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              IconButton(icon: Icon(Icons.remove,size: 50,),onPressed: (){
+                                if(commomValue.floor().toInt()>=min.toInt()){
+                                  setState(() {
+                                    if(commomValue.floor().toInt()==min.toInt()){
+                                      commomValue = min;
+                                    }else{
+                                    commomValue = commomValue-1.0;
+                                    }
+                                  });
+                                }
+                              },),
+                              SizedBox(width:120),
+                              Text(
+                                prefix
+                                    ? getIeData(commomValue.toInt(), 1).toString()
+                                    : suffix
+                                        ? commomValue.round().toString() + "%"
+                                        : commomValue.round().toString(),
+                                style: TextStyle(fontSize: 40),
+                              ),
+                              SizedBox(width:120),
+                              IconButton(icon: Icon(Icons.add,size: 50,),onPressed: (){
+                                if(commomValue.ceil().toInt()<=max.toInt()){
+                                  setState(() {
+                                    if(commomValue.ceil().toInt()==max.toInt()){
+                                      commomValue = max;
+                                    }else{
+                                    commomValue = commomValue+1.0;
+                                    }
+                                  });
+                                }
+                              },),
+                            ],
                           ),
                           Text(widget.value.toString() == "RR"
                               ? "I:E = " +
@@ -244,6 +274,14 @@ class _CommonDialogState extends State<CommonDialog> {
                           //     : ""),
                           SizedBox(
                             height: 5,
+                          ),
+                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(widget.value.toString() == "I:E" ? "Min "+getIeData(min.toInt(),1) :"Min "+min.toInt().toString()),
+                              Text(widget.value.toString() == "I:E" ? "Max "+getIeData(max.toInt(),1) :"Max "+max.toInt().toString()),
+                            ],
                           ),
                           Container(
                             width: 450,
@@ -263,12 +301,13 @@ class _CommonDialogState extends State<CommonDialog> {
                                       : commomValue.round().toString(),
                             ),
                           ),
+                         
                           Text(
-                              widget.value.toString() == "RR"
-                                  ? calculateRrIe(commomValue, commomValue1)
-                                  : widget.value.toString() == "I:E"
-                                  ? calculateIeRr(commomValue, commomValue1):"",
-                              style: TextStyle(fontSize: 25)),
+                                  widget.value.toString() == "RR"
+                                      ? calculateRrIe(commomValue, commomValue1)
+                                      : widget.value.toString() == "I:E"
+                                      ? calculateIeRr(commomValue, commomValue1):"",
+                                  style: TextStyle(fontSize: 25)),
                           SizedBox(
                             height: 0,
                           ),
