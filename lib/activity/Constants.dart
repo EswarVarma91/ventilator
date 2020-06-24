@@ -1,3 +1,3 @@
 class Constants{
-  static String versionNew = "1.8.0";
+  static String versionNew = "1.8.1";
 }

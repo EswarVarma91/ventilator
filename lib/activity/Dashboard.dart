@@ -212,8 +212,7 @@ class _CheckPageState extends State<Dashboard> {
       pacvFlowRampValue = 3;
 
   int pacvmaxValue = 60, pacvminValue = 1, pacvdefaultValue = 20;
-  String pacvparameterName = "RR",
-      pacvparameterUnits = "bpm";
+  String pacvparameterName = "RR", pacvparameterUnits = "bpm";
 
   bool vacvItrig = false,
       vacvRr = true,
@@ -236,8 +235,7 @@ class _CheckPageState extends State<Dashboard> {
       vacvFlowRampValue = 4;
 
   int vacvmaxValue = 60, vacvminValue = 1, vacvdefaultValue = 20;
-  String vacvparameterName = "RR",
-      vacvparameterUnits = "bpm";
+  String vacvparameterName = "RR", vacvparameterUnits = "bpm";
 
   bool prvcItrig = false,
       prvcRr = true,
@@ -260,8 +258,7 @@ class _CheckPageState extends State<Dashboard> {
       prvcFlowRampValue = 4;
 
   int prvcmaxValue = 30, prvcminValue = 1, prvcdefaultValue = 20;
-  String prvcparameterName = "RR",
-      prvcparameterUnits = "bpm";
+  String prvcparameterName = "RR", prvcparameterUnits = "bpm";
 
   bool psvItrig = false,
       psvPeep = false,
@@ -292,8 +289,7 @@ class _CheckPageState extends State<Dashboard> {
       psvPcValue = 30;
 
   int psvmaxValue = 80, psvminValue = 1, psvdefaultValue = 30;
-  String psvparameterName = "PS",
-      psvparameterUnits = "cmH\u2082O  Below PEEP";
+  String psvparameterName = "PS", psvparameterUnits = "cmH\u2082O  Below PEEP";
 
   bool psimvItrig = false,
       psimvRr = true,
@@ -318,8 +314,7 @@ class _CheckPageState extends State<Dashboard> {
       psimvFlowRampValue = 3;
 
   int psimvmaxValue = 30, psimvminValue = 1, psimvdefaultValue = 20;
-  String psimvparameterName = "RR",
-      psimvparameterUnits = "bpm";
+  String psimvparameterName = "RR", psimvparameterUnits = "bpm";
 
   bool vsimvItrig = false,
       vsimvRr = true,
@@ -344,8 +339,7 @@ class _CheckPageState extends State<Dashboard> {
       vsimvFlowRampValue = 4;
 
   int vsimvmaxValue = 30, vsimvminValue = 1, vsimvdefaultValue = 20;
-  String vsimvparameterName = "RR",
-      vsimvparameterUnits = "bpm";
+  String vsimvparameterName = "RR", vsimvparameterUnits = "bpm";
 
   bool prvcApnea = true;
   int prvcApneaValue = 30;
@@ -503,6 +497,7 @@ class _CheckPageState extends State<Dashboard> {
       blender = 0,
       checkOfffset = 0;
   var checkO2CalibrationValue;
+  List<int> finalListSend = [];
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -619,7 +614,7 @@ class _CheckPageState extends State<Dashboard> {
     UsbSerial.usbEventStream.listen((UsbEvent event) {
       _getPorts();
     });
-    _getPorts();
+    // _getPorts();
 
     // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) {
     //   if(_status == "Disconnected"){
@@ -706,15 +701,14 @@ class _CheckPageState extends State<Dashboard> {
           } else {
             setState(() {
               // powerButtonEnabled = false;
-            }); 
+            });
           }
           // Fluttertoast.showToast(msg:"timeout "+differnceD.inSeconds.toString());
           // if(differnceD.inSeconds>61){
           //   turnOffScreen();
           // }
         });
-      }else{
-      }
+      } else {}
     });
     _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
       if (_status == "Connected") {
@@ -901,7 +895,7 @@ class _CheckPageState extends State<Dashboard> {
     _loopActive = false;
   }
 
-   void _increaseCounterWhilePressedE() async {
+  void _increaseCounterWhilePressedE() async {
     // writeRespiratoryPauseData();
     // make sure that only one loop is active
     if (_loopActive) return;
@@ -1037,10 +1031,13 @@ class _CheckPageState extends State<Dashboard> {
       fio2Value = preferences.getInt("fio2");
       tiValue =
           (((double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
-              (60000 / rrValue))/1000);
+                  (60000 / rrValue)) /
+              1000);
       // print(tiValue.toString());
       teValue =
-          (((double.tryParse(e) / (double.tryParse(i) + double.tryParse(e))) * (60000 / rrValue))/1000);
+          (((double.tryParse(e) / (double.tryParse(i) + double.tryParse(e))) *
+                  (60000 / rrValue)) /
+              1000);
       // print(teValue.toString());
       paw = preferences.getInt("paw");
       mvValue = 0;
@@ -3070,7 +3067,8 @@ class _CheckPageState extends State<Dashboard> {
                                                         padding:
                                                             const EdgeInsets
                                                                 .all(8.0),
-                                                        child: Text("PSIMV + PS",
+                                                        child: Text(
+                                                            "PSIMV + PS",
                                                             style: TextStyle(
                                                                 fontSize: 20,
                                                                 color: psimvEnabled
@@ -3113,7 +3111,8 @@ class _CheckPageState extends State<Dashboard> {
                                                         padding:
                                                             const EdgeInsets
                                                                 .all(8.0),
-                                                        child: Text("VSIMV + PS",
+                                                        child: Text(
+                                                            "VSIMV + PS",
                                                             style: TextStyle(
                                                                 fontSize: 20,
                                                                 color: vsimvEnabled
@@ -3759,7 +3758,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.8.0",
+                  "V1.8.1",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -3850,7 +3849,7 @@ class _CheckPageState extends State<Dashboard> {
                           )
                         : InkWell(
                             onTap: () {
-                               showDialogPause();
+                              showDialogPause();
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -3869,8 +3868,11 @@ class _CheckPageState extends State<Dashboard> {
                     //  powerIndication==1 ?  Image.asset("assets/images/switchon.png"):powerIndication==0 ?
                     //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                     SizedBox(
-                      height:
-                        playOnEnabled &&  powerButtonEnabled ? 98 :playOnEnabled ? 167 : powerButtonEnabled ? 201 : 268,
+                      height: playOnEnabled && powerButtonEnabled
+                          ? 98
+                          : playOnEnabled
+                              ? 167
+                              : powerButtonEnabled ? 201 : 268,
                     ),
                   ],
                 ),
@@ -4355,9 +4357,9 @@ class _CheckPageState extends State<Dashboard> {
                                                       const EdgeInsets.only(
                                                           right: 8.0),
                                                   child: Text(
-                                                  _buttonPressed ?
-                                                    pplateauDisplay
-                                                        .toStringAsFixed(0) 
+                                                    _buttonPressed
+                                                        ? pplateauDisplay
+                                                            .toStringAsFixed(0)
                                                         : "--",
                                                     // "0000",
                                                     style: TextStyle(
@@ -4632,11 +4634,11 @@ class _CheckPageState extends State<Dashboard> {
                                         : Column(
                                             children: <Widget>[
                                               Center(
-                                                child:  
-                                                // GestureDetector(
-                                                // onTapDown : _writeRespiratoryDataStart(), 
-                                                // onTapUp: _writeRespiratoryDataStop(),
-                                                Listener(
+                                                child:
+                                                    // GestureDetector(
+                                                    // onTapDown : _writeRespiratoryDataStart(),
+                                                    // onTapUp: _writeRespiratoryDataStop(),
+                                                    Listener(
                                                   onPointerDown: (details) {
                                                     writeRespiratoryPauseData(
                                                         1);
@@ -4653,8 +4655,8 @@ class _CheckPageState extends State<Dashboard> {
                                                       // _inpirationPressed = false;
                                                     });
                                                   },
-                                                 child: Container(
-                                                   child: Material(
+                                                  child: Container(
+                                                    child: Material(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               4.0),
@@ -4693,7 +4695,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         ),
                                                       ),
                                                     ),
-                                                 ),
+                                                  ),
                                                 ),
                                                 // ),
                                               ),
@@ -4769,7 +4771,9 @@ class _CheckPageState extends State<Dashboard> {
                         ],
                       ),
                     ),
-                   modeName=="PSV" || operatinModeR == 3 ? psvBottomBar() : bottombar(),
+                    modeName == "PSV" || operatinModeR == 3
+                        ? psvBottomBar()
+                        : bottombar(),
                   ],
                 ),
               ),
@@ -4786,26 +4790,25 @@ class _CheckPageState extends State<Dashboard> {
     );
   }
 
-  _writeRespiratoryDataStart(){
+  _writeRespiratoryDataStart() {
     writeRespiratoryPauseData(1);
     // _inpirationPressed = true;
-    setState((){
+    setState(() {
       _buttonPressed = true;
     });
     _increaseCounterWhilePressed();
   }
 
-  _writeRespiratoryDataStop(){
-   writeRespiratoryPauseData(0);
-   setState(() {
-   timerCounter = 0;
-   _buttonPressed = false;
-   // _inpirationPressed = false;
-   });
+  _writeRespiratoryDataStop() {
+    writeRespiratoryPauseData(0);
+    setState(() {
+      timerCounter = 0;
+      _buttonPressed = false;
+      // _inpirationPressed = false;
+    });
   }
-  
 
-  psvBottomBar(){
+  psvBottomBar() {
     return Container(
       color: Color(0xFF171e27),
       width: 904,
@@ -4815,72 +4818,71 @@ class _CheckPageState extends State<Dashboard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-             InkWell(
-                    onTap: () {
-                      //  CommonClick("PS") ;
-                    },
-                    child: Center(
-                      child: Container(
-                        width: 120,
-                        height: 110,
-                        child: Card(
-                          elevation: 40,
-                          color: Color(0xFF213855),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Center(
-                                child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "PS",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Text(
-                                    "",
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 17.0),
-                                    child: Text(
-                                      psValue.toString(),
-                                      style: TextStyle(
-                                          fontSize: 30, color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                // Align(
-                                //   alignment: Alignment.bottomCenter,
-                                //   child: LinearProgressIndicator(
-                                //     backgroundColor: Colors.grey,
-                                //     valueColor: AlwaysStoppedAnimation<Color>(
-                                //       Colors.white,
-                                //     ),
-                                //     value: psValue != null ? psValue / 60 : 0,
-                                //   ),
-                                // )
-                              ],
-                            )),
+            InkWell(
+              onTap: () {
+                 CommonClick("PS") ;
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PS",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
                           ),
-                        ),
-                      ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                psValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: psValue != null ? psValue / 60 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
                     ),
                   ),
-
-                  InkWell(
+                ),
+              ),
+            ),
+            InkWell(
               onTap: () {
-                //  CommonClick("PEEP") ;
+                 CommonClick("PEEP") ;
               },
               child: Center(
                 child: Container(
@@ -4950,10 +4952,9 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-
-             InkWell(
+            InkWell(
               onTap: () {
-                // CommonClick("FiO\u2082");
+                CommonClick("FiO2");
               },
               child: Center(
                 child: Container(
@@ -5023,11 +5024,9 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-            
-                
             InkWell(
               onTap: () {
-                // CommonClick("RR");
+                CommonClick("Backup RR");
               },
               child: Center(
                 child: Container(
@@ -5099,7 +5098,7 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                // CommonClick("I:E");
+                CommonClick("Backup I:E");
               },
               child: Center(
                 child: Container(
@@ -5169,11 +5168,9 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-
-            
             InkWell(
               onTap: () {
-                //  CommonClick("PS") ;
+                 CommonClick("PC") ;
               },
               child: Center(
                 child: Container(
@@ -5189,7 +5186,8 @@ class _CheckPageState extends State<Dashboard> {
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: Text("PC",
+                            child: Text(
+                              "PC",
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -5218,7 +5216,8 @@ class _CheckPageState extends State<Dashboard> {
                             alignment: Alignment.center,
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
-                              child: Text(pcValue.toString(),
+                              child: Text(
+                                pcValue.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -5241,9 +5240,6 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-
-           
-           
             SizedBox(
               width: 10,
             ),
@@ -5905,7 +5901,7 @@ class _CheckPageState extends State<Dashboard> {
           children: [
             InkWell(
               onTap: () {
-                // CommonClick("RR");
+               CommonClick("RR");
               },
               child: Center(
                 child: Container(
@@ -5977,7 +5973,7 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                // CommonClick("I:E");
+                CommonClick("I:E");
               },
               child: Center(
                 child: Container(
@@ -6050,7 +6046,7 @@ class _CheckPageState extends State<Dashboard> {
 
             InkWell(
               onTap: () {
-                //  CommonClick("PEEP") ;
+                CommonClick("PEEP");
               },
               child: Center(
                 child: Container(
@@ -6122,7 +6118,21 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                //  CommonClick("PS") ;
+                CommonClick(operatinModeR == 6 || operatinModeR == 2
+                    ? "PC"
+                    : operatinModeR == 7 ||
+                            operatinModeR == 1 ||
+                            operatinModeR == 5 
+                        ? "Vt"
+                        : modeName == "PC-CMV" || modeName == "PACV"
+                            ? "PC"
+                            : modeName == "VC-CMV" ||
+                                    modeName == "VACV" ||
+                                    modeName == "VSIMV" 
+                                    
+                                ? "Vt"
+                                : operatinModeR == 14  || modeName == "PRVC" ? "Target Vt" :
+                                 "PC");
               },
               child: Center(
                 child: Container(
@@ -6140,23 +6150,22 @@ class _CheckPageState extends State<Dashboard> {
                             alignment: Alignment.topLeft,
                             child: Text(
                               operatinModeR == 6 || operatinModeR == 2
-                                  ? "PC"
-                                  : operatinModeR == 7 ||
-                                          operatinModeR == 1 ||
-                                          operatinModeR == 5 ||
-                                          operatinModeR == 14
-                                      ? "Vt"
-                                      : modeName == "PC-CMV" ||
-                                              modeName == "PACV"
-                                          ? "PC"
-                                          : modeName == "VC-CMV" ||
-                                                  modeName == "VACV" ||
-                                                  modeName == "VSIMV" ||
-                                                  modeName == "PRVC"
-                                              ? "Vt"
-                                              : "PC",
+                    ? "PC"
+                    : operatinModeR == 7 ||
+                            operatinModeR == 1 ||
+                            operatinModeR == 5 
+                        ? "Vt"
+                        : modeName == "PC-CMV" || modeName == "PACV"
+                            ? "PC"
+                            : modeName == "VC-CMV" ||
+                                    modeName == "VACV" ||
+                                    modeName == "VSIMV" 
+                                    
+                                ? "Vt"
+                                : operatinModeR == 14  || modeName == "PRVC" ? "Target Vt" :
+                                 "PC",
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: operatinModeR == 14  || modeName == "PRVC"  ? 14 :18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
@@ -6238,10 +6247,9 @@ class _CheckPageState extends State<Dashboard> {
               ),
             ),
 
-            
             InkWell(
               onTap: () {
-                // CommonClick("FiO\u2082");
+                CommonClick("FiO2");
               },
               child: Center(
                 child: Container(
@@ -6319,7 +6327,7 @@ class _CheckPageState extends State<Dashboard> {
                     operatinModeR == 5
                 ? InkWell(
                     onTap: () {
-                      //  CommonClick("PS") ;
+                      CommonClick("PS");
                     },
                     child: Center(
                       child: Container(
@@ -6601,10 +6609,14 @@ class _CheckPageState extends State<Dashboard> {
               ),
               Container(
                   child: Padding(
-                padding:
-                    const EdgeInsets.only(left: 20, right: 0, top: 4, bottom: 4),
+                padding: const EdgeInsets.only(
+                    left: 20, right: 0, top: 4, bottom: 4),
                 child: Text(
-                  modeName=="VSIMV" ? "VSIMV + PS" : modeName=="PSIMV" ? "PSIMV + PS" : modeName.toString(),
+                  modeName == "VSIMV"
+                      ? "VSIMV + PS"
+                      : modeName == "PSIMV"
+                          ? "PSIMV + PS"
+                          : modeName.toString(),
                   style: TextStyle(
                       color: Colors.blue,
                       fontSize: 20,
@@ -6641,22 +6653,24 @@ class _CheckPageState extends State<Dashboard> {
                               : Image.asset("assets/images/nobattery.png",
                                   width: 28, color: Colors.black))),
               SizedBox(width: 10),
-             selfTestingButtonEnabled ? Material(
-                  borderRadius: BorderRadius.circular(5),
-                  child: InkWell(
-                    onTap: () {
-                      sendSelfTest();
-                      selfTestingEnabled = true;
-                    },
-                    child: Container(
-                        height: 40,
-                        width: 80,
-                        child: Image.asset(
-                          "assets/images/calibrate.png",
-                          width: 60,
-                        )),
-                  )) :Container(),
-              selfTestingButtonEnabled ? SizedBox(width: 10) :Container(),
+              selfTestingButtonEnabled
+                  ? Material(
+                      borderRadius: BorderRadius.circular(5),
+                      child: InkWell(
+                        onTap: () {
+                          sendSelfTest();
+                          selfTestingEnabled = true;
+                        },
+                        child: Container(
+                            height: 40,
+                            width: 80,
+                            child: Image.asset(
+                              "assets/images/calibrate.png",
+                              width: 60,
+                            )),
+                      ))
+                  : Container(),
+              selfTestingButtonEnabled ? SizedBox(width: 10) : Container(),
               timerCounter != 0
                   ? Material(
                       borderRadius: BorderRadius.circular(14.0),
@@ -6757,369 +6771,355 @@ class _CheckPageState extends State<Dashboard> {
   psvData() {
     return Row(
       children: [
-        Column(
-          children: [
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 80;
-                    psvminValue = 1;
-                    psvparameterName = "PS";
-                    psvparameterUnits = "cmH\u2082O above PEEP";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = true;
-                    psvTi = false;
-                    psvVtMin = false;
-                    psvVtMax = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvEtrig = false;
-                    psvPc = false;
-                    psvBackupRr = false;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvPs ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "PS",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "cmH\u2082O",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "80",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "1",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvPsValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvPs
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvPs
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value:
-                                      psvPsValue != null ? psvPsValue / 80 : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    psvmaxValue = 80;
-                    psvminValue = 1;
-                    psvparameterName = "PC";
-                    psvparameterUnits = "cmH\u2082O above PEEP";
-                    psvItrig = false;
-                    psvPeep = false;
-                    psvIe = false;
-                    psvPs = false;
-                    psvTi = false;
-                    psvVtMin = false;
-                    psvVtMax = false;
-                    psvFio2 = false;
-                    psvAtime = false;
-                    psvBackupRr = false;
-                    psvEtrig = false;
-                    psvPc = true;
-                    psvMinTe = false;
-                  });
-                },
-                child: Center(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    child: Card(
-                      elevation: 40,
-                      color: psvPc ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "PC",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: psvPc
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                "cmH\u2082O",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPc
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                "80",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPc
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                "1",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: psvPc
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 1.0),
-                                child: Text(
-                                  psvPcValue.toString(),
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      color: psvPc
-                                          ? Color(0xFF213855)
-                                          : Color(0xFFE0E0E0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, right: 10),
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    psvPc
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0),
-                                  ),
-                                  value:
-                                      psvPcValue != null ? psvPcValue / 80 : 0,
-                                ),
-                              ),
-                            )
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 30;
-                  psvminValue = 0;
-                  psvparameterName = "PEEP";
-                  psvparameterUnits = "";
-                  psvItrig = false;
-                  psvPeep = true;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = false;
-                  psvEtrig = false;
-                  psvPc = false;
-                  psvBackupRr = false;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvPeep ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
+        Column(children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                psvmaxValue = 80;
+                psvminValue = 1;
+                psvparameterName = "PS";
+                psvparameterUnits = "cmH\u2082O above PEEP";
+                psvItrig = false;
+                psvPeep = false;
+                psvIe = false;
+                psvPs = true;
+                psvTi = false;
+                psvVtMin = false;
+                psvVtMax = false;
+                psvFio2 = false;
+                psvAtime = false;
+                psvEtrig = false;
+                psvPc = false;
+                psvBackupRr = false;
+                psvMinTe = false;
+              });
+            },
+            child: Center(
+              child: Container(
+                width: 130,
+                height: 130,
+                child: Card(
+                  elevation: 40,
+                  color: psvPs ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Center(
+                        child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "PS",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: psvPs
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Text(
+                            "cmH\u2082O",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPs
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            "80",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPs
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(
+                            "1",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPs
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 1.0),
                             child: Text(
-                              "PEEP",
+                              psvPsValue.toString(),
                               style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvPeep
+                                  fontSize: 35,
+                                  color: psvPs
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0)),
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH\u2082O",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "30",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "0",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                psvPeepValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: psvPeep
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 20.0, left: 10, right: 10),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: LinearProgressIndicator(
+                              backgroundColor: Colors.grey,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                psvPs ? Color(0xFF213855) : Color(0xFFE0E0E0),
                               ),
+                              value: psvPsValue != null ? psvPsValue / 80 : 0,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvPeep
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psvPeepValue != null
-                                    ? psvPeepValue / 30
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
+                        )
+                      ],
+                    )),
                   ),
                 ),
               ),
             ),
-            ]),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                psvmaxValue = 80;
+                psvminValue = 1;
+                psvparameterName = "PC";
+                psvparameterUnits = "cmH\u2082O above PEEP";
+                psvItrig = false;
+                psvPeep = false;
+                psvIe = false;
+                psvPs = false;
+                psvTi = false;
+                psvVtMin = false;
+                psvVtMax = false;
+                psvFio2 = false;
+                psvAtime = false;
+                psvBackupRr = false;
+                psvEtrig = false;
+                psvPc = true;
+                psvMinTe = false;
+              });
+            },
+            child: Center(
+              child: Container(
+                width: 130,
+                height: 130,
+                child: Card(
+                  elevation: 40,
+                  color: psvPc ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Center(
+                        child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "PC",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: psvPc
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Text(
+                            "cmH\u2082O",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPc
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            "80",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPc
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(
+                            "1",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPc
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 1.0),
+                            child: Text(
+                              psvPcValue.toString(),
+                              style: TextStyle(
+                                  fontSize: 35,
+                                  color: psvPc
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 20.0, left: 10, right: 10),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: LinearProgressIndicator(
+                              backgroundColor: Colors.grey,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                psvPc ? Color(0xFF213855) : Color(0xFFE0E0E0),
+                              ),
+                              value: psvPcValue != null ? psvPcValue / 80 : 0,
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                psvmaxValue = 30;
+                psvminValue = 0;
+                psvparameterName = "PEEP";
+                psvparameterUnits = "";
+                psvItrig = false;
+                psvPeep = true;
+                psvIe = false;
+                psvPs = false;
+                psvTi = false;
+                psvVtMin = false;
+                psvVtMax = false;
+                psvFio2 = false;
+                psvAtime = false;
+                psvEtrig = false;
+                psvPc = false;
+                psvBackupRr = false;
+                psvMinTe = false;
+              });
+            },
+            child: Center(
+              child: Container(
+                width: 130,
+                height: 130,
+                child: Card(
+                  elevation: 40,
+                  color: psvPeep ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Center(
+                        child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "PEEP",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: psvPeep
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Text(
+                            "cmH\u2082O",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPeep
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            "30",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPeep
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(
+                            "0",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: psvPeep
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0)),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 1.0),
+                            child: Text(
+                              psvPeepValue.toString(),
+                              style: TextStyle(
+                                  fontSize: 35,
+                                  color: psvPeep
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 20.0, left: 10, right: 10),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: LinearProgressIndicator(
+                              backgroundColor: Colors.grey,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                psvPeep ? Color(0xFF213855) : Color(0xFFE0E0E0),
+                              ),
+                              value:
+                                  psvPeepValue != null ? psvPeepValue / 30 : 0,
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ]),
         Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-             
-           
-            
-          ],
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -7721,7 +7721,7 @@ class _CheckPageState extends State<Dashboard> {
               //     ),
               //   ),
               // ),
-              
+
               // InkWell(
               //   onTap: () {
               //     setState(() {
@@ -7840,240 +7840,244 @@ class _CheckPageState extends State<Dashboard> {
               //     ),
               //   ),
               // ),
-               InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 60;
-                  psvminValue = 1;
-                  psvparameterName = "Backup RR";
-                  psvparameterUnits = "bpm";
-                  psvItrig = false;
-                  psvPeep = false;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = false;
-                  psvEtrig = false;
-                  psvPc = false;
-                  psvBackupRr = true;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvBackupRr ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Backup RR",
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "bpm",
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "60",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "1",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    psvmaxValue = 60;
+                    psvminValue = 1;
+                    psvparameterName = "Backup RR";
+                    psvparameterUnits = "bpm";
+                    psvItrig = false;
+                    psvPeep = false;
+                    psvIe = false;
+                    psvPs = false;
+                    psvTi = false;
+                    psvVtMin = false;
+                    psvVtMax = false;
+                    psvFio2 = false;
+                    psvAtime = false;
+                    psvEtrig = false;
+                    psvPc = false;
+                    psvBackupRr = true;
+                    psvMinTe = false;
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 130,
+                    height: 130,
+                    child: Card(
+                      elevation: 40,
+                      color:
+                          psvBackupRr ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Center(
+                            child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
                               child: Text(
-                                psvBackupRrValue.toString(),
+                                "Backup RR",
                                 style: TextStyle(
-                                    fontSize: 35,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
                                     color: psvBackupRr
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvBackupRr
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: psvBackupRrValue != null
-                                    ? psvBackupRrValue / 60
-                                    : 0,
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                "bpm",
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: psvBackupRr
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          )
-                        ],
-                      )),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                "60",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvBackupRr
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "1",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvBackupRr
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: Text(
+                                  psvBackupRrValue.toString(),
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: psvBackupRr
+                                          ? Color(0xFF213855)
+                                          : Color(0xFFE0E0E0)),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 20.0, left: 10, right: 10),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: LinearProgressIndicator(
+                                  backgroundColor: Colors.grey,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    psvBackupRr
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0),
+                                  ),
+                                  value: psvBackupRrValue != null
+                                      ? psvBackupRrValue / 60
+                                      : 0,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  psvmaxValue = 61;
-                  psvminValue = 1;
-                  psvparameterName = "Backup I:E";
-                  psvparameterUnits = "";
-                  psvItrig = false;
-                  psvPeep = false;
-                  psvIe = false;
-                  psvPs = false;
-                  psvTi = false;
-                  psvVtMin = false;
-                  psvVtMax = false;
-                  psvFio2 = false;
-                  psvAtime = false;
-                  psvIe = true;
-                  psvPc = false;
-                  psvBackupRr = false;
-                  psvMinTe = false;
-                });
-              },
-              child: Center(
-                child: Container(
-                  width: 130,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: psvIe ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Backup I:E",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: psvIe
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvIe
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "1:4.0",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvIe
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "4.0:1",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: psvIe
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    psvmaxValue = 61;
+                    psvminValue = 1;
+                    psvparameterName = "Backup I:E";
+                    psvparameterUnits = "";
+                    psvItrig = false;
+                    psvPeep = false;
+                    psvIe = false;
+                    psvPs = false;
+                    psvTi = false;
+                    psvVtMin = false;
+                    psvVtMax = false;
+                    psvFio2 = false;
+                    psvAtime = false;
+                    psvIe = true;
+                    psvPc = false;
+                    psvBackupRr = false;
+                    psvMinTe = false;
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 130,
+                    height: 130,
+                    child: Card(
+                      elevation: 40,
+                      color: psvIe ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Center(
+                            child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
                               child: Text(
-                                // psvIeValue,
-                                getIeData(psvIeValue, 1),
+                                "Backup I:E",
                                 style: TextStyle(
-                                    fontSize: 35,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
                                     color: psvIe
                                         ? Color(0xFF213855)
                                         : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  psvIe ? Color(0xFF213855) : Color(0xFFE0E0E0),
-                                ),
-                                value: psvIeValue != null ? psvIeValue / 61 : 0,
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                "",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvIe
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
                               ),
                             ),
-                          )
-                        ],
-                      )),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                "1:4.0",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvIe
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "4.0:1",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: psvIe
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: Text(
+                                  // psvIeValue,
+                                  getIeData(psvIeValue, 1),
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: psvIe
+                                          ? Color(0xFF213855)
+                                          : Color(0xFFE0E0E0)),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 20.0, left: 10, right: 10),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: LinearProgressIndicator(
+                                  backgroundColor: Colors.grey,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    psvIe
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0),
+                                  ),
+                                  value:
+                                      psvIeValue != null ? psvIeValue / 61 : 0,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-             InkWell(
+              InkWell(
                 onTap: () {
                   setState(() {
                     psvmaxValue = 46;
@@ -8190,7 +8194,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ),
-              
+
               // Container(width: 146)
             ]),
         SizedBox(width: 250),
@@ -8503,7 +8507,7 @@ class _CheckPageState extends State<Dashboard> {
                                               // ? psvIeValue.toInt().toString()
                                               ? getIeData(psvIeValue, 1)
                                               : psvTi
-                                                  ? getTiValue(psvTiValue)                                                      
+                                                  ? getTiValue(psvTiValue)
                                                       .toString()
                                                   : psvVtMin
                                                       ? psvVtMinValue
@@ -8549,28 +8553,29 @@ class _CheckPageState extends State<Dashboard> {
                             min: psvminValue.toDouble(),
                             max: psvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (psvItrig == true ) {
+                              if (psvItrig == true) {
                                 setState(() {
-                                 if(psvPeepValue==0){
-                                        psvItrigValue = 1;
-                                      }else{
+                                  if (psvPeepValue == 0) {
+                                    psvItrigValue = 1;
+                                  } else {
                                     if (value.toInt() > psvPeepValue) {
                                       psvItrigValue = psvPeepValue;
                                     } else {
                                       psvItrigValue = value.toInt();
                                     }
-                                      }
+                                  }
                                 });
                               } else if (psvPeep == true) {
                                 setState(() {
-                                      psvPeepValue = value.toInt();
-                                if (psvItrigValue > 1 && psvItrigValue > psvPeepValue) {
-                                  if(psvPeepValue==0){
-                                    psvItrigValue = 1;
-                                  }else{
-                                  psvItrigValue = psvPeepValue;
+                                  psvPeepValue = value.toInt();
+                                  if (psvItrigValue > 1 &&
+                                      psvItrigValue > psvPeepValue) {
+                                    if (psvPeepValue == 0) {
+                                      psvItrigValue = 1;
+                                    } else {
+                                      psvItrigValue = psvPeepValue;
+                                    }
                                   }
-                                }
                                 });
                               } else if (psvPs == true) {
                                 setState(() {
@@ -8669,7 +8674,9 @@ class _CheckPageState extends State<Dashboard> {
                                 ? getIeData(psvminValue, 1)
                                 : psvItrig
                                     ? "-" + psvminValue.toString()
-                                    : psvTi ? getTiValue(psvminValue).toString() :psvminValue.toString()),
+                                    : psvTi
+                                        ? getTiValue(psvminValue).toString()
+                                        : psvminValue.toString()),
                             Text(
                               psvparameterUnits,
                               style: TextStyle(fontSize: 16),
@@ -8678,7 +8685,9 @@ class _CheckPageState extends State<Dashboard> {
                                 ? getIeData(psvmaxValue, 1)
                                 : psvItrig
                                     ? "-" + psvmaxValue.toString()
-                                    : psvTi ? getTiValue(psvmaxValue).toString() :psvmaxValue.toString())
+                                    : psvTi
+                                        ? getTiValue(psvmaxValue).toString()
+                                        : psvmaxValue.toString())
                           ],
                         ),
                       )
@@ -9745,7 +9754,7 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            Container(width:146)
+            Container(width: 146)
           ],
         ),
         SizedBox(width: 140),
@@ -10058,25 +10067,26 @@ class _CheckPageState extends State<Dashboard> {
                             min: pacvminValue.toDouble() ?? 0,
                             max: pacvmaxValue.toDouble() ?? 0,
                             onChanged: (double value) {
-                              if (pacvItrig == true ) {
+                              if (pacvItrig == true) {
                                 setState(() {
-                                      if(pacvPeepValue==0){
-                                        pacvItrigValue = 1;
-                                      }else{
+                                  if (pacvPeepValue == 0) {
+                                    pacvItrigValue = 1;
+                                  } else {
                                     if (value.toInt() > pacvPeepValue) {
                                       pacvItrigValue = pacvPeepValue;
                                     } else {
                                       pacvItrigValue = value.toInt();
                                     }
-                                      }
+                                  }
                                 });
                               } else if (pacvPeep == true) {
                                 pacvPeepValue = value.toInt();
-                                if (pacvItrigValue > 1 && pacvItrigValue > pacvPeepValue) {
-                                  if(pacvPeepValue==0){
+                                if (pacvItrigValue > 1 &&
+                                    pacvItrigValue > pacvPeepValue) {
+                                  if (pacvPeepValue == 0) {
                                     pacvItrigValue = 1;
-                                  }else{
-                                  pacvItrigValue = pacvPeepValue;
+                                  } else {
+                                    pacvItrigValue = pacvPeepValue;
                                   }
                                 }
                               } else if (pacvRr == true) {
@@ -11434,26 +11444,27 @@ class _CheckPageState extends State<Dashboard> {
                             onChanged: (double value) {
                               if (prvcItrig == true && prvcItrigValue != 10) {
                                 setState(() {
-                                 if(prvcPeepValue==0){
-                                        prvcItrigValue = 1;
-                                      }else{
+                                  if (prvcPeepValue == 0) {
+                                    prvcItrigValue = 1;
+                                  } else {
                                     if (value.toInt() > prvcPeepValue) {
                                       prvcItrigValue = prvcPeepValue;
                                     } else {
                                       prvcItrigValue = value.toInt();
                                     }
-                                      }
+                                  }
                                 });
                               } else if (prvcPeep == true) {
                                 setState(() {
-                                      prvcPeepValue = value.toInt();
-                                if (prvcItrigValue > 1 && prvcItrigValue > prvcPeepValue) {
-                                  if(prvcPeepValue==0){
-                                    prvcItrigValue = 1;
-                                  }else{
-                                  prvcItrigValue = prvcPeepValue;
+                                  prvcPeepValue = value.toInt();
+                                  if (prvcItrigValue > 1 &&
+                                      prvcItrigValue > prvcPeepValue) {
+                                    if (prvcPeepValue == 0) {
+                                      prvcItrigValue = 1;
+                                    } else {
+                                      prvcItrigValue = prvcPeepValue;
+                                    }
                                   }
-                                }
                                 });
                               } else if (prvcRr == true) {
                                 setState(() {
@@ -12602,7 +12613,9 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-            Container(height: 260,)
+            Container(
+              height: 260,
+            )
             // InkWell(
             //   onTap: () {
             //     setState(() {
@@ -13050,28 +13063,29 @@ class _CheckPageState extends State<Dashboard> {
                             min: psimvminValue.toDouble() ?? 0,
                             max: psimvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (psimvItrig == true){
+                              if (psimvItrig == true) {
                                 setState(() {
-                                  if(psimvPeepValue==0){
-                                        psimvItrigValue = 1;
-                                      }else{
+                                  if (psimvPeepValue == 0) {
+                                    psimvItrigValue = 1;
+                                  } else {
                                     if (value.toInt() > psimvPeepValue) {
                                       psimvItrigValue = psimvPeepValue;
                                     } else {
                                       psimvItrigValue = value.toInt();
                                     }
-                                      }
+                                  }
                                 });
                               } else if (psimvPeep == true) {
                                 setState(() {
-                                         psimvPeepValue = value.toInt();
-                                if (psimvItrigValue > 1 && psimvItrigValue > psimvPeepValue) {
-                                  if(psimvPeepValue==0){
-                                    psimvItrigValue = 1;
-                                  }else{
-                                  psimvItrigValue = psimvPeepValue;
+                                  psimvPeepValue = value.toInt();
+                                  if (psimvItrigValue > 1 &&
+                                      psimvItrigValue > psimvPeepValue) {
+                                    if (psimvPeepValue == 0) {
+                                      psimvItrigValue = 1;
+                                    } else {
+                                      psimvItrigValue = psimvPeepValue;
+                                    }
                                   }
-                                }
                                 });
                               } else if (psimvRr == true) {
                                 setState(() {
@@ -17270,26 +17284,27 @@ class _CheckPageState extends State<Dashboard> {
                             onChanged: (double value) {
                               if (vsimvItrig == true && vsimvItrigValue != 10) {
                                 setState(() {
-                                 if(vsimvPeepValue==0){
-                                        vsimvItrigValue = 1;
-                                      }else{
+                                  if (vsimvPeepValue == 0) {
+                                    vsimvItrigValue = 1;
+                                  } else {
                                     if (value.toInt() > vsimvPeepValue) {
                                       vsimvItrigValue = vsimvPeepValue;
                                     } else {
                                       vsimvItrigValue = value.toInt();
                                     }
-                                      }
+                                  }
                                 });
                               } else if (vsimvPeep == true) {
                                 setState(() {
-                                    vsimvPeepValue = value.toInt();
-                                if (vsimvItrigValue > 1 && vsimvItrigValue > vsimvPeepValue) {
-                                  if(vsimvPeepValue==0){
-                                    vsimvItrigValue = 1;
-                                  }else{
-                                  vsimvItrigValue = vsimvPeepValue;
+                                  vsimvPeepValue = value.toInt();
+                                  if (vsimvItrigValue > 1 &&
+                                      vsimvItrigValue > vsimvPeepValue) {
+                                    if (vsimvPeepValue == 0) {
+                                      vsimvItrigValue = 1;
+                                    } else {
+                                      vsimvItrigValue = vsimvPeepValue;
+                                    }
                                   }
-                                }
                                 });
                               } else if (vsimvRr == true) {
                                 setState(() {
@@ -18092,7 +18107,7 @@ class _CheckPageState extends State<Dashboard> {
             //       vacvmaxValue = 100;
             //       vacvminValue = 10;
             //       vacvparameterName = "PC Min";
-            //       vacvparameterUnits = "cmH\u2082O"; 
+            //       vacvparameterUnits = "cmH\u2082O";
             //       vacvItrig = false;
             //       vacvRr = false;
             //       vacvIe = false;
@@ -18758,28 +18773,29 @@ class _CheckPageState extends State<Dashboard> {
                             min: vacvminValue.toDouble(),
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              if (vacvItrig == true ) {
+                              if (vacvItrig == true) {
                                 setState(() {
-                                   if(vacvPeepValue==0){
-                                        vacvItrigValue = 1;
-                                      }else{
+                                  if (vacvPeepValue == 0) {
+                                    vacvItrigValue = 1;
+                                  } else {
                                     if (value.toInt() > vacvPeepValue) {
                                       vacvItrigValue = vacvPeepValue;
                                     } else {
                                       vacvItrigValue = value.toInt();
                                     }
-                                      }
+                                  }
                                 }); // slider itrig
                               } else if (vacvPeep == true) {
                                 setState(() {
-                                vacvPeepValue = value.toInt();
-                                if (vacvItrigValue > 1 && vacvItrigValue > vacvPeepValue) {
-                                  if(vacvPeepValue==0){
-                                    vacvItrigValue = 1;
-                                  }else{
-                                  vacvItrigValue = vacvPeepValue;
+                                  vacvPeepValue = value.toInt();
+                                  if (vacvItrigValue > 1 &&
+                                      vacvItrigValue > vacvPeepValue) {
+                                    if (vacvPeepValue == 0) {
+                                      vacvItrigValue = 1;
+                                    } else {
+                                      vacvItrigValue = vacvPeepValue;
+                                    }
                                   }
-                                }
                                 });
                               } else if (vacvRr == true) {
                                 setState(() {
@@ -19150,111 +19166,646 @@ class _CheckPageState extends State<Dashboard> {
           return CommonDialog(value);
         });
 
-    var data = result.split("ab")[1];
-    int peepHighL = 0, peepLowL = 0;
-    if (data == "peep") {
-      int temp = int.tryParse(result.split("ab")[0]);
-      peepHighL = ((temp & 0xFF00) >> 8);
-      peepLowL = (temp & 0xFF);
-      List<int> listObj = [01, 0x10, 00, 101, 0x00, 0x01, 0x02];
-      listObj.add(peepHighL);
-      listObj.add(peepLowL);
-      // getCrcData(listObj);
-    } else if (data == "ps") {
-      int temp = int.tryParse(result.split("ab")[0]);
-      peepHighL = ((temp & 0xFF00) >> 8);
-      peepLowL = (temp & 0xFF);
-      List<int> listObj = [01, 0x10, 00, 102, 0x00, 0x01, 0x02];
-      listObj.add(peepHighL);
-      listObj.add(peepLowL);
-      // getCrcData(listObj);
-    } else if (data == "ie") {
-      int temp = int.tryParse(result.split("ab")[0]);
-      peepHighL = ((temp & 0xFF00) >> 8);
-      peepLowL = (temp & 0xFF);
-      List<int> listObj = [01, 0x10, 00, 103, 0x00, 0x01, 0x02];
-      listObj.add(peepHighL);
-      listObj.add(peepLowL);
-      // getCrcData(listObj);
-    } else if (data == "rr") {
-      int temp = int.tryParse(result.split("ab")[0]);
-      peepHighL = ((temp & 0xFF00) >> 8);
-      peepLowL = (temp & 0xFF);
-      List<int> listObj = [01, 0x10, 00, 104, 0x00, 0x01, 0x02];
-      listObj.add(peepHighL);
-      listObj.add(peepLowL);
-      // getCrcData(listObj);
-    } else if (data == "FiO\u2082") {
-      int temp = int.tryParse(result.split("ab")[0]);
-      peepHighL = ((temp & 0xFF00) >> 8);
-      peepLowL = (temp & 0xFF);
-      List<int> listObj = [01, 0x10, 00, 105, 0x00, 0x01, 0x02];
-      listObj.add(peepHighL);
-      listObj.add(peepLowL);
-      // getCrcData(listObj);
-    } else if (data == "tih") {
-      int temp = int.tryParse(result.split("ab")[0]);
-      peepHighL = ((temp & 0xFF00) >> 8);
-      peepLowL = (temp & 0xFF);
-      List<int> listObj = [01, 0x10, 00, 106, 0x00, 0x01, 0x02];
-      listObj.add(peepHighL);
-      listObj.add(peepLowL);
-      // getCrcData(listObj);
+    if (result != null) {
+      var data = result.split("ab")[1];
+
+      if (data == "peep") {
+        sendDataPacket(data, result);
+      } else if (data == "ps") {
+        sendDataPacket(data, result);
+      } else if (data == "ie") {
+        sendDataPacket(data, result);
+      } else if (data == "rr") {
+        sendDataPacket(data, result);
+      } else if (data == "fio2") {
+        sendDataPacket(data, result);
+      } else if (data == "pc") {
+        sendDataPacket(data, result);
+      } else if (data == "vt") {
+        sendDataPacket(data, result);
+      }
     }
+
     if (result != null) {
       getData();
     }
   }
 
-  getTiValue(checkTi){
-    var data = checkTi == 1 ? "0.5" :
-checkTi == 2 ? "0.6":
-checkTi == 3 ? "0.7":
-checkTi == 4 ? "0.8":
-checkTi == 5 ? "0.9":
-checkTi == 6 ? "1.0":
-checkTi == 7 ? "1.1":
-checkTi == 8 ? "1.2":
-checkTi == 9 ? "1.3":
-checkTi == 10 ? "1.4":
-checkTi == 11 ? "1.5":
-checkTi == 12 ? "1.6":
-checkTi == 13 ? "1.7":
-checkTi == 14 ? "1.8":
-checkTi == 15 ? "1.9":
-checkTi == 16 ? "2.0":
-checkTi == 17 ? "2.1":
-checkTi == 18 ? "2.2":
-checkTi == 19 ? "2.3":
-checkTi == 20 ? "2.4":
-checkTi == 21 ? "2.5":
-checkTi == 22 ? "2.6":
-checkTi == 23 ? "2.7":
-checkTi == 24 ? "2.8":
-checkTi == 25 ? "2.9":
-checkTi == 26 ? "3.0":
-checkTi == 27 ? "3.1":
-checkTi == 28 ? "3.2":
-checkTi == 29 ? "3.3":
-checkTi == 30 ? "3.4":
-checkTi == 31 ? "3.5":
-checkTi == 32 ? "3.6":
-checkTi == 33 ? "3.7":
-checkTi == 34 ? "3.8":
-checkTi == 35 ? "3.9":
-checkTi == 36 ? "4.0":
-checkTi == 37 ? "4.1":
-checkTi == 38 ? "4.2":
-checkTi == 39 ? "4.3":
-checkTi == 40 ? "4.4":
-checkTi == 41 ? "4.5":
-checkTi == 42 ? "4.6":
-checkTi == 43 ? "4.7":
-checkTi == 44 ? "4.8":
-checkTi == 45 ? "4.9":
-checkTi == 46 ? "5.0" : "0.5";
+  sendDataPacket(String res, result) {
+    if (res == "rr") {
+      if (pccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[4] = ((temp & 0xFF00) >> 8);
+        modeWriteList[5] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (1);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[4] = ((temp & 0xFF00) >> 8);
+        modeWriteList[5] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (1);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (pacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[6] = ((temp & 0xFF00) >> 8);
+        modeWriteList[7] = (temp & 0xFF);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (2);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[6] = ((temp & 0xFF00) >> 8);
+        modeWriteList[7] = (temp & 0xFF);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (2);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[6] = ((temp & 0xFF00) >> 8);
+        modeWriteList[7] = (temp & 0xFF);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (2);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vsimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[6] = ((temp & 0xFF00) >> 8);
+        modeWriteList[7] = (temp & 0xFF);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (2);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[18] = ((temp & 0xFF00) >> 8);
+        modeWriteList[19] = (temp & 0xFF);
+        modeWriteList[28] = (0);
+        modeWriteList[29] = (128);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (prvcEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[6] = ((temp & 0xFF00) >> 8);
+        modeWriteList[7] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (2);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      }
+    } else if (res == "peep") {
+      if (pccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[8] = ((temp & 0xFF00) >> 8);
+        modeWriteList[9] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (4);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[8] = ((temp & 0xFF00) >> 8);
+        modeWriteList[9] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (4);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (pacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[10] = ((temp & 0xFF00) >> 8);
+        modeWriteList[11] = (temp & 0xFF);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (8);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[10] = ((temp & 0xFF00) >> 8);
+        modeWriteList[11] = (temp & 0xFF);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (8);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[10] = ((temp & 0xFF00) >> 8);
+        modeWriteList[11] = (temp & 0xFF);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (8);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vsimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[10] = ((temp & 0xFF00) >> 8);
+        modeWriteList[11] = (temp & 0xFF);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (8);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[6] = ((temp & 0xFF00) >> 8);
+        modeWriteList[7] = (temp & 0xFF);
+        modeWriteList[28] = (0);
+        modeWriteList[29] = (2);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (prvcEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[10] = ((temp & 0xFF00) >> 8);
+        modeWriteList[11] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (8);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      }
+    } else if (res == "fio2") {
+      if (pccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        modeWriteList[13] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (16);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        modeWriteList[13] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (16);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (pacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[18] = ((temp & 0xFF00) >> 8);
+        modeWriteList[19] = (temp & 0xFF);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (128);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[18] = ((temp & 0xFF00) >> 8);
+        modeWriteList[19] = (temp & 0xFF);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (128);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[18] = ((temp & 0xFF00) >> 8);
+        modeWriteList[19] = (temp & 0xFF);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (128);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vsimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[18] = ((temp & 0xFF00) >> 8);
+        modeWriteList[19] = (temp & 0xFF);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (128);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[10] = ((temp & 0xFF00) >> 8);
+        modeWriteList[11] = (temp & 0xFF);
+        modeWriteList[28] = (0);
+        modeWriteList[29] = (8);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (prvcEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[16] = ((temp & 0xFF00) >> 8);
+        modeWriteList[17] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (64);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      }
+    } else if (res == "pc") {
+      if (pccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[10] = ((temp & 0xFF00) >> 8);
+        modeWriteList[11] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (8);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vccmvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[8]=((temp & 0xFF00) >> 8);
+        // modeWriteList[9]=(temp & 0xFF);
+        // modeWriteList[18]= (0);
+        // modeWriteList[19]= (4);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      }
+      if (pacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        modeWriteList[13] = (temp & 0xFF);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (16);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vacvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[10]=((temp & 0xFF00) >> 8);
+        // modeWriteList[11]=(temp & 0xFF);
+        // modeWriteList[20]= (0);
+        // modeWriteList[21]= (8);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (psimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        modeWriteList[13] = (temp & 0xFF);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (16);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vsimvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[10]=((temp & 0xFF00) >> 8);
+        // modeWriteList[11]=(temp & 0xFF);
+        // modeWriteList[22]= (0);
+        // modeWriteList[23]= (8);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (psvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[26] = ((temp & 0xFF00) >> 8);
+        modeWriteList[27] = (temp & 0xFF);
+        modeWriteList[28] = (8);
+        modeWriteList[29] = (0);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (prvcEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[22] = ((temp & 0xFF00) >> 8);
+        modeWriteList[23] = (temp & 0xFF);
+        modeWriteList[24] = (2);
+        modeWriteList[25] = (0);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      }
+    } else if (res == "ie") {
+      if (pccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
 
-return data;
+        var dataI = getIeData(temp, 2);
+        var dataI1 = double.tryParse(dataI);
+        var dataI2 = (dataI1 * 10).toInt();
+
+        var dataE = getIeData(temp, 3);
+        var dataE1 = double.tryParse(dataE);
+        var dataE2 = (dataE1 * 10).toInt();
+
+        preferences.setString("i", dataI1.toString());
+        preferences.setString("e", dataE1.toString());
+        // getData();
+
+        modeWriteList[6] = (dataI2);
+        modeWriteList[7] = (dataE2);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (2);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+
+        var dataI = getIeData(temp, 2);
+        var dataI1 = double.tryParse(dataI);
+        var dataI2 = (dataI1 * 10).toInt();
+
+        var dataE = getIeData(temp, 3);
+        var dataE1 = double.tryParse(dataE);
+        var dataE2 = (dataE1 * 10).toInt();
+
+        preferences.setString("i", dataI1.toString());
+        preferences.setString("e", dataE1.toString());
+        // getData();
+
+        modeWriteList[6] = (dataI2);
+        modeWriteList[7] = (dataE2);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (2);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (pacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+
+        var dataI = getIeData(temp, 2);
+        var dataI1 = double.tryParse(dataI);
+        var dataI2 = (dataI1 * 10).toInt();
+
+        var dataE = getIeData(temp, 3);
+        var dataE1 = double.tryParse(dataE);
+        var dataE2 = (dataE1 * 10).toInt();
+
+        preferences.setString("i", dataI1.toString());
+        preferences.setString("e", dataE1.toString());
+        // getData();
+
+        modeWriteList[8] = (dataI2);
+        modeWriteList[9] = (dataE2);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (4);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+
+        var dataI = getIeData(temp, 2);
+        var dataI1 = double.tryParse(dataI);
+        var dataI2 = (dataI1 * 10).toInt();
+
+        var dataE = getIeData(temp, 3);
+        var dataE1 = double.tryParse(dataE);
+        var dataE2 = (dataE1 * 10).toInt();
+
+        preferences.setString("i", dataI1.toString());
+        preferences.setString("e", dataE1.toString());
+        // getData();
+
+        modeWriteList[8] = (dataI2);
+        modeWriteList[9] = (dataE2);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (4);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+
+        var dataI = getIeData(temp, 2);
+        var dataI1 = double.tryParse(dataI);
+        var dataI2 = (dataI1 * 10).toInt();
+
+        var dataE = getIeData(temp, 3);
+        var dataE1 = double.tryParse(dataE);
+        var dataE2 = (dataE1 * 10).toInt();
+
+        preferences.setString("i", dataI1.toString());
+        preferences.setString("e", dataE1.toString());
+        // getData();
+
+        modeWriteList[8] = (dataI2);
+        modeWriteList[9] = (dataE2);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (4);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vsimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+
+        var dataI = getIeData(temp, 2);
+        var dataI1 = double.tryParse(dataI);
+        var dataI2 = (dataI1 * 10).toInt();
+
+        var dataE = getIeData(temp, 3);
+        var dataE1 = double.tryParse(dataE);
+        var dataE2 = (dataE1 * 10).toInt();
+
+        preferences.setString("i", dataI1.toString());
+        preferences.setString("e", dataE1.toString());
+        // getData();
+
+        modeWriteList[8] = (dataI2);
+        modeWriteList[9] = (dataE2);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (4);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      }else if (psvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+
+        var dataI = getIeData(temp, 2);
+        var dataI1 = double.tryParse(dataI);
+        var dataI2 = (dataI1 * 10).toInt();
+
+        var dataE = getIeData(temp, 3);
+        var dataE1 = double.tryParse(dataE);
+        var dataE2 = (dataE1 * 10).toInt();
+
+        preferences.setString("i", dataI1.toString());
+        preferences.setString("e", dataE1.toString());
+        // getData();
+
+        modeWriteList[14] = (dataI2);
+        modeWriteList[15] = (dataE2);
+        modeWriteList[28] = (0);
+        modeWriteList[29] = (32);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (prvcEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+
+        var dataI = getIeData(temp, 2);
+        var dataI1 = double.tryParse(dataI);
+        var dataI2 = (dataI1 * 10).toInt();
+
+        var dataE = getIeData(temp, 3);
+        var dataE1 = double.tryParse(dataE);
+        var dataE2 = (dataE1 * 10).toInt();
+
+        preferences.setString("i", dataI1.toString());
+        preferences.setString("e", dataE1.toString());
+        // getData();
+
+        modeWriteList[8] = (dataI2);
+        modeWriteList[9] = (dataE2);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (4);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      }
+    } else if (res == "vt") {
+      if (pccmvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[10]=((temp & 0xFF00) >> 8);
+        // modeWriteList[11]=(temp & 0xFF);
+        // modeWriteList[18]= (0);
+        // modeWriteList[19]= (8);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (vccmvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[10] = ((temp & 0xFF00) >> 8);
+        modeWriteList[11] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (8);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (pacvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[12]=((temp & 0xFF00) >> 8);
+        // modeWriteList[13]=(temp & 0xFF);
+        // modeWriteList[20]= (0);
+        // modeWriteList[21]= (16);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (vacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        modeWriteList[13] = (temp & 0xFF);
+        modeWriteList[20] = (0);
+        modeWriteList[21] = (16);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psimvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[12]=((temp & 0xFF00) >> 8);
+        // modeWriteList[13]=(temp & 0xFF);
+        // modeWriteList[22]= (0);
+        // modeWriteList[23]= (16);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (vsimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[16] = ((temp & 0xFF00) >> 8);
+        modeWriteList[17] = (temp & 0xFF);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (64);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[10]=((temp & 0xFF00) >> 8);
+        // modeWriteList[11]=(temp & 0xFF);
+        // modeWriteList[24]= (0);
+        // modeWriteList[25]= (8);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (prvcEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        modeWriteList[13] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (16);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      }
+    } else if (res == "ps") {
+      if (pccmvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[10]=((temp & 0xFF00) >> 8);
+        // modeWriteList[11]=(temp & 0xFF);
+        // modeWriteList[18]= (0);
+        // modeWriteList[19]= (8);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (vccmvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[10]=((temp & 0xFF00) >> 8);
+        // modeWriteList[11]=(temp & 0xFF);
+        // modeWriteList[18]= (0);
+        // modeWriteList[19]= (8);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (pacvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[12]=((temp & 0xFF00) >> 8);
+        // modeWriteList[13]=(temp & 0xFF);
+        // modeWriteList[20]= (0);
+        // modeWriteList[21]= (16);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (vacvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[12]=((temp & 0xFF00) >> 8);
+        // modeWriteList[13]=(temp & 0xFF);
+        // modeWriteList[20]= (0);
+        // modeWriteList[21]= (16);
+        // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (psimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[20] = ((temp & 0xFF00) >> 8);
+        modeWriteList[21] = (temp & 0xFF);
+        modeWriteList[22] = (1);
+        modeWriteList[23] = (0);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vsimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[20] = ((temp & 0xFF00) >> 8);
+        modeWriteList[21] = (temp & 0xFF);
+        modeWriteList[22] = (1);
+        modeWriteList[23] = (0);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[8]=((temp & 0xFF00) >> 8);
+        modeWriteList[9]=(temp & 0xFF);
+        modeWriteList[28]= (0);
+        modeWriteList[29]= (4);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (prvcEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        modeWriteList[13] = (temp & 0xFF);
+        modeWriteList[18] = (0);
+        modeWriteList[19] = (16);
+        // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      }
+    }
+  }
+
+  getTiValue(checkTi) {
+    var data = checkTi == 1
+        ? "0.5"
+        : checkTi == 2
+            ? "0.6"
+            : checkTi == 3
+                ? "0.7"
+                : checkTi == 4
+                    ? "0.8"
+                    : checkTi == 5
+                        ? "0.9"
+                        : checkTi == 6
+                            ? "1.0"
+                            : checkTi == 7
+                                ? "1.1"
+                                : checkTi == 8
+                                    ? "1.2"
+                                    : checkTi == 9
+                                        ? "1.3"
+                                        : checkTi == 10
+                                            ? "1.4"
+                                            : checkTi == 11
+                                                ? "1.5"
+                                                : checkTi == 12
+                                                    ? "1.6"
+                                                    : checkTi == 13
+                                                        ? "1.7"
+                                                        : checkTi == 14
+                                                            ? "1.8"
+                                                            : checkTi == 15
+                                                                ? "1.9"
+                                                                : checkTi == 16
+                                                                    ? "2.0"
+                                                                    : checkTi ==
+                                                                            17
+                                                                        ? "2.1"
+                                                                        : checkTi ==
+                                                                                18
+                                                                            ? "2.2"
+                                                                            : checkTi == 19
+                                                                                ? "2.3"
+                                                                                : checkTi == 20 ? "2.4" : checkTi == 21 ? "2.5" : checkTi == 22 ? "2.6" : checkTi == 23 ? "2.7" : checkTi == 24 ? "2.8" : checkTi == 25 ? "2.9" : checkTi == 26 ? "3.0" : checkTi == 27 ? "3.1" : checkTi == 28 ? "3.2" : checkTi == 29 ? "3.3" : checkTi == 30 ? "3.4" : checkTi == 31 ? "3.5" : checkTi == 32 ? "3.6" : checkTi == 33 ? "3.7" : checkTi == 34 ? "3.8" : checkTi == 35 ? "3.9" : checkTi == 36 ? "4.0" : checkTi == 37 ? "4.1" : checkTi == 38 ? "4.2" : checkTi == 39 ? "4.3" : checkTi == 40 ? "4.4" : checkTi == 41 ? "4.5" : checkTi == 42 ? "4.6" : checkTi == 43 ? "4.7" : checkTi == 44 ? "4.8" : checkTi == 45 ? "4.9" : checkTi == 46 ? "5.0" : "0.5";
+
+    return data;
   }
 
   getIeData(pccmvIeValue, int res) {
@@ -19328,40 +19879,40 @@ return data;
       var dataE1 = double.tryParse(dataE);
       var dataE2 = (dataE1 * 10).toInt();
 
-      // int iEval = int.tryParse((double.tryParse(data))*10.0);
-
-      // // print(iEval.toString());
       setState(() {
-        modeWriteList.add(0x7E);
-        modeWriteList.add(0);
-        modeWriteList.add(20);
-        modeWriteList.add(0);
-        modeWriteList.add(6);
+        // modeWriteList.add(0x7E);
+        modeWriteList.add(0); //0
+        modeWriteList.add(20); //1
+        modeWriteList.add(0); //2
+        modeWriteList.add(6); //3
 
-        modeWriteList.add((pccmvRRValue & 0xFF00) >> 8);
-        modeWriteList.add((pccmvRRValue & 0x00FF));
+        modeWriteList.add((pccmvRRValue & 0xFF00) >> 8); //4
+        modeWriteList.add((pccmvRRValue & 0x00FF)); //5
 
-        modeWriteList.add((dataI2 & 0x00FF));
-        modeWriteList.add((dataE2 & 0x00FF));
+        modeWriteList.add((dataI2 & 0x00FF)); //6
+        modeWriteList.add((dataE2 & 0x00FF)); //7
 
-        modeWriteList.add((pccmvPeepValue & 0xFF00) >> 8);
-        modeWriteList.add((pccmvPeepValue & 0x00FF));
+        modeWriteList.add((pccmvPeepValue & 0xFF00) >> 8); //8
+        modeWriteList.add((pccmvPeepValue & 0x00FF)); //9
 
-        modeWriteList.add((pccmvPcValue & 0xFF00) >> 8); //12
-        modeWriteList.add((pccmvPcValue & 0x00FF)); //13
+        modeWriteList.add((pccmvPcValue & 0xFF00) >> 8); //10
+        modeWriteList.add((pccmvPcValue & 0x00FF)); //11
 
-        modeWriteList.add((pccmvFio2Value & 0xFF00) >> 8);
-        modeWriteList.add((pccmvFio2Value & 0x00FF));
+        modeWriteList.add((pccmvFio2Value & 0xFF00) >> 8); //12
+        modeWriteList.add((pccmvFio2Value & 0x00FF)); //13
 
-        modeWriteList.add((pccmvVtminValue & 0xFF00) >> 8);
-        modeWriteList.add((pccmvVtminValue & 0x00FF));
+        modeWriteList.add((pccmvVtminValue & 0xFF00) >> 8); //14
+        modeWriteList.add((pccmvVtminValue & 0x00FF)); //15
 
-        modeWriteList.add((pccmvVtmaxValue & 0xFF00) >> 8);
-        modeWriteList.add((pccmvVtmaxValue & 0x00FF));
+        modeWriteList.add((pccmvVtmaxValue & 0xFF00) >> 8); //16
+        modeWriteList.add((pccmvVtmaxValue & 0x00FF)); //17
+
+        modeWriteList.add(1); //18
+        modeWriteList.add(255); //19
 
         // modeWriteList.add((pccmvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((pccmvFlowRampValue & 0x00FF));
-        modeWriteList.add(0x7F);
+        // modeWriteList.add(0x7F);
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -19369,6 +19920,7 @@ return data;
       preferences.setString("checkMode", "pccmv");
       preferences.setInt("rr", pccmvRRValue);
       preferences.setInt("ie", pccmvIeValue);
+      // Fluttertoast.showToast(msg:pccmvIeValue.toString());
       preferences.setString("i", dataI1.toString());
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", pccmvPeepValue);
@@ -19386,12 +19938,15 @@ return data;
       preferences.setInt('pccmvFlowRampValue', pccmvFlowRampValue);
       preferences.setInt('pccmvdefaultValue', pccmvdefaultValue);
 
+      // sendDataUsbConnection(modeWriteList); //TODO
+
       //to calculate crc
       // print(modeWriteList.toString());
       // Fluttertoast.showToast(msg: modeWriteList.toString());
 
       if (_status == "Connected") {
-        await _port.write(Uint8List.fromList(modeWriteList));
+        sendDataUsbConnection(modeWriteList);
+        // await _port.write(Uint8List.fromList(modeWriteList));
         writeAlarmsData();
         modesEnabled = false;
       } else {
@@ -19415,7 +19970,7 @@ return data;
       var dataE2 = (dataE1 * 10).toInt();
 
       setState(() {
-        modeWriteList.add(0x7E);
+        // modeWriteList.add(0x7E);
         modeWriteList.add(0);
         modeWriteList.add(20);
         modeWriteList.add(0);
@@ -19441,16 +19996,19 @@ return data;
         modeWriteList.add((vccmvPcMaxValue & 0xFF00) >> 8);
         modeWriteList.add((vccmvPcMaxValue & 0x00FF));
 
+        modeWriteList.add(1);
+        modeWriteList.add(255);
+
         // modeWriteList.add((vccmvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((vccmvFlowRampValue & 0x00FF));
-        modeWriteList.add(0x7F);
+        // modeWriteList.add(0x7F);
       });
 
       preferences = await SharedPreferences.getInstance();
       preferences.setString("mode", "VC-CMV");
       preferences.setString("checkMode", "vccmv");
       preferences.setInt("rr", vccmvRRValue);
-
+      preferences.setInt("ie", vccmvIeValue);
       preferences.setString("i", dataI1.toString());
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", vccmvPeepValue);
@@ -19469,11 +20027,14 @@ return data;
       preferences.setInt('vccmvFlowRampValue', vccmvFlowRampValue);
       preferences.setInt('vccmvdefaultValue', vccmvdefaultValue);
 
+      // sendDataUsbConnection(modeWriteList); //TODO
+
       //to calculate crc
       // print(modeWriteList.toString());
       // Fluttertoast.showToast(msg: modeWriteList.toString());
       if (_status == "Connected") {
-        await _port.write(Uint8List.fromList(modeWriteList));
+        sendDataUsbConnection(modeWriteList);
+        // await _port.write(Uint8List.fromList(modeWriteList));
         writeAlarmsData();
         modesEnabled = false;
       } else {
@@ -19496,7 +20057,7 @@ return data;
       var dataE2 = (dataE1 * 10).toInt();
 
       setState(() {
-        modeWriteList.add(0x7E);
+        // modeWriteList.add(0x7E);
         modeWriteList.add(0);
         modeWriteList.add(20);
         modeWriteList.add(0);
@@ -19526,10 +20087,13 @@ return data;
         modeWriteList.add((pacvFio2Value & 0xFF00) >> 8);
         modeWriteList.add((pacvFio2Value & 0x00FF));
 
+        modeWriteList.add(1);
+        modeWriteList.add(255);
+
         // modeWriteList.add((pacvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((pacvFlowRampValue & 0x00FF));
 
-        modeWriteList.add(0x7F);
+        // modeWriteList.add(0x7F);
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -19556,9 +20120,11 @@ return data;
       preferences.setInt('pacvdefaultValue', pacvdefaultValue);
 
       //==
+      // sendDataUsbConnection(modeWriteList); //TODO
 
       if (_status == "Connected") {
-        await _port.write(Uint8List.fromList(modeWriteList));
+        sendDataUsbConnection(modeWriteList);
+        // await _port.write(Uint8List.fromList(modeWriteList));
         writeAlarmsData();
         modesEnabled = false;
       } else {
@@ -19580,7 +20146,7 @@ return data;
       var dataE1 = double.tryParse(dataE);
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
-        modeWriteList.add(0x7E);
+        // modeWriteList.add(0x7E);
         modeWriteList.add(0);
         modeWriteList.add(20);
         modeWriteList.add(0);
@@ -19609,10 +20175,13 @@ return data;
         modeWriteList.add((vacvFio2Value & 0xFF00) >> 8);
         modeWriteList.add((vacvFio2Value & 0x00FF));
 
+        modeWriteList.add(1);
+        modeWriteList.add(255);
+
         // modeWriteList.add((vacvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((vacvFlowRampValue & 0x00FF));
 
-        modeWriteList.add(0x7F);
+        // modeWriteList.add(0x7F);
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -19638,8 +20207,11 @@ return data;
       preferences.setInt('vacvFlowRampValue', vacvFlowRampValue);
       preferences.setInt('vacvdefaultValue', vacvdefaultValue);
 
+      // sendDataUsbConnection(modeWriteList); //TODO
+
       if (_status == "Connected") {
-        await _port.write(Uint8List.fromList(modeWriteList));
+        sendDataUsbConnection(modeWriteList);
+        // await _port.write(Uint8List.fromList(modeWriteList));
         writeAlarmsData();
         modesEnabled = false;
       } else {
@@ -19661,7 +20233,7 @@ return data;
       var dataE1 = double.tryParse(dataE);
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
-        modeWriteList.add(0x7E);
+        // modeWriteList.add(0x7E);
         modeWriteList.add(0);
         modeWriteList.add(20);
         modeWriteList.add(0);
@@ -19693,7 +20265,10 @@ return data;
 
         modeWriteList.add((psimvPsValue & 0xFF00) >> 8);
         modeWriteList.add((psimvPsValue & 0x00FF));
-        modeWriteList.add(0x7F);
+
+        modeWriteList.add(1);
+        modeWriteList.add(255);
+        // modeWriteList.add(0x7F);
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -19721,13 +20296,16 @@ return data;
       preferences.setInt('psimvFlowRampValue', psimvFlowRampValue);
       preferences.setInt('psimvdefaultValue', psimvdefaultValue);
 
+      // sendDataUsbConnection(modeWriteList); //TODO
+
       if (_status == "Connected") {
-        await _port.write(Uint8List.fromList(modeWriteList));
+        sendDataUsbConnection(modeWriteList);
+        // await _port.write(Uint8List.fromList(modeWriteList));
         writeAlarmsData();
         modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
-        await _port.write(Uint8List.fromList(modeWriteList));
+        // await _port.write(Uint8List.fromList(modeWriteList));
       }
       setState(() {
         playOnEnabled = false;
@@ -19745,7 +20323,7 @@ return data;
       var dataE1 = double.tryParse(dataE);
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
-        modeWriteList.add(0x7E);
+        // modeWriteList.add(0x7E);
         modeWriteList.add(0);
         modeWriteList.add(20);
         modeWriteList.add(0);
@@ -19778,7 +20356,10 @@ return data;
         modeWriteList.add((vsimvPsValue & 0xFF00) >> 8); //21
         modeWriteList.add((vsimvPsValue & 0x00FF));
 
-        modeWriteList.add(0x7F); //23
+        modeWriteList.add(1);
+        modeWriteList.add(255);
+
+        // modeWriteList.add(0x7F); //23
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -19807,8 +20388,11 @@ return data;
       preferences.setInt('vsimvFlowRampValue', vsimvFlowRampValue);
       preferences.setInt('vsimvdefaultValue', vsimvdefaultValue);
 
+      // sendDataUsbConnection(modeWriteList); //TODO
+
       if (_status == "Connected") {
-        await _port.write(Uint8List.fromList(modeWriteList));
+        sendDataUsbConnection(modeWriteList);
+        // await _port.write(Uint8List.fromList(modeWriteList));
         writeAlarmsData();
         modesEnabled = false;
       } else {
@@ -19837,7 +20421,7 @@ return data;
       // var calTi = (double.tryParse(getTiValue(psvTiValue)) * 1000).toInt();
 
       setState(() {
-        modeWriteList.add(0x7E);
+        // modeWriteList.add(0x7E);
         modeWriteList.add(0);
         modeWriteList.add(20);
         modeWriteList.add(0);
@@ -19863,8 +20447,6 @@ return data;
         modeWriteList.add((dataI2 & 0x00FF));
         modeWriteList.add((dataE2 & 0x00FF));
 
-        
-
         modeWriteList.add((calTi2 & 0xFF00) >> 8); //11
         modeWriteList.add((calTi2 & 0x00FF)); //12
 
@@ -19883,7 +20465,10 @@ return data;
         modeWriteList.add((psvPcValue & 0xFF00) >> 8); //17
         modeWriteList.add((psvPcValue & 0x00FF));
 
-        modeWriteList.add(0x7F); //23
+        modeWriteList.add(1);
+        modeWriteList.add(255);
+
+        // modeWriteList.add(0x7F); //23
         // Fluttertoast.showToast(msg: modeWriteList.toString());
       });
 
@@ -19891,7 +20476,7 @@ return data;
       preferences.setString("mode", "PSV");
       preferences.setString("checkMode", "psv");
       preferences.setInt("rr", psvBackupRrValue);
-      // preferences.setInt("ie", vsimvIeValue);
+      preferences.setInt("ie", vsimvIeValue);
       preferences.setString("i", dataI1.toString());
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", psvPeepValue);
@@ -19916,9 +20501,11 @@ return data;
       preferences.setInt('psvPcValue', psvPcValue);
       preferences.setInt('psvdefaultValue', psvdefaultValue);
       // preferences.setInt("pc", );
+      // sendDataUsbConnection(modeWriteList); //TODO
 
       if (_status == "Connected") {
-        await _port.write(Uint8List.fromList(modeWriteList));
+        sendDataUsbConnection(modeWriteList);
+        // await _port.write(Uint8List.fromList(modeWriteList));
         writeAlarmsData();
         modesEnabled = false;
       } else {
@@ -19940,7 +20527,7 @@ return data;
       var dataE1 = double.tryParse(dataE);
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
-        modeWriteList.add(0x7E);
+        // modeWriteList.add(0x7E);
         modeWriteList.add(0);
         modeWriteList.add(20);
         modeWriteList.add(0);
@@ -19969,10 +20556,13 @@ return data;
         modeWriteList.add((prvcFio2Value & 0xFF00) >> 8);
         modeWriteList.add((prvcFio2Value & 0x00FF));
 
+        modeWriteList.add(1);
+        modeWriteList.add(255);
+
         // modeWriteList.add((prvcFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((prvcFlowRampValue & 0x00FF));
 
-        modeWriteList.add(0x7F);
+        // modeWriteList.add(0x7F);
       });
 
       preferences = await SharedPreferences.getInstance();
@@ -19997,9 +20587,11 @@ return data;
       preferences.setInt('prvcFio2Value', prvcFio2Value);
       preferences.setInt('prvcFlowRampValue', prvcFlowRampValue);
       preferences.setInt('prvcdefaultValue', prvcdefaultValue);
+      // sendDataUsbConnection(modeWriteList); //TODO
 
       if (_status == "Connected") {
-        await _port.write(Uint8List.fromList(modeWriteList));
+        sendDataUsbConnection(modeWriteList);
+        // await _port.write(Uint8List.fromList(modeWriteList));
         writeAlarmsData();
         modesEnabled = false;
       } else {
@@ -20054,7 +20646,46 @@ return data;
     }
   }
 
-  showDialogPause(){
+  sendDataUsbConnection(modeWriteList) async {
+    list = [];
+    List<int> listTempF = [];
+    int cIndex = 0;
+
+    for (int i = 0; i < modeWriteList.length; i++) {
+      if (modeWriteList[i] == 0x7F) {
+        listTempF.insert(cIndex, 0X7D);
+        cIndex = cIndex + 1;
+        listTempF.insert(cIndex, 0X5F);
+      } else if (modeWriteList[i] == 0x7E) {
+        listTempF.insert(cIndex, 0X7D);
+        cIndex = cIndex + 1;
+        listTempF.insert(cIndex, 0X5E);
+      } else if (modeWriteList[i] == 0x7D) {
+        listTempF.insert(cIndex, 0X7D);
+        cIndex = cIndex + 1;
+        listTempF.insert(cIndex, 0X5D);
+      } else {
+        listTempF.insert(cIndex, modeWriteList[i]);
+      }
+      cIndex = cIndex + 1;
+    }
+    print(listTempF);
+    // Fluttertoast.showToast(msg:listTempF.toString());
+
+    sendData(listTempF);
+  }
+
+  sendData(List<int> listTempF) async {
+    finalListSend = [];
+
+    finalListSend.add(126);
+    finalListSend.addAll(listTempF);
+    finalListSend.add(127);
+    print(finalListSend.toString());
+    await _port.write(Uint8List.fromList(finalListSend));
+  }
+
+  showDialogPause() {
     showDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
@@ -20066,9 +20697,9 @@ return data;
                     writeDataPause();
                     setState(() {
                       playOnEnabled = true;
-                      selfTestingButtonEnabled= true;
+                      selfTestingButtonEnabled = true;
                       Navigator.pop(context);
-                     });
+                    });
                   },
                 ),
                 CupertinoDialogAction(
@@ -20081,7 +20712,7 @@ return data;
             ));
   }
 
-  showDialogPlay(){
+  showDialogPlay() {
     showDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
@@ -20093,9 +20724,9 @@ return data;
                     writeDataPlay();
                     setState(() {
                       playOnEnabled = false;
-                      selfTestingButtonEnabled= true;
+                      selfTestingButtonEnabled = true;
                       Navigator.pop(context);
-                     });
+                    });
                   },
                 ),
                 CupertinoDialogAction(
@@ -20107,8 +20738,6 @@ return data;
               ],
             ));
   }
-
-
 
   void setData() {
     if (pacvEnabled == true) {
@@ -21116,7 +21745,6 @@ return data;
   serializeEventData(Uint8List event) async {
     if (event != null) {
       setState(() {
-        
         // turnOnScreen();
         respiratoryEnable = true;
         powerButtonEnabled = false;
@@ -21352,7 +21980,7 @@ return data;
               pplateauDisplay != 0) {
             try {
               // var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
-              var dataC = (vteValue /(pipValue - peepDisplayValue)).toInt();
+              var dataC = (vteValue / (pipValue - peepDisplayValue)).toInt();
               if (dataC.isNegative) {
                 // cdisplayParameter = 0;
               } else {
@@ -21504,9 +22132,9 @@ return data;
           setState(() {
             textText = "Calibrating Completed..";
           });
-        }else if(checkO2CalibrationValue ==0){
-          setState((){
-            checkO2CalibrationValue ="";
+        } else if (checkO2CalibrationValue == 0) {
+          setState(() {
+            checkO2CalibrationValue = "";
           });
         }
 
@@ -21557,8 +22185,8 @@ return data;
             modeName = "PRVC";
             selfTestingButtonEnabled = false;
           });
-        }else{
-          setState((){
+        } else {
+          setState(() {
             selfTestingButtonEnabled = true;
           });
         }
@@ -21616,10 +22244,9 @@ return data;
 
         if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
             ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
-              setState(() {
-                pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
-              });
-          
+          setState(() {
+            pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
+          });
         }
 
         double temp1 = ((finalList[58] << 8) + finalList[59])

@@ -82,7 +82,7 @@ class _SplashPageState extends State<SplashPage> {
     preferences.setInt("rrtotal", 0);
     preferences.setInt("ps", 35);
     preferences.setInt("pc", 20);
-    preferences.setInt("vt", 600);
+    preferences.setInt("vt", 400);
     preferences.setInt("te", 20);
     preferences.setInt("vte", 0 );
      preferences.setString("pid", "" );
