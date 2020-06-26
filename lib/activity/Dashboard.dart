@@ -413,7 +413,7 @@ class _CheckPageState extends State<Dashboard> {
       ieDisplayValue = 0,
       cdisplayParameter = 0,
       rrDisplayValue = 0;
-  String ioreDisplayParamter = "I/E";
+  String ioreDisplayParamter = "I/E",amsDisplayParamter = "AMS";
   bool playOnEnabled = false, powerOnEnabled = false;
   var dbHelper = DatabaseHelper();
   var dbHelpera = ADatabaseHelper();
@@ -547,7 +547,7 @@ class _CheckPageState extends State<Dashboard> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
-      // // print(event);
+      // // // print(event);
       // Fluttertoast.showToast(msg: event.length.toString() + " "+cc.toString() + );
       serializeEventData(event);
     });
@@ -567,7 +567,7 @@ class _CheckPageState extends State<Dashboard> {
       });
       // Fluttertoast.showToast(msg: _status);
     }
-    // print(devices);
+    // // print(devices);
     _connectTo(devices[0]);
   }
 
@@ -589,7 +589,7 @@ class _CheckPageState extends State<Dashboard> {
 
   // counterData() async {
   //   var data = await dbCounter.getCounterNo();
-  //   // print(data);
+  //   // // print(data);
   //   if (data.isEmpty) {
   //     globalCounter = globalCounter + 1;
   //     dbCounter.saveCounter(CounterValue(globalCounter.toString()));
@@ -617,7 +617,7 @@ class _CheckPageState extends State<Dashboard> {
     UsbSerial.usbEventStream.listen((UsbEvent event) {
       _getPorts();
     });
-    // _getPorts();
+    _getPorts();
 
     // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) {
     //   if(_status == "Disconnected"){
@@ -731,16 +731,16 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   saveData(VentilatorOMode data, String patientId) async {
-    // // print("data saving id : " + patientId);
+    // // // print("data saving id : " + patientId);
     dbHelper.save(data);
   }
 
   Future<void> _sendShutdown() async {
     try {
       var result = await shutdownChannel.invokeMethod('sendShutdowndevice');
-      // // print(result);
+      // // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
@@ -750,9 +750,9 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStartH');
-      // // print(result);
+      // // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
@@ -762,9 +762,9 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStartM');
-      // // print(result);
+      // // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
@@ -774,9 +774,9 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStartL');
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
@@ -786,36 +786,36 @@ class _CheckPageState extends State<Dashboard> {
     });
     try {
       var result = await shutdownChannel.invokeMethod('sendPlayAudioStop');
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
   Future<void> sendSoundOn() async {
     try {
       var result = await shutdownChannel.invokeMethod('sendsoundon');
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
   Future<void> sendSoundOff() async {
     try {
       var result = await shutdownChannel.invokeMethod('sendsoundoff');
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
   Future<void> turnOffScreen() async {
     try {
       var result = await shutdownChannel.invokeMethod('turnOffScreen');
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
@@ -825,9 +825,9 @@ class _CheckPageState extends State<Dashboard> {
       Screen.keepOn(true);
       var result = await shutdownChannel.invokeMethod('turnOnScreen');
 
-      // print(result);
+      // // print(result);
     } on PlatformException catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 
@@ -854,7 +854,7 @@ class _CheckPageState extends State<Dashboard> {
     // obj.insert(length + 1, (iCRC & 0xFF00) >> 8);
 
     // obj.insert(length + 1, 0x7F);
-    // print(obj.toString());
+    // // print(obj.toString());
 
     if (_status == "Connected") {
       // Fluttertoast.showToast(msg: obj.toString());
@@ -866,29 +866,27 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   void _increaseCounterWhilePressed() async {
+    if(_buttonPressed==false){
+            writeRespiratoryPauseData(0);
+          }
     // writeRespiratoryPauseData();
     // make sure that only one loop is active
     if (_loopActive) return;
-
     _loopActive = true;
-
     while (_buttonPressed) {
       // do your thing
-      setState(() {
         if (timerCounter <= 29) {
+          setState((){
           timerCounter++;
+          });
         }
         if (timerCounter == 30) {
           writeRespiratoryPauseData(0);
           setState(() {
-            //  sleep(Duration(seconds: 2));
             _buttonPressed = false;
-            // _loopActive = true;
           });
+          
         }
-      });
-      // Fluttertoast.showToast(msg: timerCounter.toString());
-
       // wait a bit
       await Future.delayed(Duration(seconds: 1));
     }
@@ -897,6 +895,9 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   void _increaseCounterWhilePressedE() async {
+    if(_buttonPressedE==false){
+            writeRespiratoryPauseData(0);
+          }
     // writeRespiratoryPauseData();
     // make sure that only one loop is active
     if (_loopActive) return;
@@ -916,6 +917,7 @@ class _CheckPageState extends State<Dashboard> {
             _buttonPressedE = false;
             // _loopActive = true;
           });
+          
         }
       });
       // Fluttertoast.showToast(msg: timerCounter.toString());
@@ -930,15 +932,17 @@ class _CheckPageState extends State<Dashboard> {
   writeRespiratoryPauseData(int data) async {
     List<int> resList = [];
     setState(() {
-      resList.add(0x7E);
+      // resList.add(0x7E);
       resList.add(0);
       resList.add(20);
       resList.add(0);
       resList.add(13);
       resList.add((data & 0x00FF));
-      resList.add(0x7F);
+      // resList.add(0x7F);
     });
-    await _port.write(Uint8List.fromList(resList));
+
+  sendDataUsbConnection(resList);
+    // await _port.write(Uint8List.fromList(resList));
   }
 
   checkCrc(List<int> obj, length) async {
@@ -950,7 +954,7 @@ class _CheckPageState extends State<Dashboard> {
     // List<int> l = [];
     // l.insert(0,126);
     // l.addAll(obj);
-    // // print(l);
+    // // // print(l);
 
     while (index-- > 0) {
       r = ulCrc16Table[uiCrc & 0xF];
@@ -1035,12 +1039,12 @@ class _CheckPageState extends State<Dashboard> {
           (((double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
                   (60000 / rrValue)) /
               1000);
-      // print(tiValue.toString());
+      // // print(tiValue.toString());
       teValue =
           (((double.tryParse(e) / (double.tryParse(i) + double.tryParse(e))) *
                   (60000 / rrValue)) /
               1000);
-      // print(teValue.toString());
+      // // print(teValue.toString());
       paw = preferences.getInt("paw");
       mvValue = 0;
       rrtotalValue = preferences.getInt("rrtotal");
@@ -4021,6 +4025,7 @@ class _CheckPageState extends State<Dashboard> {
                   onTap: () {
                     setState(() {
                       // if (patientId != "") {
+                        writeAlarmsData();
                       modesEnabled = !modesEnabled;
                       // } else {
                       //   showAlertDialog(context);
@@ -4438,7 +4443,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         "s",
                                                         style: TextStyle(
                                                             color: Colors.white,
-                                                            fontSize: 10),
+                                                            fontSize: 14),
                                                       ),
                                                     ),
                                                   ),
@@ -4526,7 +4531,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         "s",
                                                         style: TextStyle(
                                                             color: Colors.white,
-                                                            fontSize: 10),
+                                                            fontSize: 14),
                                                       ),
                                                     ),
                                                   ),
@@ -4596,20 +4601,47 @@ class _CheckPageState extends State<Dashboard> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Image.asset(
-                                                    lungImage == 1
-                                                        ? "assets/lungs/1.png"
-                                                        : lungImage == 2
-                                                            ? "assets/lungs/2.png"
-                                                            : lungImage == 3
-                                                                ? "assets/lungs/3.png"
-                                                                : lungImage == 4
-                                                                    ? "assets/lungs/4.png"
-                                                                    : lungImage ==
-                                                                            5
-                                                                        ? "assets/lungs/5.png"
-                                                                        : "assets/lungs/1.png",
-                                                    width: 120),
+                                                Stack(
+                                                                                                  children: [
+                                                        Image.asset(
+                                                        lungImage == 1
+                                                            ? "assets/lungs/1.png"
+                                                            : lungImage == 2
+                                                                ? "assets/lungs/2.png"
+                                                                : lungImage == 3
+                                                                    ? "assets/lungs/3.png"
+                                                                    : lungImage == 4
+                                                                        ? "assets/lungs/4.png"
+                                                                        : lungImage ==
+                                                                                5
+                                                                            ? "assets/lungs/5.png"
+                                                                            : "assets/lungs/1.png",
+                                                        width: 120),
+                                                         Padding(
+                                                           padding: const EdgeInsets.only(top:98.0,left:48),
+                                                           child: Container(
+                                                  height: 25,
+                                                  width: 25,
+                                                  decoration: new BoxDecoration(
+                                                    borderRadius:
+                                                        new BorderRadius
+                                                              .circular(25.0),
+                                                    border: new Border.all(
+                                                      width: 2.0,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  child: Center(
+                                                      child: Text(
+                                                            amsDisplayParamter,
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.white,fontWeight: FontWeight.bold,
+                                                                fontSize: 7))),
+                                                ),
+                                                         ),
+                                                      ],
+                                                ),
                                                 Container(
                                                   height: 25,
                                                   width: 25,
@@ -4641,16 +4673,22 @@ class _CheckPageState extends State<Dashboard> {
                                                     // onTapDown : _writeRespiratoryDataStart(),
                                                     // onTapUp: _writeRespiratoryDataStop(),
                                                     Listener(
+                                                      onPointerMove: (details){
+                                                        writeRespiratoryPauseData(0);
+                                                    setState(() {
+                                                      timerCounter = 0;
+                                                      _buttonPressed = false;
+                                                      // _inpirationPressed = false;
+                                                    });
+                                                      },
                                                   onPointerDown: (details) {
-                                                    writeRespiratoryPauseData(
-                                                        1);
+                                                    writeRespiratoryPauseData(1);
                                                     // _inpirationPressed = true;
                                                     _buttonPressed = true;
                                                     _increaseCounterWhilePressed();
                                                   },
                                                   onPointerUp: (details) {
-                                                    writeRespiratoryPauseData(
-                                                        0);
+                                                    writeRespiratoryPauseData(0);
                                                     setState(() {
                                                       timerCounter = 0;
                                                       _buttonPressed = false;
@@ -4704,15 +4742,22 @@ class _CheckPageState extends State<Dashboard> {
                                               SizedBox(height: 5),
                                               Center(
                                                 child: Listener(
+                                                  
+                                                  onPointerMove: (details){
+                                                        writeRespiratoryPauseData(0);
+                                                    setState(() {
+                                                      timerCounter = 0;
+                                                      _buttonPressedE = false;
+                                                      // _inpirationPressed = false;
+                                                    });
+                                                      },
                                                   onPointerDown: (details) {
-                                                    writeRespiratoryPauseData(
-                                                        2);
+                                                    writeRespiratoryPauseData(2);
                                                     _buttonPressedE = true;
                                                     _increaseCounterWhilePressedE();
                                                   },
                                                   onPointerUp: (details) {
-                                                    writeRespiratoryPauseData(
-                                                        0);
+                                                    writeRespiratoryPauseData(0);
                                                     setState(() {
                                                       timerCounter = 0;
                                                       _buttonPressedE = false;
@@ -4792,23 +4837,23 @@ class _CheckPageState extends State<Dashboard> {
     );
   }
 
-  _writeRespiratoryDataStart() {
-    writeRespiratoryPauseData(1);
-    // _inpirationPressed = true;
-    setState(() {
-      _buttonPressed = true;
-    });
-    _increaseCounterWhilePressed();
-  }
+  // _writeRespiratoryDataStart() {
+  //   writeRespiratoryPauseData(1);
+  //   // _inpirationPressed = true;
+  //   setState(() {
+  //     _buttonPressed = true;
+  //   });
+  //   _increaseCounterWhilePressed();
+  // }
 
-  _writeRespiratoryDataStop() {
-    writeRespiratoryPauseData(0);
-    setState(() {
-      timerCounter = 0;
-      _buttonPressed = false;
-      // _inpirationPressed = false;
-    });
-  }
+  // _writeRespiratoryDataStop() {
+  //   writeRespiratoryPauseData(0);
+  //   setState(() {
+  //     timerCounter = 0;
+  //     _buttonPressed = false;
+  //     // _inpirationPressed = false;
+  //   });
+  // }
 
   psvBottomBar() {
     return Container(
@@ -4822,7 +4867,7 @@ class _CheckPageState extends State<Dashboard> {
           children: [
             InkWell(
               onTap: () {
-                 CommonClick("PS") ;
+                CommonClick("PS");
               },
               child: Center(
                 child: Container(
@@ -4884,7 +4929,7 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                 CommonClick("PEEP") ;
+                CommonClick("PEEP");
               },
               child: Center(
                 child: Container(
@@ -5172,7 +5217,7 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                 CommonClick("PC") ;
+                CommonClick("PC");
               },
               child: Center(
                 child: Container(
@@ -5903,7 +5948,10 @@ class _CheckPageState extends State<Dashboard> {
           children: [
             InkWell(
               onTap: () {
-               CommonClick("RR");
+            operatinModeR == 4 ||
+                    modeName == "PSIMV" ||   operatinModeR == 5 ||
+                    modeName == "VSIMV" ||  operatinModeR == 14 ||
+                    modeName == "PRVC" ? CommonClick("eRR") : CommonClick("RR");
               },
               child: Center(
                 child: Container(
@@ -6118,23 +6166,92 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+            operatinModeR == 4 ||
+                    modeName == "PSIMV" ||
+                    operatinModeR == 3 ||
+                    modeName == "PSV" ||
+                    modeName == "VSIMV" ||
+                    operatinModeR == 5
+                ? InkWell(
+                    onTap: () {
+                      CommonClick("PS");
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 110,
+                        child: Card(
+                          elevation: 40,
+                          color: Color(0xFF213855),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "PS",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "cmH\u2082O",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 17.0),
+                                    child: Text(
+                                      psValue.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                // Align(
+                                //   alignment: Alignment.bottomCenter,
+                                //   child: LinearProgressIndicator(
+                                //     backgroundColor: Colors.grey,
+                                //     valueColor: AlwaysStoppedAnimation<Color>(
+                                //       Colors.white,
+                                //     ),
+                                //     value: psValue != null ? psValue / 60 : 0,
+                                //   ),
+                                // )
+                              ],
+                            )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
             InkWell(
               onTap: () {
                 CommonClick(operatinModeR == 6 || operatinModeR == 2
                     ? "PC"
                     : operatinModeR == 7 ||
                             operatinModeR == 1 ||
-                            operatinModeR == 5 
+                            operatinModeR == 5
                         ? "Vt"
                         : modeName == "PC-CMV" || modeName == "PACV"
                             ? "PC"
                             : modeName == "VC-CMV" ||
                                     modeName == "VACV" ||
-                                    modeName == "VSIMV" 
-                                    
+                                    modeName == "VSIMV"
                                 ? "Vt"
-                                : operatinModeR == 14  || modeName == "PRVC" ? "Target Vt" :
-                                 "PC");
+                                : operatinModeR == 14 || modeName == "PRVC"
+                                    ? "Target Vt"
+                                    : "PC");
               },
               child: Center(
                 child: Container(
@@ -6152,22 +6269,27 @@ class _CheckPageState extends State<Dashboard> {
                             alignment: Alignment.topLeft,
                             child: Text(
                               operatinModeR == 6 || operatinModeR == 2
-                    ? "PC"
-                    : operatinModeR == 7 ||
-                            operatinModeR == 1 ||
-                            operatinModeR == 5 
-                        ? "Vt"
-                        : modeName == "PC-CMV" || modeName == "PACV"
-                            ? "PC"
-                            : modeName == "VC-CMV" ||
-                                    modeName == "VACV" ||
-                                    modeName == "VSIMV" 
-                                    
-                                ? "Vt"
-                                : operatinModeR == 14  || modeName == "PRVC" ? "Target Vt" :
-                                 "PC",
+                                  ? "PC"
+                                  : operatinModeR == 7 ||
+                                          operatinModeR == 1 ||
+                                          operatinModeR == 5
+                                      ? "Vt"
+                                      : modeName == "PC-CMV" ||
+                                              modeName == "PACV"
+                                          ? "PC"
+                                          : modeName == "VC-CMV" ||
+                                                  modeName == "VACV" ||
+                                                  modeName == "VSIMV"
+                                              ? "Vt"
+                                              : operatinModeR == 14 ||
+                                                      modeName == "PRVC"
+                                                  ? "Target Vt"
+                                                  : "PC",
                               style: TextStyle(
-                                  fontSize: operatinModeR == 14  || modeName == "PRVC"  ? 14 :18,
+                                  fontSize:
+                                      operatinModeR == 14 || modeName == "PRVC"
+                                          ? 14
+                                          : 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
@@ -6249,7 +6371,9 @@ class _CheckPageState extends State<Dashboard> {
               ),
             ),
 
-            InkWell(
+            
+            
+                InkWell(
               onTap: () {
                 CommonClick("FiO2");
               },
@@ -6321,75 +6445,6 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-            operatinModeR == 4 ||
-                    modeName == "PSIMV" ||
-                    operatinModeR == 3 ||
-                    modeName == "PSV" ||
-                    modeName == "VSIMV" ||
-                    operatinModeR == 5
-                ? InkWell(
-                    onTap: () {
-                      CommonClick("PS");
-                    },
-                    child: Center(
-                      child: Container(
-                        width: 120,
-                        height: 110,
-                        child: Card(
-                          elevation: 40,
-                          color: Color(0xFF213855),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Center(
-                                child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "PS",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Text(
-                                    "cmH\u2082O",
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.white),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 17.0),
-                                    child: Text(
-                                      psValue.toString(),
-                                      style: TextStyle(
-                                          fontSize: 30, color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                // Align(
-                                //   alignment: Alignment.bottomCenter,
-                                //   child: LinearProgressIndicator(
-                                //     backgroundColor: Colors.grey,
-                                //     valueColor: AlwaysStoppedAnimation<Color>(
-                                //       Colors.white,
-                                //     ),
-                                //     value: psValue != null ? psValue / 60 : 0,
-                                //   ),
-                                // )
-                              ],
-                            )),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                : Container(),
             // InkWell(
             //   onTap: () {
             //     editbbEnabled ? CommonClick("Tih") : Container();
@@ -19199,232 +19254,277 @@ class _CheckPageState extends State<Dashboard> {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((temp & 0xFF00) >> 8);
         modeWriteList[5] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (1);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (1);
+        preferences.setInt('pccmvRRValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((temp & 0xFF00) >> 8);
         modeWriteList[5] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (1);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (1);
+        preferences.setInt('vccmvRRValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
         modeWriteList[7] = (temp & 0xFF);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (2);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (2);
+        preferences.setInt('pacvRrValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
         modeWriteList[7] = (temp & 0xFF);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (2);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (2);
+        preferences.setInt('vacvRrValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
         modeWriteList[7] = (temp & 0xFF);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (2);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (2);
+        preferences.setInt('psimvRrValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
         modeWriteList[7] = (temp & 0xFF);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (2);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (2);
+        preferences.setInt('vsimvRrValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
         modeWriteList[19] = (temp & 0xFF);
-        modeWriteList[28] = (0);
-        modeWriteList[29] = (128);
+        modeWriteList[32] = (0);
+        modeWriteList[33] = (128);
+
+        preferences.setInt('psvBackupRrValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
         modeWriteList[7] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (2);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (2);
+        preferences.setInt('prvcRrValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       }
     } else if (res == "peep") {
+      //=============================
       if (pccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[8] = ((temp & 0xFF00) >> 8);
         modeWriteList[9] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (4);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (4);
+
+        preferences.setInt('pccmvPeepValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[8] = ((temp & 0xFF00) >> 8);
         modeWriteList[9] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (4);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (4);
+
+        preferences.setInt('vccmvPeepValue', temp);
+
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
         modeWriteList[11] = (temp & 0xFF);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (8);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (8);
+        preferences.setInt('pacvPeepValue', temp);
+
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
         modeWriteList[11] = (temp & 0xFF);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (8);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (8);
+
+        preferences.setInt('vacvPeepValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
         modeWriteList[11] = (temp & 0xFF);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (8);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (8);
+
+        preferences.setInt('psimvPeepValue', temp);
+
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
         modeWriteList[11] = (temp & 0xFF);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (8);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (8);
+
+        preferences.setInt('vsimvPeepValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
         modeWriteList[7] = (temp & 0xFF);
-        modeWriteList[28] = (0);
-        modeWriteList[29] = (2);
+        modeWriteList[32] = (0);
+        modeWriteList[33] = (2);
+
+        preferences.setInt('psvPeepValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
         modeWriteList[11] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (8);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (8);
+
+        preferences.setInt('prvcPeepValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       }
     } else if (res == "fio2") {
+      //=============================
       if (pccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
         modeWriteList[13] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (16);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (16);
+
+        preferences.setInt('pccmvFio2Value', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
         modeWriteList[13] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (16);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (16);
+        preferences.setInt('vccmvFio2Value', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
         modeWriteList[19] = (temp & 0xFF);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (128);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (128);
+
+        preferences.setInt('pacvFio2Value', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
         modeWriteList[19] = (temp & 0xFF);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (128);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (128);
+
+        preferences.setInt('vacvFio2Value', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
         modeWriteList[19] = (temp & 0xFF);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (128);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (128);
+        preferences.setInt('psimvFio2Value', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
         modeWriteList[19] = (temp & 0xFF);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (128);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (128);
+
+        preferences.setInt('vsimvFio2Value', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
         modeWriteList[11] = (temp & 0xFF);
-        modeWriteList[28] = (0);
-        modeWriteList[29] = (8);
+        modeWriteList[32] = (0);
+        modeWriteList[33] = (8);
+
+        preferences.setInt('psvFio2Value', temp);
+
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
-        modeWriteList[16] = ((temp & 0xFF00) >> 8);
-        modeWriteList[17] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (64);
+        modeWriteList[18] = ((temp & 0xFF00) >> 8);
+        modeWriteList[19] = (temp & 0xFF);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (128);
+        preferences.setInt('prvcFio2Value', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       }
     } else if (res == "pc") {
+      //=====================
       if (pccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
         modeWriteList[11] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (8);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (8);
+        preferences.setInt('pccmvPcValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vccmvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19432,17 +19532,18 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[9]=(temp & 0xFF);
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (4);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       }
       if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
         modeWriteList[13] = (temp & 0xFF);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (16);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (16);
+        preferences.setInt('pacvPcValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vacvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19450,16 +19551,18 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[11]=(temp & 0xFF);
         // modeWriteList[20]= (0);
         // modeWriteList[21]= (8);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
         modeWriteList[13] = (temp & 0xFF);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (16);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (16);
+
+        preferences.setInt('psimvPsValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vsimvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19467,25 +19570,27 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[11]=(temp & 0xFF);
         // modeWriteList[22]= (0);
         // modeWriteList[23]= (8);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[26] = ((temp & 0xFF00) >> 8);
         modeWriteList[27] = (temp & 0xFF);
-        modeWriteList[28] = (8);
-        modeWriteList[29] = (0);
+        modeWriteList[32] = (8);
+        modeWriteList[33] = (0);
+        preferences.setInt('psvPsValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
-        modeWriteList[22] = ((temp & 0xFF00) >> 8);
-        modeWriteList[23] = (temp & 0xFF);
-        modeWriteList[24] = (2);
-        modeWriteList[25] = (0);
+        modeWriteList[14] = ((temp & 0xFF00) >> 8);
+        modeWriteList[15] = (temp & 0xFF);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (64);
+
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       }
     } else if (res == "ie") {
@@ -19506,10 +19611,11 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList[6] = (dataI2);
         modeWriteList[7] = (dataE2);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (2);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (2);
+        preferences.setInt('pccmvIeValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -19528,10 +19634,11 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList[6] = (dataI2);
         modeWriteList[7] = (dataE2);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (2);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (2);
+        preferences.setInt('vccmvIeValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -19550,10 +19657,11 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList[8] = (dataI2);
         modeWriteList[9] = (dataE2);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (4);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (4);
+        preferences.setInt('pacvIeValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -19572,10 +19680,12 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList[8] = (dataI2);
         modeWriteList[9] = (dataE2);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (4);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (4);
+
+        preferences.setInt('vacvIeValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -19594,10 +19704,12 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList[8] = (dataI2);
         modeWriteList[9] = (dataE2);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (4);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (4);
+
+        preferences.setInt('psimvIeValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -19616,12 +19728,13 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList[8] = (dataI2);
         modeWriteList[9] = (dataE2);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (4);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (4);
+        preferences.setInt('vsimvIeValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
-      }else if (psvEnabled == true) {
+      } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
 
         var dataI = getIeData(temp, 2);
@@ -19638,10 +19751,12 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList[14] = (dataI2);
         modeWriteList[15] = (dataE2);
-        modeWriteList[28] = (0);
-        modeWriteList[29] = (32);
+        modeWriteList[32] = (0);
+        modeWriteList[33] = (32);
+
+        preferences.setInt('psvIeValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -19660,10 +19775,12 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList[8] = (dataI2);
         modeWriteList[9] = (dataE2);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (4);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (4);
+
+        preferences.setInt('prvcIeValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       }
     } else if (res == "vt") {
@@ -19673,16 +19790,18 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[11]=(temp & 0xFF);
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (8);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
         modeWriteList[11] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (8);
+        modeWriteList[22] = (0);
+        modeWriteList[23] = (8);
+
+        preferences.setInt('vccmvVtValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (pacvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19690,16 +19809,18 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[13]=(temp & 0xFF);
         // modeWriteList[20]= (0);
         // modeWriteList[21]= (16);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
         modeWriteList[13] = (temp & 0xFF);
-        modeWriteList[20] = (0);
-        modeWriteList[21] = (16);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (16);
+
+        preferences.setInt('vacvVtValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psimvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19707,16 +19828,18 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[13]=(temp & 0xFF);
         // modeWriteList[22]= (0);
         // modeWriteList[23]= (16);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[16] = ((temp & 0xFF00) >> 8);
         modeWriteList[17] = (temp & 0xFF);
-        modeWriteList[22] = (0);
-        modeWriteList[23] = (64);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (64);
+
+        preferences.setInt('vsimvVtValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19724,16 +19847,18 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[11]=(temp & 0xFF);
         // modeWriteList[24]= (0);
         // modeWriteList[25]= (8);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
         modeWriteList[13] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (16);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (16);
+
+        preferences.setInt('prvcVtValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       }
     } else if (res == "ps") {
@@ -19743,7 +19868,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[11]=(temp & 0xFF);
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (8);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (vccmvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19751,7 +19876,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[11]=(temp & 0xFF);
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (8);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (pacvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19759,7 +19884,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[13]=(temp & 0xFF);
         // modeWriteList[20]= (0);
         // modeWriteList[21]= (16);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (vacvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -19767,44 +19892,50 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[13]=(temp & 0xFF);
         // modeWriteList[20]= (0);
         // modeWriteList[21]= (16);
-        // // print(modeWriteList.toString());
+        // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[20] = ((temp & 0xFF00) >> 8);
         modeWriteList[21] = (temp & 0xFF);
-        modeWriteList[22] = (1);
-        modeWriteList[23] = (0);
+        modeWriteList[26] = (1);
+        modeWriteList[27] = (0);
+
+        preferences.setInt('psimvPcValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[20] = ((temp & 0xFF00) >> 8);
         modeWriteList[21] = (temp & 0xFF);
-        modeWriteList[22] = (1);
-        modeWriteList[23] = (0);
+        modeWriteList[26] = (1);
+        modeWriteList[27] = (0);
+
+        preferences.setInt('vsimvPsValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
-        modeWriteList[8]=((temp & 0xFF00) >> 8);
-        modeWriteList[9]=(temp & 0xFF);
-        modeWriteList[28]= (0);
-        modeWriteList[29]= (4);
+        modeWriteList[8] = ((temp & 0xFF00) >> 8);
+        modeWriteList[9] = (temp & 0xFF);
+        modeWriteList[32] = (0);
+        modeWriteList[33] = (4);
+
+        preferences.setInt('psvPcValue', temp);
         getData();
-        // print(modeWriteList.toString());
+        // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
       } else if (prvcEnabled == true) {
-        int temp = int.tryParse(result.split("ab")[0]);
-        modeWriteList[12] = ((temp & 0xFF00) >> 8);
-        modeWriteList[13] = (temp & 0xFF);
-        modeWriteList[18] = (0);
-        modeWriteList[19] = (16);
-        getData();
-        // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        // modeWriteList[13] = (temp & 0xFF);
+        // modeWriteList[22] = (0);
+        // modeWriteList[23] = (16);
+        // getData();
+        // // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
       }
     }
   }
@@ -19904,10 +20035,10 @@ class _CheckPageState extends State<Dashboard> {
     if (res == 1) {
       return data;
     } else if (res == 2) {
-      // print(dataI);
+      // // print(dataI);
       return dataI;
     } else if (res == 3) {
-      // print(dataE);
+      // // print(dataE);
       return dataE;
     }
   }
@@ -19954,8 +20085,16 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add((pccmvVtmaxValue & 0xFF00) >> 8); //16
         modeWriteList.add((pccmvVtmaxValue & 0x00FF)); //17
 
-        modeWriteList.add(1); //18
-        modeWriteList.add(255); //19
+        modeWriteList.add(0); //18
+        modeWriteList.add(0); //19
+        modeWriteList.add(0); //20
+        modeWriteList.add(0); //21
+
+        modeWriteList.add(1); //22 val
+        modeWriteList.add(255); //23
+
+        modeWriteList.add(0); //24 crc
+        modeWriteList.add(0); //25
 
         // modeWriteList.add((pccmvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((pccmvFlowRampValue & 0x00FF));
@@ -19987,13 +20126,19 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         sendDataUsbConnection(modeWriteList);
-        //TODO
         // writeAlarmsData();
+        // modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
       }
+      setState(() {
+        playOnEnabled = false;
+      });
 
-      } else if (vccmvEnabled == true) {
+      getData();
+      newTreatEnabled = false;
+      monitorEnabled = false;
+    } else if (vccmvEnabled == true) {
       var dataI = getIeData(vccmvIeValue, 2);
       var dataI1 = double.tryParse(dataI);
       var dataI2 = (dataI1 * 10).toInt();
@@ -20004,33 +20149,40 @@ class _CheckPageState extends State<Dashboard> {
 
       setState(() {
         // modeWriteList.add(0x7E);
-        modeWriteList.add(0);
-        modeWriteList.add(20);
-        modeWriteList.add(0);
-        modeWriteList.add(7);
-        modeWriteList.add((vccmvRRValue & 0xFF00) >> 8);
-        modeWriteList.add((vccmvRRValue & 0x00FF));
+        modeWriteList.add(0); //1
+        modeWriteList.add(20); //2
+        modeWriteList.add(0); //3
+        modeWriteList.add(7); //4
+        modeWriteList.add((vccmvRRValue & 0xFF00) >> 8); //5
+        modeWriteList.add((vccmvRRValue & 0x00FF)); //6
 
-        modeWriteList.add((dataI2 & 0x00FF));
-        modeWriteList.add((dataE2 & 0x00FF));
+        modeWriteList.add((dataI2 & 0x00FF)); //7
+        modeWriteList.add((dataE2 & 0x00FF)); //8
 
-        modeWriteList.add((vccmvPeepValue & 0xFF00) >> 8);
+        modeWriteList.add((vccmvPeepValue & 0xFF00) >> 8); //9
         modeWriteList.add((vccmvPeepValue & 0x00FF));
 
-        modeWriteList.add((vccmvVtValue & 0xFF00) >> 8);
+        modeWriteList.add((vccmvVtValue & 0xFF00) >> 8); //11
         modeWriteList.add((vccmvVtValue & 0x00FF));
 
-        modeWriteList.add((vccmvFio2Value & 0xFF00) >> 8);
+        modeWriteList.add((vccmvFio2Value & 0xFF00) >> 8); //13
         modeWriteList.add((vccmvFio2Value & 0x00FF));
 
-        modeWriteList.add((vccmvPcMinValue & 0xFF00) >> 8);
+        modeWriteList.add((vccmvPcMinValue & 0xFF00) >> 8); //15
         modeWriteList.add((vccmvPcMinValue & 0x00FF));
 
-        modeWriteList.add((vccmvPcMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((vccmvPcMaxValue & 0xFF00) >> 8); //17
         modeWriteList.add((vccmvPcMaxValue & 0x00FF));
 
-        modeWriteList.add(1);
+        modeWriteList.add(0); //19
+        modeWriteList.add(0); //
+        modeWriteList.add(0); //21
+        modeWriteList.add(0); //
+
+        modeWriteList.add(1); //23
         modeWriteList.add(255);
+        modeWriteList.add(0); //25 crc
+        modeWriteList.add(0); //26
 
         // modeWriteList.add((vccmvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((vccmvFlowRampValue & 0x00FF));
@@ -20062,8 +20214,8 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         sendDataUsbConnection(modeWriteList);
-        writeAlarmsData();
-        modesEnabled = false;
+        // writeAlarmsData();
+        // modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
       }
@@ -20085,37 +20237,44 @@ class _CheckPageState extends State<Dashboard> {
 
       setState(() {
         // modeWriteList.add(0x7E);
+        modeWriteList.add(0); //1
+        modeWriteList.add(20); //2
         modeWriteList.add(0);
-        modeWriteList.add(20);
-        modeWriteList.add(0);
-        modeWriteList.add(2);
+        modeWriteList.add(2); //4
 
-        modeWriteList.add((-pacvItrigValue & 0xFF00) >> 8);
+        modeWriteList.add((-pacvItrigValue & 0xFF00) >> 8); //5
         modeWriteList.add((-pacvItrigValue & 0x00FF));
 
-        modeWriteList.add((pacvRrValue & 0xFF00) >> 8);
+        modeWriteList.add((pacvRrValue & 0xFF00) >> 8); //7
         modeWriteList.add((pacvRrValue & 0x00FF));
 
-        modeWriteList.add((dataI2 & 0x00FF));
+        modeWriteList.add((dataI2 & 0x00FF)); //8
         modeWriteList.add((dataE2 & 0x00FF));
 
-        modeWriteList.add((pacvPeepValue & 0xFF00) >> 8);
+        modeWriteList.add((pacvPeepValue & 0xFF00) >> 8); //11
         modeWriteList.add((pacvPeepValue & 0x00FF));
 
-        modeWriteList.add((pacvPcValue & 0xFF00) >> 8);
+        modeWriteList.add((pacvPcValue & 0xFF00) >> 8); //13
         modeWriteList.add((pacvPcValue & 0x00FF));
 
-        modeWriteList.add((pacvVtMinValue & 0xFF00) >> 8);
+        modeWriteList.add((pacvVtMinValue & 0xFF00) >> 8); //15
         modeWriteList.add((pacvVtMinValue & 0x00FF));
 
-        modeWriteList.add((pacvVtMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((pacvVtMaxValue & 0xFF00) >> 8); //17
         modeWriteList.add((pacvVtMaxValue & 0x00FF));
 
-        modeWriteList.add((pacvFio2Value & 0xFF00) >> 8);
+        modeWriteList.add((pacvFio2Value & 0xFF00) >> 8); //19
         modeWriteList.add((pacvFio2Value & 0x00FF));
 
-        modeWriteList.add(1);
+        modeWriteList.add(0); //21
+        modeWriteList.add(0); //
+        modeWriteList.add(0); //23
+        modeWriteList.add(0); //
+
+        modeWriteList.add(3); //25
         modeWriteList.add(255);
+        modeWriteList.add(0); //27
+        modeWriteList.add(0); //28
 
         // modeWriteList.add((pacvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((pacvFlowRampValue & 0x00FF));
@@ -20133,7 +20292,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("peep", pacvPeepValue);
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", pacvFio2Value);
-      preferences.setInt("ps", pacvPcValue);
+      preferences.setInt("pc", pacvPcValue);
       //==
       preferences.setInt('pacvItrigValue', pacvItrigValue);
       preferences.setInt('pacvRrValue', pacvRrValue);
@@ -20146,12 +20305,10 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('pacvFlowRampValue', pacvFlowRampValue);
       preferences.setInt('pacvdefaultValue', pacvdefaultValue);
 
-     
-
       if (_status == "Connected") {
         sendDataUsbConnection(modeWriteList);
-        writeAlarmsData();
-        modesEnabled = false;
+        // writeAlarmsData();
+        // modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
       }
@@ -20172,36 +20329,43 @@ class _CheckPageState extends State<Dashboard> {
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
         // modeWriteList.add(0x7E);
-        modeWriteList.add(0);
+        modeWriteList.add(0); //1
         modeWriteList.add(20);
         modeWriteList.add(0);
-        modeWriteList.add(1);
-        modeWriteList.add((-vacvItrigValue & 0xFF00) >> 8);
+        modeWriteList.add(1); //4
+        modeWriteList.add((-vacvItrigValue & 0xFF00) >> 8); //5
         modeWriteList.add((-vacvItrigValue & 0x00FF));
 
-        modeWriteList.add((vacvRrValue & 0xFF00) >> 8);
+        modeWriteList.add((vacvRrValue & 0xFF00) >> 8); //7
         modeWriteList.add((vacvRrValue & 0x00FF));
 
-        modeWriteList.add((dataI2 & 0x00FF));
+        modeWriteList.add((dataI2 & 0x00FF)); //9
         modeWriteList.add((dataE2 & 0x00FF));
 
-        modeWriteList.add((vacvPeepValue & 0xFF00) >> 8);
+        modeWriteList.add((vacvPeepValue & 0xFF00) >> 8); //11
         modeWriteList.add((vacvPeepValue & 0x00FF));
 
-        modeWriteList.add((vacvVtValue & 0xFF00) >> 8);
+        modeWriteList.add((vacvVtValue & 0xFF00) >> 8); //13
         modeWriteList.add((vacvVtValue & 0x00FF));
 
-        modeWriteList.add((vacvPcMinValue & 0xFF00) >> 8);
+        modeWriteList.add((vacvPcMinValue & 0xFF00) >> 8); //15
         modeWriteList.add((vacvPcMinValue & 0x00FF));
 
-        modeWriteList.add((vacvPcMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((vacvPcMaxValue & 0xFF00) >> 8); //17
         modeWriteList.add((vacvPcMaxValue & 0x00FF));
 
-        modeWriteList.add((vacvFio2Value & 0xFF00) >> 8);
+        modeWriteList.add((vacvFio2Value & 0xFF00) >> 8); //19
         modeWriteList.add((vacvFio2Value & 0x00FF));
 
-        modeWriteList.add(1);
+        modeWriteList.add(0); //21
+        modeWriteList.add(0); //
+        modeWriteList.add(0); //23
+        modeWriteList.add(0); //
+
+        modeWriteList.add(3); //25
         modeWriteList.add(255);
+        modeWriteList.add(0); //27
+        modeWriteList.add(0); //
 
         // modeWriteList.add((vacvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((vacvFlowRampValue & 0x00FF));
@@ -20232,12 +20396,10 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('vacvFlowRampValue', vacvFlowRampValue);
       preferences.setInt('vacvdefaultValue', vacvdefaultValue);
 
-      
-
       if (_status == "Connected") {
         sendDataUsbConnection(modeWriteList);
-        writeAlarmsData();
-        modesEnabled = false;
+        // writeAlarmsData();
+        // modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
       }
@@ -20258,40 +20420,47 @@ class _CheckPageState extends State<Dashboard> {
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
         // modeWriteList.add(0x7E);
-        modeWriteList.add(0);
+        modeWriteList.add(0); //1
         modeWriteList.add(20);
         modeWriteList.add(0);
         modeWriteList.add(4);
 
-        modeWriteList.add((-psimvItrigValue & 0xFF00) >> 8);
+        modeWriteList.add((-psimvItrigValue & 0xFF00) >> 8); //5
         modeWriteList.add((-psimvItrigValue & 0x00FF));
 
-        modeWriteList.add((psimvRrValue & 0xFF00) >> 8);
+        modeWriteList.add((psimvRrValue & 0xFF00) >> 8); //7
         modeWriteList.add((psimvRrValue & 0x00FF));
 
-        modeWriteList.add((dataI2 & 0x00FF));
+        modeWriteList.add((dataI2 & 0x00FF)); //9
         modeWriteList.add((dataE2 & 0x00FF));
 
-        modeWriteList.add((psimvPeepValue & 0xFF00) >> 8);
+        modeWriteList.add((psimvPeepValue & 0xFF00) >> 8); //11
         modeWriteList.add((psimvPeepValue & 0x00FF));
 
-        modeWriteList.add((psimvPcValue & 0xFF00) >> 8);
+        modeWriteList.add((psimvPcValue & 0xFF00) >> 8); //13
         modeWriteList.add((psimvPcValue & 0x00FF));
 
-        modeWriteList.add((psimvVtMinValue & 0xFF00) >> 8);
+        modeWriteList.add((psimvVtMinValue & 0xFF00) >> 8); //15
         modeWriteList.add((psimvVtMinValue & 0x00FF));
 
-        modeWriteList.add((psimvVtMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((psimvVtMaxValue & 0xFF00) >> 8); //17
         modeWriteList.add((psimvVtMaxValue & 0x00FF));
 
-        modeWriteList.add((psimvFio2Value & 0xFF00) >> 8);
+        modeWriteList.add((psimvFio2Value & 0xFF00) >> 8); //19
         modeWriteList.add((psimvFio2Value & 0x00FF));
 
-        modeWriteList.add((psimvPsValue & 0xFF00) >> 8);
+        modeWriteList.add((psimvPsValue & 0xFF00) >> 8); //21
         modeWriteList.add((psimvPsValue & 0x00FF));
 
-        modeWriteList.add(1);
+        modeWriteList.add(0); //23
+        modeWriteList.add(0); //
+        modeWriteList.add(0); //25
+        modeWriteList.add(0); //
+
+        modeWriteList.add(7); //27
         modeWriteList.add(255);
+        modeWriteList.add(0); //29
+        modeWriteList.add(0); //30
         // modeWriteList.add(0x7F);
       });
 
@@ -20309,23 +20478,22 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("pc", psimvPcValue);
 
       preferences.setInt('psimvItrigValue', psimvItrigValue);
+
+      preferences.setInt('psimvVtMinValue', psimvVtMinValue);
+      preferences.setInt('psimvVtMaxValue', psimvVtMaxValue);
       preferences.setInt('psimvRrValue', psimvRrValue);
       preferences.setInt('psimvPsValue', psimvPsValue);
       preferences.setInt('psimvIeValue', psimvIeValue);
       preferences.setInt('psimvPeepValue', psimvPeepValue);
       preferences.setInt('psimvPcValue', psimvPcValue);
-      preferences.setInt('psimvVtMinValue', psimvVtMinValue);
-      preferences.setInt('psimvVtMaxValue', psimvVtMaxValue);
       preferences.setInt('psimvFio2Value', psimvFio2Value);
       preferences.setInt('psimvFlowRampValue', psimvFlowRampValue);
       preferences.setInt('psimvdefaultValue', psimvdefaultValue);
 
-      // sendDataUsbConnection(modeWriteList); //TODO
-
       if (_status == "Connected") {
         sendDataUsbConnection(modeWriteList);
-        writeAlarmsData();
-        modesEnabled = false;
+        // writeAlarmsData();
+        // modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
       }
@@ -20357,16 +20525,16 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add((vsimvRrValue & 0xFF00) >> 8); //7
         modeWriteList.add((vsimvRrValue & 0x00FF)); //8
 
-        modeWriteList.add((dataI2 & 0x00FF));
+        modeWriteList.add((dataI2 & 0x00FF)); //9
         modeWriteList.add((dataE2 & 0x00FF));
 
         modeWriteList.add((vsimvPeepValue & 0xFF00) >> 8); //11
         modeWriteList.add((vsimvPeepValue & 0x00FF)); //12
 
-        modeWriteList.add((vsimvPcMinValue & 0xFF00) >> 8);
+        modeWriteList.add((vsimvPcMinValue & 0xFF00) >> 8); //13
         modeWriteList.add((vsimvPcMinValue & 0x00FF));
 
-        modeWriteList.add((vsimvPcMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((vsimvPcMaxValue & 0xFF00) >> 8); //15
         modeWriteList.add((vsimvPcMaxValue & 0x00FF));
 
         modeWriteList.add((vsimvVtValue & 0xFF00) >> 8); //17
@@ -20378,8 +20546,15 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add((vsimvPsValue & 0xFF00) >> 8); //21
         modeWriteList.add((vsimvPsValue & 0x00FF));
 
-        modeWriteList.add(1);
+        modeWriteList.add(0); //23
+        modeWriteList.add(0); //
+        modeWriteList.add(0); //25
+        modeWriteList.add(0); //
+
+        modeWriteList.add(7); //27
         modeWriteList.add(255);
+        modeWriteList.add(0); //29
+        modeWriteList.add(0); //30
 
         // modeWriteList.add(0x7F); //23
       });
@@ -20399,22 +20574,22 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("pc", vsimvPcMaxValue);
 
       preferences.setInt('vsimvItrigValue', vsimvItrigValue);
+
+      preferences.setInt('vsimvPcMinValue', vsimvPcMinValue);
+      preferences.setInt('vsimvPcMaxValue', vsimvPcMaxValue);
       preferences.setInt('vsimvRrValue', vsimvRrValue);
       preferences.setInt('vsimvIeValue', vsimvIeValue);
       preferences.setInt('vsimvPeepValue', vsimvPeepValue);
       preferences.setInt('vsimvVtValue', vsimvVtValue);
       preferences.setInt('vsimvPsValue', vsimvPsValue);
-      preferences.setInt('vsimvPcMinValue', vsimvPcMinValue);
-      preferences.setInt('vsimvPcMaxValue', vsimvPcMaxValue);
       preferences.setInt('vsimvFio2Value', vsimvFio2Value);
       preferences.setInt('vsimvFlowRampValue', vsimvFlowRampValue);
       preferences.setInt('vsimvdefaultValue', vsimvdefaultValue);
 
-
       if (_status == "Connected") {
         sendDataUsbConnection(modeWriteList);
-        writeAlarmsData();
-        modesEnabled = false;
+        // writeAlarmsData();
+        // modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
       }
@@ -20453,40 +20628,47 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add((psvPeepValue & 0xFF00) >> 8); //7
         modeWriteList.add((psvPeepValue & 0x00FF)); //8
 
-        modeWriteList.add((psvPsValue & 0xFF00) >> 8); //11
-        modeWriteList.add((psvPsValue & 0x00FF)); //12
+        modeWriteList.add((psvPsValue & 0xFF00) >> 8); //9
+        modeWriteList.add((psvPsValue & 0x00FF)); //10
 
-        modeWriteList.add((psvFio2Value & 0xFF00) >> 8); //19
+        modeWriteList.add((psvFio2Value & 0xFF00) >> 8); //11
         modeWriteList.add((psvFio2Value & 0x00FF));
 
         var calAtime = psvAtimeValue * 1000;
 
-        modeWriteList.add((calAtime & 0xFF00) >> 8); //17
+        modeWriteList.add((calAtime & 0xFF00) >> 8); //13
         modeWriteList.add((calAtime & 0x00FF));
 
-        modeWriteList.add((dataI2 & 0x00FF));
+        modeWriteList.add((dataI2 & 0x00FF)); //15
         modeWriteList.add((dataE2 & 0x00FF));
 
-        modeWriteList.add((calTi2 & 0xFF00) >> 8); //11
+        modeWriteList.add((calTi2 & 0xFF00) >> 8); //17
         modeWriteList.add((calTi2 & 0x00FF)); //12
 
         modeWriteList.add((psvBackupRrValue & 0xFF00) >> 8); //19
         modeWriteList.add((psvBackupRrValue & 0x00FF));
 
-        modeWriteList.add((psvVtMinValue & 0xFF00) >> 8); //17
+        modeWriteList.add((psvVtMinValue & 0xFF00) >> 8); //21
         modeWriteList.add((psvVtMinValue & 0x00FF));
 
-        modeWriteList.add((psvVtMaxValue & 0xFF00) >> 8); //17
+        modeWriteList.add((psvVtMaxValue & 0xFF00) >> 8); //23
         modeWriteList.add((psvVtMaxValue & 0x00FF));
 
-        modeWriteList.add((psvMinTeValue & 0xFF00) >> 8); //17
+        modeWriteList.add((psvMinTeValue & 0xFF00) >> 8); //25
         modeWriteList.add((psvMinTeValue & 0x00FF));
 
-        modeWriteList.add((psvPcValue & 0xFF00) >> 8); //17
+        modeWriteList.add((psvPcValue & 0xFF00) >> 8); //27
         modeWriteList.add((psvPcValue & 0x00FF));
 
-        modeWriteList.add(1);
+        modeWriteList.add(0); //29
+        modeWriteList.add(0); //
+        modeWriteList.add(0); //31
+        modeWriteList.add(0); //
+
+        modeWriteList.add(63); //33
         modeWriteList.add(255);
+        modeWriteList.add(0); //35
+        modeWriteList.add(0); //36
 
         // modeWriteList.add(0x7F); //23
         // Fluttertoast.showToast(msg: modeWriteList.toString());
@@ -20507,24 +20689,26 @@ class _CheckPageState extends State<Dashboard> {
       // Fluttertoast.showToast(msg:psvPsValue.toString() +" pc "+psvPcValue.toString());
 
       preferences.setInt('psvItrigValue', psvItrigValue);
+
+      preferences.setInt('psvVtMinValue', psvVtMinValue);
+      preferences.setInt('psvVtMaxValue', psvVtMaxValue);
+
+      preferences.setInt('psvTiValue', psvTiValue);
       preferences.setInt('psvPeepValue', psvPeepValue);
       preferences.setInt('psvIeValue', psvIeValue);
       preferences.setInt('psvPsValue', psvPsValue);
-      preferences.setInt('psvTiValue', psvTiValue);
-      preferences.setInt('psvVtMinValue', psvVtMinValue);
-      preferences.setInt('psvVtMaxValue', psvVtMaxValue);
       preferences.setInt('psvFio2Value', psvFio2Value);
+      preferences.setInt('psvBackupRrValue', psvBackupRrValue);
+      preferences.setInt('psvPcValue', psvPcValue);
       preferences.setInt('psvAtimeValue', psvAtimeValue);
       preferences.setInt('psvEtrigValue', psvEtrigValue);
-      preferences.setInt('psvBackupRrValue', psvBackupRrValue);
       preferences.setInt('psvMinTeValue', psvMinTeValue);
-      preferences.setInt('psvPcValue', psvPcValue);
       preferences.setInt('psvdefaultValue', psvdefaultValue);
 
       if (_status == "Connected") {
         sendDataUsbConnection(modeWriteList);
-        writeAlarmsData();
-        modesEnabled = false;
+        // writeAlarmsData();
+        // modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
       }
@@ -20545,36 +20729,45 @@ class _CheckPageState extends State<Dashboard> {
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
         // modeWriteList.add(0x7E);
-        modeWriteList.add(0);
+        modeWriteList.add(0); //1
         modeWriteList.add(20);
         modeWriteList.add(0);
         modeWriteList.add(14);
-        modeWriteList.add((-prvcItrigValue & 0xFF00) >> 8);
+        modeWriteList.add((-prvcItrigValue & 0xFF00) >> 8); //5
         modeWriteList.add((-prvcItrigValue & 0x00FF));
 
-        modeWriteList.add((prvcRrValue & 0xFF00) >> 8);
+        modeWriteList.add((prvcRrValue & 0xFF00) >> 8); //7
         modeWriteList.add((prvcRrValue & 0x00FF));
 
-        modeWriteList.add((dataI2 & 0x00FF));
+        modeWriteList.add((dataI2 & 0x00FF)); //9
         modeWriteList.add((dataE2 & 0x00FF));
 
-        modeWriteList.add((prvcPeepValue & 0xFF00) >> 8);
+        modeWriteList.add((prvcPeepValue & 0xFF00) >> 8); //11
         modeWriteList.add((prvcPeepValue & 0x00FF));
 
-        modeWriteList.add((prvcVtValue & 0xFF00) >> 8);
+        modeWriteList.add((prvcVtValue & 0xFF00) >> 8); //13
         modeWriteList.add((prvcVtValue & 0x00FF));
 
-        // modeWriteList.add((prvcPcMinValue & 0xFF00) >> 8);
-        // modeWriteList.add((prvcPcMinValue & 0x00FF));
+        modeWriteList.add(0); //15
+        modeWriteList.add(0);
 
-        modeWriteList.add((prvcPcMaxValue & 0xFF00) >> 8);
+        modeWriteList.add((prvcPcMaxValue & 0xFF00) >> 8); //17
         modeWriteList.add((prvcPcMaxValue & 0x00FF));
 
-        modeWriteList.add((prvcFio2Value & 0xFF00) >> 8);
+        modeWriteList.add((prvcFio2Value & 0xFF00) >> 8); //19
         modeWriteList.add((prvcFio2Value & 0x00FF));
 
-        modeWriteList.add(1);
+        modeWriteList.add(0); //21
+        modeWriteList.add(0);
+
+        modeWriteList.add(0); //23
+        modeWriteList.add(0);
+
+        modeWriteList.add(3); //25
         modeWriteList.add(255);
+
+        modeWriteList.add(0); //27 crc
+        modeWriteList.add(0);
 
         // modeWriteList.add((prvcFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((prvcFlowRampValue & 0x00FF));
@@ -20595,21 +20788,21 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("vt", prvcVtValue);
 
       preferences.setInt('prvcItrigValue', prvcItrigValue);
+
+      preferences.setInt('prvcPcMinValue', prvcPcMinValue);
+      preferences.setInt('prvcPcMaxValue', prvcPcMaxValue);
       preferences.setInt('prvcRrValue', prvcRrValue);
       preferences.setInt('prvcIeValue', prvcIeValue);
       preferences.setInt('prvcPeepValue', prvcPeepValue);
       preferences.setInt('prvcVtValue', prvcVtValue);
-      preferences.setInt('prvcPcMinValue', prvcPcMinValue);
-      preferences.setInt('prvcPcMaxValue', prvcPcMaxValue);
       preferences.setInt('prvcFio2Value', prvcFio2Value);
       preferences.setInt('prvcFlowRampValue', prvcFlowRampValue);
       preferences.setInt('prvcdefaultValue', prvcdefaultValue);
-      // sendDataUsbConnection(modeWriteList); //TODO
 
       if (_status == "Connected") {
         sendDataUsbConnection(modeWriteList);
-        writeAlarmsData();
-        modesEnabled = false;
+        // writeAlarmsData();
+        // modesEnabled = false;
       } else {
         Fluttertoast.showToast(msg: "No Communication");
       }
@@ -20636,7 +20829,7 @@ class _CheckPageState extends State<Dashboard> {
     writePlay.add(0x7F);
 
     //to calculate crc
-    // print(writePlay.toString());
+    // // print(writePlay.toString());
     // Fluttertoast.showToast(msg: writePlay.toString());
 
     if (_status == "Connected") {
@@ -20681,16 +20874,15 @@ class _CheckPageState extends State<Dashboard> {
       }
       cIndex = cIndex + 1;
     }
-    print(listTempF);
+    // print(listTempF);
 
     sendData(listTempF);
   }
 
-  
-
   showDialogPause() {
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (BuildContext context) => CupertinoAlertDialog(
               title: new Text("Confirm Standby Mode"),
               actions: <Widget>[
@@ -20718,8 +20910,9 @@ class _CheckPageState extends State<Dashboard> {
   showDialogPlay() {
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (BuildContext context) => CupertinoAlertDialog(
-              title: new Text("Confirm Start Off Treatment"),
+              title: new Text("Confirm Start of Treatment"),
               actions: <Widget>[
                 CupertinoDialogAction(
                   child: Text("Confirm"),
@@ -21793,7 +21986,7 @@ class _CheckPageState extends State<Dashboard> {
       // if (data == false) {
       //   finalList.clear();
       // } else {
-      // // print("page no " + finalList[112].toString());
+      // // // print("page no " + finalList[112].toString());
       // if (finalList[112] == 1) {
       //   Navigator.pushAndRemoveUntil(
       //       context,
@@ -22007,7 +22200,7 @@ class _CheckPageState extends State<Dashboard> {
                                     ? alarmMessage = "PATIENT DISCONNECTED"
                                     : alarmMessage = "";
               } else if (finalList[109] == 2) {
-                // // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
+                // // // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
                 ((finalList[106] << 8) + finalList[107]) == 1
                     ? alarmMessage = "POWER SUPPLY DISCONNECTED"
                     : ((finalList[106] << 8) + finalList[107]) == 2
@@ -22209,6 +22402,16 @@ class _CheckPageState extends State<Dashboard> {
           ioreDisplayParamter = "";
         }
 
+        if (finalList[91] == 1) {
+          amsDisplayParamter = "A";
+        } else if (finalList[91] == 2) {
+          amsDisplayParamter = "M";
+        } else if (finalList[91] == 3) {
+          amsDisplayParamter = "S";
+        } else {
+          amsDisplayParamter = "";
+        }
+
         displayTemperature = finalList[88];
 
         setState(() {
@@ -22354,7 +22557,8 @@ class _CheckPageState extends State<Dashboard> {
         listTemp = [];
       });
       // }
-    }else if(finalList.isNotEmpty && ((finalList[2] << 8) + finalList[3])==17){
+    }
+    else if(finalList.isNotEmpty && ((finalList[2] << 8) + finalList[3])==17){
       // Fluttertoast.showToast(msg: finalList.toString());
       setState((){
       acknowledgeData.addAll(finalList);
@@ -22362,38 +22566,93 @@ class _CheckPageState extends State<Dashboard> {
       ackPacket = acknowledgeData[5];
       finalList.clear();
       acknowledgeData.clear();
-      
       });
+    }
   }
 
-}
-sendData(List<int> listTempF) async {
+  sendData(List<int> listTempF) async {
+    // print(listTempF.toString());
+    Timer t;
     finalListSend = [];
 
     finalListSend.add(126);
     finalListSend.addAll(listTempF);
     finalListSend.add(127);
     // print(finalListSend.toString());
-
-    // Fluttertoast.showToast(msg:finalListSend.toString());
     await _port.write(Uint8List.fromList(finalListSend));
+    
+
+    // // Fluttertoast.showToast(msg:finalListSend.toString());
+    // t = Timer.periodic(Duration(milliseconds: 150), (timer) async{
+    //    await _port.write(Uint8List.fromList(finalListSend));
+    //  });
 
     if(acknowReceivedValue==1 && ackPacket==6){
-      // Fluttertoast.showToast(msg: "success");
-      acknowReceivedValue=0;
-      ackPacket=0;
-      writeAlarmsData();
+      clearData();
+      // writeAlarmsData();
+    }else if(acknowReceivedValue==1 && ackPacket==7){
+      clearData();
+      // writeAlarmsData();
+    }else if(acknowReceivedValue==1 && ackPacket==2){
+      clearData();
+      // writeAlarmsData();
+    }else if(acknowReceivedValue==1 && ackPacket==1){
+      clearData();
+      // writeAlarmsData();
+    }else if(acknowReceivedValue==1 && ackPacket==3){
+      clearData();
+      // writeAlarmsData();
+    }else if(acknowReceivedValue==1 && ackPacket==4){
+      clearData();
+      // writeAlarmsData();
+    }else if(acknowReceivedValue==1 && ackPacket==5){
+      clearData();
+      // writeAlarmsData();
+    }else if(acknowReceivedValue==1 && ackPacket==14){
+      clearData();
+      // writeAlarmsData();
     }else if(acknowReceivedValue==1 && ackPacket==10){
-      acknowReceivedValue=0;
-      ackPacket=0;
-        modesEnabled = false;
-         setState(() {
-        playOnEnabled = false;
-        alarmEnabled = false;
-      });
-      getData();
+     clearAlarmData();
+        // modesEnabled = false;     
+    }else if(acknowReceivedValue==1 && ackPacket==13){
+     clearRespiratoryData();
+        // modesEnabled = false;     
     }
 
+    
+  }
+
+  clearData(){
+    print(finalListSend.toString());
+    setState((){
+      
+      modesEnabled = false;
+      acknowReceivedValue=0;
+      ackPacket=0;
+      // t.stop();
+      // Fluttertoast.showToast(msg:"Succes");
     finalListSend.clear();
+     });
+  }
+  clearAlarmData(){
+    setState((){
+      alarmEnabled = false;
+      acknowReceivedValue=0;
+      ackPacket=0;
+      // t.stop();
+      // Fluttertoast.showToast(msg:"Succes");
+    finalListSend.clear();
+     });
+  }
+
+  clearRespiratoryData(){
+    
+     setState((){
+      acknowReceivedValue=0;
+      ackPacket=0;
+      // t.stop();
+      // Fluttertoast.showToast(msg:"Succes 13");
+    finalListSend.clear();
+     });
   }
 }

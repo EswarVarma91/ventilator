@@ -25,13 +25,23 @@ class _CommonDialogState extends State<CommonDialog> {
   }
 
   getData() async {
-    preferences = await SharedPreferences.getInstance();
+    preferences = await SharedPreferences.getInstance();//eRR
     if (widget.value.toString() == "RR") {
       setState(() {
         commomValue = preferences.getInt("rr").toDouble();
         commomValue1 = preferences.getInt("ie").toDouble();
         min = 1;
         max = 60;
+        prefix = false;
+        suffix = false;
+        units = false;
+      });
+    }else if (widget.value.toString() == "eRR") {
+      setState(() {
+        commomValue = preferences.getInt("rr").toDouble();
+        commomValue1 = preferences.getInt("ie").toDouble();
+        min = 1;
+        max = 30;
         prefix = false;
         suffix = false;
         units = false;
@@ -211,7 +221,7 @@ class _CommonDialogState extends State<CommonDialog> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
-                        widget.value.toString(),
+                        widget.value.toString()=="eRR"?"RR" :widget.value.toString(),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
@@ -231,9 +241,9 @@ class _CommonDialogState extends State<CommonDialog> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               IconButton(icon: Icon(Icons.remove,size: 50,),onPressed: (){
-                                if(commomValue.floor().toInt()>=min.toInt()){
+                                if(commomValue.ceil().toInt()>=min.toInt()){
                                   setState(() {
-                                    if(commomValue.floor().toInt()==min.toInt()){
+                                    if(commomValue.toInt()==min.toInt()){
                                       commomValue = min;
                                     }else{
                                     commomValue = commomValue-1.0;
@@ -246,8 +256,8 @@ class _CommonDialogState extends State<CommonDialog> {
                                 prefix
                                     ? getIeData(commomValue.toInt(), 1).toString()
                                     : suffix
-                                        ? commomValue.round().toString() + "%"
-                                        : commomValue.round().toString(),
+                                        ? commomValue.ceil().toString() + "%"
+                                        : commomValue.ceil().toString(),
                                 style: TextStyle(fontSize: 40),
                               ),
                               SizedBox(width:120),
@@ -264,7 +274,7 @@ class _CommonDialogState extends State<CommonDialog> {
                               },),
                             ],
                           ),
-                          Text(widget.value.toString() == "RR"
+                          Text(widget.value.toString() == "RR" || widget.value.toString() == "eRR"
                               ? "I:E = " +
                                   getIeData(commomValue1.toInt(), 1).toString()
                               : widget.value.toString() == "I:E"
@@ -295,15 +305,15 @@ class _CommonDialogState extends State<CommonDialog> {
                               max: max,
                               min: min,
                               label: prefix
-                                  ? commomValue.round().toString()
+                                  ? commomValue.ceil().toString()
                                   : suffix
-                                      ? commomValue.round().toString() + "%"
-                                      : commomValue.round().toString(),
+                                      ? commomValue.ceil().toString() + "%"
+                                      : commomValue.ceil().toString(),
                             ),
                           ),
                          
                           Text(
-                                  widget.value.toString() == "RR"
+                                  widget.value.toString() == "RR" || widget.value.toString() == "eRR"
                                       ? calculateRrIe(commomValue, commomValue1)
                                       : widget.value.toString() == "I:E"
                                       ? calculateIeRr(commomValue, commomValue1):"",
@@ -414,54 +424,59 @@ class _CommonDialogState extends State<CommonDialog> {
   void writeData(double value) async {
     if (widget.value.toString() == "RR") {
       setState(() {
-        preferences.setInt("rr", value.round());
+        preferences.setInt("rr", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "rr");
-    } else if (widget.value.toString() == "Backup RR") {
+      Navigator.pop(context, value.ceil().toString() + "ab" + "rr");
+    }else if (widget.value.toString() == "eRR") {
       setState(() {
-        preferences.setInt("rr", value.round());
+        preferences.setInt("rr", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "rr");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "rr");
+    }  else if (widget.value.toString() == "Backup RR") {
+      setState(() {
+        preferences.setInt("rr", value.ceil());
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "rr");
     } else if (widget.value.toString() == "I:E") {
       setState(() {
-        preferences.setInt("ie", value.round());
+        preferences.setInt("ie", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "ie");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "ie");
     } else if (widget.value.toString() == "Backup I:E") {
       setState(() {
-        preferences.setInt("ie", value.round());
+        preferences.setInt("ie", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "ie");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "ie");
     } else if (widget.value.toString() == "PEEP") {
       setState(() {
-        preferences.setInt("peep", value.round());
+        preferences.setInt("peep", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "peep");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "peep");
     } else if (widget.value.toString() == "PS") {
       setState(() {
-        preferences.setInt("ps", value.round());
+        preferences.setInt("ps", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "ps");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "ps");
     } else if (widget.value.toString() == "FiO2") {
       setState(() {
-        preferences.setInt("fio2", value.round());
+        preferences.setInt("fio2", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "fio2");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "fio2");
     } else if (widget.value.toString() == "PC") {
       setState(() {
-        preferences.setInt("pc", value.round());
+        preferences.setInt("pc", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "pc");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "pc");
     } else if (widget.value.toString() == "Vt") {
       setState(() {
-        preferences.setInt("vt", value.round());
+        preferences.setInt("vt", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "vt");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "vt");
     } else if (widget.value.toString() == "Target Vt") {
       setState(() {
-        preferences.setInt("vt", value.round());
+        preferences.setInt("vt", value.ceil());
       });
-      Navigator.pop(context, value.round().toString() + "ab" + "vt");
+      Navigator.pop(context, value.ceil().toString() + "ab" + "vt");
     }
   }
 
