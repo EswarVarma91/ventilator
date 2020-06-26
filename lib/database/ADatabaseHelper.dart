@@ -12,7 +12,7 @@ class ADatabaseHelper {
   static const String DATE_TIME = 'datetime';
   static const String GLOBAL_COUNTER_NO = 'globalCounterNo';
   static const String TABLE_ALARM ='alarmTable';
-  static const String DATABASE = 'aalarmDb';
+  static const String DATABASE = 'balarmDb';
 
   Future<Database> get db async {
     if (_db != null) {

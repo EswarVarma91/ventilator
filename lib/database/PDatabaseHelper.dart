@@ -14,8 +14,8 @@ class PDatabaseHelper {
   static const String PATIENT_GENDER = 'patientGender';
   static const String PATIENT_HEIGHT = 'patientHeight';
   static const String DATE_TIME = 'datetime';
-  static const String TABLE_NAME ='patientTb';
-  static const String DATABASE = 'patientDB';
+  static const String TABLE_NAME ='apatientTb';
+  static const String DATABASE = 'apatientDB';
 
   Future<Database> get db async {
     if (_db != null) {

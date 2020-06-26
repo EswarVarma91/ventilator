@@ -3176,48 +3176,48 @@ class _CheckPageState extends State<Dashboard> {
                                                 ),
                                               ),
                                             ),
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  pccmvEnabled = false;
-                                                  vccmvEnabled = false;
-                                                  pacvEnabled = false;
-                                                  vacvEnabled = false;
-                                                  psimvEnabled = false;
-                                                  vsimvEnabled = false;
-                                                  psvEnabled = false;
-                                                  prvcEnabled = true;
-                                                });
-                                              },
-                                              child: Card(
-                                                color: prvcEnabled
-                                                    ? Colors.blue
-                                                    : Colors.white,
-                                                child: Container(
-                                                  width: 98,
-                                                  height: 70,
-                                                  child: Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Text("PRVC",
-                                                            style: TextStyle(
-                                                                fontSize: 20,
-                                                                color: prvcEnabled
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      )),
-                                                ),
-                                              ),
-                                            ),
+                                            // InkWell(
+                                            //   onTap: () {
+                                            //     setState(() {
+                                            //       pccmvEnabled = false;
+                                            //       vccmvEnabled = false;
+                                            //       pacvEnabled = false;
+                                            //       vacvEnabled = false;
+                                            //       psimvEnabled = false;
+                                            //       vsimvEnabled = false;
+                                            //       psvEnabled = false;
+                                            //       prvcEnabled = true;
+                                            //     });
+                                            //   },
+                                            //   child: Card(
+                                            //     color: prvcEnabled
+                                            //         ? Colors.blue
+                                            //         : Colors.white,
+                                            //     child: Container(
+                                            //       width: 98,
+                                            //       height: 70,
+                                            //       child: Align(
+                                            //           alignment:
+                                            //               Alignment.center,
+                                            //           child: Padding(
+                                            //             padding:
+                                            //                 const EdgeInsets
+                                            //                     .all(8.0),
+                                            //             child: Text("PRVC",
+                                            //                 style: TextStyle(
+                                            //                     fontSize: 20,
+                                            //                     color: prvcEnabled
+                                            //                         ? Colors
+                                            //                             .white
+                                            //                         : Colors
+                                            //                             .black,
+                                            //                     fontWeight:
+                                            //                         FontWeight
+                                            //                             .bold)),
+                                            //           )),
+                                            //     ),
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -4617,51 +4617,32 @@ class _CheckPageState extends State<Dashboard> {
                                                                             ? "assets/lungs/5.png"
                                                                             : "assets/lungs/1.png",
                                                         width: 120),
-                                                         Padding(
-                                                           padding: const EdgeInsets.only(top:98.0,left:48),
-                                                           child: Container(
-                                                  height: 25,
-                                                  width: 25,
-                                                  decoration: new BoxDecoration(
-                                                    borderRadius:
-                                                        new BorderRadius
-                                                              .circular(25.0),
-                                                    border: new Border.all(
-                                                      width: 2.0,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  child: Center(
-                                                      child: Text(
-                                                            amsDisplayParamter,
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.white,fontWeight: FontWeight.bold,
-                                                                fontSize: 7))),
-                                                ),
-                                                         ),
+                                                        
                                                       ],
                                                 ),
-                                                Container(
-                                                  height: 25,
-                                                  width: 25,
-                                                  decoration: new BoxDecoration(
-                                                    borderRadius:
-                                                        new BorderRadius
-                                                            .circular(25.0),
-                                                    border: new Border.all(
-                                                      width: 2.0,
-                                                      color: Colors.green,
+                                                
+                                                    Container(
+                                                      height: 25,
+                                                      width: 25,
+                                                      decoration: new BoxDecoration(
+                                                        borderRadius:
+                                                            new BorderRadius
+                                                                .circular(25.0),
+                                                        border: new Border.all(
+                                                          width: 2.0,
+                                                          color: Colors.green,
+                                                        ),
+                                                      ),
+                                                      child: Center(
+                                                          child: Text(
+                                                              ioreDisplayParamter,
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      Colors.white,
+                                                                  fontSize: 10))),
                                                     ),
-                                                  ),
-                                                  child: Center(
-                                                      child: Text(
-                                                          ioreDisplayParamter,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 10))),
-                                                ),
+                                                    
+                                                  
                                               ],
                                             ),
                                           )
@@ -6820,7 +6801,7 @@ class _CheckPageState extends State<Dashboard> {
         psimvEnabled ? psimvData() : Container(),
         vsimvEnabled ? vsimvData() : Container(),
         psvEnabled ? psvData() : Container(),
-        prvcEnabled ? prvcData() : Container(),
+        // prvcEnabled ? prvcData() : Container(),
       ],
     );
   }

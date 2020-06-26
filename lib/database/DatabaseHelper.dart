@@ -48,11 +48,11 @@ class DatabaseHelper {
   static const String PATIENT_AGE = 'patientAge';
   static const String PATIENT_GENDER = 'patientGender';
   static const String PATIENT_HEIGHT = 'patientHeight';
-  static const String TABLE_PATIENT = 'patientTb';
-  static const String TABLE_NAME = 'counterV';
-  static const String TABLE_ALARM = 'alarms';
-  static const String TABLE = 'graphPoints';
-  static const String DATABASE = 'edb';
+  static const String TABLE_PATIENT = 'apatientTb';
+  static const String TABLE_NAME = 'acounterV';
+  static const String TABLE_ALARM = 'aalarms';
+  static const String TABLE = 'agraphPoints';
+  static const String DATABASE = 'adb';
 
   Future<Database> get db async {
     if (_db != null) {
