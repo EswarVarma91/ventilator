@@ -19,7 +19,7 @@ class _AboutState extends State<About> {
   @override
   void initState() {
     super.initState();
-    getLatestUrl();
+    // getLatestUrl();
   }
 
   getLatestUrl() async {
@@ -30,13 +30,14 @@ class _AboutState extends State<About> {
     setState(() {
       setState(() {
         downloadUrl = response.body.toString();
+        checkforUpdates(downloadUrl);
       });
       // Fluttertoast.showToast(msg: downloadUrl);
     });
   }
 
-  Future<void> checkforUpdates() async {
-    var params = <String, dynamic>{"urlFlutter": downloadUrl};
+  Future<void> checkforUpdates(String downlrl) async {
+    var params = <String, dynamic>{"urlFlutter": downlrl};
     try {
       var result =
           await shutdownChannel.invokeMethod('checkforUpdates', params);
@@ -200,7 +201,7 @@ class _AboutState extends State<About> {
                             Fluttertoast.showToast(msg:"no updates found.!");
                           }else{
                             getLatestUrl();
-                            checkforUpdates();
+                            
                           }
                         },
                       ):Container(),

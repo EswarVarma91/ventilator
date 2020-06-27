@@ -10,13 +10,14 @@ class CommonDialog extends StatefulWidget {
 }
 
 class _CommonDialogState extends State<CommonDialog> {
-  double commomValue, commomValue1;
+  double commomValue, commomValue1,checkValue;
   SharedPreferences preferences;
   double min, max;
   bool prefix = false;
   bool suffix = false;
   bool units = false;
   double tiValue = 0, teValue = 0;
+  bool confirmButton = false;
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _CommonDialogState extends State<CommonDialog> {
     if (widget.value.toString() == "RR") {
       setState(() {
         commomValue = preferences.getInt("rr").toDouble();
+        checkValue = preferences.getInt("rr").toDouble();
         commomValue1 = preferences.getInt("ie").toDouble();
         min = 1;
         max = 60;
@@ -39,6 +41,7 @@ class _CommonDialogState extends State<CommonDialog> {
     }else if (widget.value.toString() == "eRR") {
       setState(() {
         commomValue = preferences.getInt("rr").toDouble();
+        checkValue = preferences.getInt("rr").toDouble();
         commomValue1 = preferences.getInt("ie").toDouble();
         min = 1;
         max = 30;
@@ -49,6 +52,7 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "I:E") {
       setState(() {
         commomValue = preferences.getInt("ie").toDouble();
+        checkValue = preferences.getInt("ie").toDouble();
         commomValue1 = preferences.getInt("rr").toDouble();
         min = 1;
         max = 61;
@@ -59,6 +63,7 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "PEEP") {
       setState(() {
         commomValue = preferences.getInt("peep").toDouble();
+        checkValue = preferences.getInt("peep").toDouble();
         min = 0;
         max = 30;
         prefix = false;
@@ -68,6 +73,7 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "PS") {
       setState(() {
         commomValue = preferences.getInt("ps").toDouble();
+        checkValue = preferences.getInt("ps").toDouble();
         min = 1;
         max = 70;
         prefix = false;
@@ -77,6 +83,7 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "FiO2") {
       setState(() {
         commomValue = preferences.getInt("fio2").toDouble();
+        checkValue = preferences.getInt("fio2").toDouble();
         min = 21;
         max = 100;
         prefix = false;
@@ -86,6 +93,7 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "PC") {
       setState(() {
         commomValue = preferences.getInt("pc").toDouble();
+        checkValue = preferences.getInt("pc").toDouble();
         min = 1;
         max = 80;
         prefix = false;
@@ -95,6 +103,7 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "Vt") {
       setState(() {
         commomValue = preferences.getInt("vt").toDouble();
+        checkValue = preferences.getInt("vt").toDouble();
         min = 200;
         max = 1200;
         prefix = false;
@@ -104,6 +113,7 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "Target Vt") {
       setState(() {
         commomValue = preferences.getInt("vt").toDouble();
+        checkValue = preferences.getInt("vt").toDouble();
         min = 200;
         max = 1200;
         prefix = false;
@@ -115,6 +125,7 @@ class _CommonDialogState extends State<CommonDialog> {
     else if (widget.value.toString() == "Backup RR") {
       setState(() {
         commomValue = preferences.getInt("rr").toDouble();
+        checkValue = preferences.getInt("rr").toDouble();
         commomValue1 = preferences.getInt("ie").toDouble();
         min = 1;
         max = 60;
@@ -125,6 +136,7 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "Backup I:E") {
       setState(() {
         commomValue = preferences.getInt("ie").toDouble();
+        checkValue = preferences.getInt("ie").toDouble();
         commomValue1 = preferences.getInt("rr").toDouble();
         min = 1;
         max = 61;
@@ -249,6 +261,15 @@ class _CommonDialogState extends State<CommonDialog> {
                                     commomValue = commomValue-1.0;
                                     }
                                   });
+                                  if(commomValue!=checkValue){
+                                    setState(() {
+                                      confirmButton=true;
+                                    });
+                                  }else{
+                                    setState(() {
+                                      confirmButton=false;
+                                    }); 
+                                  }
                                 }
                               },),
                               SizedBox(width:120),
@@ -270,26 +291,41 @@ class _CommonDialogState extends State<CommonDialog> {
                                     commomValue = commomValue+1.0;
                                     }
                                   });
+                                  if(commomValue!=checkValue){
+                                    setState(() {
+                                      confirmButton=true;
+                                    });
+                                  }else{
+                                    setState(() {
+                                      confirmButton=false;
+                                    }); 
+                                  }
                                 }
                               },),
                             ],
                           ),
-                          Text(widget.value.toString() == "RR" || widget.value.toString() == "eRR"
-                              ? "I:E = " +
-                                  getIeData(commomValue1.toInt(), 1).toString()
-                              : widget.value.toString() == "I:E"
-                              ? "RR = " + commomValue1.toInt().toString():""),
+                          
                           // Text(widget.value.toString() == "I:E"
                           //     ? "RR = " + commomValue1.toInt().toString()
                           //     : ""),
                           SizedBox(
-                            height: 5,
+                            height: 25,
                           ),
                            Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(widget.value.toString() == "I:E" ? "Min "+getIeData(min.toInt(),1) :"Min "+min.toInt().toString()),
+                              // SizedBox(height: 30,),
+                              Text(widget.value.toString() == "RR" || widget.value.toString() == "eRR"
+                              ? "I:E = " +
+                                  getIeData(commomValue1.toInt(), 1).toString() : widget.value.toString() =="Backup RR" ?
+                                  "I:E = " + getIeData(commomValue1.toInt(), 1).toString()
+                              : widget.value.toString() == "I:E"
+                              ? "RR = " + commomValue1.toInt().toString():
+                               widget.value.toString() == "Backup I:E" 
+                               ? "Backup RR = "+commomValue1.toInt().toString():
+                              ""),
                               Text(widget.value.toString() == "I:E" ? "Max "+getIeData(max.toInt(),1) :"Max "+max.toInt().toString()),
                             ],
                           ),
@@ -299,7 +335,16 @@ class _CommonDialogState extends State<CommonDialog> {
                               value: commomValue?.toDouble(),
                               onChanged: (val) {
                                 setState(() {
-                                  commomValue = double.tryParse(val.toString());
+                                  commomValue = double.tryParse(val.ceil().toString());
+                                  if(commomValue!=checkValue){
+                                    setState(() {
+                                      confirmButton=true;
+                                    });
+                                  }else{
+                                    setState(() {
+                                      confirmButton=false;
+                                    }); 
+                                  }
                                 });
                               },
                               max: max,
@@ -315,8 +360,13 @@ class _CommonDialogState extends State<CommonDialog> {
                           Text(
                                   widget.value.toString() == "RR" || widget.value.toString() == "eRR"
                                       ? calculateRrIe(commomValue, commomValue1)
+                                      : widget.value.toString() == "Backup RR" 
+                                      ? calculateRrIe(commomValue, commomValue1)
                                       : widget.value.toString() == "I:E"
-                                      ? calculateIeRr(commomValue, commomValue1):"",
+                                      ? calculateIeRr(commomValue, commomValue1)
+                                      : widget.value.toString() == "Backup I:E"
+                                      ? calculateIeRr(commomValue, commomValue1)
+                                      :"",
                                   style: TextStyle(fontSize: 25)),
                           SizedBox(
                             height: 0,
@@ -362,7 +412,7 @@ class _CommonDialogState extends State<CommonDialog> {
                             ),
                           ),
                         ),
-                        Align(
+                     confirmButton?   Align(
                           alignment: Alignment.bottomCenter,
                           child: InkWell(
                             onTap: () {
@@ -386,7 +436,7 @@ class _CommonDialogState extends State<CommonDialog> {
                               ),
                             ),
                           ),
-                        ),
+                        ):Container(width:190),
                       ],
                     ),
                   ),
@@ -487,24 +537,24 @@ class _CommonDialogState extends State<CommonDialog> {
     var dataE = getIeData(commomValue1.toInt(), 3);
     var dataE1 = double.tryParse(dataE);
 
-    tiValue = (((dataI1 / (dataI1 + dataE1)) * (60000 / commomValue)) / 1000);
+    tiValue = (((dataI1 / (dataI1 + dataE1)) * (60000 / commomValue.ceil())) / 1000);
     // print(tiValue.toString());
-    teValue = (((dataE1 / (dataI1 + dataE1)) * (60000 / commomValue)) / 1000);
+    teValue = (((dataE1 / (dataI1 + dataE1)) * (60000 / commomValue.ceil())) / 1000);
 
     return "Ti : " +
-        tiValue.toStringAsFixed(1) +
+        tiValue.toStringAsFixed(2) +
         "s" +
-        " : " +
+        "                        " +
         "Te : " +
-        teValue.toStringAsFixed(1) +
+        teValue.toStringAsFixed(2) +
         "s";
   }
 
   calculateIeRr(double commomValue, double commomValue1) {
-    var dataI = getIeData(commomValue.toInt(), 2);
+    var dataI = getIeData(commomValue.ceil().toInt(), 2);
     var dataI1 = double.tryParse(dataI);
 
-    var dataE = getIeData(commomValue.toInt(), 3);
+    var dataE = getIeData(commomValue.ceil().toInt(), 3);
     var dataE1 = double.tryParse(dataE);
 
     tiValue = (((dataI1 / (dataI1 + dataE1)) * (60000 / commomValue1)) / 1000);
@@ -512,11 +562,11 @@ class _CommonDialogState extends State<CommonDialog> {
     teValue = (((dataE1 / (dataI1 + dataE1)) * (60000 / commomValue1)) / 1000);
 
     return "Ti : " +
-        tiValue.toStringAsFixed(1) +
+        tiValue.toStringAsFixed(2) +
         "s" +
-        " : " +
+        "                        " +
         "Te : " +
-        teValue.toStringAsFixed(1) +
+        teValue.toStringAsFixed(2) +
         "s";
   }
 }
