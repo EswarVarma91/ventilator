@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CommonDialog extends StatefulWidget {
-  String value;
-  CommonDialog(this.value, {Key key}) : super(key: key);
+  String value,status;
+  CommonDialog(this.value, this.status, {Key key}) : super(key: key);
 
   @override
   _CommonDialogState createState() => _CommonDialogState();
@@ -17,6 +18,7 @@ class _CommonDialogState extends State<CommonDialog> {
   bool suffix = false;
   bool units = false;
   double tiValue = 0, teValue = 0;
+  double _pcCheckValue,_psCheckValue;
   bool confirmButton = false;
 
   @override
@@ -74,8 +76,9 @@ class _CommonDialogState extends State<CommonDialog> {
       setState(() {
         commomValue = preferences.getInt("ps").toDouble();
         checkValue = preferences.getInt("ps").toDouble();
+        _pcCheckValue = preferences.getInt("pc").toDouble();
         min = 1;
-        max = 70;
+        max = _pcCheckValue;
         prefix = false;
         suffix = false;
         units = true;
@@ -94,6 +97,7 @@ class _CommonDialogState extends State<CommonDialog> {
       setState(() {
         commomValue = preferences.getInt("pc").toDouble();
         checkValue = preferences.getInt("pc").toDouble();
+        _psCheckValue = preferences.getInt("ps").toDouble();
         min = 1;
         max = 80;
         prefix = false;
@@ -416,7 +420,7 @@ class _CommonDialogState extends State<CommonDialog> {
                           alignment: Alignment.bottomCenter,
                           child: InkWell(
                             onTap: () {
-                              writeData(commomValue);
+                             widget.status=="Connected"? writeData(commomValue):Fluttertoast.showToast(msg: "No Communication");
                             },
                             child: Container(
                               width: 190,
@@ -443,27 +447,27 @@ class _CommonDialogState extends State<CommonDialog> {
                   SizedBox(
                     height: 0,
                   ),
-                  Align(
-                    alignment: Alignment(1.05, -1.05),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.close,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: Alignment(1.05, -1.05),
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //       Navigator.pop(context);
+                  //     },
+                  //     child: Container(
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.grey[200],
+                  //         borderRadius: BorderRadius.circular(22),
+                  //       ),
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.all(8.0),
+                  //         child: Icon(
+                  //           Icons.close,
+                  //           color: Colors.black,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               )
             : Container(),

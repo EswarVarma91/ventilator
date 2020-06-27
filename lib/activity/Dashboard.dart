@@ -205,7 +205,7 @@ class _CheckPageState extends State<Dashboard> {
       pacvRrValue = 20,
       pacvIeValue = 51,
       pacvPeepValue = 10,
-      pacvPcValue = 30,
+      pacvPcValue = 25,
       pacvVtMinValue = 0,
       pacvVtMaxValue = 2400,
       pacvFio2Value = 21,
@@ -228,9 +228,9 @@ class _CheckPageState extends State<Dashboard> {
       vacvRrValue = 20,
       vacvIeValue = 51,
       vacvPeepValue = 10,
-      vacvVtValue = 400,
+      vacvVtValue = 300,
       vacvPcMinValue = 20,
-      vacvPcMaxValue = 60,
+      vacvPcMaxValue = 100,
       vacvFio2Value = 21,
       vacvFlowRampValue = 4;
 
@@ -277,7 +277,7 @@ class _CheckPageState extends State<Dashboard> {
   int psvItrigValue = 3,
       psvPeepValue = 10,
       psvIeValue = 51,
-      psvPsValue = 30,
+      psvPsValue = 25,
       psvTiValue = 1,
       psvVtMinValue = 0,
       psvVtMaxValue = 2400,
@@ -286,7 +286,7 @@ class _CheckPageState extends State<Dashboard> {
       psvEtrigValue = 10,
       psvBackupRrValue = 20,
       psvMinTeValue = 1,
-      psvPcValue = 30;
+      psvPcValue = 25;
 
   int psvmaxValue = 80, psvminValue = 1, psvdefaultValue = 30;
   String psvparameterName = "PS", psvparameterUnits = "cmH\u2082O  Below PEEP";
@@ -304,10 +304,10 @@ class _CheckPageState extends State<Dashboard> {
 
   int psimvItrigValue = 3,
       psimvRrValue = 20,
-      psimvPsValue = 30,
+      psimvPsValue = 25,
       psimvIeValue = 51,
       psimvPeepValue = 10,
-      psimvPcValue = 30,
+      psimvPcValue = 25,
       psimvVtMinValue = 0,
       psimvVtMaxValue = 2400,
       psimvFio2Value = 21,
@@ -331,10 +331,10 @@ class _CheckPageState extends State<Dashboard> {
       vsimvRrValue = 20,
       vsimvIeValue = 51,
       vsimvPeepValue = 10,
-      vsimvVtValue = 400,
-      vsimvPsValue = 30,
+      vsimvVtValue = 300,
+      vsimvPsValue = 25,
       vsimvPcMinValue = 20,
-      vsimvPcMaxValue = 60,
+      vsimvPcMaxValue = 100,
       vsimvFio2Value = 21,
       vsimvFlowRampValue = 4;
 
@@ -360,7 +360,7 @@ class _CheckPageState extends State<Dashboard> {
   int pccmvRRValue = 20,
       pccmvIeValue = 51,
       pccmvPeepValue = 10,
-      pccmvPcValue = 30,
+      pccmvPcValue = 25,
       pccmvFio2Value = 21,
       pccmvVtminValue = 0,
       pccmvVtmaxValue = 2400,
@@ -392,9 +392,9 @@ class _CheckPageState extends State<Dashboard> {
       vccmvIeValue = 51,
       vccmvPeepValue = 10,
       vccmvPcMinValue = 20,
-      vccmvPcMaxValue = 60,
+      vccmvPcMaxValue = 100,
       vccmvFio2Value = 21,
-      vccmvVtValue = 400,
+      vccmvVtValue = 300,
       vccmvTihValue = 50;
   int vccmvFlowRampValue = 4;
 
@@ -420,7 +420,7 @@ class _CheckPageState extends State<Dashboard> {
   var dbCounter = CounterDatabaseHelper();
   String lastRecordTime;
   String priorityNo, alarmActive;
-  double pplateauDisplay ;
+  double pplateauDisplay;
   int tempDisplay = 0,
       respiratoryFlag = 0,
       leakVolumeDisplay = 0,
@@ -505,7 +505,6 @@ class _CheckPageState extends State<Dashboard> {
   bool noninvasiveEnabled = false;
   bool lockEnabled = true;
 
-
   Future<bool> _connectTo(device) async {
     list.clear();
     pressurePoints.clear();
@@ -561,6 +560,14 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   _getPorts() async {
+    countergetPorts = countergetPorts + 1;
+    setState(() {
+      countergetPorts = countergetPorts + 1;
+      if (countergetPorts == 4) {
+        getportsData = true;
+      }
+    });
+
     _ports = [];
     List<UsbDevice> devices = await UsbSerial.listDevices();
     if (devices.isEmpty) {
@@ -570,7 +577,7 @@ class _CheckPageState extends State<Dashboard> {
         usbConnected = false;
       });
       // Fluttertoast.showToast(msg: _status);
-    }
+    } else {}
     // // print(devices);
     _connectTo(devices[0]);
   }
@@ -584,6 +591,7 @@ class _CheckPageState extends State<Dashboard> {
   int timerCounter = 00;
   int displayTemperature = 0;
   int globalCounter = 0, globalCounterNo = 1;
+  int countergetPorts = 0;
 
   // getNoTimes() async {
   //   await sleep(Duration(seconds: 6));
@@ -610,6 +618,7 @@ class _CheckPageState extends State<Dashboard> {
   //   }
   // }
 
+  bool getportsData = false;
   @override
   initState() {
     super.initState();
@@ -632,6 +641,10 @@ class _CheckPageState extends State<Dashboard> {
     // });
 
     _timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
+      // if(getportsData==false){
+      //   Fluttertoast.showToast(msg: "null");
+      //     _getPorts();
+      // }
       counter = counter + 1;
       List<int> obj = [0, 20, 0, 11, 0];
       if (counter <= 250) {
@@ -904,32 +917,60 @@ class _CheckPageState extends State<Dashboard> {
     // writeRespiratoryPauseData();
     // make sure that only one loop is active
     if (_loopActive) return;
-
     _loopActive = true;
-
     while (_buttonPressedE) {
       // do your thing
-      setState(() {
-        if (timerCounter <= 29) {
+      if (timerCounter <= 29) {
+        setState(() {
           timerCounter++;
-        }
-        if (timerCounter == 30) {
-          writeRespiratoryPauseData(0);
-          setState(() {
-            //  sleep(Duration(seconds: 2));
-            _buttonPressedE = false;
-            // _loopActive = true;
-          });
-        }
-      });
-      // Fluttertoast.showToast(msg: timerCounter.toString());
-
+        });
+      }
+      if (timerCounter == 30) {
+        writeRespiratoryPauseData(0);
+        setState(() {
+          _buttonPressedE = false;
+        });
+      }
       // wait a bit
       await Future.delayed(Duration(seconds: 1));
     }
 
     _loopActive = false;
   }
+
+  // void _increaseCounterWhilePressedE() async {
+  //   if (_buttonPressedE == false) {
+  //     writeRespiratoryPauseData(0);
+  //   }
+  //   // writeRespiratoryPauseData();
+  //   // make sure that only one loop is active
+  //   if (_loopActive) return;
+
+  //   _loopActive = true;
+
+  //   while (_buttonPressedE) {
+  //     // do your thing
+  //     setState(() {
+  //       if (timerCounter <= 29) {
+  //         timerCounter++;
+  //       }
+  //       if (timerCounter == 30) {
+  //         writeRespiratoryPauseData(0);
+  //         setState(() {
+  //           //  sleep(Duration(seconds: 2));
+  //           _buttonPressedE = false;
+  //           // _loopActive = true;
+  //         });
+  //       }
+  //     });
+  //     // Fluttertoast.showToast(msg: timerCounter.toString());
+
+  //     // wait a bit
+  //     await Future.delayed(Duration(seconds: 1));
+  //   }
+
+  //   _loopActive = false;
+  // }
 
   writeRespiratoryPauseData(int data) async {
     List<int> resList = [];
@@ -1038,7 +1079,9 @@ class _CheckPageState extends State<Dashboard> {
       vteValue = preferences.getInt("vte");
       fio2Value = preferences.getInt("fio2");
       tiValue =
-          (((double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) * (60000 / rrValue)) /1000);
+          (((double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
+                  (60000 / rrValue)) /
+              1000);
       // // print(tiValue.toString());
       teValue =
           (((double.tryParse(e) / (double.tryParse(i) + double.tryParse(e))) *
@@ -3258,102 +3301,117 @@ class _CheckPageState extends State<Dashboard> {
                                               ),
                                             ),
                                           ),
-                                          
+
                                           Container(
-                                            padding:EdgeInsets.only(top:5),
-                        width: 300,
-                        child: Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  invasiveEnabled = true;
-                                  noninvasiveEnabled = false;
-                                });
-                              },
-                              child:  Card(
-                                    color: invasiveEnabled
-                                        ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(22.0),
-                                      child: Text(
-                                        "Invasive",
-                                        style: TextStyle(
-                                            color: invasiveEnabled
-                                                ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),),
-                                      ),
-                                    )),
-                              
-                            ),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  noninvasiveEnabled = true;
-                                  invasiveEnabled = false;
-                                });
-                              },
-                              child: Card(
-                                    color: noninvasiveEnabled
-                                        ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(22.0),
-                                      child: Text(
-                                        "Non Invasive",
-                                        style: TextStyle(
-                                            color: noninvasiveEnabled
-                                                ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),),
-                                      ),
-                                    )),
-                              
-                            ),
-                          ],
-                        )),//TODO
-            //   Row(
-            //   children: <Widget>[
-            //    InkWell(
-            //      onTap: (){
-            //        setState((){
-            //          invasiveEnabled=true;
-            //        noninvasiveEnabled= false;
-            //        });
-            //      },
-            //                     child: Card(
-            //       color: invasiveEnabled ? Colors.white : Colors.white,
-            //       child: Padding(
-            //         padding: const EdgeInsets.only(top:18.0,left:40,right:40,bottom:18),
-            //         child: Text(
-            //           "Invasive",
-            //           style: TextStyle(
-            //               color: invasiveEnabled
-            //                   ? Colors.green : Colors.black,),
-            //         ),
-            //       ),
-            //   ),
-            //    ),
-            //  InkWell(
-            //    onTap:(){
-            //       setState((){
-            //          invasiveEnabled=false;
-            //        noninvasiveEnabled= true;
-            //        });
-            //    },
-            //       child: Card(
-            //       color:
-            //           noninvasiveEnabled ? Colors.white : Colors.white,
-            //       child: Padding(
-            //         padding: const EdgeInsets.only(top:18.0,left:23,right:23,bottom:18),
-            //         child: Text(
-            //           "Non Invasive",
-            //           style: TextStyle(
-            //               color: noninvasiveEnabled
-            //                   ? Colors.green : Colors.black,),
-            //         ),
-            //       ),
-            //     ),
-            //  ),
-            // ],),
+                                              padding: EdgeInsets.only(top: 5),
+                                              width: 300,
+                                              child: Row(
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        invasiveEnabled = true;
+                                                        noninvasiveEnabled =
+                                                            false;
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                        color: invasiveEnabled
+                                                            ? Color(0xFFE0E0E0)
+                                                            : Color(0xFF213855),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(22.0),
+                                                          child: Text(
+                                                            "Invasive",
+                                                            style: TextStyle(
+                                                              color: invasiveEnabled
+                                                                  ? Color(
+                                                                      0xFF213855)
+                                                                  : Color(
+                                                                      0xFFE0E0E0),
+                                                            ),
+                                                          ),
+                                                        )),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        noninvasiveEnabled =
+                                                            true;
+                                                        invasiveEnabled = false;
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                        color:
+                                                            noninvasiveEnabled
+                                                                ? Color(
+                                                                    0xFFE0E0E0)
+                                                                : Color(
+                                                                    0xFF213855),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(22.0),
+                                                          child: Text(
+                                                            "Non Invasive",
+                                                            style: TextStyle(
+                                                              color: noninvasiveEnabled
+                                                                  ? Color(
+                                                                      0xFF213855)
+                                                                  : Color(
+                                                                      0xFFE0E0E0),
+                                                            ),
+                                                          ),
+                                                        )),
+                                                  ),
+                                                ],
+                                              )), //TODO
+                                          //   Row(
+                                          //   children: <Widget>[
+                                          //    InkWell(
+                                          //      onTap: (){
+                                          //        setState((){
+                                          //          invasiveEnabled=true;
+                                          //        noninvasiveEnabled= false;
+                                          //        });
+                                          //      },
+                                          //                     child: Card(
+                                          //       color: invasiveEnabled ? Colors.white : Colors.white,
+                                          //       child: Padding(
+                                          //         padding: const EdgeInsets.only(top:18.0,left:40,right:40,bottom:18),
+                                          //         child: Text(
+                                          //           "Invasive",
+                                          //           style: TextStyle(
+                                          //               color: invasiveEnabled
+                                          //                   ? Colors.green : Colors.black,),
+                                          //         ),
+                                          //       ),
+                                          //   ),
+                                          //    ),
+                                          //  InkWell(
+                                          //    onTap:(){
+                                          //       setState((){
+                                          //          invasiveEnabled=false;
+                                          //        noninvasiveEnabled= true;
+                                          //        });
+                                          //    },
+                                          //       child: Card(
+                                          //       color:
+                                          //           noninvasiveEnabled ? Colors.white : Colors.white,
+                                          //       child: Padding(
+                                          //         padding: const EdgeInsets.only(top:18.0,left:23,right:23,bottom:18),
+                                          //         child: Text(
+                                          //           "Non Invasive",
+                                          //           style: TextStyle(
+                                          //               color: noninvasiveEnabled
+                                          //                   ? Colors.green : Colors.black,),
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //  ),
+                                          // ],),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 right: 10),
@@ -3860,7 +3918,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.8.2",
+                  "V1.8.2b",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -3907,8 +3965,8 @@ class _CheckPageState extends State<Dashboard> {
                 powerButtonEnabled
                     ? InkWell(
                         onTap: () {
-                         lockEnabled ? sendSoundOff():"";
-                          lockEnabled ? turnOffScreen():"";
+                          lockEnabled ? sendSoundOff() : "";
+                          lockEnabled ? turnOffScreen() : "";
                         },
                         child: Padding(
                           padding:
@@ -3917,7 +3975,7 @@ class _CheckPageState extends State<Dashboard> {
                             icon: Icon(Icons.power_settings_new,
                                 size: 70, color: Colors.red),
                             onPressed: () {
-                            lockEnabled ? turnOffScreen():"";
+                              lockEnabled ? turnOffScreen() : "";
                             },
                           ),
                         ),
@@ -3933,7 +3991,7 @@ class _CheckPageState extends State<Dashboard> {
                     playOnEnabled
                         ? InkWell(
                             onTap: () {
-                             lockEnabled ?  showDialogPlay():"";
+                              lockEnabled ? showDialogPlay() : "";
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -3945,13 +4003,13 @@ class _CheckPageState extends State<Dashboard> {
                                     size: 50,
                                   ),
                                   onPressed: () {
-                                   lockEnabled ? showDialogPlay():"";
+                                    lockEnabled ? showDialogPlay() : "";
                                   }),
                             ),
                           )
                         : InkWell(
                             onTap: () {
-                             lockEnabled ?  showDialogPause():"";
+                              lockEnabled ? showDialogPause() : "";
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -3963,33 +4021,43 @@ class _CheckPageState extends State<Dashboard> {
                                     size: 50,
                                   ),
                                   onPressed: () {
-                                    lockEnabled ?showDialogPause():"";
+                                    lockEnabled ? showDialogPause() : "";
                                   }),
                             ),
                           ),
                     //  powerIndication==1 ?  Image.asset("assets/images/switchon.png"):powerIndication==0 ?
                     //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                     Padding(
-                      padding: const EdgeInsets.only(right:8.0),
-                      child: IconButton(icon:Icon(lockEnabled ? Icons.lock_open:Icons.lock,size:50,color:lockEnabled ? Colors.grey:Colors.white),onPressed:(){
-                        setState((){
-                          lockEnabled =!lockEnabled;
-                          if(lockEnabled==true){
-                            insExpButtonEnable=true;
-                          }
-                        });
-                   }),
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: IconButton(
+                          icon: Icon(lockEnabled ? Icons.lock_open : Icons.lock,
+                              size: 50,
+                              color: lockEnabled ? Colors.grey : Colors.white),
+                          onPressed: () {
+                            setState(() {
+                              lockEnabled = !lockEnabled;
+                              if (lockEnabled == false) {
+                                setState(() {
+                                  insExpButtonEnable = false;
+                                });
+                              }
+                            });
+                          }),
                     ),
                     SizedBox(
-                      height: playOnEnabled && powerButtonEnabled && lockEnabled ? 20 :playOnEnabled && powerButtonEnabled
-                          ? 70
-                          : lockEnabled && playOnEnabled ? 60 : playOnEnabled
-                              ? 129
-                              : powerButtonEnabled ? 153 : 220,
+                      height: playOnEnabled && powerButtonEnabled && lockEnabled
+                          ? 20
+                          : playOnEnabled && powerButtonEnabled
+                              ? 70
+                              : lockEnabled && playOnEnabled
+                                  ? 60
+                                  : playOnEnabled
+                                      ? 129
+                                      : powerButtonEnabled ? 153 : 220,
                     ),
                   ],
                 ),
-                
+
                 playOnEnabled
                     ? InkWell(
                         onTap: () {
@@ -4104,27 +4172,29 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                     lockEnabled ? Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewLogPatientList())):"";
+                      lockEnabled
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ViewLogPatientList()))
+                          : "";
                     });
                   },
                   child: Center(
                     child: Container(
                       width: 120,
                       child: Card(
-                        color: lockEnabled ?Colors.white :Colors.grey ,
+                        color: lockEnabled ? Colors.white : Colors.grey,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child:
-                              Center(
-                                  child: Text("View Logs",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                         color:lockEnabled ?Colors.black :Colors.white ,),)),
-                              
-                            
+                          child: Center(
+                              child: Text(
+                            "View Logs",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: lockEnabled ? Colors.black : Colors.white,
+                            ),
+                          )),
                         ),
                       ),
                     ),
@@ -4135,7 +4205,7 @@ class _CheckPageState extends State<Dashboard> {
                     setState(() {
                       // if (patientId != "") {
                       writeAlarmsData();
-                     lockEnabled ?modesEnabled = true:"";
+                      lockEnabled ? modesEnabled = true : "";
                       // } else {
                       //   showAlertDialog(context);
                       // }
@@ -4145,18 +4215,17 @@ class _CheckPageState extends State<Dashboard> {
                     child: Container(
                       width: 120,
                       child: Card(
-                        color: lockEnabled ?Colors.white :Colors.grey ,
+                        color: lockEnabled ? Colors.white : Colors.grey,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: 
-                              Center(
-                                  child: Text(
-                                "Modes ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color:lockEnabled ?Colors.black :Colors.white ,),
-                              )),
-                              
+                          child: Center(
+                              child: Text(
+                            "Modes ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: lockEnabled ? Colors.black : Colors.white,
+                            ),
+                          )),
                         ),
                       ),
                     ),
@@ -4475,13 +4544,14 @@ class _CheckPageState extends State<Dashboard> {
                                                           right: 8.0),
                                                   child: Text(
                                                     // _buttonPressed
-                                                    //     ? 
+                                                    //     ?
 
-                                                    pplateauDisplay != null ?
-                                                        pplateauDisplay
-                                                            .toStringAsFixed(0):""
-                                                        // : "--"
-                                                        ,
+                                                    pplateauDisplay != null
+                                                        ? pplateauDisplay
+                                                            .toStringAsFixed(0)
+                                                        : ""
+                                                    // : "--"
+                                                    ,
                                                     // "0000",
                                                     style: TextStyle(
                                                         color: Colors.pink,
@@ -4698,7 +4768,7 @@ class _CheckPageState extends State<Dashboard> {
                                           ),
                                         ),
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
@@ -4765,15 +4835,15 @@ class _CheckPageState extends State<Dashboard> {
                                                     // onTapDown : _writeRespiratoryDataStart(),
                                                     // onTapUp: _writeRespiratoryDataStop(),
                                                     Listener(
-                                                  onPointerMove: (details) {
-                                                    writeRespiratoryPauseData(
-                                                        0);
-                                                    setState(() {
-                                                      timerCounter = 0;
-                                                      _buttonPressed = false;
-                                                      // _inpirationPressed = false;
-                                                    });
-                                                  },
+                                                  // onPointerMove: (details) {
+                                                  //   writeRespiratoryPauseData(
+                                                  //       0);
+                                                  //   setState(() {
+                                                  //     timerCounter = 0;
+                                                  //     _buttonPressed = false;
+                                                  //     // _inpirationPressed = false;
+                                                  //   });
+                                                  // },
                                                   onPointerDown: (details) {
                                                     writeRespiratoryPauseData(
                                                         1);
@@ -4837,18 +4907,32 @@ class _CheckPageState extends State<Dashboard> {
                                               SizedBox(height: 5),
                                               Center(
                                                 child: Listener(
-                                                  onPointerMove: (details) {
-                                                    writeRespiratoryPauseData(
-                                                        0);
-                                                    setState(() {
-                                                      timerCounter = 0;
-                                                      _buttonPressedE = false;
-                                                      // _inpirationPressed = false;
-                                                    });
-                                                  },
+                                                  // onPointerMove: (details) {
+                                                  //   writeRespiratoryPauseData(
+                                                  //       0);
+                                                  //   setState(() {
+                                                  //     timerCounter = 0;
+                                                  //     _buttonPressedE = false;
+                                                  //     // _inpirationPressed = false;
+                                                  //   });
+                                                  // },
+                                                  // onPointerDown: (details) {
+                                                  //   writeRespiratoryPauseData(2);
+                                                  //   _buttonPressedE = true;
+                                                  //   _increaseCounterWhilePressedE();
+                                                  // },
+                                                  // onPointerUp: (details) {
+                                                  //   writeRespiratoryPauseData(0);
+                                                  //   setState(() {
+                                                  //     timerCounter = 0;
+                                                  //     _buttonPressedE = false;
+                                                  //     // _expiratoryPressed = false;
+                                                  //   });
+                                                  // },
                                                   onPointerDown: (details) {
                                                     writeRespiratoryPauseData(
                                                         2);
+                                                    // _inpirationPressed = true;
                                                     _buttonPressedE = true;
                                                     _increaseCounterWhilePressedE();
                                                   },
@@ -4858,7 +4942,7 @@ class _CheckPageState extends State<Dashboard> {
                                                     setState(() {
                                                       timerCounter = 0;
                                                       _buttonPressedE = false;
-                                                      // _expiratoryPressed = false;
+                                                      // _inpirationPressed = false;
                                                     });
                                                   },
                                                   child: Container(
@@ -4915,117 +4999,126 @@ class _CheckPageState extends State<Dashboard> {
                         ],
                       ),
                     ),
-                    Row(children: <Widget>[
-                      modeName == "PSV" || operatinModeR == 3
-                        ? psvBottomBar()
-                        : bottombar(),
-               lockEnabled ?  
-               respiratoryEnable == true
-                ? 
-                InkWell(
-                    onTap: () {
-                    insExpButtonEnable =! insExpButtonEnable;
-                    },
-                    child: Container(
-                      padding:EdgeInsets.only(left:22.0),
-                      child: Center(
-                        child: Material(
-                          borderRadius: BorderRadius.circular(24.0),
-                          color: insExpButtonEnable ? Colors.white : Colors.green,
-                          child: Container(
-                            width: 160,
-                            height: 110,
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Center(
-                                  child: Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      "Respiratory \n Pause",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
+                    Row(
+                      children: <Widget>[
+                        modeName == "PSV" || operatinModeR == 3
+                            ? psvBottomBar()
+                            : bottombar(),
+                        lockEnabled
+                            ? respiratoryEnable == true
+                                ? InkWell(
+                                    onTap: () {
+                                      insExpButtonEnable = !insExpButtonEnable;
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 22.0),
+                                      child: Center(
+                                        child: Material(
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
                                           color: insExpButtonEnable
-                                              ? Colors.black
-                                              : Colors.white),
-                                      textAlign: TextAlign.center,
+                                              ? Colors.white
+                                              : Colors.green,
+                                          child: Container(
+                                            width: 160,
+                                            height: 110,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(12.0),
+                                              child: Center(
+                                                  child: Stack(
+                                                children: [
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      "Respiratory \n Pause",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              insExpButtonEnable
+                                                                  ? Colors.black
+                                                                  : Colors
+                                                                      .white),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                  //   Align(
+                                                  //   alignment: Alignment.centerRight,
+                                                  //   child: Padding(
+                                                  //     padding: const EdgeInsets.only(top: 17.0),
+                                                  //     child: Icon(
+                                                  //         lockEnabled ? Icons.lock_open : Icons.lock,
+                                                  //         color: Colors.white,
+                                                  //         size: 15),
+                                                  //   ),
+                                                  // ),
+                                                ],
+                                              )),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                //   Align(
-                                //   alignment: Alignment.centerRight,
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.only(top: 17.0),
-                                //     child: Icon(
-                                //         lockEnabled ? Icons.lock_open : Icons.lock,
-                                //         color: Colors.white,
-                                //         size: 15),
-                                //   ),
-                                // ),
-                                ],
-                              )),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                : Container()
-                : respiratoryEnable == true
-                ? InkWell(
-                    onTap: () {
-                    // insExpButtonEnable =! insExpButtonEnable;
-                    },
-                    child: Container(
-                      padding:EdgeInsets.only(left:22.0),
-                      child: Center(
-                        child: Material(
-                          borderRadius: BorderRadius.circular(24.0),
-                          color: insExpButtonEnable ? Colors.white : Colors.green,
-                          child: Container(
-                            width: 160,
-                            height: 110,
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Center(
-                                  child: Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      "Respiratory \n Pause",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: insExpButtonEnable
-                                              ? Colors.black
-                                              : Colors.white),
-                                      textAlign: TextAlign.center,
+                                  )
+                                : Container()
+                            : respiratoryEnable == true
+                                ? InkWell(
+                                    onTap: () {
+                                      // insExpButtonEnable =! insExpButtonEnable;
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 22.0),
+                                      child: Center(
+                                        child: Material(
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
+                                          color: Colors.grey,
+                                          child: Container(
+                                            width: 160,
+                                            height: 110,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(12.0),
+                                              child: Center(
+                                                  child: Stack(
+                                                children: [
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      "Respiratory \n Pause",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                  //   Align(
+                                                  //   alignment: Alignment.centerRight,
+                                                  //   child: Padding(
+                                                  //     padding: const EdgeInsets.only(top: 17.0),
+                                                  //     child: Icon(
+                                                  //         lockEnabled ? Icons.lock_open : Icons.lock,
+                                                  //         color: Colors.white,
+                                                  //         size: 15),
+                                                  //   ),
+                                                  // ),
+                                                ],
+                                              )),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                //   Align(
-                                //   alignment: Alignment.centerRight,
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.only(top: 17.0),
-                                //     child: Icon(
-                                //         lockEnabled ? Icons.lock_open : Icons.lock,
-                                //         color: Colors.white,
-                                //         size: 15),
-                                //   ),
-                                // ),
-                                ],
-                              )),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ):Container(),
-                    ],)
-                    
-
-                    
+                                  )
+                                : Container(),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -5072,11 +5165,9 @@ class _CheckPageState extends State<Dashboard> {
           children: [
             InkWell(
               onTap: () {
-             if(modeWriteList.isNotEmpty)  {
-               lockEnabled ? CommonClick("PS"):"";
-             }else{
-               
-             }
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("PS") : "";
+                } else {}
               },
               child: Center(
                 child: Container(
@@ -5084,7 +5175,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -5119,14 +5210,13 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                        //  lockEnabled ? Align(
-                        //     alignment: Alignment.bottomRight,
-                        //     child: Padding(
-                        //       padding: const EdgeInsets.only(top: 17.0),
-                        //       child: Icon(Icons.lock)
-                        //     ),
-                        //   ):Container(),
-                          
+                          //  lockEnabled ? Align(
+                          //     alignment: Alignment.bottomRight,
+                          //     child: Padding(
+                          //       padding: const EdgeInsets.only(top: 17.0),
+                          //       child: Icon(Icons.lock)
+                          //     ),
+                          //   ):Container(),
                         ],
                       )),
                     ),
@@ -5136,8 +5226,8 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-                lockEnabled ? CommonClick("PEEP"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("PEEP") : "";
                 }
               },
               child: Center(
@@ -5146,7 +5236,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -5191,7 +5281,7 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          
+
                           // Align(
                           //   alignment: Alignment.bottomCenter,
                           //   child: LinearProgressIndicator(
@@ -5211,8 +5301,8 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-               lockEnabled?CommonClick("FiO2"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("FiO2") : "";
                 }
               },
               child: Center(
@@ -5221,7 +5311,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -5285,8 +5375,8 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-                lockEnabled ?CommonClick("Backup RR"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("Backup RR") : "";
                 }
               },
               child: Center(
@@ -5295,7 +5385,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -5359,8 +5449,8 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-               lockEnabled? CommonClick("Backup I:E"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("Backup I:E") : "";
                 }
               },
               child: Center(
@@ -5369,7 +5459,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -5433,8 +5523,8 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-               lockEnabled?  CommonClick("PC"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("PC") : "";
                 }
               },
               child: Center(
@@ -5443,7 +5533,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -6166,15 +6256,17 @@ class _CheckPageState extends State<Dashboard> {
           children: [
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-              lockEnabled ? operatinModeR == 4 ||
-                        modeName == "PSIMV" ||
-                        operatinModeR == 5 ||
-                        modeName == "VSIMV" ||
-                        operatinModeR == 14 ||
-                        modeName == "PRVC"
-                    ? CommonClick("eRR")
-                    : CommonClick("RR"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled
+                      ? operatinModeR == 4 ||
+                              modeName == "PSIMV" ||
+                              operatinModeR == 5 ||
+                              modeName == "VSIMV" ||
+                              operatinModeR == 14 ||
+                              modeName == "PRVC"
+                          ? CommonClick("eRR")
+                          : CommonClick("RR")
+                      : "";
                 }
               },
               child: Center(
@@ -6183,7 +6275,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -6247,8 +6339,8 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-                lockEnabled?CommonClick("I:E"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("I:E") : "";
                 }
               },
               child: Center(
@@ -6257,7 +6349,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -6322,8 +6414,8 @@ class _CheckPageState extends State<Dashboard> {
 
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-               lockEnabled? CommonClick("PEEP"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("PEEP") : "";
                 }
               },
               child: Center(
@@ -6332,7 +6424,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -6402,8 +6494,8 @@ class _CheckPageState extends State<Dashboard> {
                     operatinModeR == 5
                 ? InkWell(
                     onTap: () {
-                      if(modeWriteList.isNotEmpty)  {
-                      lockEnabled ?CommonClick("PS"):"";
+                      if (modeWriteList.isNotEmpty) {
+                        lockEnabled ? CommonClick("PS") : "";
                       }
                     },
                     child: Center(
@@ -6412,7 +6504,7 @@ class _CheckPageState extends State<Dashboard> {
                         height: 110,
                         child: Card(
                           elevation: 40,
-                          color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                          color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: Center(
@@ -6467,22 +6559,25 @@ class _CheckPageState extends State<Dashboard> {
                 : Container(),
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-              lockEnabled ?  CommonClick(operatinModeR == 6 || operatinModeR == 2
-                    ? "PC"
-                    : operatinModeR == 7 ||
-                            operatinModeR == 1 ||
-                            operatinModeR == 5
-                        ? "Vt"
-                        : modeName == "PC-CMV" || modeName == "PACV"
-                            ? "PC"
-                            : modeName == "VC-CMV" ||
-                                    modeName == "VACV" ||
-                                    modeName == "VSIMV"
-                                ? "Vt"
-                                : operatinModeR == 14 || modeName == "PRVC"
-                                    ? "Target Vt"
-                                    : "PC"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled
+                      ? CommonClick(operatinModeR == 6 || operatinModeR == 2
+                          ? "PC"
+                          : operatinModeR == 7 ||
+                                  operatinModeR == 1 ||
+                                  operatinModeR == 5
+                              ? "Vt"
+                              : modeName == "PC-CMV" || modeName == "PACV"
+                                  ? "PC"
+                                  : modeName == "VC-CMV" ||
+                                          modeName == "VACV" ||
+                                          modeName == "VSIMV"
+                                      ? "Vt"
+                                      : operatinModeR == 14 ||
+                                              modeName == "PRVC"
+                                          ? "Target Vt"
+                                          : "PC")
+                      : "";
                 }
               },
               child: Center(
@@ -6491,7 +6586,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -6605,8 +6700,8 @@ class _CheckPageState extends State<Dashboard> {
 
             InkWell(
               onTap: () {
-                if(modeWriteList.isNotEmpty)  {
-              lockEnabled ?  CommonClick("FiO2"):"";
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("FiO2") : "";
                 }
               },
               child: Center(
@@ -6615,7 +6710,7 @@ class _CheckPageState extends State<Dashboard> {
                   height: 110,
                   child: Card(
                     elevation: 40,
-                    color: lockEnabled ?Color(0xFF213855) :Colors.grey ,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Center(
@@ -6831,7 +6926,6 @@ class _CheckPageState extends State<Dashboard> {
                   ? 10
                   : 130,
             ),
-            
           ],
         ),
       ),
@@ -6901,7 +6995,7 @@ class _CheckPageState extends State<Dashboard> {
                                   style: TextStyle(fontSize: 20)))
                           : batteryStatus == 1
                               ? Image.asset("assets/images/chargingbattery.png",
-                                  width: 28, color: Colors.black)
+                                  width: 28, color: Colors.white)
                               : Image.asset("assets/images/nobattery.png",
                                   width: 28, color: Colors.black))),
               SizedBox(width: 10),
@@ -6982,8 +7076,9 @@ class _CheckPageState extends State<Dashboard> {
                       width: 80,
                       height: 40,
                       child: Center(
-                          child: Image.asset("assets/images/powersymbol.png",color:Colors.white),
-                              ))),
+                        child: Image.asset("assets/images/powersymbol.png",
+                            color: Colors.white),
+                      ))),
             ],
           ),
 
@@ -7027,8 +7122,8 @@ class _CheckPageState extends State<Dashboard> {
           InkWell(
             onTap: () {
               setState(() {
-                psvmaxValue = 80;
-                psvminValue = 1;
+                psvmaxValue = 60;
+                psvminValue = 0;
                 psvparameterName = "PS";
                 psvparameterUnits = "cmH\u2082O above PEEP";
                 psvItrig = false;
@@ -7084,7 +7179,7 @@ class _CheckPageState extends State<Dashboard> {
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
-                            "80",
+                            "60",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: psvPs
@@ -7095,7 +7190,7 @@ class _CheckPageState extends State<Dashboard> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            "1",
+                            "0",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: psvPs
@@ -7127,7 +7222,7 @@ class _CheckPageState extends State<Dashboard> {
                               valueColor: AlwaysStoppedAnimation<Color>(
                                 psvPs ? Color(0xFF213855) : Color(0xFFE0E0E0),
                               ),
-                              value: psvPsValue != null ? psvPsValue / 80 : 0,
+                              value: psvPsValue != null ? psvPsValue / 60 : 0,
                             ),
                           ),
                         )
@@ -7141,8 +7236,8 @@ class _CheckPageState extends State<Dashboard> {
           InkWell(
             onTap: () {
               setState(() {
-                psvmaxValue = 80;
-                psvminValue = 1;
+                psvmaxValue = 60;
+                psvminValue = 0;
                 psvparameterName = "PC";
                 psvparameterUnits = "cmH\u2082O above PEEP";
                 psvItrig = false;
@@ -7198,7 +7293,7 @@ class _CheckPageState extends State<Dashboard> {
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
-                            "80",
+                            "60",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: psvPc
@@ -7209,7 +7304,7 @@ class _CheckPageState extends State<Dashboard> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            "1",
+                            "0",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: psvPc
@@ -7241,7 +7336,7 @@ class _CheckPageState extends State<Dashboard> {
                               valueColor: AlwaysStoppedAnimation<Color>(
                                 psvPc ? Color(0xFF213855) : Color(0xFFE0E0E0),
                               ),
-                              value: psvPcValue != null ? psvPcValue / 80 : 0,
+                              value: psvPcValue != null ? psvPcValue / 60 : 0,
                             ),
                           ),
                         )
@@ -8573,17 +8668,26 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     psvItrigValue = psvItrigValue - 1;
                                   });
-                                } else if (psvPeep == true &&
+                                } 
+                                // else if (psvPeep == true &&
+                                //     psvPeepValue != psvminValue) {
+                                //   setState(() {
+                                //     psvPeepValue = psvPeepValue - 1;
+                                //     if (psvItrigValue > 1 &&
+                                //         psvItrigValue > psvPeepValue) {
+                                //       psvItrigValue = psvPeepValue;
+                                //     }
+                                //   });
+                                // } 
+                                else if (psvPeep == true &&
                                     psvPeepValue != psvminValue) {
                                   setState(() {
                                     psvPeepValue = psvPeepValue - 1;
-                                    if (psvItrigValue > 1 &&
-                                        psvItrigValue > psvPeepValue) {
-                                      psvItrigValue = psvPeepValue;
-                                    }
+                                    
                                   });
-                                } else if (psvPs == true &&
-                                    psvPsValue != psvPcValue) {
+                                } 
+                                else if (psvPs == true &&
+                                    psvPsValue != psvPcValue + 1) {
                                   setState(() {
                                     psvPsValue = psvPsValue - 1;
                                   });
@@ -8616,9 +8720,8 @@ class _CheckPageState extends State<Dashboard> {
                                 } else if (psvPc == true &&
                                     psvPcValue != psvminValue) {
                                   setState(() {
-                                    
                                     psvPcValue = psvPcValue - 1;
-                                    if(psvPcValue<psvPsValue){
+                                    if (psvPcValue < psvPsValue) {
                                       psvPsValue = psvPcValue;
                                     }
                                   });
@@ -8665,19 +8768,27 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             onPressed: () {
                               setState(() {
+                                // if (psvItrig == true &&
+                                //     psvItrigValue != psvmaxValue) {
+                                //   setState(() {
+                                //     psvItrigValue = psvItrigValue + 1;
+                                //     if (psvPeepValue <= psvItrigValue) {
+                                //       if (psvPeepValue == 0) {
+                                //         psvItrigValue = 1;
+                                //       } else {
+                                //         psvItrigValue = psvPeepValue;
+                                //       }
+                                //     }
+                                //   });
+                                // } 
                                 if (psvItrig == true &&
                                     psvItrigValue != psvmaxValue) {
                                   setState(() {
                                     psvItrigValue = psvItrigValue + 1;
-                                    if (psvPeepValue <= psvItrigValue) {
-                                      if (psvPeepValue == 0) {
-                                        psvItrigValue = 1;
-                                      } else {
-                                        psvItrigValue = psvPeepValue;
-                                      }
-                                    }
+                                    
                                   });
-                                } else if (psvPeep == true &&
+                                } 
+                                else if (psvPeep == true &&
                                     psvPeepValue != psvmaxValue) {
                                   setState(() {
                                     psvPeepValue = psvPeepValue + 1;
@@ -8809,35 +8920,48 @@ class _CheckPageState extends State<Dashboard> {
                             min: psvminValue.toDouble(),
                             max: psvmaxValue.toDouble(),
                             onChanged: (double value) {
+                              // if (psvItrig == true) {
+                              //   setState(() {
+                              //     if (psvPeepValue == 0) {
+                              //       psvItrigValue = 1;
+                              //     } else {
+                              //       if (value.toInt() > psvPeepValue) {
+                              //         psvItrigValue = psvPeepValue;
+                              //       } else {
+                              //         psvItrigValue = value.toInt();
+                              //       }
+                              //     }
+                              //   });
+                              // } else if (psvPeep == true) {
+                              //   setState(() {
+                              //     psvPeepValue = value.toInt();
+                              //     if (psvItrigValue > 1 &&
+                              //         psvItrigValue > psvPeepValue) {
+                              //       if (psvPeepValue == 0) {
+                              //         psvItrigValue = 1;
+                              //       } else {
+                              //         psvItrigValue = psvPeepValue;
+                              //       }
+                              //     }
+                              //   });
+                              // } 
                               if (psvItrig == true) {
                                 setState(() {
-                                  if (psvPeepValue == 0) {
-                                    psvItrigValue = 1;
-                                  } else {
-                                    if (value.toInt() > psvPeepValue) {
-                                      psvItrigValue = psvPeepValue;
-                                    } else {
+                                  
                                       psvItrigValue = value.toInt();
-                                    }
-                                  }
+                                    
                                 });
                               } else if (psvPeep == true) {
                                 setState(() {
                                   psvPeepValue = value.toInt();
-                                  if (psvItrigValue > 1 &&
-                                      psvItrigValue > psvPeepValue) {
-                                    if (psvPeepValue == 0) {
-                                      psvItrigValue = 1;
-                                    } else {
-                                      psvItrigValue = psvPeepValue;
-                                    }
-                                  }
+                                  
                                 });
-                              } else if (psvPs == true) {
+                              } 
+                              else if (psvPs == true) {
                                 setState(() {
-                                  if(value.toInt()>=psvPcValue){
+                                  if (value.toInt() >= psvPcValue) {
                                     psvPsValue = psvPcValue;
-                                  }else{
+                                  } else {
                                     psvPsValue = value.toInt();
                                   }
                                 });
@@ -8868,11 +8992,10 @@ class _CheckPageState extends State<Dashboard> {
                                 });
                               } else if (psvPc == true) {
                                 setState(() {
-                                  
-                                  if(value.toInt()<psvPsValue){
+                                  if (value.toInt() < psvPsValue) {
                                     psvPcValue = value.toInt();
-                                    psvPsValue=psvPcValue;
-                                  }else{
+                                    psvPsValue = psvPcValue;
+                                  } else {
                                     psvPcValue = value.toInt();
                                   }
                                   // if(value.toInt())
@@ -9437,8 +9560,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  pacvmaxValue = 80;
-                  pacvminValue = 1;
+                  pacvmaxValue = 60;
+                  pacvminValue = 0;
                   pacvparameterName = "PC";
                   pacvparameterUnits = "cmH\u2082O above PEEP";
                   pacvItrig = false;
@@ -9490,7 +9613,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "80",
+                              "60",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvPc
@@ -9501,7 +9624,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "1",
+                              "0",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pacvPc
@@ -9536,7 +9659,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value:
-                                    pacvPcValue != null ? pacvPcValue / 80 : 0,
+                                    pacvPcValue != null ? pacvPcValue / 60 : 0,
                               ),
                             ),
                           )
@@ -10148,14 +10271,22 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     pacvItrigValue = pacvItrigValue - 1;
                                   });
-                                } else if (pacvPeep == true &&
+                                }
+                                // else if (pacvPeep == true &&
+                                //     pacvPeepValue != pacvminValue) {
+                                //   setState(() {
+                                //     pacvPeepValue = pacvPeepValue - 1;
+                                //     if (pacvItrigValue > 1 &&
+                                //         pacvItrigValue > pacvPeepValue) {
+                                //       pacvItrigValue = pacvPeepValue;
+                                //     }
+                                //   });
+                                // }
+
+                                else if (pacvPeep == true &&
                                     pacvPeepValue != pacvminValue) {
                                   setState(() {
                                     pacvPeepValue = pacvPeepValue - 1;
-                                    if (pacvItrigValue > 1 &&
-                                        pacvItrigValue > pacvPeepValue) {
-                                      pacvItrigValue = pacvPeepValue;
-                                    }
                                   });
                                 } else if (pacvRr == true &&
                                     pacvRrValue != pacvminValue) {
@@ -10213,17 +10344,23 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             onPressed: () {
                               setState(() {
+                                // if (pacvItrig == true &&
+                                //     pacvItrigValue != pacvmaxValue) {
+                                //   setState(() {
+                                //     pacvItrigValue = pacvItrigValue + 1;
+                                //     if (pacvPeepValue <= pacvItrigValue) {
+                                //       if (pacvPeepValue == 0) {
+                                //         pacvItrigValue = 1;
+                                //       } else {
+                                //         pacvItrigValue = pacvPeepValue;
+                                //       }
+                                //     }
+                                //   });
+                                // }
                                 if (pacvItrig == true &&
                                     pacvItrigValue != pacvmaxValue) {
                                   setState(() {
                                     pacvItrigValue = pacvItrigValue + 1;
-                                    if (pacvPeepValue <= pacvItrigValue) {
-                                      if (pacvPeepValue == 0) {
-                                        pacvItrigValue = 1;
-                                      } else {
-                                        pacvItrigValue = pacvPeepValue;
-                                      }
-                                    }
                                   });
                                 } else if (pacvPeep == true &&
                                     pacvPeepValue != pacvmaxValue) {
@@ -10334,28 +10471,38 @@ class _CheckPageState extends State<Dashboard> {
                             min: pacvminValue.toDouble() ?? 0,
                             max: pacvmaxValue.toDouble() ?? 0,
                             onChanged: (double value) {
+                              // if (pacvItrig == true) {
+                              //   setState(() {
+                              //     if (pacvPeepValue == 0) {
+                              //       pacvItrigValue = 1;
+                              //     } else {
+                              //       if (value.toInt() > pacvPeepValue) {
+                              //         pacvItrigValue = pacvPeepValue;
+                              //       } else {
+                              //         pacvItrigValue = value.toInt();
+                              //       }
+                              //     }
+                              //   });
+                              // }
+
                               if (pacvItrig == true) {
                                 setState(() {
-                                  if (pacvPeepValue == 0) {
-                                    pacvItrigValue = 1;
-                                  } else {
-                                    if (value.toInt() > pacvPeepValue) {
-                                      pacvItrigValue = pacvPeepValue;
-                                    } else {
-                                      pacvItrigValue = value.toInt();
-                                    }
-                                  }
+                                  pacvItrigValue = value.toInt();
                                 });
-                              } else if (pacvPeep == true) {
+                              }
+                              // else if (pacvPeep == true) {
+                              //   pacvPeepValue = value.toInt();
+                              //   if (pacvItrigValue > 1 &&
+                              //       pacvItrigValue > pacvPeepValue) {
+                              //     if (pacvPeepValue == 0) {
+                              //       pacvItrigValue = 1;
+                              //     } else {
+                              //       pacvItrigValue = pacvPeepValue;
+                              //     }
+                              //   }
+                              // }
+                              else if (pacvPeep == true) {
                                 pacvPeepValue = value.toInt();
-                                if (pacvItrigValue > 1 &&
-                                    pacvItrigValue > pacvPeepValue) {
-                                  if (pacvPeepValue == 0) {
-                                    pacvItrigValue = 1;
-                                  } else {
-                                    pacvItrigValue = pacvPeepValue;
-                                  }
-                                }
                               } else if (pacvRr == true) {
                                 setState(() {
                                   pacvRrValue = value.toInt();
@@ -12239,7 +12386,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "80",
+                              "60",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPc
@@ -12250,7 +12397,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "1",
+                              "0",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPc
@@ -12285,7 +12432,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: psimvPcValue != null
-                                    ? psimvPcValue / 80
+                                    ? psimvPcValue / 60
                                     : 0,
                               ),
                             ),
@@ -12822,7 +12969,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "70",
+                              "60",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPs
@@ -12833,7 +12980,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "1",
+                              "0",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPs
@@ -12868,7 +13015,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: psimvPsValue != null
-                                    ? psimvPsValue / 70
+                                    ? psimvPsValue / 60
                                     : 0,
                               ),
                             ),
@@ -13134,14 +13281,21 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     psimvItrigValue = psimvItrigValue - 1;
                                   });
-                                } else if (psimvPeep == true &&
+                                }
+                                // else if (psimvPeep == true &&
+                                //     psimvPeepValue != psimvminValue) {
+                                //   setState(() {
+                                //     psimvPeepValue = psimvPeepValue - 1;
+                                //     if (psimvItrigValue > 1 &&
+                                //         psimvItrigValue > psimvPeepValue) {
+                                //       psimvItrigValue = psimvPeepValue;
+                                //     }
+                                //   });
+                                // }
+                                else if (psimvPeep == true &&
                                     psimvPeepValue != psimvminValue) {
                                   setState(() {
                                     psimvPeepValue = psimvPeepValue - 1;
-                                    if (psimvItrigValue > 1 &&
-                                        psimvItrigValue > psimvPeepValue) {
-                                      psimvItrigValue = psimvPeepValue;
-                                    }
                                   });
                                 } else if (psimvRr == true &&
                                     psimvRrValue != psimvminValue) {
@@ -13154,9 +13308,12 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvIeValue = psimvIeValue - 1;
                                   });
                                 } else if (psimvPc == true &&
-                                    psimvPcValue != psimvminValue) {
+                                    psimvPcValue != psvminValue) {
                                   setState(() {
                                     psimvPcValue = psimvPcValue - 1;
+                                    if (psimvPcValue < psimvPsValue) {
+                                      psimvPsValue = psimvPcValue;
+                                    }
                                   });
                                 } else if (psimvVtMin == true &&
                                     psimvVtMinValue != psimvminValue) {
@@ -13180,7 +13337,7 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvFlowRampValue = psimvFlowRampValue - 1;
                                   });
                                 } else if (psimvPs == true &&
-                                    psimvPsValue != psimvminValue) {
+                                    psimvPsValue != psimvPcValue + 1) {
                                   setState(() {
                                     psimvPsValue = psimvPsValue - 1;
                                   });
@@ -13207,17 +13364,23 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             onPressed: () {
                               setState(() {
+                                // if (psimvItrig == true &&
+                                //     psimvItrigValue != psimvmaxValue) {
+                                //   setState(() {
+                                //     psimvItrigValue = psimvItrigValue + 1;
+                                //     if (psimvPeepValue <= psimvItrigValue) {
+                                //       if (psimvPeepValue == 0) {
+                                //         psimvItrigValue = 1;
+                                //       } else {
+                                //         psimvItrigValue = psimvPeepValue;
+                                //       }
+                                //     }
+                                //   });
+                                // }
                                 if (psimvItrig == true &&
                                     psimvItrigValue != psimvmaxValue) {
                                   setState(() {
                                     psimvItrigValue = psimvItrigValue + 1;
-                                    if (psimvPeepValue <= psimvItrigValue) {
-                                      if (psimvPeepValue == 0) {
-                                        psimvItrigValue = 1;
-                                      } else {
-                                        psimvItrigValue = psimvPeepValue;
-                                      }
-                                    }
                                   });
                                 } else if (psimvPeep == true &&
                                     psimvPeepValue != psimvmaxValue) {
@@ -13235,7 +13398,7 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvIeValue = psimvIeValue + 1;
                                   });
                                 } else if (psimvPc == true &&
-                                    psimvPcValue != psimvmaxValue) {
+                                    psimvPcValue != psvmaxValue) {
                                   setState(() {
                                     psimvPcValue = psimvPcValue + 1;
                                   });
@@ -13259,7 +13422,7 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvFlowRampValue = psimvFlowRampValue + 1;
                                   });
                                 } else if (psimvPs == true &&
-                                    psimvPsValue != psimvmaxValue) {
+                                    psimvPsValue != psimvPcValue) {
                                   setState(() {
                                     psimvPsValue = psimvPsValue + 1;
                                   });
@@ -13330,29 +13493,38 @@ class _CheckPageState extends State<Dashboard> {
                             min: psimvminValue.toDouble() ?? 0,
                             max: psimvmaxValue.toDouble(),
                             onChanged: (double value) {
+                              // if (psimvItrig == true) {
+                              //   setState(() {
+                              //     if (psimvPeepValue == 0) {
+                              //       psimvItrigValue = 1;
+                              //     } else {
+                              //       if (value.toInt() > psimvPeepValue) {
+                              //         psimvItrigValue = psimvPeepValue;
+                              //       } else {
+                              //         psimvItrigValue = value.toInt();
+                              //       }
+                              //     }
+                              //   });
+                              // } else if (psimvPeep == true) {
+                              //   setState(() {
+                              //     psimvPeepValue = value.toInt();
+                              //     if (psimvItrigValue > 1 &&
+                              //         psimvItrigValue > psimvPeepValue) {
+                              //       if (psimvPeepValue == 0) {
+                              //         psimvItrigValue = 1;
+                              //       } else {
+                              //         psimvItrigValue = psimvPeepValue;
+                              //       }
+                              //     }
+                              //   });
+                              // }
                               if (psimvItrig == true) {
                                 setState(() {
-                                  if (psimvPeepValue == 0) {
-                                    psimvItrigValue = 1;
-                                  } else {
-                                    if (value.toInt() > psimvPeepValue) {
-                                      psimvItrigValue = psimvPeepValue;
-                                    } else {
-                                      psimvItrigValue = value.toInt();
-                                    }
-                                  }
+                                  psimvItrigValue = value.toInt();
                                 });
                               } else if (psimvPeep == true) {
                                 setState(() {
                                   psimvPeepValue = value.toInt();
-                                  if (psimvItrigValue > 1 &&
-                                      psimvItrigValue > psimvPeepValue) {
-                                    if (psimvPeepValue == 0) {
-                                      psimvItrigValue = 1;
-                                    } else {
-                                      psimvItrigValue = psimvPeepValue;
-                                    }
-                                  }
                                 });
                               } else if (psimvRr == true) {
                                 setState(() {
@@ -13364,7 +13536,13 @@ class _CheckPageState extends State<Dashboard> {
                                 });
                               } else if (psimvPc == true) {
                                 setState(() {
-                                  psimvPcValue = value.toInt();
+                                  if (value.toInt() < psimvPsValue) {
+                                    psimvPcValue = value.toInt();
+                                    psimvPsValue = psimvPcValue;
+                                  } else {
+                                    psimvPcValue = value.toInt();
+                                  }
+                                  // if(value.toInt())
                                 });
                               } else if (psimvVtMin == true) {
                                 if (value.toInt() < 1190) {
@@ -13389,11 +13567,11 @@ class _CheckPageState extends State<Dashboard> {
                                 });
                               } else if (psimvPs == true) {
                                 setState(() {
-                                  // if (value.toInt() <= psimvPcValue &&
-                                  //     value.toInt() >= psimvPeepValue) {
-                                  psimvPsValue = value.toInt();
-                                  // }
-                                  //
+                                  if (value.toInt() >= psimvPcValue) {
+                                    psimvPsValue = psimvPcValue;
+                                  } else {
+                                    psimvPsValue = value.toInt();
+                                  }
                                 });
                               }
                             },
@@ -13817,8 +13995,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  pccmvmaxValue = 80;
-                  pccmvminValue = 1;
+                  pccmvmaxValue = 60;
+                  pccmvminValue = 0;
                   pccmvparameterName = "PC";
                   pccmvparameterUnits = "cmH\u2082O above PEEP";
                   pccmvRR = false;
@@ -13870,7 +14048,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "80",
+                              "60",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvPc
@@ -13881,7 +14059,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "1",
+                              "0",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: pccmvPc
@@ -13916,7 +14094,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: pccmvPcValue != null
-                                    ? pccmvPcValue / 80
+                                    ? pccmvPcValue / 60
                                     : 0,
                               ),
                             ),
@@ -14053,11 +14231,9 @@ class _CheckPageState extends State<Dashboard> {
             //       noninvasiveEnabled = false;
             //     });
             //   },
-            //   child: 
+            //   child:
             // ),
-            
 
-            
             // InkWell(
             //   onTap: () {
             //     setState(() {
@@ -15191,7 +15367,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vccmvmaxValue = 1200;
+                  vccmvmaxValue = 600;
                   vccmvminValue = 200;
                   vccmvparameterName = "VT";
                   vccmvparameterUnits = "mL";
@@ -15245,7 +15421,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "1200",
+                              "600",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vccmvVt
@@ -15541,7 +15717,7 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 setState(() {
                   vccmvmaxValue = 100;
-                  vccmvminValue = 10;
+                  vccmvminValue = 0;
                   vccmvparameterName = "PC Max";
                   vccmvparameterUnits = "cmH\u2082O above PEEP";
                   vccmvRR = false;
@@ -15605,7 +15781,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "10",
+                              "0",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vccmvPcMax
@@ -16420,7 +16596,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vsimvmaxValue = 1200;
+                  vsimvmaxValue = 600;
                   vsimvminValue = 200;
                   vsimvparameterName = "Vt";
                   vsimvparameterUnits = "mL";
@@ -16474,7 +16650,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "1200",
+                              "600",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvVt
@@ -16885,7 +17061,7 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 setState(() {
                   vsimvmaxValue = 100;
-                  vsimvminValue = 10;
+                  vsimvminValue = 0;
                   vsimvparameterName = "PC Max";
                   vsimvparameterUnits = "cmH\u2082O above PEEP";
                   vsimvItrig = false;
@@ -16949,7 +17125,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "10",
+                              "0",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvPcMax
@@ -17000,8 +17176,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vsimvmaxValue = 70;
-                  vsimvminValue = 1;
+                  vsimvmaxValue = 60;
+                  vsimvminValue = 0;
                   vsimvparameterName = "PS";
                   vsimvparameterUnits = "cmH\u2082O above PEEP";
                   vsimvItrig = false;
@@ -17054,7 +17230,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "70",
+                              "60",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvPs
@@ -17065,7 +17241,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "1",
+                              "0",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvPs
@@ -17365,14 +17541,21 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     vsimvItrigValue = vsimvItrigValue - 1;
                                   });
-                                } else if (vsimvPeep == true &&
+                                }
+                                // else if (vsimvPeep == true &&
+                                //     vsimvPeepValue != vsimvminValue) {
+                                //   setState(() {
+                                //     vsimvPeepValue = vsimvPeepValue - 1;
+                                //     if (vsimvItrigValue > 1 &&
+                                //         vsimvItrigValue > vsimvPeepValue) {
+                                //       vsimvItrigValue = vsimvPeepValue;
+                                //     }
+                                //   });
+                                // }
+                                else if (vsimvPeep == true &&
                                     vsimvPeepValue != vsimvminValue) {
                                   setState(() {
                                     vsimvPeepValue = vsimvPeepValue - 1;
-                                    if (vsimvItrigValue > 1 &&
-                                        vsimvItrigValue > vsimvPeepValue) {
-                                      vsimvItrigValue = vsimvPeepValue;
-                                    }
                                   });
                                 } else if (vsimvRr == true &&
                                     vsimvRrValue != vsimvminValue) {
@@ -17438,17 +17621,23 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             onPressed: () {
                               setState(() {
+                                // if (vsimvItrig == true &&
+                                //     vsimvItrigValue != vsimvmaxValue) {
+                                //   setState(() {
+                                //     vsimvItrigValue = vsimvItrigValue + 1;
+                                //     if (vsimvPeepValue <= vsimvItrigValue) {
+                                //       if (vsimvPeepValue == 0) {
+                                //         vsimvItrigValue = 1;
+                                //       } else {
+                                //         vsimvItrigValue = vsimvPeepValue;
+                                //       }
+                                //     }
+                                //   });
+                                // }
                                 if (vsimvItrig == true &&
                                     vsimvItrigValue != vsimvmaxValue) {
                                   setState(() {
                                     vsimvItrigValue = vsimvItrigValue + 1;
-                                    if (vsimvPeepValue <= vsimvItrigValue) {
-                                      if (vsimvPeepValue == 0) {
-                                        vsimvItrigValue = 1;
-                                      } else {
-                                        vsimvItrigValue = vsimvPeepValue;
-                                      }
-                                    }
                                   });
                                 } else if (vsimvPeep == true &&
                                     vsimvPeepValue != vsimvmaxValue) {
@@ -17561,31 +17750,44 @@ class _CheckPageState extends State<Dashboard> {
                             min: vsimvminValue.toDouble() ?? 0,
                             max: vsimvmaxValue.toDouble(),
                             onChanged: (double value) {
+                              // if (vsimvItrig == true && vsimvItrigValue != 10) {
+                              //   setState(() {
+                              //     if (vsimvPeepValue == 0) {
+                              //       vsimvItrigValue = 1;
+                              //     } else {
+                              //       if (value.toInt() > vsimvPeepValue) {
+                              //         vsimvItrigValue = vsimvPeepValue;
+                              //       } else {
+                              //         vsimvItrigValue = value.toInt();
+                              //       }
+                              //     }
+                              //   });
+                              // } else if (vsimvPeep == true) {
+                              //   setState(() {
+                              //     vsimvPeepValue = value.toInt();
+                              //     if (vsimvItrigValue > 1 &&
+                              //         vsimvItrigValue > vsimvPeepValue) {
+                              //       if (vsimvPeepValue == 0) {
+                              //         vsimvItrigValue = 1;
+                              //       } else {
+                              //         vsimvItrigValue = vsimvPeepValue;
+                              //       }
+                              //     }
+                              //   });
+                              // } 
                               if (vsimvItrig == true && vsimvItrigValue != 10) {
                                 setState(() {
-                                  if (vsimvPeepValue == 0) {
-                                    vsimvItrigValue = 1;
-                                  } else {
-                                    if (value.toInt() > vsimvPeepValue) {
-                                      vsimvItrigValue = vsimvPeepValue;
-                                    } else {
+                                  
                                       vsimvItrigValue = value.toInt();
-                                    }
-                                  }
+                                   
                                 });
                               } else if (vsimvPeep == true) {
                                 setState(() {
                                   vsimvPeepValue = value.toInt();
-                                  if (vsimvItrigValue > 1 &&
-                                      vsimvItrigValue > vsimvPeepValue) {
-                                    if (vsimvPeepValue == 0) {
-                                      vsimvItrigValue = 1;
-                                    } else {
-                                      vsimvItrigValue = vsimvPeepValue;
-                                    }
-                                  }
+                                  
                                 });
-                              } else if (vsimvRr == true) {
+                              } 
+                              else if (vsimvRr == true) {
                                 setState(() {
                                   vsimvRrValue = value.toInt();
                                 });
@@ -18037,7 +18239,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  vacvmaxValue = 1200;
+                  vacvmaxValue = 600;
                   vacvminValue = 200;
                   vacvparameterName = "Vt";
                   vacvparameterUnits = "mL";
@@ -18090,7 +18292,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "1200",
+                              "600",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvVt
@@ -18135,9 +18337,8 @@ class _CheckPageState extends State<Dashboard> {
                                       ? Color(0xFF213855)
                                       : Color(0xFFE0E0E0),
                                 ),
-                                value: vacvVtValue != null
-                                    ? vacvVtValue / 1200
-                                    : 0,
+                                value:
+                                    vacvVtValue != null ? vacvVtValue / 600 : 0,
                               ),
                             ),
                           )
@@ -18498,7 +18699,7 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 setState(() {
                   vacvmaxValue = 100;
-                  vacvminValue = 10;
+                  vacvminValue = 0;
                   vacvparameterName = "PC Max";
                   vacvparameterUnits = "cmH\u2082O above PEEP";
                   vacvItrig = false;
@@ -18561,7 +18762,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "10",
+                              "0",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vacvPcMax
@@ -18862,14 +19063,21 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     vacvItrigValue = vacvItrigValue - 1;
                                   });
-                                } else if (vacvPeep == true &&
+                                }
+                                //  else if (vacvPeep == true &&
+                                //     vacvPeepValue != vacvminValue) {
+                                //   setState(() {
+                                //     vacvPeepValue = vacvPeepValue - 1;
+                                //     if (vacvItrigValue > 1 &&
+                                //         vacvItrigValue > vacvPeepValue) {
+                                //       vacvItrigValue = vacvPeepValue;
+                                //     }
+                                //   }); //peep negative
+                                // }
+                                else if (vacvPeep == true &&
                                     vacvPeepValue != vacvminValue) {
                                   setState(() {
                                     vacvPeepValue = vacvPeepValue - 1;
-                                    if (vacvItrigValue > 1 &&
-                                        vacvItrigValue > vacvPeepValue) {
-                                      vacvItrigValue = vacvPeepValue;
-                                    }
                                   }); //peep negative
                                 } else if (vacvRr == true &&
                                     vacvRrValue != vacvminValue) {
@@ -18930,28 +19138,28 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             onPressed: () {
                               setState(() {
+                                // if (vacvItrig == true &&
+                                //     vacvItrigValue != vacvmaxValue) {
+                                //   setState(() {
+                                //     vacvItrigValue = vacvItrigValue + 1;
+                                //     if (vacvPeepValue <= vacvItrigValue) {
+                                //       if (vacvPeepValue == 0) {
+                                //         vacvItrigValue = 1;
+                                //       } else {
+                                //         vacvItrigValue = vacvPeepValue;
+                                //       }
+                                //     }
+                                //   }); //itrig positive
+                                // }
                                 if (vacvItrig == true &&
                                     vacvItrigValue != vacvmaxValue) {
                                   setState(() {
                                     vacvItrigValue = vacvItrigValue + 1;
-                                    if (vacvPeepValue <= vacvItrigValue) {
-                                      if (vacvPeepValue == 0) {
-                                        vacvItrigValue = 1;
-                                      } else {
-                                        vacvItrigValue = vacvPeepValue;
-                                      }
-                                    }
                                   }); //itrig positive
                                 } else if (vacvPeep == true &&
                                     vacvPeepValue != vacvmaxValue) {
                                   setState(() {
                                     vacvPeepValue = vacvPeepValue + 1;
-                                    // if (vacvPcMinValue <= vacvPeepValue) {
-                                    //   vacvPcMinValue = vacvPeepValue + 1;
-                                    //   if (vacvPcMaxValue <= vacvPcMinValue) {
-                                    //     vacvPcMaxValue = vacvPcMinValue + 1;
-                                    //   }
-                                    // }
                                   });
                                 } else if (vacvRr == true &&
                                     vacvRrValue != vacvmaxValue) {
@@ -19052,29 +19260,39 @@ class _CheckPageState extends State<Dashboard> {
                             min: vacvminValue.toDouble(),
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
+                              // if (vacvItrig == true) {
+                              //   setState(() {
+                              //     if (vacvPeepValue == 0) {
+                              //       vacvItrigValue = 1;
+                              //     } else {
+                              //       if (value.toInt() > vacvPeepValue) {
+                              //         vacvItrigValue = vacvPeepValue;
+                              //       } else {
+                              //         vacvItrigValue = value.toInt();
+                              //       }
+                              //     }
+                              //   }); // slider itrig
+                              // }
+                              //  else if (vacvPeep == true) {
+                              //   setState(() {
+                              //     vacvPeepValue = value.toInt();
+                              //     if (vacvItrigValue > 1 &&
+                              //         vacvItrigValue > vacvPeepValue) {
+                              //       if (vacvPeepValue == 0) {
+                              //         vacvItrigValue = 1;
+                              //       } else {
+                              //         vacvItrigValue = vacvPeepValue;
+                              //       }
+                              //     }
+                              //   });
+                              // }
                               if (vacvItrig == true) {
                                 setState(() {
-                                  if (vacvPeepValue == 0) {
-                                    vacvItrigValue = 1;
-                                  } else {
-                                    if (value.toInt() > vacvPeepValue) {
-                                      vacvItrigValue = vacvPeepValue;
-                                    } else {
-                                      vacvItrigValue = value.toInt();
-                                    }
-                                  }
+                                  vacvItrigValue = value.toInt();
                                 }); // slider itrig
                               } else if (vacvPeep == true) {
                                 setState(() {
                                   vacvPeepValue = value.toInt();
-                                  if (vacvItrigValue > 1 &&
-                                      vacvItrigValue > vacvPeepValue) {
-                                    if (vacvPeepValue == 0) {
-                                      vacvItrigValue = 1;
-                                    } else {
-                                      vacvItrigValue = vacvPeepValue;
-                                    }
-                                  }
                                 });
                               } else if (vacvRr == true) {
                                 setState(() {
@@ -19442,7 +19660,7 @@ class _CheckPageState extends State<Dashboard> {
         barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
-          return CommonDialog(value);
+          return CommonDialog(value, _status);
         });
 
     if (result != null) {
@@ -21189,7 +21407,7 @@ class _CheckPageState extends State<Dashboard> {
         pccmvRRValue = 20;
         pccmvIeValue = 51;
         pccmvPeepValue = 10;
-        pccmvPcValue = 30;
+        pccmvPcValue = 25;
         pccmvFio2Value = 21;
         pccmvVtminValue = 0;
         pccmvVtmaxValue = 2400;
@@ -22390,16 +22608,14 @@ class _CheckPageState extends State<Dashboard> {
             _stopMusic();
           }
 
-          if (!vteValue.isNegative &&
-              vteValue != null &&
+          if (vteValue != null &&
               vteValue != 0 &&
-              !pplateauDisplay.isNegative &&
               pplateauDisplay != null &&
               pplateauDisplay != 0) {
             try {
               // var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
               var dataC = (vteValue / (pipValue - peepDisplayValue)).toInt();
-              if (dataC.isNegative) {
+              if (dataC < 0) {
                 // cdisplayParameter = 0;
               } else {
                 cdisplayParameter = dataC;
@@ -22665,7 +22881,7 @@ class _CheckPageState extends State<Dashboard> {
           setState(() {
             pressurePoints.removeAt(0);
             pressurePoints.add(temp);
-            Fluttertoast.showToast(msg: temp.toString());
+            // Fluttertoast.showToast(msg: temp.toString());
           });
         } else {
           pressurePoints.add(temp);
@@ -22802,6 +23018,9 @@ class _CheckPageState extends State<Dashboard> {
     finalListSend.addAll(listTempF);
     finalListSend.add(127);
     // print(finalListSend.toString());
+    // if(finalListSend[4]==13){
+    //   print(finalListSend);
+    // }
     await _port.write(Uint8List.fromList(finalListSend));
 
     // // Fluttertoast.showToast(msg:finalListSend.toString());
