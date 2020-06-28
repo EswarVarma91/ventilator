@@ -507,6 +507,7 @@ class _CheckPageState extends State<Dashboard> {
   bool invasiveEnabled = true;
   bool noninvasiveEnabled = false;
   bool lockEnabled = true;
+  List<int> savedList = [];
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -1084,6 +1085,7 @@ class _CheckPageState extends State<Dashboard> {
       itrigValue = preferences.getInt("itrig");
       atimeValue = preferences.getInt("atime");
       tipsvValue = preferences.getInt("ti");
+      playOnEnabled = preferences.getBool("play");
       tiValue =
           (((double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
                   (60000 / rrValue)) /
@@ -1103,6 +1105,14 @@ class _CheckPageState extends State<Dashboard> {
       patientAge = preferences.getString("page");
       patientHeight = preferences.getString("pheight");
       patientWeight = preferences.getString("pweight");
+      List<String> lsaveListTemp = preferences.getStringList("saveList");
+      if (lsaveListTemp.isNotEmpty) {
+        savedList = lsaveListTemp.map((i) => int.parse(i)).toList();
+        setState(() {
+          modeWriteList = savedList;
+        });
+      }
+
       if (patientWeight == null || patientWeight == "") {
         patientWeight = "133";
       }
@@ -4402,7 +4412,7 @@ class _CheckPageState extends State<Dashboard> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "MAP",
+                                                    "P Mean",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
@@ -20764,9 +20774,8 @@ class _CheckPageState extends State<Dashboard> {
         // sendDataUsbConnection(modeWriteList);
       }
     } else if (res == "atime") {
-      
       int temp = int.tryParse(result.split("ab")[0]);
-      var atimeData = temp*1000;
+      var atimeData = temp * 1000;
 
       modeWriteList[12] = ((atimeData & 0xFF00) >> 8);
       modeWriteList[13] = (atimeData & 0xFF);
@@ -20966,6 +20975,9 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("peep", pccmvPeepValue);
       preferences.setInt("fio2", pccmvFio2Value);
       preferences.setInt("pc", pccmvPcValue);
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+
+      preferences.setStringList("saveList", strList);
 
       preferences.setInt('pccmvRRValue', pccmvRRValue);
       preferences.setInt('pccmvIeValue', pccmvIeValue);
@@ -21054,6 +21066,9 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", vccmvFio2Value);
       preferences.setInt("vt", vccmvVtValue);
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+
+      preferences.setStringList("saveList", strList);
 
       preferences.setInt('vccmvRRValue', vccmvRRValue);
       preferences.setInt('vccmvIeValue', vccmvIeValue);
@@ -21148,6 +21163,9 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", pacvFio2Value);
       preferences.setInt("pc", pacvPcValue);
       preferences.setInt("itrig", pacvItrigValue);
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+
+      preferences.setStringList("saveList", strList);
       //==
       preferences.setInt('pacvItrigValue', pacvItrigValue);
       preferences.setInt('pacvRrValue', pacvRrValue);
@@ -21240,6 +21258,9 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
       preferences.setInt("itrig", vacvItrigValue);
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+
+      preferences.setStringList("saveList", strList);
 
       preferences.setInt('vacvItrigValue', vacvItrigValue);
       preferences.setInt('vacvRrValue', vacvRrValue);
@@ -21333,6 +21354,9 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("ps", psimvPsValue);
       preferences.setInt("pc", psimvPcValue);
       preferences.setInt("itrig", psimvItrigValue);
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+
+      preferences.setStringList("saveList", strList);
 
       preferences.setInt('psimvItrigValue', psimvItrigValue);
 
@@ -21430,6 +21454,9 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("ps", vsimvPsValue);
       preferences.setInt("pc", vsimvPcMaxValue);
       preferences.setInt("itrig", vsimvItrigValue);
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+
+      preferences.setStringList("saveList", strList);
 
       preferences.setInt('vsimvItrigValue', vsimvItrigValue);
 
@@ -21545,6 +21572,9 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("ps", psvPsValue);
       preferences.setInt("pc", psvPcValue);
       preferences.setInt("itrig", psvItrigValue);
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+
+      preferences.setStringList("saveList", strList);
       // Fluttertoast.showToast(msg:psvPsValue.toString() +" pc "+psvPcValue.toString());
 
       preferences.setInt('psvItrigValue', psvItrigValue);
@@ -21645,6 +21675,9 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", prvcFio2Value);
       preferences.setInt("vt", prvcVtValue);
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+
+      preferences.setStringList("saveList", strList);
 
       preferences.setInt('prvcItrigValue', prvcItrigValue);
 
@@ -21752,7 +21785,8 @@ class _CheckPageState extends State<Dashboard> {
                   child: Text("Confirm"),
                   onPressed: () {
                     writeDataPause();
-                    sleep(Duration(milliseconds:1));
+                    preferences.setBool("play", false);
+                    sleep(Duration(milliseconds: 1));
                     Navigator.pop(context);
                   },
                 ),
@@ -21777,7 +21811,8 @@ class _CheckPageState extends State<Dashboard> {
                   child: Text("Confirm"),
                   onPressed: () {
                     writeDataPlay();
-                    sleep(Duration(milliseconds:1));
+                    preferences.setBool("play", true);
+                    sleep(Duration(milliseconds: 1));
                     Navigator.pop(context);
                   },
                 ),
@@ -23437,8 +23472,12 @@ class _CheckPageState extends State<Dashboard> {
     finalListSend.addAll(listTempF);
     finalListSend.add(127);
     // print(finalListSend.toString());
-    if(finalListSend[4]==2 || finalListSend[4]==1 || finalListSend[4]==4 || finalListSend[4]==5 || finalListSend[4]==3){
-    print(finalListSend);
+    if (finalListSend[4] == 2 ||
+        finalListSend[4] == 1 ||
+        finalListSend[4] == 4 ||
+        finalListSend[4] == 5 ||
+        finalListSend[4] == 3) {
+      print(finalListSend);
     }
     await _port.write(Uint8List.fromList(finalListSend));
 
@@ -23479,14 +23518,12 @@ class _CheckPageState extends State<Dashboard> {
       // modesEnabled = false;
     } else if (acknowReceivedValue == 1 && ackPacket == 31) {
       clearPlay();
-    } else if(acknowReceivedValue == 1 && ackPacket == 30){
+    } else if (acknowReceivedValue == 1 && ackPacket == 30) {
       clearPause();
     }
-
   }
 
-
-  clearPause(){
+  clearPause() {
     setState(() {
       acknowReceivedValue = 0;
       ackPacket = 0;

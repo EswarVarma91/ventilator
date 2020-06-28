@@ -553,7 +553,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "MAP",
+                                                    "P Mean",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
