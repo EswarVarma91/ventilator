@@ -3947,12 +3947,20 @@ class _CheckPageState extends State<Dashboard> {
                 SizedBox(
                   height: 4,
                 ),
-                Text(
-                  "SWASIT",
-                  style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 22,
-                      fontFamily: "appleFont"),
+                InkWell(
+                  onTap:(){
+                    Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => About()));
+                  },
+                                  child: Text(
+                    "SWASIT",
+                    style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 22,
+                        fontFamily: "appleFont"),
+                  ),
                 ),
                 Text(
                   "V1.8.2d",
@@ -4095,38 +4103,38 @@ class _CheckPageState extends State<Dashboard> {
                   ],
                 ),
 
-                playOnEnabled
-                    ? InkWell(
-                        onTap: () {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => About()));
-                          });
-                        },
-                        child: Center(
-                          child: Container(
-                            width: 120,
-                            child: Card(
-                              color: modesEnabled ? Colors.blue : Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Center(
-                                    child: Text(
-                                  "About",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: modesEnabled
-                                          ? Colors.white
-                                          : Colors.black),
-                                )),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    : Container(),
+                // playOnEnabled
+                //     ? InkWell(
+                //         onTap: () {
+                //           setState(() {
+                //             Navigator.push(
+                //                 context,
+                //                 MaterialPageRoute(
+                //                     builder: (context) => About()));
+                //           });
+                //         },
+                //         child: Center(
+                //           child: Container(
+                //             width: 120,
+                //             child: Card(
+                //               color: modesEnabled ? Colors.blue : Colors.white,
+                //               child: Padding(
+                //                 padding: const EdgeInsets.all(12.0),
+                //                 child: Center(
+                //                     child: Text(
+                //                   "About",
+                //                   style: TextStyle(
+                //                       fontWeight: FontWeight.bold,
+                //                       color: modesEnabled
+                //                           ? Colors.white
+                //                           : Colors.black),
+                //                 )),
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       )
+                //     : Container(),
                 playOnEnabled
                     ? Column(
                         children: [
@@ -4433,7 +4441,7 @@ class _CheckPageState extends State<Dashboard> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "MAP",
+                                                    "P Mean",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
@@ -19995,6 +20003,7 @@ class _CheckPageState extends State<Dashboard> {
         });
 
     if (result != null) {
+      preferences.setBool("play", false);
       getData();
     }
 
@@ -20033,6 +20042,7 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[5] = (temp & 0xFF);
         modeWriteList[22] = (0);
         modeWriteList[23] = (1);
+
         preferences.setInt('pccmvRRValue', temp);
         getData();
         // // print(modeWriteList.toString());
@@ -23529,18 +23539,19 @@ class _CheckPageState extends State<Dashboard> {
     // print(listTempF.toString());
     Timer t;
     finalListSend = [];
+    
 
     finalListSend.add(126);
     finalListSend.addAll(listTempF);
     finalListSend.add(127);
     // print(finalListSend.toString());
-    if (finalListSend[4] == 2 ||
-        finalListSend[4] == 1 ||
-        finalListSend[4] == 4 ||
-        finalListSend[4] == 5 ||
-        finalListSend[4] == 3) {
-      print(finalListSend);
-    }
+    // if (finalListSend[4] == 2 ||
+    //     finalListSend[4] == 1 ||
+    //     finalListSend[4] == 4 ||
+    //     finalListSend[4] == 5 ||
+    //     finalListSend[4] == 3) {
+    //   print(finalListSend);
+    // }
     await _port.write(Uint8List.fromList(finalListSend));
 
     // // Fluttertoast.showToast(msg:finalListSend.toString());
