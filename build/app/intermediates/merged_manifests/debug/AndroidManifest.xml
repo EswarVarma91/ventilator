@@ -40,7 +40,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:label="Ventilator" >
+        android:label="Ventilator"
+        android:testOnly="true" >
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
@@ -100,22 +101,23 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
-        <!-- <activity -->
-        <!-- android:name=".UsbEventReceiverActivity" -->
-        <!-- android:label="Ventilator" -->
-        <!-- android:theme="@style/Theme.Transparent" -->
-        <!-- android:noHistory="true" -->
-        <!-- android:excludeFromRecents="true" -->
-        <!-- android:taskAffinity="com.example.taskAffinityUsbEventReceiver" -->
-        <!-- android:process=":UsbEventReceiverActivityProcess" -->
-        <!-- android:exported="false" -->
-        <!-- > -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" /> -->
-        <!-- </intent-filter> -->
-        <!-- <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@xml/device_filter" /> -->
-        <!-- </activity> -->
+        <activity
+            android:name="com.example.ventilator.UsbEventReceiverActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:label="Ventilator"
+            android:noHistory="true"
+            android:process=":UsbEventReceiverActivityProcess"
+            android:taskAffinity="com.example.taskAffinityUsbEventReceiver"
+            android:theme="@style/Theme.Transparent" >
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+        </activity>
         <activity
             android:name="com.nabinbhandari.android.permissions.PermissionsActivity"
             android:theme="@style/Permissions.TransparentTheme" />

@@ -232,6 +232,24 @@ action#android.intent.action.BOOT_COMPLETED
 ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:76:17-78
 	android:name
 		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:76:25-76
+activity#com.example.ventilator.UsbEventReceiverActivity
+ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:91:9-105:20
+	android:process
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:98:13-63
+	android:label
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:93:13-39
+	android:excludeFromRecents
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:96:13-46
+	android:noHistory
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:95:13-37
+	android:exported
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:99:13-37
+	android:theme
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:94:13-53
+	android:taskAffinity
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:97:13-76
+	android:name
+		ADDED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:92:13-53
 uses-sdk
 INJECTED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml

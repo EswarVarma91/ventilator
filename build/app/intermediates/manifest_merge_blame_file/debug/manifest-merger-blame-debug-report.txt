@@ -67,132 +67,149 @@
 41        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 41-->[androidx.core:core:1.1.0] /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/AndroidManifest.xml:24:18-86
 42        android:debuggable="true"
-43        android:label="Ventilator" >
+43        android:label="Ventilator"
 43-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:35:9-35
-44        <meta-data
-44-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:9-72
-45            android:name="flutterEmbedding"
-45-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:20-51
-46            android:value="2" />
-46-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:52-69
-47
-48        <activity
-48-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:9-64:20
-49            android:name="com.example.ventilator.MainActivity"
-49-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:19-47
-50            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-50-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:40:13-144
-51            android:exported="true"
-51-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:43:13-36
-52            android:hardwareAccelerated="false"
-52-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:41:13-48
-53            android:launchMode="singleTop"
-53-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:42:13-43
-54            android:screenOrientation="fullSensor"
-54-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:39:13-51
-55            android:theme="@style/LaunchTheme"
-55-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:44:13-47
-56            android:windowSoftInputMode="adjustResize" >
-56-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:45:13-55
-57            <meta-data
-57-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:13-113
-58                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
-58-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:24-89
-59                android:value="true" />
-59-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:90-110
-60
-61            <intent-filter>
-61-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:48:13-54:29
-62
-63                <!-- <action android:name="android.intent.action.ACTION_REQUEST_SHUTDOWN" /> -->
-64                <action android:name="android.intent.action.MAIN" />
-64-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:50:17-69
-64-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:50:25-66
-65
-66                <category android:name="android.intent.category.LAUNCHER" />
-66-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:51:17-77
-66-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:51:27-74
-67                <category android:name="android.intent.category.HOME" />
-67-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:52:17-73
-67-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:52:27-70
-68                <category android:name="android.intent.category.DEFAULT" />
-68-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:53:17-76
-68-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:53:27-73
-69            </intent-filter>
-70            <intent-filter>
-70-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:56:14-59:29
-71                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-71-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:57:17-90
-71-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:57:25-87
-72            </intent-filter>
-73
-74            <meta-data
-74-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:61:13-62:57
-75                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
-75-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:61:24-86
-76                android:resource="@xml/device_filter" />
-76-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:62:17-54
-77        </activity>
-78
-79        <receiver
-79-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:66:9-78:20
-80            android:name="com.example.ventilator.MyDeviceAdminReceiver"
-80-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:67:13-50
-81            android:permission="android.permission.BIND_DEVICE_ADMIN" >
-81-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:68:13-70
-82            <meta-data
-82-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:69:13-71:65
-83                android:name="android.app.device_admin"
-83-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:70:17-56
-84                android:resource="@xml/device_admin_receiver" />
-84-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:71:17-62
-85
-86            <intent-filter>
-86-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:73:13-77:29
-87                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
-87-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:74:17-82
-87-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:74:25-79
-88                <action android:name="android.intent.action.PROFILE_PROVISIONING_COMPLETE" />
-88-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:75:17-93
-88-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:75:25-91
-89                <action android:name="android.intent.action.BOOT_COMPLETED" />
-89-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:76:17-78
-89-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:76:25-76
-90            </intent-filter>
-91        </receiver>
-92
-93        <provider
-94            android:name="androidx.core.content.FileProvider"
-95            android:authorities="com.example.ventilator.provider"
-96            android:exported="false"
-97            android:grantUriPermissions="true" >
-98            <meta-data
-99                android:name="android.support.FILE_PROVIDER_PATHS"
-100                android:resource="@xml/file_provider_paths" />
-101        </provider>
-102
-103        <!-- <activity -->
-104        <!-- android:name=".UsbEventReceiverActivity" -->
-105        <!-- android:label="Ventilator" -->
-106        <!-- android:theme="@style/Theme.Transparent" -->
-107        <!-- android:noHistory="true" -->
-108        <!-- android:excludeFromRecents="true" -->
-109        <!-- android:taskAffinity="com.example.taskAffinityUsbEventReceiver" -->
-110        <!-- android:process=":UsbEventReceiverActivityProcess" -->
-111        <!-- android:exported="false" -->
-112        <!-- > -->
-113        <!-- <intent-filter> -->
-114        <!-- <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" /> -->
-115        <!-- </intent-filter> -->
-116        <!-- <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@xml/device_filter" /> -->
-117        <!-- </activity> -->
-118
-119        <activity
-119-->[com.nabinbhandari.android:permissions:3.8] /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/ba473c54fc46539b2bdfa0ebb5cc7313/permissions-3.8/AndroidManifest.xml:12:9-14:67
-120            android:name="com.nabinbhandari.android.permissions.PermissionsActivity"
-120-->[com.nabinbhandari.android:permissions:3.8] /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/ba473c54fc46539b2bdfa0ebb5cc7313/permissions-3.8/AndroidManifest.xml:13:13-85
-121            android:theme="@style/Permissions.TransparentTheme" />
-121-->[com.nabinbhandari.android:permissions:3.8] /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/ba473c54fc46539b2bdfa0ebb5cc7313/permissions-3.8/AndroidManifest.xml:14:13-64
-122    </application>
-123
-124</manifest>
+44        android:testOnly="true" >
+45        <meta-data
+45-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:9-72
+46            android:name="flutterEmbedding"
+46-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:20-51
+47            android:value="2" />
+47-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:36:52-69
+48
+49        <activity
+49-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:9-64:20
+50            android:name="com.example.ventilator.MainActivity"
+50-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:38:19-47
+51            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+51-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:40:13-144
+52            android:exported="true"
+52-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:43:13-36
+53            android:hardwareAccelerated="false"
+53-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:41:13-48
+54            android:launchMode="singleTop"
+54-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:42:13-43
+55            android:screenOrientation="fullSensor"
+55-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:39:13-51
+56            android:theme="@style/LaunchTheme"
+56-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:44:13-47
+57            android:windowSoftInputMode="adjustResize" >
+57-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:45:13-55
+58            <meta-data
+58-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:13-113
+59                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+59-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:24-89
+60                android:value="true" />
+60-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:47:90-110
+61
+62            <intent-filter>
+62-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:48:13-54:29
+63
+64                <!-- <action android:name="android.intent.action.ACTION_REQUEST_SHUTDOWN" /> -->
+65                <action android:name="android.intent.action.MAIN" />
+65-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:50:17-69
+65-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:50:25-66
+66
+67                <category android:name="android.intent.category.LAUNCHER" />
+67-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:51:17-77
+67-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:51:27-74
+68                <category android:name="android.intent.category.HOME" />
+68-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:52:17-73
+68-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:52:27-70
+69                <category android:name="android.intent.category.DEFAULT" />
+69-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:53:17-76
+69-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:53:27-73
+70            </intent-filter>
+71            <intent-filter>
+71-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:56:14-59:29
+72                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+72-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:57:17-90
+72-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:57:25-87
+73            </intent-filter>
+74
+75            <meta-data
+75-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:61:13-62:57
+76                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+76-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:61:24-86
+77                android:resource="@xml/device_filter" />
+77-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:62:17-54
+78        </activity>
+79
+80        <receiver
+80-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:66:9-78:20
+81            android:name="com.example.ventilator.MyDeviceAdminReceiver"
+81-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:67:13-50
+82            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+82-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:68:13-70
+83            <meta-data
+83-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:69:13-71:65
+84                android:name="android.app.device_admin"
+84-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:70:17-56
+85                android:resource="@xml/device_admin_receiver" />
+85-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:71:17-62
+86
+87            <intent-filter>
+87-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:73:13-77:29
+88                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+88-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:74:17-82
+88-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:74:25-79
+89                <action android:name="android.intent.action.PROFILE_PROVISIONING_COMPLETE" />
+89-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:75:17-93
+89-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:75:25-91
+90                <action android:name="android.intent.action.BOOT_COMPLETED" />
+90-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:76:17-78
+90-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:76:25-76
+91            </intent-filter>
+92        </receiver>
+93
+94        <provider
+95            android:name="androidx.core.content.FileProvider"
+96            android:authorities="com.example.ventilator.provider"
+97            android:exported="false"
+98            android:grantUriPermissions="true" >
+99            <meta-data
+100                android:name="android.support.FILE_PROVIDER_PATHS"
+101                android:resource="@xml/file_provider_paths" />
+102        </provider>
+103
+104        <activity
+104-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:91:9-105:20
+105            android:name="com.example.ventilator.UsbEventReceiverActivity"
+105-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:92:13-53
+106            android:excludeFromRecents="true"
+106-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:96:13-46
+107            android:exported="false"
+107-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:99:13-37
+108            android:label="Ventilator"
+108-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:93:13-39
+109            android:noHistory="true"
+109-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:95:13-37
+110            android:process=":UsbEventReceiverActivityProcess"
+110-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:98:13-63
+111            android:taskAffinity="com.example.taskAffinityUsbEventReceiver"
+111-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:97:13-76
+112            android:theme="@style/Theme.Transparent" >
+112-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:94:13-53
+113            <intent-filter>
+113-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:56:14-59:29
+114                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+114-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:57:17-90
+114-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:57:25-87
+115            </intent-filter>
+116
+117            <meta-data
+117-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:61:13-62:57
+118                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+118-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:61:24-86
+119                android:resource="@xml/device_filter" />
+119-->/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/AndroidManifest.xml:62:17-54
+120        </activity>
+121        <activity
+121-->[com.nabinbhandari.android:permissions:3.8] /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/ba473c54fc46539b2bdfa0ebb5cc7313/permissions-3.8/AndroidManifest.xml:12:9-14:67
+122            android:name="com.nabinbhandari.android.permissions.PermissionsActivity"
+122-->[com.nabinbhandari.android:permissions:3.8] /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/ba473c54fc46539b2bdfa0ebb5cc7313/permissions-3.8/AndroidManifest.xml:13:13-85
+123            android:theme="@style/Permissions.TransparentTheme" />
+123-->[com.nabinbhandari.android:permissions:3.8] /Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/ba473c54fc46539b2bdfa0ebb5cc7313/permissions-3.8/AndroidManifest.xml:14:13-64
+124    </application>
+125
+126</manifest>

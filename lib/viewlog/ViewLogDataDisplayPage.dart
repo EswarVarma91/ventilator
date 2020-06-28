@@ -553,7 +553,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "P Mean",
+                                                    "MAP",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
@@ -1693,7 +1693,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 17.0),
                                   child: Text(
-                                    "1:" + ieValue.toString(),
+                                    ieValue.toString(),
                                     style: TextStyle(
                                         fontSize: 25, color: Colors.white),
                                   ),

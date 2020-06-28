@@ -88,21 +88,21 @@
         </provider>
 
 
-<!--        <activity-->
-<!--            android:name=".UsbEventReceiverActivity"-->
-<!--            android:label="Ventilator"-->
-<!--            android:theme="@style/Theme.Transparent"-->
-<!--            android:noHistory="true"-->
-<!--            android:excludeFromRecents="true"-->
-<!--            android:taskAffinity="com.example.taskAffinityUsbEventReceiver"-->
-<!--            android:process=":UsbEventReceiverActivityProcess"-->
-<!--            android:exported="false"-->
-<!--            >-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />-->
-<!--            </intent-filter>-->
-<!--            <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@xml/device_filter" />-->
-<!--        </activity>-->
+        <activity
+            android:name=".UsbEventReceiverActivity"
+            android:label="Ventilator"
+            android:theme="@style/Theme.Transparent"
+            android:noHistory="true"
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.example.taskAffinityUsbEventReceiver"
+            android:process=":UsbEventReceiverActivityProcess"
+            android:exported="false"
+            >
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@xml/device_filter" />
+        </activity>
 
     </application>
 </manifest>

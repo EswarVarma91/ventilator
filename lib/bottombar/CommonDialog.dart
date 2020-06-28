@@ -159,7 +159,7 @@ class _CommonDialogState extends State<CommonDialog> {
         suffix = false;
         units = false;
       });
-    }else if (widget.value.toString() == "Apnea Time") {
+    } else if (widget.value.toString() == "Apnea Time") {
       setState(() {
         commomValue = preferences.getInt("atime").toDouble();
         checkValue = preferences.getInt("atime").toDouble();
@@ -170,7 +170,7 @@ class _CommonDialogState extends State<CommonDialog> {
         suffix = false;
         units = false;
       });
-    }else if (widget.value.toString() == "Ti") {
+    } else if (widget.value.toString() == "Ti") {
       setState(() {
         commomValue = preferences.getInt("ti").toDouble();
         checkValue = preferences.getInt("ti").toDouble();
@@ -184,7 +184,7 @@ class _CommonDialogState extends State<CommonDialog> {
     }
   }
 
-   getTiValue(checkTi) {
+  getTiValue(checkTi) {
     var data = checkTi == 1
         ? "0.5"
         : checkTi == 2
@@ -226,7 +226,7 @@ class _CommonDialogState extends State<CommonDialog> {
                                                                             : checkTi == 19
                                                                                 ? "2.3"
                                                                                 : checkTi == 20 ? "2.4" : checkTi == 21 ? "2.5" : checkTi == 22 ? "2.6" : checkTi == 23 ? "2.7" : checkTi == 24 ? "2.8" : checkTi == 25 ? "2.9" : checkTi == 26 ? "3.0" : checkTi == 27 ? "3.1" : checkTi == 28 ? "3.2" : checkTi == 29 ? "3.3" : checkTi == 30 ? "3.4" : checkTi == 31 ? "3.5" : checkTi == 32 ? "3.6" : checkTi == 33 ? "3.7" : checkTi == 34 ? "3.8" : checkTi == 35 ? "3.9" : checkTi == 36 ? "4.0" : checkTi == 37 ? "4.1" : checkTi == 38 ? "4.2" : checkTi == 39 ? "4.3" : checkTi == 40 ? "4.4" : checkTi == 41 ? "4.5" : checkTi == 42 ? "4.6" : checkTi == 43 ? "4.7" : checkTi == 44 ? "4.8" : checkTi == 45 ? "4.9" : checkTi == 46 ? "5.0" : "0.5";
-                                                                                   return data;
+    return data;
   }
 
   getIeData(int pccmvIeValue, int res) {
@@ -375,11 +375,9 @@ class _CommonDialogState extends State<CommonDialog> {
                                         : widget.value.toString() == "ITRI"
                                             ? "-" +
                                                 commomValue.ceil().toString()
-                                            : widget.value.toString() == "Ti" ?
-
-                                            getTiValue(commomValue.ceil())
-                                            
-                                            :commomValue.ceil().toString(),
+                                            : widget.value.toString() == "Ti"
+                                                ? getTiValue(commomValue.ceil())
+                                                : commomValue.ceil().toString(),
                                 style: TextStyle(fontSize: 40),
                               ),
                               SizedBox(width: 120),
@@ -428,10 +426,10 @@ class _CommonDialogState extends State<CommonDialog> {
                                   ? "Min " + getIeData(min.toInt(), 1)
                                   : widget.value.toString() == "ITRI"
                                       ? "Min " + "-" + min.toInt().toString()
-                                      :  widget.value.toString() == "Ti"
-                                      ? "Min " + "-" + getTiValue(min.toInt()).toString():
-                                      
-                                      "Min " + min.toInt().toString()),
+                                      : widget.value.toString() == "Ti"
+                                          ? "Min " +
+                                              getTiValue(min.toInt()).toString()
+                                          : "Min " + min.toInt().toString()),
                               // SizedBox(height: 30,),
                               Text(widget.value.toString() == "RR" ||
                                       widget.value.toString() == "eRR"
@@ -455,10 +453,12 @@ class _CommonDialogState extends State<CommonDialog> {
                               Text(widget.value.toString() == "I:E"
                                   ? "Max " + getIeData(max.toInt(), 1)
                                   : widget.value.toString() == "ITRI"
-                                      ? "Max " + "-" + max.toInt().toString():
-                                      widget.value.toString() == "Ti"
-                                      ? "Max " + "-" + getTiValue(max.toInt()).toString():
-                                      "Max " + max.toInt().toString()),
+                                      ? "Max " + "-" + max.toInt().toString()
+                                      : widget.value.toString() == "Ti"
+                                          ? "Max " +
+                                               
+                                              getTiValue(max.toInt()).toString()
+                                          : "Max " + max.toInt().toString()),
                             ],
                           ),
                           Container(
@@ -657,6 +657,11 @@ class _CommonDialogState extends State<CommonDialog> {
     } else if (widget.value.toString() == "PC") {
       setState(() {
         preferences.setInt("pc", value.ceil());
+        // print(value.ceil().toString() + " " + _psCheckValue.ceil().toString());
+        if (value.ceil().toInt() < _psCheckValue.ceil().toInt()) {
+          preferences.setInt("ps", value.ceil());
+         
+        }
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "pc");
     } else if (widget.value.toString() == "Vt") {
@@ -669,17 +674,17 @@ class _CommonDialogState extends State<CommonDialog> {
         preferences.setInt("vt", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "vt");
-    }else if (widget.value.toString() == "ITRI") {
+    } else if (widget.value.toString() == "ITRI") {
       setState(() {
         preferences.setInt("itrig", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "itrig");
-    }else if (widget.value.toString() == "Apnea Time") {
+    } else if (widget.value.toString() == "Apnea Time") {
       setState(() {
         preferences.setInt("atime", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "atime");
-    }else if (widget.value.toString() == "Ti") {
+    } else if (widget.value.toString() == "Ti") {
       setState(() {
         preferences.setInt("ti", value.ceil());
       });

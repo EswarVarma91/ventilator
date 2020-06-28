@@ -291,7 +291,7 @@ class _CheckPageState extends State<Dashboard> {
       psvMinTeValue = 1,
       psvPcValue = 25;
 
-  int psvmaxValue = 80, psvminValue = 1, psvdefaultValue = 30;
+  int psvmaxValue = 60, psvminValue = 0, psvdefaultValue = 25;
   String psvparameterName = "PS", psvparameterUnits = "cmH\u2082O  Below PEEP";
 
   bool psimvItrig = false,
@@ -1085,7 +1085,13 @@ class _CheckPageState extends State<Dashboard> {
       itrigValue = preferences.getInt("itrig");
       atimeValue = preferences.getInt("atime");
       tipsvValue = preferences.getInt("ti");
-      playOnEnabled = preferences.getBool("play");
+      if (psimvEnabled == true) {
+        // psimvPsValue = psValue;
+        preferences.setInt("psimvPsValue", psValue);
+      } else if (psvEnabled == true) {
+        preferences.setInt("psvPsValue", psValue);
+      }
+
       tiValue =
           (((double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
                   (60000 / rrValue)) /
@@ -1105,6 +1111,7 @@ class _CheckPageState extends State<Dashboard> {
       patientAge = preferences.getString("page");
       patientHeight = preferences.getString("pheight");
       patientWeight = preferences.getString("pweight");
+      playOnEnabled = preferences.getBool("play");
       List<String> lsaveListTemp = preferences.getStringList("saveList");
       if (lsaveListTemp.isNotEmpty) {
         savedList = lsaveListTemp.map((i) => int.parse(i)).toList();
@@ -1112,7 +1119,6 @@ class _CheckPageState extends State<Dashboard> {
           modeWriteList = savedList;
         });
       }
-
       if (patientWeight == null || patientWeight == "") {
         patientWeight = "133";
       }
@@ -3296,20 +3302,23 @@ class _CheckPageState extends State<Dashboard> {
                                           InkWell(
                                             onTap: () {
                                               setState(() {
-                                                alarmEnabled = true;
+                                                setData();
                                               });
                                             },
                                             child: Container(
                                               height: 80,
-                                              width: 210,
+                                              width: 80,
                                               child: Card(
                                                 child: Center(
                                                     child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
-                                                  child: Text("Alarm Settings",
+                                                  child: Text(
+                                                      "Default\nSettings",
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: TextStyle(
-                                                          fontSize: 22,
+                                                          fontSize: 10,
                                                           color: Colors.black,
                                                           fontWeight:
                                                               FontWeight.bold)),
@@ -3318,72 +3327,84 @@ class _CheckPageState extends State<Dashboard> {
                                             ),
                                           ),
 
-                                          Container(
-                                              padding: EdgeInsets.only(top: 5),
-                                              width: 300,
-                                              child: Row(
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        invasiveEnabled = true;
-                                                        noninvasiveEnabled =
-                                                            false;
-                                                      });
-                                                    },
-                                                    child: Card(
-                                                        color: invasiveEnabled
-                                                            ? Color(0xFFE0E0E0)
-                                                            : Color(0xFF213855),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(22.0),
-                                                          child: Text(
-                                                            "Invasive",
-                                                            style: TextStyle(
-                                                              color: invasiveEnabled
-                                                                  ? Color(
-                                                                      0xFF213855)
-                                                                  : Color(
-                                                                      0xFFE0E0E0),
-                                                            ),
-                                                          ),
-                                                        )),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        noninvasiveEnabled =
-                                                            true;
-                                                        invasiveEnabled = false;
-                                                      });
-                                                    },
-                                                    child: Card(
-                                                        color:
-                                                            noninvasiveEnabled
+                                          vccmvEnabled ||
+                                                  vacvEnabled ||
+                                                  psvEnabled
+                                              ? Container(
+                                                  padding:
+                                                      EdgeInsets.only(top: 5),
+                                                  width: 255,
+                                                  child: Row(
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            invasiveEnabled =
+                                                                true;
+                                                            noninvasiveEnabled =
+                                                                false;
+                                                          });
+                                                        },
+                                                        child: Card(
+                                                            color: invasiveEnabled
                                                                 ? Color(
                                                                     0xFFE0E0E0)
                                                                 : Color(
                                                                     0xFF213855),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(22.0),
-                                                          child: Text(
-                                                            "Non Invasive",
-                                                            style: TextStyle(
-                                                              color: noninvasiveEnabled
-                                                                  ? Color(
-                                                                      0xFF213855)
-                                                                  : Color(
-                                                                      0xFFE0E0E0),
-                                                            ),
-                                                          ),
-                                                        )),
-                                                  ),
-                                                ],
-                                              )), //TODO
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .all(
+                                                                      22.0),
+                                                              child: Text(
+                                                                "Invasive",
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: invasiveEnabled
+                                                                      ? Color(
+                                                                          0xFF213855)
+                                                                      : Color(
+                                                                          0xFFE0E0E0),
+                                                                ),
+                                                              ),
+                                                            )),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            noninvasiveEnabled =
+                                                                true;
+                                                            invasiveEnabled =
+                                                                false;
+                                                          });
+                                                        },
+                                                        child: Card(
+                                                            color: noninvasiveEnabled
+                                                                ? Color(
+                                                                    0xFFE0E0E0)
+                                                                : Color(
+                                                                    0xFF213855),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .all(
+                                                                      22.0),
+                                                              child: Text(
+                                                                "Non Invasive",
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: noninvasiveEnabled
+                                                                      ? Color(
+                                                                          0xFF213855)
+                                                                      : Color(
+                                                                          0xFFE0E0E0),
+                                                                ),
+                                                              ),
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  ))
+                                              : Container(),
                                           //   Row(
                                           //   children: <Widget>[
                                           //    InkWell(
@@ -3934,7 +3955,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.8.2c",
+                  "V1.8.2d",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4412,7 +4433,7 @@ class _CheckPageState extends State<Dashboard> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "P Mean",
+                                                    "MAP",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
@@ -12646,8 +12667,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  psimvmaxValue = 80;
-                  psimvminValue = 1;
+                  psimvmaxValue = 60;
+                  psimvminValue = 0;
                   psimvparameterName = "PC";
                   psimvparameterUnits = "cmH\u2082O above PEEP";
                   psimvItrig = false;
@@ -13229,8 +13250,8 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  psimvmaxValue = 70;
-                  psimvminValue = 1;
+                  psimvmaxValue = 60;
+                  psimvminValue = 0;
                   psimvparameterName = "PS";
                   psimvparameterUnits = "cmH\u2082O above PEEP";
                   psimvItrig = false;
@@ -15156,12 +15177,12 @@ class _CheckPageState extends State<Dashboard> {
                           children: [
                             Text(
                               pccmvRR
-                                  ? pccmvRRValue.toInt().toString()
+                                  ? pccmvRRValue.ceil().toInt().toString()
                                   // : pccmvIe
                                   //     ? "1:" + pccmvIeValue.toInt().toString()
 
                                   : pccmvIe
-                                      ? getIeData(pccmvIeValue, 1)
+                                      ? getIeData(pccmvIeValue.ceil(), 1)
                                       : pccmvPeep
                                           ? pccmvPeepValue.toInt().toString()
                                           : pccmvPc
@@ -15216,9 +15237,9 @@ class _CheckPageState extends State<Dashboard> {
                           min: pccmvminValue.toDouble() ?? 0,
                           max: pccmvmaxValue.toDouble() ?? 0,
                           value: pccmvRR
-                              ? pccmvRRValue.toDouble()
+                              ? pccmvRRValue.ceil().toDouble()
                               : pccmvIe
-                                  ? pccmvIeValue.toDouble()
+                                  ? pccmvIeValue.ceil().toDouble()
                                   : pccmvPeep
                                       ? pccmvPeepValue.toDouble()
                                       : pccmvPc
@@ -15238,11 +15259,11 @@ class _CheckPageState extends State<Dashboard> {
                             setState(() {
                               if (pccmvRR == true) {
                                 setState(() {
-                                  pccmvRRValue = value.toInt();
+                                  pccmvRRValue = value.ceil().toInt();
                                 });
                               } else if (pccmvIe == true) {
                                 setState(() {
-                                  pccmvIeValue = value.toInt();
+                                  pccmvIeValue = value.ceil().toInt();
                                 });
                               } else if (pccmvPeep == true) {
                                 // if (pccmvPcValue <= pccmvPeepValue) {
@@ -19974,6 +19995,10 @@ class _CheckPageState extends State<Dashboard> {
         });
 
     if (result != null) {
+      getData();
+    }
+
+    if (result != null) {
       var data = result.split("ab")[1];
 
       if (data == "peep") {
@@ -19998,14 +20023,9 @@ class _CheckPageState extends State<Dashboard> {
         sendDataPacket(data, result);
       }
     }
-
-    if (result != null) {
-      getData();
-    }
   }
 
   sendDataPacket(String res, result) {
-    preferences.setBool("play", false);
     if (res == "rr") {
       if (pccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -20317,7 +20337,8 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[26] = (0);
         modeWriteList[27] = (16);
 
-        preferences.setInt('psimvPsValue', temp);
+        preferences.setInt('psimvPcValue', temp);
+        // preferences.setInt("psimvPsValue", temp);
         getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
@@ -20335,7 +20356,7 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[27] = (temp & 0xFF);
         modeWriteList[32] = (8);
         modeWriteList[33] = (0);
-        preferences.setInt('psvPsValue', temp);
+        preferences.setInt('psvPcValue', temp);
         getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
@@ -20658,7 +20679,7 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[26] = (1);
         modeWriteList[27] = (0);
 
-        preferences.setInt('psimvPcValue', temp);
+        preferences.setInt('psimvPsValue', temp);
         getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
@@ -20680,7 +20701,7 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[32] = (0);
         modeWriteList[33] = (4);
 
-        preferences.setInt('psvPcValue', temp);
+        preferences.setInt('psvPsValue', temp);
         getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList);
@@ -21683,12 +21704,11 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", prvcFio2Value);
       preferences.setInt("vt", prvcVtValue);
-      
+
+      preferences.setInt('prvcItrigValue', prvcItrigValue);
       List<String> strList = modeWriteList.map((i) => i.toString()).toList();
 
       preferences.setStringList("saveList", strList);
-
-      preferences.setInt('prvcItrigValue', prvcItrigValue);
 
       preferences.setInt('prvcPcMinValue', prvcPcMinValue);
       preferences.setInt('prvcPcMaxValue', prvcPcMaxValue);
@@ -21839,22 +21859,8 @@ class _CheckPageState extends State<Dashboard> {
   void setData() {
     if (pacvEnabled == true) {
       setState(() {
-        pacvItrigValue = 3;
-        pacvRrValue = 20;
-        pacvIeValue = 51;
-        pacvPeepValue = 10;
-        pacvPcValue = 30;
-        pacvVtMinValue = 0;
-        pacvVtMaxValue = 2400;
-        pacvFio2Value = 21;
-        pacvFlowRampValue = 3;
-        pacvmaxValue = 10;
-        pacvminValue = 1;
-        pacvdefaultValue = 6;
-        pacvparameterName = "I Trig";
-        pacvparameterUnits = "cmH\u2082O Below PEEP";
-        pacvItrig = true;
-        pacvRr = false;
+        pacvItrig = false;
+        pacvRr = true;
         pacvIe = false;
         pacvPeep = false;
         pacvPc = false;
@@ -21862,23 +21868,25 @@ class _CheckPageState extends State<Dashboard> {
         pacvVtMax = false;
         pacvFio2 = false;
         pacvFlowRamp = false;
+
+        pacvItrigValue = 3;
+        pacvRrValue = 20;
+        pacvIeValue = 51;
+        pacvPeepValue = 10;
+        pacvPcValue = 25;
+        pacvVtMinValue = 0;
+        pacvVtMaxValue = 2400;
+        pacvFio2Value = 21;
+        pacvFlowRampValue = 3;
+
+        pacvmaxValue = 60;
+        pacvminValue = 1;
+        pacvdefaultValue = 20;
+        pacvparameterName = "RR";
+        pacvparameterUnits = "bpm";
       });
     } else if (pccmvEnabled == true) {
       setState(() {
-        pccmvRRValue = 20;
-        pccmvIeValue = 51;
-        pccmvPeepValue = 10;
-        pccmvPcValue = 25;
-        pccmvFio2Value = 21;
-        pccmvVtminValue = 0;
-        pccmvVtmaxValue = 2400;
-        pccmvTihValue = 50;
-        pccmvFlowRampValue = 4;
-        pccmvmaxValue = 60;
-        pccmvminValue = 1;
-        pccmvdefaultValue = 12;
-        pccmvparameterName = "RR";
-        pccmvparameterUnits = "";
         pccmvRR = true;
         pccmvIe = false;
         pccmvPeep = false;
@@ -21888,23 +21896,33 @@ class _CheckPageState extends State<Dashboard> {
         pccmvVtmax = false;
         pccmvFlowRamp = false;
         pccmvTih = false;
+
+        pccmvRRValue = 20;
+        pccmvIeValue = 51;
+        pccmvPeepValue = 10;
+        pccmvPcValue = 25;
+        pccmvFio2Value = 21;
+        pccmvVtminValue = 0;
+        pccmvVtmaxValue = 2400;
+        pccmvTihValue = 50;
+        pccmvRRValueTemp = 20;
+        pccmvIeValueTemp = 51;
+        pccmvPeepValueTemp = 10;
+        pccmvPcValueTemp = 30;
+        pccmvFio2ValueTemp = 21;
+        pccmvVtminValueTemp = 100;
+        pccmvVtmaxValueTemp = 400;
+        pccmvTihValueTemp = 50;
+        pccmvFlowRampValue = 4;
+
+        pccmvmaxValue = 60;
+        pccmvminValue = 1;
+        pccmvdefaultValue = 12;
+        pccmvparameterName = "RR";
+        pccmvparameterUnits = "bpm";
       });
     } else if (vccmvEnabled == true) {
       setState(() {
-        vccmvRRValue = 20;
-        vccmvIeValue = 51;
-        vccmvPeepValue = 10;
-        vccmvPcMinValue = 20;
-        vccmvPcMaxValue = 60;
-        vccmvFio2Value = 21;
-        vccmvVtValue = 200;
-        vccmvTihValue = 50;
-        vccmvFlowRampValue = 4;
-        vccmvmaxValue = 60;
-        vccmvminValue = 1;
-        vccmvdefaultValue = 12;
-        vccmvparameterName = "RR";
-        vccmvparameterUnits = "";
         vccmvRR = true;
         vccmvIe = false;
         vccmvPeep = false;
@@ -21914,25 +21932,27 @@ class _CheckPageState extends State<Dashboard> {
         vccmvVt = false;
         vccmvFlowRamp = false;
         vccmvTih = false;
+
+        vccmvRRValue = 20;
+        vccmvIeValue = 51;
+        vccmvPeepValue = 10;
+        vccmvPcMinValue = 20;
+        vccmvPcMaxValue = 100;
+        vccmvFio2Value = 21;
+        vccmvVtValue = 300;
+        vccmvTihValue = 50;
+        vccmvFlowRampValue = 4;
+
+        vccmvmaxValue = 60;
+        vccmvminValue = 1;
+        vccmvdefaultValue = 20;
+        vccmvparameterName = "RR";
+        vccmvparameterUnits = "bpm";
       });
     } else if (vacvEnabled == true) {
       setState(() {
-        vacvItrigValue = 3;
-        vacvRrValue = 20;
-        vacvIeValue = 51;
-        vacvPeepValue = 10;
-        vacvVtValue = 200;
-        vacvPcMinValue = 20;
-        vacvPcMaxValue = 60;
-        vacvFio2Value = 21;
-        vacvFlowRampValue = 4;
-        vacvmaxValue = 10;
-        vacvminValue = 1;
-        vacvdefaultValue = 6;
-        vacvparameterName = "I Trig";
-        vacvparameterUnits = "cmH\u2082O Below PEEP";
-        vacvItrig = true;
-        vacvRr = false;
+        vacvItrig = false;
+        vacvRr = true;
         vacvIe = false;
         vacvPeep = false;
         vacvVt = false;
@@ -21940,26 +21960,29 @@ class _CheckPageState extends State<Dashboard> {
         vacvPcMax = false;
         vacvFio2 = false;
         vacvFlowRamp = false;
+
+        vacvItrigValue = 3;
+        vacvRrValue = 20;
+        vacvIeValue = 51;
+        vacvPeepValue = 10;
+        vacvVtValue = 300;
+        vacvPcMinValue = 20;
+        vacvPcMaxValue = 100;
+        vacvFio2Value = 21;
+        vacvFlowRampValue = 4;
+
+        vacvmaxValue = 60;
+        vacvminValue = 1;
+        vacvdefaultValue = 20;
+        vacvparameterName = "RR";
+        vacvparameterUnits = "bpm";
       });
     } else if (psvEnabled == true) {
       setState(() {
-        psvItrigValue = 3;
-        psvPeepValue = 10;
-        psvIeValue = 51;
-        psvPsValue = 30;
-        psvTiValue = 1;
-        psvVtMinValue = 0;
-        psvVtMaxValue = 2400;
-        psvFio2Value = 21;
-        psvAtimeValue = 10;
-        psvEtrigValue = 10;
-        psvBackupRrValue = 20;
-        psvMinTeValue = 1;
-        psvPcValue = 30;
-        psvItrig = true;
+        psvItrig = false;
         psvPeep = false;
         psvIe = false;
-        psvPs = false;
+        psvPs = true;
         psvTi = false;
         psvVtMin = false;
         psvVtMax = false;
@@ -21967,18 +21990,33 @@ class _CheckPageState extends State<Dashboard> {
         psvAtime = false;
         psvEtrig = false;
         psvBackupRr = false;
-        psvMinTe = false;
+        // psvMe = false;
         psvPc = false;
-        psvmaxValue = 10;
-        psvminValue = 1;
-        psvdefaultValue = 6;
-        psvparameterName = "I Trig";
-        psvparameterUnits = "cmH\u2082O Below PEEP";
+
+        psvItrigValue = 3;
+        psvPeepValue = 10;
+        psvIeValue = 51;
+        psvPsValue = 25;
+        psvTiValue = 1;
+        psvVtMinValue = 0;
+        psvVtMaxValue = 2400;
+        psvFio2Value = 21;
+        psvAtimeValue = 10;
+        psvEtrigValue = 10;
+        psvBackupRrValue = 20;
+        // psvMeValue = 1;
+        psvPcValue = 25;
+
+        psvmaxValue = 60;
+        psvminValue = 0;
+        psvdefaultValue = 25;
+        psvparameterName = "PS";
+        psvparameterUnits = "cmH\u2082O  Below PEEP";
       });
     } else if (vsimvEnabled == true) {
       setState(() {
-        vsimvItrig = true;
-        vsimvRr = false;
+        vsimvItrig = false;
+        vsimvRr = true;
         vsimvIe = false;
         vsimvPeep = false;
         vsimvVt = false;
@@ -21987,49 +22025,53 @@ class _CheckPageState extends State<Dashboard> {
         vsimvPcMax = false;
         vsimvFio2 = false;
         vsimvFlowRamp = false;
+
         vsimvItrigValue = 3;
         vsimvRrValue = 20;
         vsimvIeValue = 51;
         vsimvPeepValue = 10;
-        vsimvVtValue = 200;
-        vsimvPsValue = 30;
+        vsimvVtValue = 300;
+        vsimvPsValue = 25;
         vsimvPcMinValue = 20;
-        vsimvPcMaxValue = 60;
+        vsimvPcMaxValue = 100;
         vsimvFio2Value = 21;
         vsimvFlowRampValue = 4;
-        vsimvmaxValue = 10;
+
+        vsimvmaxValue = 30;
         vsimvminValue = 1;
-        vsimvdefaultValue = 6;
-        vsimvparameterName = "I Trig";
-        vsimvparameterUnits = "cmH\u2082O Below PEEP";
+        vsimvdefaultValue = 20;
+        vsimvparameterName = "RR";
+        vsimvparameterUnits = "bpm";
       });
     } else if (psimvEnabled == true) {
       setState(() {
-        vsimvItrig = true;
-        vsimvRr = false;
-        vsimvIe = false;
-        vsimvPeep = false;
-        vsimvVt = false;
-        vsimvPs = false;
-        vsimvPcMin = false;
-        vsimvPcMax = false;
-        vsimvFio2 = false;
-        vsimvFlowRamp = false;
-        vsimvItrigValue = 3;
-        vsimvRrValue = 20;
-        vsimvIeValue = 51;
-        vsimvPeepValue = 10;
-        vsimvVtValue = 200;
-        vsimvPsValue = 30;
-        vsimvPcMinValue = 20;
-        vsimvPcMaxValue = 60;
-        vsimvFio2Value = 22;
-        vsimvFlowRampValue = 4;
-        vsimvmaxValue = 10;
-        vsimvminValue = 1;
-        vsimvdefaultValue = 6;
-        vsimvparameterName = "I Trig";
-        vsimvparameterUnits = "cmH\u2082O Below PEEP";
+        psimvItrig = false;
+        psimvRr = true;
+        psimvIe = false;
+        psimvPeep = false;
+        psimvPc = false;
+        psimvPs = false;
+        psimvVtMin = false;
+        psimvVtMax = false;
+        psimvFio2 = false;
+        psimvFlowRamp = false;
+
+        psimvItrigValue = 3;
+        psimvRrValue = 20;
+        psimvPsValue = 25;
+        psimvIeValue = 51;
+        psimvPeepValue = 10;
+        psimvPcValue = 25;
+        psimvVtMinValue = 0;
+        psimvVtMaxValue = 2400;
+        psimvFio2Value = 21;
+        psimvFlowRampValue = 3;
+
+        psimvmaxValue = 30;
+        psimvminValue = 1;
+        psimvdefaultValue = 20;
+        psimvparameterName = "RR";
+        psimvparameterUnits = "bpm";
       });
     }
   }
@@ -23078,7 +23120,9 @@ class _CheckPageState extends State<Dashboard> {
               pplateauDisplay != 0) {
             try {
               // var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
-              var dataC = (vteValue / (pipValue - peepDisplayValue)).toInt();
+              var dataC =
+                  (vteValue / (pplateauDisplay.toInt() - peepDisplayValue))
+                      .toInt();
               if (dataC < 0) {
                 // cdisplayParameter = 0;
               } else {
@@ -23389,71 +23433,79 @@ class _CheckPageState extends State<Dashboard> {
           batteryPercentage = finalList[65];
           batteryStatus = finalList[78];
         });
-
-        if (patientId != "") {
-          var data = VentilatorOMode(
-              patientId,
-              patientName.toString(),
-              pipValue.toString(),
-              vteValue.toString(),
-              peepDisplayValue.toString(),
-              rrDisplayValue.toString(),
-              fio2DisplayParameter.toString(),
-              mapDisplayValue.toString(),
-              mvValue.toString(),
-              cdisplayParameter.toString(),
-              ieDisplayValue.toString(),
-              rrValue.toString(),
-              checkI(i) + ":" + checkE(e).toString(),
-              peepValue.toString(),
-              psValue.toString(),
-              fio2Value.toString(),
-              vtValue.toString(),
-              tiValue.toString(),
-              teValue.toString(),
-              temp,
-              temp3,
-              temp1,
-              operatinModeR.toString(),
-              lungImage.toString(),
-              paw.toString(),
-              globalCounterNo.toString(),
-              ((finalList[106] << 8) + finalList[107]).toString(),
-              finalList[109].toString(),
-              alarmActive);
-          saveData(data, patientId);
-        } else {
-          var data = VentilatorOMode(
-              "SWASIT " + globalCounterNo.toString(),
-              patientName,
-              pipValue.toString(),
-              vteValue.toString(),
-              peepDisplayValue.toString(),
-              rrDisplayValue.toString(),
-              fio2DisplayParameter.toString(),
-              mapDisplayValue.toString(),
-              mvValue.toString(),
-              cdisplayParameter.toString(),
-              ieDisplayValue.toString(),
-              rrValue.toString(),
-              checkI(i) + ":" + checkE(e).toString(),
-              peepValue.toString(),
-              psValue.toString(),
-              fio2Value.toString(),
-              vtValue.toString(),
-              tiValue.toString(),
-              teValue.toString(),
-              temp,
-              temp3,
-              temp1,
-              operatinModeR.toString(),
-              lungImage.toString(),
-              paw.toString(),
-              globalCounterNo.toString(),
-              ((finalList[106] << 8) + finalList[107]).toString(),
-              finalList[109].toString(),
-              alarmActive);
-          saveData(data, patientId);
+        if (operatinModeR == 1 ||
+            operatinModeR == 2 ||
+            operatinModeR == 3 ||
+            operatinModeR == 4 ||
+            operatinModeR == 5 ||
+            operatinModeR == 6 ||
+            operatinModeR == 7 ||
+            operatinModeR == 14) {
+          if (patientId != "") {
+            var data = VentilatorOMode(
+                patientId,
+                patientName.toString(),
+                pipValue.toString(),
+                vteValue.toString(),
+                peepDisplayValue.toString(),
+                rrDisplayValue.toString(),
+                fio2DisplayParameter.toString(),
+                mapDisplayValue.toString(),
+                mvValue.toString(),
+                cdisplayParameter.toString(),
+                ieDisplayValue.toString(),
+                rrValue.toString(),
+                checkI(i) + ":" + checkE(e).toString(),
+                peepValue.toString(),
+                psValue.toString(),
+                fio2Value.toString(),
+                vtValue.toString(),
+                tiValue.toString(),
+                teValue.toString(),
+                temp,
+                temp3,
+                temp1,
+                operatinModeR.toString(),
+                lungImage.toString(),
+                paw.toString(),
+                globalCounterNo.toString(),
+                ((finalList[106] << 8) + finalList[107]).toString(),
+                finalList[109].toString(),
+                alarmActive);
+            saveData(data, patientId);
+          } else {
+            var data = VentilatorOMode(
+                "SWASIT " + globalCounterNo.toString(),
+                patientName,
+                pipValue.toString(),
+                vteValue.toString(),
+                peepDisplayValue.toString(),
+                rrDisplayValue.toString(),
+                fio2DisplayParameter.toString(),
+                mapDisplayValue.toString(),
+                mvValue.toString(),
+                cdisplayParameter.toString(),
+                ieDisplayValue.toString(),
+                rrValue.toString(),
+                checkI(i) + ":" + checkE(e).toString(),
+                peepValue.toString(),
+                psValue.toString(),
+                fio2Value.toString(),
+                vtValue.toString(),
+                tiValue.toString(),
+                teValue.toString(),
+                temp,
+                temp3,
+                temp1,
+                operatinModeR.toString(),
+                lungImage.toString(),
+                paw.toString(),
+                globalCounterNo.toString(),
+                ((finalList[106] << 8) + finalList[107]).toString(),
+                finalList[109].toString(),
+                alarmActive);
+            saveData(data, patientId);
+          }
         }
         finalList = [];
         list = [];

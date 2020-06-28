@@ -27,6 +27,7 @@ public class UsbEventReceiverActivity extends Activity
             {
                 Parcelable usbDevice = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
 
+
                 // Create a new intent and put the usb device in as an extra
                 Intent broadcastIntent = new Intent(ACTION_USB_DEVICE_ATTACHED);
                 broadcastIntent.putExtra(UsbManager.EXTRA_DEVICE, usbDevice);
