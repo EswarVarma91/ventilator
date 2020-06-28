@@ -4095,7 +4095,7 @@ class _CheckPageState extends State<Dashboard> {
                           : playOnEnabled && powerButtonEnabled
                               ? 70
                               : lockEnabled && playOnEnabled
-                                  ? 60
+                                  ? 140
                                   : playOnEnabled
                                       ? 129
                                       : powerButtonEnabled ? 153 : 220,
@@ -4265,6 +4265,7 @@ class _CheckPageState extends State<Dashboard> {
                   child: Center(
                     child: Container(
                       width: 120,
+                      height: 80,
                       child: Card(
                         color: lockEnabled ? Colors.white : Colors.grey,
                         child: Padding(
@@ -4441,7 +4442,7 @@ class _CheckPageState extends State<Dashboard> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 60, left: 4),
                                                   child: Text(
-                                                    "P Mean",
+                                                    "P mean",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12),
@@ -4690,7 +4691,7 @@ class _CheckPageState extends State<Dashboard> {
                                                               right: 8.0),
                                                       child: Text(
                                                         tiValue
-                                                            .toStringAsFixed(1),
+                                                            .toStringAsFixed(2),
                                                         // "0000",
                                                         style: TextStyle(
                                                             color: Colors.blue,
@@ -4778,7 +4779,7 @@ class _CheckPageState extends State<Dashboard> {
                                                               right: 8.0),
                                                       child: Text(
                                                         teValue
-                                                            .toStringAsFixed(1),
+                                                            .toStringAsFixed(2),
                                                         // "0000",
                                                         style: TextStyle(
                                                             color: Colors.blue,
@@ -15185,12 +15186,12 @@ class _CheckPageState extends State<Dashboard> {
                           children: [
                             Text(
                               pccmvRR
-                                  ? pccmvRRValue.ceil().toInt().toString()
+                                  ? pccmvRRValue.toInt().toString()
                                   // : pccmvIe
                                   //     ? "1:" + pccmvIeValue.toInt().toString()
 
                                   : pccmvIe
-                                      ? getIeData(pccmvIeValue.ceil(), 1)
+                                      ? getIeData(pccmvIeValue, 1)
                                       : pccmvPeep
                                           ? pccmvPeepValue.toInt().toString()
                                           : pccmvPc
@@ -15245,9 +15246,9 @@ class _CheckPageState extends State<Dashboard> {
                           min: pccmvminValue.toDouble() ?? 0,
                           max: pccmvmaxValue.toDouble() ?? 0,
                           value: pccmvRR
-                              ? pccmvRRValue.ceil().toDouble()
+                              ? pccmvRRValue.toDouble()
                               : pccmvIe
-                                  ? pccmvIeValue.ceil().toDouble()
+                                  ? pccmvIeValue.toDouble()
                                   : pccmvPeep
                                       ? pccmvPeepValue.toDouble()
                                       : pccmvPc
@@ -15267,11 +15268,11 @@ class _CheckPageState extends State<Dashboard> {
                             setState(() {
                               if (pccmvRR == true) {
                                 setState(() {
-                                  pccmvRRValue = value.ceil().toInt();
+                                  pccmvRRValue = value.toInt();
                                 });
                               } else if (pccmvIe == true) {
                                 setState(() {
-                                  pccmvIeValue = value.ceil().toInt();
+                                  pccmvIeValue = value.toInt();
                                 });
                               } else if (pccmvPeep == true) {
                                 // if (pccmvPcValue <= pccmvPeepValue) {
@@ -23539,7 +23540,6 @@ class _CheckPageState extends State<Dashboard> {
     // print(listTempF.toString());
     Timer t;
     finalListSend = [];
-    
 
     finalListSend.add(126);
     finalListSend.addAll(listTempF);
