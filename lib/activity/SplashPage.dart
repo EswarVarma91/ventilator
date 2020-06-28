@@ -77,11 +77,14 @@ class _SplashPageState extends State<SplashPage> {
     preferences.setInt("fio2", 21);
     preferences.setInt("tih", 50);
     preferences.setInt("paw", 0);
+    preferences.setInt("itrig", 3);
+    preferences.setInt("atime", 10);
+    preferences.setInt("ti", 1);
     // preferences.setInt("tidal", 14);
     // preferences.setInt("mv", 500);
     preferences.setInt("rrtotal", 0);
-    preferences.setInt("ps", 35);
-    preferences.setInt("pc", 20);
+    preferences.setInt("ps", 25);
+    preferences.setInt("pc", 25);
     preferences.setInt("vt", 400);
     preferences.setInt("te", 20);
     preferences.setInt("vte", 0 );

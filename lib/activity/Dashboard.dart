@@ -149,6 +149,9 @@ class _CheckPageState extends State<Dashboard> {
       pipValue = 0,
       peepDisplayValue = 0,
       fio2Value,
+      itrigValue,
+      atimeValue,
+      tipsvValue,
       ibytValue,
       vteValue,
       leakMeanValue,
@@ -1078,6 +1081,9 @@ class _CheckPageState extends State<Dashboard> {
       vtValue = preferences.getInt("vt");
       vteValue = preferences.getInt("vte");
       fio2Value = preferences.getInt("fio2");
+      itrigValue = preferences.getInt("itrig");
+      atimeValue = preferences.getInt("atime");
+      tipsvValue = preferences.getInt("ti");
       tiValue =
           (((double.tryParse(i) / (double.tryParse(i) + double.tryParse(e))) *
                   (60000 / rrValue)) /
@@ -3918,7 +3924,7 @@ class _CheckPageState extends State<Dashboard> {
                       fontFamily: "appleFont"),
                 ),
                 Text(
-                  "V1.8.2b",
+                  "V1.8.2c",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4168,16 +4174,18 @@ class _CheckPageState extends State<Dashboard> {
                         ],
                       )
                     : Container(),
-
                 InkWell(
                   onTap: () {
                     setState(() {
-                      lockEnabled
-                          ? Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ViewLogPatientList()))
-                          : "";
+                      // if (patientId != "") {
+
+                      lockEnabled ? alarmEnabled = true : "";
+                      // if (_status == "Connected") {
+                      //   writeAlarmsData();
+                      // }
+                      // } else {
+                      //   showAlertDialog(context);
+                      // }
                     });
                   },
                   child: Center(
@@ -4189,7 +4197,7 @@ class _CheckPageState extends State<Dashboard> {
                           padding: const EdgeInsets.all(12.0),
                           child: Center(
                               child: Text(
-                            "View Logs",
+                            "Alarms ",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: lockEnabled ? Colors.black : Colors.white,
@@ -4200,12 +4208,16 @@ class _CheckPageState extends State<Dashboard> {
                     ),
                   ),
                 ),
+
                 InkWell(
                   onTap: () {
                     setState(() {
                       // if (patientId != "") {
-                      writeAlarmsData();
+
                       lockEnabled ? modesEnabled = true : "";
+                      if (_status == "Connected") {
+                        writeAlarmsData();
+                      }
                       // } else {
                       //   showAlertDialog(context);
                       // }
@@ -5595,47 +5607,228 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
-              width: 10,
+            InkWell(
+              onTap: () {
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("ITRI") : "";
+                }
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I Trig",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "%",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         lockEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                "-" + itrigValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: fio2Value != null ? fio2Value / 100 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
             ),
-            // respiratoryEnable == true
-            //     ? InkWell(
-            //         onTap: () {
-            //           insExpButtonEnable = !insExpButtonEnable;
-            //         },
-            //         child: Center(
-            //           child: Material(
-            //             borderRadius: BorderRadius.circular(24.0),
-            //             color: insExpButtonEnable ? Colors.white : Colors.green,
-            //             child: Container(
-            //               width: 160,
-            //               height: 110,
-            //               child: Padding(
-            //                 padding: const EdgeInsets.all(12.0),
-            //                 child: Center(
-            //                     child: Stack(
-            //                   children: [
-            //                     Align(
-            //                       alignment: Alignment.center,
-            //                       child: Text(
-            //                         "Respiratory \n Pause",
-            //                         style: TextStyle(
-            //                             fontSize: 18,
-            //                             fontWeight: FontWeight.bold,
-            //                             color: insExpButtonEnable
-            //                                 ? Colors.black
-            //                                 : Colors.white),
-            //                         textAlign: TextAlign.center,
-            //                       ),
-            //                     ),
-            //                   ],
-            //                 )),
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //       )
-            //     : Container(),
+            InkWell(
+              onTap: () {
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("Apnea Time") : "";
+                }
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Apnea Time",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "s",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         lockEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                atimeValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: fio2Value != null ? fio2Value / 100 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled ? CommonClick("Ti") : "";
+                }
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Ti",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "s",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(top: 17.0),
+                          //     child: Icon(
+                          //         lockEnabled ? Icons.lock_open : Icons.lock,
+                          //         color: Colors.white,
+                          //         size: 15),
+                          //   ),
+                          // ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                getTiValue(tipsvValue).toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomCenter,
+                          //   child: LinearProgressIndicator(
+                          //     backgroundColor: Colors.grey,
+                          //     valueColor: AlwaysStoppedAnimation<Color>(
+                          //       Colors.white,
+                          //     ),
+                          //     value: fio2Value != null ? fio2Value / 100 : 0,
+                          //   ),
+                          // )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -6247,7 +6440,7 @@ class _CheckPageState extends State<Dashboard> {
   bottombar() {
     return Container(
       color: Color(0xFF171e27),
-      width: 708,
+      width: 710,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -6772,6 +6965,91 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+            operatinModeR == 1 ||
+                    operatinModeR == 2 ||
+                    operatinModeR == 3 ||
+                    operatinModeR == 4 ||
+                    operatinModeR == 5 ||
+                    pacvEnabled == true ||
+                    vacvEnabled == true ||
+                    psimvEnabled == true ||
+                    vsimvEnabled == true ||
+                    psvEnabled == true
+                ? InkWell(
+                    onTap: () {
+                      if (modeWriteList.isNotEmpty) {
+                        lockEnabled ? CommonClick("ITRI") : "";
+                      }
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 110,
+                        child: Card(
+                          elevation: 40,
+                          color: lockEnabled ? Color(0xFF213855) : Colors.grey,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "I Trig",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "%",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.white),
+                                  ),
+                                ),
+                                // Align(
+                                //   alignment: Alignment.centerRight,
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.only(top: 17.0),
+                                //     child: Icon(
+                                //         lockEnabled ? Icons.lock_open : Icons.lock,
+                                //         color: Colors.white,
+                                //         size: 15),
+                                //   ),
+                                // ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 17.0),
+                                    child: Text(
+                                      "-" + itrigValue.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                // Align(
+                                //   alignment: Alignment.bottomCenter,
+                                //   child: LinearProgressIndicator(
+                                //     backgroundColor: Colors.grey,
+                                //     valueColor: AlwaysStoppedAnimation<Color>(
+                                //       Colors.white,
+                                //     ),
+                                //     value: fio2Value != null ? fio2Value / 100 : 0,
+                                //   ),
+                                // )
+                              ],
+                            )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
             // InkWell(
             //   onTap: () {
             //     editbbEnabled ? CommonClick("Tih") : Container();
@@ -7079,6 +7357,40 @@ class _CheckPageState extends State<Dashboard> {
                         child: Image.asset("assets/images/powersymbol.png",
                             color: Colors.white),
                       ))),
+              SizedBox(width: 10),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    lockEnabled
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewLogPatientList()))
+                        : "";
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 80,
+                    child: Card(
+                      color: lockEnabled ? Colors.white : Colors.grey,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 0.0, left: 10, right: 10, bottom: 0.0),
+                        child: Center(child: Icon(Icons.history, size: 40)
+                            //     Text(
+                            //   "View Logs",
+                            //   style: TextStyle(
+                            //     fontWeight: FontWeight.bold,
+                            //     color: lockEnabled ? Colors.black : Colors.white,
+                            //   ),
+                            // )
+                            ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
 
@@ -8668,7 +8980,7 @@ class _CheckPageState extends State<Dashboard> {
                                   setState(() {
                                     psvItrigValue = psvItrigValue - 1;
                                   });
-                                } 
+                                }
                                 // else if (psvPeep == true &&
                                 //     psvPeepValue != psvminValue) {
                                 //   setState(() {
@@ -8678,15 +8990,13 @@ class _CheckPageState extends State<Dashboard> {
                                 //       psvItrigValue = psvPeepValue;
                                 //     }
                                 //   });
-                                // } 
+                                // }
                                 else if (psvPeep == true &&
                                     psvPeepValue != psvminValue) {
                                   setState(() {
                                     psvPeepValue = psvPeepValue - 1;
-                                    
                                   });
-                                } 
-                                else if (psvPs == true &&
+                                } else if (psvPs == true &&
                                     psvPsValue != psvPcValue + 1) {
                                   setState(() {
                                     psvPsValue = psvPsValue - 1;
@@ -8780,15 +9090,13 @@ class _CheckPageState extends State<Dashboard> {
                                 //       }
                                 //     }
                                 //   });
-                                // } 
+                                // }
                                 if (psvItrig == true &&
                                     psvItrigValue != psvmaxValue) {
                                   setState(() {
                                     psvItrigValue = psvItrigValue + 1;
-                                    
                                   });
-                                } 
-                                else if (psvPeep == true &&
+                                } else if (psvPeep == true &&
                                     psvPeepValue != psvmaxValue) {
                                   setState(() {
                                     psvPeepValue = psvPeepValue + 1;
@@ -8944,20 +9252,16 @@ class _CheckPageState extends State<Dashboard> {
                               //       }
                               //     }
                               //   });
-                              // } 
+                              // }
                               if (psvItrig == true) {
                                 setState(() {
-                                  
-                                      psvItrigValue = value.toInt();
-                                    
+                                  psvItrigValue = value.toInt();
                                 });
                               } else if (psvPeep == true) {
                                 setState(() {
                                   psvPeepValue = value.toInt();
-                                  
                                 });
-                              } 
-                              else if (psvPs == true) {
+                              } else if (psvPs == true) {
                                 setState(() {
                                   if (value.toInt() >= psvPcValue) {
                                     psvPsValue = psvPcValue;
@@ -17774,20 +18078,16 @@ class _CheckPageState extends State<Dashboard> {
                               //       }
                               //     }
                               //   });
-                              // } 
+                              // }
                               if (vsimvItrig == true && vsimvItrigValue != 10) {
                                 setState(() {
-                                  
-                                      vsimvItrigValue = value.toInt();
-                                   
+                                  vsimvItrigValue = value.toInt();
                                 });
                               } else if (vsimvPeep == true) {
                                 setState(() {
                                   vsimvPeepValue = value.toInt();
-                                  
                                 });
-                              } 
-                              else if (vsimvRr == true) {
+                              } else if (vsimvRr == true) {
                                 setState(() {
                                   vsimvRrValue = value.toInt();
                                 });
@@ -19680,6 +19980,12 @@ class _CheckPageState extends State<Dashboard> {
         sendDataPacket(data, result);
       } else if (data == "vt") {
         sendDataPacket(data, result);
+      } else if (data == "itrig") {
+        sendDataPacket(data, result);
+      } else if (data == "atime") {
+        sendDataPacket(data, result);
+      } else if (data == "ti") {
+        sendDataPacket(data, result);
       }
     }
 
@@ -20377,6 +20683,114 @@ class _CheckPageState extends State<Dashboard> {
         // // // print(modeWriteList.toString());
         // sendDataUsbConnection(modeWriteList);
       }
+    } else if (res == "itrig") {
+      if (pccmvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[10]=((temp & 0xFF00) >> 8);
+        // modeWriteList[11]=(temp & 0xFF);
+        // modeWriteList[18]= (0);
+        // modeWriteList[19]= (8);
+        // // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (vccmvEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[10]=((temp & 0xFF00) >> 8);
+        // modeWriteList[11]=(temp & 0xFF);
+        // modeWriteList[18]= (0);
+        // modeWriteList[19]= (8);
+        // // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      } else if (pacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[4] = ((-temp & 0xFF00) >> 8);
+        modeWriteList[5] = (-temp & 0xFF);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (1);
+        preferences.setInt('pacvItrigValue', temp);
+        getData();
+        // // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vacvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[4] = ((-temp & 0xFF00) >> 8);
+        modeWriteList[5] = (-temp & 0xFF);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (1);
+        preferences.setInt('vacvItrigValue', temp);
+        getData();
+        // // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[4] = ((-temp & 0xFF00) >> 8);
+        modeWriteList[5] = (-temp & 0xFF);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (1);
+
+        preferences.setInt('psimvItrigValue', temp);
+        getData();
+        // // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (vsimvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[4] = ((-temp & 0xFF00) >> 8);
+        modeWriteList[5] = (-temp & 0xFF);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (1);
+
+        preferences.setInt('vsimvItrigValue', temp);
+        getData();
+        // // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (psvEnabled == true) {
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[4] = ((-temp & 0xFF00) >> 8);
+        modeWriteList[5] = (-temp & 0xFF);
+        modeWriteList[32] = (0);
+        modeWriteList[33] = (1);
+
+        preferences.setInt('psvItrigValue', temp);
+        getData();
+        // // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList);
+      } else if (prvcEnabled == true) {
+        // int temp = int.tryParse(result.split("ab")[0]);
+        // modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        // modeWriteList[13] = (temp & 0xFF);
+        // modeWriteList[24] = (0);
+        // modeWriteList[25] = (16);
+        // getData();
+        // // // print(modeWriteList.toString());
+        // sendDataUsbConnection(modeWriteList);
+      }
+    } else if (res == "atime") {
+      
+      int temp = int.tryParse(result.split("ab")[0]);
+      var atimeData = temp*1000;
+
+      modeWriteList[12] = ((atimeData & 0xFF00) >> 8);
+      modeWriteList[13] = (atimeData & 0xFF);
+      modeWriteList[32] = (0);
+      modeWriteList[33] = (16);
+
+      preferences.setInt('psvAtimeValue', temp);
+      getData();
+      // // print(modeWriteList.toString());
+      sendDataUsbConnection(modeWriteList);
+    } else if (res == "ti") {
+      int temp = int.tryParse(result.split("ab")[0]);
+      var calTi = getTiValue(temp);
+      var calTi1 = double.tryParse(calTi);
+      var calTi2 = (calTi1 * 1000).toInt();
+      modeWriteList[16] = ((calTi2 & 0xFF00) >> 8);
+      modeWriteList[17] = (calTi2 & 0xFF);
+      modeWriteList[32] = (0);
+      modeWriteList[33] = (64);
+
+      preferences.setInt('psvTiValue', temp);
+      getData();
+      // // print(modeWriteList.toString());
+      sendDataUsbConnection(modeWriteList);
     }
   }
 
@@ -20733,6 +21147,7 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", pacvFio2Value);
       preferences.setInt("pc", pacvPcValue);
+      preferences.setInt("itrig", pacvItrigValue);
       //==
       preferences.setInt('pacvItrigValue', pacvItrigValue);
       preferences.setInt('pacvRrValue', pacvRrValue);
@@ -20824,6 +21239,7 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
+      preferences.setInt("itrig", vacvItrigValue);
 
       preferences.setInt('vacvItrigValue', vacvItrigValue);
       preferences.setInt('vacvRrValue', vacvRrValue);
@@ -20916,6 +21332,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", psimvFio2Value);
       preferences.setInt("ps", psimvPsValue);
       preferences.setInt("pc", psimvPcValue);
+      preferences.setInt("itrig", psimvItrigValue);
 
       preferences.setInt('psimvItrigValue', psimvItrigValue);
 
@@ -21012,6 +21429,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("vt", vsimvVtValue);
       preferences.setInt("ps", vsimvPsValue);
       preferences.setInt("pc", vsimvPcMaxValue);
+      preferences.setInt("itrig", vsimvItrigValue);
 
       preferences.setInt('vsimvItrigValue', vsimvItrigValue);
 
@@ -21126,6 +21544,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", psvFio2Value);
       preferences.setInt("ps", psvPsValue);
       preferences.setInt("pc", psvPcValue);
+      preferences.setInt("itrig", psvItrigValue);
       // Fluttertoast.showToast(msg:psvPsValue.toString() +" pc "+psvPcValue.toString());
 
       preferences.setInt('psvItrigValue', psvItrigValue);
@@ -21261,34 +21680,37 @@ class _CheckPageState extends State<Dashboard> {
     //   await _port.write(Uint8List.fromList(modeWriteList));
     // }
     writePlay = [];
-    writePlay.add(0x7E);
+    // writePlay.add(0x7E);
     writePlay.add(0);
     writePlay.add(20);
     writePlay.add(0);
     writePlay.add(31);
-    writePlay.add(0x7F);
+    // writePlay.add(0x7F);
 
     //to calculate crc
     // // print(writePlay.toString());
     // Fluttertoast.showToast(msg: writePlay.toString());
+    sendDataUsbConnection(writePlay);
 
-    if (_status == "Connected") {
-      await _port.write(Uint8List.fromList(writePlay));
-    }
+    // if (_status == "Connected") {
+    //   await _port.write(Uint8List.fromList(writePlay));
+    // }
   }
 
   writeDataPause() async {
     writePlay = [];
-    writePlay.add(0x7E);
+    // writePlay.add(0x7E);
     writePlay.add(0);
     writePlay.add(20);
     writePlay.add(0);
     writePlay.add(30);
-    writePlay.add(0x7F);
+    // writePlay.add(0x7F);
 
-    if (_status == "Connected") {
-      await _port.write(Uint8List.fromList(writePlay));
-    }
+    sendDataUsbConnection(writePlay);
+
+    // if (_status == "Connected") {
+    //   await _port.write(Uint8List.fromList(writePlay));
+    // }
   }
 
   sendDataUsbConnection(List<int> samplemodeWriteList) async {
@@ -21330,11 +21752,8 @@ class _CheckPageState extends State<Dashboard> {
                   child: Text("Confirm"),
                   onPressed: () {
                     writeDataPause();
-                    setState(() {
-                      playOnEnabled = true;
-                      selfTestingButtonEnabled = true;
-                      Navigator.pop(context);
-                    });
+                    sleep(Duration(milliseconds:1));
+                    Navigator.pop(context);
                   },
                 ),
                 CupertinoDialogAction(
@@ -21358,11 +21777,8 @@ class _CheckPageState extends State<Dashboard> {
                   child: Text("Confirm"),
                   onPressed: () {
                     writeDataPlay();
-                    setState(() {
-                      playOnEnabled = false;
-                      selfTestingButtonEnabled = true;
-                      Navigator.pop(context);
-                    });
+                    sleep(Duration(milliseconds:1));
+                    Navigator.pop(context);
                   },
                 ),
                 CupertinoDialogAction(
@@ -22572,6 +22988,7 @@ class _CheckPageState extends State<Dashboard> {
                     presentCode == 10 ||
                     presentCode == 11 ||
                     presentCode == 17) {
+                  _stopMusic();
                   _playMusicHigh();
                   sendSoundOn();
                   audioEnable = true;
@@ -22592,11 +23009,13 @@ class _CheckPageState extends State<Dashboard> {
                     presentCode == 20 ||
                     presentCode == 21 ||
                     presentCode == 22) {
+                  _stopMusic();
                   _playMusicMedium();
                   sendSoundOn();
 
                   audioEnable = true;
                 } else if (presentCode == 23) {
+                  _stopMusic();
                   _playMusicLower();
                   sendSoundOn();
                   audioEnable = true;
@@ -23018,9 +23437,9 @@ class _CheckPageState extends State<Dashboard> {
     finalListSend.addAll(listTempF);
     finalListSend.add(127);
     // print(finalListSend.toString());
-    // if(finalListSend[4]==13){
-    //   print(finalListSend);
-    // }
+    if(finalListSend[4]==2 || finalListSend[4]==1 || finalListSend[4]==4 || finalListSend[4]==5 || finalListSend[4]==3){
+    print(finalListSend);
+    }
     await _port.write(Uint8List.fromList(finalListSend));
 
     // // Fluttertoast.showToast(msg:finalListSend.toString());
@@ -23058,7 +23477,33 @@ class _CheckPageState extends State<Dashboard> {
     } else if (acknowReceivedValue == 1 && ackPacket == 13) {
       clearRespiratoryData();
       // modesEnabled = false;
+    } else if (acknowReceivedValue == 1 && ackPacket == 31) {
+      clearPlay();
+    } else if(acknowReceivedValue == 1 && ackPacket == 30){
+      clearPause();
     }
+
+  }
+
+
+  clearPause(){
+    setState(() {
+      acknowReceivedValue = 0;
+      ackPacket = 0;
+      playOnEnabled = true;
+      selfTestingButtonEnabled = true;
+      // Navigator.pop(context);
+    });
+  }
+
+  clearPlay() {
+    setState(() {
+      acknowReceivedValue = 0;
+      ackPacket = 0;
+      playOnEnabled = false;
+      selfTestingButtonEnabled = true;
+      // Navigator.pop(context);
+    });
   }
 
   clearData() {

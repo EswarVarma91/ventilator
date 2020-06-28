@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CommonDialog extends StatefulWidget {
-  String value,status;
+  String value, status;
   CommonDialog(this.value, this.status, {Key key}) : super(key: key);
 
   @override
@@ -11,14 +11,14 @@ class CommonDialog extends StatefulWidget {
 }
 
 class _CommonDialogState extends State<CommonDialog> {
-  double commomValue, commomValue1,checkValue;
+  double commomValue, commomValue1, checkValue;
   SharedPreferences preferences;
   double min, max;
   bool prefix = false;
   bool suffix = false;
   bool units = false;
   double tiValue = 0, teValue = 0;
-  double _pcCheckValue,_psCheckValue;
+  double _pcCheckValue, _psCheckValue;
   bool confirmButton = false;
 
   @override
@@ -28,7 +28,7 @@ class _CommonDialogState extends State<CommonDialog> {
   }
 
   getData() async {
-    preferences = await SharedPreferences.getInstance();//eRR
+    preferences = await SharedPreferences.getInstance(); //eRR
     if (widget.value.toString() == "RR") {
       setState(() {
         commomValue = preferences.getInt("rr").toDouble();
@@ -40,7 +40,7 @@ class _CommonDialogState extends State<CommonDialog> {
         suffix = false;
         units = false;
       });
-    }else if (widget.value.toString() == "eRR") {
+    } else if (widget.value.toString() == "eRR") {
       setState(() {
         commomValue = preferences.getInt("rr").toDouble();
         checkValue = preferences.getInt("rr").toDouble();
@@ -99,7 +99,7 @@ class _CommonDialogState extends State<CommonDialog> {
         checkValue = preferences.getInt("pc").toDouble();
         _psCheckValue = preferences.getInt("ps").toDouble();
         min = 1;
-        max = 80;
+        max = 60;
         prefix = false;
         suffix = false;
         units = true;
@@ -109,7 +109,7 @@ class _CommonDialogState extends State<CommonDialog> {
         commomValue = preferences.getInt("vt").toDouble();
         checkValue = preferences.getInt("vt").toDouble();
         min = 200;
-        max = 1200;
+        max = 600;
         prefix = false;
         suffix = false;
         units = true;
@@ -119,7 +119,7 @@ class _CommonDialogState extends State<CommonDialog> {
         commomValue = preferences.getInt("vt").toDouble();
         checkValue = preferences.getInt("vt").toDouble();
         min = 200;
-        max = 1200;
+        max = 600;
         prefix = false;
         suffix = false;
         units = true;
@@ -148,7 +148,85 @@ class _CommonDialogState extends State<CommonDialog> {
         suffix = false;
         units = false;
       });
+    } else if (widget.value.toString() == "ITRI") {
+      setState(() {
+        commomValue = preferences.getInt("itrig").toDouble();
+        checkValue = preferences.getInt("itrig").toDouble();
+        // commomValue1 = preferences.getInt("rr").toDouble();
+        min = 1;
+        max = 10;
+        prefix = false;
+        suffix = false;
+        units = false;
+      });
+    }else if (widget.value.toString() == "Apnea Time") {
+      setState(() {
+        commomValue = preferences.getInt("atime").toDouble();
+        checkValue = preferences.getInt("atime").toDouble();
+        // commomValue1 = preferences.getInt("rr").toDouble();
+        min = 5;
+        max = 30;
+        prefix = false;
+        suffix = false;
+        units = false;
+      });
+    }else if (widget.value.toString() == "Ti") {
+      setState(() {
+        commomValue = preferences.getInt("ti").toDouble();
+        checkValue = preferences.getInt("ti").toDouble();
+        // commomValue1 = preferences.getInt("rr").toDouble();
+        min = 1;
+        max = 46;
+        prefix = false;
+        suffix = false;
+        units = false;
+      });
     }
+  }
+
+   getTiValue(checkTi) {
+    var data = checkTi == 1
+        ? "0.5"
+        : checkTi == 2
+            ? "0.6"
+            : checkTi == 3
+                ? "0.7"
+                : checkTi == 4
+                    ? "0.8"
+                    : checkTi == 5
+                        ? "0.9"
+                        : checkTi == 6
+                            ? "1.0"
+                            : checkTi == 7
+                                ? "1.1"
+                                : checkTi == 8
+                                    ? "1.2"
+                                    : checkTi == 9
+                                        ? "1.3"
+                                        : checkTi == 10
+                                            ? "1.4"
+                                            : checkTi == 11
+                                                ? "1.5"
+                                                : checkTi == 12
+                                                    ? "1.6"
+                                                    : checkTi == 13
+                                                        ? "1.7"
+                                                        : checkTi == 14
+                                                            ? "1.8"
+                                                            : checkTi == 15
+                                                                ? "1.9"
+                                                                : checkTi == 16
+                                                                    ? "2.0"
+                                                                    : checkTi ==
+                                                                            17
+                                                                        ? "2.1"
+                                                                        : checkTi ==
+                                                                                18
+                                                                            ? "2.2"
+                                                                            : checkTi == 19
+                                                                                ? "2.3"
+                                                                                : checkTi == 20 ? "2.4" : checkTi == 21 ? "2.5" : checkTi == 22 ? "2.6" : checkTi == 23 ? "2.7" : checkTi == 24 ? "2.8" : checkTi == 25 ? "2.9" : checkTi == 26 ? "3.0" : checkTi == 27 ? "3.1" : checkTi == 28 ? "3.2" : checkTi == 29 ? "3.3" : checkTi == 30 ? "3.4" : checkTi == 31 ? "3.5" : checkTi == 32 ? "3.6" : checkTi == 33 ? "3.7" : checkTi == 34 ? "3.8" : checkTi == 35 ? "3.9" : checkTi == 36 ? "4.0" : checkTi == 37 ? "4.1" : checkTi == 38 ? "4.2" : checkTi == 39 ? "4.3" : checkTi == 40 ? "4.4" : checkTi == 41 ? "4.5" : checkTi == 42 ? "4.6" : checkTi == 43 ? "4.7" : checkTi == 44 ? "4.8" : checkTi == 45 ? "4.9" : checkTi == 46 ? "5.0" : "0.5";
+                                                                                   return data;
   }
 
   getIeData(int pccmvIeValue, int res) {
@@ -237,7 +315,11 @@ class _CommonDialogState extends State<CommonDialog> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
-                        widget.value.toString()=="eRR"?"RR" :widget.value.toString(),
+                        widget.value.toString() == "eRR"
+                            ? "RR"
+                            : widget.value.toString() == "ITRI"
+                                ? "I Trig"
+                                : widget.value.toString(),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
@@ -256,81 +338,127 @@ class _CommonDialogState extends State<CommonDialog> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              IconButton(icon: Icon(Icons.remove,size: 50,),onPressed: (){
-                                if(commomValue.ceil().toInt()>=min.toInt()){
-                                  setState(() {
-                                    if(commomValue.toInt()==min.toInt()){
-                                      commomValue = min;
-                                    }else{
-                                    commomValue = commomValue-1.0;
-                                    }
-                                  });
-                                  if(commomValue!=checkValue){
+                              IconButton(
+                                icon: Icon(
+                                  Icons.remove,
+                                  size: 50,
+                                ),
+                                onPressed: () {
+                                  if (commomValue.ceil().toInt() >=
+                                      min.toInt()) {
                                     setState(() {
-                                      confirmButton=true;
+                                      if (commomValue.toInt() == min.toInt()) {
+                                        commomValue = min;
+                                      } else {
+                                        commomValue = commomValue - 1.0;
+                                      }
                                     });
-                                  }else{
-                                    setState(() {
-                                      confirmButton=false;
-                                    }); 
+                                    if (commomValue != checkValue) {
+                                      setState(() {
+                                        confirmButton = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        confirmButton = false;
+                                      });
+                                    }
                                   }
-                                }
-                              },),
-                              SizedBox(width:120),
+                                },
+                              ),
+                              SizedBox(width: 120),
                               Text(
                                 prefix
-                                    ? getIeData(commomValue.toInt(), 1).toString()
+                                    ? getIeData(commomValue.toInt(), 1)
+                                        .toString()
                                     : suffix
                                         ? commomValue.ceil().toString() + "%"
-                                        : commomValue.ceil().toString(),
+                                        : widget.value.toString() == "ITRI"
+                                            ? "-" +
+                                                commomValue.ceil().toString()
+                                            : widget.value.toString() == "Ti" ?
+
+                                            getTiValue(commomValue.ceil())
+                                            
+                                            :commomValue.ceil().toString(),
                                 style: TextStyle(fontSize: 40),
                               ),
-                              SizedBox(width:120),
-                              IconButton(icon: Icon(Icons.add,size: 50,),onPressed: (){
-                                if(commomValue.ceil().toInt()<=max.toInt()){
-                                  setState(() {
-                                    if(commomValue.ceil().toInt()==max.toInt()){
-                                      commomValue = max;
-                                    }else{
-                                    commomValue = commomValue+1.0;
-                                    }
-                                  });
-                                  if(commomValue!=checkValue){
+                              SizedBox(width: 120),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.add,
+                                  size: 50,
+                                ),
+                                onPressed: () {
+                                  if (commomValue.ceil().toInt() <=
+                                      max.toInt()) {
                                     setState(() {
-                                      confirmButton=true;
+                                      if (commomValue.ceil().toInt() ==
+                                          max.toInt()) {
+                                        commomValue = max;
+                                      } else {
+                                        commomValue = commomValue + 1.0;
+                                      }
                                     });
-                                  }else{
-                                    setState(() {
-                                      confirmButton=false;
-                                    }); 
+                                    if (commomValue != checkValue) {
+                                      setState(() {
+                                        confirmButton = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        confirmButton = false;
+                                      });
+                                    }
                                   }
-                                }
-                              },),
+                                },
+                              ),
                             ],
                           ),
-                          
+
                           // Text(widget.value.toString() == "I:E"
                           //     ? "RR = " + commomValue1.toInt().toString()
                           //     : ""),
                           SizedBox(
                             height: 25,
                           ),
-                           Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(widget.value.toString() == "I:E" ? "Min "+getIeData(min.toInt(),1) :"Min "+min.toInt().toString()),
+                              Text(widget.value.toString() == "I:E"
+                                  ? "Min " + getIeData(min.toInt(), 1)
+                                  : widget.value.toString() == "ITRI"
+                                      ? "Min " + "-" + min.toInt().toString()
+                                      :  widget.value.toString() == "Ti"
+                                      ? "Min " + "-" + getTiValue(min.toInt()).toString():
+                                      
+                                      "Min " + min.toInt().toString()),
                               // SizedBox(height: 30,),
-                              Text(widget.value.toString() == "RR" || widget.value.toString() == "eRR"
-                              ? "I:E = " +
-                                  getIeData(commomValue1.toInt(), 1).toString() : widget.value.toString() =="Backup RR" ?
-                                  "I:E = " + getIeData(commomValue1.toInt(), 1).toString()
-                              : widget.value.toString() == "I:E"
-                              ? "RR = " + commomValue1.toInt().toString():
-                               widget.value.toString() == "Backup I:E" 
-                               ? "Backup RR = "+commomValue1.toInt().toString():
-                              ""),
-                              Text(widget.value.toString() == "I:E" ? "Max "+getIeData(max.toInt(),1) :"Max "+max.toInt().toString()),
+                              Text(widget.value.toString() == "RR" ||
+                                      widget.value.toString() == "eRR"
+                                  ? "I:E = " +
+                                      getIeData(commomValue1.toInt(), 1)
+                                          .toString()
+                                  : widget.value.toString() == "Backup RR"
+                                      ? "I:E = " +
+                                          getIeData(commomValue1.toInt(), 1)
+                                              .toString()
+                                      : widget.value.toString() == "I:E"
+                                          ? "RR = " +
+                                              commomValue1.toInt().toString()
+                                          : widget.value.toString() ==
+                                                  "Backup I:E"
+                                              ? "Backup RR = " +
+                                                  commomValue1
+                                                      .toInt()
+                                                      .toString()
+                                              : ""),
+                              Text(widget.value.toString() == "I:E"
+                                  ? "Max " + getIeData(max.toInt(), 1)
+                                  : widget.value.toString() == "ITRI"
+                                      ? "Max " + "-" + max.toInt().toString():
+                                      widget.value.toString() == "Ti"
+                                      ? "Max " + "-" + getTiValue(max.toInt()).toString():
+                                      "Max " + max.toInt().toString()),
                             ],
                           ),
                           Container(
@@ -339,15 +467,16 @@ class _CommonDialogState extends State<CommonDialog> {
                               value: commomValue?.toDouble(),
                               onChanged: (val) {
                                 setState(() {
-                                  commomValue = double.tryParse(val.ceil().toString());
-                                  if(commomValue!=checkValue){
+                                  commomValue =
+                                      double.tryParse(val.ceil().toString());
+                                  if (commomValue != checkValue) {
                                     setState(() {
-                                      confirmButton=true;
+                                      confirmButton = true;
                                     });
-                                  }else{
+                                  } else {
                                     setState(() {
-                                      confirmButton=false;
-                                    }); 
+                                      confirmButton = false;
+                                    });
                                   }
                                 });
                               },
@@ -360,18 +489,22 @@ class _CommonDialogState extends State<CommonDialog> {
                                       : commomValue.ceil().toString(),
                             ),
                           ),
-                         
+
                           Text(
-                                  widget.value.toString() == "RR" || widget.value.toString() == "eRR"
-                                      ? calculateRrIe(commomValue, commomValue1)
-                                      : widget.value.toString() == "Backup RR" 
+                              widget.value.toString() == "RR" ||
+                                      widget.value.toString() == "eRR"
+                                  ? calculateRrIe(commomValue, commomValue1)
+                                  : widget.value.toString() == "Backup RR"
                                       ? calculateRrIe(commomValue, commomValue1)
                                       : widget.value.toString() == "I:E"
-                                      ? calculateIeRr(commomValue, commomValue1)
-                                      : widget.value.toString() == "Backup I:E"
-                                      ? calculateIeRr(commomValue, commomValue1)
-                                      :"",
-                                  style: TextStyle(fontSize: 25)),
+                                          ? calculateIeRr(
+                                              commomValue, commomValue1)
+                                          : widget.value.toString() ==
+                                                  "Backup I:E"
+                                              ? calculateIeRr(
+                                                  commomValue, commomValue1)
+                                              : "",
+                              style: TextStyle(fontSize: 25)),
                           SizedBox(
                             height: 0,
                           ),
@@ -416,31 +549,36 @@ class _CommonDialogState extends State<CommonDialog> {
                             ),
                           ),
                         ),
-                     confirmButton?   Align(
-                          alignment: Alignment.bottomCenter,
-                          child: InkWell(
-                            onTap: () {
-                             widget.status=="Connected"? writeData(commomValue):Fluttertoast.showToast(msg: "No Communication");
-                            },
-                            child: Container(
-                              width: 190,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  color: Color(0xFF424242),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Confirm",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
+                        confirmButton
+                            ? Align(
+                                alignment: Alignment.bottomCenter,
+                                child: InkWell(
+                                  onTap: () {
+                                    widget.status == "Connected"
+                                        ? writeData(commomValue)
+                                        : Fluttertoast.showToast(
+                                            msg: "No Communication");
+                                  },
+                                  child: Container(
+                                    width: 190,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFF424242),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "Confirm",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ):Container(width:190),
+                              )
+                            : Container(width: 190),
                       ],
                     ),
                   ),
@@ -481,12 +619,12 @@ class _CommonDialogState extends State<CommonDialog> {
         preferences.setInt("rr", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "rr");
-    }else if (widget.value.toString() == "eRR") {
+    } else if (widget.value.toString() == "eRR") {
       setState(() {
         preferences.setInt("rr", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "rr");
-    }  else if (widget.value.toString() == "Backup RR") {
+    } else if (widget.value.toString() == "Backup RR") {
       setState(() {
         preferences.setInt("rr", value.ceil());
       });
@@ -531,6 +669,21 @@ class _CommonDialogState extends State<CommonDialog> {
         preferences.setInt("vt", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "vt");
+    }else if (widget.value.toString() == "ITRI") {
+      setState(() {
+        preferences.setInt("itrig", value.ceil());
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "itrig");
+    }else if (widget.value.toString() == "Apnea Time") {
+      setState(() {
+        preferences.setInt("atime", value.ceil());
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "atime");
+    }else if (widget.value.toString() == "Ti") {
+      setState(() {
+        preferences.setInt("ti", value.ceil());
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "ti");
     }
   }
 
@@ -541,9 +694,11 @@ class _CommonDialogState extends State<CommonDialog> {
     var dataE = getIeData(commomValue1.toInt(), 3);
     var dataE1 = double.tryParse(dataE);
 
-    tiValue = (((dataI1 / (dataI1 + dataE1)) * (60000 / commomValue.ceil())) / 1000);
+    tiValue =
+        (((dataI1 / (dataI1 + dataE1)) * (60000 / commomValue.ceil())) / 1000);
     // print(tiValue.toString());
-    teValue = (((dataE1 / (dataI1 + dataE1)) * (60000 / commomValue.ceil())) / 1000);
+    teValue =
+        (((dataE1 / (dataI1 + dataE1)) * (60000 / commomValue.ceil())) / 1000);
 
     return "Ti : " +
         tiValue.toStringAsFixed(2) +
