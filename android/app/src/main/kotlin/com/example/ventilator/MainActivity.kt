@@ -13,13 +13,13 @@ import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
+import com.example.ventilator.util.DownloadController
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-import com.example.ventilator.util.DownloadController
 
 
 class MainActivity: FlutterActivity() {
@@ -206,6 +206,8 @@ class MainActivity: FlutterActivity() {
                         amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true)
                     }
 
+
+
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
@@ -214,6 +216,7 @@ class MainActivity: FlutterActivity() {
                 try {
 //                  // unmute audio
                     val amanager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+//                    amanager.setStreamVolume(AudioManager.STREAM_MUSIC, amanager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                         amanager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
                         amanager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_UNMUTE, 0)
