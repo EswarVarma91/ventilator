@@ -20005,6 +20005,7 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   sendDataPacket(String res, result) {
+    preferences.setBool("play", false);
     if (res == "rr") {
       if (pccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -20991,6 +20992,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('pccmvdefaultValue', pccmvdefaultValue);
 
       if (_status == "Connected") {
+        preferences.setBool("play", false);
         sendDataUsbConnection(modeWriteList);
         // writeAlarmsData();
         // modesEnabled = false;
@@ -21082,6 +21084,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('vccmvdefaultValue', vccmvdefaultValue);
 
       if (_status == "Connected") {
+        preferences.setBool("play", false);
         sendDataUsbConnection(modeWriteList);
         // writeAlarmsData();
         // modesEnabled = false;
@@ -21179,6 +21182,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('pacvdefaultValue', pacvdefaultValue);
 
       if (_status == "Connected") {
+        preferences.setBool("play", false);
         sendDataUsbConnection(modeWriteList);
         // writeAlarmsData();
         // modesEnabled = false;
@@ -21274,6 +21278,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('vacvdefaultValue', vacvdefaultValue);
 
       if (_status == "Connected") {
+        preferences.setBool("play", false);
         sendDataUsbConnection(modeWriteList);
         // writeAlarmsData();
         // modesEnabled = false;
@@ -21372,6 +21377,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('psimvdefaultValue', psimvdefaultValue);
 
       if (_status == "Connected") {
+        preferences.setBool("play", false);
         sendDataUsbConnection(modeWriteList);
         // writeAlarmsData();
         // modesEnabled = false;
@@ -21472,6 +21478,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('vsimvdefaultValue', vsimvdefaultValue);
 
       if (_status == "Connected") {
+        preferences.setBool("play", false);
         sendDataUsbConnection(modeWriteList);
         // writeAlarmsData();
         // modesEnabled = false;
@@ -21595,6 +21602,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('psvdefaultValue', psvdefaultValue);
 
       if (_status == "Connected") {
+        preferences.setBool("play", false);
         sendDataUsbConnection(modeWriteList);
         // writeAlarmsData();
         // modesEnabled = false;
@@ -21675,6 +21683,7 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", prvcFio2Value);
       preferences.setInt("vt", prvcVtValue);
+      
       List<String> strList = modeWriteList.map((i) => i.toString()).toList();
 
       preferences.setStringList("saveList", strList);
@@ -21692,6 +21701,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('prvcdefaultValue', prvcdefaultValue);
 
       if (_status == "Connected") {
+        preferences.setBool("play", false);
         sendDataUsbConnection(modeWriteList);
         // writeAlarmsData();
         // modesEnabled = false;
@@ -21785,7 +21795,7 @@ class _CheckPageState extends State<Dashboard> {
                   child: Text("Confirm"),
                   onPressed: () {
                     writeDataPause();
-                    preferences.setBool("play", false);
+                    preferences.setBool("play", true);
                     sleep(Duration(milliseconds: 1));
                     Navigator.pop(context);
                   },
@@ -21811,7 +21821,7 @@ class _CheckPageState extends State<Dashboard> {
                   child: Text("Confirm"),
                   onPressed: () {
                     writeDataPlay();
-                    preferences.setBool("play", true);
+                    preferences.setBool("play", false);
                     sleep(Duration(milliseconds: 1));
                     Navigator.pop(context);
                   },
