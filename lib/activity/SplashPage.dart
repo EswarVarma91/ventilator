@@ -106,7 +106,6 @@ class _SplashPageState extends State<SplashPage> {
     //  var res = dbHelper.delete7Daysdata(dateS);
     // var res1 = dbHelper1.delete1Daysdata(dateS);
     // print(res.toString()+"  "+res1.toString());
-   
     //  preferences.setInt('noTimes', counter);
     // await sleep(Duration(seconds: 2));
   }
