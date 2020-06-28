@@ -165,7 +165,7 @@ class _CommonDialogState extends State<CommonDialog> {
         checkValue = preferences.getInt("atime").toDouble();
         // commomValue1 = preferences.getInt("rr").toDouble();
         min = 5;
-        max = 30;
+        max = 55;
         prefix = false;
         suffix = false;
         units = false;
@@ -614,6 +614,7 @@ class _CommonDialogState extends State<CommonDialog> {
   }
 
   void writeData(double value) async {
+    
     if (widget.value.toString() == "RR") {
       setState(() {
         preferences.setInt("rr", value.ceil());

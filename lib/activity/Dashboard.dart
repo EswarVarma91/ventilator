@@ -3948,13 +3948,11 @@ class _CheckPageState extends State<Dashboard> {
                   height: 4,
                 ),
                 InkWell(
-                  onTap:(){
-                    Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => About()));
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => About()));
                   },
-                                  child: Text(
+                  child: Text(
                     "SWASIT",
                     style: TextStyle(
                         color: Colors.orange,
@@ -3963,7 +3961,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "V1.8.2d",
+                  "V1.8.2f",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4025,7 +4023,7 @@ class _CheckPageState extends State<Dashboard> {
                           ),
                         ),
                       )
-                    : Container(),
+                    : Container(height: 70),
                 SizedBox(
                   height: 2,
                 ),
@@ -4044,7 +4042,7 @@ class _CheckPageState extends State<Dashboard> {
                               child: IconButton(
                                   icon: Icon(
                                     Icons.play_circle_filled,
-                                    color: Colors.green,
+                                    color: lockEnabled==false ? Colors.grey : Colors.green,
                                     size: 50,
                                   ),
                                   onPressed: () {
@@ -4062,7 +4060,7 @@ class _CheckPageState extends State<Dashboard> {
                               child: IconButton(
                                   icon: Icon(
                                     Icons.pause_circle_filled,
-                                    color: Colors.blue,
+                                    color: lockEnabled==false ? Colors.grey : Colors.blue,
                                     size: 50,
                                   ),
                                   onPressed: () {
@@ -4089,20 +4087,11 @@ class _CheckPageState extends State<Dashboard> {
                             });
                           }),
                     ),
-                    SizedBox(
-                      height: playOnEnabled && powerButtonEnabled && lockEnabled
-                          ? 20
-                          : playOnEnabled && powerButtonEnabled
-                              ? 70
-                              : lockEnabled && playOnEnabled
-                                  ? 140
-                                  : playOnEnabled
-                                      ? 129
-                                      : powerButtonEnabled ? 153 : 220,
-                    ),
                   ],
                 ),
-
+                SizedBox(
+                  height: 70,
+                ),
                 // playOnEnabled
                 //     ? InkWell(
                 //         onTap: () {
@@ -4178,41 +4167,10 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                           ),
 
-                          //       InkWell(
-                          //         onTap: () {
-                          //           setState(() {
-                          //             Navigator.push(
-                          //               context,
-                          //               new MaterialPageRoute(
-                          //                   builder: (context) => SelfTestPage()),
-                          //             );
-                          //           });
-                          //         },
-                          //         child: Center(
-                          //           child: Container(
-                          //             width: 120,
-                          //             child: Card(
-                          //               color: monitorEnabled
-                          //                   ? Colors.blue
-                          //                   : Colors.white,
-                          //               child: Padding(
-                          //                 padding: const EdgeInsets.all(12.0),
-                          //                 child: Center(
-                          //                     child: Text(" Test \n Calibration",
-                          //                         textAlign: TextAlign.center,
-                          //                         style: TextStyle(
-                          //                             fontWeight: FontWeight.bold,
-                          //                             color: monitorEnabled
-                          //                                 ? Colors.white
-                          //                                 : Colors.black))),
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
+                         
                         ],
                       )
-                    : Container(),
+                    : Container(height:35),
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -7884,7 +7842,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              "30",
+                              "55",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psvAtime
@@ -7930,7 +7888,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: psvAtimeValue != null
-                                    ? psvAtimeValue / 30
+                                    ? psvAtimeValue / 55
                                     : 0,
                               ),
                             ),
