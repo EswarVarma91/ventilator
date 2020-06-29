@@ -7274,7 +7274,7 @@ class _CheckPageState extends State<Dashboard> {
                                   style: TextStyle(fontSize: 20)))
                           : batteryStatus == 1
                               ? Image.asset("assets/images/chargingbattery.png",
-                                  width: 28, color: Colors.white)
+                                  width: 28, color: Colors.black)
                               : Image.asset("assets/images/nobattery.png",
                                   width: 28, color: Colors.black))),
               SizedBox(width: 10),
