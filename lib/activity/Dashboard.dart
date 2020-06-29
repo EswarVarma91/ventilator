@@ -291,7 +291,7 @@ class _CheckPageState extends State<Dashboard> {
       psvMinTeValue = 1,
       psvPcValue = 25;
 
-  int psvmaxValue = 60, psvminValue = 0, psvdefaultValue = 25;
+  int psvmaxValue = 60, psvminValue = 1, psvdefaultValue = 25;
   String psvparameterName = "PS", psvparameterUnits = "cmH\u2082O  Below PEEP";
 
   bool psimvItrig = false,
@@ -657,7 +657,7 @@ class _CheckPageState extends State<Dashboard> {
           obj.add(3);
         });
         if (_status == "Connected") {
-          sendDataUsbConnection(obj);
+          sendDataUsbConnection(obj, 2);
         }
       } else {
         setState(() {
@@ -745,7 +745,7 @@ class _CheckPageState extends State<Dashboard> {
             resList.add((result & 0x00FF));
             // resList.add(0x7F);
           });
-          sendDataUsbConnection(resList);
+          sendDataUsbConnection(resList, 2);
         });
       }
     });
@@ -988,7 +988,7 @@ class _CheckPageState extends State<Dashboard> {
       // resList.add(0x7F);
     });
 
-    sendDataUsbConnection(resList);
+    sendDataUsbConnection(resList, 2);
     // await _port.write(Uint8List.fromList(resList));
   }
 
@@ -1113,7 +1113,7 @@ class _CheckPageState extends State<Dashboard> {
       patientWeight = preferences.getString("pweight");
       playOnEnabled = preferences.getBool("play");
       List<String> lsaveListTemp = preferences.getStringList("saveList");
-      if (lsaveListTemp.isNotEmpty) {
+      if (lsaveListTemp.isNotEmpty || lsaveListTemp != null) {
         savedList = lsaveListTemp.map((i) => int.parse(i)).toList();
         setState(() {
           modeWriteList = savedList;
@@ -3326,8 +3326,8 @@ class _CheckPageState extends State<Dashboard> {
                                               ),
                                             ),
                                           ),
-
-                                          vccmvEnabled ||
+                                            
+                                         pacvEnabled ||  vccmvEnabled ||
                                                   vacvEnabled ||
                                                   psvEnabled
                                               ? Container(
@@ -3961,7 +3961,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "V1.8.2f",
+                  "V1.8.3",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4042,7 +4042,9 @@ class _CheckPageState extends State<Dashboard> {
                               child: IconButton(
                                   icon: Icon(
                                     Icons.play_circle_filled,
-                                    color: lockEnabled==false ? Colors.grey : Colors.green,
+                                    color: lockEnabled == false
+                                        ? Colors.grey
+                                        : Colors.green,
                                     size: 50,
                                   ),
                                   onPressed: () {
@@ -4060,7 +4062,9 @@ class _CheckPageState extends State<Dashboard> {
                               child: IconButton(
                                   icon: Icon(
                                     Icons.pause_circle_filled,
-                                    color: lockEnabled==false ? Colors.grey : Colors.blue,
+                                    color: lockEnabled == false
+                                        ? Colors.grey
+                                        : Colors.blue,
                                     size: 50,
                                   ),
                                   onPressed: () {
@@ -4166,11 +4170,9 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-
-                         
                         ],
                       )
-                    : Container(height:35),
+                    : Container(height: 35),
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -5176,7 +5178,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("PS") : "";
+                  lockEnabled ? CommonClick("PSV") : "";
                 } else {}
               },
               child: Center(
@@ -5534,7 +5536,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("PC") : "";
+                  lockEnabled ? CommonClick("PCV") : "";
                 }
               },
               child: Center(
@@ -7433,7 +7435,7 @@ class _CheckPageState extends State<Dashboard> {
             onTap: () {
               setState(() {
                 psvmaxValue = 60;
-                psvminValue = 0;
+                psvminValue = 1;
                 psvparameterName = "PS";
                 psvparameterUnits = "cmH\u2082O above PEEP";
                 psvItrig = false;
@@ -7500,7 +7502,7 @@ class _CheckPageState extends State<Dashboard> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            "0",
+                            "1",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: psvPs
@@ -7547,7 +7549,7 @@ class _CheckPageState extends State<Dashboard> {
             onTap: () {
               setState(() {
                 psvmaxValue = 60;
-                psvminValue = 0;
+                psvminValue = 1;
                 psvparameterName = "PC";
                 psvparameterUnits = "cmH\u2082O above PEEP";
                 psvItrig = false;
@@ -7614,7 +7616,7 @@ class _CheckPageState extends State<Dashboard> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            "0",
+                            "1",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: psvPc
@@ -8995,7 +8997,7 @@ class _CheckPageState extends State<Dashboard> {
                                     psvPeepValue = psvPeepValue - 1;
                                   });
                                 } else if (psvPs == true &&
-                                    psvPsValue != psvPcValue + 1) {
+                                    psvPsValue != psvPcValue + 1 && psvPsValue != 1) {
                                   setState(() {
                                     psvPsValue = psvPsValue - 1;
                                   });
@@ -13639,7 +13641,7 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvFlowRampValue = psimvFlowRampValue - 1;
                                   });
                                 } else if (psimvPs == true &&
-                                    psimvPsValue != psimvPcValue + 1) {
+                                    psimvPsValue != psimvPcValue + 1 && psimvPsValue != 0) {
                                   setState(() {
                                     psimvPsValue = psimvPsValue - 1;
                                   });
@@ -20005,7 +20007,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pccmvRRValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((temp & 0xFF00) >> 8);
@@ -20015,7 +20017,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vccmvRRValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
@@ -20025,7 +20027,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pacvRrValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
@@ -20035,7 +20037,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vacvRrValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
@@ -20045,7 +20047,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psimvRrValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
@@ -20055,7 +20057,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vsimvRrValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
@@ -20066,7 +20068,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psvBackupRrValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
@@ -20076,7 +20078,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('prvcRrValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       }
     } else if (res == "peep") {
       //=============================
@@ -20090,7 +20092,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pccmvPeepValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[8] = ((temp & 0xFF00) >> 8);
@@ -20102,7 +20104,7 @@ class _CheckPageState extends State<Dashboard> {
 
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
@@ -20113,7 +20115,7 @@ class _CheckPageState extends State<Dashboard> {
 
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
@@ -20124,7 +20126,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vacvPeepValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
@@ -20136,7 +20138,7 @@ class _CheckPageState extends State<Dashboard> {
 
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
@@ -20147,7 +20149,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vsimvPeepValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[6] = ((temp & 0xFF00) >> 8);
@@ -20158,7 +20160,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psvPeepValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
@@ -20169,7 +20171,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('prvcPeepValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       }
     } else if (res == "fio2") {
       //=============================
@@ -20183,7 +20185,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pccmvFio2Value', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
@@ -20193,7 +20195,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vccmvFio2Value', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
@@ -20204,7 +20206,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pacvFio2Value', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
@@ -20215,7 +20217,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vacvFio2Value', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
@@ -20225,7 +20227,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psimvFio2Value', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
@@ -20236,7 +20238,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vsimvFio2Value', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
@@ -20248,7 +20250,7 @@ class _CheckPageState extends State<Dashboard> {
 
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[18] = ((temp & 0xFF00) >> 8);
@@ -20258,7 +20260,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('prvcFio2Value', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       }
     } else if (res == "pc") {
       //=====================
@@ -20271,7 +20273,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pccmvPcValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[8]=((temp & 0xFF00) >> 8);
@@ -20279,7 +20281,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (4);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       }
       if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -20290,7 +20292,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pacvPcValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vacvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[10]=((temp & 0xFF00) >> 8);
@@ -20298,7 +20300,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[20]= (0);
         // modeWriteList[21]= (8);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
@@ -20310,7 +20312,7 @@ class _CheckPageState extends State<Dashboard> {
         // preferences.setInt("psimvPsValue", temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vsimvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[10]=((temp & 0xFF00) >> 8);
@@ -20318,7 +20320,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[22]= (0);
         // modeWriteList[23]= (8);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[26] = ((temp & 0xFF00) >> 8);
@@ -20328,7 +20330,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psvPcValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[14] = ((temp & 0xFF00) >> 8);
@@ -20338,7 +20340,7 @@ class _CheckPageState extends State<Dashboard> {
 
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       }
     } else if (res == "ie") {
       if (pccmvEnabled == true) {
@@ -20363,7 +20365,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pccmvIeValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
 
@@ -20386,7 +20388,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vccmvIeValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
 
@@ -20409,7 +20411,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pacvIeValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
 
@@ -20433,7 +20435,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vacvIeValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
 
@@ -20457,7 +20459,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psimvIeValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
 
@@ -20480,7 +20482,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vsimvIeValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
 
@@ -20504,7 +20506,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psvIeValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
 
@@ -20528,7 +20530,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('prvcIeValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       }
     } else if (res == "vt") {
       if (pccmvEnabled == true) {
@@ -20538,7 +20540,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (8);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[10] = ((temp & 0xFF00) >> 8);
@@ -20549,7 +20551,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vccmvVtValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (pacvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[12]=((temp & 0xFF00) >> 8);
@@ -20557,7 +20559,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[20]= (0);
         // modeWriteList[21]= (16);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
@@ -20568,7 +20570,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vacvVtValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psimvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[12]=((temp & 0xFF00) >> 8);
@@ -20576,7 +20578,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[22]= (0);
         // modeWriteList[23]= (16);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[16] = ((temp & 0xFF00) >> 8);
@@ -20587,7 +20589,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vsimvVtValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[10]=((temp & 0xFF00) >> 8);
@@ -20595,7 +20597,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[24]= (0);
         // modeWriteList[25]= (8);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[12] = ((temp & 0xFF00) >> 8);
@@ -20606,7 +20608,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('prvcVtValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       }
     } else if (res == "ps") {
       if (pccmvEnabled == true) {
@@ -20616,7 +20618,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (8);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (vccmvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[10]=((temp & 0xFF00) >> 8);
@@ -20624,7 +20626,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (8);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (pacvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[12]=((temp & 0xFF00) >> 8);
@@ -20632,7 +20634,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[20]= (0);
         // modeWriteList[21]= (16);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (vacvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[12]=((temp & 0xFF00) >> 8);
@@ -20640,7 +20642,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[20]= (0);
         // modeWriteList[21]= (16);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[20] = ((temp & 0xFF00) >> 8);
@@ -20651,7 +20653,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psimvPsValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[20] = ((temp & 0xFF00) >> 8);
@@ -20662,7 +20664,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vsimvPsValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[8] = ((temp & 0xFF00) >> 8);
@@ -20673,7 +20675,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psvPsValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[12] = ((temp & 0xFF00) >> 8);
@@ -20682,7 +20684,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[23] = (16);
         // getData();
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       }
     } else if (res == "itrig") {
       if (pccmvEnabled == true) {
@@ -20692,7 +20694,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (8);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (vccmvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[10]=((temp & 0xFF00) >> 8);
@@ -20700,7 +20702,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[18]= (0);
         // modeWriteList[19]= (8);
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       } else if (pacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((-temp & 0xFF00) >> 8);
@@ -20710,7 +20712,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('pacvItrigValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vacvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((-temp & 0xFF00) >> 8);
@@ -20720,7 +20722,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vacvItrigValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((-temp & 0xFF00) >> 8);
@@ -20731,7 +20733,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psimvItrigValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (vsimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((-temp & 0xFF00) >> 8);
@@ -20742,7 +20744,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('vsimvItrigValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (psvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((-temp & 0xFF00) >> 8);
@@ -20753,7 +20755,7 @@ class _CheckPageState extends State<Dashboard> {
         preferences.setInt('psvItrigValue', temp);
         getData();
         // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[12] = ((temp & 0xFF00) >> 8);
@@ -20762,7 +20764,7 @@ class _CheckPageState extends State<Dashboard> {
         // modeWriteList[25] = (16);
         // getData();
         // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList);
+        // sendDataUsbConnection(modeWriteList,1);
       }
     } else if (res == "atime") {
       int temp = int.tryParse(result.split("ab")[0]);
@@ -20776,7 +20778,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('psvAtimeValue', temp);
       getData();
       // // print(modeWriteList.toString());
-      sendDataUsbConnection(modeWriteList);
+      sendDataUsbConnection(modeWriteList, 1);
     } else if (res == "ti") {
       int temp = int.tryParse(result.split("ab")[0]);
       var calTi = getTiValue(temp);
@@ -20790,7 +20792,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt('psvTiValue', temp);
       getData();
       // // print(modeWriteList.toString());
-      sendDataUsbConnection(modeWriteList);
+      sendDataUsbConnection(modeWriteList, 1);
     }
   }
 
@@ -20983,7 +20985,7 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 2);
         // writeAlarmsData();
         // modesEnabled = false;
       } else {
@@ -21075,7 +21077,7 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 2);
         // writeAlarmsData();
         // modesEnabled = false;
       } else {
@@ -21173,7 +21175,7 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 2);
         // writeAlarmsData();
         // modesEnabled = false;
       } else {
@@ -21269,7 +21271,7 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 2);
         // writeAlarmsData();
         // modesEnabled = false;
       } else {
@@ -21368,7 +21370,7 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 2);
         // writeAlarmsData();
         // modesEnabled = false;
       } else {
@@ -21469,7 +21471,7 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 2);
         // writeAlarmsData();
         // modesEnabled = false;
       } else {
@@ -21593,7 +21595,7 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 2);
         // writeAlarmsData();
         // modesEnabled = false;
       } else {
@@ -21691,7 +21693,7 @@ class _CheckPageState extends State<Dashboard> {
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
-        sendDataUsbConnection(modeWriteList);
+        sendDataUsbConnection(modeWriteList, 2);
         // writeAlarmsData();
         // modesEnabled = false;
       } else {
@@ -21722,7 +21724,7 @@ class _CheckPageState extends State<Dashboard> {
     //to calculate crc
     // // print(writePlay.toString());
     // Fluttertoast.showToast(msg: writePlay.toString());
-    sendDataUsbConnection(writePlay);
+    sendDataUsbConnection(writePlay, 2);
 
     // if (_status == "Connected") {
     //   await _port.write(Uint8List.fromList(writePlay));
@@ -21738,14 +21740,14 @@ class _CheckPageState extends State<Dashboard> {
     writePlay.add(30);
     // writePlay.add(0x7F);
 
-    sendDataUsbConnection(writePlay);
+    sendDataUsbConnection(writePlay, 2);
 
     // if (_status == "Connected") {
     //   await _port.write(Uint8List.fromList(writePlay));
     // }
   }
 
-  sendDataUsbConnection(List<int> samplemodeWriteList) async {
+  sendDataUsbConnection(List<int> samplemodeWriteList, checkValue) async {
     list = [];
     List<int> listTempF = [];
     int cIndex = 0;
@@ -21770,7 +21772,7 @@ class _CheckPageState extends State<Dashboard> {
     }
     // print(listTempF);
 
-    sendData(listTempF);
+    sendData(listTempF, checkValue);
   }
 
   showDialogPause() {
@@ -21977,7 +21979,7 @@ class _CheckPageState extends State<Dashboard> {
         psvPcValue = 25;
 
         psvmaxValue = 60;
-        psvminValue = 0;
+        psvminValue = 1;
         psvdefaultValue = 25;
         psvparameterName = "PS";
         psvparameterUnits = "cmH\u2082O  Below PEEP";
@@ -22099,7 +22101,7 @@ class _CheckPageState extends State<Dashboard> {
     preferences.setInt("maxppeak", maxppeak);
     preferences.setInt("minpeep", minpeep);
     preferences.setInt("maxpeep", maxpeep);
-    sendDataUsbConnection(alarmList);
+    sendDataUsbConnection(alarmList, 2);
     setState(() {
       alarmConfirmed = true;
     });
@@ -23494,63 +23496,49 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  sendData(List<int> listTempF) async {
+  sendData(List<int> listTempF, checkValue) async {
     // print(listTempF.toString());
-    Timer t;
     finalListSend = [];
 
     finalListSend.add(126);
     finalListSend.addAll(listTempF);
     finalListSend.add(127);
-    // print(finalListSend.toString());
-    // if (finalListSend[4] == 2 ||
-    //     finalListSend[4] == 1 ||
-    //     finalListSend[4] == 4 ||
-    //     finalListSend[4] == 5 ||
-    //     finalListSend[4] == 3) {
-    //   print(finalListSend);
-    // }
+
     await _port.write(Uint8List.fromList(finalListSend));
 
-    // // Fluttertoast.showToast(msg:finalListSend.toString());
-    // t = Timer.periodic(Duration(milliseconds: 150), (timer) async{
-    //    await _port.write(Uint8List.fromList(finalListSend));
-    //  });
-
-    if (acknowReceivedValue == 1 && ackPacket == 6) {
-      clearData();
-      // writeAlarmsData();
-    } else if (acknowReceivedValue == 1 && ackPacket == 7) {
-      clearData();
-      // writeAlarmsData();
-    } else if (acknowReceivedValue == 1 && ackPacket == 2) {
-      clearData();
-      // writeAlarmsData();
-    } else if (acknowReceivedValue == 1 && ackPacket == 1) {
-      clearData();
-      // writeAlarmsData();
-    } else if (acknowReceivedValue == 1 && ackPacket == 3) {
-      clearData();
-      // writeAlarmsData();
-    } else if (acknowReceivedValue == 1 && ackPacket == 4) {
-      clearData();
-      // writeAlarmsData();
-    } else if (acknowReceivedValue == 1 && ackPacket == 5) {
-      clearData();
-      // writeAlarmsData();
-    } else if (acknowReceivedValue == 1 && ackPacket == 14) {
-      clearData();
-      // writeAlarmsData();
-    } else if (acknowReceivedValue == 1 && ackPacket == 10) {
-      clearAlarmData();
-      // modesEnabled = false;
-    } else if (acknowReceivedValue == 1 && ackPacket == 13) {
-      clearRespiratoryData();
-      // modesEnabled = false;
-    } else if (acknowReceivedValue == 1 && ackPacket == 31) {
-      clearPlay();
-    } else if (acknowReceivedValue == 1 && ackPacket == 30) {
-      clearPause();
+    if (checkValue == 1) {
+      if (acknowReceivedValue == 1 && ackPacket == 6 || acknowReceivedValue == 1 && ackPacket == 7
+      || acknowReceivedValue == 1 && ackPacket == 2 || acknowReceivedValue == 1 && ackPacket == 1
+      || acknowReceivedValue == 1 && ackPacket == 3 || acknowReceivedValue == 1 && ackPacket == 4
+      || acknowReceivedValue == 1 && ackPacket == 5 ||  acknowReceivedValue == 1 && ackPacket == 14) {
+        clearDialogData();
+        // writeAlarmsData();
+      } else if(acknowReceivedValue == 0 && ackPacket == 6 || acknowReceivedValue == 0 && ackPacket == 7
+      || acknowReceivedValue == 0 && ackPacket == 2 || acknowReceivedValue == 0 && ackPacket == 1
+      || acknowReceivedValue == 0 && ackPacket == 3 || acknowReceivedValue == 0 && ackPacket == 4
+      || acknowReceivedValue == 0 && ackPacket == 5 ||  acknowReceivedValue == 0 && ackPacket == 14) {
+        // Fluttertoast.showToast(msg: "Failed to communicate");
+        var data = preferences.getString("dialog");
+        // CommonClick(data);
+      }
+    } else {
+      if (acknowReceivedValue == 1 && ackPacket == 6 || acknowReceivedValue == 1 && ackPacket == 7
+      || acknowReceivedValue == 1 && ackPacket == 2 || acknowReceivedValue == 1 && ackPacket == 1
+      || acknowReceivedValue == 1 && ackPacket == 3 || acknowReceivedValue == 1 && ackPacket == 4
+      || acknowReceivedValue == 1 && ackPacket == 5 ||  acknowReceivedValue == 1 && ackPacket == 14) {
+        clearData();
+        // writeAlarmsData();
+      }  else if (acknowReceivedValue == 1 && ackPacket == 10) {
+        clearAlarmData();
+        // modesEnabled = false;
+      } else if (acknowReceivedValue == 1 && ackPacket == 13) {
+        clearRespiratoryData();
+        // modesEnabled = false;
+      } else if (acknowReceivedValue == 1 && ackPacket == 31) {
+        clearPlay();
+      } else if (acknowReceivedValue == 1 && ackPacket == 30) {
+        clearPause();
+      }
     }
   }
 
@@ -23603,6 +23591,18 @@ class _CheckPageState extends State<Dashboard> {
       ackPacket = 0;
       // t.stop();
       // Fluttertoast.showToast(msg:"Succes 13");
+      finalListSend.clear();
+    });
+  }
+
+  void clearDialogData() {
+    print(finalListSend.toString());
+    setState(() {
+      // modesEnabled = false;
+      acknowReceivedValue = 0;
+      ackPacket = 0;
+      // t.stop();
+      // Fluttertoast.showToast(msg:"Succes");
       finalListSend.clear();
     });
   }

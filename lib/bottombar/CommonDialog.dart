@@ -83,6 +83,17 @@ class _CommonDialogState extends State<CommonDialog> {
         suffix = false;
         units = true;
       });
+    } else if (widget.value.toString() == "PSV") {
+      setState(() {
+        commomValue = preferences.getInt("ps").toDouble();
+        checkValue = preferences.getInt("ps").toDouble();
+        _pcCheckValue = preferences.getInt("pc").toDouble();
+        min = 1;
+        max = _pcCheckValue;
+        prefix = false;
+        suffix = false;
+        units = true;
+      });
     } else if (widget.value.toString() == "FiO2") {
       setState(() {
         commomValue = preferences.getInt("fio2").toDouble();
@@ -99,6 +110,17 @@ class _CommonDialogState extends State<CommonDialog> {
         checkValue = preferences.getInt("pc").toDouble();
         _psCheckValue = preferences.getInt("ps").toDouble();
         min = 0;
+        max = 60;
+        prefix = false;
+        suffix = false;
+        units = true;
+      });
+    } else if (widget.value.toString() == "PCV") {
+      setState(() {
+        commomValue = preferences.getInt("pc").toDouble();
+        checkValue = preferences.getInt("pc").toDouble();
+        _psCheckValue = preferences.getInt("ps").toDouble();
+        min = 1;
         max = 60;
         prefix = false;
         suffix = false;
@@ -319,6 +341,8 @@ class _CommonDialogState extends State<CommonDialog> {
                             ? "RR"
                             : widget.value.toString() == "ITRI"
                                 ? "I Trig"
+                                : widget.value.toString()=="PSV" ? "PS" 
+                                : widget.value.toString()=="PCV" ? "PC" 
                                 : widget.value.toString(),
                         style: TextStyle(
                             color: Colors.white,
@@ -614,7 +638,7 @@ class _CommonDialogState extends State<CommonDialog> {
   }
 
   void writeData(double value) async {
-    
+    preferences.setString("dialog",widget.value.toString());
     if (widget.value.toString() == "RR") {
       setState(() {
         preferences.setInt("rr", value.ceil());
@@ -650,12 +674,27 @@ class _CommonDialogState extends State<CommonDialog> {
         preferences.setInt("ps", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "ps");
-    } else if (widget.value.toString() == "FiO2") {
+    } else if (widget.value.toString() == "PSV") {
+      setState(() {
+        preferences.setInt("ps", value.ceil());
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "ps");
+    }else if (widget.value.toString() == "FiO2") {
       setState(() {
         preferences.setInt("fio2", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "fio2");
     } else if (widget.value.toString() == "PC") {
+      setState(() {
+        preferences.setInt("pc", value.ceil());
+        // print(value.ceil().toString() + " " + _psCheckValue.ceil().toString());
+        if (value.ceil().toInt() < _psCheckValue.ceil().toInt()) {
+          preferences.setInt("ps", value.ceil());
+         
+        }
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "pc");
+    } else if (widget.value.toString() == "PCV") {
       setState(() {
         preferences.setInt("pc", value.ceil());
         // print(value.ceil().toString() + " " + _psCheckValue.ceil().toString());
