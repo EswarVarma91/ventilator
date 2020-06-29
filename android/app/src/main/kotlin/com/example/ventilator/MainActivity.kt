@@ -162,7 +162,6 @@ class MainActivity: FlutterActivity() {
             }
             else if(call.method == "checkforUpdates"){
 //                print(params?.get("from")as String);
-
                 try {
                     downloadController = DownloadController(this, params?.get("urlFlutter") as String)
 //                    downloadController = DownloadController(this, apkUrl)
@@ -172,7 +171,6 @@ class MainActivity: FlutterActivity() {
                             downloadController.enqueueDownload()
                         }
                     })
-
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
@@ -205,9 +203,6 @@ class MainActivity: FlutterActivity() {
                         amanager.setStreamMute(AudioManager.STREAM_RING, true)
                         amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true)
                     }
-
-
-
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }

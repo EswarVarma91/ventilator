@@ -16505,7 +16505,7 @@ class _CheckPageState extends State<Dashboard> {
                                   // if (value.toInt() <= vccmvPcMinValue + 1) {
                                   //   vccmvPcMaxValue = vccmvPcMinValue + 1;
                                   // } else {
-                                    vccmvPcMaxValue = value.toInt();
+                                  vccmvPcMaxValue = value.toInt();
                                   // }
                                 });
                               } else if (vccmvFlowRamp == true) {
@@ -19621,7 +19621,7 @@ class _CheckPageState extends State<Dashboard> {
                                   // if (value.toInt() <= vacvPcMinValue + 1) {
                                   //   vacvPcMaxValue = vacvPcMinValue + 1;
                                   // } else {
-                                    vacvPcMaxValue = value.toInt();
+                                  vacvPcMaxValue = value.toInt();
                                   // }
                                 });
                               } else if (vacvFio2 == true) {
@@ -22993,48 +22993,71 @@ class _CheckPageState extends State<Dashboard> {
 
           checkTempData = finalList[31].toString();
 
+          var highPriorityAlarm = 0;
+          var mediumPriorityAlarm = 0;
+          var lowPriorityAlarm = 0;
+
           if (finalList[108] == 1) {
             presentCode = ((finalList[106] << 8) + finalList[107]);
             alarmCounter = finalList[90];
 
             if (presentCode != previousCode) {
               previousCode = presentCode;
+              _stopMusic();
               var data = AlarmsList(
                   presentCode.toString(), this.globalCounterNo.toString());
               dbHelpera.saveAlarm(data);
               // alarmPrevCounter = alarmCounter;
-              _stopMusic();
 
-              if (presentCode == 5 ||
-                  presentCode == 7 ||
-                  presentCode == 10 ||
-                  presentCode == 11 ||
-                  presentCode == 17) {
+              if ((presentCode == 5 ||
+                      presentCode == 7 ||
+                      presentCode == 10 ||
+                      presentCode == 11 ||
+                      presentCode == 17) &&
+                  highPriorityAlarm == 0) {
+                setState(() {
+                  highPriorityAlarm = 1;
+                  mediumPriorityAlarm = 0;
+                  lowPriorityAlarm = 0;
+                });
+                _stopMusic();
                 _playMusicHigh();
                 sendSoundOn();
                 audioEnable = true;
-              } else if (presentCode == 1 ||
-                  presentCode == 2 ||
-                  presentCode == 3 ||
-                  presentCode == 4 ||
-                  presentCode == 6 ||
-                  presentCode == 8 ||
-                  presentCode == 9 ||
-                  presentCode == 12 ||
-                  presentCode == 13 ||
-                  presentCode == 14 ||
-                  presentCode == 15 ||
-                  presentCode == 16 ||
-                  presentCode == 18 ||
-                  presentCode == 19 ||
-                  presentCode == 20 ||
-                  presentCode == 21 ||
-                  presentCode == 22) {
+              } else if ((presentCode == 1 ||
+                      presentCode == 2 ||
+                      presentCode == 3 ||
+                      presentCode == 4 ||
+                      presentCode == 6 ||
+                      presentCode == 8 ||
+                      presentCode == 9 ||
+                      presentCode == 12 ||
+                      presentCode == 13 ||
+                      presentCode == 14 ||
+                      presentCode == 15 ||
+                      presentCode == 16 ||
+                      presentCode == 18 ||
+                      presentCode == 19 ||
+                      presentCode == 20 ||
+                      presentCode == 21 ||
+                      presentCode == 22) &&
+                  mediumPriorityAlarm == 0) {
+                setState(() {
+                  highPriorityAlarm = 0;
+                  mediumPriorityAlarm = 1;
+                  lowPriorityAlarm = 0;
+                });
+                _stopMusic();
                 _playMusicMedium();
                 sendSoundOn();
-
                 audioEnable = true;
-              } else if (presentCode == 23) {
+              } else if (presentCode == 23 && lowPriorityAlarm == 0) {
+                setState(() {
+                  highPriorityAlarm = 0;
+                  mediumPriorityAlarm = 0;
+                  lowPriorityAlarm = 1;
+                });
+                _stopMusic();
                 _playMusicLower();
                 sendSoundOn();
                 audioEnable = true;
@@ -23042,42 +23065,59 @@ class _CheckPageState extends State<Dashboard> {
             } else {
               if (alarmCounter != alarmPrevCounter) {
                 alarmPrevCounter = alarmCounter;
+                _stopMusic();
                 var data = AlarmsList(
                     presentCode.toString(), this.globalCounterNo.toString());
                 dbHelpera.saveAlarm(data);
-                _stopMusic();
-                if (presentCode == 5 ||
-                    presentCode == 7 ||
-                    presentCode == 10 ||
-                    presentCode == 11 ||
-                    presentCode == 17) {
+
+                if ((presentCode == 5 ||
+                        presentCode == 7 ||
+                        presentCode == 10 ||
+                        presentCode == 11 ||
+                        presentCode == 17) &&
+                    highPriorityAlarm == 0) {
+                  setState(() {
+                    highPriorityAlarm = 1;
+                    mediumPriorityAlarm = 0;
+                    lowPriorityAlarm = 0;
+                  });
                   _stopMusic();
                   _playMusicHigh();
                   sendSoundOn();
                   audioEnable = true;
-                } else if (presentCode == 1 ||
-                    presentCode == 2 ||
-                    presentCode == 3 ||
-                    presentCode == 4 ||
-                    presentCode == 6 ||
-                    presentCode == 8 ||
-                    presentCode == 9 ||
-                    presentCode == 12 ||
-                    presentCode == 13 ||
-                    presentCode == 14 ||
-                    presentCode == 15 ||
-                    presentCode == 16 ||
-                    presentCode == 18 ||
-                    presentCode == 19 ||
-                    presentCode == 20 ||
-                    presentCode == 21 ||
-                    presentCode == 22) {
+                } else if ((presentCode == 1 ||
+                        presentCode == 2 ||
+                        presentCode == 3 ||
+                        presentCode == 4 ||
+                        presentCode == 6 ||
+                        presentCode == 8 ||
+                        presentCode == 9 ||
+                        presentCode == 12 ||
+                        presentCode == 13 ||
+                        presentCode == 14 ||
+                        presentCode == 15 ||
+                        presentCode == 16 ||
+                        presentCode == 18 ||
+                        presentCode == 19 ||
+                        presentCode == 20 ||
+                        presentCode == 21 ||
+                        presentCode == 22) &&
+                    mediumPriorityAlarm == 0) {
+                  setState(() {
+                    highPriorityAlarm = 0;
+                    mediumPriorityAlarm = 1;
+                    lowPriorityAlarm = 0;
+                  });
                   _stopMusic();
                   _playMusicMedium();
                   sendSoundOn();
-
                   audioEnable = true;
-                } else if (presentCode == 23) {
+                } else if (presentCode == 23 && lowPriorityAlarm == 0) {
+                  setState(() {
+                    highPriorityAlarm = 0;
+                    mediumPriorityAlarm = 0;
+                    lowPriorityAlarm = 1;
+                  });
                   _stopMusic();
                   _playMusicLower();
                   sendSoundOn();
@@ -23086,6 +23126,11 @@ class _CheckPageState extends State<Dashboard> {
               }
             }
           } else if (finalList[108] == 0) {
+            setState(() {
+              highPriorityAlarm = 0;
+              mediumPriorityAlarm = 0;
+              lowPriorityAlarm = 1;
+            });
             sendSoundOff();
             _stopMusic();
           }
