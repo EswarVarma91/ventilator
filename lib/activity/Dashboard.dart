@@ -3326,8 +3326,9 @@ class _CheckPageState extends State<Dashboard> {
                                               ),
                                             ),
                                           ),
-                                            
-                                         pacvEnabled ||  vccmvEnabled ||
+
+                                          pacvEnabled ||
+                                                  vccmvEnabled ||
                                                   vacvEnabled ||
                                                   psvEnabled
                                               ? Container(
@@ -8997,7 +8998,8 @@ class _CheckPageState extends State<Dashboard> {
                                     psvPeepValue = psvPeepValue - 1;
                                   });
                                 } else if (psvPs == true &&
-                                    psvPsValue != psvPcValue + 1 && psvPsValue != 1) {
+                                    psvPsValue != psvPcValue + 1 &&
+                                    psvPsValue != 1) {
                                   setState(() {
                                     psvPsValue = psvPsValue - 1;
                                   });
@@ -9028,7 +9030,8 @@ class _CheckPageState extends State<Dashboard> {
                                     psvFio2Value = psvFio2Value - 1;
                                   });
                                 } else if (psvPc == true &&
-                                    psvPcValue != psvminValue) {
+                                    psvPcValue != psvminValue &&
+                                    psvPcValue != 1) {
                                   setState(() {
                                     psvPcValue = psvPcValue - 1;
                                     if (psvPcValue < psvPsValue) {
@@ -13612,7 +13615,8 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvIeValue = psimvIeValue - 1;
                                   });
                                 } else if (psimvPc == true &&
-                                    psimvPcValue != psvminValue) {
+                                    psimvPcValue != psimvminValue &&
+                                    psimvPcValue != 0) {
                                   setState(() {
                                     psimvPcValue = psimvPcValue - 1;
                                     if (psimvPcValue < psimvPsValue) {
@@ -13641,7 +13645,8 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvFlowRampValue = psimvFlowRampValue - 1;
                                   });
                                 } else if (psimvPs == true &&
-                                    psimvPsValue != psimvPcValue + 1 && psimvPsValue != 0) {
+                                    psimvPsValue != psimvPcValue + 1 &&
+                                    psimvPsValue != 0) {
                                   setState(() {
                                     psimvPsValue = psimvPsValue - 1;
                                   });
@@ -16277,7 +16282,7 @@ class _CheckPageState extends State<Dashboard> {
                                     // }
                                   });
                                 } else if (vccmvPcMax == true &&
-                                    vccmvPcMaxValue != vccmvPcMinValue + 1) {
+                                    vccmvPcMaxValue != vccmvminValue) {
                                   vccmvPcMaxValue = vccmvPcMaxValue - 1;
                                 } else if (vccmvFio2 == true &&
                                     vccmvFio2Value != vccmvminValue) {
@@ -16497,11 +16502,11 @@ class _CheckPageState extends State<Dashboard> {
                                 }
                               } else if (vccmvPcMax == true) {
                                 setState(() {
-                                  if (value.toInt() <= vccmvPcMinValue + 1) {
-                                    vccmvPcMaxValue = vccmvPcMinValue + 1;
-                                  } else {
+                                  // if (value.toInt() <= vccmvPcMinValue + 1) {
+                                  //   vccmvPcMaxValue = vccmvPcMinValue + 1;
+                                  // } else {
                                     vccmvPcMaxValue = value.toInt();
-                                  }
+                                  // }
                                 });
                               } else if (vccmvFlowRamp == true) {
                                 setState(() {
@@ -17885,7 +17890,7 @@ class _CheckPageState extends State<Dashboard> {
                                     // }
                                   });
                                 } else if (vsimvPcMax == true &&
-                                    vsimvPcMaxValue != vsimvPcMinValue + 1) {
+                                    vsimvPcMaxValue != vsimvminValue) {
                                   vsimvPcMaxValue = vsimvPcMaxValue - 1;
                                 } else if (vsimvFio2 == true &&
                                     vsimvFio2Value != vsimvminValue) {
@@ -17964,7 +17969,7 @@ class _CheckPageState extends State<Dashboard> {
                                     vsimvVtValue = vsimvVtValue + 1;
                                   });
                                 } else if (vsimvPcMin == true &&
-                                    vsimvPcMinValue != pacvmaxValue) {
+                                    vsimvPcMinValue != vsimvmaxValue) {
                                   setState(() {
                                     if (vsimvPcMaxValue < 90) {
                                       vsimvPcMinValue = vsimvPcMinValue + 1;
@@ -17972,7 +17977,7 @@ class _CheckPageState extends State<Dashboard> {
                                     }
                                   });
                                 } else if (vsimvPcMax == true &&
-                                    vsimvPcMaxValue != pacvmaxValue) {
+                                    vsimvPcMaxValue != vsimvmaxValue) {
                                   setState(() {
                                     vsimvPcMaxValue = vsimvPcMaxValue + 1;
                                   });
@@ -18106,11 +18111,11 @@ class _CheckPageState extends State<Dashboard> {
                                 }
                               } else if (vsimvPcMax == true) {
                                 setState(() {
-                                  if (value.toInt() <= vsimvPcMinValue + 1) {
-                                    vsimvPcMaxValue = vsimvPcMinValue + 1;
-                                  } else {
-                                    vsimvPcMaxValue = value.toInt();
-                                  }
+                                  // if (value.toInt() <= vsimvPcMinValue + 1) {
+                                  //   vsimvPcMaxValue = vsimvPcMinValue + 1;
+                                  // } else {
+                                  vsimvPcMaxValue = value.toInt();
+                                  // }
                                 });
                               } else if (vsimvFio2 == true) {
                                 setState(() {
@@ -19403,7 +19408,7 @@ class _CheckPageState extends State<Dashboard> {
                                     // }
                                   });
                                 } else if (vacvPcMax == true &&
-                                    vacvPcMaxValue != vacvPcMinValue + 1) {
+                                    vacvPcMaxValue != vacvminValue) {
                                   vacvPcMaxValue = vacvPcMaxValue - 1;
                                 } else if (vacvFio2 == true &&
                                     vacvFio2Value != vacvminValue) {
@@ -19485,7 +19490,7 @@ class _CheckPageState extends State<Dashboard> {
                                     }
                                   });
                                 } else if (vacvPcMax == true &&
-                                    vacvPcMaxValue != pacvmaxValue) {
+                                    vacvPcMaxValue != 100) {
                                   setState(() {
                                     vacvPcMaxValue = vacvPcMaxValue + 1;
                                   });
@@ -19613,11 +19618,11 @@ class _CheckPageState extends State<Dashboard> {
                                 }
                               } else if (vacvPcMax == true) {
                                 setState(() {
-                                  if (value.toInt() <= vacvPcMinValue + 1) {
-                                    vacvPcMaxValue = vacvPcMinValue + 1;
-                                  } else {
+                                  // if (value.toInt() <= vacvPcMinValue + 1) {
+                                  //   vacvPcMaxValue = vacvPcMinValue + 1;
+                                  // } else {
                                     vacvPcMaxValue = value.toInt();
-                                  }
+                                  // }
                                 });
                               } else if (vacvFio2 == true) {
                                 setState(() {
@@ -23507,28 +23512,40 @@ class _CheckPageState extends State<Dashboard> {
     await _port.write(Uint8List.fromList(finalListSend));
 
     if (checkValue == 1) {
-      if (acknowReceivedValue == 1 && ackPacket == 6 || acknowReceivedValue == 1 && ackPacket == 7
-      || acknowReceivedValue == 1 && ackPacket == 2 || acknowReceivedValue == 1 && ackPacket == 1
-      || acknowReceivedValue == 1 && ackPacket == 3 || acknowReceivedValue == 1 && ackPacket == 4
-      || acknowReceivedValue == 1 && ackPacket == 5 ||  acknowReceivedValue == 1 && ackPacket == 14) {
+      if (acknowReceivedValue == 1 && ackPacket == 6 ||
+          acknowReceivedValue == 1 && ackPacket == 7 ||
+          acknowReceivedValue == 1 && ackPacket == 2 ||
+          acknowReceivedValue == 1 && ackPacket == 1 ||
+          acknowReceivedValue == 1 && ackPacket == 3 ||
+          acknowReceivedValue == 1 && ackPacket == 4 ||
+          acknowReceivedValue == 1 && ackPacket == 5 ||
+          acknowReceivedValue == 1 && ackPacket == 14) {
         clearDialogData();
         // writeAlarmsData();
-      } else if(acknowReceivedValue == 0 && ackPacket == 6 || acknowReceivedValue == 0 && ackPacket == 7
-      || acknowReceivedValue == 0 && ackPacket == 2 || acknowReceivedValue == 0 && ackPacket == 1
-      || acknowReceivedValue == 0 && ackPacket == 3 || acknowReceivedValue == 0 && ackPacket == 4
-      || acknowReceivedValue == 0 && ackPacket == 5 ||  acknowReceivedValue == 0 && ackPacket == 14) {
+      } else if (acknowReceivedValue == 0 && ackPacket == 6 ||
+          acknowReceivedValue == 0 && ackPacket == 7 ||
+          acknowReceivedValue == 0 && ackPacket == 2 ||
+          acknowReceivedValue == 0 && ackPacket == 1 ||
+          acknowReceivedValue == 0 && ackPacket == 3 ||
+          acknowReceivedValue == 0 && ackPacket == 4 ||
+          acknowReceivedValue == 0 && ackPacket == 5 ||
+          acknowReceivedValue == 0 && ackPacket == 14) {
         // Fluttertoast.showToast(msg: "Failed to communicate");
         var data = preferences.getString("dialog");
         // CommonClick(data);
       }
     } else {
-      if (acknowReceivedValue == 1 && ackPacket == 6 || acknowReceivedValue == 1 && ackPacket == 7
-      || acknowReceivedValue == 1 && ackPacket == 2 || acknowReceivedValue == 1 && ackPacket == 1
-      || acknowReceivedValue == 1 && ackPacket == 3 || acknowReceivedValue == 1 && ackPacket == 4
-      || acknowReceivedValue == 1 && ackPacket == 5 ||  acknowReceivedValue == 1 && ackPacket == 14) {
+      if (acknowReceivedValue == 1 && ackPacket == 6 ||
+          acknowReceivedValue == 1 && ackPacket == 7 ||
+          acknowReceivedValue == 1 && ackPacket == 2 ||
+          acknowReceivedValue == 1 && ackPacket == 1 ||
+          acknowReceivedValue == 1 && ackPacket == 3 ||
+          acknowReceivedValue == 1 && ackPacket == 4 ||
+          acknowReceivedValue == 1 && ackPacket == 5 ||
+          acknowReceivedValue == 1 && ackPacket == 14) {
         clearData();
         // writeAlarmsData();
-      }  else if (acknowReceivedValue == 1 && ackPacket == 10) {
+      } else if (acknowReceivedValue == 1 && ackPacket == 10) {
         clearAlarmData();
         // modesEnabled = false;
       } else if (acknowReceivedValue == 1 && ackPacket == 13) {
