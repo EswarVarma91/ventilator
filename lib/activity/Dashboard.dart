@@ -508,6 +508,8 @@ class _CheckPageState extends State<Dashboard> {
   bool noninvasiveEnabled = false;
   bool lockEnabled = true;
   List<int> savedList = [];
+  bool turnoffSendingboolI = false;
+  bool turnoffSendingboolE = false;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -895,6 +897,9 @@ class _CheckPageState extends State<Dashboard> {
     if (_loopActive) return;
     _loopActive = true;
     while (_buttonPressed) {
+       if (turnoffSendingboolI == false) {
+          writeRespiratoryPauseData(1);
+        }
       // do your thing
       if (timerCounter <= 29) {
         setState(() {
@@ -902,7 +907,7 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
       if (timerCounter == 30) {
-        writeRespiratoryPauseData(0);
+       
         setState(() {
           _buttonPressed = false;
         });
@@ -923,6 +928,9 @@ class _CheckPageState extends State<Dashboard> {
     if (_loopActive) return;
     _loopActive = true;
     while (_buttonPressedE) {
+         if (turnoffSendingboolE == false) {
+          writeRespiratoryPauseData(2);
+        }
       // do your thing
       if (timerCounter <= 29) {
         setState(() {
@@ -930,7 +938,7 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
       if (timerCounter == 30) {
-        writeRespiratoryPauseData(0);
+        
         setState(() {
           _buttonPressedE = false;
         });
@@ -985,9 +993,10 @@ class _CheckPageState extends State<Dashboard> {
       resList.add(0);
       resList.add(13);
       resList.add((data & 0x00FF));
+      // Fluttertoast.showToast(msg: resList.toString());
       // resList.add(0x7F);
     });
-
+    //TODO
     sendDataUsbConnection(resList, 2);
     // await _port.write(Uint8List.fromList(resList));
   }
@@ -3950,8 +3959,10 @@ class _CheckPageState extends State<Dashboard> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => About()));
+                    playOnEnabled
+                        ? Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => About()))
+                        : "";
                   },
                   child: Text(
                     "SWASIT",
@@ -3962,47 +3973,12 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "V1.8.3",
+                  "V1.8.3i",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
                       fontFamily: "appleFont"),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-
-                SizedBox(
-                  height: 5,
-                ),
-
-                //   Center(
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(4.0),
-                //       child: Container(
-                //       width: 60,
-                //       child: LinearPercentIndicator(
-                //         animation: true,
-                //         lineHeight: 20.0,
-                //         animationDuration: 2500,
-                //         percent: batteryPercentageValue,
-                //         center: Text(""),
-                //         linearStrokeCap: LinearStrokeCap.roundAll,
-                //         progressColor: Colors.green,
-                //       ),
-                // ),
-                //     ),
-                //   ),
-                //  Center(
-                //    child: Padding(
-                //      padding: const EdgeInsets.only(bottom:5.0),
-                //      child: Container(
-                //       width: 60,
-                //       child: Icon(Icons.close,color:Colors.red,size:26)
-                // ),
-                //    ),
-                //  ),
-
                 SizedBox(
                   height: 2,
                 ),
@@ -4026,7 +4002,7 @@ class _CheckPageState extends State<Dashboard> {
                       )
                     : Container(height: 70),
                 SizedBox(
-                  height: 2,
+                  height: 0,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -4039,14 +4015,14 @@ class _CheckPageState extends State<Dashboard> {
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 20.0, bottom: 20),
+                                  right: 28.0, bottom: 10),
                               child: IconButton(
                                   icon: Icon(
                                     Icons.play_circle_filled,
                                     color: lockEnabled == false
                                         ? Colors.grey
                                         : Colors.green,
-                                    size: 50,
+                                    size: 60,
                                   ),
                                   onPressed: () {
                                     lockEnabled ? showDialogPlay() : "";
@@ -4059,14 +4035,14 @@ class _CheckPageState extends State<Dashboard> {
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 20.0, bottom: 20),
+                                  right: 28.0, bottom: 20),
                               child: IconButton(
                                   icon: Icon(
                                     Icons.pause_circle_filled,
                                     color: lockEnabled == false
                                         ? Colors.grey
                                         : Colors.blue,
-                                    size: 50,
+                                    size: 60,
                                   ),
                                   onPressed: () {
                                     lockEnabled ? showDialogPause() : "";
@@ -4075,27 +4051,10 @@ class _CheckPageState extends State<Dashboard> {
                           ),
                     //  powerIndication==1 ?  Image.asset("assets/images/switchon.png"):powerIndication==0 ?
                     //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: IconButton(
-                          icon: Icon(lockEnabled ? Icons.lock_open : Icons.lock,
-                              size: 50,
-                              color: lockEnabled ? Colors.grey : Colors.white),
-                          onPressed: () {
-                            setState(() {
-                              lockEnabled = !lockEnabled;
-                              if (lockEnabled == false) {
-                                setState(() {
-                                  insExpButtonEnable = false;
-                                });
-                              }
-                            });
-                          }),
-                    ),
                   ],
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 130,
                 ),
                 // playOnEnabled
                 //     ? InkWell(
@@ -4134,22 +4093,14 @@ class _CheckPageState extends State<Dashboard> {
                         children: [
                           InkWell(
                             onTap: () async {
-                              var data = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => NewTreatmentScreen()),
-                              );
-                              if (data == "1") {
-                                getData();
-                              }
+                              _newtreatmentMethod();
                             },
                             child: Center(
                               child: Container(
                                 width: 120,
                                 child: Card(
-                                  color: newTreatEnabled
-                                      ? Colors.blue
-                                      : Colors.white,
+                                  color:
+                                      lockEnabled ? Colors.white : Colors.grey,
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 12.0,
@@ -4162,9 +4113,9 @@ class _CheckPageState extends State<Dashboard> {
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: newTreatEnabled
-                                              ? Colors.white
-                                              : Colors.black),
+                                          color: lockEnabled
+                                              ? Colors.black
+                                              : Colors.white),
                                     )),
                                   ),
                                 ),
@@ -4173,7 +4124,38 @@ class _CheckPageState extends State<Dashboard> {
                           ),
                         ],
                       )
-                    : Container(height: 35),
+                    : Column(
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              // _newtreatmentMethod();
+                            },
+                            child: Center(
+                              child: Container(
+                                width: 120,
+                                child: Card(
+                                  color: Colors.grey,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 12.0,
+                                        right: 12.0,
+                                        top: 12,
+                                        bottom: 12),
+                                    child: Center(
+                                        child: Text(
+                                      "New Patient",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    )),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -4305,6 +4287,16 @@ class _CheckPageState extends State<Dashboard> {
         ),
       ],
     );
+  }
+
+  _newtreatmentMethod() async {
+    var data = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NewTreatmentScreen()),
+    );
+    if (data == "1") {
+      getData();
+    }
   }
 
   main() {
@@ -4843,24 +4835,13 @@ class _CheckPageState extends State<Dashboard> {
                                         : Column(
                                             children: <Widget>[
                                               Center(
-                                                child:
-                                                    // GestureDetector(
-                                                    // onTapDown : _writeRespiratoryDataStart(),
-                                                    // onTapUp: _writeRespiratoryDataStop(),
-                                                    Listener(
-                                                  // onPointerMove: (details) {
-                                                  //   writeRespiratoryPauseData(
-                                                  //       0);
-                                                  //   setState(() {
-                                                  //     timerCounter = 0;
-                                                  //     _buttonPressed = false;
-                                                  //     // _inpirationPressed = false;
-                                                  //   });
-                                                  // },
+                                                child: Listener(
                                                   onPointerDown: (details) {
                                                     writeRespiratoryPauseData(
                                                         1);
+
                                                     // _inpirationPressed = true;
+                                                    turnoffSendingboolI = false;
                                                     _buttonPressed = true;
                                                     _increaseCounterWhilePressed();
                                                   },
@@ -4885,7 +4866,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         child: Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                  .all(4.0),
+                                                                  .all(2.0),
                                                           child: Center(
                                                               child: Stack(
                                                             children: [
@@ -4917,7 +4898,7 @@ class _CheckPageState extends State<Dashboard> {
                                                 ),
                                                 // ),
                                               ),
-                                              SizedBox(height: 5),
+                                              SizedBox(height: 6),
                                               Center(
                                                 child: Listener(
                                                   // onPointerMove: (details) {
@@ -4947,6 +4928,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         2);
                                                     // _inpirationPressed = true;
                                                     _buttonPressedE = true;
+                                                    turnoffSendingboolE = false;
                                                     _increaseCounterWhilePressedE();
                                                   },
                                                   onPointerUp: (details) {
@@ -4970,7 +4952,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         child: Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                  .all(4.0),
+                                                                  .all(2.0),
                                                           child: Center(
                                                               child: Stack(
                                                             children: [
@@ -5179,7 +5161,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("PSV") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("PSV") : "";
                 } else {}
               },
               child: Center(
@@ -5240,7 +5222,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("PEEP") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("PEEP") : "";
                 }
               },
               child: Center(
@@ -5315,7 +5297,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("FiO2") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("FiO2") : "";
                 }
               },
               child: Center(
@@ -5389,7 +5371,9 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("Backup RR") : "";
+                  lockEnabled
+                      ? playOnEnabled ? "" : CommonClick("Backup RR")
+                      : "";
                 }
               },
               child: Center(
@@ -5463,7 +5447,9 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("Backup I:E") : "";
+                  lockEnabled
+                      ? playOnEnabled ? "" : CommonClick("Backup I:E")
+                      : "";
                 }
               },
               child: Center(
@@ -5537,7 +5523,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("PCV") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("PCV") : "";
                 }
               },
               child: Center(
@@ -5611,7 +5597,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("ITRI") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("ITRI") : "";
                 }
               },
               child: Center(
@@ -5685,7 +5671,9 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("Apnea Time") : "";
+                  lockEnabled
+                      ? playOnEnabled ? "" : CommonClick("Apnea Time")
+                      : "";
                 }
               },
               child: Center(
@@ -5759,7 +5747,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("Ti") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("Ti") : "";
                 }
               },
               child: Center(
@@ -6458,8 +6446,8 @@ class _CheckPageState extends State<Dashboard> {
                               modeName == "VSIMV" ||
                               operatinModeR == 14 ||
                               modeName == "PRVC"
-                          ? CommonClick("eRR")
-                          : CommonClick("RR")
+                          ? playOnEnabled ? "" : CommonClick("eRR")
+                          : playOnEnabled ? "" : CommonClick("RR")
                       : "";
                 }
               },
@@ -6534,7 +6522,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("I:E") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("I:E") : "";
                 }
               },
               child: Center(
@@ -6609,7 +6597,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("PEEP") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("PEEP") : "";
                 }
               },
               child: Center(
@@ -6689,7 +6677,9 @@ class _CheckPageState extends State<Dashboard> {
                 ? InkWell(
                     onTap: () {
                       if (modeWriteList.isNotEmpty) {
-                        lockEnabled ? CommonClick("PS") : "";
+                        lockEnabled
+                            ? playOnEnabled ? "" : CommonClick("PS")
+                            : "";
                       }
                     },
                     child: Center(
@@ -6755,22 +6745,24 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled
-                      ? CommonClick(operatinModeR == 6 || operatinModeR == 2
-                          ? "PC"
-                          : operatinModeR == 7 ||
-                                  operatinModeR == 1 ||
-                                  operatinModeR == 5
-                              ? "Vt"
-                              : modeName == "PC-CMV" || modeName == "PACV"
-                                  ? "PC"
-                                  : modeName == "VC-CMV" ||
-                                          modeName == "VACV" ||
-                                          modeName == "VSIMV"
-                                      ? "Vt"
-                                      : operatinModeR == 14 ||
-                                              modeName == "PRVC"
-                                          ? "Target Vt"
-                                          : "PC")
+                      ? playOnEnabled
+                          ? ""
+                          : CommonClick(operatinModeR == 6 || operatinModeR == 2
+                              ? "PC"
+                              : operatinModeR == 7 ||
+                                      operatinModeR == 1 ||
+                                      operatinModeR == 5
+                                  ? "Vt"
+                                  : modeName == "PC-CMV" || modeName == "PACV"
+                                      ? "PC"
+                                      : modeName == "VC-CMV" ||
+                                              modeName == "VACV" ||
+                                              modeName == "VSIMV"
+                                          ? "Vt"
+                                          : operatinModeR == 14 ||
+                                                  modeName == "PRVC"
+                                              ? "Target Vt"
+                                              : "PC")
                       : "";
                 }
               },
@@ -6895,7 +6887,7 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? CommonClick("FiO2") : "";
+                  lockEnabled ? playOnEnabled ? "" : CommonClick("FiO2") : "";
                 }
               },
               child: Center(
@@ -6970,16 +6962,13 @@ class _CheckPageState extends State<Dashboard> {
                     operatinModeR == 2 ||
                     operatinModeR == 3 ||
                     operatinModeR == 4 ||
-                    operatinModeR == 5 ||
-                    pacvEnabled == true ||
-                    vacvEnabled == true ||
-                    psimvEnabled == true ||
-                    vsimvEnabled == true ||
-                    psvEnabled == true
+                    operatinModeR == 5
                 ? InkWell(
                     onTap: () {
                       if (modeWriteList.isNotEmpty) {
-                        lockEnabled ? CommonClick("ITRI") : "";
+                        lockEnabled
+                            ? playOnEnabled ? "" : CommonClick("ITRI")
+                            : "";
                       }
                     },
                     child: Center(
@@ -7248,26 +7237,13 @@ class _CheckPageState extends State<Dashboard> {
                       fontWeight: FontWeight.bold),
                 ),
               )),
-              Container(
-                  child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 10, right: 0, top: 4, bottom: 10),
-                child: Text(
-                  patientName != null && patientName != ""
-                      ? patientName.toString()
-                      : "                   ",
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
-                ),
-              )),
-              SizedBox(width: 10),
+              SizedBox(
+                  width: modeName == "VSIMV" || modeName == "PSIMV" ? 50 : 75),
               Material(
                   borderRadius: BorderRadius.circular(5),
                   child: Container(
                       height: 40,
-                      width: 80,
+                      width: 70,
                       child: batteryStatus == 2
                           ? Center(
                               child: Text(batteryPercentage.toString() + " %",
@@ -7277,25 +7253,24 @@ class _CheckPageState extends State<Dashboard> {
                                   width: 28, color: Colors.black)
                               : Image.asset("assets/images/nobattery.png",
                                   width: 28, color: Colors.black))),
+              SizedBox(width: 5),
+              Material(
+                  borderRadius: BorderRadius.circular(5),
+                  child: InkWell(
+                    onTap: () {
+                      playOnEnabled ? sendSelfTest() : "";
+                      // selfTestingEnabled = true;
+                    },
+                    child: Container(
+                        color: playOnEnabled ? Colors.white : Colors.grey,
+                        height: 40,
+                        width: 80,
+                        child: Image.asset(
+                          "assets/images/calibrate.png",
+                          width: 60,
+                        )),
+                  )),
               SizedBox(width: 10),
-              playOnEnabled
-                  ? Material(
-                      borderRadius: BorderRadius.circular(5),
-                      child: InkWell(
-                        onTap: () {
-                          sendSelfTest();
-                          selfTestingEnabled = true;
-                        },
-                        child: Container(
-                            height: 40,
-                            width: 80,
-                            child: Image.asset(
-                              "assets/images/calibrate.png",
-                              width: 60,
-                            )),
-                      ))
-                  : Container(),
-              playOnEnabled ? SizedBox(width: 10) : Container(),
               timerCounter != 0
                   ? Material(
                       borderRadius: BorderRadius.circular(14.0),
@@ -7345,20 +7320,20 @@ class _CheckPageState extends State<Dashboard> {
               //           child: Text(displayTemperature.toString() + "\u2103",
               //               style: TextStyle(fontSize: 20)),
               //         )))),
-              SizedBox(width: 10),
+              SizedBox(width: 5),
               Material(
                   borderRadius: BorderRadius.circular(5),
                   color: powerIndication == 1
                       ? Colors.green
                       : powerIndication == 0 ? Colors.red : Colors.red,
                   child: Container(
-                      width: 80,
+                      width: 70,
                       height: 40,
                       child: Center(
                         child: Image.asset("assets/images/powersymbol.png",
                             color: Colors.white),
                       ))),
-              SizedBox(width: 10),
+              SizedBox(width: 5),
               InkWell(
                 onTap: () {
                   setState(() {
@@ -7378,7 +7353,43 @@ class _CheckPageState extends State<Dashboard> {
                       child: Padding(
                         padding: const EdgeInsets.only(
                             top: 0.0, left: 10, right: 10, bottom: 0.0),
-                        child: Center(child: Icon(Icons.history, size: 40)
+                        child: Center(
+                            child: Icon(Icons.history,
+                                size: 40,
+                                color:
+                                    lockEnabled ? Colors.black : Colors.white)),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    lockEnabled = !lockEnabled;
+                    if (lockEnabled == false) {
+                      setState(() {
+                        insExpButtonEnable = false;
+                      });
+                    }
+                  });
+                },
+                child: Center(
+                  child: Container(
+                    width: 80,
+                    child: Card(
+                      // color: lockEnabled ? Colors.white : Colors.grey,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 0.0, left: 10, right: 10, bottom: 0.0),
+                        child: Center(
+                            child: lockEnabled
+                                ? Icon(
+                                    Icons.lock_open,
+                                    size: 40,
+                                  )
+                                : Icon(Icons.lock,
+                                    size: 40, color: Colors.black)
                             //     Text(
                             //   "View Logs",
                             //   style: TextStyle(
@@ -21775,7 +21786,8 @@ class _CheckPageState extends State<Dashboard> {
       }
       cIndex = cIndex + 1;
     }
-    // print(listTempF);
+
+    // print("1234 " + checkValue.toString());
 
     sendData(listTempF, checkValue);
   }
@@ -23001,13 +23013,81 @@ class _CheckPageState extends State<Dashboard> {
             presentCode = ((finalList[106] << 8) + finalList[107]);
             alarmCounter = finalList[90];
 
-            if (presentCode != previousCode) {
+            print("present code : " +
+                presentCode.toString() +
+                " alarmCounter : " +
+                alarmCounter.toString());
+
+            // if (presentCode != previousCode) {
+            //   previousCode = presentCode;
+            //   _stopMusic();
+            //   var data = AlarmsList(
+            //       presentCode.toString(), this.globalCounterNo.toString());
+            //   dbHelpera.saveAlarm(data);
+            //   // alarmPrevCounter = alarmCounter;
+
+            //   if ((presentCode == 5 ||
+            //           presentCode == 7 ||
+            //           presentCode == 10 ||
+            //           presentCode == 11 ||
+            //           presentCode == 17) &&
+            //       highPriorityAlarm == 0) {
+            //     setState(() {
+            //       highPriorityAlarm = 1;
+            //       mediumPriorityAlarm = 0;
+            //       lowPriorityAlarm = 0;
+            //     });
+            //     _stopMusic();
+            //     _playMusicHigh();
+            //     sendSoundOn();
+            //     audioEnable = true;
+            //   } else if ((presentCode == 1 ||
+            //           presentCode == 2 ||
+            //           presentCode == 3 ||
+            //           presentCode == 4 ||
+            //           presentCode == 6 ||
+            //           presentCode == 8 ||
+            //           presentCode == 9 ||
+            //           presentCode == 12 ||
+            //           presentCode == 13 ||
+            //           presentCode == 14 ||
+            //           presentCode == 15 ||
+            //           presentCode == 16 ||
+            //           presentCode == 18 ||
+            //           presentCode == 19 ||
+            //           presentCode == 20 ||
+            //           presentCode == 21 ||
+            //           presentCode == 22) &&
+            //       mediumPriorityAlarm == 0) {
+            //     setState(() {
+            //       highPriorityAlarm = 0;
+            //       mediumPriorityAlarm = 1;
+            //       lowPriorityAlarm = 0;
+            //     });
+            //     _stopMusic();
+            //     _playMusicMedium();
+            //     sendSoundOn();
+            //     audioEnable = true;
+            //   } else if (presentCode == 23 && lowPriorityAlarm == 0) {
+            //     setState(() {
+            //       highPriorityAlarm = 0;
+            //       mediumPriorityAlarm = 0;
+            //       lowPriorityAlarm = 1;
+            //     });
+            //     _stopMusic();
+            //     _playMusicLower();
+            //     sendSoundOn();
+            //     audioEnable = true;
+            //   }
+            // } else {
+            if (alarmCounter != alarmPrevCounter &&
+                presentCode != previousCode) {
+              alarmPrevCounter = alarmCounter;
               previousCode = presentCode;
               _stopMusic();
               var data = AlarmsList(
                   presentCode.toString(), this.globalCounterNo.toString());
               dbHelpera.saveAlarm(data);
-              // alarmPrevCounter = alarmCounter;
 
               if ((presentCode == 5 ||
                       presentCode == 7 ||
@@ -23062,74 +23142,13 @@ class _CheckPageState extends State<Dashboard> {
                 sendSoundOn();
                 audioEnable = true;
               }
-            } else {
-              if (alarmCounter != alarmPrevCounter) {
-                alarmPrevCounter = alarmCounter;
-                _stopMusic();
-                var data = AlarmsList(
-                    presentCode.toString(), this.globalCounterNo.toString());
-                dbHelpera.saveAlarm(data);
-
-                if ((presentCode == 5 ||
-                        presentCode == 7 ||
-                        presentCode == 10 ||
-                        presentCode == 11 ||
-                        presentCode == 17) &&
-                    highPriorityAlarm == 0) {
-                  setState(() {
-                    highPriorityAlarm = 1;
-                    mediumPriorityAlarm = 0;
-                    lowPriorityAlarm = 0;
-                  });
-                  _stopMusic();
-                  _playMusicHigh();
-                  sendSoundOn();
-                  audioEnable = true;
-                } else if ((presentCode == 1 ||
-                        presentCode == 2 ||
-                        presentCode == 3 ||
-                        presentCode == 4 ||
-                        presentCode == 6 ||
-                        presentCode == 8 ||
-                        presentCode == 9 ||
-                        presentCode == 12 ||
-                        presentCode == 13 ||
-                        presentCode == 14 ||
-                        presentCode == 15 ||
-                        presentCode == 16 ||
-                        presentCode == 18 ||
-                        presentCode == 19 ||
-                        presentCode == 20 ||
-                        presentCode == 21 ||
-                        presentCode == 22) &&
-                    mediumPriorityAlarm == 0) {
-                  setState(() {
-                    highPriorityAlarm = 0;
-                    mediumPriorityAlarm = 1;
-                    lowPriorityAlarm = 0;
-                  });
-                  _stopMusic();
-                  _playMusicMedium();
-                  sendSoundOn();
-                  audioEnable = true;
-                } else if (presentCode == 23 && lowPriorityAlarm == 0) {
-                  setState(() {
-                    highPriorityAlarm = 0;
-                    mediumPriorityAlarm = 0;
-                    lowPriorityAlarm = 1;
-                  });
-                  _stopMusic();
-                  _playMusicLower();
-                  sendSoundOn();
-                  audioEnable = true;
-                }
-              }
             }
+            // }
           } else if (finalList[108] == 0) {
             setState(() {
               highPriorityAlarm = 0;
               mediumPriorityAlarm = 0;
-              lowPriorityAlarm = 1;
+              lowPriorityAlarm = 0;
             });
             sendSoundOff();
             _stopMusic();
@@ -23540,6 +23559,7 @@ class _CheckPageState extends State<Dashboard> {
         acknowledgeData.addAll(finalList);
         acknowReceivedValue = acknowledgeData[4];
         ackPacket = acknowledgeData[5];
+
         finalList.clear();
         acknowledgeData.clear();
       });
@@ -23556,51 +23576,56 @@ class _CheckPageState extends State<Dashboard> {
 
     await _port.write(Uint8List.fromList(finalListSend));
 
-    if (checkValue == 1) {
-      if (acknowReceivedValue == 1 && ackPacket == 6 ||
-          acknowReceivedValue == 1 && ackPacket == 7 ||
-          acknowReceivedValue == 1 && ackPacket == 2 ||
-          acknowReceivedValue == 1 && ackPacket == 1 ||
-          acknowReceivedValue == 1 && ackPacket == 3 ||
-          acknowReceivedValue == 1 && ackPacket == 4 ||
-          acknowReceivedValue == 1 && ackPacket == 5 ||
-          acknowReceivedValue == 1 && ackPacket == 14) {
+    // if (checkValue == 1) {
+    //   sleep(Duration(milliseconds: 50));
+    //   print(acknowReceivedValue.toString());
+    //   print(ackPacket.toString());
+    //   print(checkValue.toString());
+    // } else {
+    // print(acknowReceivedValue.toString());
+    // print(ackPacket.toString());
+    // print(checkValue.toString());
+    // }
+
+    // if (checkValue == 1) {
+    //   if (acknowReceivedValue == 1 && ackPacket == 6) {
+    //     clearDialogData();
+    //   } else {
+    //     var data = preferences.getString("dialog");
+    //     CommonClick(data);
+    //   }
+    // } else if (checkValue == 2) {
+    if (acknowReceivedValue == 1 && ackPacket == 6 ||
+        acknowReceivedValue == 1 && ackPacket == 7 ||
+        acknowReceivedValue == 1 && ackPacket == 2 ||
+        acknowReceivedValue == 1 && ackPacket == 1 ||
+        acknowReceivedValue == 1 && ackPacket == 3 ||
+        acknowReceivedValue == 1 && ackPacket == 4 ||
+        acknowReceivedValue == 1 && ackPacket == 5 ||
+        acknowReceivedValue == 1 && ackPacket == 14) {
+      if (checkValue == 1) {
         clearDialogData();
-        // writeAlarmsData();
-      } else if (acknowReceivedValue == 0 && ackPacket == 6 ||
-          acknowReceivedValue == 0 && ackPacket == 7 ||
-          acknowReceivedValue == 0 && ackPacket == 2 ||
-          acknowReceivedValue == 0 && ackPacket == 1 ||
-          acknowReceivedValue == 0 && ackPacket == 3 ||
-          acknowReceivedValue == 0 && ackPacket == 4 ||
-          acknowReceivedValue == 0 && ackPacket == 5 ||
-          acknowReceivedValue == 0 && ackPacket == 14) {
-        // Fluttertoast.showToast(msg: "Failed to communicate");
-        var data = preferences.getString("dialog");
-        // CommonClick(data);
-      }
-    } else {
-      if (acknowReceivedValue == 1 && ackPacket == 6 ||
-          acknowReceivedValue == 1 && ackPacket == 7 ||
-          acknowReceivedValue == 1 && ackPacket == 2 ||
-          acknowReceivedValue == 1 && ackPacket == 1 ||
-          acknowReceivedValue == 1 && ackPacket == 3 ||
-          acknowReceivedValue == 1 && ackPacket == 4 ||
-          acknowReceivedValue == 1 && ackPacket == 5 ||
-          acknowReceivedValue == 1 && ackPacket == 14) {
+      } else if (checkValue == 2) {
         clearData();
-        // writeAlarmsData();
-      } else if (acknowReceivedValue == 1 && ackPacket == 10) {
-        clearAlarmData();
-        // modesEnabled = false;
-      } else if (acknowReceivedValue == 1 && ackPacket == 13) {
-        clearRespiratoryData();
-        // modesEnabled = false;
-      } else if (acknowReceivedValue == 1 && ackPacket == 31) {
-        clearPlay();
-      } else if (acknowReceivedValue == 1 && ackPacket == 30) {
-        clearPause();
       }
+      // writeAlarmsData();
+    } else if (acknowReceivedValue == 1 && ackPacket == 10) {
+      clearAlarmData();
+      // modesEnabled = false;
+    } else if (acknowReceivedValue == 1 && ackPacket == 13) {
+      // Fluttertoast.showToast(msg: "success");
+
+      setState(() {
+        turnoffSendingboolI = true;
+        turnoffSendingboolE = true;
+      });
+
+      clearRespiratoryData();
+      // modesEnabled = false;
+    } else if (acknowReceivedValue == 1 && ackPacket == 31) {
+      clearPlay();
+    } else if (acknowReceivedValue == 1 && ackPacket == 30) {
+      clearPause();
     }
   }
 
@@ -23625,7 +23650,7 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   clearData() {
-    print(finalListSend.toString());
+    // print(finalListSend.toString());
     setState(() {
       modesEnabled = false;
       acknowReceivedValue = 0;
@@ -23649,6 +23674,7 @@ class _CheckPageState extends State<Dashboard> {
 
   clearRespiratoryData() {
     setState(() {
+      // turnoffSendingbool = !turnoffSendingbool;
       acknowReceivedValue = 0;
       ackPacket = 0;
       // t.stop();
