@@ -32,7 +32,6 @@ class _AboutState extends State<About> {
         downloadUrl = response.body.toString();
         checkforUpdates(downloadUrl);
       });
-      // Fluttertoast.showToast(msg: downloadUrl);
     });
   }
 
@@ -55,23 +54,6 @@ class _AboutState extends State<About> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      // appBar: AppBar(
-      //   title: Text("About"),
-      //   actions: <Widget>[
-      //     PopupMenuButton<String>(
-      //       onSelected: handleClick,
-      //       itemBuilder: (BuildContext context) {
-      //         return {'Revert to old Version', }.map((String choice) {
-      //           return PopupMenuItem<String>(
-      //             value: choice,
-      //             child: Text(choice),
-      //           );
-      //         }).toList();
-      //       },
-      //     ),
-      //   ],
-      // ),
-
       body: WillPopScope(
         onWillPop: _willPopCallback,
         child: Container(
