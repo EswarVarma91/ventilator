@@ -3973,7 +3973,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "V1.8.3i",
+                  "V1.8.3j",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4049,45 +4049,11 @@ class _CheckPageState extends State<Dashboard> {
                                   }),
                             ),
                           ),
-                    //  powerIndication==1 ?  Image.asset("assets/images/switchon.png"):powerIndication==0 ?
-                    //  Image.asset("assets/images/switchoff.png") : Icon(Icons.power_settings_new,color:Colors.red),
                   ],
                 ),
                 SizedBox(
                   height: 130,
                 ),
-                // playOnEnabled
-                //     ? InkWell(
-                //         onTap: () {
-                //           setState(() {
-                //             Navigator.push(
-                //                 context,
-                //                 MaterialPageRoute(
-                //                     builder: (context) => About()));
-                //           });
-                //         },
-                //         child: Center(
-                //           child: Container(
-                //             width: 120,
-                //             child: Card(
-                //               color: modesEnabled ? Colors.blue : Colors.white,
-                //               child: Padding(
-                //                 padding: const EdgeInsets.all(12.0),
-                //                 child: Center(
-                //                     child: Text(
-                //                   "About",
-                //                   style: TextStyle(
-                //                       fontWeight: FontWeight.bold,
-                //                       color: modesEnabled
-                //                           ? Colors.white
-                //                           : Colors.black),
-                //                 )),
-                //               ),
-                //             ),
-                //           ),
-                //         ),
-                //       )
-                //     : Container(),
                 playOnEnabled
                     ? Column(
                         children: [
@@ -4159,15 +4125,7 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      // if (patientId != "") {
-
-                      lockEnabled ? alarmEnabled = true : "";
-                      // if (_status == "Connected") {
-                      //   writeAlarmsData();
-                      // }
-                      // } else {
-                      //   showAlertDialog(context);
-                      // }
+                  lockEnabled ? alarmEnabled = true : "";
                     });
                   },
                   child: Center(
@@ -4200,9 +4158,6 @@ class _CheckPageState extends State<Dashboard> {
                       if (_status == "Connected") {
                         writeAlarmsData();
                       }
-                      // } else {
-                      //   showAlertDialog(context);
-                      // }
                     });
                   },
                   child: Center(
@@ -5130,24 +5085,6 @@ class _CheckPageState extends State<Dashboard> {
     );
   }
 
-  // _writeRespiratoryDataStart() {
-  //   writeRespiratoryPauseData(1);
-  //   // _inpirationPressed = true;
-  //   setState(() {
-  //     _buttonPressed = true;
-  //   });
-  //   _increaseCounterWhilePressed();
-  // }
-
-  // _writeRespiratoryDataStop() {
-  //   writeRespiratoryPauseData(0);
-  //   setState(() {
-  //     timerCounter = 0;
-  //     _buttonPressed = false;
-  //     // _inpirationPressed = false;
-  //   });
-  // }
-
   psvBottomBar() {
     return Container(
       color: Color(0xFF171e27),
@@ -5205,13 +5142,7 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          //  lockEnabled ? Align(
-                          //     alignment: Alignment.bottomRight,
-                          //     child: Padding(
-                          //       padding: const EdgeInsets.only(top: 17.0),
-                          //       child: Icon(Icons.lock)
-                          //     ),
-                          //   ):Container(),
+                         
                         ],
                       )),
                     ),
@@ -5255,16 +5186,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 10, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -5276,17 +5197,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: peepValue != null ? peepValue / 30 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -5330,16 +5240,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -5351,16 +5251,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: fio2Value != null ? fio2Value / 100 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -5417,26 +5307,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: rrValue != null ? rrValue / 60 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -5493,26 +5363,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: ieValue != null ? int.parse(ieValue)/ 4 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -5556,16 +5406,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         editbbEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -5577,16 +5417,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: psValue != null ? psValue / 60 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -5630,16 +5460,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         lockEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -5651,16 +5471,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: fio2Value != null ? fio2Value / 100 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -5706,16 +5516,7 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         lockEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
+                          
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -5727,16 +5528,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: fio2Value != null ? fio2Value / 100 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -5780,16 +5571,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         lockEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -5801,16 +5582,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: fio2Value != null ? fio2Value / 100 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -6411,17 +6182,6 @@ class _CheckPageState extends State<Dashboard> {
             ],
           ),
         )),
-
-        // InkWell(
-        //     onTap: (){
-        //       _scaffoldKey.currentState.openDrawer();
-        //     },
-        //     child: Padding(
-        //     padding: const EdgeInsets.only(top:40.0),
-        //     child: Container(
-        //       width:8,height:60,color:Colors.orangeAccent.withOpacity(0.3)),
-        //   ),
-        // )
       ],
     );
   }
@@ -6492,26 +6252,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         lockEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: rrValue != null ? rrValue / 60 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -6566,26 +6306,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         lockEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: ieValue != null ? int.parse(ieValue)/ 4 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -6630,16 +6350,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 10, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         lockEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -6651,16 +6361,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: peepValue != null ? peepValue / 30 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -6723,16 +6423,6 @@ class _CheckPageState extends State<Dashboard> {
                                     ),
                                   ),
                                 ),
-                                // Align(
-                                //   alignment: Alignment.bottomCenter,
-                                //   child: LinearProgressIndicator(
-                                //     backgroundColor: Colors.grey,
-                                //     valueColor: AlwaysStoppedAnimation<Color>(
-                                //       Colors.white,
-                                //     ),
-                                //     value: psValue != null ? psValue / 60 : 0,
-                                //   ),
-                                // )
                               ],
                             )),
                           ),
@@ -6830,16 +6520,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         lockEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -6866,16 +6546,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: psValue != null ? psValue / 60 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -6920,16 +6590,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(top: 17.0),
-                          //     child: Icon(
-                          //         lockEnabled ? Icons.lock_open : Icons.lock,
-                          //         color: Colors.white,
-                          //         size: 15),
-                          //   ),
-                          // ),
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -6941,16 +6601,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.bottomCenter,
-                          //   child: LinearProgressIndicator(
-                          //     backgroundColor: Colors.grey,
-                          //     valueColor: AlwaysStoppedAnimation<Color>(
-                          //       Colors.white,
-                          //     ),
-                          //     value: fio2Value != null ? fio2Value / 100 : 0,
-                          //   ),
-                          // )
                         ],
                       )),
                     ),
@@ -7001,16 +6651,6 @@ class _CheckPageState extends State<Dashboard> {
                                         fontSize: 12, color: Colors.white),
                                   ),
                                 ),
-                                // Align(
-                                //   alignment: Alignment.centerRight,
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.only(top: 17.0),
-                                //     child: Icon(
-                                //         lockEnabled ? Icons.lock_open : Icons.lock,
-                                //         color: Colors.white,
-                                //         size: 15),
-                                //   ),
-                                // ),
                                 Align(
                                   alignment: Alignment.center,
                                   child: Padding(
@@ -7022,16 +6662,6 @@ class _CheckPageState extends State<Dashboard> {
                                     ),
                                   ),
                                 ),
-                                // Align(
-                                //   alignment: Alignment.bottomCenter,
-                                //   child: LinearProgressIndicator(
-                                //     backgroundColor: Colors.grey,
-                                //     valueColor: AlwaysStoppedAnimation<Color>(
-                                //       Colors.white,
-                                //     ),
-                                //     value: fio2Value != null ? fio2Value / 100 : 0,
-                                //   ),
-                                // )
                               ],
                             )),
                           ),
@@ -7040,151 +6670,7 @@ class _CheckPageState extends State<Dashboard> {
                     ),
                   )
                 : Container(),
-            // InkWell(
-            //   onTap: () {
-            //     editbbEnabled ? CommonClick("Tih") : Container();
-            //   },
-            //   child: Center(
-            //     child: Container(
-            //       width: 120,
-            //       height: 110,
-            //       child: Card(
-            //         elevation: 40,
-            //         color: Color(0xFF213855),
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(12.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Ti",
-            //                   style: TextStyle(
-            //                       fontSize: 18,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: Colors.white),
-            //                 ),
-            //               ),
-            //               // Align(
-            //               //   alignment: Alignment.centerRight,
-            //               //   child: Padding(
-            //               //     padding: const EdgeInsets.only(top: 17.0),
-            //               //     child: Icon(
-            //               //         editbbEnabled ? Icons.lock_open : Icons.lock,
-            //               //         color: Colors.white,
-            //               //         size: 15),
-            //               //   ),
-            //               // ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style:
-            //                       TextStyle(fontSize: 12, color: Colors.white),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 17.0),
-            //                   child: Text(
-            //                     tiValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 25, color: Colors.white),
-            //                   ),
-            //                 ),
-            //               ),
-            //               // Align(
-            //               //   alignment: Alignment.bottomCenter,
-            //               //   child: LinearProgressIndicator(
-            //               //     backgroundColor: Colors.grey,
-            //               //     valueColor: AlwaysStoppedAnimation<Color>(
-            //               //       Colors.white,
-            //               //     ),
-            //               //     value: tiValue != null ? tiValue / 75 : 0,
-            //               //   ),
-            //               // )
-            //             ],
-            //           )),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // InkWell(
-            //   onTap: () {
-            //     editbbEnabled ? CommonClick("Te") : Container();
-            //   },
-            //   child: Center(
-            //     child: Container(
-            //       width: 120,
-            //       height: 110,
-            //       child: Card(
-            //         elevation: 40,
-            //         color: Color(0xFF213855),
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(12.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "TE",
-            //                   style: TextStyle(
-            //                       fontSize: 18,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: Colors.white),
-            //                 ),
-            //               ),
-            //               // Align(
-            //               //   alignment: Alignment.centerRight,
-            //               //   child: Padding(
-            //               //     padding: const EdgeInsets.only(top: 17.0),
-            //               //     child: Icon(
-            //               //         editbbEnabled ? Icons.lock_open : Icons.lock,
-            //               //         color: Colors.white,
-            //               //         size: 15),
-            //               //   ),
-            //               // ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style:
-            //                       TextStyle(fontSize: 12, color: Colors.white),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 17.0),
-            //                   child: Text(
-            //                     teValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 25, color: Colors.white),
-            //                   ),
-            //                 ),
-            //               ),
-            //               // Align(
-            //               //   alignment: Alignment.bottomCenter,
-            //               //   child: LinearProgressIndicator(
-            //               //     backgroundColor: Colors.grey,
-            //               //     valueColor: AlwaysStoppedAnimation<Color>(
-            //               //       Colors.white,
-            //               //     ),
-            //               //     value: 60,
-            //               //   ),
-            //               // )
-            //             ],
-            //           )),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            SizedBox(
+                        SizedBox(
               width: operatinModeR == 4 ||
                       modeName == "PSIMV" ||
                       operatinModeR == 3 ||
@@ -7390,13 +6876,7 @@ class _CheckPageState extends State<Dashboard> {
                                   )
                                 : Icon(Icons.lock,
                                     size: 40, color: Colors.black)
-                            //     Text(
-                            //   "View Logs",
-                            //   style: TextStyle(
-                            //     fontWeight: FontWeight.bold,
-                            //     color: lockEnabled ? Colors.black : Colors.white,
-                            //   ),
-                            // )
+                           
                             ),
                       ),
                     ),
@@ -21726,48 +21206,27 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   writeDataPlay() async {
-    // if(_status=="Connected"){
-    //   await _port.write(Uint8List.fromList(modeWriteList));
-    // }
     writePlay = [];
-    // writePlay.add(0x7E);
     writePlay.add(0);
     writePlay.add(20);
     writePlay.add(0);
     writePlay.add(31);
-    // writePlay.add(0x7F);
-
-    //to calculate crc
-    // // print(writePlay.toString());
-    // Fluttertoast.showToast(msg: writePlay.toString());
     sendDataUsbConnection(writePlay, 2);
-
-    // if (_status == "Connected") {
-    //   await _port.write(Uint8List.fromList(writePlay));
-    // }
   }
 
   writeDataPause() async {
     writePlay = [];
-    // writePlay.add(0x7E);
     writePlay.add(0);
     writePlay.add(20);
     writePlay.add(0);
     writePlay.add(30);
-    // writePlay.add(0x7F);
-
     sendDataUsbConnection(writePlay, 2);
-
-    // if (_status == "Connected") {
-    //   await _port.write(Uint8List.fromList(writePlay));
-    // }
   }
 
   sendDataUsbConnection(List<int> samplemodeWriteList, checkValue) async {
     list = [];
     List<int> listTempF = [];
     int cIndex = 0;
-
     for (int i = 0; i < samplemodeWriteList.length; i++) {
       if (samplemodeWriteList[i] == 0x7F) {
         listTempF.insert(cIndex, 0X7D);
@@ -21786,9 +21245,6 @@ class _CheckPageState extends State<Dashboard> {
       }
       cIndex = cIndex + 1;
     }
-
-    // print("1234 " + checkValue.toString());
-
     sendData(listTempF, checkValue);
   }
 
@@ -21856,7 +21312,6 @@ class _CheckPageState extends State<Dashboard> {
         pacvVtMax = false;
         pacvFio2 = false;
         pacvFlowRamp = false;
-
         pacvItrigValue = 3;
         pacvRrValue = 20;
         pacvIeValue = 51;
@@ -21866,7 +21321,6 @@ class _CheckPageState extends State<Dashboard> {
         pacvVtMaxValue = 2400;
         pacvFio2Value = 21;
         pacvFlowRampValue = 3;
-
         pacvmaxValue = 60;
         pacvminValue = 1;
         pacvdefaultValue = 20;
@@ -21884,7 +21338,6 @@ class _CheckPageState extends State<Dashboard> {
         pccmvVtmax = false;
         pccmvFlowRamp = false;
         pccmvTih = false;
-
         pccmvRRValue = 20;
         pccmvIeValue = 51;
         pccmvPeepValue = 10;
@@ -21902,7 +21355,6 @@ class _CheckPageState extends State<Dashboard> {
         pccmvVtmaxValueTemp = 400;
         pccmvTihValueTemp = 50;
         pccmvFlowRampValue = 4;
-
         pccmvmaxValue = 60;
         pccmvminValue = 1;
         pccmvdefaultValue = 12;
@@ -21920,7 +21372,6 @@ class _CheckPageState extends State<Dashboard> {
         vccmvVt = false;
         vccmvFlowRamp = false;
         vccmvTih = false;
-
         vccmvRRValue = 20;
         vccmvIeValue = 51;
         vccmvPeepValue = 10;
@@ -21930,7 +21381,6 @@ class _CheckPageState extends State<Dashboard> {
         vccmvVtValue = 300;
         vccmvTihValue = 50;
         vccmvFlowRampValue = 4;
-
         vccmvmaxValue = 60;
         vccmvminValue = 1;
         vccmvdefaultValue = 20;
@@ -21948,7 +21398,6 @@ class _CheckPageState extends State<Dashboard> {
         vacvPcMax = false;
         vacvFio2 = false;
         vacvFlowRamp = false;
-
         vacvItrigValue = 3;
         vacvRrValue = 20;
         vacvIeValue = 51;
@@ -21958,7 +21407,6 @@ class _CheckPageState extends State<Dashboard> {
         vacvPcMaxValue = 100;
         vacvFio2Value = 21;
         vacvFlowRampValue = 4;
-
         vacvmaxValue = 60;
         vacvminValue = 1;
         vacvdefaultValue = 20;
@@ -22067,7 +21515,6 @@ class _CheckPageState extends State<Dashboard> {
   writeAlarmsData() async {
     List<int> alarmList = [];
     setState(() {
-      // alarmList.add(0x7E);
       alarmList.add(0);
       alarmList.add(20);
       alarmList.add(0);
@@ -22103,10 +21550,6 @@ class _CheckPageState extends State<Dashboard> {
       alarmList.add((minfio2 & 0x00FF));
       alarmList.add((maxfio2 & 0xFF00) >> 8);
       alarmList.add((maxfio2 & 0x00FF));
-
-      // alarmList.add(0x7F);
-
-      // Fluttertoast.showToast(msg: alarmList.toString());
     });
 
     preferences = await SharedPreferences.getInstance();
@@ -23018,72 +22461,13 @@ class _CheckPageState extends State<Dashboard> {
                 " alarmCounter : " +
                 alarmCounter.toString());
 
-            // if (presentCode != previousCode) {
-            //   previousCode = presentCode;
-            //   _stopMusic();
-            //   var data = AlarmsList(
-            //       presentCode.toString(), this.globalCounterNo.toString());
-            //   dbHelpera.saveAlarm(data);
-            //   // alarmPrevCounter = alarmCounter;
-
-            //   if ((presentCode == 5 ||
-            //           presentCode == 7 ||
-            //           presentCode == 10 ||
-            //           presentCode == 11 ||
-            //           presentCode == 17) &&
-            //       highPriorityAlarm == 0) {
-            //     setState(() {
-            //       highPriorityAlarm = 1;
-            //       mediumPriorityAlarm = 0;
-            //       lowPriorityAlarm = 0;
-            //     });
-            //     _stopMusic();
-            //     _playMusicHigh();
-            //     sendSoundOn();
-            //     audioEnable = true;
-            //   } else if ((presentCode == 1 ||
-            //           presentCode == 2 ||
-            //           presentCode == 3 ||
-            //           presentCode == 4 ||
-            //           presentCode == 6 ||
-            //           presentCode == 8 ||
-            //           presentCode == 9 ||
-            //           presentCode == 12 ||
-            //           presentCode == 13 ||
-            //           presentCode == 14 ||
-            //           presentCode == 15 ||
-            //           presentCode == 16 ||
-            //           presentCode == 18 ||
-            //           presentCode == 19 ||
-            //           presentCode == 20 ||
-            //           presentCode == 21 ||
-            //           presentCode == 22) &&
-            //       mediumPriorityAlarm == 0) {
-            //     setState(() {
-            //       highPriorityAlarm = 0;
-            //       mediumPriorityAlarm = 1;
-            //       lowPriorityAlarm = 0;
-            //     });
-            //     _stopMusic();
-            //     _playMusicMedium();
-            //     sendSoundOn();
-            //     audioEnable = true;
-            //   } else if (presentCode == 23 && lowPriorityAlarm == 0) {
-            //     setState(() {
-            //       highPriorityAlarm = 0;
-            //       mediumPriorityAlarm = 0;
-            //       lowPriorityAlarm = 1;
-            //     });
-            //     _stopMusic();
-            //     _playMusicLower();
-            //     sendSoundOn();
-            //     audioEnable = true;
-            //   }
-            // } else {
-            if (alarmCounter != alarmPrevCounter &&
+            
+            if (alarmCounter != alarmPrevCounter ||
                 presentCode != previousCode) {
               alarmPrevCounter = alarmCounter;
               previousCode = presentCode;
+              sendSoundOn();
+              _playMusicHigh();
               _stopMusic();
               var data = AlarmsList(
                   presentCode.toString(), this.globalCounterNo.toString());
@@ -23626,7 +23010,7 @@ class _CheckPageState extends State<Dashboard> {
       clearPlay();
     } else if (acknowReceivedValue == 1 && ackPacket == 30) {
       clearPause();
-    }
+    } 
   }
 
   clearPause() {
