@@ -897,9 +897,9 @@ class _CheckPageState extends State<Dashboard> {
     if (_loopActive) return;
     _loopActive = true;
     while (_buttonPressed) {
-       if (turnoffSendingboolI == false) {
-          writeRespiratoryPauseData(1);
-        }
+      if (turnoffSendingboolI == false) {
+        writeRespiratoryPauseData(1);
+      }
       // do your thing
       if (timerCounter <= 29) {
         setState(() {
@@ -907,7 +907,6 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
       if (timerCounter == 30) {
-       
         setState(() {
           _buttonPressed = false;
         });
@@ -928,9 +927,9 @@ class _CheckPageState extends State<Dashboard> {
     if (_loopActive) return;
     _loopActive = true;
     while (_buttonPressedE) {
-         if (turnoffSendingboolE == false) {
-          writeRespiratoryPauseData(2);
-        }
+      if (turnoffSendingboolE == false) {
+        writeRespiratoryPauseData(2);
+      }
       // do your thing
       if (timerCounter <= 29) {
         setState(() {
@@ -938,7 +937,6 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
       if (timerCounter == 30) {
-        
         setState(() {
           _buttonPressedE = false;
         });
@@ -4125,7 +4123,7 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                  lockEnabled ? alarmEnabled = true : "";
+                      lockEnabled ? alarmEnabled = true : "";
                     });
                   },
                   child: Center(
@@ -5142,7 +5140,6 @@ class _CheckPageState extends State<Dashboard> {
                               ),
                             ),
                           ),
-                         
                         ],
                       )),
                     ),
@@ -5516,7 +5513,6 @@ class _CheckPageState extends State<Dashboard> {
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
-                          
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
@@ -6313,7 +6309,6 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
@@ -6553,7 +6548,6 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-
             InkWell(
               onTap: () {
                 if (modeWriteList.isNotEmpty) {
@@ -6670,7 +6664,7 @@ class _CheckPageState extends State<Dashboard> {
                     ),
                   )
                 : Container(),
-                        SizedBox(
+            SizedBox(
               width: operatinModeR == 4 ||
                       modeName == "PSIMV" ||
                       operatinModeR == 3 ||
@@ -6875,9 +6869,7 @@ class _CheckPageState extends State<Dashboard> {
                                     size: 40,
                                   )
                                 : Icon(Icons.lock,
-                                    size: 40, color: Colors.black)
-                           
-                            ),
+                                    size: 40, color: Colors.black)),
                       ),
                     ),
                   ),
@@ -22456,22 +22448,14 @@ class _CheckPageState extends State<Dashboard> {
             presentCode = ((finalList[106] << 8) + finalList[107]);
             alarmCounter = finalList[90];
 
-            print("present code : " +
-                presentCode.toString() +
-                " alarmCounter : " +
-                alarmCounter.toString());
-
-            
-            if (alarmCounter != alarmPrevCounter ||
-                presentCode != previousCode) {
-              alarmPrevCounter = alarmCounter;
+            if (presentCode != previousCode) {
               previousCode = presentCode;
               sendSoundOn();
-              _playMusicHigh();
               _stopMusic();
               var data = AlarmsList(
                   presentCode.toString(), this.globalCounterNo.toString());
               dbHelpera.saveAlarm(data);
+              // alarmPrevCounter = alarmCounter;
 
               if ((presentCode == 5 ||
                       presentCode == 7 ||
@@ -22526,6 +22510,70 @@ class _CheckPageState extends State<Dashboard> {
                 sendSoundOn();
                 audioEnable = true;
               }
+            } else {
+              if (alarmCounter != alarmPrevCounter) {
+                alarmPrevCounter = alarmCounter;
+                _stopMusic();
+                var data = AlarmsList(
+                    presentCode.toString(), this.globalCounterNo.toString());
+                dbHelpera.saveAlarm(data);
+
+                if ((presentCode == 5 ||
+                        presentCode == 7 ||
+                        presentCode == 10 ||
+                        presentCode == 11 ||
+                        presentCode == 17) &&
+                    highPriorityAlarm == 0) {
+                  setState(() {
+                    highPriorityAlarm = 1;
+                    mediumPriorityAlarm = 0;
+                    lowPriorityAlarm = 0;
+                  });
+                  _stopMusic();
+                  _playMusicHigh();
+                  sendSoundOn();
+                  audioEnable = true;
+                } else if ((presentCode == 1 ||
+                        presentCode == 2 ||
+                        presentCode == 3 ||
+                        presentCode == 4 ||
+                        presentCode == 6 ||
+                        presentCode == 8 ||
+                        presentCode == 9 ||
+                        presentCode == 12 ||
+                        presentCode == 13 ||
+                        presentCode == 14 ||
+                        presentCode == 15 ||
+                        presentCode == 16 ||
+                        presentCode == 18 ||
+                        presentCode == 19 ||
+                        presentCode == 20 ||
+                        presentCode == 21 ||
+                        presentCode == 22) &&
+                    mediumPriorityAlarm == 0) {
+                  setState(() {
+                    highPriorityAlarm = 0;
+                    mediumPriorityAlarm = 1;
+                    lowPriorityAlarm = 0;
+                  });
+                  _stopMusic();
+                  _playMusicMedium();
+                  sendSoundOn();
+                  audioEnable = true;
+                } else if (presentCode == 23 && lowPriorityAlarm == 0) {
+                  setState(() {
+                    highPriorityAlarm = 0;
+                    mediumPriorityAlarm = 0;
+                    lowPriorityAlarm = 1;
+                  });
+                  _stopMusic();
+                  _playMusicLower();
+                  sendSoundOn();
+                  audioEnable = true;
+                }
+              }
+
+             
             }
             // }
           } else if (finalList[108] == 0) {
@@ -23010,7 +23058,11 @@ class _CheckPageState extends State<Dashboard> {
       clearPlay();
     } else if (acknowReceivedValue == 1 && ackPacket == 30) {
       clearPause();
-    } 
+    } else {
+      acknowReceivedValue = 0;
+      ackPacket = 0;
+      finalListSend.clear();
+    }
   }
 
   clearPause() {

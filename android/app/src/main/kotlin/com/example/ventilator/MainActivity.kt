@@ -180,7 +180,11 @@ class MainActivity: FlutterActivity() {
             else if(call.method == "sendPlayAudioStop"){
                 try {
 //                    mp= MediaPlayer.create(getApplicationContext(),R.raw.ealarm);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
-                    mp?.stop();
+                    if(mp?.isPlaying()!!){
+                        mp?.stop();
+//                        mp?.reset();
+//                        mp?.release();
+                    }
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
@@ -211,7 +215,7 @@ class MainActivity: FlutterActivity() {
                 try {
 //                  // unmute audio
                     val amanager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-//                    amanager.setStreamVolume(AudioManager.STREAM_MUSIC, amanager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0)
+                    amanager.setStreamVolume(AudioManager.STREAM_MUSIC, amanager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                         amanager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
                         amanager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_UNMUTE, 0)
