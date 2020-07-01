@@ -2044,15 +2044,15 @@ class _CheckPageState extends State<Dashboard> {
 
   endDrawerMethod() {
     return Container(
-      child:Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-        Container(child:Material(color:Colors.white,borderRadius:BorderRadius.circular(10),child:Container(child:Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text("a"),
-        ))))
-      ],)
+      // child:Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   children: <Widget>[
+      //   Container(child:Material(color:Colors.white,borderRadius:BorderRadius.circular(10),child:Container(child:Padding(
+      //     padding: const EdgeInsets.all(8.0),
+      //     child: Text("a"),
+      //   ))))
+      // ],)
     );
   }
 
