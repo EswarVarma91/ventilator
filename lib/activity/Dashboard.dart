@@ -1410,6 +1410,7 @@ class _CheckPageState extends State<Dashboard> {
         //     icon: Icon(Icons.arrow_forward),
         //     onTap: () {}
         // ),
+        endDrawer: endDrawerMethod(),
         drawer: Container(
           width: 190,
           child: Theme(
@@ -2039,6 +2040,20 @@ class _CheckPageState extends State<Dashboard> {
     if (_status == "Connected") {
       await _port.write(Uint8List.fromList(objSelfTestData));
     }
+  }
+
+  endDrawerMethod() {
+    return Container(
+      child:Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+        Container(child:Material(color:Colors.white,borderRadius:BorderRadius.circular(10),child:Container(child:Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text("a"),
+        ))))
+      ],)
+    );
   }
 
   showAlertCalibarationDialog() {
@@ -3971,7 +3986,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "V1.8.3j",
+                  "V1.8.3k",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -22060,222 +22075,382 @@ class _CheckPageState extends State<Dashboard> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Color(0xFFE0E0E0)),
-                width: 400,
+                width: 500,
                 height: 380,
                 child: Center(
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                       Text(
                         alarmparameterName,
                         style: TextStyle(fontSize: 36),
                       ),
                       SizedBox(
-                        height: 70,
+                        height: 10,
                       ),
                       Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.remove,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  alarmConfirmed = false;
-                                  if (alarmRR == true && minRrtotal != 1) {
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_up,
+                                    color: Colors.black,
+                                    size: 55,
+                                  ),
+                                  onPressed: () {
                                     setState(() {
-                                      minRrtotal = minRrtotal - 1;
+                                      alarmConfirmed = false;
+                                      if (alarmRR == true &&
+                                          minRrtotal <= maxRrtotal - 1) {
+                                        setState(() {
+                                          minRrtotal = minRrtotal + 1;
+                                        });
+                                      } else if (alarmVte == true &&
+                                          minvte <= maxvte - 1) {
+                                        setState(() {
+                                          minvte = minvte + 1;
+                                        });
+                                      } else if (alarmPpeak == true &&
+                                          minppeak <= maxppeak - 1) {
+                                        setState(() {
+                                          minppeak = minppeak + 1;
+                                        });
+                                      } else if (alarmpeep == true &&
+                                          minpeep <= maxpeep - 1) {
+                                        setState(() {
+                                          minpeep = minpeep + 1;
+                                        });
+                                      }
                                     });
-                                  } else if (alarmVte == true && minvte != 0) {
+                                  },
+                                ),
+                                SizedBox(height: 20),
+                                // IconButton(
+                                //   icon: Icon(
+                                //     Icons.remove,
+                                //     color: Colors.black,
+                                //     size: 55,
+                                //   ),
+                                //   onPressed: () {
+                                //     setState(() {
+                                //       alarmConfirmed = false;
+                                //       if (alarmRR == true && minRrtotal != 1) {
+                                //         setState(() {
+                                //           minRrtotal = minRrtotal - 1;
+                                //         });
+                                //       } else if (alarmVte == true &&
+                                //           minvte != 0) {
+                                //         setState(() {
+                                //           minvte = minvte - 1;
+                                //         });
+                                //       } else if (alarmPpeak == true &&
+                                //           minppeak != 0) {
+                                //         setState(() {
+                                //           minppeak = minppeak - 1;
+                                //         });
+                                //       } else if (alarmFio2 == true &&
+                                //           minfio2 != 21) {
+                                //         setState(() {
+                                //           minfio2 = minfio2 - 1;
+                                //         });
+                                //       } else if (alarmpeep == true &&
+                                //           minpeep != 0) {
+                                //         setState(() {
+                                //           minpeep = minpeep - 1;
+                                //         });
+                                //       }
+                                //     });
+                                //   },
+                                // ),
+                                SizedBox(height: 100),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: Colors.black,
+                                    size: 55,
+                                  ),
+                                  onPressed: () {
                                     setState(() {
-                                      minvte = minvte - 1;
+                                      alarmConfirmed = false;
+                                      if (alarmRR == true && minRrtotal != 1) {
+                                        setState(() {
+                                          minRrtotal = minRrtotal - 1;
+                                        });
+                                      } else if (alarmVte == true &&
+                                          minvte != 0) {
+                                        setState(() {
+                                          minvte = minvte - 1;
+                                        });
+                                      } else if (alarmPpeak == true &&
+                                          minppeak != 0) {
+                                        setState(() {
+                                          minppeak = minppeak - 1;
+                                        });
+                                      } else if (alarmFio2 == true &&
+                                          minfio2 != 21) {
+                                        setState(() {
+                                          minfio2 = minfio2 - 1;
+                                        });
+                                      } else if (alarmpeep == true &&
+                                          minpeep != 0) {
+                                        setState(() {
+                                          minpeep = minpeep - 1;
+                                        });
+                                      }
                                     });
-                                  } else if (alarmPpeak == true &&
-                                      minppeak != 0) {
-                                    setState(() {
-                                      minppeak = minppeak - 1;
-                                    });
-                                  } else if (alarmFio2 == true &&
-                                      minfio2 != 21) {
-                                    setState(() {
-                                      minfio2 = minfio2 - 1;
-                                    });
-                                  } else if (alarmpeep == true &&
-                                      minpeep != 0) {
-                                    setState(() {
-                                      minpeep = minpeep - 1;
-                                    });
-                                  }
-                                });
-                              },
+                                  },
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: 60,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  alarmRR
+                                      ? "$minRrtotal - $maxRrtotal"
+                                      : alarmVte
+                                          ? "$minvte - $maxvte"
+                                          : alarmPpeak
+                                              ? "$minppeak - $maxppeak"
+                                              : alarmFio2
+                                                  ? "$minfio2 - $maxfio2"
+                                                  : alarmpeep
+                                                      ? "$minpeep - $maxpeep"
+                                                      : "0",
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Container(
+                                  width: 350,
+                                  child: CupertinoRangeSlider(
+                                    minValue: alarmRR
+                                        ? minRrtotal.toDouble()
+                                        : alarmVte
+                                            ? minvte.toDouble()
+                                            : alarmPpeak
+                                                ? minppeak.toDouble()
+                                                : alarmFio2
+                                                    ? minfio2.toDouble()
+                                                    : alarmpeep
+                                                        ? minpeep.toDouble()
+                                                        : 0.0, // Current min value
+                                    maxValue: alarmRR
+                                        ? maxRrtotal.toDouble()
+                                        : alarmVte
+                                            ? maxvte.toDouble()
+                                            : alarmPpeak
+                                                ? maxppeak.toDouble()
+                                                : alarmFio2
+                                                    ? maxfio2.toDouble()
+                                                    : alarmpeep
+                                                        ? maxpeep.toDouble()
+                                                        : 0.0, // Current max value
+                                    min: alarmRR
+                                        ? 1
+                                        : alarmVte
+                                            ? 0
+                                            : alarmPpeak
+                                                ? 0
+                                                : alarmFio2
+                                                    ? 21
+                                                    : alarmpeep
+                                                        ? 0
+                                                        : 0.0, // Min range value
+                                    max: alarmRR
+                                        ? 70
+                                        : alarmVte
+                                            ? 2400
+                                            : alarmPpeak
+                                                ? 100
+                                                : alarmFio2
+                                                    ? 100
+                                                    : alarmpeep
+                                                        ? 40
+                                                        : 0.0, // Max range value
+                                    onMinChanged: (minVal) {
+                                      setState(() {
+                                        alarmConfirmed = false;
+                                        alarmRR
+                                            ? minRrtotal = minVal.toInt()
+                                            : alarmVte
+                                                ? minvte = minVal.toInt()
+                                                : alarmPpeak
+                                                    ? minppeak = minVal.toInt()
+                                                    : alarmFio2
+                                                        ? minfio2 =
+                                                            minVal.toInt()
+                                                        : alarmpeep
+                                                            ? minpeep =
+                                                                minVal.toInt()
+                                                            : 0.toInt();
+                                      });
+                                    },
+                                    onMaxChanged: (maxVal) {
+                                      setState(() {
+                                        alarmConfirmed = false;
+                                        alarmRR
+                                            ? maxRrtotal = maxVal.toInt()
+                                            : alarmVte
+                                                ? maxvte = maxVal.toInt()
+                                                : alarmPpeak
+                                                    ? maxppeak = maxVal.toInt()
+                                                    : alarmFio2
+                                                        ? maxfio2 =
+                                                            maxVal.toInt()
+                                                        : alarmpeep
+                                                            ? maxpeep =
+                                                                maxVal.toInt()
+                                                            : 0.toInt();
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 45.0, right: 45.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(alarmminValue.toString()),
+                                      SizedBox(width: 200),
+                                      Text(alarmmaxValue.toString())
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              alarmRR
-                                  ? "$minRrtotal - $maxRrtotal"
-                                  : alarmVte
-                                      ? "$minvte - $maxvte"
-                                      : alarmPpeak
-                                          ? "$minppeak - $maxppeak"
-                                          : alarmFio2
-                                              ? "$minfio2 - $maxfio2"
-                                              : alarmpeep
-                                                  ? "$minpeep - $maxpeep"
-                                                  : "0",
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 60,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  alarmConfirmed = false;
-                                  if (alarmRR == true && maxRrtotal != 70) {
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_up,
+                                    color: Colors.black,
+                                    size: 55,
+                                  ),
+                                  onPressed: () {
                                     setState(() {
-                                      maxRrtotal = maxRrtotal + 1;
+                                      alarmConfirmed = false;
+                                      if (alarmRR == true && maxRrtotal != 70) {
+                                        setState(() {
+                                          maxRrtotal = maxRrtotal + 1;
+                                        });
+                                      } else if (alarmVte == true &&
+                                          maxvte != 2400) {
+                                        setState(() {
+                                          maxvte = maxvte + 1;
+                                        });
+                                      } else if (alarmPpeak == true &&
+                                          maxppeak != 100) {
+                                        setState(() {
+                                          maxppeak = maxppeak + 1;
+                                        });
+                                      } else if (alarmFio2 == true &&
+                                          maxfio2 != 100) {
+                                        setState(() {
+                                          maxfio2 = maxfio2 + 1;
+                                        });
+                                      } else if (alarmpeep == true &&
+                                          maxpeep != 40) {
+                                        setState(() {
+                                          maxpeep = maxpeep + 1;
+                                        });
+                                      }
                                     });
-                                  } else if (alarmVte == true &&
-                                      maxvte != 2400) {
+                                  },
+                                ),
+                                SizedBox(height: 100),
+                                // IconButton(
+                                //   icon: Icon(
+                                //     Icons.add,
+                                //     color: Colors.black,
+                                //     size: 45,
+                                //   ),
+                                //   onPressed: () {
+                                //     setState(() {
+                                //       alarmConfirmed = false;
+                                //       if (alarmRR == true && maxRrtotal != 70) {
+                                //         setState(() {
+                                //           maxRrtotal = maxRrtotal + 1;
+                                //         });
+                                //       } else if (alarmVte == true &&
+                                //           maxvte != 2400) {
+                                //         setState(() {
+                                //           maxvte = maxvte + 1;
+                                //         });
+                                //       } else if (alarmPpeak == true &&
+                                //           maxppeak != 100) {
+                                //         setState(() {
+                                //           maxppeak = maxppeak + 1;
+                                //         });
+                                //       } else if (alarmFio2 == true &&
+                                //           maxfio2 != 100) {
+                                //         setState(() {
+                                //           maxfio2 = maxfio2 + 1;
+                                //         });
+                                //       } else if (alarmpeep == true &&
+                                //           maxpeep != 40) {
+                                //         setState(() {
+                                //           maxpeep = maxpeep + 1;
+                                //         });
+                                //       }
+                                //     });
+                                //   },
+                                // ),
+                                SizedBox(height: 20),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: Colors.black,
+                                    size: 55,
+                                  ),
+                                  onPressed: () {
                                     setState(() {
-                                      maxvte = maxvte + 1;
+                                      alarmConfirmed = false;
+                                      if (alarmRR == true &&
+                                          maxRrtotal >= minRrtotal + 1) {
+                                        setState(() {
+                                          maxRrtotal = maxRrtotal - 1;
+                                        });
+                                      } else if (alarmVte == true &&
+                                          maxvte >= minvte + 1) {
+                                        setState(() {
+                                          maxvte = maxvte - 1;
+                                        });
+                                      } else if (alarmPpeak == true &&
+                                          maxppeak >= minppeak + 1) {
+                                        setState(() {
+                                          maxppeak = maxppeak - 1;
+                                        });
+                                      } else if (alarmpeep == true &&
+                                          maxpeep >= minpeep + 1) {
+                                        setState(() {
+                                          maxpeep = maxpeep - 1;
+                                        });
+                                      }
                                     });
-                                  } else if (alarmPpeak == true &&
-                                      maxppeak != 100) {
-                                    setState(() {
-                                      maxppeak = maxppeak + 1;
-                                    });
-                                  } else if (alarmFio2 == true &&
-                                      maxfio2 != 100) {
-                                    setState(() {
-                                      maxfio2 = maxfio2 + 1;
-                                    });
-                                  } else if (alarmpeep == true &&
-                                      maxpeep != 40) {
-                                    setState(() {
-                                      maxpeep = maxpeep + 1;
-                                    });
-                                  }
-                                });
-                              },
+                                  },
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 35,
-                      ),
-                      Container(
-                        width: 350,
-                        child: CupertinoRangeSlider(
-                          minValue: alarmRR
-                              ? minRrtotal.toDouble()
-                              : alarmVte
-                                  ? minvte.toDouble()
-                                  : alarmPpeak
-                                      ? minppeak.toDouble()
-                                      : alarmFio2
-                                          ? minfio2.toDouble()
-                                          : alarmpeep
-                                              ? minpeep.toDouble()
-                                              : 0.0, // Current min value
-                          maxValue: alarmRR
-                              ? maxRrtotal.toDouble()
-                              : alarmVte
-                                  ? maxvte.toDouble()
-                                  : alarmPpeak
-                                      ? maxppeak.toDouble()
-                                      : alarmFio2
-                                          ? maxfio2.toDouble()
-                                          : alarmpeep
-                                              ? maxpeep.toDouble()
-                                              : 0.0, // Current max value
-                          min: alarmRR
-                              ? 1
-                              : alarmVte
-                                  ? 0
-                                  : alarmPpeak
-                                      ? 0
-                                      : alarmFio2
-                                          ? 21
-                                          : alarmpeep
-                                              ? 0
-                                              : 0.0, // Min range value
-                          max: alarmRR
-                              ? 70
-                              : alarmVte
-                                  ? 2400
-                                  : alarmPpeak
-                                      ? 100
-                                      : alarmFio2
-                                          ? 100
-                                          : alarmpeep
-                                              ? 40
-                                              : 0.0, // Max range value
-                          onMinChanged: (minVal) {
-                            setState(() {
-                              alarmConfirmed = false;
-                              alarmRR
-                                  ? minRrtotal = minVal.toInt()
-                                  : alarmVte
-                                      ? minvte = minVal.toInt()
-                                      : alarmPpeak
-                                          ? minppeak = minVal.toInt()
-                                          : alarmFio2
-                                              ? minfio2 = minVal.toInt()
-                                              : alarmpeep
-                                                  ? minpeep = minVal.toInt()
-                                                  : 0.toInt();
-                            });
-                          },
-                          onMaxChanged: (maxVal) {
-                            setState(() {
-                              alarmConfirmed = false;
-                              alarmRR
-                                  ? maxRrtotal = maxVal.toInt()
-                                  : alarmVte
-                                      ? maxvte = maxVal.toInt()
-                                      : alarmPpeak
-                                          ? maxppeak = maxVal.toInt()
-                                          : alarmFio2
-                                              ? maxfio2 = maxVal.toInt()
-                                              : alarmpeep
-                                                  ? maxpeep = maxVal.toInt()
-                                                  : 0.toInt();
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 1,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 45.0, right: 45.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(alarmminValue.toString()),
-                            Text(alarmmaxValue.toString())
-                          ],
-                        ),
-                      )
                     ],
                   ),
                 ))
@@ -22572,8 +22747,6 @@ class _CheckPageState extends State<Dashboard> {
                   audioEnable = true;
                 }
               }
-
-             
             }
             // }
           } else if (finalList[108] == 0) {
