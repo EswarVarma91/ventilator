@@ -41,42 +41,793 @@ install root explorer app and go to system/media/ change the bootanimation.zip t
 https://www.xda-developers.com/customize-battery-saver-mode-android-8-0/
 
 
-
- setState(() {
-                                      vacvPeepValue = vacvPeepValue-1;
-                                      if(vacvItrigValue>1 && vacvItrigValue>vacvPeepValue){
-                                        vacvItrigValue = vacvPeepValue;
-                                      }
-                                    }); //peep negative
-
-
-
-
- setState(() {
-                                      vacvItrigValue = vacvItrigValue + 1;
-                                      if(vacvPeepValue <= vacvItrigValue){
-                                        if(vacvPeepValue==0){
-                                          vacvItrigValue=1;
-                                        }else{
-                                         vacvItrigValue=vacvPeepValue;
-                                        }
-                                      }
-                                    }); //itrig positive
-
-                      
- setState(() {
-                                      vacvItrigValue = vacvItrigValue + 1;
-                                      if(vacvPeepValue <= vacvItrigValue){
-                                        if(vacvPeepValue==0){
-                                          vacvItrigValue=1;
-                                        }else{
-                                         vacvItrigValue=vacvPeepValue;
-                                        }
-                                      }
-                                    }); // slider itrig
+heightId.text = index.toString();
+                                  if (index <= 70) {
+                                    setState(() {
+                                      weightId.text = ((0.125 * index) - 0.75)
+                                          .toInt()
+                                          .toString();
+                                    });
+                                  } else if (70 < index && index <= 128) {
+                                    setState(() {
+                                      weightId.text =
+                                          (((0.0037 * index - 0.4018) * index) +
+                                                  18.62)
+                                              .toInt()
+                                              .toString();
+                                    });
+                                  } else if (index >= 129) {
+                                    setState(() {
+                                      maleEnabled == true
+                                          ? weightId.text =
+                                              ((0.9079 * index) - 88.022)
+                                                  .toInt()
+                                                  .toString()
+                                          : femaleEnabled == true
+                                              ? weightId.text =
+                                                  ((0.9049 * index) - 88.022)
+                                                      .toInt()
+                                                      .toString()
+                                              : 0.toString();
+                                    });
+                                  }
 
 
-vacvPeepValue = value.toInt();
-                                if(vacvItrigValue>1 && vacvItrigValue>vacvPeepValue){
-                                        vacvItrigValue = vacvPeepValue;
-                                      } // slider peep
+
+leftside bar 
+child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(height: 2),
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 5.0, bottom: 5, left: 8, right: 8),
+          child: Card(
+              child: Padding(
+            padding: const EdgeInsets.only(
+                left: 18.0, right: 18, top: 18, bottom: 18),
+            child: Text("Set Parameters",
+                style: TextStyle(color: Colors.black, fontSize: 15)),
+          )),
+        ),
+        SizedBox(height: 2),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Row(children: <Widget>[
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Itrig"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedItrig.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("PEEP"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedpeep.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("PS"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedps.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("FiO\u2082"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedfio2.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Apnea Time"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedapneaTime.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("I:E"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(
+                                          receivedi.toString() +
+                                              ":" +
+                                              receivede.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+              ]),
+              SizedBox(height: 10),
+              Row(children: <Widget>[
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Ti"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedti.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Backup RR"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedbackuprr.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Vt min"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedvvttmin.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Vt max"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedvtmax.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Min Te"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedminte.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("PC"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedpc.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+              ]),
+              SizedBox(height: 10),
+              Row(children: <Widget>[
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("RR"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedrr.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("VT"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedvt.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                            SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Pc Min"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedpcmin.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+                SizedBox(width: 10),
+                Container(
+                    child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: Stack(children: [
+                                Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Pc Max"),
+                                    )),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 18.0,
+                                          bottom: 10,
+                                          right: 10,
+                                          left: 10),
+                                      child: Text(receivedpcmax.toString(),
+                                          style: TextStyle(fontSize: 25)),
+                                    )),
+                              ]),
+                            )))),
+              ]),
+            ],
+          ),
+        ),
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 2.0, bottom: 2, left: 8, right: 8),
+          child: Card(
+              child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Text("Other Parameters",
+                style: TextStyle(color: Colors.black, fontSize: 15)),
+          )),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              Container(
+                  child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: Stack(children: [
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("O\u2082 Pressure"),
+                                  )),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 18.0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Text(receivedo2pressure.toString(),
+                                        style: TextStyle(fontSize: 25)),
+                                  )),
+                            ]),
+                          )))),
+              SizedBox(width: 20),
+              Container(
+                  child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: Stack(children: [
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Tank Pressure"),
+                                  )),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 18.0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Text(receivedtankpressure.toString(),
+                                        style: TextStyle(fontSize: 25)),
+                                  )),
+                            ]),
+                          )))),
+              SizedBox(width: 20),
+              Container(
+                  child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: Stack(children: [
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Flatprop"),
+                                  )),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 18.0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Text(receivedflatprop.toString(),
+                                        style: TextStyle(fontSize: 25)),
+                                  )),
+                            ]),
+                          )))),
+              SizedBox(width: 20),
+              Container(
+                  child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: Stack(children: [
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Tank Blower I"),
+                                  )),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 18.0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Text(
+                                        receivedinhalationblowercommand
+                                            .toString(),
+                                        style: TextStyle(fontSize: 25)),
+                                  )),
+                            ]),
+                          )))),
+              SizedBox(width: 20),
+              Container(
+                  child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: Stack(children: [
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Tank Blower E"),
+                                  )),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 18.0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Text(
+                                        receivedexhalatioblowercommand
+                                            .toString(),
+                                        style: TextStyle(fontSize: 25)),
+                                  )),
+                            ]),
+                          )))),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              Container(
+                  child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: Stack(children: [
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("FiO\u2082"),
+                                  )),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 18.0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Text(dreceivedfio2.toString(),
+                                        style: TextStyle(fontSize: 25)),
+                                  )),
+                            ]),
+                          )))),
+              SizedBox(width: 20),
+              Container(
+                  child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: Stack(children: [
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("VTi"),
+                                  )),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 18.0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Text(receivedvti.toString(),
+                                        style: TextStyle(fontSize: 25)),
+                                  )),
+                            ]),
+                          )))),
+              SizedBox(width: 20),
+              Container(
+                  child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: Stack(children: [
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("VTe"),
+                                  )),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 18.0,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Text(receivedvte.toString(),
+                                        style: TextStyle(fontSize: 25)),
+                                  )),
+                            ]),
+                          )))),
+            ],
+          ),
+        ),
+      ],
+    )

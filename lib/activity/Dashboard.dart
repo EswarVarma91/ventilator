@@ -511,6 +511,32 @@ class _CheckPageState extends State<Dashboard> {
   bool turnoffSendingboolI = false;
   bool turnoffSendingboolE = false;
 
+  int receivedItrig = 0,
+      receivedpeep = 0,
+      receivedps = 0,
+      receivedfio2 = 0,
+      receivedapneaTime = 0,
+      receivedi = 0,
+      receivede = 0,
+      receivedti = 0,
+      receivedbackuprr = 0,
+      receivedvvttmin = 0,
+      receivedvtmax = 0,
+      receivedminte = 0,
+      receivedpc = 0,
+      receivedrr = 0,
+      receivedvt = 0,
+      receivedpcmin = 0,
+      receivedpcmax = 0,
+      receivedo2pressure = 0,
+      receivedtankpressure = 0,
+      receivedinhalationblowercommand = 0,
+      receivedexhalatioblowercommand = 0,
+      dreceivedfio2 = 0,
+      receivedvti = 0,
+      receivedvte = 0,
+      receivedflatprop = 0;
+
   Future<bool> _connectTo(device) async {
     list.clear();
     pressurePoints.clear();
@@ -598,6 +624,7 @@ class _CheckPageState extends State<Dashboard> {
   int displayTemperature = 0;
   int globalCounter = 0, globalCounterNo = 1;
   int countergetPorts = 0;
+  int _enableWriteData = 0;
 
   // getNoTimes() async {
   //   await sleep(Duration(seconds: 6));
@@ -1410,7 +1437,7 @@ class _CheckPageState extends State<Dashboard> {
         //     icon: Icon(Icons.arrow_forward),
         //     onTap: () {}
         // ),
-        endDrawer: endDrawerMethod(),
+        //  endDrawer: endDrawerMethod(),
         drawer: Container(
           width: 190,
           child: Theme(
@@ -2044,16 +2071,144 @@ class _CheckPageState extends State<Dashboard> {
 
   endDrawerMethod() {
     return Container(
-      // child:Column(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   children: <Widget>[
-      //   Container(child:Material(color:Colors.white,borderRadius:BorderRadius.circular(10),child:Container(child:Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child: Text("a"),
-      //   ))))
-      // ],)
-    );
+      
+      color:Colors.white,
+        child: Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        Column(
+          children: <Widget>[
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text(" itrig  " + receivedItrig.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("peep  "+receivedpeep.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("ps  "+receivedps.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("fio2  "+receivedfio2.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("a time "+receivedapneaTime.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("I:E "+(receivedi/10).toString()+":"+(receivede/10).toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("Ti "+receivedti.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("backup rr  "+ receivedbackuprr.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("vt min "+receivedvvttmin.toString() ),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("vt max "+receivedvtmax.toString() ),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("min te "+receivedminte.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("pc "+receivedpc.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("rr "+receivedrr.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("vt "+receivedvt.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("pc min "+receivedpcmin.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("pc max "+receivedpcmax.toString()),
+            )),
+            
+          ],
+        ),
+        Column(
+          children: <Widget>[
+            
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("o2 pressure "+receivedo2pressure.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text(" tank pressure  " + receivedtankpressure.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("i blower "+ receivedinhalationblowercommand.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("e blower "+ receivedexhalatioblowercommand.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("fio2 "+dreceivedfio2.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("vti "+receivedvti.toString()),
+            )),
+            Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("vte "+receivedvte.toString()),
+            )),
+             Card(
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Text("flat prop "+receivedflatprop.toString()),
+            )),
+          ],
+        ),
+      ],
+    ));
   }
 
   showAlertCalibarationDialog() {
@@ -3986,7 +4141,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "V1.8.3k",
+                  "V1.8.3l",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4138,7 +4293,7 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      lockEnabled ? alarmEnabled = true : "";
+                      lockEnabled ? _enableWriteData==1 ? alarmEnabled = true:"" : "";
                     });
                   },
                   child: Center(
@@ -4167,9 +4322,9 @@ class _CheckPageState extends State<Dashboard> {
                     setState(() {
                       // if (patientId != "") {
 
-                      lockEnabled ? modesEnabled = true : "";
+                      lockEnabled ? _enableWriteData==1 ? modesEnabled = true:"" : "";
                       if (_status == "Connected") {
-                        writeAlarmsData();
+                      _enableWriteData==1 ?  writeAlarmsData():"";
                       }
                     });
                   },
@@ -22516,8 +22671,10 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   serialiseReceivedPacket(List<int> finalList) async {
-    if (finalList.isNotEmpty && finalList.length == 114) {
+    if (finalList.isNotEmpty && finalList.length == 162) {
       var now = new DateTime.now();
+
+      // Fluttertoast.showToast(msg: finalList.toString());
 
       lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
       preferences = await SharedPreferences.getInstance();
@@ -22544,6 +22701,8 @@ class _CheckPageState extends State<Dashboard> {
       setState(() {
         setState(() {
           var now = new DateTime.now();
+
+          _enableWriteData = finalList[89];
 
           int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
 
@@ -23077,6 +23236,34 @@ class _CheckPageState extends State<Dashboard> {
           powerIndication = finalList[64];
           batteryPercentage = finalList[65];
           batteryStatus = finalList[78];
+
+          receivedItrig = ((finalList[114] << 8) + finalList[115]);
+          receivedpeep = ((finalList[116] << 8) + finalList[117]);
+          receivedps = ((finalList[118] << 8) + finalList[119]);
+          receivedfio2 = ((finalList[120] << 8) + finalList[121]);
+          receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
+          receivedi = finalList[124];
+          receivede = finalList[125];
+          receivedti = ((finalList[126] << 8) + finalList[127]);
+          receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
+          receivedvvttmin = ((finalList[130] << 8) + finalList[131]);
+          receivedvtmax = ((finalList[132] << 8) + finalList[133]);
+          receivedminte = ((finalList[134] << 8) + finalList[135]);
+          receivedpc = ((finalList[136] << 8) + finalList[137]);
+          receivedrr = ((finalList[138] << 8) + finalList[139]);
+          receivedvt = ((finalList[140] << 8) + finalList[141]);
+          receivedpcmin = ((finalList[142] << 8) + finalList[143]);
+          receivedpcmax = ((finalList[144] << 8) + finalList[145]);
+          receivedo2pressure = ((finalList[146] << 8) + finalList[147]);
+          receivedtankpressure = ((finalList[148] << 8) + finalList[149]);
+          receivedinhalationblowercommand =
+              ((finalList[150] << 8) + finalList[151]);
+          receivedexhalatioblowercommand =
+              ((finalList[152] << 8) + finalList[153]);
+          dreceivedfio2 = ((finalList[154] << 8) + finalList[155]);
+          receivedvti = ((finalList[156] << 8) + finalList[157]);
+          receivedvte = ((finalList[158] << 8) + finalList[159]);
+          receivedflatprop = ((finalList[160] << 8) + finalList[161]);
         });
         if (operatinModeR == 1 ||
             operatinModeR == 2 ||
