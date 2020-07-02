@@ -4130,6 +4130,10 @@ class _CheckPageState extends State<Dashboard> {
                     playOnEnabled
                         ? Navigator.push(context,
                             MaterialPageRoute(builder: (context) => About()))
+                        // ignore: unnecessary_statements
+                        // ignore: unnecessary_statements
+                        // ignore: unnecessary_statements
+                        // ignore: unnecessary_statements
                         : "";
                   },
                   child: Text(
@@ -4153,7 +4157,9 @@ class _CheckPageState extends State<Dashboard> {
                 powerButtonEnabled
                     ? InkWell(
                         onTap: () {
+                          // ignore: unnecessary_statements
                           lockEnabled ? sendSoundOff() : "";
+                          // ignore: unnecessary_statements
                           lockEnabled ? turnOffScreen() : "";
                         },
                         child: Padding(
