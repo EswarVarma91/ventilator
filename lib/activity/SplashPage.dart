@@ -32,25 +32,24 @@ class _SplashPageState extends State<SplashPage> {
     dbHelper = DatabaseHelper();
     dbHelper1 = ADatabaseHelper();
     // counter = counter+1;
-   
+
     getData();
     // saveData();
   }
 
-    Future<void> turnOnScreen() async {
+  Future<void> turnOnScreen() async {
     try {
       Screen.setBrightness(1.0);
-    Screen.keepOn(true);
+      Screen.keepOn(true);
       var result = await shutdownChannel.invokeMethod('turnOnScreen');
-      
+
       // print(result);
     } on PlatformException catch (e) {
       // print(e);
     }
   }
 
-
-  getData() async{
+  getData() async {
     // preferences = await SharedPreferences.getInstance();
     // counter = (preferences.getInt("noTimes")).toInt();
     // await sleep(Duration(seconds: 7));
@@ -63,9 +62,9 @@ class _SplashPageState extends State<SplashPage> {
     // if(counter==null){
     //   counter = counter +1;
     // }else{
-      // counter = counter +1;
+    // counter = counter +1;
     // }
-    
+
     preferences.setString("mode", "PC-CMV");
     preferences.setString("checkMode", "0");
     preferences.setInt("rr", 20);
@@ -88,24 +87,25 @@ class _SplashPageState extends State<SplashPage> {
     preferences.setInt("pc", 25);
     preferences.setInt("vt", 400);
     preferences.setInt("te", 20);
-    preferences.setInt("vte", 0 );
-     preferences.setString("pid", "" );
-     preferences.setString("pname", "" );
-     preferences.setString("pgender", "" );
-     preferences.setString("page", "" );
-     preferences.setString("pweight", "" );
-     preferences.setString("pheight", "" );
-     preferences.setInt('minrr',1);
-     preferences.setInt('maxrr',70);
-     preferences.setInt('minvte',0);
-     preferences.setInt('maxvte',2400);
-     preferences.setInt('minppeak',0);
-     preferences.setInt('maxppeak',100);
-     preferences.setInt('minpeep',0);
-     preferences.setInt('maxpeep',40);
-    // var dateS = preferences.getString('lastRecordTime');
-    //  var res = dbHelper.delete7Daysdata(dateS);
-    // var res1 = dbHelper1.delete1Daysdata(dateS);
+    preferences.setInt("vte", 0);
+    preferences.setString("pid", "");
+    preferences.setString("pname", "");
+    preferences.setString("pgender", "");
+    preferences.setString("page", "");
+    preferences.setString("pweight", "");
+    preferences.setString("pheight", "");
+    preferences.setInt('minrr', 1);
+    preferences.setInt('maxrr', 70);
+    preferences.setInt('minvte', 0);
+    preferences.setInt('maxvte', 2400);
+    preferences.setInt('minppeak', 0);
+    preferences.setInt('maxppeak', 100);
+    preferences.setInt('minpeep', 0);
+    preferences.setInt('maxpeep', 40);
+    var dateS = preferences.getString('lastRecordTime');
+    print(dateS+" 2");
+    var res = dbHelper.delete7Daysdata(dateS);
+    var res1 = dbHelper1.delete1Daysdata(dateS);
     // print(res.toString()+"  "+res1.toString());
     //  preferences.setInt('noTimes', counter);
     // await sleep(Duration(seconds: 2));

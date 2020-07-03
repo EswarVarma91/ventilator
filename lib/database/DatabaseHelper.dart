@@ -38,8 +38,7 @@ class DatabaseHelper {
   static const String LUNG_IMAGE = 'lungImage';
   static const String PAW = 'paw';
   static const String GLOBAL_COUNTER_NO = 'globalCounterNo';
- static const String ALARM_ACTIVE = 'alarmActive';
-  
+  static const String ALARM_ACTIVE = 'alarmActive';
 
   static const String COUNTER_NO = 'counterNo';
   // static const String DATE_TIME = 'datetime';
@@ -93,9 +92,9 @@ class DatabaseHelper {
             psl.patientAge,
             psl.patientGender,
             psl.patientHeight,
-            DateFormat("yyyy-MM-dd HH:mm:ss").format(now), 
+            DateFormat("yyyy-MM-dd HH:mm:ss").format(now),
           ]);
-        //  Fluttertoast.showToast(msg: " patient saved in db "+res.toString());
+      //  Fluttertoast.showToast(msg: " patient saved in db "+res.toString());
       return res;
     } catch (Exception) {
       return null;
@@ -150,8 +149,9 @@ class DatabaseHelper {
 
   Future<List<PatientsList>> getAllPatients() async {
     var dbClient = await db;
-     // List<Map> dataData = await dbClient.rawQuery('SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
-          List<Map> dataData = await dbClient.rawQuery('SELECT DISTINCT $PATIENTID,$PATIENTNAME from $TABLE GROUP BY $GLOBAL_COUNTER_NO ORDER BY $ID DESC');
+    // List<Map> dataData = await dbClient.rawQuery('SELECT DISTINCT $PATIENTID, $PATIENTNAME, MIN($DATE_TIME) minTime, MAX($DATE_TIME) maxTime FROM $TABLE group by $PATIENTID ORDER BY $ID ASC');
+    List<Map> dataData = await dbClient.rawQuery(
+        'SELECT DISTINCT $PATIENTID,$PATIENTNAME from $TABLE GROUP BY $GLOBAL_COUNTER_NO ORDER BY $ID DESC');
     List<PatientsList> plist = [];
     if (dataData.length > 0) {
       for (int i = 0; i < dataData.length; i++) {
@@ -160,11 +160,11 @@ class DatabaseHelper {
     }
     return plist;
   }
-
 
   Future<List<PatientsList>> patientDatesById(String patientIdD) async {
     var dbClient = await db;
-    List<Map> dataData = await dbClient.rawQuery( 'SELECT DISTINCT date($DATE_TIME) dates from $TABLE  where $PATIENTID = \'$patientIdD\' order by $ID DESC');
+    List<Map> dataData = await dbClient.rawQuery(
+        'SELECT DISTINCT date($DATE_TIME) dates from $TABLE  where $PATIENTID = \'$patientIdD\' order by $ID DESC');
     List<PatientsList> plist = [];
     if (dataData.length > 0) {
       for (int i = 0; i < dataData.length; i++) {
@@ -174,10 +174,11 @@ class DatabaseHelper {
     return plist;
   }
 
-  
-  Future<List<PatientsList>> patientDataByDateId(String patientIdD,String dateTimeW) async {
+  Future<List<PatientsList>> patientDataByDateId(
+      String patientIdD, String dateTimeW) async {
     var dbClient = await db;
-    List<Map> dataData = await dbClient.rawQuery('SELECT $PATIENTID, min($DATE_TIME) minTime, max($DATE_TIME) maxTime FROM $TABLE where $PATIENTID= \'$patientIdD\'  AND DATE($DATE_TIME) = DATE(\'$dateTimeW\') order by $ID DESC');
+    List<Map> dataData = await dbClient.rawQuery(
+        'SELECT $PATIENTID, min($DATE_TIME) minTime, max($DATE_TIME) maxTime FROM $TABLE where $PATIENTID= \'$patientIdD\'  AND DATE($DATE_TIME) = DATE(\'$dateTimeW\') order by $ID DESC');
     List<PatientsList> plist = [];
     if (dataData.length > 0) {
       for (int i = 0; i < dataData.length; i++) {
@@ -187,40 +188,43 @@ class DatabaseHelper {
     return plist;
   }
 
-
-  Future<List<PatientsList>> splitData(String minTime,String maxTime) async {
+  Future<List<PatientsList>> splitData(String minTime, String maxTime) async {
     var dbClient = await db;
-    var checkValue=0;
-    
-    int noofBoxes=0;
-    List<Map> dataData = await dbClient.rawQuery('SELECT $DATE_TIME dates from $TABLE where $DATE_TIME BETWEEN \'$minTime\' and \'$maxTime\'');
-  
+    var checkValue = 0;
+
+    int noofBoxes = 0;
+    List<Map> dataData = await dbClient.rawQuery(
+        'SELECT $DATE_TIME dates from $TABLE where $DATE_TIME BETWEEN \'$minTime\' and \'$maxTime\'');
+
     List<PatientsList> plist = [];
     List<PatientsList> slist = [];
     List<PatientsList> list = [];
 
     var data = (dataData.length * (0.00025)).toInt();
 
-    if(int.tryParse((dataData.length * (0.00025)).toDouble().toString().split(".")[1])>0){
-      noofBoxes = data+1;
-    }else{
+    if (int.tryParse(
+            (dataData.length * (0.00025)).toDouble().toString().split(".")[1]) >
+        0) {
+      noofBoxes = data + 1;
+    } else {
       noofBoxes = data;
     }
-    int recordScanner=0;
-      plist.clear();
-      slist.clear();
-      list.clear();
+    int recordScanner = 0;
+    plist.clear();
+    slist.clear();
+    list.clear();
 
-    for(int i=0; i<noofBoxes;i++){
-      for(int j=0;j<4000;j++){
-        if(recordScanner==dataData.length){
+    for (int i = 0; i < noofBoxes; i++) {
+      for (int j = 0; j < 4000; j++) {
+        if (recordScanner == dataData.length) {
           break;
         }
         recordScanner++;
-        slist.add(PatientsList.fromMap(dataData[checkValue+j]));
+        slist.add(PatientsList.fromMap(dataData[checkValue + j]));
       }
       checkValue = checkValue + slist.length;
-      list.add(PatientsList("0","0",slist[0].datetimeP.toString(), slist[slist.length-1].datetimeP.toString(),"0"));
+      list.add(PatientsList("0", "0", slist[0].datetimeP.toString(),
+          slist[slist.length - 1].datetimeP.toString(), "0"));
       plist.addAll(list);
       list.clear();
       slist.clear();
@@ -228,15 +232,15 @@ class DatabaseHelper {
     return plist;
   }
 
-
-
-  Future<List<VentilatorOMode>> getPatientsData(String fromDate,String toDate) async {
-     var dbClient = await db;
+  Future<List<VentilatorOMode>> getPatientsData(
+      String fromDate, String toDate) async {
+    var dbClient = await db;
     //  SELECT * FROM graphPoints WHERE patientId="p002" and datetimeP BETWEEN "24-01-2010 09:02:23"  AND "24-01-2010 09:02:54"
-    List<Map> dataData= await dbClient.rawQuery('SELECT * FROM $TABLE where $DATE_TIME BETWEEN \'$fromDate\' AND \'$toDate\'');
-    List<VentilatorOMode> plist =[];
-    if(dataData.length>0){
-      for(int i=0; i<dataData.length;i++){
+    List<Map> dataData = await dbClient.rawQuery(
+        'SELECT * FROM $TABLE where $DATE_TIME BETWEEN \'$fromDate\' AND \'$toDate\'');
+    List<VentilatorOMode> plist = [];
+    if (dataData.length > 0) {
+      for (int i = 0; i < dataData.length; i++) {
         plist.add(VentilatorOMode.fromMap(dataData[i]));
       }
     }
@@ -250,20 +254,20 @@ class DatabaseHelper {
   }
 
   Future<int> delete7Daysdata(String dateS) async {
+    print(dateS+"   1");
     // var now = new DateTime.now();
-    var now = DateFormat("dd-MM-yyyy HH:mm:ss").format(DateTime.parse(dateS));
+    var now = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.parse(dateS));
     var dbClient = await db;
-    String sql = "DELETE FROM $TABLE WHERE $DATE_TIME <= date(\'$now\', '-6 day')";
+    print(now+"   1");
+    String sql =
+        "DELETE FROM $TABLE WHERE $DATE_TIME <= date(\'$now\', '-2 day')";
     // DELETE FROM graphPoints WHERE datetimeP <= date('2020-06-19 20:20:12.00', '-1 day')
     var res = await dbClient.rawDelete(sql);
     return res;
   }
 
-  
-
   Future close() async {
     var dbClient = await db;
     dbClient.close();
   }
-
 }

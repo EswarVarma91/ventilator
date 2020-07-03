@@ -1147,7 +1147,7 @@ class _CheckPageState extends State<Dashboard> {
       patientWeight = preferences.getString("pweight");
       playOnEnabled = preferences.getBool("play");
       List<String> lsaveListTemp = preferences.getStringList("saveList");
-      if (lsaveListTemp.isNotEmpty || lsaveListTemp != null) {
+      if (lsaveListTemp != null) {
         savedList = lsaveListTemp.map((i) => int.parse(i)).toList();
         setState(() {
           modeWriteList = savedList;
@@ -4299,7 +4299,11 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      lockEnabled ? _enableWriteData==1 ? alarmEnabled = true:"" : "";
+                      lockEnabled ? 
+                      // _enableWriteData==1 ? 
+                      alarmEnabled = true
+                      // :"" 
+                      : "";
                     });
                   },
                   child: Center(
@@ -4328,7 +4332,11 @@ class _CheckPageState extends State<Dashboard> {
                     setState(() {
                       // if (patientId != "") {
 
-                      lockEnabled ? _enableWriteData==1 ? modesEnabled = true:"" : "";
+                      lockEnabled ? 
+                      // _enableWriteData==1 ? 
+                      modesEnabled = true
+                      // :"" 
+                      : "";
                       if (_status == "Connected") {
                       _enableWriteData==1 ?  writeAlarmsData():"";
                       }
