@@ -436,8 +436,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                                         200,
                                         (index) => Center(
                                               child: Text(index.toString()),
-                                            ))
-                                            ),
+                                            ))),
                               ),
                             ),
                           ],
@@ -461,8 +460,6 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
         ),
     );
   }
-
-  
 
   /// Fired when the virtual keyboard key is pressed.
   _onKeyPress(VirtualKeyboardKey key) {
