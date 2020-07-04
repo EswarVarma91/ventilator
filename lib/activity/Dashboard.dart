@@ -511,6 +511,8 @@ class _CheckPageState extends State<Dashboard> {
   bool turnoffSendingboolI = false;
   bool turnoffSendingboolE = false;
 
+  bool playpauseButtonEnabled = false;
+
   Future<bool> _connectTo(device) async {
     list.clear();
     pressurePoints.clear();
@@ -2044,16 +2046,16 @@ class _CheckPageState extends State<Dashboard> {
 
   endDrawerMethod() {
     return Container(
-      // child:Column(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   children: <Widget>[
-      //   Container(child:Material(color:Colors.white,borderRadius:BorderRadius.circular(10),child:Container(child:Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child: Text("a"),
-      //   ))))
-      // ],)
-    );
+        // child:Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: <Widget>[
+        //   Container(child:Material(color:Colors.white,borderRadius:BorderRadius.circular(10),child:Container(child:Padding(
+        //     padding: const EdgeInsets.all(8.0),
+        //     child: Text("a"),
+        //   ))))
+        // ],)
+        );
   }
 
   showAlertCalibarationDialog() {
@@ -3990,7 +3992,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "V1.8.3k",
+                  "V1.8.3l",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -4023,7 +4025,7 @@ class _CheckPageState extends State<Dashboard> {
                 SizedBox(
                   height: 0,
                 ),
-                Column(
+              playpauseButtonEnabled ? Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -4069,7 +4071,7 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                           ),
                   ],
-                ),
+                ):Container(height:60),
                 SizedBox(
                   height: 130,
                 ),
@@ -4144,15 +4146,14 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-<<<<<<< HEAD
-                      lockEnabled ? 
-                      // _enableWriteData==1 ? 
-                      alarmEnabled = true
-                      // :"" 
-                      : "";
-=======
+                      lockEnabled
+                          ?
+                          // _enableWriteData==1 ?
+                          alarmEnabled = true
+                          // :""
+                          : "";
+
                       lockEnabled ? alarmEnabled = true : "";
->>>>>>> parent of 1bdc8aaa... temporary nav drawer
                     });
                   },
                   child: Center(
@@ -4181,15 +4182,15 @@ class _CheckPageState extends State<Dashboard> {
                     setState(() {
                       // if (patientId != "") {
 
-<<<<<<< HEAD
-                      lockEnabled ? 
-                      // _enableWriteData==1 ? 
-                      modesEnabled = true
-                      // :"" 
-                      : "";
-=======
+                      lockEnabled
+                          ?
+                          // _enableWriteData==1 ?
+                          modesEnabled = true
+                          // :""
+                          : "";
+
                       lockEnabled ? modesEnabled = true : "";
->>>>>>> parent of 1bdc8aaa... temporary nav drawer
+
                       if (_status == "Connected") {
                         writeAlarmsData();
                       }
@@ -20518,6 +20519,7 @@ class _CheckPageState extends State<Dashboard> {
       }
       setState(() {
         playOnEnabled = false;
+        playpauseButtonEnabled = true;
       });
 
       getData();
@@ -20610,6 +20612,7 @@ class _CheckPageState extends State<Dashboard> {
       }
       setState(() {
         playOnEnabled = false;
+        playpauseButtonEnabled = true;
       });
       getData();
       newTreatEnabled = false;
@@ -20708,6 +20711,7 @@ class _CheckPageState extends State<Dashboard> {
       }
       setState(() {
         playOnEnabled = false;
+        playpauseButtonEnabled = true;
       });
 
       getData();
@@ -20804,6 +20808,7 @@ class _CheckPageState extends State<Dashboard> {
       }
       setState(() {
         playOnEnabled = false;
+        playpauseButtonEnabled = true;
       });
 
       getData();
@@ -20903,6 +20908,7 @@ class _CheckPageState extends State<Dashboard> {
       }
       setState(() {
         playOnEnabled = false;
+        playpauseButtonEnabled = true;
       });
 
       getData();
@@ -21004,6 +21010,7 @@ class _CheckPageState extends State<Dashboard> {
       }
       setState(() {
         playOnEnabled = false;
+        playpauseButtonEnabled = true;
       });
 
       getData();
@@ -21128,6 +21135,7 @@ class _CheckPageState extends State<Dashboard> {
       }
       setState(() {
         playOnEnabled = false;
+        playpauseButtonEnabled = true;
       });
 
       getData();
@@ -21226,6 +21234,7 @@ class _CheckPageState extends State<Dashboard> {
       }
       setState(() {
         playOnEnabled = false;
+        playpauseButtonEnabled = true;
       });
 
       getData();
@@ -23100,14 +23109,7 @@ class _CheckPageState extends State<Dashboard> {
           batteryPercentage = finalList[65];
           batteryStatus = finalList[78];
         });
-        if (operatinModeR == 1 ||
-            operatinModeR == 2 ||
-            operatinModeR == 3 ||
-            operatinModeR == 4 ||
-            operatinModeR == 5 ||
-            operatinModeR == 6 ||
-            operatinModeR == 7 ||
-            operatinModeR == 14) {
+        if (playOnEnabled == false) {
           if (patientId != "") {
             var data = VentilatorOMode(
                 patientId,

@@ -103,7 +103,6 @@ class _SplashPageState extends State<SplashPage> {
     preferences.setInt('minpeep', 0);
     preferences.setInt('maxpeep', 40);
     var dateS = preferences.getString('lastRecordTime');
-    print(dateS+" 2");
     var res = dbHelper.delete7Daysdata(dateS);
     var res1 = dbHelper1.delete1Daysdata(dateS);
     // print(res.toString()+"  "+res1.toString());

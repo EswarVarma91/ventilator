@@ -254,15 +254,16 @@ class DatabaseHelper {
   }
 
   Future<int> delete7Daysdata(String dateS) async {
-    print(dateS+"   1");
+   
     // var now = new DateTime.now();
     var now = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.parse(dateS));
     var dbClient = await db;
-    print(now+"   1");
+    
     String sql =
         "DELETE FROM $TABLE WHERE $DATE_TIME <= date(\'$now\', '-2 day')";
     // DELETE FROM graphPoints WHERE datetimeP <= date('2020-06-19 20:20:12.00', '-1 day')
     var res = await dbClient.rawDelete(sql);
+
     return res;
   }
 
