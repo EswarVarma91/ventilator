@@ -13,6 +13,8 @@ import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
+import androidx.core.os.BuildCompat
+import androidx.core.os.UserManagerCompat
 import com.example.ventilator.util.DownloadController
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
@@ -37,13 +39,13 @@ class MainActivity: FlutterActivity() {
         const val PERMISSION_REQUEST_STORAGE = 0
     }
     lateinit var downloadController: DownloadController
-//    val apkUrl = "https://eagleaspect.com:9000/static/apks/v1.7.5.apk"
-    val apkUrl = "https://eagleaspect.com:9000/static/apks/"
 
     @SuppressLint("InvalidWakeLockTag")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine)
+
+
 
 //
         mAdminComponentName = MyDeviceAdminReceiver.getComponentName(this)

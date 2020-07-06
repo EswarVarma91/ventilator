@@ -42,6 +42,7 @@ class DownloadController(private val context: Context, private val url: String) 
         request.setTitle(context.getString(R.string.title_file_download))
         request.setDescription(context.getString(R.string.downloading))
 
+
         // set destination
         request.setDestinationUri(uri)
 
