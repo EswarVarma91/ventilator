@@ -544,7 +544,8 @@ class _CheckPageState extends State<Dashboard> {
       receivedvte = 0,
       receivedflatprop = 0;
 
-  String assistStatus ="OFF";
+  String assistStatus = "OFF";
+  var batteryforceCharge = 0;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -3087,177 +3088,194 @@ class _CheckPageState extends State<Dashboard> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                           assistmodeOn ? Container():InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // setData();
-                                                  pccmvEnabled = true;
-                                                  vccmvEnabled = false;
-                                                  pacvEnabled = false;
-                                                  vacvEnabled = false;
-                                                  psimvEnabled = false;
-                                                  vsimvEnabled = false;
-                                                  psvEnabled = false;
-                                                  prvcEnabled = false;
-                                                });
-                                              },
-                                              child: Card(
-                                                color: pccmvEnabled
-                                                    ? Colors.blue
-                                                    : Colors.white,
-                                                child: Container(
-                                                  width: 115,
-                                                  height: 70,
-                                                  child: Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Text("PC-CMV",
-                                                            style: TextStyle(
-                                                                fontSize: 20,
-                                                                color: pccmvEnabled
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      )),
-                                                ),
-                                              ),
-                                            ),
-                                          assistmodeOn ?  InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // setData();
-                                                  pccmvEnabled = false;
-                                                  vccmvEnabled = false;
-                                                  pacvEnabled = true;
-                                                  vacvEnabled = false;
-                                                  psimvEnabled = false;
-                                                  vsimvEnabled = false;
-                                                  psvEnabled = false;
-                                                  prvcEnabled = false;
-                                                });
-                                              },
-                                              child: Card(
-                                                color: pacvEnabled
-                                                    ? Colors.blue
-                                                    : Colors.white,
-                                                child: Container(
-                                                  width: 98,
-                                                  height: 70,
-                                                  child: Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Text("PACV",
-                                                            style: TextStyle(
-                                                                fontSize: 20,
-                                                                color: pacvEnabled
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      )),
-                                                ),
-                                              ),
-                                            ):Container(),
-                                           assistmodeOn ? Container(): InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // setData();
-                                                  pccmvEnabled = false;
-                                                  vccmvEnabled = true;
-                                                  pacvEnabled = false;
-                                                  vacvEnabled = false;
-                                                  psimvEnabled = false;
-                                                  vsimvEnabled = false;
-                                                  psvEnabled = false;
-                                                  prvcEnabled = false;
-                                                });
-                                              },
-                                              child: Card(
-                                                  color: vccmvEnabled
-                                                      ? Colors.blue
-                                                      : Colors.white,
-                                                  child: Container(
-                                                    width: 115,
-                                                    height: 70,
-                                                    child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text("VC-CMV",
-                                                              style: TextStyle(
-                                                                  fontSize: 20,
-                                                                  color: vccmvEnabled
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
+                                            assistmodeOn
+                                                ? Container()
+                                                : InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // setData();
+                                                        pccmvEnabled = true;
+                                                        vccmvEnabled = false;
+                                                        pacvEnabled = false;
+                                                        vacvEnabled = false;
+                                                        psimvEnabled = false;
+                                                        vsimvEnabled = false;
+                                                        psvEnabled = false;
+                                                        prvcEnabled = false;
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                      color: pccmvEnabled
+                                                          ? Colors.blue
+                                                          : Colors.white,
+                                                      child: Container(
+                                                        width: 115,
+                                                        height: 70,
+                                                        child: Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Text(
+                                                                  "PC-CMV",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      color: pccmvEnabled
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            )),
+                                                      ),
+                                                    ),
+                                                  ),
+                                            assistmodeOn
+                                                ? InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // setData();
+                                                        pccmvEnabled = false;
+                                                        vccmvEnabled = false;
+                                                        pacvEnabled = true;
+                                                        vacvEnabled = false;
+                                                        psimvEnabled = false;
+                                                        vsimvEnabled = false;
+                                                        psvEnabled = false;
+                                                        prvcEnabled = false;
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                      color: pacvEnabled
+                                                          ? Colors.blue
+                                                          : Colors.white,
+                                                      child: Container(
+                                                        width: 98,
+                                                        height: 70,
+                                                        child: Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Text(
+                                                                  "PACV",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      color: pacvEnabled
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            )),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : Container(),
+                                            assistmodeOn
+                                                ? Container()
+                                                : InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // setData();
+                                                        pccmvEnabled = false;
+                                                        vccmvEnabled = true;
+                                                        pacvEnabled = false;
+                                                        vacvEnabled = false;
+                                                        psimvEnabled = false;
+                                                        vsimvEnabled = false;
+                                                        psvEnabled = false;
+                                                        prvcEnabled = false;
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                        color: vccmvEnabled
+                                                            ? Colors.blue
+                                                            : Colors.white,
+                                                        child: Container(
+                                                          width: 115,
+                                                          height: 70,
+                                                          child: Align(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                    "VC-CMV",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            20,
+                                                                        color: vccmvEnabled
+                                                                            ? Colors
+                                                                                .white
+                                                                            : Colors
+                                                                                .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                              )),
                                                         )),
-                                                  )),
-                                            ),
-                                          assistmodeOn ?  InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // setData();
-                                                  pccmvEnabled = false;
-                                                  vccmvEnabled = false;
-                                                  pacvEnabled = false;
-                                                  vacvEnabled = true;
-                                                  psimvEnabled = false;
-                                                  vsimvEnabled = false;
-                                                  psvEnabled = false;
-                                                  prvcEnabled = false;
-                                                });
-                                              },
-                                              child: Card(
-                                                color: vacvEnabled
-                                                    ? Colors.blue
-                                                    : Colors.white,
-                                                child: Container(
-                                                  width: 98,
-                                                  height: 70,
-                                                  child: Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Text("VACV",
-                                                            style: TextStyle(
-                                                                fontSize: 20,
-                                                                color: vacvEnabled
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      )),
-                                                ),
-                                              ),
-                                            ):Container(),
+                                                  ),
+                                            assistmodeOn
+                                                ? InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // setData();
+                                                        pccmvEnabled = false;
+                                                        vccmvEnabled = false;
+                                                        pacvEnabled = false;
+                                                        vacvEnabled = true;
+                                                        psimvEnabled = false;
+                                                        vsimvEnabled = false;
+                                                        psvEnabled = false;
+                                                        prvcEnabled = false;
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                      color: vacvEnabled
+                                                          ? Colors.blue
+                                                          : Colors.white,
+                                                      child: Container(
+                                                        width: 98,
+                                                        height: 70,
+                                                        child: Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Text(
+                                                                  "VACV",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      color: vacvEnabled
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            )),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : Container(),
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
@@ -3462,62 +3480,70 @@ class _CheckPageState extends State<Dashboard> {
                                                     child: Center(
                                                         child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(8.0),
+                                                          const EdgeInsets.all(
+                                                              8.0),
                                                       child: Text(
                                                           "Default\nSettings",
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: TextStyle(
                                                               fontSize: 10,
-                                                              color: Colors.black,
+                                                              color:
+                                                                  Colors.black,
                                                               fontWeight:
-                                                                  FontWeight.bold)),
+                                                                  FontWeight
+                                                                      .bold)),
                                                     )),
                                                   ),
                                                 ),
                                               ),
                                               InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                assistmodeOn = !assistmodeOn;
-                                                if (assistStatus == "OFF") {
-                                                  assistStatus = "ON";
-                                                } else if (assistStatus == "ON") {
-                                                  assistStatus = "OFF";
-                                                }
-                                                if (assistmodeOn == true) {
-                                                  pacvEnabled = true;
-                                                  pccmvEnabled = false;
-                                                } else {
-                                                  pccmvEnabled = true;
-                                                  pacvEnabled = false;
-                                                }
-                                              });
-                                            },
-                                            child: Container(
-                                              height: 80,
-                                              width: 80,
-                                              child: Card(
-                                                child: Center(
-                                                    child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                      "Assit \n"+assistStatus,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontSize: 10,
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                )),
+                                                onTap: () {
+                                                  setState(() {
+                                                    assistmodeOn =
+                                                        !assistmodeOn;
+                                                    if (assistStatus == "OFF") {
+                                                      assistStatus = "ON";
+                                                    } else if (assistStatus ==
+                                                        "ON") {
+                                                      assistStatus = "OFF";
+                                                    }
+                                                    if (assistmodeOn == true) {
+                                                      pacvEnabled = true;
+                                                      pccmvEnabled = false;
+                                                    } else {
+                                                      pccmvEnabled = true;
+                                                      pacvEnabled = false;
+                                                    }
+                                                  });
+                                                },
+                                                child: Container(
+                                                  height: 80,
+                                                  width: 80,
+                                                  child: Card(
+                                                    child: Center(
+                                                        child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
+                                                          "Assit \n" +
+                                                              assistStatus,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontSize: 10,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    )),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
                                             ],
                                           ),
-                                          
 
                                           pacvEnabled ||
                                                   vccmvEnabled ||
@@ -7018,20 +7044,46 @@ class _CheckPageState extends State<Dashboard> {
               )),
               SizedBox(
                   width: modeName == "VSIMV" || modeName == "PSIMV" ? 50 : 75),
-              Material(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Container(
-                      height: 40,
-                      width: 70,
-                      child: batteryStatus == 2
-                          ? Center(
-                              child: Text(batteryPercentage.toString() + " %",
-                                  style: TextStyle(fontSize: 20)))
-                          : batteryStatus == 1
-                              ? Image.asset("assets/images/chargingbattery.png",
-                                  width: 28, color: Colors.black)
-                              : Image.asset("assets/images/nobattery.png",
-                                  width: 28, color: Colors.black))),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    if (batteryforceCharge == 0) {
+                      batteryforceCharge = 1;
+                    } else if (batteryforceCharge == 1) {
+                      batteryforceCharge = 0;
+                    }
+                  });
+                  List<int> resbatteryList = [];
+                  setState(() {
+                    resbatteryList.add(0);
+                    resbatteryList.add(20);
+                    resbatteryList.add(0);
+                    resbatteryList.add(18);
+                    resbatteryList.add((batteryforceCharge));
+                  });
+
+                  sendDataUsbConnection(resbatteryList, 2);
+                },
+                child: Container(
+                  child: Material(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Container(
+                          height: 40,
+                          width: 70,
+                          child: batteryStatus == 2
+                              ? Center(
+                                  child: Text(
+                                      batteryPercentage.toString() + " %",
+                                      style: TextStyle(fontSize: 20)))
+                              : batteryStatus == 1
+                                  ? Image.asset(
+                                      "assets/images/chargingbattery.png",
+                                      width: 28,
+                                      color: Colors.black)
+                                  : Image.asset("assets/images/nobattery.png",
+                                      width: 28, color: Colors.black))),
+                ),
+              ),
               SizedBox(width: 5),
               Material(
                   borderRadius: BorderRadius.circular(5),
@@ -23902,10 +23954,14 @@ class _CheckPageState extends State<Dashboard> {
           flowPoints.add(temp3 * 1.2);
         }
 
-        if (_setValuesonClick == true) {
+        if (_setValuesonClick == true && operatinModeR != 0) {
           setState(() {
-            receivedItrig = (65536 - ((finalList[114] << 8) + finalList[115]));
-            itrigValue = receivedItrig;
+            if (((finalList[114] << 8) + finalList[115]) != 0) {
+              receivedItrig =
+                  (65536 - ((finalList[114] << 8) + finalList[115]));
+              itrigValue = receivedItrig;
+            }
+
             receivedpeep = ((finalList[116] << 8) + finalList[117]);
             peepValue = receivedpeep;
             receivedps = ((finalList[118] << 8) + finalList[119]);
@@ -23915,9 +23971,10 @@ class _CheckPageState extends State<Dashboard> {
             receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
             atimeValue = receivedapneaTime;
             receivedi = finalList[124];
-            i = receivedi.toString();
+            
+            i = (receivedi/10).toString();
             receivede = finalList[125];
-            e = receivede.toString();
+            e = (receivede/10).toString();
             receivedti = ((finalList[126] << 8) + finalList[127]);
             tipsvValue = receivedti;
             receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
