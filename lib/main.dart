@@ -9,6 +9,7 @@ Future<void> main() async {
   await SystemChrome.setEnabledSystemUIOverlays([]);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
   runApp(MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {

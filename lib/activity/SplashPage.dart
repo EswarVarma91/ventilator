@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  SharedPreferences preferences;
+  
   DatabaseHelper dbHelper;
   ADatabaseHelper dbHelper1;
   static const shutdownChannel = const MethodChannel("shutdown");
@@ -29,6 +30,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     turnOnScreen();
     super.initState();
+    
     dbHelper = DatabaseHelper();
     dbHelper1 = ADatabaseHelper();
     // counter = counter+1;
@@ -57,15 +59,13 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   saveData() async {
-    preferences = await SharedPreferences.getInstance();
-
-    // if(counter==null){
-    //   counter = counter +1;
-    // }else{
-    // counter = counter +1;
-    // }
-
-    preferences.setString("mode", "PC-CMV");
+    WidgetsFlutterBinding.ensureInitialized();
+    
+    
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    
+      preferences.setString("mode", "PC-CMV");
+      
     preferences.setString("checkMode", "0");
     preferences.setInt("rr", 20);
     preferences.setInt("ie", 51);
@@ -105,6 +105,15 @@ class _SplashPageState extends State<SplashPage> {
     var dateS = preferences.getString('lastRecordTime');
     var res = dbHelper.delete7Daysdata(dateS);
     var res1 = dbHelper1.delete1Daysdata(dateS);
+   
+
+    // if(counter==null){
+    //   counter = counter +1;
+    // }else{
+    // counter = counter +1;
+    // }
+
+    
     // print(res.toString()+"  "+res1.toString());
     //  preferences.setInt('noTimes', counter);
     // await sleep(Duration(seconds: 2));

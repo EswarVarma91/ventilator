@@ -4,8 +4,8 @@
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
         <option name="GRADLE_PROJECT_PATH" value=":usb_serial" />
-        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" value="3.5.0" />
-        <option name="LAST_KNOWN_AGP_VERSION" value="3.5.0" />
+        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" value="4.0.0" />
+        <option name="LAST_KNOWN_AGP_VERSION" value="4.0.0" />
       </configuration>
     </facet>
     <facet type="android" name="Android">
@@ -19,8 +19,8 @@
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/main/res;file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/debug/res;file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/rs/debug;file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/resValues/debug" />
-        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/androidTest/res;file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/test/res;file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/androidTestDebug/res;file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/testDebug/res;file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/rs/androidTest/debug;file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/resValues/androidTest/debug" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/main/res;file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/debug/res;file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/rs/debug" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/androidTest/res;file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/test/res;file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/androidTestDebug/res;file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/testDebug/res;file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/rs/androidTest/debug" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
         <option name="PROJECT_TYPE" value="1" />
       </configuration>
@@ -74,11 +74,11 @@
       <sourceFolder url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/test/rs" isTestSource="true" />
       <sourceFolder url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/usb_serial-0.2.4/android/src/test/shaders" isTestSource="true" />
     </content>
-    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/aidl_source_output_dir/debug/compileDebugAidl/out">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/aidl_source_output_dir/debug/compileDebugAidl/out" isTestSource="false" generated="true" />
+    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/aidl_source_output_dir/debug/out">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/aidl_source_output_dir/debug/out" isTestSource="false" generated="true" />
     </content>
-    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/aidl_source_output_dir/debugAndroidTest/compileDebugAndroidTestAidl/out">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/aidl_source_output_dir/debugAndroidTest/compileDebugAndroidTestAidl/out" isTestSource="true" generated="true" />
+    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/aidl_source_output_dir/debugAndroidTest/out">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/aidl_source_output_dir/debugAndroidTest/out" isTestSource="true" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/ap_generated_sources/debug/out">
       <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
@@ -89,17 +89,11 @@
     <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/ap_generated_sources/debugUnitTest/out">
       <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/ap_generated_sources/debugUnitTest/out" isTestSource="true" generated="true" />
     </content>
-    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/renderscript_source_output_dir/debug/compileDebugRenderscript/out">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/renderscript_source_output_dir/debug/compileDebugRenderscript/out" isTestSource="false" generated="true" />
+    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/renderscript_source_output_dir/debug/out">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/renderscript_source_output_dir/debug/out" isTestSource="false" generated="true" />
     </content>
-    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/renderscript_source_output_dir/debugAndroidTest/compileDebugAndroidTestRenderscript/out">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/renderscript_source_output_dir/debugAndroidTest/compileDebugAndroidTestRenderscript/out" isTestSource="true" generated="true" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/resValues/androidTest/debug">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/resValues/androidTest/debug" type="java-test-resource" generated="true" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/resValues/debug">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/resValues/debug" type="java-resource" generated="true" />
+    <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/renderscript_source_output_dir/debugAndroidTest/out">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/renderscript_source_output_dir/debugAndroidTest/out" isTestSource="true" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/rs/androidTest/debug">
       <sourceFolder url="file://$MODULE_DIR$/../../../../build/usb_serial/generated/res/rs/androidTest/debug" type="java-test-resource" generated="true" />

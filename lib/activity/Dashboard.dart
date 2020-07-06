@@ -190,9 +190,11 @@ class _CheckPageState extends State<Dashboard> {
       psvEnabled = false,
       prvcEnabled = false,
       bipapEnabled = false,
+      cpapEnabled = false,
       alarmsSetting1 = true,
       editbbEnabled = false,
-      alarmsSetting2 = false;
+      alarmsSetting2 = false,
+      assistmodeOn = false;
 
   bool pacvItrig = false,
       pacvRr = true,
@@ -513,6 +515,36 @@ class _CheckPageState extends State<Dashboard> {
   String alarmDisplayError = "";
   bool alarmDisplayErrorEnabled = false;
   bool playpauseButtonEnabled = false;
+
+  bool _setValuesonClick = false;
+
+  int receivedItrig = 0,
+      receivedpeep = 0,
+      receivedps = 0,
+      receivedfio2 = 0,
+      receivedapneaTime = 0,
+      receivedi = 0,
+      receivede = 0,
+      receivedti = 0,
+      receivedbackuprr = 0,
+      receivedvvttmin = 0,
+      receivedvtmax = 0,
+      receivedminte = 0,
+      receivedpc = 0,
+      receivedrr = 0,
+      receivedvt = 0,
+      receivedpcmin = 0,
+      receivedpcmax = 0,
+      receivedo2pressure = 0,
+      receivedtankpressure = 0,
+      receivedinhalationblowercommand = 0,
+      receivedexhalatioblowercommand = 0,
+      dreceivedfio2 = 0,
+      receivedvti = 0,
+      receivedvte = 0,
+      receivedflatprop = 0;
+
+  String assistStatus ="OFF";
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -951,55 +983,17 @@ class _CheckPageState extends State<Dashboard> {
     _loopActive = false;
   }
 
-  // void _increaseCounterWhilePressedE() async {
-  //   if (_buttonPressedE == false) {
-  //     writeRespiratoryPauseData(0);
-  //   }
-  //   // writeRespiratoryPauseData();
-  //   // make sure that only one loop is active
-  //   if (_loopActive) return;
-
-  //   _loopActive = true;
-
-  //   while (_buttonPressedE) {
-  //     // do your thing
-  //     setState(() {
-  //       if (timerCounter <= 29) {
-  //         timerCounter++;
-  //       }
-  //       if (timerCounter == 30) {
-  //         writeRespiratoryPauseData(0);
-  //         setState(() {
-  //           //  sleep(Duration(seconds: 2));
-  //           _buttonPressedE = false;
-  //           // _loopActive = true;
-  //         });
-  //       }
-  //     });
-  //     // Fluttertoast.showToast(msg: timerCounter.toString());
-
-  //     // wait a bit
-  //     await Future.delayed(Duration(seconds: 1));
-  //   }
-
-  //   _loopActive = false;
-  // }
-
   writeRespiratoryPauseData(int data) async {
     List<int> resList = [];
     setState(() {
-      // resList.add(0x7E);
       resList.add(0);
       resList.add(20);
       resList.add(0);
       resList.add(13);
       resList.add((data & 0x00FF));
-      // Fluttertoast.showToast(msg: resList.toString());
-      // resList.add(0x7F);
     });
-    //TODO
+
     sendDataUsbConnection(resList, 2);
-    // await _port.write(Uint8List.fromList(resList));
   }
 
   checkCrc(List<int> obj, length) async {
@@ -1036,14 +1030,6 @@ class _CheckPageState extends State<Dashboard> {
           cc = 0;
         });
       }
-      // Fluttertoast.showToast(
-      //     msg: length.toString() +
-      //         " counter " +
-      //         cc.toString() +
-      //         "  geting crc " +
-      //         crcData.toString() +
-      //         " cal crc " +
-      //         uiCrc.toString());
 
       return true;
     } else {
@@ -1413,7 +1399,7 @@ class _CheckPageState extends State<Dashboard> {
         //     icon: Icon(Icons.arrow_forward),
         //     onTap: () {}
         // ),
-        endDrawer: endDrawerMethod(),
+        endDrawer: patientName == "betauser" ? endDrawerMethod() : Container(),
         drawer: Container(
           width: 190,
           child: Theme(
@@ -2047,16 +2033,147 @@ class _CheckPageState extends State<Dashboard> {
 
   endDrawerMethod() {
     return Container(
-        // child:Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: <Widget>[
-        //   Container(child:Material(color:Colors.white,borderRadius:BorderRadius.circular(10),child:Container(child:Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: Text("a"),
-        //   ))))
-        // ],)
-        );
+        color: Colors.transparent,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(" itrig  -" + receivedItrig.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("peep  " + receivedpeep.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("ps  " + receivedps.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("fio2  " + receivedfio2.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("a time " + receivedapneaTime.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("I:E " +
+                      (receivedi / 10).toString() +
+                      ":" +
+                      (receivede / 10).toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("Ti " + receivedti.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("backup rr  " + receivedbackuprr.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("vt min " + receivedvvttmin.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("vt max " + receivedvtmax.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("min te " + receivedminte.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("pc " + receivedpc.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("rr " + receivedrr.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("vt " + receivedvt.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("pc min " + receivedpcmin.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("pc max " + receivedpcmax.toString()),
+                )),
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("o2 pressure " + receivedo2pressure.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                      " tank pressure  " + receivedtankpressure.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                      "i blower " + receivedinhalationblowercommand.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                      "e blower " + receivedexhalatioblowercommand.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("fio2 " + dreceivedfio2.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("vti " + receivedvti.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("vte " + receivedvte.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("flat prop " + receivedflatprop.toString()),
+                )),
+              ],
+            ),
+          ],
+        ));
   }
 
   showAlertCalibarationDialog() {
@@ -2970,7 +3087,7 @@ class _CheckPageState extends State<Dashboard> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            InkWell(
+                                           assistmodeOn ? Container():InkWell(
                                               onTap: () {
                                                 setState(() {
                                                   // setData();
@@ -3013,7 +3130,7 @@ class _CheckPageState extends State<Dashboard> {
                                                 ),
                                               ),
                                             ),
-                                            InkWell(
+                                          assistmodeOn ?  InkWell(
                                               onTap: () {
                                                 setState(() {
                                                   // setData();
@@ -3055,8 +3172,8 @@ class _CheckPageState extends State<Dashboard> {
                                                       )),
                                                 ),
                                               ),
-                                            ),
-                                            InkWell(
+                                            ):Container(),
+                                           assistmodeOn ? Container(): InkWell(
                                               onTap: () {
                                                 setState(() {
                                                   // setData();
@@ -3098,7 +3215,7 @@ class _CheckPageState extends State<Dashboard> {
                                                         )),
                                                   )),
                                             ),
-                                            InkWell(
+                                          assistmodeOn ?  InkWell(
                                               onTap: () {
                                                 setState(() {
                                                   // setData();
@@ -3140,7 +3257,7 @@ class _CheckPageState extends State<Dashboard> {
                                                       )),
                                                 ),
                                               ),
-                                            ),
+                                            ):Container(),
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
@@ -3330,10 +3447,51 @@ class _CheckPageState extends State<Dashboard> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          InkWell(
+                                          Row(
+                                            children: <Widget>[
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    setData();
+                                                  });
+                                                },
+                                                child: Container(
+                                                  height: 80,
+                                                  width: 80,
+                                                  child: Card(
+                                                    child: Center(
+                                                        child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(8.0),
+                                                      child: Text(
+                                                          "Default\nSettings",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontSize: 10,
+                                                              color: Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight.bold)),
+                                                    )),
+                                                  ),
+                                                ),
+                                              ),
+                                              InkWell(
                                             onTap: () {
                                               setState(() {
-                                                setData();
+                                                assistmodeOn = !assistmodeOn;
+                                                if (assistStatus == "OFF") {
+                                                  assistStatus = "ON";
+                                                } else if (assistStatus == "ON") {
+                                                  assistStatus = "OFF";
+                                                }
+                                                if (assistmodeOn == true) {
+                                                  pacvEnabled = true;
+                                                  pccmvEnabled = false;
+                                                } else {
+                                                  pccmvEnabled = true;
+                                                  pacvEnabled = false;
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -3345,7 +3503,7 @@ class _CheckPageState extends State<Dashboard> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                      "Default\nSettings",
+                                                      "Assit \n"+assistStatus,
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(
@@ -3357,6 +3515,9 @@ class _CheckPageState extends State<Dashboard> {
                                               ),
                                             ),
                                           ),
+                                            ],
+                                          ),
+                                          
 
                                           pacvEnabled ||
                                                   vccmvEnabled ||
@@ -3646,27 +3807,29 @@ class _CheckPageState extends State<Dashboard> {
                                         //     ),
                                         //   ),
                                         // ),
-                                        //TODO
-                                      alarmDisplayErrorEnabled ? Container(
-                                          width: 550,
-                                          height: 80,
-                                          child: Card(
-                                            color: Colors.white,
-                                            child: Center(
-                                                child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Center(
-                                                child: Text(
-                                                  alarmDisplayError,
-                                                  style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize: 18),
+
+                                        alarmDisplayErrorEnabled
+                                            ? Container(
+                                                width: 550,
+                                                height: 80,
+                                                child: Card(
+                                                  color: Colors.white,
+                                                  child: Center(
+                                                      child: Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Center(
+                                                      child: Text(
+                                                        alarmDisplayError,
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 18),
+                                                      ),
+                                                    ),
+                                                  )),
                                                 ),
-                                              ),
-                                            )),
-                                          ),
-                                        )
-                                        :Container(),
+                                              )
+                                            : Container(),
                                         alarmConfirmed == false
                                             ? Row(
                                                 crossAxisAlignment:
@@ -4226,6 +4389,9 @@ class _CheckPageState extends State<Dashboard> {
 
                 InkWell(
                   onTap: () {
+                    setState(() {
+                      _setValuesonClick = false;
+                    });
                     setState(() {
                       // if (patientId != "") {
 
@@ -5180,6 +5346,9 @@ class _CheckPageState extends State<Dashboard> {
           children: [
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("PSV") : "";
                 } else {}
@@ -5234,6 +5403,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("PEEP") : "";
                 }
@@ -5288,6 +5460,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("FiO2") : "";
                 }
@@ -5342,6 +5517,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled
                       ? playOnEnabled ? "" : CommonClick("Backup RR")
@@ -5398,6 +5576,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled
                       ? playOnEnabled ? "" : CommonClick("Backup I:E")
@@ -5454,6 +5635,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("PCV") : "";
                 }
@@ -5508,6 +5692,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("ITRI") : "";
                 }
@@ -5562,6 +5749,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled
                       ? playOnEnabled ? "" : CommonClick("Apnea Time")
@@ -5618,6 +5808,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("Ti") : "";
                 }
@@ -6279,6 +6472,9 @@ class _CheckPageState extends State<Dashboard> {
           children: [
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled
                       ? operatinModeR == 4 ||
@@ -6342,6 +6538,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("I:E") : "";
                 }
@@ -6396,6 +6595,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("PEEP") : "";
                 }
@@ -6456,6 +6658,9 @@ class _CheckPageState extends State<Dashboard> {
                     operatinModeR == 5
                 ? InkWell(
                     onTap: () {
+                      setState(() {
+                        _setValuesonClick = false;
+                      });
                       if (modeWriteList.isNotEmpty) {
                         lockEnabled
                             ? playOnEnabled ? "" : CommonClick("PS")
@@ -6513,6 +6718,9 @@ class _CheckPageState extends State<Dashboard> {
                 : Container(),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled
                       ? playOnEnabled
@@ -6635,6 +6843,9 @@ class _CheckPageState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
                 if (modeWriteList.isNotEmpty) {
                   lockEnabled ? playOnEnabled ? "" : CommonClick("FiO2") : "";
                 }
@@ -6694,6 +6905,9 @@ class _CheckPageState extends State<Dashboard> {
                     operatinModeR == 5
                 ? InkWell(
                     onTap: () {
+                      setState(() {
+                        _setValuesonClick = false;
+                      });
                       if (modeWriteList.isNotEmpty) {
                         lockEnabled
                             ? playOnEnabled ? "" : CommonClick("ITRI")
@@ -19539,6 +19753,10 @@ class _CheckPageState extends State<Dashboard> {
     if (result != null) {
       preferences.setBool("play", false);
       getData();
+    } else {
+      setState(() {
+        _setValuesonClick = true;
+      });
     }
 
     if (result != null) {
@@ -21665,7 +21883,6 @@ class _CheckPageState extends State<Dashboard> {
             InkWell(
               onTap: () {
                 setState(() {
-                  
                   alarmmaxValue = 70;
                   alarmminValue = 1;
                   alarmparameterName = "RR Total";
@@ -22550,566 +22767,524 @@ class _CheckPageState extends State<Dashboard> {
 
   checkData() {
     if (pccmvEnabled == true) {
-       
-        //RR
-      if(alarmRR== true){
+      //RR
+      if (alarmRR == true) {
         if (pccmvRRValue >= minRrtotal && pccmvRRValue <= maxRrtotal) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minRrtotal > pccmvRRValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxRrtotal < pccmvRRValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-      }else if(alarmVte==true){
-         
-       
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minRrtotal > pccmvRRValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxRrtotal < pccmvRRValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmVte == true) {
         //PEEP
-      }else if(alarmpeep==true){
-         
-         if (pccmvPeepValue >= minpeep && pccmvPeepValue <= maxpeep) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minpeep > pccmvPeepValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxpeep < pccmvPeepValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
+      } else if (alarmpeep == true) {
+        if (pccmvPeepValue >= minpeep && pccmvPeepValue <= maxpeep) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minpeep > pccmvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxpeep < pccmvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmPpeak == true) {
+        if (pccmvPcValue >= minppeak && pccmvPcValue <= maxppeak) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minppeak > pccmvPcValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxppeak < pccmvPcValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
       }
-
-      }else if(alarmPpeak==true){
-         if (pccmvPcValue >= minppeak && pccmvPcValue <= maxppeak) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minppeak > pccmvPcValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxppeak < pccmvPcValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-
-      }
-      
     } else if (vccmvEnabled == true) {
-
-      if(alarmRR== true){
+      if (alarmRR == true) {
         if (vccmvRRValue >= minRrtotal && vccmvRRValue <= maxRrtotal) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minRrtotal > vccmvRRValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxRrtotal < vccmvRRValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-      }else if(alarmVte==true){
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minRrtotal > vccmvRRValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxRrtotal < vccmvRRValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmVte == true) {
         if (vccmvVtValue >= minvte && vccmvVtValue <= maxvte) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minvte > vccmvVtValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxvte < vccmvVtValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-       
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minvte > vccmvVtValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxvte < vccmvVtValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+
         //PEEP
-      }else if(alarmpeep==true){
-         
-         if (vccmvPeepValue >= minpeep && vccmvPeepValue <= maxpeep) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minpeep > vccmvPeepValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxpeep < vccmvPeepValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
+      } else if (alarmpeep == true) {
+        if (vccmvPeepValue >= minpeep && vccmvPeepValue <= maxpeep) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minpeep > vccmvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxpeep < vccmvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmPpeak == true) {
+        if (vccmvPcMaxValue >= minppeak && vccmvPcMaxValue <= maxppeak) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minppeak > vccmvPcMaxValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxppeak < vccmvPcMaxValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
       }
-
-      }else if(alarmPpeak==true){
-         if (vccmvPcMaxValue >= minppeak && vccmvPcMaxValue <= maxppeak) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minppeak > vccmvPcMaxValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxppeak < vccmvPcMaxValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-
-      }
-
-
     } else if (pacvEnabled == true) {
-
-      if(alarmRR== true){
+      if (alarmRR == true) {
         if (pacvRrValue >= minRrtotal && pacvRrValue <= maxRrtotal) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minRrtotal > pacvRrValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxRrtotal < pacvRrValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-      }else if(alarmVte==true){
-        
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minRrtotal > pacvRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxRrtotal < pacvRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmVte == true) {
         //PEEP
-      }else if(alarmpeep==true){
-         
-         if (pacvPeepValue >= minpeep && pacvPeepValue <= maxpeep) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minpeep > pacvPeepValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxpeep < pacvPeepValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
+      } else if (alarmpeep == true) {
+        if (pacvPeepValue >= minpeep && pacvPeepValue <= maxpeep) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minpeep > pacvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxpeep < pacvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmPpeak == true) {
+        if (pacvPcValue >= minppeak && pacvPcValue <= maxppeak) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minppeak > pacvPcValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxppeak < pacvPcValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
       }
-
-      }else if(alarmPpeak==true){
-         if (pacvPcValue >= minppeak && pacvPcValue <= maxppeak) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minppeak > pacvPcValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxppeak < pacvPcValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-
-      }
-
-
     } else if (vacvEnabled == true) {
-
-      if(alarmRR== true){
+      if (alarmRR == true) {
         if (vacvRrValue >= minRrtotal && vacvRrValue <= maxRrtotal) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minRrtotal > vacvRrValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxRrtotal < vacvRrValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-      }else if(alarmVte==true){
-         if (vacvVtValue >= minvte && vacvVtValue <= maxvte) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minvte > vacvVtValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxvte < vacvVtValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minRrtotal > vacvRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxRrtotal < vacvRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmVte == true) {
+        if (vacvVtValue >= minvte && vacvVtValue <= maxvte) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minvte > vacvVtValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxvte < vacvVtValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
         //PEEP
-      }else if(alarmpeep==true){
-         
-         if (vacvPeepValue >= minpeep && vacvPeepValue <= maxpeep) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minpeep > vacvPeepValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxpeep < vacvPeepValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
+      } else if (alarmpeep == true) {
+        if (vacvPeepValue >= minpeep && vacvPeepValue <= maxpeep) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minpeep > vacvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxpeep < vacvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmPpeak == true) {
+        if (pacvPcValue >= minppeak && vacvPcMaxValue <= maxppeak) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minppeak > vacvPcMaxValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxppeak < vacvPcMaxValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
       }
-
-      }else if(alarmPpeak==true){
-         if (pacvPcValue >= minppeak && vacvPcMaxValue <= maxppeak) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minppeak > vacvPcMaxValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxppeak < vacvPcMaxValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-
-      }
-
     } else if (psimvEnabled == true) {
-      
-      if(alarmRR== true){
+      if (alarmRR == true) {
         if (psimvRrValue >= minRrtotal && psimvRrValue <= maxRrtotal) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minRrtotal > psimvRrValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxRrtotal < psimvRrValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-      }else if(alarmVte==true){
-      //    if (psimvVtValue >= minvte && psimvVtValue <= maxvte) {
-      //   setState(() {
-      //     alarmDisplayErrorEnabled = false;
-      //     alarmDisplayError = "";
-      //   });
-      // } else if (minvte > psimvVtValue) {
-      //   setState(() {
-      //     alarmDisplayErrorEnabled = true;
-      //     alarmDisplayError =
-      //         "Alarm limit is greater than the set operation value";
-      //   });
-      // } else if (maxvte < psimvVtValue) {
-      //   setState(() {
-      //   alarmDisplayErrorEnabled = true;
-      //     alarmDisplayError =
-      //         "Alarm limit is less than the set operation value";
-      //   });
-      // }
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minRrtotal > psimvRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxRrtotal < psimvRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmVte == true) {
+        //    if (psimvVtValue >= minvte && psimvVtValue <= maxvte) {
+        //   setState(() {
+        //     alarmDisplayErrorEnabled = false;
+        //     alarmDisplayError = "";
+        //   });
+        // } else if (minvte > psimvVtValue) {
+        //   setState(() {
+        //     alarmDisplayErrorEnabled = true;
+        //     alarmDisplayError =
+        //         "Alarm limit is greater than the set operation value";
+        //   });
+        // } else if (maxvte < psimvVtValue) {
+        //   setState(() {
+        //   alarmDisplayErrorEnabled = true;
+        //     alarmDisplayError =
+        //         "Alarm limit is less than the set operation value";
+        //   });
+        // }
         //PEEP
-      }else if(alarmpeep==true){
-         
-         if (psimvPeepValue >= minpeep && psimvPeepValue <= maxpeep) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minpeep > psimvPeepValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxpeep < psimvPeepValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
+      } else if (alarmpeep == true) {
+        if (psimvPeepValue >= minpeep && psimvPeepValue <= maxpeep) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minpeep > psimvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxpeep < psimvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmPpeak == true) {
+        if (psimvPcValue >= minppeak && psimvPcValue <= maxppeak) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minppeak > psimvPcValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxppeak < psimvPcValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
       }
-
-      }else if(alarmPpeak==true){
-         if (psimvPcValue >= minppeak && psimvPcValue <= maxppeak) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minppeak > psimvPcValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxppeak < psimvPcValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-
-      }
-
     } else if (vsimvEnabled == true) {
-
-         if(alarmRR== true){
+      if (alarmRR == true) {
         if (vsimvRrValue >= minRrtotal && vsimvRrValue <= maxRrtotal) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minRrtotal > vsimvRrValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxRrtotal < vsimvRrValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-      }else if(alarmVte==true){
-         if (vsimvVtValue >= minvte && vsimvVtValue <= maxvte) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minvte > vsimvVtValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxvte < vsimvVtValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minRrtotal > vsimvRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxRrtotal < vsimvRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmVte == true) {
+        if (vsimvVtValue >= minvte && vsimvVtValue <= maxvte) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minvte > vsimvVtValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxvte < vsimvVtValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
         //PEEP
-      }else if(alarmpeep==true){
-         
-         if (vsimvPeepValue >= minpeep && vsimvPeepValue <= maxpeep) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minpeep > vsimvPeepValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxpeep < vsimvPeepValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
+      } else if (alarmpeep == true) {
+        if (vsimvPeepValue >= minpeep && vsimvPeepValue <= maxpeep) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minpeep > vsimvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxpeep < vsimvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmPpeak == true) {
+        if (vsimvPcMaxValue >= minppeak && vsimvPcMaxValue <= maxppeak) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minppeak > vsimvPcMaxValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxppeak < vsimvPcMaxValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
       }
-
-      }else if(alarmPpeak==true){
-         if (vsimvPcMaxValue >= minppeak && vsimvPcMaxValue <= maxppeak) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minppeak > vsimvPcMaxValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxppeak < vsimvPcMaxValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-
-      }
-
     } else if (psvEnabled == true) {
-
-
-       if(alarmRR== true){
+      if (alarmRR == true) {
         if (psvBackupRrValue >= minRrtotal && psvBackupRrValue <= maxRrtotal) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minRrtotal > psvBackupRrValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxRrtotal < psvBackupRrValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-      }else if(alarmVte==true){
-      //    if (psvVtValue >= minvte && psvVtValue <= maxvte) {
-      //   setState(() {
-      //     alarmDisplayErrorEnabled = false;
-      //     alarmDisplayError = "";
-      //   });
-      // } else if (minvte > psvVtValue) {
-      //   setState(() {
-      //     alarmDisplayErrorEnabled = true;
-      //     alarmDisplayError =
-      //         "Alarm limit is greater than the set operation value";
-      //   });
-      // } else if (maxvte < psvVtValue) {
-      //   setState(() {
-      //   alarmDisplayErrorEnabled = true;
-      //     alarmDisplayError =
-      //         "Alarm limit is less than the set operation value";
-      //   });
-      // }
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minRrtotal > psvBackupRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxRrtotal < psvBackupRrValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmVte == true) {
+        //    if (psvVtValue >= minvte && psvVtValue <= maxvte) {
+        //   setState(() {
+        //     alarmDisplayErrorEnabled = false;
+        //     alarmDisplayError = "";
+        //   });
+        // } else if (minvte > psvVtValue) {
+        //   setState(() {
+        //     alarmDisplayErrorEnabled = true;
+        //     alarmDisplayError =
+        //         "Alarm limit is greater than the set operation value";
+        //   });
+        // } else if (maxvte < psvVtValue) {
+        //   setState(() {
+        //   alarmDisplayErrorEnabled = true;
+        //     alarmDisplayError =
+        //         "Alarm limit is less than the set operation value";
+        //   });
+        // }
         //PEEP
-      }else if(alarmpeep==true){
-         
-         if (psvPeepValue >= minpeep && psvPeepValue <= maxpeep) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minpeep > psvPeepValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxpeep < psvPeepValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
+      } else if (alarmpeep == true) {
+        if (psvPeepValue >= minpeep && psvPeepValue <= maxpeep) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minpeep > psvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxpeep < psvPeepValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
+      } else if (alarmPpeak == true) {
+        if (psvPcValue >= minppeak && psvPcValue <= maxppeak) {
+          setState(() {
+            alarmDisplayErrorEnabled = false;
+            alarmDisplayError = "";
+          });
+        } else if (minppeak > psvPcValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is greater than the set operation value";
+          });
+        } else if (maxppeak < psvPcValue) {
+          setState(() {
+            alarmDisplayErrorEnabled = true;
+            alarmDisplayError =
+                "Alarm limit is less than the set operation value";
+          });
+        }
       }
-
-      }else if(alarmPpeak==true){
-         if (psvPcValue >= minppeak && psvPcValue <= maxppeak) {
-        setState(() {
-          alarmDisplayErrorEnabled = false;
-          alarmDisplayError = "";
-        });
-      } else if (minppeak > psvPcValue) {
-        setState(() {
-          alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is greater than the set operation value";
-        });
-      } else if (maxppeak < psvPcValue) {
-        setState(() {
-        alarmDisplayErrorEnabled = true;
-          alarmDisplayError =
-              "Alarm limit is less than the set operation value";
-        });
-      }
-
-      }
-
-
     } else if (prvcEnabled == true) {}
   }
 
@@ -23170,7 +23345,7 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   serialiseReceivedPacket(List<int> finalList) async {
-    if (finalList.isNotEmpty && finalList.length == 114) {
+    if (finalList.isNotEmpty && finalList.length == 162) {
       var now = new DateTime.now();
 
       lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
@@ -23727,6 +23902,58 @@ class _CheckPageState extends State<Dashboard> {
           flowPoints.add(temp3 * 1.2);
         }
 
+        if (_setValuesonClick == true) {
+          setState(() {
+            receivedItrig = (65536 - ((finalList[114] << 8) + finalList[115]));
+            itrigValue = receivedItrig;
+            receivedpeep = ((finalList[116] << 8) + finalList[117]);
+            peepValue = receivedpeep;
+            receivedps = ((finalList[118] << 8) + finalList[119]);
+            psValue = receivedps;
+            receivedfio2 = ((finalList[120] << 8) + finalList[121]);
+            fio2Value = receivedfio2;
+            receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
+            atimeValue = receivedapneaTime;
+            receivedi = finalList[124];
+            i = receivedi.toString();
+            receivede = finalList[125];
+            e = receivede.toString();
+            receivedti = ((finalList[126] << 8) + finalList[127]);
+            tipsvValue = receivedti;
+            receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
+            if (operatinModeR == 3) {
+              rrValue = receivedbackuprr;
+            }
+            receivedvvttmin = ((finalList[130] << 8) + finalList[131]);
+            receivedvtmax = ((finalList[132] << 8) + finalList[133]);
+            receivedminte = ((finalList[134] << 8) + finalList[135]);
+            receivedpc = ((finalList[136] << 8) + finalList[137]);
+            pcValue = receivedpc;
+            receivedrr = ((finalList[138] << 8) + finalList[139]);
+            rrValue = receivedrr;
+            receivedvt = ((finalList[140] << 8) + finalList[141]);
+            vtValue = receivedvt;
+            receivedpcmin = ((finalList[142] << 8) + finalList[143]);
+            if (operatinModeR == 7 ||
+                operatinModeR == 1 ||
+                operatinModeR == 5) {
+              receivedpcmax = ((finalList[144] << 8) + finalList[145]);
+              pcValue = receivedpcmax;
+            }
+
+            receivedo2pressure = ((finalList[146] << 8) + finalList[147]);
+            receivedtankpressure = ((finalList[148] << 8) + finalList[149]);
+            receivedinhalationblowercommand =
+                ((finalList[150] << 8) + finalList[151]);
+            receivedexhalatioblowercommand =
+                ((finalList[152] << 8) + finalList[153]);
+            dreceivedfio2 = ((finalList[154] << 8) + finalList[155]);
+            receivedvti = ((finalList[156] << 8) + finalList[157]);
+            receivedvte = ((finalList[158] << 8) + finalList[159]);
+            receivedflatprop = ((finalList[160] << 8) + finalList[161]);
+          });
+        }
+
         setState(() {
           powerIndication = finalList[64];
           batteryPercentage = finalList[65];
@@ -23827,6 +24054,9 @@ class _CheckPageState extends State<Dashboard> {
     finalListSend.add(127);
 
     await _port.write(Uint8List.fromList(finalListSend));
+    setState(() {
+      _setValuesonClick = true;
+    });
 
     // if (checkValue == 1) {
     //   sleep(Duration(milliseconds: 50));
@@ -23906,6 +24136,9 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   clearData() {
+    // setState(() {
+    //     _setValuesonClick = true;
+    // });
     // print(finalListSend.toString());
     setState(() {
       modesEnabled = false;
@@ -23951,4 +24184,3 @@ class _CheckPageState extends State<Dashboard> {
     });
   }
 }
-  
