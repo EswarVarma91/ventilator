@@ -765,10 +765,10 @@ class _CheckPageState extends State<Dashboard> {
               powerButtonEnabled = false;
             });
           }
-          // Fluttertoast.showToast(msg:"timeout "+differnceD.inSeconds.toString());
-          // if(differnceD.inSeconds>61){
-          //   turnOffScreen();
-          // }
+// Fluttertoast.showToast(msg:"timeout "+differnceD.inSeconds.toString());
+// if(differnceD.inSeconds>61){
+//   turnOffScreen();
+// }
         });
       } else {}
     });
@@ -1831,7 +1831,7 @@ class _CheckPageState extends State<Dashboard> {
                                             ? "0"
                                             : (spontaneousDisplay / 1000)
                                                 .toStringAsFixed(3),
-                                        // "00",
+// "00",
                                         style: TextStyle(
                                             color: Colors.blue, fontSize: 35),
                                       ),
@@ -1949,42 +1949,42 @@ class _CheckPageState extends State<Dashboard> {
               //     ? Padding(
               //         padding: const EdgeInsets.only(right: 96.0, bottom: 162),
               //         child: Align(
-              //             alignment: Alignment.bottomRight,
-              //             child: Container(
-              //               height:0,
-              //               width: 0,
-              //               child: Card(
-              //                 color: Colors.blue,
-              //               ),
-              //             )),
+              //   alignment: Alignment.bottomRight,
+              //   child: Container(
+              //     height:0,
+              //     width: 0,
+              //     child: Card(
+              //       color: Colors.blue,
+              //     ),
+              //   )),
               //       )
               //     : Container(),
               // newTreatEnabled
               //     ? Padding(
               //         padding: const EdgeInsets.only(right: 96.0, bottom: 108),
               //         child: Align(
-              //             alignment: Alignment.bottomRight,
-              //             child: Container(
-              //               height:0,
-              //               width: 0,
-              //               child: Card(
-              //                 color: Colors.blue,
-              //               ),
-              //             )),
+              //   alignment: Alignment.bottomRight,
+              //   child: Container(
+              //     height:0,
+              //     width: 0,
+              //     child: Card(
+              //       color: Colors.blue,
+              //     ),
+              //   )),
               //       )
               //     : Container(),
               // monitorEnabled
               //     ? Padding(
               //         padding: const EdgeInsets.only(right: 96.0, bottom: 54),
               //         child: Align(
-              //             alignment: Alignment.bottomRight,
-              //             child: Container(
-              //               height: 0,
-              //               width: 0,
-              //               child: Card(
-              //                 color: Colors.blue,
-              //               ),
-              //             )),
+              //   alignment: Alignment.bottomRight,
+              //   child: Container(
+              //     height: 0,
+              //     width: 0,
+              //     child: Card(
+              //       color: Colors.blue,
+              //     ),
+              //   )),
               //       )
               //
               //  : Container(),
@@ -1994,8 +1994,8 @@ class _CheckPageState extends State<Dashboard> {
                       ? modesClick()
 
                       //     ? Navigator.push(
-                      //             context,
-                      //             MaterialPageRoute(builder: (context) => NewTreatmentScreen()),)
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => NewTreatmentScreen()),)
                       : monitorEnabled
                           ? monitorClick()
                           : selfTestingEnabled
@@ -2009,18 +2009,18 @@ class _CheckPageState extends State<Dashboard> {
               // _buttonPressed
               //     ? Center(
               //       child: Material(
-              //           borderRadius: BorderRadius.circular(24.0),
-              //           color: Colors.green,
-              //           child: Padding(
-              //             padding: const EdgeInsets.only(
-              //                 left: 30.0, right: 30.0, top: 15, bottom: 15),
-              //             child: Text(
-              //               ioreDisplayParamter=="I" ?  "Inspiratory Pause : " +  (timerCounter.toString() + "s")
-              //                 : ioreDisplayParamter=="E" ? "Expiratory Pause : "  + (timerCounter.toString() + "s")
-              //                 : "Respiratory Pause : "+ (timerCounter.toString() + "s"),
-              //                 style:
-              //                     TextStyle(fontSize: 30, color: Colors.white)),
-              //           ),
+              // borderRadius: BorderRadius.circular(24.0),
+              // color: Colors.green,
+              // child: Padding(
+              //   padding: const EdgeInsets.only(
+              //       left: 30.0, right: 30.0, top: 15, bottom: 15),
+              //   child: Text(
+              //     ioreDisplayParamter=="I" ?  "Inspiratory Pause : " +  (timerCounter.toString() + "s")
+              //       : ioreDisplayParamter=="E" ? "Expiratory Pause : "  + (timerCounter.toString() + "s")
+              //       : "Respiratory Pause : "+ (timerCounter.toString() + "s"),
+              //       style:
+              // TextStyle(fontSize: 30, color: Colors.white)),
+              // ),
               //         ),
               //     )
               //     : Container()
@@ -2427,11 +2427,11 @@ class _CheckPageState extends State<Dashboard> {
                 //       });
 
                 //        _timer = Timer.periodic(Duration(seconds: 15), (timer) {
-                //           setState(() async {
-                //             testingText=true;
-                //             textText = "Calibration Completed.";
-                //             // await sleep(Duration(seconds:1));
-                //           });
+                // setState(() async {
+                //   testingText=true;
+                //   textText = "Calibration Completed.";
+                //   // await sleep(Duration(seconds:1));
+                // });
                 //       });
 
                 //     },
@@ -2440,26 +2440,26 @@ class _CheckPageState extends State<Dashboard> {
                 //       child: Padding(
                 //         padding: const EdgeInsets.all(18.0),
                 //         child: Column(
-                //           children: [
-                //             Text(
-                //               "Continue \n with".toUpperCase(),
-                //               style: TextStyle(
-                //                 color: Colors.black,
-                //                 fontWeight: FontWeight.bold,
-                //                 fontSize: 15,
-                //               ),
-                //               textAlign: TextAlign.center,
-                //             ),
-                //             Text(
-                //               "Full Test".toUpperCase(),
-                //               style: TextStyle(
-                //                 color: Colors.black,
-                //                 fontWeight: FontWeight.bold,
-                //                 fontSize: 22,
-                //               ),
-                //               textAlign: TextAlign.center,
-                //             ),
-                //           ],
+                // children: [
+                //   Text(
+                //     "Continue \n with".toUpperCase(),
+                //     style: TextStyle(
+                //       color: Colors.black,
+                //       fontWeight: FontWeight.bold,
+                //       fontSize: 15,
+                //     ),
+                //     textAlign: TextAlign.center,
+                //   ),
+                //   Text(
+                //     "Full Test".toUpperCase(),
+                //     style: TextStyle(
+                //       color: Colors.black,
+                //       fontWeight: FontWeight.bold,
+                //       fontSize: 22,
+                //     ),
+                //     textAlign: TextAlign.center,
+                //   ),
+                // ],
                 //         ),
                 //       ),
                 //     ),
@@ -2879,7 +2879,7 @@ class _CheckPageState extends State<Dashboard> {
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Text(
-                                "O \u2082 Sensor          ",
+                                "O \u2082 Sensor",
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
@@ -3527,24 +3527,24 @@ class _CheckPageState extends State<Dashboard> {
                                             //       width: 98,
                                             //       height: 70,
                                             //       child: Align(
-                                            //           alignment:
-                                            //               Alignment.center,
-                                            //           child: Padding(
-                                            //             padding:
-                                            //                 const EdgeInsets
-                                            //                     .all(8.0),
-                                            //             child: Text("PRVC",
-                                            //                 style: TextStyle(
-                                            //                     fontSize: 20,
-                                            //                     color: prvcEnabled
-                                            //                         ? Colors
-                                            //                             .white
-                                            //                         : Colors
-                                            //                             .black,
-                                            //                     fontWeight:
-                                            //                         FontWeight
-                                            //                             .bold)),
-                                            //           )),
+                                            // alignment:
+                                            //     Alignment.center,
+                                            // child: Padding(
+                                            //   padding:
+                                            //       const EdgeInsets
+                                            // .all(8.0),
+                                            //   child: Text("PRVC",
+                                            //       style: TextStyle(
+                                            // fontSize: 20,
+                                            // color: prvcEnabled
+                                            //     ? Colors
+                                            //         .white
+                                            //     : Colors
+                                            //         .black,
+                                            // fontWeight:
+                                            //     FontWeight
+                                            //         .bold)),
+                                            // )),
                                             //     ),
                                             //   ),
                                             // ),
@@ -3728,19 +3728,19 @@ class _CheckPageState extends State<Dashboard> {
                                           //    InkWell(
                                           //      onTap: (){
                                           //        setState((){
-                                          //          invasiveEnabled=true;
+                                          //invasiveEnabled=true;
                                           //        noninvasiveEnabled= false;
                                           //        });
                                           //      },
-                                          //                     child: Card(
+                                          // child: Card(
                                           //       color: invasiveEnabled ? Colors.white : Colors.white,
                                           //       child: Padding(
                                           //         padding: const EdgeInsets.only(top:18.0,left:40,right:40,bottom:18),
                                           //         child: Text(
-                                          //           "Invasive",
-                                          //           style: TextStyle(
-                                          //               color: invasiveEnabled
-                                          //                   ? Colors.green : Colors.black,),
+                                          // "Invasive",
+                                          // style: TextStyle(
+                                          //     color: invasiveEnabled
+                                          //         ? Colors.green : Colors.black,),
                                           //         ),
                                           //       ),
                                           //   ),
@@ -3748,20 +3748,20 @@ class _CheckPageState extends State<Dashboard> {
                                           //  InkWell(
                                           //    onTap:(){
                                           //       setState((){
-                                          //          invasiveEnabled=false;
+                                          //invasiveEnabled=false;
                                           //        noninvasiveEnabled= true;
                                           //        });
                                           //    },
                                           //       child: Card(
                                           //       color:
-                                          //           noninvasiveEnabled ? Colors.white : Colors.white,
+                                          // noninvasiveEnabled ? Colors.white : Colors.white,
                                           //       child: Padding(
                                           //         padding: const EdgeInsets.only(top:18.0,left:23,right:23,bottom:18),
                                           //         child: Text(
-                                          //           "Non Invasive",
-                                          //           style: TextStyle(
-                                          //               color: noninvasiveEnabled
-                                          //                   ? Colors.green : Colors.black,),
+                                          // "Non Invasive",
+                                          // style: TextStyle(
+                                          //     color: noninvasiveEnabled
+                                          //         ? Colors.green : Colors.black,),
                                           //         ),
                                           //       ),
                                           //     ),
@@ -3895,43 +3895,43 @@ class _CheckPageState extends State<Dashboard> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // InkWell(
-                                        //   onTap: () {
-                                        //     setState(() {
-                                        //       alarmRRchanged = false;
-                                        //       alarmVtechanged = false;
-                                        //       alarmFio2changed = false;
-                                        //       alarmpeepchanged = false;
-                                        //       alarmPpeakchanged = false;
-                                        //       newTreatEnabled = false;
-                                        //       alarmEnabled = false;
-                                        //       alarmRR = false;
-                                        //       alarmVte = false;
-                                        //       alarmPpeak = false;
-                                        //       alarmpeep = false;
-                                        //       alarmFio2 = false;
-                                        //       newTreatEnabled = false;
-                                        //       alarmConfirmed = true;
-                                        //     });
-                                        //   },
-                                        //   child: Container(
-                                        //     height: 80,
-                                        //     width: 210,
-                                        //     child: Card(
-                                        //       child: Center(
-                                        //           child: Padding(
-                                        //         padding:
-                                        //             const EdgeInsets.all(8.0),
-                                        //         child: Text("Exit",
-                                        //             style: TextStyle(
-                                        //                 fontSize: 22,
-                                        //                 color: Colors.black,
-                                        //                 fontWeight:
-                                        //                     FontWeight.bold)),
-                                        //       )),
-                                        //     ),
-                                        //   ),
-                                        // ),
+// InkWell(
+//   onTap: () {
+//     setState(() {
+//       alarmRRchanged = false;
+//       alarmVtechanged = false;
+//       alarmFio2changed = false;
+//       alarmpeepchanged = false;
+//       alarmPpeakchanged = false;
+//       newTreatEnabled = false;
+//       alarmEnabled = false;
+//       alarmRR = false;
+//       alarmVte = false;
+//       alarmPpeak = false;
+//       alarmpeep = false;
+//       alarmFio2 = false;
+//       newTreatEnabled = false;
+//       alarmConfirmed = true;
+//     });
+//   },
+//   child: Container(
+//     height: 80,
+//     width: 210,
+//     child: Card(
+//       child: Center(
+// child: Padding(
+//         padding:
+//   const EdgeInsets.all(8.0),
+//         child: Text("Exit",
+//   style: TextStyle(
+//       fontSize: 22,
+//       color: Colors.black,
+//       fontWeight:
+// FontWeight.bold)),
+//       )),
+//     ),
+//   ),
+// ),
 
                                         alarmDisplayErrorEnabled
                                             ? Container(
@@ -4189,32 +4189,32 @@ class _CheckPageState extends State<Dashboard> {
                         child: Center(
                           child: Stack(
                             children: [
-                              // Align(
-                              //   alignment: Alignment(1.02, -1.03),
-                              //   child: InkWell(
-                              //     onTap: () {
-                              //       setState(() {
-                              //         modesEnabled = false;
-                              //         newTreatEnabled = false;
+// Align(
+//   alignment: Alignment(1.02, -1.03),
+//   child: InkWell(
+//     onTap: () {
+//       setState(() {
+//         modesEnabled = false;
+//         newTreatEnabled = false;
 
-                              //         monitorEnabled = false;
-                              //       });
-                              //     },
-                              //     child: Container(
-                              //       decoration: BoxDecoration(
-                              //         color: Colors.red,
-                              //         borderRadius: BorderRadius.circular(22),
-                              //       ),
-                              //       child: Padding(
-                              //         padding: const EdgeInsets.all(12.0),
-                              //         child: Icon(
-                              //           Icons.close,
-                              //           color: Colors.white,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
+//         monitorEnabled = false;
+//       });
+//     },
+//     child: Container(
+//       decoration: BoxDecoration(
+//         color: Colors.red,
+//         borderRadius: BorderRadius.circular(22),
+//       ),
+//       child: Padding(
+//         padding: const EdgeInsets.all(12.0),
+//         child: Icon(
+// Icons.close,
+// color: Colors.white,
+//         ),
+//       ),
+//     ),
+//   ),
+// ),
                               Align(
                                 alignment: Alignment.center,
                                 child: Column(
@@ -4450,7 +4450,7 @@ class _CheckPageState extends State<Dashboard> {
                         children: [
                           InkWell(
                             onTap: () async {
-                              // _newtreatmentMethod();
+// _newtreatmentMethod();
                             },
                             child: Center(
                               child: Container(
@@ -4603,8 +4603,8 @@ class _CheckPageState extends State<Dashboard> {
                 //     checkTempData == "1"
                 //         ? "L"
                 //         : checkTempData == "0"
-                //             ? "U"
-                //             : checkTempData == "2" ? "S" : "",
+                //   ? "U"
+                //   : checkTempData == "2" ? "S" : "",
                 //     style: TextStyle(color: Colors.white),
                 //   )),
                 // ),
@@ -5230,28 +5230,28 @@ class _CheckPageState extends State<Dashboard> {
                                               SizedBox(height: 6),
                                               Center(
                                                 child: Listener(
-                                                  // onPointerMove: (details) {
-                                                  //   writeRespiratoryPauseData(
-                                                  //       0);
-                                                  //   setState(() {
-                                                  //     timerCounter = 0;
-                                                  //     _buttonPressedE = false;
-                                                  //     // _inpirationPressed = false;
-                                                  //   });
-                                                  // },
-                                                  // onPointerDown: (details) {
-                                                  //   writeRespiratoryPauseData(2);
-                                                  //   _buttonPressedE = true;
-                                                  //   _increaseCounterWhilePressedE();
-                                                  // },
-                                                  // onPointerUp: (details) {
-                                                  //   writeRespiratoryPauseData(0);
-                                                  //   setState(() {
-                                                  //     timerCounter = 0;
-                                                  //     _buttonPressedE = false;
-                                                  //     // _expiratoryPressed = false;
-                                                  //   });
-                                                  // },
+// onPointerMove: (details) {
+//   writeRespiratoryPauseData(
+//       0);
+//   setState(() {
+//     timerCounter = 0;
+//     _buttonPressedE = false;
+//     // _inpirationPressed = false;
+//   });
+// },
+// onPointerDown: (details) {
+//   writeRespiratoryPauseData(2);
+//   _buttonPressedE = true;
+//   _increaseCounterWhilePressedE();
+// },
+// onPointerUp: (details) {
+//   writeRespiratoryPauseData(0);
+//   setState(() {
+//     timerCounter = 0;
+//     _buttonPressedE = false;
+//     // _expiratoryPressed = false;
+//   });
+// },
                                                   onPointerDown: (details) {
                                                     writeRespiratoryPauseData(
                                                         2);
@@ -5369,16 +5369,16 @@ class _CheckPageState extends State<Dashboard> {
                                                           TextAlign.center,
                                                     ),
                                                   ),
-                                                  //   Align(
-                                                  //   alignment: Alignment.centerRight,
-                                                  //   child: Padding(
-                                                  //     padding: const EdgeInsets.only(top: 17.0),
-                                                  //     child: Icon(
-                                                  //         lockEnabled ? Icons.lock_open : Icons.lock,
-                                                  //         color: Colors.white,
-                                                  //         size: 15),
-                                                  //   ),
-                                                  // ),
+//   Align(
+//   alignment: Alignment.centerRight,
+//   child: Padding(
+//     padding: const EdgeInsets.only(top: 17.0),
+//     child: Icon(
+//         lockEnabled ? Icons.lock_open : Icons.lock,
+//         color: Colors.white,
+//         size: 15),
+//   ),
+// ),
                                                 ],
                                               )),
                                             ),
@@ -5422,16 +5422,16 @@ class _CheckPageState extends State<Dashboard> {
                                                           TextAlign.center,
                                                     ),
                                                   ),
-                                                  //   Align(
-                                                  //   alignment: Alignment.centerRight,
-                                                  //   child: Padding(
-                                                  //     padding: const EdgeInsets.only(top: 17.0),
-                                                  //     child: Icon(
-                                                  //         lockEnabled ? Icons.lock_open : Icons.lock,
-                                                  //         color: Colors.white,
-                                                  //         size: 15),
-                                                  //   ),
-                                                  // ),
+//   Align(
+//   alignment: Alignment.centerRight,
+//   child: Padding(
+//     padding: const EdgeInsets.only(top: 17.0),
+//     child: Icon(
+//         lockEnabled ? Icons.lock_open : Icons.lock,
+//         color: Colors.white,
+//         size: 15),
+//   ),
+// ),
                                                 ],
                                               )),
                                             ),
@@ -6160,7 +6160,7 @@ class _CheckPageState extends State<Dashboard> {
                             padding: const EdgeInsets.only(right: 5.0),
                             child: Text(
                               vteValue.toString(),
-                              // "0000",
+// "0000",
                               style:
                                   TextStyle(color: Colors.green, fontSize: 35),
                             ),
@@ -6289,7 +6289,7 @@ class _CheckPageState extends State<Dashboard> {
                             padding: const EdgeInsets.only(right: 5.0),
                             child: Text(
                               peepDisplayValue.toString(),
-                              // "00",
+// "00",
                               style:
                                   TextStyle(color: Colors.pink, fontSize: 35),
                             ),
@@ -6412,7 +6412,7 @@ class _CheckPageState extends State<Dashboard> {
                             padding: const EdgeInsets.only(right: 5.0),
                             child: Text(
                               rrDisplayValue.toString(),
-                              // "00",
+// "00",
                               style:
                                   TextStyle(color: Colors.blue, fontSize: 35),
                             ),
@@ -6535,7 +6535,7 @@ class _CheckPageState extends State<Dashboard> {
                             padding: const EdgeInsets.only(right: 5.0),
                             child: Text(
                               fio2DisplayParameter.toString(),
-                              // "000",
+// "000",
                               style:
                                   TextStyle(color: Colors.teal, fontSize: 35),
                             ),
@@ -7246,10 +7246,10 @@ class _CheckPageState extends State<Dashboard> {
               //         width: 80,
               //         height: 40,
               //         child: Center(
-              //             child: Padding(
-              //           padding: const EdgeInsets.all(8.0),
-              //           child: Text(displayTemperature.toString() + "\u2103",
-              //               style: TextStyle(fontSize: 20)),
+              //   child: Padding(
+              // padding: const EdgeInsets.all(8.0),
+              // child: Text(displayTemperature.toString() + "\u2103",
+              //     style: TextStyle(fontSize: 20)),
               //         )))),
               SizedBox(width: 5),
               Material(
@@ -7329,19 +7329,19 @@ class _CheckPageState extends State<Dashboard> {
             ],
           ),
 
-          // Stack(
-          //   children: [
-          //     Padding(
-          //       padding: const EdgeInsets.only(bottom: 6),
-          //       child: Container(
-          //         child: Text(
-          //           dateandTime ?? "",
-          //           style: TextStyle(color: Colors.white, fontSize: 15),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // )
+// Stack(
+//   children: [
+//     Padding(
+//       padding: const EdgeInsets.only(bottom: 6),
+//       child: Container(
+//         child: Text(
+// dateandTime ?? "",
+// style: TextStyle(color: Colors.white, fontSize: 15),
+//         ),
+//       ),
+//     ),
+//   ],
+// )
         ],
       ),
     );
@@ -8109,89 +8109,89 @@ class _CheckPageState extends State<Dashboard> {
               //         elevation: 40,
               //         color: psvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
               //         child: Padding(
-              //           padding: const EdgeInsets.all(6.0),
-              //           child: Center(
-              //               child: Stack(
-              //             children: [
-              //               Align(
-              //                 alignment: Alignment.topLeft,
-              //                 child: Text(
-              //                   "Vt Min",
-              //                   style: TextStyle(
-              //                       fontSize: 15,
-              //                       fontWeight: FontWeight.bold,
-              //                       color: psvVtMin
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.topRight,
-              //                 child: Text(
-              //                   "mL",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvVtMin
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.bottomRight,
-              //                 child: Text(
-              //                   "1200",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvVtMin
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.bottomLeft,
-              //                 child: Text(
-              //                   "100",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvVtMin
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.center,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.only(top: 1.0),
-              //                   child: Text(
-              //                     psvVtMinValue.toString(),
-              //                     style: TextStyle(
-              //                         fontSize: 35,
-              //                         color: psvVtMin
-              //                             ? Color(0xFF213855)
-              //                             : Color(0xFFE0E0E0)),
-              //                   ),
-              //                 ),
-              //               ),
-              //               Padding(
-              //                 padding: const EdgeInsets.only(
-              //                     bottom: 20.0, left: 10, right: 10),
-              //                 child: Align(
-              //                   alignment: Alignment.bottomCenter,
-              //                   child: LinearProgressIndicator(
-              //                     backgroundColor: Colors.grey,
-              //                     valueColor: AlwaysStoppedAnimation<Color>(
-              //                       psvVtMin
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0),
-              //                     ),
-              //                     value: psvVtMinValue != null
-              //                         ? psvVtMinValue / 1200
-              //                         : 0,
-              //                   ),
-              //                 ),
-              //               )
-              //             ],
-              //           )),
+              // padding: const EdgeInsets.all(6.0),
+              // child: Center(
+              //     child: Stack(
+              //   children: [
+              //     Align(
+              //       alignment: Alignment.topLeft,
+              //       child: Text(
+              //         "Vt Min",
+              //         style: TextStyle(
+              //   fontSize: 15,
+              //   fontWeight: FontWeight.bold,
+              //   color: psvVtMin
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.topRight,
+              //       child: Text(
+              //         "mL",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvVtMin
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.bottomRight,
+              //       child: Text(
+              //         "1200",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvVtMin
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.bottomLeft,
+              //       child: Text(
+              //         "100",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvVtMin
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.center,
+              //       child: Padding(
+              //         padding: const EdgeInsets.only(top: 1.0),
+              //         child: Text(
+              // psvVtMinValue.toString(),
+              // style: TextStyle(
+              //     fontSize: 35,
+              //     color: psvVtMin
+              //         ? Color(0xFF213855)
+              //         : Color(0xFFE0E0E0)),
+              //         ),
+              //       ),
+              //     ),
+              //     Padding(
+              //       padding: const EdgeInsets.only(
+              // bottom: 20.0, left: 10, right: 10),
+              //       child: Align(
+              //         alignment: Alignment.bottomCenter,
+              //         child: LinearProgressIndicator(
+              // backgroundColor: Colors.grey,
+              // valueColor: AlwaysStoppedAnimation<Color>(
+              //   psvVtMin
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0),
+              // ),
+              // value: psvVtMinValue != null
+              //     ? psvVtMinValue / 1200
+              //     : 0,
+              //         ),
+              //       ),
+              //     )
+              //   ],
+              // )),
               //         ),
               //       ),
               //     ),
@@ -8227,89 +8227,89 @@ class _CheckPageState extends State<Dashboard> {
               //         elevation: 40,
               //         color: psvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
               //         child: Padding(
-              //           padding: const EdgeInsets.all(6.0),
-              //           child: Center(
-              //               child: Stack(
-              //             children: [
-              //               Align(
-              //                 alignment: Alignment.topLeft,
-              //                 child: Text(
-              //                   "Vt Max",
-              //                   style: TextStyle(
-              //                       fontSize: 15,
-              //                       fontWeight: FontWeight.bold,
-              //                       color: psvVtMax
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.topRight,
-              //                 child: Text(
-              //                   "mL",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvVtMax
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.bottomRight,
-              //                 child: Text(
-              //                   "1200",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvVtMax
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.bottomLeft,
-              //                 child: Text(
-              //                   "100",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvVtMax
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.center,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.only(top: 1.0),
-              //                   child: Text(
-              //                     psvVtMaxValue.toString(),
-              //                     style: TextStyle(
-              //                         fontSize: 35,
-              //                         color: psvVtMax
-              //                             ? Color(0xFF213855)
-              //                             : Color(0xFFE0E0E0)),
-              //                   ),
-              //                 ),
-              //               ),
-              //               Padding(
-              //                 padding: const EdgeInsets.only(
-              //                     bottom: 20.0, left: 10, right: 10),
-              //                 child: Align(
-              //                   alignment: Alignment.bottomCenter,
-              //                   child: LinearProgressIndicator(
-              //                     backgroundColor: Colors.grey,
-              //                     valueColor: AlwaysStoppedAnimation<Color>(
-              //                       psvVtMax
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0),
-              //                     ),
-              //                     value: psvVtMaxValue != null
-              //                         ? psvVtMaxValue / 1200
-              //                         : 0,
-              //                   ),
-              //                 ),
-              //               )
-              //             ],
-              //           )),
+              // padding: const EdgeInsets.all(6.0),
+              // child: Center(
+              //     child: Stack(
+              //   children: [
+              //     Align(
+              //       alignment: Alignment.topLeft,
+              //       child: Text(
+              //         "Vt Max",
+              //         style: TextStyle(
+              //   fontSize: 15,
+              //   fontWeight: FontWeight.bold,
+              //   color: psvVtMax
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.topRight,
+              //       child: Text(
+              //         "mL",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvVtMax
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.bottomRight,
+              //       child: Text(
+              //         "1200",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvVtMax
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.bottomLeft,
+              //       child: Text(
+              //         "100",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvVtMax
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.center,
+              //       child: Padding(
+              //         padding: const EdgeInsets.only(top: 1.0),
+              //         child: Text(
+              // psvVtMaxValue.toString(),
+              // style: TextStyle(
+              //     fontSize: 35,
+              //     color: psvVtMax
+              //         ? Color(0xFF213855)
+              //         : Color(0xFFE0E0E0)),
+              //         ),
+              //       ),
+              //     ),
+              //     Padding(
+              //       padding: const EdgeInsets.only(
+              // bottom: 20.0, left: 10, right: 10),
+              //       child: Align(
+              //         alignment: Alignment.bottomCenter,
+              //         child: LinearProgressIndicator(
+              // backgroundColor: Colors.grey,
+              // valueColor: AlwaysStoppedAnimation<Color>(
+              //   psvVtMax
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0),
+              // ),
+              // value: psvVtMaxValue != null
+              //     ? psvVtMaxValue / 1200
+              //     : 0,
+              //         ),
+              //       ),
+              //     )
+              //   ],
+              // )),
               //         ),
               //       ),
               //     ),
@@ -8346,89 +8346,89 @@ class _CheckPageState extends State<Dashboard> {
               //         elevation: 40,
               //         color: psvMinTe ? Color(0xFFE0E0E0) : Color(0xFF213855),
               //         child: Padding(
-              //           padding: const EdgeInsets.all(6.0),
-              //           child: Center(
-              //               child: Stack(
-              //             children: [
-              //               Align(
-              //                 alignment: Alignment.topLeft,
-              //                 child: Text(
-              //                   "Min Te",
-              //                   style: TextStyle(
-              //                       fontSize: 15,
-              //                       fontWeight: FontWeight.bold,
-              //                       color: psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.topRight,
-              //                 child: Text(
-              //                   "s",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.bottomRight,
-              //                 child: Text(
-              //                   "5",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.bottomLeft,
-              //                 child: Text(
-              //                   "1",
-              //                   style: TextStyle(
-              //                       fontSize: 12,
-              //                       color: psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0)),
-              //                 ),
-              //               ),
-              //               Align(
-              //                 alignment: Alignment.center,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.only(top: 1.0),
-              //                   child: Text(
-              //                     psvMinTeValue.toString(),
-              //                     style: TextStyle(
-              //                         fontSize: 35,
-              //                         color: psvMinTe
-              //                             ? Color(0xFF213855)
-              //                             : Color(0xFFE0E0E0)),
-              //                   ),
-              //                 ),
-              //               ),
-              //               Padding(
-              //                 padding: const EdgeInsets.only(
-              //                     bottom: 20.0, left: 10, right: 10),
-              //                 child: Align(
-              //                   alignment: Alignment.bottomCenter,
-              //                   child: LinearProgressIndicator(
-              //                     backgroundColor: Colors.grey,
-              //                     valueColor: AlwaysStoppedAnimation<Color>(
-              //                       psvMinTe
-              //                           ? Color(0xFF213855)
-              //                           : Color(0xFFE0E0E0),
-              //                     ),
-              //                     value: psvMinTeValue != null
-              //                         ? psvMinTeValue / 5
-              //                         : 0,
-              //                   ),
-              //                 ),
-              //               )
-              //             ],
-              //           )),
+              // padding: const EdgeInsets.all(6.0),
+              // child: Center(
+              //     child: Stack(
+              //   children: [
+              //     Align(
+              //       alignment: Alignment.topLeft,
+              //       child: Text(
+              //         "Min Te",
+              //         style: TextStyle(
+              //   fontSize: 15,
+              //   fontWeight: FontWeight.bold,
+              //   color: psvMinTe
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.topRight,
+              //       child: Text(
+              //         "s",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvMinTe
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.bottomRight,
+              //       child: Text(
+              //         "5",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvMinTe
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.bottomLeft,
+              //       child: Text(
+              //         "1",
+              //         style: TextStyle(
+              //   fontSize: 12,
+              //   color: psvMinTe
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0)),
+              //       ),
+              //     ),
+              //     Align(
+              //       alignment: Alignment.center,
+              //       child: Padding(
+              //         padding: const EdgeInsets.only(top: 1.0),
+              //         child: Text(
+              // psvMinTeValue.toString(),
+              // style: TextStyle(
+              //     fontSize: 35,
+              //     color: psvMinTe
+              //         ? Color(0xFF213855)
+              //         : Color(0xFFE0E0E0)),
+              //         ),
+              //       ),
+              //     ),
+              //     Padding(
+              //       padding: const EdgeInsets.only(
+              // bottom: 20.0, left: 10, right: 10),
+              //       child: Align(
+              //         alignment: Alignment.bottomCenter,
+              //         child: LinearProgressIndicator(
+              // backgroundColor: Colors.grey,
+              // valueColor: AlwaysStoppedAnimation<Color>(
+              //   psvMinTe
+              //       ? Color(0xFF213855)
+              //       : Color(0xFFE0E0E0),
+              // ),
+              // value: psvMinTeValue != null
+              //     ? psvMinTeValue / 5
+              //     : 0,
+              //         ),
+              //       ),
+              //     )
+              //   ],
+              // )),
               //         ),
               //       ),
               //     ),
@@ -9165,31 +9165,31 @@ class _CheckPageState extends State<Dashboard> {
                             min: psvminValue.toDouble(),
                             max: psvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              // if (psvItrig == true) {
-                              //   setState(() {
-                              //     if (psvPeepValue == 0) {
-                              //       psvItrigValue = 1;
-                              //     } else {
-                              //       if (value.toInt() > psvPeepValue) {
-                              //         psvItrigValue = psvPeepValue;
-                              //       } else {
-                              //         psvItrigValue = value.toInt();
-                              //       }
-                              //     }
-                              //   });
-                              // } else if (psvPeep == true) {
-                              //   setState(() {
-                              //     psvPeepValue = value.toInt();
-                              //     if (psvItrigValue > 1 &&
-                              //         psvItrigValue > psvPeepValue) {
-                              //       if (psvPeepValue == 0) {
-                              //         psvItrigValue = 1;
-                              //       } else {
-                              //         psvItrigValue = psvPeepValue;
-                              //       }
-                              //     }
-                              //   });
-                              // }
+// if (psvItrig == true) {
+//   setState(() {
+//     if (psvPeepValue == 0) {
+//       psvItrigValue = 1;
+//     } else {
+//       if (value.toInt() > psvPeepValue) {
+//         psvItrigValue = psvPeepValue;
+//       } else {
+//         psvItrigValue = value.toInt();
+//       }
+//     }
+//   });
+// } else if (psvPeep == true) {
+//   setState(() {
+//     psvPeepValue = value.toInt();
+//     if (psvItrigValue > 1 &&
+//         psvItrigValue > psvPeepValue) {
+//       if (psvPeepValue == 0) {
+//         psvItrigValue = 1;
+//       } else {
+//         psvItrigValue = psvPeepValue;
+//       }
+//     }
+//   });
+// }
                               if (psvItrig == true) {
                                 setState(() {
                                   psvItrigValue = value.toInt();
@@ -10055,89 +10055,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: pacvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Vt Min",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: pacvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "mL",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "1200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "100",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     pacvVtMinValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: pacvVtMin
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       pacvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: pacvVtMinValue != null
-            //                         ? pacvVtMinValue / 1200
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Vt Min",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: pacvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "mL",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "1200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "100",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // pacvVtMinValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: pacvVtMin
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   pacvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: pacvVtMinValue != null
+            //     ? pacvVtMinValue / 1200
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -10169,89 +10169,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: pacvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Vt Max",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: pacvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "mL",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "1200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     pacvVtMaxValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: pacvVtMax
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       pacvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: pacvVtMaxValue != null
-            //                         ? pacvVtMaxValue / 1200
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Vt Max",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: pacvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "mL",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "1200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // pacvVtMaxValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: pacvVtMax
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   pacvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: pacvVtMaxValue != null
+            //     ? pacvVtMaxValue / 1200
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -10284,102 +10284,102 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: pacvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Flow Ramp",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: pacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "4",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "0",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     pacvFlowRampValue.toString() == "0"
-            //                         ? "AF"
-            //                         : pacvFlowRampValue.toString() == "1"
-            //                             ? "AS"
-            //                             : pacvFlowRampValue.toString() == "2"
-            //                                 ? "DF"
-            //                                 : pacvFlowRampValue.toString() ==
-            //                                         "3"
-            //                                     ? "DS"
-            //                                     : pacvFlowRampValue
-            //                                                 .toString() ==
-            //                                             "4"
-            //                                         ? "S"
-            //                                         : "S",
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: pacvFlowRamp
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       pacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: pacvFlowRampValue != null
-            //                         ? pacvFlowRampValue / 4
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Flow Ramp",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: pacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "4",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "0",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // pacvFlowRampValue.toString() == "0"
+            //     ? "AF"
+            //     : pacvFlowRampValue.toString() == "1"
+            //         ? "AS"
+            //         : pacvFlowRampValue.toString() == "2"
+            //   ? "DF"
+            //   : pacvFlowRampValue.toString() ==
+            // "3"
+            //       ? "DS"
+            //       : pacvFlowRampValue
+            //         .toString() ==
+            //     "4"
+            // ? "S"
+            // : "S",
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: pacvFlowRamp
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   pacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: pacvFlowRampValue != null
+            //     ? pacvFlowRampValue / 4
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -10775,36 +10775,36 @@ class _CheckPageState extends State<Dashboard> {
                             min: pacvminValue.toDouble() ?? 0,
                             max: pacvmaxValue.toDouble() ?? 0,
                             onChanged: (double value) {
-                              // if (pacvItrig == true) {
-                              //   setState(() {
-                              //     if (pacvPeepValue == 0) {
-                              //       pacvItrigValue = 1;
-                              //     } else {
-                              //       if (value.toInt() > pacvPeepValue) {
-                              //         pacvItrigValue = pacvPeepValue;
-                              //       } else {
-                              //         pacvItrigValue = value.toInt();
-                              //       }
-                              //     }
-                              //   });
-                              // }
+// if (pacvItrig == true) {
+//   setState(() {
+//     if (pacvPeepValue == 0) {
+//       pacvItrigValue = 1;
+//     } else {
+//       if (value.toInt() > pacvPeepValue) {
+//         pacvItrigValue = pacvPeepValue;
+//       } else {
+//         pacvItrigValue = value.toInt();
+//       }
+//     }
+//   });
+// }
 
                               if (pacvItrig == true) {
                                 setState(() {
                                   pacvItrigValue = value.toInt();
                                 });
                               }
-                              // else if (pacvPeep == true) {
-                              //   pacvPeepValue = value.toInt();
-                              //   if (pacvItrigValue > 1 &&
-                              //       pacvItrigValue > pacvPeepValue) {
-                              //     if (pacvPeepValue == 0) {
-                              //       pacvItrigValue = 1;
-                              //     } else {
-                              //       pacvItrigValue = pacvPeepValue;
-                              //     }
-                              //   }
-                              // }
+// else if (pacvPeep == true) {
+//   pacvPeepValue = value.toInt();
+//   if (pacvItrigValue > 1 &&
+//       pacvItrigValue > pacvPeepValue) {
+//     if (pacvPeepValue == 0) {
+//       pacvItrigValue = 1;
+//     } else {
+//       pacvItrigValue = pacvPeepValue;
+//     }
+//   }
+// }
                               else if (pacvPeep == true) {
                                 pacvPeepValue = value.toInt();
                               } else if (pacvRr == true) {
@@ -11740,102 +11740,102 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: prvcFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Flow Ramp",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: prvcFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: prvcFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "4",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: prvcFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "0",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: prvcFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     prvcFlowRampValue.toString() == "0"
-            //                         ? "AF"
-            //                         : prvcFlowRampValue.toString() == "1"
-            //                             ? "AS"
-            //                             : prvcFlowRampValue.toString() == "2"
-            //                                 ? "DF"
-            //                                 : prvcFlowRampValue.toString() ==
-            //                                         "3"
-            //                                     ? "DS"
-            //                                     : prvcFlowRampValue
-            //                                                 .toString() ==
-            //                                             "4"
-            //                                         ? "S"
-            //                                         : "S",
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: prvcFlowRamp
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       prvcFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: prvcFlowRampValue != null
-            //                         ? prvcFlowRampValue / 4
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Flow Ramp",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: prvcFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: prvcFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "4",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: prvcFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "0",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: prvcFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // prvcFlowRampValue.toString() == "0"
+            //     ? "AF"
+            //     : prvcFlowRampValue.toString() == "1"
+            //         ? "AS"
+            //         : prvcFlowRampValue.toString() == "2"
+            //   ? "DF"
+            //   : prvcFlowRampValue.toString() ==
+            // "3"
+            //       ? "DS"
+            //       : prvcFlowRampValue
+            //         .toString() ==
+            //     "4"
+            // ? "S"
+            // : "S",
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: prvcFlowRamp
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   prvcFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: prvcFlowRampValue != null
+            //     ? prvcFlowRampValue / 4
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -13011,89 +13011,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: psimvVtMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Vt Min",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: psimvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "mL",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "1200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "100",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     psimvVtMinValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: psimvVtMin
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       psimvVtMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: psimvVtMinValue != null
-            //                         ? psimvVtMinValue / 1200
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Vt Min",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: psimvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "mL",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "1200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "100",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // psimvVtMinValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: psimvVtMin
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   psimvVtMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: psimvVtMinValue != null
+            //     ? psimvVtMinValue / 1200
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -13127,89 +13127,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: psimvVtMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Vt Max",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: psimvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "mL",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "1200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     psimvVtMaxValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: psimvVtMax
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       psimvVtMax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: psimvVtMaxValue != null
-            //                         ? psimvVtMaxValue / 1200
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Vt Max",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: psimvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "mL",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "1200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // psimvVtMaxValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: psimvVtMax
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   psimvVtMax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: psimvVtMaxValue != null
+            //     ? psimvVtMaxValue / 1200
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -13359,104 +13359,104 @@ class _CheckPageState extends State<Dashboard> {
             //       child: Card(
             //         elevation: 40,
             //         color:
-            //             psimvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //   psimvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Flow Ramp",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: psimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "4",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "0",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: psimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     psimvFlowRampValue.toString() == "0"
-            //                         ? "AF"
-            //                         : psimvFlowRampValue.toString() == "1"
-            //                             ? "AS"
-            //                             : psimvFlowRampValue.toString() == "2"
-            //                                 ? "DF"
-            //                                 : psimvFlowRampValue.toString() ==
-            //                                         "3"
-            //                                     ? "DS"
-            //                                     : psimvFlowRampValue
-            //                                                 .toString() ==
-            //                                             "4"
-            //                                         ? "S"
-            //                                         : "S",
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: psimvFlowRamp
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       psimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: psimvFlowRampValue != null
-            //                         ? psimvFlowRampValue / 4
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Flow Ramp",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: psimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "4",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "0",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: psimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // psimvFlowRampValue.toString() == "0"
+            //     ? "AF"
+            //     : psimvFlowRampValue.toString() == "1"
+            //         ? "AS"
+            //         : psimvFlowRampValue.toString() == "2"
+            //   ? "DF"
+            //   : psimvFlowRampValue.toString() ==
+            // "3"
+            //       ? "DS"
+            //       : psimvFlowRampValue
+            //         .toString() ==
+            //     "4"
+            // ? "S"
+            // : "S",
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: psimvFlowRamp
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   psimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: psimvFlowRampValue != null
+            //     ? psimvFlowRampValue / 4
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -13799,31 +13799,31 @@ class _CheckPageState extends State<Dashboard> {
                             min: psimvminValue.toDouble() ?? 0,
                             max: psimvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              // if (psimvItrig == true) {
-                              //   setState(() {
-                              //     if (psimvPeepValue == 0) {
-                              //       psimvItrigValue = 1;
-                              //     } else {
-                              //       if (value.toInt() > psimvPeepValue) {
-                              //         psimvItrigValue = psimvPeepValue;
-                              //       } else {
-                              //         psimvItrigValue = value.toInt();
-                              //       }
-                              //     }
-                              //   });
-                              // } else if (psimvPeep == true) {
-                              //   setState(() {
-                              //     psimvPeepValue = value.toInt();
-                              //     if (psimvItrigValue > 1 &&
-                              //         psimvItrigValue > psimvPeepValue) {
-                              //       if (psimvPeepValue == 0) {
-                              //         psimvItrigValue = 1;
-                              //       } else {
-                              //         psimvItrigValue = psimvPeepValue;
-                              //       }
-                              //     }
-                              //   });
-                              // }
+// if (psimvItrig == true) {
+//   setState(() {
+//     if (psimvPeepValue == 0) {
+//       psimvItrigValue = 1;
+//     } else {
+//       if (value.toInt() > psimvPeepValue) {
+//         psimvItrigValue = psimvPeepValue;
+//       } else {
+//         psimvItrigValue = value.toInt();
+//       }
+//     }
+//   });
+// } else if (psimvPeep == true) {
+//   setState(() {
+//     psimvPeepValue = value.toInt();
+//     if (psimvItrigValue > 1 &&
+//         psimvItrigValue > psimvPeepValue) {
+//       if (psimvPeepValue == 0) {
+//         psimvItrigValue = 1;
+//       } else {
+//         psimvItrigValue = psimvPeepValue;
+//       }
+//     }
+//   });
+// }
                               if (psimvItrig == true) {
                                 setState(() {
                                   psimvItrigValue = value.toInt();
@@ -14566,89 +14566,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: pccmvVtmin ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "VTmin",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: pccmvVtmin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "mL",
-            //                   style: TextStyle(
-            //                       fontSize: 9,
-            //                       color: pccmvVtmin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "1200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pccmvVtmin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "100",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pccmvVtmin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     pccmvVtminValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: pccmvVtmin
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       pccmvVtmin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: pccmvVtminValue != null
-            //                         ? pccmvVtminValue / 1200
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "VTmin",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: pccmvVtmin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "mL",
+            //         style: TextStyle(
+            //   fontSize: 9,
+            //   color: pccmvVtmin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "1200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pccmvVtmin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "100",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pccmvVtmin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // pccmvVtminValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: pccmvVtmin
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   pccmvVtmin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: pccmvVtminValue != null
+            //     ? pccmvVtminValue / 1200
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -14680,89 +14680,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: pccmvVtmax ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "VTmax",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: pccmvVtmax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "mL",
-            //                   style: TextStyle(
-            //                       fontSize: 9,
-            //                       color: pccmvVtmax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "1200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pccmvVtmax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "200",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pccmvVtmax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     pccmvVtmaxValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: pccmvVtmax
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       pccmvVtmax
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: pccmvVtmaxValue != null
-            //                         ? pccmvVtmaxValue / 1200
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "VTmax",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: pccmvVtmax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "mL",
+            //         style: TextStyle(
+            //   fontSize: 9,
+            //   color: pccmvVtmax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "1200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pccmvVtmax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "200",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pccmvVtmax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // pccmvVtmaxValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: pccmvVtmax
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   pccmvVtmax
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: pccmvVtmaxValue != null
+            //     ? pccmvVtmaxValue / 1200
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -14793,104 +14793,104 @@ class _CheckPageState extends State<Dashboard> {
             //       child: Card(
             //         elevation: 40,
             //         color:
-            //             pccmvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //   pccmvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Flow Ramp",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: pccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 9,
-            //                       color: pccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "4",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "0",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: pccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     pccmvFlowRampValue.toString() == "0"
-            //                         ? "AF"
-            //                         : pccmvFlowRampValue.toString() == "1"
-            //                             ? "AS"
-            //                             : pccmvFlowRampValue.toString() == "2"
-            //                                 ? "DF"
-            //                                 : pccmvFlowRampValue.toString() ==
-            //                                         "3"
-            //                                     ? "DS"
-            //                                     : pccmvFlowRampValue
-            //                                                 .toString() ==
-            //                                             "4"
-            //                                         ? "S"
-            //                                         : "S",
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: pccmvFlowRamp
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       pccmvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: pccmvFlowRampValue != null
-            //                         ? pccmvFlowRampValue / 4
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Flow Ramp",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: pccmvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "",
+            //         style: TextStyle(
+            //   fontSize: 9,
+            //   color: pccmvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "4",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pccmvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "0",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: pccmvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // pccmvFlowRampValue.toString() == "0"
+            //     ? "AF"
+            //     : pccmvFlowRampValue.toString() == "1"
+            //         ? "AS"
+            //         : pccmvFlowRampValue.toString() == "2"
+            //   ? "DF"
+            //   : pccmvFlowRampValue.toString() ==
+            // "3"
+            //       ? "DS"
+            //       : pccmvFlowRampValue
+            //         .toString() ==
+            //     "4"
+            // ? "S"
+            // : "S",
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: pccmvFlowRamp
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   pccmvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: pccmvFlowRampValue != null
+            //     ? pccmvFlowRampValue / 4
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -15996,89 +15996,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: vccmvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "PC Min",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "cmH\u2082O",
-            //                   style: TextStyle(
-            //                       fontSize: 9,
-            //                       color: vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "100",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "10",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vccmvPcMinValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vccmvPcMin
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vccmvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vccmvPcMinValue != null
-            //                         ? vccmvPcMinValue / 100
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "PC Min",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: vccmvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "cmH\u2082O",
+            //         style: TextStyle(
+            //   fontSize: 9,
+            //   color: vccmvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "100",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vccmvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "10",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vccmvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // vccmvPcMinValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: vccmvPcMin
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   vccmvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: vccmvPcMinValue != null
+            //     ? vccmvPcMinValue / 100
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -17340,89 +17340,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: vsimvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "PC Min",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vsimvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "cmH\u2082O",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vsimvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "100",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vsimvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "10",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vsimvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vsimvPcMinValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vsimvPcMin
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vsimvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vsimvPcMinValue != null
-            //                         ? vsimvPcMinValue / 100
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "PC Min",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: vsimvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "cmH\u2082O",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vsimvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "100",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vsimvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "10",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vsimvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // vsimvPcMinValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: vsimvPcMin
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   vsimvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: vsimvPcMinValue != null
+            //     ? vsimvPcMinValue / 100
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -17685,104 +17685,104 @@ class _CheckPageState extends State<Dashboard> {
             //       child: Card(
             //         elevation: 40,
             //         color:
-            //             vsimvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
+            //   vsimvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Flow Ramp",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vsimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vsimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "4",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vsimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "0",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vsimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vsimvFlowRampValue.toString() == "0"
-            //                         ? "AF"
-            //                         : vsimvFlowRampValue.toString() == "1"
-            //                             ? "AS"
-            //                             : vsimvFlowRampValue.toString() == "2"
-            //                                 ? "DF"
-            //                                 : vsimvFlowRampValue.toString() ==
-            //                                         "3"
-            //                                     ? "DS"
-            //                                     : vsimvFlowRampValue
-            //                                                 .toString() ==
-            //                                             "4"
-            //                                         ? "S"
-            //                                         : "S",
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vsimvFlowRamp
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vsimvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vsimvFlowRampValue != null
-            //                         ? vsimvFlowRampValue / 4
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Flow Ramp",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: vsimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vsimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "4",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vsimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "0",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vsimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // vsimvFlowRampValue.toString() == "0"
+            //     ? "AF"
+            //     : vsimvFlowRampValue.toString() == "1"
+            //         ? "AS"
+            //         : vsimvFlowRampValue.toString() == "2"
+            //   ? "DF"
+            //   : vsimvFlowRampValue.toString() ==
+            // "3"
+            //       ? "DS"
+            //       : vsimvFlowRampValue
+            //         .toString() ==
+            //     "4"
+            // ? "S"
+            // : "S",
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: vsimvFlowRamp
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   vsimvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: vsimvFlowRampValue != null
+            //     ? vsimvFlowRampValue / 4
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -18121,31 +18121,31 @@ class _CheckPageState extends State<Dashboard> {
                             min: vsimvminValue.toDouble() ?? 0,
                             max: vsimvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              // if (vsimvItrig == true && vsimvItrigValue != 10) {
-                              //   setState(() {
-                              //     if (vsimvPeepValue == 0) {
-                              //       vsimvItrigValue = 1;
-                              //     } else {
-                              //       if (value.toInt() > vsimvPeepValue) {
-                              //         vsimvItrigValue = vsimvPeepValue;
-                              //       } else {
-                              //         vsimvItrigValue = value.toInt();
-                              //       }
-                              //     }
-                              //   });
-                              // } else if (vsimvPeep == true) {
-                              //   setState(() {
-                              //     vsimvPeepValue = value.toInt();
-                              //     if (vsimvItrigValue > 1 &&
-                              //         vsimvItrigValue > vsimvPeepValue) {
-                              //       if (vsimvPeepValue == 0) {
-                              //         vsimvItrigValue = 1;
-                              //       } else {
-                              //         vsimvItrigValue = vsimvPeepValue;
-                              //       }
-                              //     }
-                              //   });
-                              // }
+// if (vsimvItrig == true && vsimvItrigValue != 10) {
+//   setState(() {
+//     if (vsimvPeepValue == 0) {
+//       vsimvItrigValue = 1;
+//     } else {
+//       if (value.toInt() > vsimvPeepValue) {
+//         vsimvItrigValue = vsimvPeepValue;
+//       } else {
+//         vsimvItrigValue = value.toInt();
+//       }
+//     }
+//   });
+// } else if (vsimvPeep == true) {
+//   setState(() {
+//     vsimvPeepValue = value.toInt();
+//     if (vsimvItrigValue > 1 &&
+//         vsimvItrigValue > vsimvPeepValue) {
+//       if (vsimvPeepValue == 0) {
+//         vsimvItrigValue = 1;
+//       } else {
+//         vsimvItrigValue = vsimvPeepValue;
+//       }
+//     }
+//   });
+// }
                               if (vsimvItrig == true && vsimvItrigValue != 10) {
                                 setState(() {
                                   vsimvItrigValue = value.toInt();
@@ -18974,89 +18974,89 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: vacvPcMin ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "PC Min",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "cmH\u2082O",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "100",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "10",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vacvPcMinValue.toString(),
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vacvPcMin
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vacvPcMin
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vacvPcMinValue != null
-            //                         ? vacvPcMinValue / 100
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "PC Min",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: vacvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "cmH\u2082O",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vacvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "100",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vacvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "10",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vacvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // vacvPcMinValue.toString(),
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: vacvPcMin
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   vacvPcMin
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: vacvPcMinValue != null
+            //     ? vacvPcMinValue / 100
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -19203,102 +19203,102 @@ class _CheckPageState extends State<Dashboard> {
             //         elevation: 40,
             //         color: vacvFlowRamp ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "Flow Ramp",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: vacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "4",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "0",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: vacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     vacvFlowRampValue.toString() == "0"
-            //                         ? "AF"
-            //                         : vacvFlowRampValue.toString() == "1"
-            //                             ? "AS"
-            //                             : vacvFlowRampValue.toString() == "2"
-            //                                 ? "DF"
-            //                                 : vacvFlowRampValue.toString() ==
-            //                                         "3"
-            //                                     ? "DS"
-            //                                     : vacvFlowRampValue
-            //                                                 .toString() ==
-            //                                             "4"
-            //                                         ? "S"
-            //                                         : "S",
-            //                     style: TextStyle(
-            //                         fontSize: 35,
-            //                         color: vacvFlowRamp
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //               Padding(
-            //                 padding: const EdgeInsets.only(
-            //                     bottom: 20.0, left: 10, right: 10),
-            //                 child: Align(
-            //                   alignment: Alignment.bottomCenter,
-            //                   child: LinearProgressIndicator(
-            //                     backgroundColor: Colors.grey,
-            //                     valueColor: AlwaysStoppedAnimation<Color>(
-            //                       vacvFlowRamp
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0),
-            //                     ),
-            //                     value: vacvFlowRampValue != null
-            //                         ? vacvFlowRampValue / 4
-            //                         : 0,
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "Flow Ramp",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: vacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "4",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "0",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: vacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // vacvFlowRampValue.toString() == "0"
+            //     ? "AF"
+            //     : vacvFlowRampValue.toString() == "1"
+            //         ? "AS"
+            //         : vacvFlowRampValue.toString() == "2"
+            //   ? "DF"
+            //   : vacvFlowRampValue.toString() ==
+            // "3"
+            //       ? "DS"
+            //       : vacvFlowRampValue
+            //         .toString() ==
+            //     "4"
+            // ? "S"
+            // : "S",
+            // style: TextStyle(
+            //     fontSize: 35,
+            //     color: vacvFlowRamp
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            // bottom: 20.0, left: 10, right: 10),
+            //       child: Align(
+            //         alignment: Alignment.bottomCenter,
+            //         child: LinearProgressIndicator(
+            // backgroundColor: Colors.grey,
+            // valueColor: AlwaysStoppedAnimation<Color>(
+            //   vacvFlowRamp
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0),
+            // ),
+            // value: vacvFlowRampValue != null
+            //     ? vacvFlowRampValue / 4
+            //     : 0,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -19627,32 +19627,32 @@ class _CheckPageState extends State<Dashboard> {
                             min: vacvminValue.toDouble(),
                             max: vacvmaxValue.toDouble(),
                             onChanged: (double value) {
-                              // if (vacvItrig == true) {
-                              //   setState(() {
-                              //     if (vacvPeepValue == 0) {
-                              //       vacvItrigValue = 1;
-                              //     } else {
-                              //       if (value.toInt() > vacvPeepValue) {
-                              //         vacvItrigValue = vacvPeepValue;
-                              //       } else {
-                              //         vacvItrigValue = value.toInt();
-                              //       }
-                              //     }
-                              //   }); // slider itrig
-                              // }
-                              //  else if (vacvPeep == true) {
-                              //   setState(() {
-                              //     vacvPeepValue = value.toInt();
-                              //     if (vacvItrigValue > 1 &&
-                              //         vacvItrigValue > vacvPeepValue) {
-                              //       if (vacvPeepValue == 0) {
-                              //         vacvItrigValue = 1;
-                              //       } else {
-                              //         vacvItrigValue = vacvPeepValue;
-                              //       }
-                              //     }
-                              //   });
-                              // }
+// if (vacvItrig == true) {
+//   setState(() {
+//     if (vacvPeepValue == 0) {
+//       vacvItrigValue = 1;
+//     } else {
+//       if (value.toInt() > vacvPeepValue) {
+//         vacvItrigValue = vacvPeepValue;
+//       } else {
+//         vacvItrigValue = value.toInt();
+//       }
+//     }
+//   }); // slider itrig
+// }
+//  else if (vacvPeep == true) {
+//   setState(() {
+//     vacvPeepValue = value.toInt();
+//     if (vacvItrigValue > 1 &&
+//         vacvItrigValue > vacvPeepValue) {
+//       if (vacvPeepValue == 0) {
+//         vacvItrigValue = 1;
+//       } else {
+//         vacvItrigValue = vacvPeepValue;
+//       }
+//     }
+//   });
+// }
                               if (vacvItrig == true) {
                                 setState(() {
                                   vacvItrigValue = value.toInt();
@@ -20002,7 +20002,7 @@ class _CheckPageState extends State<Dashboard> {
             child: alarmActive == "1"
                 ? Card(
                     color: alarmActive == "1" ? Colors.red : Color(0xFF171e27),
-                    // priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
+// priorityNo=="0" ? Colors.red: priorityNo=="1" ? Colors.red : priorityNo=="2" ? Colors.orange : priorityNo=="3" ? Colors.yellow :
 
                     child: Center(
                         child: Align(
@@ -20067,8 +20067,16 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   sendDataPacket(String res, result) {
+    List<String> lsaveListTemp = preferences.getStringList("saveList");
+      if (lsaveListTemp != null) {
+        savedList = lsaveListTemp.map((i) => int.parse(i)).toList();
+        setState(() {
+          modeWriteList = savedList;
+        });
+      }
     if (res == "rr") {
       if (pccmvEnabled == true) {
+        print("echo " + modeWriteList.toString());
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[4] = ((temp & 0xFF00) >> 8);
         modeWriteList[5] = (temp & 0xFF);
@@ -20076,8 +20084,10 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[23] = (1);
 
         preferences.setInt('pccmvRRValue', temp);
+        pccmvRRValue = temp;
         getData();
-        // // print(modeWriteList.toString());
+        print("done " + modeWriteList.toString());
+        
         sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -20161,8 +20171,9 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[23] = (4);
 
         preferences.setInt('pccmvPeepValue', temp);
+        pccmvPeepValue = temp;
         getData();
-        // // print(modeWriteList.toString());
+        print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -20254,8 +20265,9 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[23] = (16);
 
         preferences.setInt('pccmvFio2Value', temp);
+        pccmvFio2Value = temp;
         getData();
-        // // print(modeWriteList.toString());
+        print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -20342,8 +20354,9 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[22] = (0);
         modeWriteList[23] = (8);
         preferences.setInt('pccmvPcValue', temp);
+        pccmvPcValue = temp;
         getData();
-        // // print(modeWriteList.toString());
+        print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
@@ -20434,8 +20447,9 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[22] = (0);
         modeWriteList[23] = (2);
         preferences.setInt('pccmvIeValue', temp);
+        pccmvIeValue = temp;
         getData();
-        // // print(modeWriteList.toString());
+        print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -20867,6 +20881,58 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
+  getTiValueNumber(checkTi){
+    var data = checkTi =="0.5" ? 1
+: checkTi == "0.6" ? 2
+: checkTi == "0.7" ? 3
+: checkTi == "0.8" ? 4 
+: checkTi == "0.9" ? 5
+: checkTi == "1.0" ? 6
+: checkTi == "1.1" ? 7
+: checkTi == "1.2" ? 8
+: checkTi == "1.3" ? 9
+: checkTi == "1.4" ? 10
+: checkTi == "1.5" ? 11
+: checkTi == "1.6" ? 12
+: checkTi == "1.7" ? 13
+: checkTi == "1.8" ? 14
+: checkTi == "1.9" ? 15
+: checkTi == "2.0" ? 16
+: checkTi == "2.1" ? 17
+: checkTi == "2.2" ? 18
+: checkTi == "2.3" ? 19
+: checkTi == "2.4" ? 20
+: checkTi == "2.5" ? 21
+: checkTi == "2.6" ? 22
+: checkTi == "2.7" ? 23
+: checkTi == "2.8" ? 24 
+: checkTi == "2.9" ? 25
+: checkTi == "3.0" ? 26
+: checkTi == "3.1" ? 27
+: checkTi == "3.2" ? 28
+: checkTi == "3.3" ? 29
+: checkTi == "3.4" ? 30
+: checkTi == "3.5" ? 31 
+: checkTi == "3.6" ? 32
+: checkTi == "3.7" ? 33
+: checkTi == "3.8" ? 34 
+: checkTi == "3.9" ? 35
+: checkTi == "4.0" ? 36 
+: checkTi == "4.1" ? 37 
+: checkTi == "4.2" ? 38 
+: checkTi == "4.3" ? 39 
+: checkTi == "4.4" ? 40 
+: checkTi == "4.5" ? 41 
+: checkTi == "4.6" ? 42 
+: checkTi == "4.7" ? 43
+: checkTi == "4.8" ? 44 
+: checkTi == "4.9" ? 45 
+: checkTi == "5.0" ? 46 
+: "0.5";
+
+return data;
+  }
+
   getTiValue(checkTi) {
     var data = checkTi == 1
         ? "0.5"
@@ -20940,7 +21006,8 @@ class _CheckPageState extends State<Dashboard> {
                                                     ? 12
                                                     : ieDataValue == "2.8:1.0"
                                                         ? 13
-                                                        : ieDataValue == "2.7:1.0"
+                                                        : ieDataValue ==
+                                                                "2.7:1.0"
                                                             ? 14
                                                             : ieDataValue ==
                                                                     "2.6:1.0"
@@ -21087,9 +21154,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("peep", pccmvPeepValue);
       preferences.setInt("fio2", pccmvFio2Value);
       preferences.setInt("pc", pccmvPcValue);
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-
-      preferences.setStringList("saveList", strList);
+      
 
       preferences.setInt('pccmvRRValue', pccmvRRValue);
       preferences.setInt('pccmvIeValue', pccmvIeValue);
@@ -21180,9 +21245,7 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", vccmvFio2Value);
       preferences.setInt("vt", vccmvVtValue);
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-
-      preferences.setStringList("saveList", strList);
+      
 
       preferences.setInt('vccmvRRValue', vccmvRRValue);
       preferences.setInt('vccmvIeValue', vccmvIeValue);
@@ -21279,9 +21342,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", pacvFio2Value);
       preferences.setInt("pc", pacvPcValue);
       preferences.setInt("itrig", pacvItrigValue);
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-
-      preferences.setStringList("saveList", strList);
+      
       //==
       preferences.setInt('pacvItrigValue', pacvItrigValue);
       preferences.setInt('pacvRrValue', pacvRrValue);
@@ -21376,9 +21437,6 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", vacvFio2Value);
       preferences.setInt("vt", vacvVtValue);
       preferences.setInt("itrig", vacvItrigValue);
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-
-      preferences.setStringList("saveList", strList);
 
       preferences.setInt('vacvItrigValue', vacvItrigValue);
       preferences.setInt('vacvRrValue', vacvRrValue);
@@ -21474,9 +21532,6 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("ps", psimvPsValue);
       preferences.setInt("pc", psimvPcValue);
       preferences.setInt("itrig", psimvItrigValue);
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-
-      preferences.setStringList("saveList", strList);
 
       preferences.setInt('psimvItrigValue', psimvItrigValue);
 
@@ -21576,9 +21631,6 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("ps", vsimvPsValue);
       preferences.setInt("pc", vsimvPcMaxValue);
       preferences.setInt("itrig", vsimvItrigValue);
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-
-      preferences.setStringList("saveList", strList);
 
       preferences.setInt('vsimvItrigValue', vsimvItrigValue);
 
@@ -21697,9 +21749,6 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("pc", psvPcValue);
       preferences.setInt("itrig", psvItrigValue); //atime ti
       preferences.setInt("atime", psvAtimeValue);
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-
-      preferences.setStringList("saveList", strList);
       // Fluttertoast.showToast(msg:psvPsValue.toString() +" pc "+psvPcValue.toString());
 
       preferences.setInt('psvItrigValue', psvItrigValue);
@@ -21804,9 +21853,6 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("vt", prvcVtValue);
 
       preferences.setInt('prvcItrigValue', prvcItrigValue);
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-
-      preferences.setStringList("saveList", strList);
 
       preferences.setInt('prvcPcMinValue', prvcPcMinValue);
       preferences.setInt('prvcPcMaxValue', prvcPcMaxValue);
@@ -21856,6 +21902,14 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   sendDataUsbConnection(List<int> samplemodeWriteList, checkValue) async {
+    var modeNumber = samplemodeWriteList[3];
+
+      if(modeNumber==1 || modeNumber==2 || modeNumber==3 || modeNumber==4 || modeNumber==5 || modeNumber==6||modeNumber==7||modeNumber==14){
+          List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+          preferences.setStringList("saveList", strList);
+      }
+
+    // print(samplemodeWriteList.toString());
     list = [];
     List<int> listTempF = [];
     int cIndex = 0;
@@ -22423,78 +22477,78 @@ class _CheckPageState extends State<Dashboard> {
             //   child: Center(
             //     child: Container(
             //       color:
-            //           alarmFio2changed ? Color(0xFFB0BEC5) : Color(0xFF213855),
+            // alarmFio2changed ? Color(0xFFB0BEC5) : Color(0xFF213855),
             //       width: 146,
             //       height: 130,
             //       child: Card(
             //         elevation: 40,
             //         color: alarmFio2 ? Color(0xFFE0E0E0) : Color(0xFF213855),
             //         child: Padding(
-            //           padding: const EdgeInsets.all(6.0),
-            //           child: Center(
-            //               child: Stack(
-            //             children: [
-            //               Align(
-            //                 alignment: Alignment.topLeft,
-            //                 child: Text(
-            //                   "FiO\u2082",
-            //                   style: TextStyle(
-            //                       fontSize: 15,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: alarmFio2
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.topRight,
-            //                 child: Text(
-            //                   "",
-            //                   style: TextStyle(
-            //                       fontSize: 9,
-            //                       color: alarmFio2
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomRight,
-            //                 child: Text(
-            //                   "100",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: alarmFio2
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.bottomLeft,
-            //                 child: Text(
-            //                   "21",
-            //                   style: TextStyle(
-            //                       fontSize: 12,
-            //                       color: alarmFio2
-            //                           ? Color(0xFF213855)
-            //                           : Color(0xFFE0E0E0)),
-            //                 ),
-            //               ),
-            //               Align(
-            //                 alignment: Alignment.center,
-            //                 child: Padding(
-            //                   padding: const EdgeInsets.only(top: 1.0),
-            //                   child: Text(
-            //                     "$minfio2 - $maxfio2",
-            //                     style: TextStyle(
-            //                         fontSize: 20,
-            //                         color: alarmFio2
-            //                             ? Color(0xFF213855)
-            //                             : Color(0xFFE0E0E0)),
-            //                   ),
-            //                 ),
-            //               ),
-            //             ],
-            //           )),
+            // padding: const EdgeInsets.all(6.0),
+            // child: Center(
+            //     child: Stack(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.topLeft,
+            //       child: Text(
+            //         "FiO\u2082",
+            //         style: TextStyle(
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.bold,
+            //   color: alarmFio2
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.topRight,
+            //       child: Text(
+            //         "",
+            //         style: TextStyle(
+            //   fontSize: 9,
+            //   color: alarmFio2
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomRight,
+            //       child: Text(
+            //         "100",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: alarmFio2
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.bottomLeft,
+            //       child: Text(
+            //         "21",
+            //         style: TextStyle(
+            //   fontSize: 12,
+            //   color: alarmFio2
+            //       ? Color(0xFF213855)
+            //       : Color(0xFFE0E0E0)),
+            //       ),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.center,
+            //       child: Padding(
+            //         padding: const EdgeInsets.only(top: 1.0),
+            //         child: Text(
+            // "$minfio2 - $maxfio2",
+            // style: TextStyle(
+            //     fontSize: 20,
+            //     color: alarmFio2
+            //         ? Color(0xFF213855)
+            //         : Color(0xFFE0E0E0)),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // )),
             //         ),
             //       ),
             //     ),
@@ -22774,27 +22828,27 @@ class _CheckPageState extends State<Dashboard> {
                                 //       alarmConfirmed = false;
                                 //       if (alarmRR == true && minRrtotal != 1) {
                                 //         setState(() {
-                                //           minRrtotal = minRrtotal - 1;
+                                // minRrtotal = minRrtotal - 1;
                                 //         });
                                 //       } else if (alarmVte == true &&
-                                //           minvte != 0) {
+                                // minvte != 0) {
                                 //         setState(() {
-                                //           minvte = minvte - 1;
+                                // minvte = minvte - 1;
                                 //         });
                                 //       } else if (alarmPpeak == true &&
-                                //           minppeak != 0) {
+                                // minppeak != 0) {
                                 //         setState(() {
-                                //           minppeak = minppeak - 1;
+                                // minppeak = minppeak - 1;
                                 //         });
                                 //       } else if (alarmFio2 == true &&
-                                //           minfio2 != 21) {
+                                // minfio2 != 21) {
                                 //         setState(() {
-                                //           minfio2 = minfio2 - 1;
+                                // minfio2 = minfio2 - 1;
                                 //         });
                                 //       } else if (alarmpeep == true &&
-                                //           minpeep != 0) {
+                                // minpeep != 0) {
                                 //         setState(() {
-                                //           minpeep = minpeep - 1;
+                                // minpeep = minpeep - 1;
                                 //         });
                                 //       }
                                 //     });
@@ -23020,27 +23074,27 @@ class _CheckPageState extends State<Dashboard> {
                                 //       alarmConfirmed = false;
                                 //       if (alarmRR == true && maxRrtotal != 70) {
                                 //         setState(() {
-                                //           maxRrtotal = maxRrtotal + 1;
+                                // maxRrtotal = maxRrtotal + 1;
                                 //         });
                                 //       } else if (alarmVte == true &&
-                                //           maxvte != 2400) {
+                                // maxvte != 2400) {
                                 //         setState(() {
-                                //           maxvte = maxvte + 1;
+                                // maxvte = maxvte + 1;
                                 //         });
                                 //       } else if (alarmPpeak == true &&
-                                //           maxppeak != 100) {
+                                // maxppeak != 100) {
                                 //         setState(() {
-                                //           maxppeak = maxppeak + 1;
+                                // maxppeak = maxppeak + 1;
                                 //         });
                                 //       } else if (alarmFio2 == true &&
-                                //           maxfio2 != 100) {
+                                // maxfio2 != 100) {
                                 //         setState(() {
-                                //           maxfio2 = maxfio2 + 1;
+                                // maxfio2 = maxfio2 + 1;
                                 //         });
                                 //       } else if (alarmpeep == true &&
-                                //           maxpeep != 40) {
+                                // maxpeep != 40) {
                                 //         setState(() {
-                                //           maxpeep = maxpeep + 1;
+                                // maxpeep = maxpeep + 1;
                                 //         });
                                 //       }
                                 //     });
@@ -23690,13 +23744,13 @@ class _CheckPageState extends State<Dashboard> {
       //   Navigator.pushAndRemoveUntil(
       //       context,
       //       MaterialPageRoute(
-      //           builder: (BuildContext context) => SelfTestPage()),
+      // builder: (BuildContext context) => SelfTestPage()),
       //       ModalRoute.withName('/'));
       // } else if (finalList[112] == 2) {
       //   Navigator.pushAndRemoveUntil(
       //       context,
       //       MaterialPageRoute(
-      //           builder: (BuildContext context) => CallibrationPage()),
+      // builder: (BuildContext context) => CallibrationPage()),
       //       ModalRoute.withName('/'));
       // }
       setState(() {
@@ -24029,10 +24083,10 @@ class _CheckPageState extends State<Dashboard> {
         });
 
         setState(() {
-          // list[26]=(0x55);
-          // list[27]=(0x55);
-          // list[28]=(0x55);
-          // list[29]=(0x55);
+// list[26]=(0x55);
+// list[27]=(0x55);
+// list[28]=(0x55);
+// list[29]=(0x55);
           o2pressuresensor = ((list[26] & 0x3) >> 0);
           mtpressuresensor = ((list[26] & 0xC) >> 2);
           exhalationflowsensor = ((list[26] & 0x30) >> 4);
@@ -24053,12 +24107,12 @@ class _CheckPageState extends State<Dashboard> {
           blender = ((list[29] & 0x30) >> 4);
           checkOfffset = ((list[29] & 0xC0) >> 6);
 
-          // if (checkOfffset == 2) {
-          //   _port.close();
-          //   _status = "Disconnected";
-          // }
+// if (checkOfffset == 2) {
+//   _port.close();
+//   _status = "Disconnected";
+// }
 
-          // Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
+// Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
         });
         setState(() {
           checkO2CalibrationValue = finalList[30];
@@ -24282,30 +24336,27 @@ class _CheckPageState extends State<Dashboard> {
 
           setState(() {
             if (operatinModeR == 6) {
-              preferences.setString("checkMode", "pccmv");
-              preferences.setInt('pccmvRRValue', receivedrr);
-              preferences.setInt('pccmvIeValue',
-                  getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('pccmvPeepValue', receivedpeep);
-              preferences.setInt('pccmvPcValue', receivedpc);
-              preferences.setInt('pccmvFio2Value', receivedfio2); //6
+              pccmvRRValue = receivedrr;
+              pccmvIeValue = getIeNumber(i + ":" + e.toString());
+              pccmvPeepValue = receivedpeep;
+              pccmvPcValue = receivedpc;
+              pccmvFio2Value = receivedfio2; //6
 
               preferences.setInt("rr", receivedrr);
               preferences.setString("i", i);
-
               preferences.setString("e", e);
               preferences.setInt("peep", receivedpeep);
               preferences.setInt("fio2", receivedfio2);
               preferences.setInt("pc", receivedpc);
               // pccmvEnabled = true;
-              getData();
+              // getData();
 
               //TODO
             } else if (operatinModeR == 7) {
               preferences.setString("checkMode", "vccmv");
               preferences.setInt('vccmvRRValue', receivedrr);
-              preferences.setInt('vccmvIeValue',
-                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt(
+                  'vccmvIeValue', getIeNumber(i + ":" + e.toString()));
               preferences.setInt('vccmvPeepValue', receivedpeep);
               preferences.setInt('vccmvFio2Value', receivedfio2);
               preferences.setInt('vccmvVtValue', receivedvt); //7
@@ -24322,8 +24373,8 @@ class _CheckPageState extends State<Dashboard> {
               preferences.setString("checkMode", "pacv");
               preferences.setInt('pacvItrigValue', receivedItrig);
               preferences.setInt('pacvRrValue', receivedrr);
-              preferences.setInt('pacvIeValue',
-                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt(
+                  'pacvIeValue', getIeNumber(i + ":" + e.toString()));
               preferences.setInt('pacvPeepValue', receivedpeep);
               preferences.setInt('pacvPcValue', receivedpc);
               preferences.setInt('pacvFio2Value', receivedfio2); //2
@@ -24341,8 +24392,8 @@ class _CheckPageState extends State<Dashboard> {
               preferences.setString("checkMode", "vacv");
               preferences.setInt('vacvItrigValue', receivedItrig);
               preferences.setInt('vacvRrValue', receivedrr);
-              preferences.setInt('vacvIeValue',
-                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt(
+                  'vacvIeValue', getIeNumber(i + ":" + e.toString()));
               preferences.setInt('vacvPeepValue', receivedpeep);
               preferences.setInt('vacvVtValue', receivedvt);
               preferences.setInt('vacvFio2Value', receivedfio2); //1
@@ -24360,8 +24411,8 @@ class _CheckPageState extends State<Dashboard> {
               preferences.setString("checkMode", "psimv");
               preferences.setInt('psimvRrValue', receivedrr);
               preferences.setInt('psimvPsValue', receivedps);
-              preferences.setInt('psimvIeValue',
-                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt(
+                  'psimvIeValue', getIeNumber(i + ":" + e.toString()));
               preferences.setInt('psimvPeepValue', receivedpeep);
               preferences.setInt('psimvPcValue', receivedpc);
               preferences.setInt('psimvFio2Value', receivedfio2); //4
@@ -24378,8 +24429,8 @@ class _CheckPageState extends State<Dashboard> {
             } else if (operatinModeR == 5) {
               preferences.setString("checkMode", "vsimv");
               preferences.setInt('vsimvRrValue', receivedrr);
-              preferences.setInt('vsimvIeValue',
-                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt(
+                  'vsimvIeValue', getIeNumber(i + ":" + e.toString()));
               preferences.setInt('vsimvPeepValue', receivedpeep);
               preferences.setInt('vsimvVtValue', receivedvt);
               preferences.setInt('vsimvPsValue', receivedps);
@@ -24399,8 +24450,8 @@ class _CheckPageState extends State<Dashboard> {
               preferences.setInt('psvItrigValue', receivedItrig);
               // preferences.setInt('psvTiValue', psvTiValue);
               preferences.setInt('psvPeepValue', receivedpeep);
-              preferences.setInt('psvIeValue',
-                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt(
+                  'psvIeValue', getIeNumber(i + ":" + e.toString()));
               preferences.setInt('psvPsValue', receivedps);
               preferences.setInt('psvFio2Value', receivedfio2);
               preferences.setInt('psvBackupRrValue', receivedbackuprr);
@@ -24416,6 +24467,7 @@ class _CheckPageState extends State<Dashboard> {
               preferences.setInt("ps", receivedps);
               preferences.setInt("itrig", receivedItrig);
               preferences.setInt("atime", receivedapneaTime);
+              preferences.setInt("ti",getTiValueNumber(receivedti));
               //TODO
 
               // psvEnabled = true;
@@ -24525,9 +24577,6 @@ class _CheckPageState extends State<Dashboard> {
     finalListSend.add(127);
 
     await _port.write(Uint8List.fromList(finalListSend));
-    setState(() {
-      _setValuesonClick = true;
-    });
 
     // if (checkValue == 1) {
     //   sleep(Duration(milliseconds: 50));
@@ -24607,9 +24656,9 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   clearData() {
-    // setState(() {
-    //     _setValuesonClick = true;
-    // });
+    setState(() {
+      _setValuesonClick = true;
+    });
     // print(finalListSend.toString());
     setState(() {
       modesEnabled = false;
@@ -24644,7 +24693,7 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   void clearDialogData() {
-    print(finalListSend.toString());
+    // print(finalListSend.toString());
     setState(() {
       // modesEnabled = false;
       acknowReceivedValue = 0;
