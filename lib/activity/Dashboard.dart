@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:screen/screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usb_serial/transaction.dart';
@@ -546,6 +547,7 @@ class _CheckPageState extends State<Dashboard> {
 
   String assistStatus = "OFF";
   var batteryforceCharge = 0;
+  bool batterChargingScreen = false;
 
   Future<bool> _connectTo(device) async {
     list.clear();
@@ -2000,7 +2002,9 @@ class _CheckPageState extends State<Dashboard> {
                               ? selfTestingData()
                               : callibrationEnabled
                                   ? callibrationData()
-                                  : Container(),
+                                  : batterChargingScreen
+                                      ? batteryCharginScreen()
+                                      : Container(),
 
               // _buttonPressed
               //     ? Center(
@@ -2259,6 +2263,101 @@ class _CheckPageState extends State<Dashboard> {
         callibrationEnabled = true;
       });
     }
+  }
+
+  _closebatteryScreen() {
+    setState(() {
+      batterChargingScreen = false;
+    });
+  }
+
+  batteryCharginScreen() {
+    return Container(
+        color: Colors.white,
+        child: Stack(
+          children: [
+            batteryStatus == 2
+                ? Center(
+                    child: SizedBox(
+                      width: 250,
+                      height: 250,
+                      child: LiquidCircularProgressIndicator(
+                        value: batteryPercentage.toDouble(),
+                        backgroundColor: Colors.white,
+                        valueColor: AlwaysStoppedAnimation(Colors.orange),
+                        borderColor: Colors.grey,
+                        borderWidth: 5.0,
+                        center: Text(
+                          batteryPercentage.toString(),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Center(
+                    child: SizedBox(
+                      width: 250,
+                      height: 250,
+                      child: LiquidCircularProgressIndicator(
+                        value: batteryStatus == 1 ? 50.0 : 0.0,
+                        backgroundColor: Colors.white,
+                        valueColor: AlwaysStoppedAnimation(Colors.orange),
+                        borderColor: Colors.grey,
+                        borderWidth: 5.0,
+                        center: Text(
+                          batteryStatus == 1 ? "Charging..." : "No Battery",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      batterChargingScreen = !batterChargingScreen;
+                      if (batteryforceCharge == 0) {
+                        batteryforceCharge = 1;
+                      } else if (batteryforceCharge == 1) {
+                        batteryforceCharge = 0;
+                      }
+                    });
+                    List<int> resbatteryList = [];
+                    setState(() {
+                      resbatteryList.add(0);
+                      resbatteryList.add(20);
+                      resbatteryList.add(0);
+                      resbatteryList.add(18);
+                      resbatteryList.add((batteryforceCharge));
+                    });
+
+                    sendDataUsbConnection(resbatteryList, 2);
+                  },
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 18.0),
+                      child: Card(
+                          color: Colors.orange,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Stop Charging",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25)),
+                          )),
+                    ),
+                  ),
+                )),
+          ],
+        ));
   }
 
   callibrationData() {
@@ -7047,6 +7146,7 @@ class _CheckPageState extends State<Dashboard> {
               InkWell(
                 onTap: () {
                   setState(() {
+                    batterChargingScreen = !batterChargingScreen;
                     if (batteryforceCharge == 0) {
                       batteryforceCharge = 1;
                     } else if (batteryforceCharge == 1) {
@@ -10285,10 +10385,72 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            Container(width: 146)
           ],
         ),
-        SizedBox(width: 140),
+        SizedBox(width: 15),
+        Container(
+            padding: EdgeInsets.only(top: 290),
+            width: 255,
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      assistmodeOn = !assistmodeOn;
+                      if (assistmodeOn == true) {
+                        pacvEnabled = true;
+                        pccmvEnabled = false;
+                      } else {
+                        pccmvEnabled = true;
+                        pacvEnabled = false;
+                      }
+                    });
+                  },
+                  child: Card(
+                      color:
+                          assistmodeOn ? Color(0xFF213855) : Color(0xFFE0E0E0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Text(
+                          "Assist Off",
+                          style: TextStyle(
+                            color: assistmodeOn
+                                ? Color(0xFFE0E0E0):Color(0xFF213855),
+                          ),
+                        ),
+                      )),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      assistmodeOn = !assistmodeOn;
+                      if (assistmodeOn == true) {
+                        pacvEnabled = true;
+                        pccmvEnabled = false;
+                      } else {
+                        pccmvEnabled = true;
+                        pacvEnabled = false;
+                      }
+                    });
+                  },
+                  child: Card(
+                      color:
+                          assistmodeOn ? Color(0xFFE0E0E0): Color(0xFF213855) ,
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Text(
+                          "Assist on",
+                          style: TextStyle(
+                            color: assistmodeOn
+                                ? Color(0xFF213855)
+                                : Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      )),
+                ),
+              ],
+            )),
+        SizedBox(width: 15),
         Column(
           children: [
             Container(
@@ -14733,12 +14895,77 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            Container(
-              width: 146,
-            )
           ],
         ),
-        SizedBox(width: 140),
+        SizedBox(width: 15),
+        Container(
+            padding: EdgeInsets.only(top: 290),
+            width: 255,
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      assistmodeOn = !assistmodeOn;
+
+                      if (assistmodeOn == true) {
+                        pacvEnabled = true;
+                        pccmvEnabled = false;
+                      } else {
+                        pccmvEnabled = true;
+                        pacvEnabled = false;
+                      }
+                    });
+                  },
+                  child: Card(
+                      color: invasiveEnabled
+                          ? Color(0xFFE0E0E0)
+                          : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Text(
+                          "Assist Off",
+                          style: TextStyle(
+                            color: invasiveEnabled
+                                ? Color(0xFF213855)
+                                : Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      )),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      assistmodeOn = !assistmodeOn;
+
+                      if (assistmodeOn == true) {
+                        pacvEnabled = true;
+                        pccmvEnabled = false;
+                      } else {
+                        pccmvEnabled = true;
+                        pacvEnabled = false;
+                      }
+                    });
+                  },
+                  child: Card(
+                      color: noninvasiveEnabled
+                          ? Color(0xFFE0E0E0)
+                          : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Text(
+                          "Assist On",
+                          style: TextStyle(
+                            color: noninvasiveEnabled
+                                ? Color(0xFF213855)
+                                : Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      )),
+                ),
+              ],
+            )),
+        SizedBox(width: 15),
         Column(
           children: [
             Container(
@@ -23971,10 +24198,10 @@ class _CheckPageState extends State<Dashboard> {
             receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
             atimeValue = receivedapneaTime;
             receivedi = finalList[124];
-            
-            i = (receivedi/10).toString();
+
+            i = (receivedi / 10).toString();
             receivede = finalList[125];
-            e = (receivede/10).toString();
+            e = (receivede / 10).toString();
             receivedti = ((finalList[126] << 8) + finalList[127]);
             tipsvValue = receivedti;
             receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
