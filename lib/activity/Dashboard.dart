@@ -3192,7 +3192,7 @@ class _CheckPageState extends State<Dashboard> {
                                                 : InkWell(
                                                     onTap: () {
                                                       setState(() {
-                                                        // setData();
+                                                        getData();
                                                         pccmvEnabled = true;
                                                         vccmvEnabled = false;
                                                         pacvEnabled = false;
@@ -3238,7 +3238,7 @@ class _CheckPageState extends State<Dashboard> {
                                                 ? InkWell(
                                                     onTap: () {
                                                       setState(() {
-                                                        // setData();
+                                                        getData();
                                                         pccmvEnabled = false;
                                                         vccmvEnabled = false;
                                                         pacvEnabled = true;
@@ -3286,7 +3286,7 @@ class _CheckPageState extends State<Dashboard> {
                                                 : InkWell(
                                                     onTap: () {
                                                       setState(() {
-                                                        // setData();
+                                                        getData();
                                                         pccmvEnabled = false;
                                                         vccmvEnabled = true;
                                                         pacvEnabled = false;
@@ -3332,7 +3332,7 @@ class _CheckPageState extends State<Dashboard> {
                                                 ? InkWell(
                                                     onTap: () {
                                                       setState(() {
-                                                        // setData();
+                                                        getData();
                                                         pccmvEnabled = false;
                                                         vccmvEnabled = false;
                                                         pacvEnabled = false;
@@ -3378,7 +3378,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  // setData();
+                                                  getData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = false;
@@ -3422,7 +3422,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  // setData();
+                                                  getData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = false;
@@ -3466,7 +3466,7 @@ class _CheckPageState extends State<Dashboard> {
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  // setData();
+                                                  getData();
                                                   pccmvEnabled = false;
                                                   vccmvEnabled = false;
                                                   pacvEnabled = false;
@@ -10415,7 +10415,8 @@ class _CheckPageState extends State<Dashboard> {
                           "Assist Off",
                           style: TextStyle(
                             color: assistmodeOn
-                                ? Color(0xFFE0E0E0):Color(0xFF213855),
+                                ? Color(0xFFE0E0E0)
+                                : Color(0xFF213855),
                           ),
                         ),
                       )),
@@ -10435,7 +10436,7 @@ class _CheckPageState extends State<Dashboard> {
                   },
                   child: Card(
                       color:
-                          assistmodeOn ? Color(0xFFE0E0E0): Color(0xFF213855) ,
+                          assistmodeOn ? Color(0xFFE0E0E0) : Color(0xFF213855),
                       child: Padding(
                         padding: const EdgeInsets.all(22.0),
                         child: Text(
@@ -20912,6 +20913,54 @@ class _CheckPageState extends State<Dashboard> {
     return data;
   }
 
+  getIeNumber(String ieDataValue) {
+    var adata = ieDataValue == "4.0:1.0"
+        ? 1
+        : ieDataValue == "3.9:1.0"
+            ? 2
+            : ieDataValue == "3.8:1.0"
+                ? 3
+                : ieDataValue == "3.7:1.0"
+                    ? 4
+                    : ieDataValue == "3.6:1.0"
+                        ? 5
+                        : ieDataValue == "3.5:1.0"
+                            ? 6
+                            : ieDataValue == "3.4:1.0"
+                                ? 7
+                                : ieDataValue == "3.3:1.0"
+                                    ? 8
+                                    : ieDataValue == "3.2:1.0"
+                                        ? 9
+                                        : ieDataValue == "3.1:1.0"
+                                            ? 10
+                                            : ieDataValue == "3.0:1.0"
+                                                ? 11
+                                                : ieDataValue == "2.9:1.0"
+                                                    ? 12
+                                                    : ieDataValue == "2.8:1.0"
+                                                        ? 13
+                                                        : ieDataValue == "2.7:1.0"
+                                                            ? 14
+                                                            : ieDataValue ==
+                                                                    "2.6:1.0"
+                                                                ? 15
+                                                                : ieDataValue ==
+                                                                        "2.5:1"
+                                                                    ? 16
+                                                                    : ieDataValue ==
+                                                                            "2.4:1.0"
+                                                                        ? 17
+                                                                        : ieDataValue ==
+                                                                                "2.3:1.0"
+                                                                            ? 18
+                                                                            : ieDataValue == "2.2:1.0"
+                                                                                ? 19
+                                                                                : ieDataValue == "2.1:1.0" ? 20 : ieDataValue == "2.0:1.0" ? 21 : ieDataValue == "1.9:1.0" ? 22 : ieDataValue == "1.8:1.0" ? 23 : ieDataValue == "1.7:1.0" ? 24 : ieDataValue == "1.6:1.0" ? 25 : ieDataValue == "1.5:1.0" ? 26 : ieDataValue == "1.4:1.0" ? 27 : ieDataValue == "1.3:1.0" ? 28 : ieDataValue == "1.2:1.0" ? 29 : ieDataValue == "1.1:1.0" ? 30 : ieDataValue == "1.0:1.0" ? 31 : ieDataValue == "1.0:1.1" ? 32 : ieDataValue == "1.0:1.2" ? 33 : ieDataValue == "1.0:1.3" ? 34 : ieDataValue == "1.0:1.4" ? 35 : ieDataValue == "1.0:1.5" ? 36 : ieDataValue == "1.0:1.6" ? 37 : ieDataValue == "1.0:1.7" ? 38 : ieDataValue == "1.0:1.8" ? 39 : ieDataValue == "1.0:1.9" ? 40 : ieDataValue == "1.0:2.0" ? 41 : ieDataValue == "1.0:2.1" ? 42 : ieDataValue == "1.0:2.2" ? 43 : ieDataValue == "1.0:2.3" ? 44 : ieDataValue == "1.0:2.4" ? 45 : ieDataValue == "1.0:2.5" ? 46 : ieDataValue == "1.0:2.6" ? 47 : ieDataValue == "1.0:2.7" ? 48 : ieDataValue == "1.0:2.8" ? 49 : ieDataValue == "1.0:2.9" ? 50 : ieDataValue == "1.0:3.0" ? 51 : ieDataValue == "1.0:3.1" ? 52 : ieDataValue == "1.0:3.2" ? 53 : ieDataValue == "1.0:3.3" ? 54 : ieDataValue == "1.0:3.4" ? 55 : ieDataValue == "1.0:3.5" ? 56 : ieDataValue == "1.0:3.6" ? 57 : ieDataValue == "1.0:3.7" ? 58 : ieDataValue == "1.0:3.8" ? 59 : ieDataValue == "1.0:3.9" ? 60 : ieDataValue == "1.0:4.0" ? 61 : 0;
+
+    return adata;
+  }
+
   getIeData(pccmvIeValue, int res) {
     var data = pccmvIeValue == 1
         ? "4.0:1"
@@ -21646,7 +21695,8 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setInt("fio2", psvFio2Value);
       preferences.setInt("ps", psvPsValue);
       preferences.setInt("pc", psvPcValue);
-      preferences.setInt("itrig", psvItrigValue);
+      preferences.setInt("itrig", psvItrigValue); //atime ti
+      preferences.setInt("atime", psvAtimeValue);
       List<String> strList = modeWriteList.map((i) => i.toString()).toList();
 
       preferences.setStringList("saveList", strList);
@@ -24186,44 +24236,37 @@ class _CheckPageState extends State<Dashboard> {
             if (((finalList[114] << 8) + finalList[115]) != 0) {
               receivedItrig =
                   (65536 - ((finalList[114] << 8) + finalList[115]));
-              itrigValue = receivedItrig;
             }
 
             receivedpeep = ((finalList[116] << 8) + finalList[117]);
-            peepValue = receivedpeep;
+
             receivedps = ((finalList[118] << 8) + finalList[119]);
-            psValue = receivedps;
+
             receivedfio2 = ((finalList[120] << 8) + finalList[121]);
-            fio2Value = receivedfio2;
+
             receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
-            atimeValue = receivedapneaTime;
+
             receivedi = finalList[124];
 
             i = (receivedi / 10).toString();
             receivede = finalList[125];
             e = (receivede / 10).toString();
             receivedti = ((finalList[126] << 8) + finalList[127]);
-            tipsvValue = receivedti;
+
             receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
-            if (operatinModeR == 3) {
-              rrValue = receivedbackuprr;
-            }
+
             receivedvvttmin = ((finalList[130] << 8) + finalList[131]);
             receivedvtmax = ((finalList[132] << 8) + finalList[133]);
             receivedminte = ((finalList[134] << 8) + finalList[135]);
             receivedpc = ((finalList[136] << 8) + finalList[137]);
-            pcValue = receivedpc;
+
             receivedrr = ((finalList[138] << 8) + finalList[139]);
-            rrValue = receivedrr;
+
             receivedvt = ((finalList[140] << 8) + finalList[141]);
-            vtValue = receivedvt;
+
             receivedpcmin = ((finalList[142] << 8) + finalList[143]);
-            if (operatinModeR == 7 ||
-                operatinModeR == 1 ||
-                operatinModeR == 5) {
-              receivedpcmax = ((finalList[144] << 8) + finalList[145]);
-              pcValue = receivedpcmax;
-            }
+
+            receivedpcmax = ((finalList[144] << 8) + finalList[145]);
 
             receivedo2pressure = ((finalList[146] << 8) + finalList[147]);
             receivedtankpressure = ((finalList[148] << 8) + finalList[149]);
@@ -24235,6 +24278,150 @@ class _CheckPageState extends State<Dashboard> {
             receivedvti = ((finalList[156] << 8) + finalList[157]);
             receivedvte = ((finalList[158] << 8) + finalList[159]);
             receivedflatprop = ((finalList[160] << 8) + finalList[161]);
+          });
+
+          setState(() {
+            if (operatinModeR == 6) {
+              preferences.setString("checkMode", "pccmv");
+              preferences.setInt('pccmvRRValue', receivedrr);
+              preferences.setInt('pccmvIeValue',
+                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt('pccmvPeepValue', receivedpeep);
+              preferences.setInt('pccmvPcValue', receivedpc);
+              preferences.setInt('pccmvFio2Value', receivedfio2); //6
+
+              preferences.setInt("rr", receivedrr);
+              preferences.setString("i", i);
+
+              preferences.setString("e", e);
+              preferences.setInt("peep", receivedpeep);
+              preferences.setInt("fio2", receivedfio2);
+              preferences.setInt("pc", receivedpc);
+              // pccmvEnabled = true;
+              getData();
+
+              //TODO
+            } else if (operatinModeR == 7) {
+              preferences.setString("checkMode", "vccmv");
+              preferences.setInt('vccmvRRValue', receivedrr);
+              preferences.setInt('vccmvIeValue',
+                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt('vccmvPeepValue', receivedpeep);
+              preferences.setInt('vccmvFio2Value', receivedfio2);
+              preferences.setInt('vccmvVtValue', receivedvt); //7
+
+              preferences.setInt("rr", receivedrr);
+              preferences.setString("i", i);
+              preferences.setString("e", e);
+              preferences.setInt("peep", receivedpeep);
+              preferences.setInt("fio2", receivedfio2);
+              preferences.setInt("vt", receivedvt);
+              // vccmvEnabled = true;
+              getData();
+            } else if (operatinModeR == 2) {
+              preferences.setString("checkMode", "pacv");
+              preferences.setInt('pacvItrigValue', receivedItrig);
+              preferences.setInt('pacvRrValue', receivedrr);
+              preferences.setInt('pacvIeValue',
+                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt('pacvPeepValue', receivedpeep);
+              preferences.setInt('pacvPcValue', receivedpc);
+              preferences.setInt('pacvFio2Value', receivedfio2); //2
+
+              preferences.setInt("rr", receivedrr);
+              preferences.setString("i", i);
+              preferences.setString("e", e);
+              preferences.setInt("peep", receivedpeep);
+              preferences.setInt("fio2", receivedfio2);
+              preferences.setInt("pc", receivedpc);
+              preferences.setInt("itrig", receivedItrig);
+              // pacvEnabled  = true;
+              getData();
+            } else if (operatinModeR == 1) {
+              preferences.setString("checkMode", "vacv");
+              preferences.setInt('vacvItrigValue', receivedItrig);
+              preferences.setInt('vacvRrValue', receivedrr);
+              preferences.setInt('vacvIeValue',
+                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt('vacvPeepValue', receivedpeep);
+              preferences.setInt('vacvVtValue', receivedvt);
+              preferences.setInt('vacvFio2Value', receivedfio2); //1
+
+              preferences.setInt("rr", receivedrr);
+              preferences.setString("i", i);
+              preferences.setString("e", e);
+              preferences.setInt("peep", receivedpeep);
+              preferences.setInt("fio2", receivedfio2);
+              preferences.setInt("vt", receivedvt);
+              preferences.setInt("itrig", receivedItrig);
+              // vacvEnabled = true;
+              getData();
+            } else if (operatinModeR == 4) {
+              preferences.setString("checkMode", "psimv");
+              preferences.setInt('psimvRrValue', receivedrr);
+              preferences.setInt('psimvPsValue', receivedps);
+              preferences.setInt('psimvIeValue',
+                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt('psimvPeepValue', receivedpeep);
+              preferences.setInt('psimvPcValue', receivedpc);
+              preferences.setInt('psimvFio2Value', receivedfio2); //4
+
+              preferences.setInt("rr", receivedrr);
+              preferences.setString("i", i);
+              preferences.setString("e", e);
+              preferences.setInt("peep", receivedpeep);
+              preferences.setInt("fio2", receivedfio2);
+              preferences.setInt("pc", receivedpc);
+              preferences.setInt("ps", receivedps);
+              // psimvEnabled = true;
+              getData();
+            } else if (operatinModeR == 5) {
+              preferences.setString("checkMode", "vsimv");
+              preferences.setInt('vsimvRrValue', receivedrr);
+              preferences.setInt('vsimvIeValue',
+                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt('vsimvPeepValue', receivedpeep);
+              preferences.setInt('vsimvVtValue', receivedvt);
+              preferences.setInt('vsimvPsValue', receivedps);
+              preferences.setInt('vsimvFio2Value', receivedfio2); //5
+
+              preferences.setInt("rr", receivedrr);
+              preferences.setString("i", i);
+              preferences.setString("e", e);
+              preferences.setInt("peep", receivedpeep);
+              preferences.setInt("fio2", receivedfio2);
+              preferences.setInt("vt", receivedvt);
+              // vsimvEnabled = true;
+              // preferences.setInt("ps", receivedps);
+              getData();
+            } else if (operatinModeR == 3) {
+              preferences.setString("checkMode", "psv");
+              preferences.setInt('psvItrigValue', receivedItrig);
+              // preferences.setInt('psvTiValue', psvTiValue);
+              preferences.setInt('psvPeepValue', receivedpeep);
+              preferences.setInt('psvIeValue',
+                  getIeNumber(i + ":" + e.toString()));
+              preferences.setInt('psvPsValue', receivedps);
+              preferences.setInt('psvFio2Value', receivedfio2);
+              preferences.setInt('psvBackupRrValue', receivedbackuprr);
+              preferences.setInt('psvPcValue', receivedpc);
+              preferences.setInt('psvAtimeValue', receivedapneaTime); //3
+
+              preferences.setInt("rr", receivedbackuprr);
+              preferences.setString("i", i);
+              preferences.setString("e", e);
+              preferences.setInt("peep", receivedpeep);
+              preferences.setInt("fio2", receivedfio2);
+              preferences.setInt("pc", receivedpc);
+              preferences.setInt("ps", receivedps);
+              preferences.setInt("itrig", receivedItrig);
+              preferences.setInt("atime", receivedapneaTime);
+              //TODO
+
+              // psvEnabled = true;
+
+              getData();
+            }
           });
         }
 
