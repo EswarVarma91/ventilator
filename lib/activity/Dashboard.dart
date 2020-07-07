@@ -21749,6 +21749,7 @@ return data;
       preferences.setInt("pc", psvPcValue);
       preferences.setInt("itrig", psvItrigValue); //atime ti
       preferences.setInt("atime", psvAtimeValue);
+      preferences.setInt("ti",psvTiValue);
       // Fluttertoast.showToast(msg:psvPsValue.toString() +" pc "+psvPcValue.toString());
 
       preferences.setInt('psvItrigValue', psvItrigValue);
@@ -21863,6 +21864,7 @@ return data;
       preferences.setInt('prvcFio2Value', prvcFio2Value);
       preferences.setInt('prvcFlowRampValue', prvcFlowRampValue);
       preferences.setInt('prvcdefaultValue', prvcdefaultValue);
+      
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
@@ -24305,7 +24307,7 @@ return data;
             i = (receivedi / 10).toString();
             receivede = finalList[125];
             e = (receivede / 10).toString();
-            receivedti = ((finalList[126] << 8) + finalList[127]);
+            receivedti = (((finalList[126] << 8) + finalList[127])/100).toInt();
 
             receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
 
@@ -24332,6 +24334,7 @@ return data;
             receivedvti = ((finalList[156] << 8) + finalList[157]);
             receivedvte = ((finalList[158] << 8) + finalList[159]);
             receivedflatprop = ((finalList[160] << 8) + finalList[161]);
+            //TODO
           });
 
           setState(() {
@@ -24446,6 +24449,7 @@ return data;
               // preferences.setInt("ps", receivedps);
               getData();
             } else if (operatinModeR == 3) {
+              var apneatimeCaal= (receivedapneaTime/1000).toInt();
               preferences.setString("checkMode", "psv");
               preferences.setInt('psvItrigValue', receivedItrig);
               // preferences.setInt('psvTiValue', psvTiValue);
@@ -24456,7 +24460,7 @@ return data;
               preferences.setInt('psvFio2Value', receivedfio2);
               preferences.setInt('psvBackupRrValue', receivedbackuprr);
               preferences.setInt('psvPcValue', receivedpc);
-              preferences.setInt('psvAtimeValue', receivedapneaTime); //3
+              preferences.setInt('psvAtimeValue', apneatimeCaal); //3
 
               preferences.setInt("rr", receivedbackuprr);
               preferences.setString("i", i);
@@ -24466,7 +24470,7 @@ return data;
               preferences.setInt("pc", receivedpc);
               preferences.setInt("ps", receivedps);
               preferences.setInt("itrig", receivedItrig);
-              preferences.setInt("atime", receivedapneaTime);
+              preferences.setInt("atime", apneatimeCaal);
               preferences.setInt("ti",getTiValueNumber(receivedti));
               //TODO
 
