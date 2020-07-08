@@ -629,12 +629,6 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
   savePatientData() async {
     if (patientId.text.isEmpty) {
     } else if (nameId.text.isEmpty) {
-    } else if (ageId.text.isEmpty) {
-    } else if (maleEnabled == false && femaleEnabled == false) {
-    } else if (adultEnabled == false && pediatricEnabled == false) {
-    } else if (int.tryParse(heightId.text) <= 134 ||
-        int.tryParse(heightId.text) >= 200) {
-      Fluttertoast.showToast(msg: "Enter height between 134cm to 200cm");
     } else {
       dbHelper.savePatient(PatientsSaveList(patientId.text, nameId.text,
           ageId.text, maleEnabled ? "1" : "2", heightId.text));

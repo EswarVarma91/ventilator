@@ -1,10 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
-import 'About.dart';
 
 class DowngradeAppScreen extends StatefulWidget {
   @override
@@ -44,9 +41,10 @@ class _DowngradeAppScreenState extends State<DowngradeAppScreen> {
     }
   }
 
-  Future<bool> _willPopCallback() async {
-    return true;
-  }
+  // ignore: unused_element
+  // Future<bool> _willPopCallback() async {
+  //   return true;
+  // }
 
   @override
   Widget build(BuildContext context) {

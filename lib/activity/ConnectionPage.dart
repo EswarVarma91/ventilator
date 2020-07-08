@@ -12,10 +12,13 @@ class ConnectionPage extends StatefulWidget {
 
 class _ConnectionScreenState extends State<ConnectionPage> {
   UsbPort _port;
+  // ignore: unused_field
   String _status = "Idle";
+  // ignore: unused_field
   List<Widget> _ports = [];
   StreamSubscription<String> _subscription;
   Transaction<String> _transaction;
+  // ignore: unused_field
   int _deviceId;
 
   Future<bool> _connectTo(device) async {

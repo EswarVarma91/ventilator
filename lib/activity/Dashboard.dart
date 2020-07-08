@@ -549,6 +549,8 @@ class _CheckPageState extends State<Dashboard> {
   var batteryforceCharge = 0;
   bool batterChargingScreen = false;
 
+  List<Widget> _temporarySetValue = [];
+
   Future<bool> _connectTo(device) async {
     list.clear();
     pressurePoints.clear();
@@ -594,8 +596,6 @@ class _CheckPageState extends State<Dashboard> {
         Transaction.terminated(_port.inputStream, Uint8List.fromList([127]));
 
     transaction.stream.listen((event) async {
-      // // // print(event);
-      // Fluttertoast.showToast(msg: event.length.toString() + " "+cc.toString() + );
       serializeEventData(event);
     });
     setState(() {
@@ -1404,7 +1404,7 @@ class _CheckPageState extends State<Dashboard> {
         // ),
         endDrawer: patientName == "betauser" ? endDrawerMethod() : Container(),
         drawer: Container(
-          width: 190,
+          // width: 190,
           child: Theme(
             data: Theme.of(context).copyWith(
               canvasColor: Colors.transparent,
@@ -1412,521 +1412,535 @@ class _CheckPageState extends State<Dashboard> {
             child: Container(
               color: Colors.transparent,
               child: Drawer(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                child: Row(
                   children: <Widget>[
-                    SizedBox(height: 50),
-                    Container(
-                      color: Color(0xFF171e27),
-                      width: 190,
-                      height: 85,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 5),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text("",
-                                    style: TextStyle(
-                                        color: Colors.green, fontSize: 10)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.green, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 5.0),
-                                child: Text(
-                                  cdisplayParameter.toString(),
-                                  style: TextStyle(
-                                      color: Colors.green, fontSize: 38),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 0.0, bottom: 65),
-                                child: Text(
-                                  "Static Compliance",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  "ml/cmH\u2082O",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 0),
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.green, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.green, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 18.0),
-                                  child: Divider(
-                                    color: Colors.white,
-                                    height: 1,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 50),
+                        Container(
+                          color: Color(0xFF171e27),
+                          width: 190,
+                          height: 85,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 12, right: 12, top: 5),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Text("",
+                                        style: TextStyle(
+                                            color: Colors.green, fontSize: 10)),
                                   ),
-                                ))
-                          ],
-                        )),
-                      ),
-                    ),
-                    Container(
-                      color: Color(0xFF171e27),
-                      width: 190,
-                      height: 85,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 10),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text("",
-                                    style: TextStyle(
-                                        color: Colors.yellow, fontSize: 10)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.yellow, fontSize: 10),
                                 ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 5.0),
-                                child: Text(
-                                  leakVolumeDisplay == null
-                                      ? "0"
-                                      : (leakVolumeDisplay).toInt().toString(),
-                                  // "0000",
-                                  style: TextStyle(
-                                      color: Colors.yellow, fontSize: 35),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 0.0, bottom: 60),
-                                child: Text(
-                                  "Leak Volume",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  "ml",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 0),
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
+                                Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Text(
                                       "",
                                       style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.yellow, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.yellow, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 18.0),
-                                  child: Divider(
-                                    color: Colors.white,
-                                    height: 1,
-                                  ),
-                                ))
-                          ],
-                        )),
-                      ),
-                    ),
-                    Container(
-                      color: Color(0xFF171e27),
-                      width: 190,
-                      height: 85,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12, right: 12, top: 5, bottom: 5),
-                        child: Center(
-                            child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text("",
-                                    style: TextStyle(
-                                        color: Colors.pink, fontSize: 10)),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.pink, fontSize: 10),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 5.0),
-                                child: Text(
-                                  peakFlowDisplay == null
-                                      ? "0"
-                                      : ((peakFlowDisplay * 60) / 1000)
-                                          .toStringAsFixed(3),
-                                  // "00",
-                                  style: TextStyle(
-                                      color: Colors.pink, fontSize: 35),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 0.0, bottom: 60),
-                                child: Text(
-                                  "Peak Flow",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  "lpm",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 0),
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.pink, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.pink, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 18.0),
-                                  child: Divider(
-                                    color: Colors.white,
-                                    height: 1,
-                                  ),
-                                )),
-                          ],
-                        )),
-                      ),
-                    ),
-                    operatinModeR == 4 ||
-                            operatinModeR == 5 ||
-                            operatinModeR == 3
-                        ? Container(
-                            color: Color(0xFF171e27),
-                            width: 190,
-                            height: 85,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 12, right: 12, top: 5, bottom: 5),
-                              child: Center(
-                                  child: Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: Text("",
-                                          style: TextStyle(
-                                              color: Colors.pink,
-                                              fontSize: 10)),
+                                          color: Colors.green, fontSize: 10),
                                     ),
                                   ),
-                                  Align(
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 5.0),
+                                    child: Text(
+                                      cdisplayParameter.toString(),
+                                      style: TextStyle(
+                                          color: Colors.green, fontSize: 38),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 0.0, bottom: 65),
+                                    child: Text(
+                                      "Static Compliance",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Align(
                                     alignment: Alignment.bottomLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: Text(
-                                        "",
-                                        style: TextStyle(
-                                            color: Colors.pink, fontSize: 10),
-                                      ),
+                                    child: Text(
+                                      "ml/cmH\u2082O",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12),
                                     ),
                                   ),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 5.0),
-                                      child: Text(
-                                        spontaneousDisplay == null
-                                            ? "0"
-                                            : (spontaneousDisplay / 1000)
-                                                .toStringAsFixed(3),
-// "00",
-                                        style: TextStyle(
-                                            color: Colors.blue, fontSize: 35),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 0.0, bottom: 60),
-                                      child: Text(
-                                        "Spontaneous Volume",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 5),
-                                    child: Align(
-                                      alignment: Alignment.bottomLeft,
-                                      child: Text(
-                                        "ml",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 0),
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: <Widget>[
-                                          Text(
-                                            "",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12),
-                                          ),
-                                          Text(
-                                            "",
-                                            style: TextStyle(
-                                                color: Colors.pink,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 5),
-                                    child: Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: <Widget>[
-                                          Text(
-                                            "",
-                                            style: TextStyle(
-                                                color: Colors.pink,
-                                                fontSize: 12),
-                                          ),
-                                          Text(
-                                            "",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 18.0),
-                                        child: Divider(
-                                          color: Colors.white,
-                                          height: 1,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12),
                                         ),
-                                      )),
-                                ],
-                              )),
-                            ),
-                          )
-                        : Container(),
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.green, fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.green, fontSize: 12),
+                                        ),
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 18.0),
+                                      child: Divider(
+                                        color: Colors.white,
+                                        height: 1,
+                                      ),
+                                    ))
+                              ],
+                            )),
+                          ),
+                        ),
+                        Container(
+                          color: Color(0xFF171e27),
+                          width: 190,
+                          height: 85,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 12, right: 12, top: 10),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Text("",
+                                        style: TextStyle(
+                                            color: Colors.yellow, fontSize: 10)),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Text(
+                                      "",
+                                      style: TextStyle(
+                                          color: Colors.yellow, fontSize: 10),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 5.0),
+                                    child: Text(
+                                      leakVolumeDisplay == null
+                                          ? "0"
+                                          : (leakVolumeDisplay).toInt().toString(),
+                                      // "0000",
+                                      style: TextStyle(
+                                          color: Colors.yellow, fontSize: 35),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 0.0, bottom: 60),
+                                    child: Text(
+                                      "Leak Volume",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text(
+                                      "ml",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12),
+                                        ),
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.yellow, fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.yellow, fontSize: 12),
+                                        ),
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 18.0),
+                                      child: Divider(
+                                        color: Colors.white,
+                                        height: 1,
+                                      ),
+                                    ))
+                              ],
+                            )),
+                          ),
+                        ),
+                        Container(
+                          color: Color(0xFF171e27),
+                          width: 190,
+                          height: 85,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 12, right: 12, top: 5, bottom: 5),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Text("",
+                                        style: TextStyle(
+                                            color: Colors.pink, fontSize: 10)),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Text(
+                                      "",
+                                      style: TextStyle(
+                                          color: Colors.pink, fontSize: 10),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 5.0),
+                                    child: Text(
+                                      peakFlowDisplay == null
+                                          ? "0"
+                                          : ((peakFlowDisplay * 60) / 1000)
+                                              .toStringAsFixed(3),
+                                      // "00",
+                                      style: TextStyle(
+                                          color: Colors.pink, fontSize: 35),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 0.0, bottom: 60),
+                                    child: Text(
+                                      "Peak Flow",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text(
+                                      "lpm",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12),
+                                        ),
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.pink, fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.pink, fontSize: 12),
+                                        ),
+                                        Text(
+                                          "",
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 18.0),
+                                      child: Divider(
+                                        color: Colors.white,
+                                        height: 1,
+                                      ),
+                                    )),
+                              ],
+                            )),
+                          ),
+                        ),
+                        operatinModeR == 4 ||
+                                operatinModeR == 5 ||
+                                operatinModeR == 3
+                            ? Container(
+                                color: Color(0xFF171e27),
+                                width: 190,
+                                height: 85,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 12, right: 12, top: 5, bottom: 5),
+                                  child: Center(
+                                      child: Stack(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Text("",
+                                              style: TextStyle(
+                                                  color: Colors.pink,
+                                                  fontSize: 10)),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Text(
+                                            "",
+                                            style: TextStyle(
+                                                color: Colors.pink, fontSize: 10),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5.0),
+                                          child: Text(
+                                            spontaneousDisplay == null
+                                                ? "0"
+                                                : (spontaneousDisplay / 1000)
+                                                    .toStringAsFixed(3),
+                                            style: TextStyle(
+                                                color: Colors.blue, fontSize: 35),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 0.0, bottom: 60),
+                                          child: Text(
+                                            "Spontaneous Volume",
+                                            style: TextStyle(
+                                                color: Colors.white, fontSize: 12),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 5),
+                                        child: Align(
+                                          alignment: Alignment.bottomLeft,
+                                          child: Text(
+                                            "ml",
+                                            style: TextStyle(
+                                                color: Colors.white, fontSize: 12),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 0),
+                                        child: Align(
+                                          alignment: Alignment.topRight,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: <Widget>[
+                                              Text(
+                                                "",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 12),
+                                              ),
+                                              Text(
+                                                "",
+                                                style: TextStyle(
+                                                    color: Colors.pink,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 5),
+                                        child: Align(
+                                          alignment: Alignment.bottomRight,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: <Widget>[
+                                              Text(
+                                                "",
+                                                style: TextStyle(
+                                                    color: Colors.pink,
+                                                    fontSize: 12),
+                                              ),
+                                              Text(
+                                                "",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 18.0),
+                                            child: Divider(
+                                              color: Colors.white,
+                                              height: 1,
+                                            ),
+                                          )),
+                                    ],
+                                  )),
+                                ),
+                              )
+                            : Container(),
+                      ],
+                    ),
+                    ..._temporarySetValue,
+                    InkWell(
+                      onTap:(){
+                        setState((){
+                          _temporarySetValue.clear();
+                        });
+                      },
+                      child: Container(color: Colors.white,child:Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Clear All"),
+                      ))),
                   ],
                 ),
               ),
@@ -3783,6 +3797,9 @@ class _CheckPageState extends State<Dashboard> {
                                                       newTreatEnabled = false;
 
                                                       monitorEnabled = false;
+                                                      
+                                                      _setValuesonClick = true;
+                                                      
                                                     });
                                                   },
                                                   child: Container(
@@ -20068,12 +20085,12 @@ class _CheckPageState extends State<Dashboard> {
 
   sendDataPacket(String res, result) {
     List<String> lsaveListTemp = preferences.getStringList("saveList");
-      if (lsaveListTemp != null) {
-        savedList = lsaveListTemp.map((i) => int.parse(i)).toList();
-        setState(() {
-          modeWriteList = savedList;
-        });
-      }
+    if (lsaveListTemp != null) {
+      savedList = lsaveListTemp.map((i) => int.parse(i)).toList();
+      setState(() {
+        modeWriteList = savedList;
+      });
+    }
     if (res == "rr") {
       if (pccmvEnabled == true) {
         print("echo " + modeWriteList.toString());
@@ -20087,7 +20104,7 @@ class _CheckPageState extends State<Dashboard> {
         pccmvRRValue = temp;
         getData();
         print("done " + modeWriteList.toString());
-        
+
         sendDataUsbConnection(modeWriteList, 1);
       } else if (vccmvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
@@ -20881,56 +20898,51 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  getTiValueNumber(checkTi){
-    var data = checkTi =="0.5" ? 1
-: checkTi == "0.6" ? 2
-: checkTi == "0.7" ? 3
-: checkTi == "0.8" ? 4 
-: checkTi == "0.9" ? 5
-: checkTi == "1.0" ? 6
-: checkTi == "1.1" ? 7
-: checkTi == "1.2" ? 8
-: checkTi == "1.3" ? 9
-: checkTi == "1.4" ? 10
-: checkTi == "1.5" ? 11
-: checkTi == "1.6" ? 12
-: checkTi == "1.7" ? 13
-: checkTi == "1.8" ? 14
-: checkTi == "1.9" ? 15
-: checkTi == "2.0" ? 16
-: checkTi == "2.1" ? 17
-: checkTi == "2.2" ? 18
-: checkTi == "2.3" ? 19
-: checkTi == "2.4" ? 20
-: checkTi == "2.5" ? 21
-: checkTi == "2.6" ? 22
-: checkTi == "2.7" ? 23
-: checkTi == "2.8" ? 24 
-: checkTi == "2.9" ? 25
-: checkTi == "3.0" ? 26
-: checkTi == "3.1" ? 27
-: checkTi == "3.2" ? 28
-: checkTi == "3.3" ? 29
-: checkTi == "3.4" ? 30
-: checkTi == "3.5" ? 31 
-: checkTi == "3.6" ? 32
-: checkTi == "3.7" ? 33
-: checkTi == "3.8" ? 34 
-: checkTi == "3.9" ? 35
-: checkTi == "4.0" ? 36 
-: checkTi == "4.1" ? 37 
-: checkTi == "4.2" ? 38 
-: checkTi == "4.3" ? 39 
-: checkTi == "4.4" ? 40 
-: checkTi == "4.5" ? 41 
-: checkTi == "4.6" ? 42 
-: checkTi == "4.7" ? 43
-: checkTi == "4.8" ? 44 
-: checkTi == "4.9" ? 45 
-: checkTi == "5.0" ? 46 
-: "0.5";
+  getTiValueNumber(checkTi) {
+    var data = checkTi == "0.5"
+        ? 1
+        : checkTi == "0.6"
+            ? 2
+            : checkTi == "0.7"
+                ? 3
+                : checkTi == "0.8"
+                    ? 4
+                    : checkTi == "0.9"
+                        ? 5
+                        : checkTi == "1.0"
+                            ? 6
+                            : checkTi == "1.1"
+                                ? 7
+                                : checkTi == "1.2"
+                                    ? 8
+                                    : checkTi == "1.3"
+                                        ? 9
+                                        : checkTi == "1.4"
+                                            ? 10
+                                            : checkTi == "1.5"
+                                                ? 11
+                                                : checkTi == "1.6"
+                                                    ? 12
+                                                    : checkTi == "1.7"
+                                                        ? 13
+                                                        : checkTi == "1.8"
+                                                            ? 14
+                                                            : checkTi == "1.9"
+                                                                ? 15
+                                                                : checkTi ==
+                                                                        "2.0"
+                                                                    ? 16
+                                                                    : checkTi ==
+                                                                            "2.1"
+                                                                        ? 17
+                                                                        : checkTi ==
+                                                                                "2.2"
+                                                                            ? 18
+                                                                            : checkTi == "2.3"
+                                                                                ? 19
+                                                                                : checkTi == "2.4" ? 20 : checkTi == "2.5" ? 21 : checkTi == "2.6" ? 22 : checkTi == "2.7" ? 23 : checkTi == "2.8" ? 24 : checkTi == "2.9" ? 25 : checkTi == "3.0" ? 26 : checkTi == "3.1" ? 27 : checkTi == "3.2" ? 28 : checkTi == "3.3" ? 29 : checkTi == "3.4" ? 30 : checkTi == "3.5" ? 31 : checkTi == "3.6" ? 32 : checkTi == "3.7" ? 33 : checkTi == "3.8" ? 34 : checkTi == "3.9" ? 35 : checkTi == "4.0" ? 36 : checkTi == "4.1" ? 37 : checkTi == "4.2" ? 38 : checkTi == "4.3" ? 39 : checkTi == "4.4" ? 40 : checkTi == "4.5" ? 41 : checkTi == "4.6" ? 42 : checkTi == "4.7" ? 43 : checkTi == "4.8" ? 44 : checkTi == "4.9" ? 45 : checkTi == "5.0" ? 46 : "0.5";
 
-return data;
+    return data;
   }
 
   getTiValue(checkTi) {
@@ -21154,7 +21166,6 @@ return data;
       preferences.setInt("peep", pccmvPeepValue);
       preferences.setInt("fio2", pccmvFio2Value);
       preferences.setInt("pc", pccmvPcValue);
-      
 
       preferences.setInt('pccmvRRValue', pccmvRRValue);
       preferences.setInt('pccmvIeValue', pccmvIeValue);
@@ -21245,7 +21256,6 @@ return data;
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", vccmvFio2Value);
       preferences.setInt("vt", vccmvVtValue);
-      
 
       preferences.setInt('vccmvRRValue', vccmvRRValue);
       preferences.setInt('vccmvIeValue', vccmvIeValue);
@@ -21342,7 +21352,7 @@ return data;
       preferences.setInt("fio2", pacvFio2Value);
       preferences.setInt("pc", pacvPcValue);
       preferences.setInt("itrig", pacvItrigValue);
-      
+
       //==
       preferences.setInt('pacvItrigValue', pacvItrigValue);
       preferences.setInt('pacvRrValue', pacvRrValue);
@@ -21749,7 +21759,7 @@ return data;
       preferences.setInt("pc", psvPcValue);
       preferences.setInt("itrig", psvItrigValue); //atime ti
       preferences.setInt("atime", psvAtimeValue);
-      preferences.setInt("ti",psvTiValue);
+      preferences.setInt("ti", psvTiValue);
       // Fluttertoast.showToast(msg:psvPsValue.toString() +" pc "+psvPcValue.toString());
 
       preferences.setInt('psvItrigValue', psvItrigValue);
@@ -21864,7 +21874,6 @@ return data;
       preferences.setInt('prvcFio2Value', prvcFio2Value);
       preferences.setInt('prvcFlowRampValue', prvcFlowRampValue);
       preferences.setInt('prvcdefaultValue', prvcdefaultValue);
-      
 
       if (_status == "Connected") {
         preferences.setBool("play", false);
@@ -21906,10 +21915,17 @@ return data;
   sendDataUsbConnection(List<int> samplemodeWriteList, checkValue) async {
     var modeNumber = samplemodeWriteList[3];
 
-      if(modeNumber==1 || modeNumber==2 || modeNumber==3 || modeNumber==4 || modeNumber==5 || modeNumber==6||modeNumber==7||modeNumber==14){
-          List<String> strList = modeWriteList.map((i) => i.toString()).toList();
-          preferences.setStringList("saveList", strList);
-      }
+    if (modeNumber == 1 ||
+        modeNumber == 2 ||
+        modeNumber == 3 ||
+        modeNumber == 4 ||
+        modeNumber == 5 ||
+        modeNumber == 6 ||
+        modeNumber == 7 ||
+        modeNumber == 14) {
+      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+      preferences.setStringList("saveList", strList);
+    }
 
     // print(samplemodeWriteList.toString());
     list = [];
@@ -23730,182 +23746,128 @@ return data;
   }
 
   serialiseReceivedPacket(List<int> finalList) async {
-    if (finalList.isNotEmpty && finalList.length == 162) {
+    if (finalList.isNotEmpty && finalList.length == 162) {//114
       var now = new DateTime.now();
 
       lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
       preferences = await SharedPreferences.getInstance();
       preferences.setString("lastRecordTime", lastRecordTime);
 
-      // bool data = await checkCrc(finalList, finalList.length);
-      // if (data == false) {
-      //   finalList.clear();
-      // } else {
-      // // // print("page no " + finalList[112].toString());
-      // if (finalList[112] == 1) {
-      //   Navigator.pushAndRemoveUntil(
-      //       context,
-      //       MaterialPageRoute(
-      // builder: (BuildContext context) => SelfTestPage()),
-      //       ModalRoute.withName('/'));
-      // } else if (finalList[112] == 2) {
-      //   Navigator.pushAndRemoveUntil(
-      //       context,
-      //       MaterialPageRoute(
-      // builder: (BuildContext context) => CallibrationPage()),
-      //       ModalRoute.withName('/'));
-      // }
-      setState(() {
+      
+        // 
+
+        // bool data = await checkCrc(finalList, finalList.length);
+        // if (data == false) {
+        //   finalList.clear();
+        // } else {
+        // // // print("page no " + finalList[112].toString());
+        // if (finalList[112] == 1) {
+        //   Navigator.pushAndRemoveUntil(
+        //       context,
+        //       MaterialPageRoute(
+        // builder: (BuildContext context) => SelfTestPage()),
+        //       ModalRoute.withName('/'));
+        // } else if (finalList[112] == 2) {
+        //   Navigator.pushAndRemoveUntil(
+        //       context,
+        //       MaterialPageRoute(
+        // builder: (BuildContext context) => CallibrationPage()),
+        //       ModalRoute.withName('/'));
+        // }
         setState(() {
-          var now = new DateTime.now();
-
-          int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
-
-          if ((vteValueCheck != "" || vteValueCheck != null) &&
-              vteValueCheck.round() >= 0 &&
-              vteValueCheck.round() <= 2500) {
-            setState(() {
-              vteMinValue = vteValue - vtValue;
-              vteValue = ((finalList[4] << 8) + finalList[5]);
-            });
-          }
-          int mvValueCheck = (((finalList[8] << 8) + finalList[9])).toInt();
-
           setState(() {
-            mvValue = mvValueCheck;
-          });
+            var now = new DateTime.now();
 
-          leakVolumeDisplay =
-              ((finalList[102] << 8) + finalList[103]); //103 104
-          peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
-          spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
+            int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
 
-          int rrtotalCheck =
-              ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
+            if ((vteValueCheck != "" || vteValueCheck != null) &&
+                vteValueCheck.round() >= 0 &&
+                vteValueCheck.round() <= 2500) {
+              setState(() {
+                vteMinValue = vteValue - vtValue;
+                vteValue = ((finalList[4] << 8) + finalList[5]);
+              });
+            }
+            int mvValueCheck = (((finalList[8] << 8) + finalList[9])).toInt();
 
-          if (rrtotalCheck != "" &&
-              rrtotalCheck.round() >= 0 &&
-              rrtotalCheck.round() <= 100) {
             setState(() {
-              rrDisplayValue = rrtotalCheck;
+              mvValue = mvValueCheck;
             });
-          }
-          int pipValueCheck = (((finalList[14] << 8) + finalList[15]) / 100)
-              .round()
-              .toInt(); //15 16
 
-          if ((((finalList[16] << 8) + finalList[17]) / 100).round().toInt() >=
-                  0 &&
-              (((finalList[16] << 8) + finalList[17]) / 100).round().toInt() <=
-                  150) {
-            peepDisplayValue = (((finalList[16] << 8) + finalList[17]) / 100)
+            leakVolumeDisplay =
+                ((finalList[102] << 8) + finalList[103]); //103 104
+            peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
+            spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
+
+            int rrtotalCheck =
+                ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
+
+            if (rrtotalCheck != "" &&
+                rrtotalCheck.round() >= 0 &&
+                rrtotalCheck.round() <= 100) {
+              setState(() {
+                rrDisplayValue = rrtotalCheck;
+              });
+            }
+            int pipValueCheck = (((finalList[14] << 8) + finalList[15]) / 100)
                 .round()
-                .toInt(); //17 18
-          }
+                .toInt(); //15 16
 
-          if (pipValueCheck != 0 &&
-              pipValueCheck.round() >= 0 &&
-              pipValueCheck.round() <= 150) {
-            setState(() {
-              pipValue = pipValueCheck;
-            });
-          }
-          paw = (((finalList[34] << 8) + finalList[35]) / 100).toInt();
+            if ((((finalList[16] << 8) + finalList[17]) / 100)
+                        .round()
+                        .toInt() >=
+                    0 &&
+                (((finalList[16] << 8) + finalList[17]) / 100)
+                        .round()
+                        .toInt() <=
+                    150) {
+              peepDisplayValue = (((finalList[16] << 8) + finalList[17]) / 100)
+                  .round()
+                  .toInt(); //17 18
+            }
 
-          if (paw > 200) {
-            setState(() {
-              paw = 0;
-            });
-          }
+            if (pipValueCheck != 0 &&
+                pipValueCheck.round() >= 0 &&
+                pipValueCheck.round() <= 150) {
+              setState(() {
+                pipValue = pipValueCheck;
+              });
+            }
+            paw = (((finalList[34] << 8) + finalList[35]) / 100).toInt();
 
-          expiratoryPressureR =
-              (((finalList[36] << 8) + finalList[37]) / 100).toInt(); //37 38
+            if (paw > 200) {
+              setState(() {
+                paw = 0;
+              });
+            }
 
-          if (((finalList[38] << 8) + finalList[39]).round() >= 20 &&
-              ((finalList[38] << 8) + finalList[39]).round() <= 100) {
-            fio2DisplayParameter =
-                ((finalList[38] << 8) + finalList[39]); // 39,40
-          }
+            expiratoryPressureR =
+                (((finalList[36] << 8) + finalList[37]) / 100).toInt(); //37 38
 
-          checkTempData = finalList[31].toString();
+            if (((finalList[38] << 8) + finalList[39]).round() >= 20 &&
+                ((finalList[38] << 8) + finalList[39]).round() <= 100) {
+              fio2DisplayParameter =
+                  ((finalList[38] << 8) + finalList[39]); // 39,40
+            }
 
-          var highPriorityAlarm = 0;
-          var mediumPriorityAlarm = 0;
-          var lowPriorityAlarm = 0;
+            checkTempData = finalList[31].toString();
 
-          if (finalList[108] == 1) {
-            presentCode = ((finalList[106] << 8) + finalList[107]);
-            alarmCounter = finalList[90];
+            var highPriorityAlarm = 0;
+            var mediumPriorityAlarm = 0;
+            var lowPriorityAlarm = 0;
 
-            if (presentCode != previousCode) {
-              previousCode = presentCode;
-              sendSoundOn();
-              _stopMusic();
-              var data = AlarmsList(
-                  presentCode.toString(), this.globalCounterNo.toString());
-              dbHelpera.saveAlarm(data);
-              // alarmPrevCounter = alarmCounter;
+            if (finalList[108] == 1) {
+              presentCode = ((finalList[106] << 8) + finalList[107]);
+              alarmCounter = finalList[90];
 
-              if ((presentCode == 5 ||
-                      presentCode == 7 ||
-                      presentCode == 10 ||
-                      presentCode == 11 ||
-                      presentCode == 17) &&
-                  highPriorityAlarm == 0) {
-                setState(() {
-                  highPriorityAlarm = 1;
-                  mediumPriorityAlarm = 0;
-                  lowPriorityAlarm = 0;
-                });
-                _stopMusic();
-                _playMusicHigh();
+              if (presentCode != previousCode) {
+                previousCode = presentCode;
                 sendSoundOn();
-                audioEnable = true;
-              } else if ((presentCode == 1 ||
-                      presentCode == 2 ||
-                      presentCode == 3 ||
-                      presentCode == 4 ||
-                      presentCode == 6 ||
-                      presentCode == 8 ||
-                      presentCode == 9 ||
-                      presentCode == 12 ||
-                      presentCode == 13 ||
-                      presentCode == 14 ||
-                      presentCode == 15 ||
-                      presentCode == 16 ||
-                      presentCode == 18 ||
-                      presentCode == 19 ||
-                      presentCode == 20 ||
-                      presentCode == 21 ||
-                      presentCode == 22) &&
-                  mediumPriorityAlarm == 0) {
-                setState(() {
-                  highPriorityAlarm = 0;
-                  mediumPriorityAlarm = 1;
-                  lowPriorityAlarm = 0;
-                });
-                _stopMusic();
-                _playMusicMedium();
-                sendSoundOn();
-                audioEnable = true;
-              } else if (presentCode == 23 && lowPriorityAlarm == 0) {
-                setState(() {
-                  highPriorityAlarm = 0;
-                  mediumPriorityAlarm = 0;
-                  lowPriorityAlarm = 1;
-                });
-                _stopMusic();
-                _playMusicLower();
-                sendSoundOn();
-                audioEnable = true;
-              }
-            } else {
-              if (alarmCounter != alarmPrevCounter) {
-                alarmPrevCounter = alarmCounter;
                 _stopMusic();
                 var data = AlarmsList(
                     presentCode.toString(), this.globalCounterNo.toString());
                 dbHelpera.saveAlarm(data);
+                // alarmPrevCounter = alarmCounter;
 
                 if ((presentCode == 5 ||
                         presentCode == 7 ||
@@ -23960,154 +23922,214 @@ return data;
                   sendSoundOn();
                   audioEnable = true;
                 }
-              }
-            }
-            // }
-          } else if (finalList[108] == 0) {
-            setState(() {
-              highPriorityAlarm = 0;
-              mediumPriorityAlarm = 0;
-              lowPriorityAlarm = 0;
-            });
-            sendSoundOff();
-            _stopMusic();
-          }
-
-          if (vteValue != null &&
-              vteValue != 0 &&
-              pplateauDisplay != null &&
-              pplateauDisplay != 0) {
-            try {
-              // var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
-              var dataC =
-                  (vteValue / (pplateauDisplay.toInt() - peepDisplayValue))
-                      .toInt();
-              if (dataC < 0) {
-                // cdisplayParameter = 0;
               } else {
-                cdisplayParameter = dataC;
+                if (alarmCounter != alarmPrevCounter) {
+                  alarmPrevCounter = alarmCounter;
+                  _stopMusic();
+                  var data = AlarmsList(
+                      presentCode.toString(), this.globalCounterNo.toString());
+                  dbHelpera.saveAlarm(data);
+
+                  if ((presentCode == 5 ||
+                          presentCode == 7 ||
+                          presentCode == 10 ||
+                          presentCode == 11 ||
+                          presentCode == 17) &&
+                      highPriorityAlarm == 0) {
+                    setState(() {
+                      highPriorityAlarm = 1;
+                      mediumPriorityAlarm = 0;
+                      lowPriorityAlarm = 0;
+                    });
+                    _stopMusic();
+                    _playMusicHigh();
+                    sendSoundOn();
+                    audioEnable = true;
+                  } else if ((presentCode == 1 ||
+                          presentCode == 2 ||
+                          presentCode == 3 ||
+                          presentCode == 4 ||
+                          presentCode == 6 ||
+                          presentCode == 8 ||
+                          presentCode == 9 ||
+                          presentCode == 12 ||
+                          presentCode == 13 ||
+                          presentCode == 14 ||
+                          presentCode == 15 ||
+                          presentCode == 16 ||
+                          presentCode == 18 ||
+                          presentCode == 19 ||
+                          presentCode == 20 ||
+                          presentCode == 21 ||
+                          presentCode == 22) &&
+                      mediumPriorityAlarm == 0) {
+                    setState(() {
+                      highPriorityAlarm = 0;
+                      mediumPriorityAlarm = 1;
+                      lowPriorityAlarm = 0;
+                    });
+                    _stopMusic();
+                    _playMusicMedium();
+                    sendSoundOn();
+                    audioEnable = true;
+                  } else if (presentCode == 23 && lowPriorityAlarm == 0) {
+                    setState(() {
+                      highPriorityAlarm = 0;
+                      mediumPriorityAlarm = 0;
+                      lowPriorityAlarm = 1;
+                    });
+                    _stopMusic();
+                    _playMusicLower();
+                    sendSoundOn();
+                    audioEnable = true;
+                  }
+                }
               }
-            } catch (e) {}
-          }
+              // }
+            } else if (finalList[108] == 0) {
+              setState(() {
+                highPriorityAlarm = 0;
+                mediumPriorityAlarm = 0;
+                lowPriorityAlarm = 0;
+              });
+              sendSoundOff();
+              _stopMusic();
+            }
 
-          if (finalList[108] == 1) {
-            setState(() {
-              if (finalList[109] == 1 || finalList[109] == 0) {
-                ((finalList[106] << 8) + finalList[107]) == 5
-                    ? alarmMessage = "SYSTEM FAULT"
-                    : ((finalList[106] << 8) + finalList[107]) == 7
-                        ? alarmMessage = "FiO\u2082 SENSOR MISSING"
-                        : ((finalList[106] << 8) + finalList[107]) == 10
-                            ? alarmMessage = "HIGH LEAKAGE"
-                            : ((finalList[106] << 8) + finalList[107]) == 11
-                                ? alarmMessage = "HIGH PRESSURE"
-                                : ((finalList[106] << 8) + finalList[107]) == 17
-                                    ? alarmMessage = "PATIENT DISCONNECTED"
-                                    : alarmMessage = "";
-              } else if (finalList[109] == 2) {
-                // // // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
-                ((finalList[106] << 8) + finalList[107]) == 1
-                    ? alarmMessage = "POWER SUPPLY DISCONNECTED"
-                    : ((finalList[106] << 8) + finalList[107]) == 2
-                        ? alarmMessage = " LOW BATTERY"
-                        : ((finalList[106] << 8) + finalList[107]) == 3
-                            ? alarmMessage = "CALIBRATE FiO2"
-                            : ((finalList[106] << 8) + finalList[107]) == 4
-                                ? alarmMessage = "CALIBRATION FiO2 FAIL"
-                                : ((finalList[106] << 8) + finalList[107]) == 6
-                                    ? alarmMessage = "SELF TEST FAIL"
-                                    : ((finalList[106] << 8) + finalList[107]) == 8
-                                        ? alarmMessage = "HIGH FiO2"
-                                        : ((finalList[106] << 8) + finalList[107]) == 9
-                                            ? alarmMessage = "LOW FIO2"
-                                            : ((finalList[106] << 8) +
-                                                        finalList[107]) ==
-                                                    12
-                                                ? alarmMessage = "LOW PRESSURE"
-                                                : ((finalList[106] << 8) +
-                                                            finalList[107]) ==
-                                                        13
-                                                    ? alarmMessage = "LOW VTE"
-                                                    : ((finalList[106] << 8) + finalList[107]) == 14
-                                                        ? alarmMessage =
-                                                            "HIGH VTE"
-                                                        : ((finalList[106] << 8) + finalList[107]) == 15
-                                                            ? alarmMessage =
-                                                                "LOW VTI"
-                                                            : ((finalList[106] << 8) + finalList[107]) == 16
-                                                                ? alarmMessage =
-                                                                    "HIGH VTI"
-                                                                : ((finalList[106] << 8) + finalList[107]) == 18
-                                                                    ? alarmMessage =
-                                                                        "LOW O2  supply"
-                                                                    : ((finalList[106] << 8) + finalList[107]) ==
-                                                                            19
-                                                                        ? alarmMessage =
-                                                                            "LOW RR"
-                                                                        : ((finalList[106] << 8) + finalList[107]) == 20
-                                                                            ? alarmMessage = "HIGH RR"
-                                                                            : ((finalList[106] << 8) + finalList[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((finalList[106] << 8) + finalList[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
-              } else if (finalList[109] == 3) {
-                ((finalList[106] << 8) + finalList[107]) == 23
-                    ? alarmMessage = "Apnea backup"
-                    : alarmMessage = "";
-              }
-            });
-          }
+            if (vteValue != null &&
+                vteValue != 0 &&
+                pplateauDisplay != null &&
+                pplateauDisplay != 0) {
+              try {
+                // var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
+                var dataC =
+                    (vteValue / (pplateauDisplay.toInt() - peepDisplayValue))
+                        .toInt();
+                if (dataC < 0) {
+                  // cdisplayParameter = 0;
+                } else {
+                  cdisplayParameter = dataC;
+                }
+              } catch (e) {}
+            }
 
-          if (paw <= 10) {
-            setState(() {
-              lungImage = 1;
-            });
-          } else if (paw <= 20 && paw >= 11) {
-            setState(() {
-              lungImage = 2;
-            });
-          } else if (paw <= 30 && paw >= 21) {
-            setState(() {
-              lungImage = 3;
-            });
-          } else if (paw <= 40 && paw >= 31) {
-            setState(() {
-              lungImage = 4;
-            });
-          } else if (paw <= 100 && paw >= 41) {
-            setState(() {
-              lungImage = 5;
-            });
-          }
-        });
-        setState(() {
-          String i = "", e = "", tempIe = "";
-          i = finalList[12].toString();
-          e = finalList[13].toString();
-          tempIe = i + ":" + e;
-        });
+            if (finalList[108] == 1) {
+              setState(() {
+                if (finalList[109] == 1 || finalList[109] == 0) {
+                  ((finalList[106] << 8) + finalList[107]) == 5
+                      ? alarmMessage = "SYSTEM FAULT"
+                      : ((finalList[106] << 8) + finalList[107]) == 7
+                          ? alarmMessage = "FiO\u2082 SENSOR MISSING"
+                          : ((finalList[106] << 8) + finalList[107]) == 10
+                              ? alarmMessage = "HIGH LEAKAGE"
+                              : ((finalList[106] << 8) + finalList[107]) == 11
+                                  ? alarmMessage = "HIGH PRESSURE"
+                                  : ((finalList[106] << 8) + finalList[107]) ==
+                                          17
+                                      ? alarmMessage = "PATIENT DISCONNECTED"
+                                      : alarmMessage = "";
+                } else if (finalList[109] == 2) {
+                  // // // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
+                  ((finalList[106] << 8) + finalList[107]) == 1
+                      ? alarmMessage = "POWER SUPPLY DISCONNECTED"
+                      : ((finalList[106] << 8) + finalList[107]) == 2
+                          ? alarmMessage = " LOW BATTERY"
+                          : ((finalList[106] << 8) + finalList[107]) == 3
+                              ? alarmMessage = "CALIBRATE FiO2"
+                              : ((finalList[106] << 8) + finalList[107]) == 4
+                                  ? alarmMessage = "CALIBRATION FiO2 FAIL"
+                                  : ((finalList[106] << 8) + finalList[107]) == 6
+                                      ? alarmMessage = "SELF TEST FAIL"
+                                      : ((finalList[106] << 8) + finalList[107]) == 8
+                                          ? alarmMessage = "HIGH FiO2"
+                                          : ((finalList[106] << 8) + finalList[107]) == 9
+                                              ? alarmMessage = "LOW FIO2"
+                                              : ((finalList[106] << 8) +
+                                                          finalList[107]) ==
+                                                      12
+                                                  ? alarmMessage =
+                                                      "LOW PRESSURE"
+                                                  : ((finalList[106] << 8) +
+                                                              finalList[107]) ==
+                                                          13
+                                                      ? alarmMessage = "LOW VTE"
+                                                      : ((finalList[106] << 8) + finalList[107]) == 14
+                                                          ? alarmMessage =
+                                                              "HIGH VTE"
+                                                          : ((finalList[106] << 8) + finalList[107]) == 15
+                                                              ? alarmMessage =
+                                                                  "LOW VTI"
+                                                              : ((finalList[106] << 8) + finalList[107]) == 16
+                                                                  ? alarmMessage =
+                                                                      "HIGH VTI"
+                                                                  : ((finalList[106] << 8) + finalList[107]) == 18
+                                                                      ? alarmMessage =
+                                                                          "LOW O2  supply"
+                                                                      : ((finalList[106] << 8) + finalList[107]) == 19
+                                                                          ? alarmMessage =
+                                                                              "LOW RR"
+                                                                          : ((finalList[106] << 8) + finalList[107]) == 20 ? alarmMessage = "HIGH RR" : ((finalList[106] << 8) + finalList[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((finalList[106] << 8) + finalList[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
+                } else if (finalList[109] == 3) {
+                  ((finalList[106] << 8) + finalList[107]) == 23
+                      ? alarmMessage = "Apnea backup"
+                      : alarmMessage = "";
+                }
+              });
+            }
 
-        setState(() {
+            if (paw <= 10) {
+              setState(() {
+                lungImage = 1;
+              });
+            } else if (paw <= 20 && paw >= 11) {
+              setState(() {
+                lungImage = 2;
+              });
+            } else if (paw <= 30 && paw >= 21) {
+              setState(() {
+                lungImage = 3;
+              });
+            } else if (paw <= 40 && paw >= 31) {
+              setState(() {
+                lungImage = 4;
+              });
+            } else if (paw <= 100 && paw >= 41) {
+              setState(() {
+                lungImage = 5;
+              });
+            }
+          });
+          setState(() {
+            String i = "", e = "", tempIe = "";
+            i = finalList[12].toString();
+            e = finalList[13].toString();
+            tempIe = i + ":" + e;
+          });
+
+          setState(() {
 // list[26]=(0x55);
 // list[27]=(0x55);
 // list[28]=(0x55);
 // list[29]=(0x55);
-          o2pressuresensor = ((list[26] & 0x3) >> 0);
-          mtpressuresensor = ((list[26] & 0xC) >> 2);
-          exhalationflowsensor = ((list[26] & 0x30) >> 4);
-          inhalationflowsensor = ((list[26] & 0xC0) >> 6);
+            o2pressuresensor = ((list[26] & 0x3) >> 0);
+            mtpressuresensor = ((list[26] & 0xC) >> 2);
+            exhalationflowsensor = ((list[26] & 0x30) >> 4);
+            inhalationflowsensor = ((list[26] & 0xC0) >> 6);
 
-          exhalationpressure = ((list[27] & 0x3) >> 0);
-          inhalationpressure = ((list[27] & 0xC) >> 2);
-          o2sensor = ((list[27] & 0x30) >> 4);
-          inhalationvalve = ((list[27] & 0xC0) >> 6);
+            exhalationpressure = ((list[27] & 0x3) >> 0);
+            inhalationpressure = ((list[27] & 0xC) >> 2);
+            o2sensor = ((list[27] & 0x30) >> 4);
+            inhalationvalve = ((list[27] & 0xC0) >> 6);
 
-          exhalationvalve = ((list[28] & 0x3) >> 0);
-          ventvalue = ((list[28] & 0xC) >> 2);
-          mainpower = ((list[28] & 0x30) >> 4);
-          battery = ((list[28] & 0xC0) >> 6);
+            exhalationvalve = ((list[28] & 0x3) >> 0);
+            ventvalue = ((list[28] & 0xC) >> 2);
+            mainpower = ((list[28] & 0x30) >> 4);
+            battery = ((list[28] & 0xC0) >> 6);
 
-          communication = ((list[29] & 0x3) >> 0);
-          compressor = ((list[29] & 0xC) >> 2);
-          blender = ((list[29] & 0x30) >> 4);
-          checkOfffset = ((list[29] & 0xC0) >> 6);
+            communication = ((list[29] & 0x3) >> 0);
+            compressor = ((list[29] & 0xC) >> 2);
+            blender = ((list[29] & 0x30) >> 4);
+            checkOfffset = ((list[29] & 0xC0) >> 6);
 
 // if (checkOfffset == 2) {
 //   _port.close();
@@ -24115,448 +24137,453 @@ return data;
 // }
 
 // Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
-        });
-        setState(() {
-          checkO2CalibrationValue = finalList[30];
-        });
+          });
+          setState(() {
+            checkO2CalibrationValue = finalList[30];
+          });
 
-        // Fluttertoast.showToast(msg:checkO2CalibrationValue.toString());
-        if (checkO2CalibrationValue == 1) {
-          setState(() {
-            textText = "Lung Disconnected";
-          });
-        } else if (checkO2CalibrationValue == 2) {
-          setState(() {
-            textText = "Calibrating 0\u2082..";
-          });
-        } else if (checkO2CalibrationValue == 3) {
-          setState(() {
-            textText = "Calibrating Completed..";
-          });
-        } else if (checkO2CalibrationValue == 0) {
-          setState(() {
-            checkO2CalibrationValue = "";
-          });
-        }
-
-        var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
-        if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
-          setState(() {
-            operatinModeR = ((finalList[104] << 8) + finalList[105]);
-          });
-        }
-
-        if (operatinModeR == 1) {
-          setState(() {
-            modeName = "VACV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 2) {
-          setState(() {
-            modeName = "PACV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 3) {
-          setState(() {
-            modeName = "PSV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 4) {
-          setState(() {
-            modeName = "PSIMV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 5) {
-          setState(() {
-            modeName = "VSIMV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 6) {
-          setState(() {
-            modeName = "PC-CMV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 7) {
-          setState(() {
-            modeName = "VC-CMV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 14) {
-          setState(() {
-            modeName = "PRVC";
-            selfTestingButtonEnabled = false;
-          });
-        } else {
-          setState(() {
-            selfTestingButtonEnabled = true;
-          });
-        }
-
-        if ((((finalList[68] << 8) + finalList[69]) / 100).round().toInt() >=
-                0 &&
-            (((finalList[68] << 8) + finalList[69]) / 100).round().toInt() <=
-                150) {
-          mapDisplayValue =
-              (((finalList[68] << 8) + finalList[69]) / 100).toInt();
-        }
-        if (finalList[84] == 1) {
-          ioreDisplayParamter = "I";
-        } else if (finalList[84] == 2) {
-          ioreDisplayParamter = "E";
-        } else {
-          ioreDisplayParamter = "";
-        }
-
-        if (finalList[91] == 1) {
-          amsDisplayParamter = "A";
-        } else if (finalList[91] == 2) {
-          amsDisplayParamter = "M";
-        } else if (finalList[91] == 3) {
-          amsDisplayParamter = "S";
-        } else {
-          amsDisplayParamter = "";
-        }
-
-        displayTemperature = finalList[88];
-
-        setState(() {
-          if (finalList[108] != 0 &&
-              ((finalList[106] << 8) + finalList[107]) != null &&
-              ((finalList[106] << 8) + finalList[107]) >= 1 &&
-              ((finalList[106] << 8) + finalList[107]) <= 23) {
-            alarmActive = finalList[108].toString();
-          } else {
-            alarmActive = 0.toString();
+          // Fluttertoast.showToast(msg:checkO2CalibrationValue.toString());
+          if (checkO2CalibrationValue == 1) {
+            setState(() {
+              textText = "Lung Disconnected";
+            });
+          } else if (checkO2CalibrationValue == 2) {
+            setState(() {
+              textText = "Calibrating 0\u2082..";
+            });
+          } else if (checkO2CalibrationValue == 3) {
+            setState(() {
+              textText = "Calibrating Completed..";
+            });
+          } else if (checkO2CalibrationValue == 0) {
+            setState(() {
+              checkO2CalibrationValue = "";
+            });
           }
-        });
 
-        // pressure graph
-        double temp = (((finalList[34] << 8) + finalList[35]))
-            .toDouble(); // pressure points 35,36
+          var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
+          if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
+            setState(() {
+              operatinModeR = ((finalList[104] << 8) + finalList[105]);
+            });
+          }
 
-        if (temp > 40000) {
+          if (operatinModeR == 1) {
+            setState(() {
+              modeName = "VACV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 2) {
+            setState(() {
+              modeName = "PACV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 3) {
+            setState(() {
+              modeName = "PSV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 4) {
+            setState(() {
+              modeName = "PSIMV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 5) {
+            setState(() {
+              modeName = "VSIMV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 6) {
+            setState(() {
+              modeName = "PC-CMV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 7) {
+            setState(() {
+              modeName = "VC-CMV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 14) {
+            setState(() {
+              modeName = "PRVC";
+              selfTestingButtonEnabled = false;
+            });
+          } else {
+            setState(() {
+              selfTestingButtonEnabled = true;
+            });
+          }
+
+          if ((((finalList[68] << 8) + finalList[69]) / 100).round().toInt() >=
+                  0 &&
+              (((finalList[68] << 8) + finalList[69]) / 100).round().toInt() <=
+                  150) {
+            mapDisplayValue =
+                (((finalList[68] << 8) + finalList[69]) / 100).toInt();
+          }
+          if (finalList[84] == 1) {
+            ioreDisplayParamter = "I";
+          } else if (finalList[84] == 2) {
+            ioreDisplayParamter = "E";
+          } else {
+            ioreDisplayParamter = "";
+          }
+
+          if (finalList[91] == 1) {
+            amsDisplayParamter = "A";
+          } else if (finalList[91] == 2) {
+            amsDisplayParamter = "M";
+          } else if (finalList[91] == 3) {
+            amsDisplayParamter = "S";
+          } else {
+            amsDisplayParamter = "";
+          }
+
+          displayTemperature = finalList[88];
+
           setState(() {
-            temp = -((65535 - temp) / 100);
+            if (finalList[108] != 0 &&
+                ((finalList[106] << 8) + finalList[107]) != null &&
+                ((finalList[106] << 8) + finalList[107]) >= 1 &&
+                ((finalList[106] << 8) + finalList[107]) <= 23) {
+              alarmActive = finalList[108].toString();
+            } else {
+              alarmActive = 0.toString();
+            }
           });
-        } else {
-          setState(() {
-            temp = temp / 100;
-          });
-        }
 
-        if (pressurePoints.length >= 50) {
-          setState(() {
-            pressurePoints.removeAt(0);
+          // pressure graph
+          double temp = (((finalList[34] << 8) + finalList[35]))
+              .toDouble(); // pressure points 35,36
+
+          if (temp > 40000) {
+            setState(() {
+              temp = -((65535 - temp) / 100);
+            });
+          } else {
+            setState(() {
+              temp = temp / 100;
+            });
+          }
+
+          if (pressurePoints.length >= 50) {
+            setState(() {
+              pressurePoints.removeAt(0);
+              pressurePoints.add(temp);
+              // Fluttertoast.showToast(msg: temp.toString());
+            });
+          } else {
             pressurePoints.add(temp);
-            // Fluttertoast.showToast(msg: temp.toString());
-          });
-        } else {
-          pressurePoints.add(temp);
-        }
-
-        if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
-            ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
-          setState(() {
-            pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
-          });
-        }
-
-        double temp1 = ((finalList[58] << 8) + finalList[59])
-            .toDouble(); // volume points 59,60
-
-        if (volumePoints.length >= 50) {
-          setState(() {
-            volumePoints.removeAt(0);
-            volumePoints.add(temp1);
-          });
-        } else {
-          volumePoints.add(temp1);
-        }
-
-        double temp3 = ((((finalList[46] << 8) + finalList[47])) -
-                (((finalList[48] << 8) + finalList[49])))
-            .toDouble();
-        temp3 = temp3 * 0.06;
-
-        if (flowPoints.length >= 50) {
-          setState(() {
-            flowPoints.removeAt(0);
-            flowPoints.add(temp3);
-          });
-        } else {
-          flowPoints.add(temp3 * 1.2);
-        }
-
-        if (_setValuesonClick == true && operatinModeR != 0) {
-          setState(() {
-            if (((finalList[114] << 8) + finalList[115]) != 0) {
-              receivedItrig =
-                  (65536 - ((finalList[114] << 8) + finalList[115]));
-            }
-
-            receivedpeep = ((finalList[116] << 8) + finalList[117]);
-
-            receivedps = ((finalList[118] << 8) + finalList[119]);
-
-            receivedfio2 = ((finalList[120] << 8) + finalList[121]);
-
-            receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
-
-            receivedi = finalList[124];
-
-            i = (receivedi / 10).toString();
-            receivede = finalList[125];
-            e = (receivede / 10).toString();
-            receivedti = (((finalList[126] << 8) + finalList[127])/100).toInt();
-
-            receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
-
-            receivedvvttmin = ((finalList[130] << 8) + finalList[131]);
-            receivedvtmax = ((finalList[132] << 8) + finalList[133]);
-            receivedminte = ((finalList[134] << 8) + finalList[135]);
-            receivedpc = ((finalList[136] << 8) + finalList[137]);
-
-            receivedrr = ((finalList[138] << 8) + finalList[139]);
-
-            receivedvt = ((finalList[140] << 8) + finalList[141]);
-
-            receivedpcmin = ((finalList[142] << 8) + finalList[143]);
-
-            receivedpcmax = ((finalList[144] << 8) + finalList[145]);
-
-            receivedo2pressure = ((finalList[146] << 8) + finalList[147]);
-            receivedtankpressure = ((finalList[148] << 8) + finalList[149]);
-            receivedinhalationblowercommand =
-                ((finalList[150] << 8) + finalList[151]);
-            receivedexhalatioblowercommand =
-                ((finalList[152] << 8) + finalList[153]);
-            dreceivedfio2 = ((finalList[154] << 8) + finalList[155]);
-            receivedvti = ((finalList[156] << 8) + finalList[157]);
-            receivedvte = ((finalList[158] << 8) + finalList[159]);
-            receivedflatprop = ((finalList[160] << 8) + finalList[161]);
-            //TODO
-          });
-
-          setState(() {
-            if (operatinModeR == 6) {
-              pccmvRRValue = receivedrr;
-              pccmvIeValue = getIeNumber(i + ":" + e.toString());
-              pccmvPeepValue = receivedpeep;
-              pccmvPcValue = receivedpc;
-              pccmvFio2Value = receivedfio2; //6
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("pc", receivedpc);
-              // pccmvEnabled = true;
-              // getData();
-
-              //TODO
-            } else if (operatinModeR == 7) {
-              preferences.setString("checkMode", "vccmv");
-              preferences.setInt('vccmvRRValue', receivedrr);
-              preferences.setInt(
-                  'vccmvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('vccmvPeepValue', receivedpeep);
-              preferences.setInt('vccmvFio2Value', receivedfio2);
-              preferences.setInt('vccmvVtValue', receivedvt); //7
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("vt", receivedvt);
-              // vccmvEnabled = true;
-              getData();
-            } else if (operatinModeR == 2) {
-              preferences.setString("checkMode", "pacv");
-              preferences.setInt('pacvItrigValue', receivedItrig);
-              preferences.setInt('pacvRrValue', receivedrr);
-              preferences.setInt(
-                  'pacvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('pacvPeepValue', receivedpeep);
-              preferences.setInt('pacvPcValue', receivedpc);
-              preferences.setInt('pacvFio2Value', receivedfio2); //2
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("pc", receivedpc);
-              preferences.setInt("itrig", receivedItrig);
-              // pacvEnabled  = true;
-              getData();
-            } else if (operatinModeR == 1) {
-              preferences.setString("checkMode", "vacv");
-              preferences.setInt('vacvItrigValue', receivedItrig);
-              preferences.setInt('vacvRrValue', receivedrr);
-              preferences.setInt(
-                  'vacvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('vacvPeepValue', receivedpeep);
-              preferences.setInt('vacvVtValue', receivedvt);
-              preferences.setInt('vacvFio2Value', receivedfio2); //1
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("vt", receivedvt);
-              preferences.setInt("itrig", receivedItrig);
-              // vacvEnabled = true;
-              getData();
-            } else if (operatinModeR == 4) {
-              preferences.setString("checkMode", "psimv");
-              preferences.setInt('psimvRrValue', receivedrr);
-              preferences.setInt('psimvPsValue', receivedps);
-              preferences.setInt(
-                  'psimvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('psimvPeepValue', receivedpeep);
-              preferences.setInt('psimvPcValue', receivedpc);
-              preferences.setInt('psimvFio2Value', receivedfio2); //4
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("pc", receivedpc);
-              preferences.setInt("ps", receivedps);
-              // psimvEnabled = true;
-              getData();
-            } else if (operatinModeR == 5) {
-              preferences.setString("checkMode", "vsimv");
-              preferences.setInt('vsimvRrValue', receivedrr);
-              preferences.setInt(
-                  'vsimvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('vsimvPeepValue', receivedpeep);
-              preferences.setInt('vsimvVtValue', receivedvt);
-              preferences.setInt('vsimvPsValue', receivedps);
-              preferences.setInt('vsimvFio2Value', receivedfio2); //5
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("vt", receivedvt);
-              // vsimvEnabled = true;
-              // preferences.setInt("ps", receivedps);
-              getData();
-            } else if (operatinModeR == 3) {
-              var apneatimeCaal= (receivedapneaTime/1000).toInt();
-              preferences.setString("checkMode", "psv");
-              preferences.setInt('psvItrigValue', receivedItrig);
-              // preferences.setInt('psvTiValue', psvTiValue);
-              preferences.setInt('psvPeepValue', receivedpeep);
-              preferences.setInt(
-                  'psvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('psvPsValue', receivedps);
-              preferences.setInt('psvFio2Value', receivedfio2);
-              preferences.setInt('psvBackupRrValue', receivedbackuprr);
-              preferences.setInt('psvPcValue', receivedpc);
-              preferences.setInt('psvAtimeValue', apneatimeCaal); //3
-
-              preferences.setInt("rr", receivedbackuprr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("pc", receivedpc);
-              preferences.setInt("ps", receivedps);
-              preferences.setInt("itrig", receivedItrig);
-              preferences.setInt("atime", apneatimeCaal);
-              preferences.setInt("ti",getTiValueNumber(receivedti));
-              //TODO
-
-              // psvEnabled = true;
-
-              getData();
-            }
-          });
-        }
-
-        setState(() {
-          powerIndication = finalList[64];
-          batteryPercentage = finalList[65];
-          batteryStatus = finalList[78];
-        });
-        if (playOnEnabled == false) {
-          if (patientId != "") {
-            var data = VentilatorOMode(
-                patientId,
-                patientName.toString(),
-                pipValue.toString(),
-                vteValue.toString(),
-                peepDisplayValue.toString(),
-                rrDisplayValue.toString(),
-                fio2DisplayParameter.toString(),
-                mapDisplayValue.toString(),
-                mvValue.toString(),
-                cdisplayParameter.toString(),
-                ieDisplayValue.toString(),
-                rrValue.toString(),
-                checkI(i) + ":" + checkE(e).toString(),
-                peepValue.toString(),
-                psValue.toString(),
-                fio2Value.toString(),
-                vtValue.toString(),
-                tiValue.toString(),
-                teValue.toString(),
-                temp,
-                temp3,
-                temp1,
-                operatinModeR.toString(),
-                lungImage.toString(),
-                paw.toString(),
-                globalCounterNo.toString(),
-                ((finalList[106] << 8) + finalList[107]).toString(),
-                finalList[109].toString(),
-                alarmActive);
-            saveData(data, patientId);
-          } else {
-            var data = VentilatorOMode(
-                "SWASIT " + globalCounterNo.toString(),
-                patientName,
-                pipValue.toString(),
-                vteValue.toString(),
-                peepDisplayValue.toString(),
-                rrDisplayValue.toString(),
-                fio2DisplayParameter.toString(),
-                mapDisplayValue.toString(),
-                mvValue.toString(),
-                cdisplayParameter.toString(),
-                ieDisplayValue.toString(),
-                rrValue.toString(),
-                checkI(i) + ":" + checkE(e).toString(),
-                peepValue.toString(),
-                psValue.toString(),
-                fio2Value.toString(),
-                vtValue.toString(),
-                tiValue.toString(),
-                teValue.toString(),
-                temp,
-                temp3,
-                temp1,
-                operatinModeR.toString(),
-                lungImage.toString(),
-                paw.toString(),
-                globalCounterNo.toString(),
-                ((finalList[106] << 8) + finalList[107]).toString(),
-                finalList[109].toString(),
-                alarmActive);
-            saveData(data, patientId);
           }
-        }
-        finalList = [];
-        list = [];
-        listTemp = [];
-      });
+
+          if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
+              ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
+            setState(() {
+              pplateauDisplay =
+                  ((finalList[60] << 8) + finalList[61]).toDouble();
+            });
+          }
+
+          double temp1 = ((finalList[58] << 8) + finalList[59])
+              .toDouble(); // volume points 59,60
+
+          if (volumePoints.length >= 50) {
+            setState(() {
+              volumePoints.removeAt(0);
+              volumePoints.add(temp1);
+            });
+          } else {
+            volumePoints.add(temp1);
+          }
+
+          double temp3 = ((((finalList[46] << 8) + finalList[47])) -
+                  (((finalList[48] << 8) + finalList[49])))
+              .toDouble();
+          temp3 = temp3 * 0.06;
+
+          if (flowPoints.length >= 50) {
+            setState(() {
+              flowPoints.removeAt(0);
+              flowPoints.add(temp3);
+            });
+          } else {
+            flowPoints.add(temp3);
+          }
+
+          if (_setValuesonClick == true && operatinModeR != 0) {
+            setState(() {
+              if (((finalList[114] << 8) + finalList[115]) != 0) {
+                receivedItrig =
+                    (65536 - ((finalList[114] << 8) + finalList[115]));
+              }
+
+              receivedpeep = ((finalList[116] << 8) + finalList[117]);
+
+              receivedps = ((finalList[118] << 8) + finalList[119]);
+
+              receivedfio2 = ((finalList[120] << 8) + finalList[121]);
+
+              receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
+
+              receivedi = finalList[124];
+
+              i = (receivedi / 10).toString();
+              receivede = finalList[125];
+              e = (receivede / 10).toString();
+              receivedti =
+                  (((finalList[126] << 8) + finalList[127]) / 100).toInt();
+
+              receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
+
+              receivedvvttmin = ((finalList[130] << 8) + finalList[131]);
+              receivedvtmax = ((finalList[132] << 8) + finalList[133]);
+              receivedminte = ((finalList[134] << 8) + finalList[135]);
+              receivedpc = ((finalList[136] << 8) + finalList[137]);
+
+              receivedrr = ((finalList[138] << 8) + finalList[139]);
+
+              receivedvt = ((finalList[140] << 8) + finalList[141]);
+
+              receivedpcmin = ((finalList[142] << 8) + finalList[143]);
+
+              receivedpcmax = ((finalList[144] << 8) + finalList[145]);
+
+              receivedo2pressure = ((finalList[146] << 8) + finalList[147]);
+              receivedtankpressure = ((finalList[148] << 8) + finalList[149]);
+              receivedinhalationblowercommand =
+                  ((finalList[150] << 8) + finalList[151]);
+              receivedexhalatioblowercommand =
+                  ((finalList[152] << 8) + finalList[153]);
+              dreceivedfio2 = ((finalList[154] << 8) + finalList[155]);
+              receivedvti = ((finalList[156] << 8) + finalList[157]);
+              receivedvte = ((finalList[158] << 8) + finalList[159]);
+              receivedflatprop = ((finalList[160] << 8) + finalList[161]);
+            });
+
+            setState(() {
+              if (operatinModeR == 6) {
+                pccmvRRValue = receivedrr;
+                pccmvIeValue = getIeNumber(i + ":" + e.toString());
+                pccmvPeepValue = receivedpeep;
+                pccmvPcValue = receivedpc;
+                pccmvFio2Value = receivedfio2; //6
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("pc", receivedpc);
+                // pccmvEnabled = true;
+                // getData();
+
+              } else if (operatinModeR == 7) {
+                preferences.setString("checkMode", "vccmv");
+                preferences.setInt('vccmvRRValue', receivedrr);
+                preferences.setInt(
+                    'vccmvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('vccmvPeepValue', receivedpeep);
+                preferences.setInt('vccmvFio2Value', receivedfio2);
+                preferences.setInt('vccmvVtValue', receivedvt); //7
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("vt", receivedvt);
+                // vccmvEnabled = true;
+                // getData();
+              } else if (operatinModeR == 2) {
+                preferences.setString("checkMode", "pacv");
+                preferences.setInt('pacvItrigValue', receivedItrig);
+                preferences.setInt('pacvRrValue', receivedrr);
+                preferences.setInt(
+                    'pacvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('pacvPeepValue', receivedpeep);
+                preferences.setInt('pacvPcValue', receivedpc);
+                preferences.setInt('pacvFio2Value', receivedfio2); //2
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("pc", receivedpc);
+                preferences.setInt("itrig", receivedItrig);
+                // pacvEnabled  = true;
+                // getData();
+              } else if (operatinModeR == 1) {
+                preferences.setString("checkMode", "vacv");
+                preferences.setInt('vacvItrigValue', receivedItrig);
+                preferences.setInt('vacvRrValue', receivedrr);
+                preferences.setInt(
+                    'vacvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('vacvPeepValue', receivedpeep);
+                preferences.setInt('vacvVtValue', receivedvt);
+                preferences.setInt('vacvFio2Value', receivedfio2); //1
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("vt", receivedvt);
+                preferences.setInt("itrig", receivedItrig);
+                // vacvEnabled = true;
+                // getData();
+              } else if (operatinModeR == 4) {
+                preferences.setString("checkMode", "psimv");
+                preferences.setInt('psimvRrValue', receivedrr);
+                preferences.setInt('psimvPsValue', receivedps);
+                preferences.setInt(
+                    'psimvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('psimvPeepValue', receivedpeep);
+                preferences.setInt('psimvPcValue', receivedpc);
+                preferences.setInt('psimvFio2Value', receivedfio2); //4
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("pc", receivedpc);
+                preferences.setInt("ps", receivedps);
+                // psimvEnabled = true;
+                // getData();
+              } else if (operatinModeR == 5) {
+                preferences.setString("checkMode", "vsimv");
+                preferences.setInt('vsimvRrValue', receivedrr);
+                preferences.setInt(
+                    'vsimvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('vsimvPeepValue', receivedpeep);
+                preferences.setInt('vsimvVtValue', receivedvt);
+                preferences.setInt('vsimvPsValue', receivedps);
+                preferences.setInt('vsimvFio2Value', receivedfio2); //5
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("vt", receivedvt);
+                // vsimvEnabled = true;
+                // preferences.setInt("ps", receivedps);
+                // getData();
+              } else if (operatinModeR == 3) {
+                var apneatimeCaal = (receivedapneaTime / 1000).toInt();
+                preferences.setString("checkMode", "psv");
+                preferences.setInt('psvItrigValue', receivedItrig);
+                // preferences.setInt('psvTiValue', psvTiValue);
+                preferences.setInt('psvPeepValue', receivedpeep);
+                preferences.setInt(
+                    'psvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('psvPsValue', receivedps);
+                preferences.setInt('psvFio2Value', receivedfio2);
+                preferences.setInt('psvBackupRrValue', receivedbackuprr);
+                preferences.setInt('psvPcValue', receivedpc);
+                preferences.setInt('psvAtimeValue', apneatimeCaal); //3
+
+                preferences.setInt("rr", receivedbackuprr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("pc", receivedpc);
+                preferences.setInt("ps", receivedps);
+                preferences.setInt("itrig", receivedItrig);
+                preferences.setInt("atime", apneatimeCaal);
+                preferences.setInt("ti", getTiValueNumber(receivedti));
+
+                // psvEnabled = true;
+
+                // getData();
+              }
+            });
+          }
+
+          var setValueData = pcValue + peepValue;
+
+          if (pipValue>setValueData){
+            _temporarySetValue.add(Text(lastRecordTime+" "+pipValue.toString()+" "+setValueData.toString(),style:TextStyle(color:Colors.white)));
+          }
+
+          setState(() {
+            powerIndication = finalList[64];
+            batteryPercentage = finalList[65];
+            batteryStatus = finalList[78];
+          });
+          if (playOnEnabled == false) {
+            if (patientId != "") {
+              var data = VentilatorOMode(
+                  patientId,
+                  patientName.toString(),
+                  pipValue.toString(),
+                  vteValue.toString(),
+                  peepDisplayValue.toString(),
+                  rrDisplayValue.toString(),
+                  fio2DisplayParameter.toString(),
+                  mapDisplayValue.toString(),
+                  mvValue.toString(),
+                  cdisplayParameter.toString(),
+                  ieDisplayValue.toString(),
+                  rrValue.toString(),
+                  checkI(i) + ":" + checkE(e).toString(),
+                  peepValue.toString(),
+                  psValue.toString(),
+                  fio2Value.toString(),
+                  vtValue.toString(),
+                  tiValue.toString(),
+                  teValue.toString(),
+                  temp,
+                  temp3,
+                  temp1,
+                  operatinModeR.toString(),
+                  lungImage.toString(),
+                  paw.toString(),
+                  globalCounterNo.toString(),
+                  ((finalList[106] << 8) + finalList[107]).toString(),
+                  finalList[109].toString(),
+                  alarmActive);
+              saveData(data, patientId);
+            } else {
+              var data = VentilatorOMode(
+                  "SWASIT " + globalCounterNo.toString(),
+                  patientName,
+                  pipValue.toString(),
+                  vteValue.toString(),
+                  peepDisplayValue.toString(),
+                  rrDisplayValue.toString(),
+                  fio2DisplayParameter.toString(),
+                  mapDisplayValue.toString(),
+                  mvValue.toString(),
+                  cdisplayParameter.toString(),
+                  ieDisplayValue.toString(),
+                  rrValue.toString(),
+                  checkI(i) + ":" + checkE(e).toString(),
+                  peepValue.toString(),
+                  psValue.toString(),
+                  fio2Value.toString(),
+                  vtValue.toString(),
+                  tiValue.toString(),
+                  teValue.toString(),
+                  temp,
+                  temp3,
+                  temp1,
+                  operatinModeR.toString(),
+                  lungImage.toString(),
+                  paw.toString(),
+                  globalCounterNo.toString(),
+                  ((finalList[106] << 8) + finalList[107]).toString(),
+                  finalList[109].toString(),
+                  alarmActive);
+              saveData(data, patientId);
+            }
+          }
+          finalList = [];
+          list = [];
+          listTemp = [];
+        });
       // }
     } else if (finalList.isNotEmpty &&
         ((finalList[2] << 8) + finalList[3]) == 17) {
