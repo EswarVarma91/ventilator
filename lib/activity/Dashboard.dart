@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:screen/screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usb_serial/transaction.dart';
@@ -683,6 +684,32 @@ class _CheckPageState extends State<Dashboard> {
     // // });
     //   }
     // });
+    _timer = Timer.periodic(Duration(minutes:1), (timer) async {
+      var now = new DateTime.now();
+      setState((){
+        presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+      if(pcValue<55){
+         pcValue =  pcValue+5;
+      sendDataPacket("pc",pcValue.toString()+"ab");
+      }else{
+        if(rrValue<55){
+           rrValue = rrValue+5;
+        }else{
+          rrValue= 10;
+        }
+        pcValue = 10;
+        sendDataPacket("rr",rrValue.toString()+"ab");
+      }
+      });
+      
+
+      if(pipValue>(pcValue+peepValue)){
+        _writeStringToTextFile("time: $presentTime"," pip: $pipValue"," rr: $rrValue"," pc+peep: "+(pcValue+peepValue).toString());
+      }
+
+      
+      //_writeStringToTextFile(_textField.text);
+    });
 
     _timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
       // if(getportsData==false){
@@ -789,6 +816,21 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
     });
+  }
+
+   Future<File> _writeStringToTextFile(String presetnTime, String pipValue, String rrValue, String s,) async {
+    final file = await _localFile;
+    return file.writeAsString('$presetnTime $pipValue $rrValue $s $operatinModeR\n', mode: FileMode.append);
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/pccmvrecord.txt');
+  }
+
+   Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
   }
 
   saveData(VentilatorOMode data, String patientId) async {
@@ -3972,8 +4014,7 @@ class _CheckPageState extends State<Dashboard> {
                                                 ),
                                               )
                                             : Container(),
-                                        alarmConfirmed == false
-                                            ? Row(
+                                         Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.end,
                                                 mainAxisAlignment:
@@ -4071,7 +4112,6 @@ class _CheckPageState extends State<Dashboard> {
                                                   ),
                                                 ],
                                               )
-                                            : Container(),
                                       ],
                                     ),
                                   )
@@ -4816,7 +4856,7 @@ class _CheckPageState extends State<Dashboard> {
                                                     style: TextStyle(
                                                         color: Colors.green,
                                                         fontSize: 35),
-                                                  ),
+                                                  ), 
                                                 ),
                                               ),
                                               Align(
@@ -23161,7 +23201,7 @@ class _CheckPageState extends State<Dashboard> {
                     ],
                   ),
                 ))
-            : Container(),
+            : Container(height:380),
       ],
     );
   }

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" group="android" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1771226315/android-fluttertoast.iml" filepath="$PROJECT_DIR$/.idea/modules/-1771226315/android-fluttertoast.iml" group="android/fluttertoast" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1160043275/android-path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/-1160043275/android-path_provider.iml" group="android/path_provider" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/997741204/android-path_provider_macos.iml" filepath="$PROJECT_DIR$/.idea/modules/997741204/android-path_provider_macos.iml" group="android/path_provider_macos" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1441689898/android-screen.iml" filepath="$PROJECT_DIR$/.idea/modules/-1441689898/android-screen.iml" group="android/screen" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1290918537/android-shared_preferences.iml" filepath="$PROJECT_DIR$/.idea/modules/-1290918537/android-shared_preferences.iml" group="android/shared_preferences" />
@@ -12,7 +13,6 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="android/app" />
       <module fileurl="file://$USER_HOME$/flutter_sdk/.pub-cache/hosted/pub.dartlang.org/fluttertoast-4.0.1/android/fluttertoast.iml" filepath="$USER_HOME$/flutter_sdk/.pub-cache/hosted/pub.dartlang.org/fluttertoast-4.0.1/android/fluttertoast.iml" group="android/fluttertoast" />
       <module fileurl="file://$USER_HOME$/flutter_sdk/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.8/android/path_provider.iml" filepath="$USER_HOME$/flutter_sdk/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.8/android/path_provider.iml" group="android/path_provider" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/647411188/path_provider-1.6.10-android-path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/647411188/path_provider-1.6.10-android-path_provider.iml" group="android/path_provider" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1983516720/path_provider_linux.iml" filepath="$PROJECT_DIR$/.idea/modules/-1983516720/path_provider_linux.iml" group="android/path_provider_linux" />
       <module fileurl="file://$USER_HOME$/flutter_sdk/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+2/android/path_provider_macos.iml" filepath="$USER_HOME$/flutter_sdk/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+2/android/path_provider_macos.iml" group="android/path_provider_macos" />
       <module fileurl="file://$USER_HOME$/flutter_sdk/.pub-cache/hosted/pub.dartlang.org/screen-0.0.5/android/screen.iml" filepath="$USER_HOME$/flutter_sdk/.pub-cache/hosted/pub.dartlang.org/screen-0.0.5/android/screen.iml" group="android/screen" />
