@@ -543,7 +543,7 @@ class _CheckPageState extends State<Dashboard> {
       dreceivedfio2 = 0,
       receivedvti = 0,
       receivedvte = 0,
-      receivedflatprop = 0;
+      receivedflatprop = 0,receivedoperatingModeR=0;
 
   String assistStatus = "OFF";
   var batteryforceCharge = 0;
@@ -3610,51 +3610,51 @@ class _CheckPageState extends State<Dashboard> {
                                                   ),
                                                 ),
                                               ),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    assistmodeOn =
-                                                        !assistmodeOn;
-                                                    if (assistStatus == "OFF") {
-                                                      assistStatus = "ON";
-                                                    } else if (assistStatus ==
-                                                        "ON") {
-                                                      assistStatus = "OFF";
-                                                    }
-                                                    if (assistmodeOn == true) {
-                                                      pacvEnabled = true;
-                                                      pccmvEnabled = false;
-                                                    } else {
-                                                      pccmvEnabled = true;
-                                                      pacvEnabled = false;
-                                                    }
-                                                  });
-                                                },
-                                                child: Container(
-                                                  height: 80,
-                                                  width: 80,
-                                                  child: Card(
-                                                    child: Center(
-                                                        child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Text(
-                                                          "Assit \n" +
-                                                              assistStatus,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                              fontSize: 10,
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                    )),
-                                                  ),
-                                                ),
-                                              ),
+                                              // InkWell(
+                                              //   onTap: () {
+                                              //     setState(() {
+                                              //       assistmodeOn =
+                                              //           !assistmodeOn;
+                                              //       if (assistStatus == "OFF") {
+                                              //         assistStatus = "ON";
+                                              //       } else if (assistStatus ==
+                                              //           "ON") {
+                                              //         assistStatus = "OFF";
+                                              //       }
+                                              //       if (assistmodeOn == true) {
+                                              //         pacvEnabled = true;
+                                              //         pccmvEnabled = false;
+                                              //       } else {
+                                              //         pccmvEnabled = true;
+                                              //         pacvEnabled = false;
+                                              //       }
+                                              //     });
+                                              //   },
+                                              //   child: Container(
+                                              //     height: 80,
+                                              //     width: 80,
+                                              //     child: Card(
+                                              //       child: Center(
+                                              //           child: Padding(
+                                              //         padding:
+                                              //             const EdgeInsets.all(
+                                              //                 8.0),
+                                              //         child: Text(
+                                              //             "Assit \n" +
+                                              //                 assistStatus,
+                                              //             textAlign:
+                                              //                 TextAlign.center,
+                                              //             style: TextStyle(
+                                              //                 fontSize: 10,
+                                              //                 color:
+                                              //                     Colors.black,
+                                              //                 fontWeight:
+                                              //                     FontWeight
+                                              //                         .bold)),
+                                              //       )),
+                                              //     ),
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
 
@@ -23746,7 +23746,7 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   serialiseReceivedPacket(List<int> finalList) async {
-    if (finalList.isNotEmpty && finalList.length == 162) {//114
+    if (finalList.isNotEmpty && finalList.length == 164) {//114
       var now = new DateTime.now();
 
       lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
@@ -24312,6 +24312,7 @@ class _CheckPageState extends State<Dashboard> {
 
           if (_setValuesonClick == true && operatinModeR != 0) {
             setState(() {
+              receivedoperatingModeR = ((finalList[112] << 8) + finalList[113]);
               if (((finalList[114] << 8) + finalList[115]) != 0) {
                 receivedItrig =
                     (65536 - ((finalList[114] << 8) + finalList[115]));
@@ -24358,10 +24359,11 @@ class _CheckPageState extends State<Dashboard> {
               receivedvti = ((finalList[156] << 8) + finalList[157]);
               receivedvte = ((finalList[158] << 8) + finalList[159]);
               receivedflatprop = ((finalList[160] << 8) + finalList[161]);
+              
             });
 
             setState(() {
-              if (operatinModeR == 6) {
+              if (operatinModeR == 6 && receivedoperatingModeR == 6) {
                 pccmvRRValue = receivedrr;
                 pccmvIeValue = getIeNumber(i + ":" + e.toString());
                 pccmvPeepValue = receivedpeep;
@@ -24377,7 +24379,7 @@ class _CheckPageState extends State<Dashboard> {
                 // pccmvEnabled = true;
                 // getData();
 
-              } else if (operatinModeR == 7) {
+              } else if (operatinModeR == 7 && receivedoperatingModeR == 7) {
                 preferences.setString("checkMode", "vccmv");
                 preferences.setInt('vccmvRRValue', receivedrr);
                 preferences.setInt(
@@ -24394,7 +24396,7 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt("vt", receivedvt);
                 // vccmvEnabled = true;
                 // getData();
-              } else if (operatinModeR == 2) {
+              } else if (operatinModeR == 2 && receivedoperatingModeR == 2) {
                 preferences.setString("checkMode", "pacv");
                 preferences.setInt('pacvItrigValue', receivedItrig);
                 preferences.setInt('pacvRrValue', receivedrr);
@@ -24413,7 +24415,7 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt("itrig", receivedItrig);
                 // pacvEnabled  = true;
                 // getData();
-              } else if (operatinModeR == 1) {
+              } else if (operatinModeR == 1 && receivedoperatingModeR == 1) {
                 preferences.setString("checkMode", "vacv");
                 preferences.setInt('vacvItrigValue', receivedItrig);
                 preferences.setInt('vacvRrValue', receivedrr);
@@ -24432,7 +24434,7 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt("itrig", receivedItrig);
                 // vacvEnabled = true;
                 // getData();
-              } else if (operatinModeR == 4) {
+              } else if (operatinModeR == 4 && receivedoperatingModeR == 4) {
                 preferences.setString("checkMode", "psimv");
                 preferences.setInt('psimvRrValue', receivedrr);
                 preferences.setInt('psimvPsValue', receivedps);
@@ -24451,7 +24453,7 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt("ps", receivedps);
                 // psimvEnabled = true;
                 // getData();
-              } else if (operatinModeR == 5) {
+              } else if (operatinModeR == 5 && receivedoperatingModeR == 5) {
                 preferences.setString("checkMode", "vsimv");
                 preferences.setInt('vsimvRrValue', receivedrr);
                 preferences.setInt(
@@ -24470,7 +24472,7 @@ class _CheckPageState extends State<Dashboard> {
                 // vsimvEnabled = true;
                 // preferences.setInt("ps", receivedps);
                 // getData();
-              } else if (operatinModeR == 3) {
+              } else if (operatinModeR == 3 && receivedoperatingModeR == 3) {
                 var apneatimeCaal = (receivedapneaTime / 1000).toInt();
                 preferences.setString("checkMode", "psv");
                 preferences.setInt('psvItrigValue', receivedItrig);
