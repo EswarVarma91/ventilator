@@ -15855,7 +15855,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vccmvVtValue != null
-                                    ? vccmvVtValue / 1200
+                                    ? vccmvVtValue / 600
                                     : 0,
                               ),
                             ),
@@ -17084,7 +17084,7 @@ class _CheckPageState extends State<Dashboard> {
                                       : Color(0xFFE0E0E0),
                                 ),
                                 value: vsimvVtValue != null
-                                    ? vsimvVtValue / 2000
+                                    ? vsimvVtValue / 600
                                     : 0,
                               ),
                             ),
