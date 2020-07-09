@@ -2661,6 +2661,96 @@ class _CheckPageState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    
+                    
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Inhalation Valve         ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: inhalationvalve == 0
+                                  ? false
+                                  : inhalationvalve == 1
+                                      ? false
+                                      : inhalationvalve == 2 ? true : false,
+                              activeColor: inhalationvalve == 1
+                                  ? Colors.red
+                                  : inhalationvalve == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Exhalation Valve        ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: exhalationvalve == 0
+                                  ? false
+                                  : exhalationvalve == 1
+                                      ? false
+                                      : exhalationvalve == 2 ? true : false,
+                              activeColor: exhalationvalve == 1
+                                  ? Colors.red
+                                  : exhalationvalve == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Vent Value                  ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: ventvalue == 0
+                                  ? false
+                                  : ventvalue == 1
+                                      ? false
+                                      : ventvalue == 2 ? true : false,
+                              activeColor: ventvalue == 1
+                                  ? Colors.red
+                                  : ventvalue == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Card(
@@ -2691,96 +2781,6 @@ class _CheckPageState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: Colors.grey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "MT Pressure Sensor",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Checkbox(
-                              value: mtpressuresensor == 0
-                                  ? false
-                                  : mtpressuresensor == 1
-                                      ? false
-                                      : mtpressuresensor == 2 ? true : false,
-                              activeColor: mtpressuresensor == 1
-                                  ? Colors.red
-                                  : mtpressuresensor == 2
-                                      ? Colors.blue
-                                      : Colors.black,
-                              onChanged: (bool value) {},
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: Colors.grey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "Inhalation Valve        ",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Checkbox(
-                              value: inhalationvalve == 0
-                                  ? false
-                                  : inhalationvalve == 1
-                                      ? false
-                                      : inhalationvalve == 2 ? true : false,
-                              activeColor: inhalationvalve == 1
-                                  ? Colors.red
-                                  : inhalationvalve == 2
-                                      ? Colors.blue
-                                      : Colors.black,
-                              onChanged: (bool value) {},
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: Colors.grey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "Exhalation Valve      ",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Checkbox(
-                              value: exhalationvalve == 0
-                                  ? false
-                                  : exhalationvalve == 1
-                                      ? false
-                                      : exhalationvalve == 2 ? true : false,
-                              activeColor: exhalationvalve == 1
-                                  ? Colors.red
-                                  : exhalationvalve == 2
-                                      ? Colors.blue
-                                      : Colors.black,
-                              onChanged: (bool value) {},
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 Column(
@@ -2796,21 +2796,49 @@ class _CheckPageState extends State<Dashboard> {
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Text(
-                                "Exhalation Flow Sensor        ",
+                                "Inhalation Pressure Sensor ",
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
                             Checkbox(
-                              value: exhalationflowsensor == 0
+                              value: inhalationpressure == 0
                                   ? false
-                                  : exhalationflowsensor == 1
+                                  : inhalationpressure == 1
                                       ? false
-                                      : exhalationflowsensor == 2
-                                          ? true
-                                          : false,
-                              activeColor: exhalationflowsensor == 1
+                                      : inhalationpressure == 2 ? true : false,
+                              activeColor: inhalationpressure == 1
                                   ? Colors.red
-                                  : exhalationflowsensor == 2
+                                  : inhalationpressure == 2
+                                      ? Colors.blue
+                                      : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Exhalation Pressure Sensor",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: exhalationpressure == 0
+                                  ? false
+                                  : exhalationpressure == 1
+                                      ? false
+                                      : exhalationpressure == 2 ? true : false,
+                              activeColor: exhalationpressure == 1
+                                  ? Colors.red
+                                  : exhalationpressure == 2
                                       ? Colors.blue
                                       : Colors.black,
                               onChanged: (bool value) {},
@@ -2860,19 +2888,21 @@ class _CheckPageState extends State<Dashboard> {
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Text(
-                                "Exhalation Pressure Sensor",
+                                "Exhalation Flow Sensor        ",
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
                             Checkbox(
-                              value: exhalationpressure == 0
+                              value: exhalationflowsensor == 0
                                   ? false
-                                  : exhalationpressure == 1
+                                  : exhalationflowsensor == 1
                                       ? false
-                                      : exhalationpressure == 2 ? true : false,
-                              activeColor: exhalationpressure == 1
+                                      : exhalationflowsensor == 2
+                                          ? true
+                                          : false,
+                              activeColor: exhalationflowsensor == 1
                                   ? Colors.red
-                                  : exhalationpressure == 2
+                                  : exhalationflowsensor == 2
                                       ? Colors.blue
                                       : Colors.black,
                               onChanged: (bool value) {},
@@ -2881,36 +2911,9 @@ class _CheckPageState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: Colors.grey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "Inhalation Pressure Sensor",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Checkbox(
-                              value: inhalationpressure == 0
-                                  ? false
-                                  : inhalationpressure == 1
-                                      ? false
-                                      : inhalationpressure == 2 ? true : false,
-                              activeColor: inhalationpressure == 1
-                                  ? Colors.red
-                                  : inhalationpressure == 2
-                                      ? Colors.blue
-                                      : Colors.black,
-                              onChanged: (bool value) {},
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    
+                    
+                    
                   ],
                 ),
                 Column(
@@ -2926,7 +2929,7 @@ class _CheckPageState extends State<Dashboard> {
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Text(
-                                "O \u2082 Sensor",
+                                "O \u2082 Sensor                  ",
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
@@ -2954,47 +2957,19 @@ class _CheckPageState extends State<Dashboard> {
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Text(
-                                "Vent Value        ",
+                                "MT Pressure Sensor ",
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
                             Checkbox(
-                              value: ventvalue == 0
+                              value: mtpressuresensor == 0
                                   ? false
-                                  : ventvalue == 1
+                                  : mtpressuresensor == 1
                                       ? false
-                                      : ventvalue == 2 ? true : false,
-                              activeColor: ventvalue == 1
+                                      : mtpressuresensor == 2 ? true : false,
+                              activeColor: mtpressuresensor == 1
                                   ? Colors.red
-                                  : ventvalue == 2 ? Colors.blue : Colors.black,
-                              onChanged: (bool value) {},
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: Colors.grey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "Communication",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Checkbox(
-                              value: communication == 0
-                                  ? false
-                                  : communication == 1
-                                      ? false
-                                      : communication == 2 ? true : false,
-                              activeColor: communication == 1
-                                  ? Colors.red
-                                  : communication == 2
+                                  : mtpressuresensor == 2
                                       ? Colors.blue
                                       : Colors.black,
                               onChanged: (bool value) {},
@@ -3012,74 +2987,7 @@ class _CheckPageState extends State<Dashboard> {
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Text(
-                                "Main Power       ",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Checkbox(
-                              value: mainpower == 0
-                                  ? false
-                                  : mainpower == 1
-                                      ? false
-                                      : mainpower == 2 ? true : false,
-                              activeColor: mainpower == 1
-                                  ? Colors.red
-                                  : mainpower == 2 ? Colors.blue : Colors.black,
-                              onChanged: (bool value) {},
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: battery == 1 ? Colors.red : Colors.grey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "Battery         ",
-                                style: TextStyle(
-                                    color: battery == 0
-                                        ? Colors.black
-                                        : battery == 1
-                                            ? Colors.white
-                                            : Colors.black),
-                              ),
-                            ),
-                            Checkbox(
-                              value: battery == 0
-                                  ? false
-                                  : battery == 1
-                                      ? false
-                                      : battery == 2 ? true : false,
-                              activeColor: battery == 1
-                                  ? Colors.red
-                                  : battery == 2 ? Colors.blue : Colors.black,
-                              onChanged: (bool value) {},
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: Colors.grey,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "Compressor",
+                                "Compressor               ",
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
@@ -3109,7 +3017,7 @@ class _CheckPageState extends State<Dashboard> {
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Text(
-                                "Blender        ",
+                                "Blender                       ",
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
@@ -3122,6 +3030,107 @@ class _CheckPageState extends State<Dashboard> {
                               activeColor: blender == 1
                                   ? Colors.red
                                   : blender == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                    
+                    
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Main Power       ",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: mainpower == 0
+                                  ? false
+                                  : mainpower == 1
+                                      ? false
+                                      : mainpower == 2 ? true : false,
+                              activeColor: mainpower == 1
+                                  ? Colors.red
+                                  : mainpower == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: battery == 1 ? Colors.red : Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Battery                ",
+                                style: TextStyle(
+                                    color: battery == 0
+                                        ? Colors.black
+                                        : battery == 1
+                                            ? Colors.white
+                                            : Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: battery == 0
+                                  ? false
+                                  : battery == 1
+                                      ? false
+                                      : battery == 2 ? true : false,
+                              activeColor: battery == 1
+                                  ? Colors.red
+                                  : battery == 2 ? Colors.blue : Colors.black,
+                              onChanged: (bool value) {},
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "Communication",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Checkbox(
+                              value: communication == 0
+                                  ? false
+                                  : communication == 1
+                                      ? false
+                                      : communication == 2 ? true : false,
+                              activeColor: communication == 1
+                                  ? Colors.red
+                                  : communication == 2
+                                      ? Colors.blue
+                                      : Colors.black,
                               onChanged: (bool value) {},
                             )
                           ],
