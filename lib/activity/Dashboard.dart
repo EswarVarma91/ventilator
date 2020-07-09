@@ -24539,7 +24539,7 @@ class _CheckPageState extends State<Dashboard> {
 
           // if (pipValue>setValueData){
           //   _temporarySetValue.add(Text(lastRecordTime+" "+pipValue.toString()+" "+setValueData.toString(),style:TextStyle(color:Colors.white)));
-          // }f
+          // }
 
           setState(() {
             powerIndication = finalList[64];
