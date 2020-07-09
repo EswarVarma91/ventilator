@@ -684,32 +684,33 @@ class _CheckPageState extends State<Dashboard> {
     // // });
     //   }
     // });
-    _timer = Timer.periodic(Duration(minutes:1), (timer) async {
-      var now = new DateTime.now();
-      setState((){
-        presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
-      if(pcValue<55){
-         pcValue =  pcValue+5;
-      sendDataPacket("pc",pcValue.toString()+"ab");
-      }else{
-        if(rrValue<55){
-           rrValue = rrValue+5;
-        }else{
-          rrValue= 10;
-        }
-        pcValue = 10;
-        sendDataPacket("rr",rrValue.toString()+"ab");
-      }
-      });
+    // _timer = Timer.periodic(Duration(seconds:1), (timer) async {
+    //   var now = new DateTime.now();
+    //   setState((){
+    //     presentTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);
+    //   if(pcValue<55){
+    //      pcValue =  pcValue+5;
+    //   sendDataPacket("pc",pcValue.toString()+"ab");
+    //   }else{
+    //     if(rrValue<55){
+    //        rrValue = rrValue+5;
+    //     }else{
+    //       rrValue= 10;
+    //       pcValue = 10;
+    //     }
+    //     
+    //     sendDataPacket("rr",rrValue.toString()+"ab");
+    //   }
+    //   });
       
 
-      if(pipValue>(pcValue+peepValue)){
-        _writeStringToTextFile("time: $presentTime"," pip: $pipValue"," rr: $rrValue"," pc+peep: "+(pcValue+peepValue).toString());
-      }
+    //   if(pipValue>(pcValue+peepValue)){
+    //     _writeStringToTextFile("time: $presentTime"," pip: $pipValue"," rr: $rrValue"," pc+peep: "+(pcValue+peepValue).toString());
+    //   }
 
       
-      //_writeStringToTextFile(_textField.text);
-    });
+    //   //_writeStringToTextFile(_textField.text);
+    // });
 
     _timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
       // if(getportsData==false){
@@ -1972,17 +1973,7 @@ class _CheckPageState extends State<Dashboard> {
                             : Container(),
                       ],
                     ),
-                    ..._temporarySetValue,
-                    InkWell(
-                      onTap:(){
-                        setState((){
-                          _temporarySetValue.clear();
-                        });
-                      },
-                      child: Container(color: Colors.white,child:Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Clear All"),
-                      ))),
+                    
                   ],
                 ),
               ),
@@ -24544,11 +24535,11 @@ class _CheckPageState extends State<Dashboard> {
             });
           }
 
-          var setValueData = pcValue + peepValue;
+          // var setValueData = pcValue + peepValue;
 
-          if (pipValue>setValueData){
-            _temporarySetValue.add(Text(lastRecordTime+" "+pipValue.toString()+" "+setValueData.toString(),style:TextStyle(color:Colors.white)));
-          }
+          // if (pipValue>setValueData){
+          //   _temporarySetValue.add(Text(lastRecordTime+" "+pipValue.toString()+" "+setValueData.toString(),style:TextStyle(color:Colors.white)));
+          // }f
 
           setState(() {
             powerIndication = finalList[64];
