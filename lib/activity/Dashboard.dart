@@ -684,15 +684,15 @@ class _CheckPageState extends State<Dashboard> {
       _getPorts();
     });
     _getPorts();
-    _timer3 =Timer.periodic(Duration(milliseconds: 5000), (timer) {
-      // Fluttertoast.showToast(msg:(rrValue==null).toString()+" "+rrValue.toString());
-      if (rrValue == null ) {
-        saveDataa();
-        getData();
-      } else {
-        // _timer3.cancel();
-      }
-     });
+    // _timer3 =Timer.periodic(Duration(milliseconds: 5000), (timer) {
+    //   // Fluttertoast.showToast(msg:(rrValue==null).toString()+" "+rrValue.toString());
+    //   if (rrValue == null ) {
+    //     saveDataa();
+    //     getData();
+    //   } else {
+    //     // _timer3.cancel();
+    //   }
+    //  });
      getData();
     // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) {
     //   if(_status == "Disconnected"){
@@ -835,52 +835,52 @@ class _CheckPageState extends State<Dashboard> {
     });
   }
 
-  saveDataa() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  // saveDataa() async {
+  //   WidgetsFlutterBinding.ensureInitialized();
 
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    preferences.setString("mode", "PC-CMV");
+  //   preferences.setString("mode", "PC-CMV");
 
-    preferences.setString("checkMode", "0");
-    preferences.setInt("rr", 20);
-    preferences.setInt("ie", 51);
-    preferences.setString("i", "1.0");
-    preferences.setString("e", "3.0");
-    preferences.setInt("peep", 10);
-    // preferences.setInt("ps", 40);
-    preferences.setInt("fio2", 21);
-    preferences.setInt("tih", 50);
-    preferences.setInt("paw", 0);
-    preferences.setInt("itrig", 3);
-    preferences.setInt("atime", 10);
-    preferences.setInt("ti", 1);
-    preferences.setBool("play", true);
-    // preferences.setInt("tidal", 14);
-    // preferences.setInt("mv", 500);
-    preferences.setInt("rrtotal", 0);
-    preferences.setInt("ps", 25);
-    preferences.setInt("pc", 25);
-    preferences.setInt("vt", 400);
-    preferences.setInt("te", 20);
-    preferences.setInt("vte", 0);
-    preferences.setString("pid", "");
-    preferences.setString("pname", "");
-    preferences.setString("pgender", "");
-    preferences.setString("page", "");
-    preferences.setString("pweight", "");
-    preferences.setString("pheight", "");
-    preferences.setInt('minrr', 1);
-    preferences.setInt('maxrr', 70);
-    preferences.setInt('minvte', 0);
-    preferences.setInt('maxvte', 2400);
-    preferences.setInt('minppeak', 0);
-    preferences.setInt('maxppeak', 100);
-    preferences.setInt('minpeep', 0);
-    preferences.setInt('maxpeep', 40);
-    var dateS = preferences.getString('lastRecordTime');
-    var res = dbHelper.delete7Daysdata(dateS);
-    var res1 = dbHelper1.delete1Daysdata(dateS);
+  //   preferences.setString("checkMode", "0");
+  //   preferences.setInt("rr", 20);
+  //   preferences.setInt("ie", 51);
+  //   preferences.setString("i", "1.0");
+  //   preferences.setString("e", "3.0");
+  //   preferences.setInt("peep", 10);
+  //   // preferences.setInt("ps", 40);
+  //   preferences.setInt("fio2", 21);
+  //   preferences.setInt("tih", 50);
+  //   preferences.setInt("paw", 0);
+  //   preferences.setInt("itrig", 3);
+  //   preferences.setInt("atime", 10);
+  //   preferences.setInt("ti", 1);
+  //   preferences.setBool("play", true);
+  //   // preferences.setInt("tidal", 14);
+  //   // preferences.setInt("mv", 500);
+  //   preferences.setInt("rrtotal", 0);
+  //   preferences.setInt("ps", 25);
+  //   preferences.setInt("pc", 25);
+  //   preferences.setInt("vt", 400);
+  //   preferences.setInt("te", 20);
+  //   preferences.setInt("vte", 0);
+  //   preferences.setString("pid", "");
+  //   preferences.setString("pname", "");
+  //   preferences.setString("pgender", "");
+  //   preferences.setString("page", "");
+  //   preferences.setString("pweight", "");
+  //   preferences.setString("pheight", "");
+  //   preferences.setInt('minrr', 1);
+  //   preferences.setInt('maxrr', 70);
+  //   preferences.setInt('minvte', 0);
+  //   preferences.setInt('maxvte', 2400);
+  //   preferences.setInt('minppeak', 0);
+  //   preferences.setInt('maxppeak', 100);
+  //   preferences.setInt('minpeep', 0);
+  //   preferences.setInt('maxpeep', 40);
+  //   var dateS = preferences.getString('lastRecordTime');
+  //   var res = dbHelper.delete7Daysdata(dateS);
+  //   var res1 = dbHelper1.delete1Daysdata(dateS);
 
     // if(counter==null){
     //   counter = counter +1;
@@ -891,7 +891,7 @@ class _CheckPageState extends State<Dashboard> {
     // print(res.toString()+"  "+res1.toString());
     //  preferences.setInt('noTimes', counter);
     // await sleep(Duration(seconds: 2));
-  }
+  // }
 
   Future<File> _writeStringToTextFile(
     String presetnTime,

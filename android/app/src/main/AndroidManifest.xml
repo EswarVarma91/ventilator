@@ -39,7 +39,7 @@
             android:launchMode="singleTop"
             android:exported="true"
             android:theme="@style/LaunchTheme"
-            android:directBootAware="true"
+            android:directBootAware="false"
             android:windowSoftInputMode="adjustResize">
 
             <meta-data android:name="io.flutter.app.android.SplashScreenUntilFirstFrame" android:value="true" />
@@ -76,13 +76,13 @@
         </receiver>
 
 
-        <receiver
-            android:enabled="true"
-            android:name=".StartBootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver-->
+<!--            android:enabled="true"-->
+<!--            android:name=".StartBootReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
 
         <provider
             android:name="androidx.core.content.FileProvider"

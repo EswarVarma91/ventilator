@@ -42,14 +42,14 @@ class MainActivity: FlutterActivity() {
     @SuppressLint("InvalidWakeLockTag")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
-        val um: UserManager = getSystemService(Context.USER_SERVICE) as UserManager
-        if(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    um.isUserUnlocked
-                } else {
-                    TODO("VERSION.SDK_INT < N")
-                }) {
+//        val um: UserManager = getSystemService(Context.USER_SERVICE) as UserManager
+//        if(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    um.isUserUnlocked
+//                } else {
+//                    TODO("VERSION.SDK_INT < N")
+//                }) {
             GeneratedPluginRegistrant.registerWith(flutterEngine)
-        }
+//        }
 
         mAdminComponentName = MyDeviceAdminReceiver.getComponentName(this)
         mDevicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
