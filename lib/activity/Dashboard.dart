@@ -24,6 +24,9 @@ import 'package:ventilator/activity/About.dart';
 import 'package:ventilator/activity/NewTreatmentScreen.dart';
 
 class Dashboard extends StatefulWidget {
+  String pageRefresh;
+  Dashboard(this.pageRefresh);
+
   @override
   _CheckPageState createState() => _CheckPageState();
 }
@@ -424,6 +427,7 @@ class _CheckPageState extends State<Dashboard> {
   bool playOnEnabled = false, powerOnEnabled = false;
   var dbHelper = DatabaseHelper();
   var dbHelpera = ADatabaseHelper();
+  ADatabaseHelper dbHelper1;
   var dbCounter = CounterDatabaseHelper();
   String lastRecordTime;
   String priorityNo, alarmActive;
@@ -667,17 +671,29 @@ class _CheckPageState extends State<Dashboard> {
   bool getportsData = false;
   @override
   initState() {
+    dbHelper = DatabaseHelper();
+    dbHelper1 = ADatabaseHelper();
     super.initState();
+
     var now = new DateTime.now();
     lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
     // counterData();
-    getData();
+    
     // getNoTimes();
     UsbSerial.usbEventStream.listen((UsbEvent event) {
       _getPorts();
     });
     _getPorts();
-
+    _timer3 =Timer.periodic(Duration(milliseconds: 5000), (timer) {
+      // Fluttertoast.showToast(msg:(rrValue==null).toString()+" "+rrValue.toString());
+      if (rrValue == null ) {
+        saveDataa();
+        getData();
+      } else {
+        // _timer3.cancel();
+      }
+     });
+     getData();
     // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) {
     //   if(_status == "Disconnected"){
     //   // UsbSerial.usbEventStream.listen((UsbEvent event) {
@@ -712,6 +728,7 @@ class _CheckPageState extends State<Dashboard> {
     // });
 
     _timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
+      
       // if(getportsData==false){
       //   Fluttertoast.showToast(msg: "null");
       //     _getPorts();
@@ -816,6 +833,64 @@ class _CheckPageState extends State<Dashboard> {
         });
       }
     });
+  }
+
+  saveDataa() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    preferences.setString("mode", "PC-CMV");
+
+    preferences.setString("checkMode", "0");
+    preferences.setInt("rr", 20);
+    preferences.setInt("ie", 51);
+    preferences.setString("i", "1.0");
+    preferences.setString("e", "3.0");
+    preferences.setInt("peep", 10);
+    // preferences.setInt("ps", 40);
+    preferences.setInt("fio2", 21);
+    preferences.setInt("tih", 50);
+    preferences.setInt("paw", 0);
+    preferences.setInt("itrig", 3);
+    preferences.setInt("atime", 10);
+    preferences.setInt("ti", 1);
+    preferences.setBool("play", true);
+    // preferences.setInt("tidal", 14);
+    // preferences.setInt("mv", 500);
+    preferences.setInt("rrtotal", 0);
+    preferences.setInt("ps", 25);
+    preferences.setInt("pc", 25);
+    preferences.setInt("vt", 400);
+    preferences.setInt("te", 20);
+    preferences.setInt("vte", 0);
+    preferences.setString("pid", "");
+    preferences.setString("pname", "");
+    preferences.setString("pgender", "");
+    preferences.setString("page", "");
+    preferences.setString("pweight", "");
+    preferences.setString("pheight", "");
+    preferences.setInt('minrr', 1);
+    preferences.setInt('maxrr', 70);
+    preferences.setInt('minvte', 0);
+    preferences.setInt('maxvte', 2400);
+    preferences.setInt('minppeak', 0);
+    preferences.setInt('maxppeak', 100);
+    preferences.setInt('minpeep', 0);
+    preferences.setInt('maxpeep', 40);
+    var dateS = preferences.getString('lastRecordTime');
+    var res = dbHelper.delete7Daysdata(dateS);
+    var res1 = dbHelper1.delete1Daysdata(dateS);
+
+    // if(counter==null){
+    //   counter = counter +1;
+    // }else{
+    // counter = counter +1;
+    // }
+
+    // print(res.toString()+"  "+res1.toString());
+    //  preferences.setInt('noTimes', counter);
+    // await sleep(Duration(seconds: 2));
   }
 
   Future<File> _writeStringToTextFile(
@@ -4602,7 +4677,7 @@ class _CheckPageState extends State<Dashboard> {
                           // :""
                           : "";
 
-                      lockEnabled ? modesEnabled = true : "";
+                      lockEnabled ? rrValue!=null ? modesEnabled = true : "":"";
 
                       if (_status == "Connected") {
                         writeAlarmsData();
@@ -6723,7 +6798,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                rrValue.toString(),
+                                rrValue!=null ? rrValue.toString():"0",
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6780,7 +6855,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                checkI(i) + ":" + checkE(e),
+                                i!=null ? checkI(i) + ":" + checkE(e):"0.0",
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6837,7 +6912,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                peepValue.toString(),
+                               peepValue!=null ? peepValue.toString():"0",
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6902,7 +6977,7 @@ class _CheckPageState extends State<Dashboard> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 17.0),
                                     child: Text(
-                                      psValue.toString(),
+                                     psValue!=null ?  psValue.toString():"0",
                                       style: TextStyle(
                                           fontSize: 30, color: Colors.white),
                                     ),
@@ -7014,21 +7089,21 @@ class _CheckPageState extends State<Dashboard> {
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
                                 operatinModeR == 6 || operatinModeR == 2
-                                    ? pcValue.toString()
+                                    ? pcValue!=null ? pcValue.toString():"0"
                                     : operatinModeR == 7 ||
                                             operatinModeR == 1 ||
                                             operatinModeR == 5 ||
                                             operatinModeR == 14
-                                        ? vtValue.toString()
+                                        ? vtValue!=null ? vtValue.toString():"0"
                                         : modeName == "PC-CMV" ||
                                                 modeName == "PACV"
-                                            ? pcValue.toString()
+                                            ? pcValue!=null ? pcValue.toString():"0"
                                             : modeName == "VC-CMV" ||
                                                     modeName == "VACV" ||
                                                     modeName == "VSIMV" ||
                                                     modeName == "PRVC"
-                                                ? vtValue.toString()
-                                                : pcValue.toString(),
+                                                ? vtValue!=null ? vtValue.toString():"0"
+                                                : pcValue!=null ? pcValue.toString():"0",
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7085,7 +7160,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                fio2Value.toString(),
+                               fio2Value!=null ?  fio2Value.toString():"0",
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7149,7 +7224,7 @@ class _CheckPageState extends State<Dashboard> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 17.0),
                                     child: Text(
-                                      "-" + itrigValue.toString(),
+                                     itrigValue!=null ?  "-" + itrigValue.toString():"0",
                                       style: TextStyle(
                                           fontSize: 30, color: Colors.white),
                                     ),
@@ -9103,12 +9178,14 @@ class _CheckPageState extends State<Dashboard> {
                                     psvItrigValue = psvItrigValue + 1;
                                   });
                                 } else if (psvPeep == true &&
-                                    psvPeepValue != psvmaxValue && psvPeepValue < maxValuepeepValue) {
+                                    psvPeepValue != psvmaxValue &&
+                                    psvPeepValue < maxValuepeepValue) {
                                   setState(() {
                                     psvPeepValue = psvPeepValue + 1;
                                   });
                                 } else if (psvPs == true &&
-                                    psvPsValue != psvPcValue && psvPcValue < maxValuepcValue) {
+                                    psvPsValue != psvPcValue &&
+                                    psvPcValue < maxValuepcValue) {
                                   setState(() {
                                     psvPsValue = psvPsValue + 1;
                                   });
@@ -9235,14 +9312,14 @@ class _CheckPageState extends State<Dashboard> {
                             max: psvmaxValue.toDouble(),
                             onChanged: (double value) {
                               int maxValuepcValue, maxValuepeepValue;
-                                setState((){
-                                  maxValuepcValue = 65 - psvPeepValue;
+                              setState(() {
+                                maxValuepcValue = 65 - psvPeepValue;
                                 if ((65 - psvPcValue) >= 30) {
                                   maxValuepeepValue = 30;
                                 } else {
                                   maxValuepeepValue = 65 - psvPcValue;
                                 }
-                                });
+                              });
                               if (psvItrig == true) {
                                 setState(() {
                                   psvItrigValue = value.toInt();
@@ -9254,7 +9331,6 @@ class _CheckPageState extends State<Dashboard> {
                                   } else {
                                     psvPeepValue = value.toInt();
                                   }
-
                                 });
                               } else if (psvPs == true) {
                                 setState(() {
@@ -9293,17 +9369,17 @@ class _CheckPageState extends State<Dashboard> {
                                 setState(() {
                                   if (value.toInt() < psvPsValue) {
                                     if (value.toInt() >= maxValuepcValue) {
-                                    psvPcValue = maxValuepcValue;
-                                  } else {
-                                    psvPcValue = value.toInt();
-                                  }
+                                      psvPcValue = maxValuepcValue;
+                                    } else {
+                                      psvPcValue = value.toInt();
+                                    }
                                     psvPsValue = psvPcValue;
                                   } else {
                                     if (value.toInt() >= maxValuepcValue) {
-                                    psvPcValue = maxValuepcValue;
-                                  } else {
-                                    psvPcValue = value.toInt();
-                                  }
+                                      psvPcValue = maxValuepcValue;
+                                    } else {
+                                      psvPcValue = value.toInt();
+                                    }
                                   }
                                   // if(value.toInt())
                                 });
@@ -10740,7 +10816,8 @@ class _CheckPageState extends State<Dashboard> {
                                     pacvItrigValue = pacvItrigValue + 1;
                                   });
                                 } else if (pacvPeep == true &&
-                                    pacvPeepValue != pacvmaxValue && pacvPeepValue < maxValuepeepValue) {
+                                    pacvPeepValue != pacvmaxValue &&
+                                    pacvPeepValue < maxValuepeepValue) {
                                   setState(() {
                                     pacvPeepValue = pacvPeepValue + 1;
                                     // if (pacvPcValue <= pacvPeepValue) {
@@ -10758,7 +10835,8 @@ class _CheckPageState extends State<Dashboard> {
                                     pacvIeValue = pacvIeValue + 1;
                                   });
                                 } else if (pacvPc == true &&
-                                    pacvPcValue != pacvmaxValue && pacvPcValue < maxValuepcValue) {
+                                    pacvPcValue != pacvmaxValue &&
+                                    pacvPcValue < maxValuepcValue) {
                                   setState(() {
                                     pacvPcValue = pacvPcValue + 1;
                                   });
@@ -10849,7 +10927,7 @@ class _CheckPageState extends State<Dashboard> {
                             max: pacvmaxValue.toDouble() ?? 0,
                             onChanged: (double value) {
                               int maxValuepcValue, maxValuepeepValue;
-                              setState((){
+                              setState(() {
                                 maxValuepcValue = 65 - pacvPeepValue;
                                 if ((65 - pacvPcValue) >= 30) {
                                   maxValuepeepValue = 30;
@@ -10861,13 +10939,12 @@ class _CheckPageState extends State<Dashboard> {
                                 setState(() {
                                   pacvItrigValue = value.toInt();
                                 });
-                              }
-                              else if (pacvPeep == true) {
+                              } else if (pacvPeep == true) {
                                 if (value.toInt() >= maxValuepeepValue) {
-                                    pacvPeepValue = maxValuepeepValue;
-                                  } else {
-                                    pacvPeepValue = value.toInt();
-                                  }
+                                  pacvPeepValue = maxValuepeepValue;
+                                } else {
+                                  pacvPeepValue = value.toInt();
+                                }
                               } else if (pacvRr == true) {
                                 setState(() {
                                   pacvRrValue = value.toInt();
@@ -13734,7 +13811,7 @@ class _CheckPageState extends State<Dashboard> {
                               size: 45,
                             ),
                             onPressed: () {
-                               int maxValuepcValue, maxValuepeepValue;
+                              int maxValuepcValue, maxValuepeepValue;
                               setState(() {
                                 // if (psimvItrig == true &&
                                 //     psimvItrigValue != psimvmaxValue) {
@@ -13749,7 +13826,7 @@ class _CheckPageState extends State<Dashboard> {
                                 //     }
                                 //   });
                                 // }
-                               
+
                                 maxValuepcValue = 65 - psimvPeepValue;
                                 if ((65 - psimvPcValue) >= 30) {
                                   maxValuepeepValue = 30;
@@ -13762,7 +13839,8 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvItrigValue = psimvItrigValue + 1;
                                   });
                                 } else if (psimvPeep == true &&
-                                    psimvPeepValue != psimvmaxValue && psimvPeepValue < maxValuepeepValue) {
+                                    psimvPeepValue != psimvmaxValue &&
+                                    psimvPeepValue < maxValuepeepValue) {
                                   setState(() {
                                     psimvPeepValue = psimvPeepValue + 1;
                                   });
@@ -13777,7 +13855,8 @@ class _CheckPageState extends State<Dashboard> {
                                     psimvIeValue = psimvIeValue + 1;
                                   });
                                 } else if (psimvPc == true &&
-                                    psimvPcValue != psvmaxValue && psimvPcValue < maxValuepcValue) {
+                                    psimvPcValue != psvmaxValue &&
+                                    psimvPcValue < maxValuepcValue) {
                                   setState(() {
                                     psimvPcValue = psimvPcValue + 1;
                                   });
@@ -13873,21 +13952,21 @@ class _CheckPageState extends State<Dashboard> {
                             max: psimvmaxValue.toDouble(),
                             onChanged: (double value) {
                               int maxValuepcValue, maxValuepeepValue;
-                                setState((){
-                                  maxValuepcValue = 65 - psimvPeepValue;
+                              setState(() {
+                                maxValuepcValue = 65 - psimvPeepValue;
                                 if ((65 - psimvPcValue) >= 30) {
                                   maxValuepeepValue = 30;
                                 } else {
                                   maxValuepeepValue = 65 - psimvPcValue;
                                 }
-                                });
+                              });
                               if (psimvItrig == true) {
                                 setState(() {
                                   psimvItrigValue = value.toInt();
                                 });
                               } else if (psimvPeep == true) {
                                 setState(() {
-                                 if (value.toInt() >= maxValuepeepValue) {
+                                  if (value.toInt() >= maxValuepeepValue) {
                                     psimvPeepValue = maxValuepeepValue;
                                   } else {
                                     psimvPeepValue = value.toInt();
@@ -13905,17 +13984,17 @@ class _CheckPageState extends State<Dashboard> {
                                 setState(() {
                                   if (value.toInt() < psimvPsValue) {
                                     if (value.toInt() >= maxValuepcValue) {
-                                    psimvPcValue = maxValuepcValue;
-                                  } else {
-                                    psimvPcValue = value.toInt();
-                                  }
+                                      psimvPcValue = maxValuepcValue;
+                                    } else {
+                                      psimvPcValue = value.toInt();
+                                    }
                                     psimvPsValue = psimvPcValue;
                                   } else {
                                     if (value.toInt() >= maxValuepcValue) {
-                                    psimvPcValue = maxValuepcValue;
-                                  } else {
-                                    psimvPcValue = value.toInt();
-                                  }
+                                      psimvPcValue = maxValuepcValue;
+                                    } else {
+                                      psimvPcValue = value.toInt();
+                                    }
                                   }
                                   // if(value.toInt())
                                 });
@@ -15233,7 +15312,8 @@ class _CheckPageState extends State<Dashboard> {
                                     pccmvIeValue = pccmvIeValue + 1;
                                   });
                                 } else if (pccmvPeep == true &&
-                                    pccmvPeepValue != pccmvmaxValue && pccmvPeepValue < maxValuepeepValue) {
+                                    pccmvPeepValue != pccmvmaxValue &&
+                                    pccmvPeepValue < maxValuepeepValue) {
                                   setState(() {
                                     pccmvPeepValue = pccmvPeepValue + 1;
                                     // if (pccmvPcValue <= pccmvPeepValue) {
@@ -15241,7 +15321,8 @@ class _CheckPageState extends State<Dashboard> {
                                     // }
                                   });
                                 } else if (pccmvPc == true &&
-                                    pccmvPcValue != pccmvmaxValue && pccmvPcValue < maxValuepcValue) {
+                                    pccmvPcValue != pccmvmaxValue &&
+                                    pccmvPcValue < maxValuepcValue) {
                                   setState(() {
                                     pccmvPcValue = pccmvPcValue + 1;
                                   });
@@ -16466,7 +16547,6 @@ class _CheckPageState extends State<Dashboard> {
                             ),
                             onPressed: () {
                               setState(() {
-                                
                                 if (vccmvRR == true &&
                                     vccmvRRValue != vccmvmaxValue) {
                                   setState(() {

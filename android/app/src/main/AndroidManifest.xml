@@ -39,7 +39,7 @@
             android:launchMode="singleTop"
             android:exported="true"
             android:theme="@style/LaunchTheme"
-            android:directBootAware="false"
+            android:directBootAware="true"
             android:windowSoftInputMode="adjustResize">
 
             <meta-data android:name="io.flutter.app.android.SplashScreenUntilFirstFrame" android:value="true" />
@@ -75,6 +75,15 @@
             </intent-filter>
         </receiver>
 
+
+        <receiver
+            android:enabled="true"
+            android:name=".StartBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -86,21 +95,6 @@
         </provider>
 
 
-<!--        <activity-->
-<!--            android:name=".UsbEventReceiverActivity"-->
-<!--            android:label="Ventilator"-->
-<!--            android:theme="@style/Theme.Transparent"-->
-<!--            android:noHistory="true"-->
-<!--            android:excludeFromRecents="true"-->
-<!--            android:taskAffinity="com.example.taskAffinityUsbEventReceiver"-->
-<!--            android:process=":UsbEventReceiverActivityProcess"-->
-<!--            android:exported="false"-->
-<!--            >-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />-->
-<!--            </intent-filter>-->
-<!--            <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@xml/device_filter" />-->
-<!--        </activity>-->
 
     </application>
 </manifest>

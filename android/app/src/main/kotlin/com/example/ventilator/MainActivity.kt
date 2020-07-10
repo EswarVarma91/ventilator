@@ -9,12 +9,11 @@ import android.media.MediaPlayer
 import android.os.BatteryManager
 import android.os.Build
 import android.os.PowerManager
+import android.os.UserManager
 import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
-import androidx.core.os.BuildCompat
-import androidx.core.os.UserManagerCompat
 import com.example.ventilator.util.DownloadController
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
@@ -43,11 +42,15 @@ class MainActivity: FlutterActivity() {
     @SuppressLint("InvalidWakeLockTag")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
-        GeneratedPluginRegistrant.registerWith(flutterEngine)
+        val um: UserManager = getSystemService(Context.USER_SERVICE) as UserManager
+        if(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    um.isUserUnlocked
+                } else {
+                    TODO("VERSION.SDK_INT < N")
+                }) {
+            GeneratedPluginRegistrant.registerWith(flutterEngine)
+        }
 
-
-
-//
         mAdminComponentName = MyDeviceAdminReceiver.getComponentName(this)
         mDevicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 

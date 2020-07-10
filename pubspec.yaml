@@ -48,6 +48,7 @@ dependencies:
   floating_action_row: ^0.1.0
   liquid_progress_indicator: ^0.3.2
   path_provider: ^1.6.11
+  flutter_phoenix: ^0.1.0
 
 dev_dependencies:
   flutter_test:

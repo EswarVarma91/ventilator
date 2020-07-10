@@ -136,7 +136,7 @@ class _SplashPageState extends State<SplashPage> {
                         fontFamily: "appleFont"),
                   ),
           loadingText: Text("Please wait",style: TextStyle(color: Colors.white),),
-          navigateAfterSeconds: Dashboard(),
+          navigateAfterSeconds: Dashboard("1"),
           backgroundColor:Color(0xFF171e27),
           loaderColor: Colors.white,
         ),),
