@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/sqflite/intermediates/res/merged/release/drawable-hdpi-v4/notification_bg_normal.9.png",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/805e05a71e209033ab91722f2d3217f8/core-1.1.0/res/drawable-hdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/sqflite/intermediates/res/merged/release/drawable-hdpi-v4/notify_panel_notification_icon_bg.png",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/805e05a71e209033ab91722f2d3217f8/core-1.1.0/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/sqflite/intermediates/res/merged/release/drawable-hdpi-v4/notification_bg_low_pressed.9.png",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/805e05a71e209033ab91722f2d3217f8/core-1.1.0/res/drawable-hdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/sqflite/intermediates/res/merged/release/drawable-hdpi-v4/notification_bg_low_normal.9.png",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/805e05a71e209033ab91722f2d3217f8/core-1.1.0/res/drawable-hdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/sqflite/intermediates/res/merged/release/drawable-hdpi-v4/notification_bg_normal_pressed.9.png",
+        "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/805e05a71e209033ab91722f2d3217f8/core-1.1.0/res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png"
+    }
+]

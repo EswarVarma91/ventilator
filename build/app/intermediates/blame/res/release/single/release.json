@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/xml_device_filter.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/xml/device_filter.xml"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/raw_ealarm.mp3.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/raw/ealarm.mp3"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/drawable_launch_background.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/drawable/launch_background.xml"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/raw_low.mp3.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/raw/low.mp3"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/xml_file_provider_paths.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/xml/file_provider_paths.xml"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/raw_medium.mp3.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/raw/medium.mp3"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/xml_device_admin_receiver.xml.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/xml/device_admin_receiver.xml"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/raw_high.mp3.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/raw/high.mp3"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/app/intermediates/res/merged/release/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    }
+]

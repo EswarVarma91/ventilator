@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/fluttertoast/intermediates/incremental/mergeReleaseResources/merged.dir/values-da/values-da.xml",
+            "map": [
+                {
+                    "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/805e05a71e209033ab91722f2d3217f8/core-1.1.0/res/values-da/values-da.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/eswarvarmapanumetcha/Documents/GitHub/ventilator/build/fluttertoast/intermediates/res/merged/release/values-da/values-da.xml",
+            "map": [
+                {
+                    "source": "/Users/eswarvarmapanumetcha/.gradle/caches/transforms-2/files-2.1/805e05a71e209033ab91722f2d3217f8/core-1.1.0/res/values-da/values-da.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}
