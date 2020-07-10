@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screen/screen.dart';
+import 'package:splashscreen/splashscreen.dart';
 import 'package:ventilator/activity/Dashboard.dart';
 import 'package:ventilator/activity/SplashPage.dart';
 import 'package:ventilator/viewlog/ViewLogPatientList.dart';
@@ -44,12 +47,15 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   static const shutdownChannel = const MethodChannel("shutdown");
+  Timer _timer;
 
   @override
   void initState() {
     turnOnScreen();
     super.initState();
   }
+
+  
 
   Future<void> turnOnScreen() async {
     try {
@@ -71,44 +77,19 @@ class _StartScreenState extends State<StartScreen> {
       body: Container(
         color: Color(0xFF171e27),
         child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: Text(
-                "SWASIT",
-                style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 142,
-                    fontFamily: "appleFont"),
-              ),
-            ),
-            SizedBox(height: 70),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SplashPage()),
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.orange.withOpacity(0.8)),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      top: 18.0, bottom: 18.0, left: 40.0, right: 40.0),
-                  child: Text("Start Ventilator",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24)),
-                ),
-              ),
-            ),
-          ],
-        )),
+          child: SplashScreen(
+          seconds: 2,
+          title: Text("SWASIT",
+                    style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 72,
+                        fontFamily: "appleFont"),
+                  ),
+          loadingText: Text("Please wait",style: TextStyle(color: Colors.white),),
+          navigateAfterSeconds: SplashPage(),
+          backgroundColor:Color(0xFF171e27),
+          loaderColor: Colors.white,
+        ),),
       ),
     );
   }

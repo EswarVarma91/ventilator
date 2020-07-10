@@ -124,13 +124,22 @@ class _SplashPageState extends State<SplashPage> {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      body: Center(
-        child: SplashScreen(
+      body: Container(
+        color: Color(0xFF171e27),
+        child: Center(
+          child: SplashScreen(
           seconds: 2,
+          title: Text("SWASIT",
+                    style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 72,
+                        fontFamily: "appleFont"),
+                  ),
+          loadingText: Text("Please wait",style: TextStyle(color: Colors.white),),
           navigateAfterSeconds: Dashboard(),
-          backgroundColor: Colors.white,
-          loaderColor: Colors.black,
-        ),
+          backgroundColor:Color(0xFF171e27),
+          loaderColor: Colors.white,
+        ),),
       ),
     );
   }
