@@ -85,7 +85,7 @@ class _AboutState extends State<About> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Dashboard("2")),
+                                    builder: (context) => Dashboard()),
                               );
                             },
                           ),

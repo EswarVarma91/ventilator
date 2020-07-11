@@ -22,6 +22,7 @@ class _CommonDialogState extends State<CommonDialog> {
   double dpeepcheckValue, dpccheckValue, dpscheckValue;
   bool confirmButton = false;
   double maxValuepcValue, maxValuepsValue, maxValuepeepValue;
+  double vmaxValuepcValue, vmaxValuepsValue, vmaxValuepeepValue;
 
   @override
   void initState() {
@@ -36,11 +37,28 @@ class _CommonDialogState extends State<CommonDialog> {
     dpscheckValue = preferences.getInt("ps").toDouble();
 
     setState(() {
-     maxValuepcValue = 65.0 - dpeepcheckValue;
-      if((65.0 - dpccheckValue)>=30){
-      maxValuepeepValue = 30 ;
+      if ((65.0 - dpeepcheckValue) >= 60) {
+        vmaxValuepsValue = 60;
       }else{
-        maxValuepeepValue= 65.0 - dpccheckValue;
+      vmaxValuepsValue = 65.0 - dpeepcheckValue;
+      }
+      if ((65.0 - dpscheckValue) >= 30) {
+        vmaxValuepeepValue = 30;
+      } else {
+        vmaxValuepeepValue = 65.0 - dpscheckValue;
+      }
+    });
+
+    setState(() {
+      if((65.0 - dpeepcheckValue)>=60){
+        maxValuepcValue = 60;
+      }else{
+      maxValuepcValue = 65.0 - dpeepcheckValue;
+      }
+      if ((65.0 - dpccheckValue) >= 30) {
+        maxValuepeepValue = 30;
+      } else {
+        maxValuepeepValue = 65.0 - dpccheckValue;
       }
     });
     if (widget.value.toString() == "RR") {
@@ -86,6 +104,16 @@ class _CommonDialogState extends State<CommonDialog> {
         suffix = false;
         units = true;
       });
+    } else if (widget.value.toString() == "VPEEP") {
+      setState(() {
+        commomValue = preferences.getInt("peep").toDouble();
+        checkValue = preferences.getInt("peep").toDouble();
+        min = 0;
+        max = vmaxValuepeepValue;
+        prefix = false;
+        suffix = false;
+        units = true;
+      });
     } else if (widget.value.toString() == "PS") {
       setState(() {
         commomValue = preferences.getInt("ps").toDouble();
@@ -97,12 +125,23 @@ class _CommonDialogState extends State<CommonDialog> {
         suffix = false;
         units = true;
       });
+    } else if (widget.value.toString() == "VPS") {
+      setState(() {
+        commomValue = preferences.getInt("ps").toDouble();
+        checkValue = preferences.getInt("ps").toDouble();
+        _pcCheckValue = preferences.getInt("pc").toDouble();
+        min = 0;
+        max = vmaxValuepsValue;
+        prefix = false;
+        suffix = false;
+        units = true;
+      });
     } else if (widget.value.toString() == "PSV") {
       setState(() {
         commomValue = preferences.getInt("ps").toDouble();
         checkValue = preferences.getInt("ps").toDouble();
         _pcCheckValue = preferences.getInt("pc").toDouble();
-        min = 1;
+        min = 5;
         max = _pcCheckValue;
         prefix = false;
         suffix = false;
@@ -134,7 +173,7 @@ class _CommonDialogState extends State<CommonDialog> {
         commomValue = preferences.getInt("pc").toDouble();
         checkValue = preferences.getInt("pc").toDouble();
         _psCheckValue = preferences.getInt("ps").toDouble();
-        min = 1;
+        min = 5;
         max = maxValuepcValue;
         prefix = false;
         suffix = false;
@@ -359,7 +398,11 @@ class _CommonDialogState extends State<CommonDialog> {
                                     ? "PS"
                                     : widget.value.toString() == "PCV"
                                         ? "PC"
-                                        : widget.value.toString(),
+                                        : widget.value.toString() == "VPEEP"
+                                            ? "PEEP"
+                                            : widget.value.toString() == "VPS"
+                                                ? "PS"
+                                                : widget.value.toString(),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
@@ -689,6 +732,16 @@ class _CommonDialogState extends State<CommonDialog> {
         preferences.setInt("ps", value.ceil());
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "ps");
+    } else if (widget.value.toString() == "VPEEP") {
+      setState(() {
+        preferences.setInt("peep", value.ceil());
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "peep");
+    } else if (widget.value.toString() == "VPS") {
+      setState(() {
+        preferences.setInt("ps", value.ceil());
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "ps");
     } else if (widget.value.toString() == "PSV") {
       setState(() {
         preferences.setInt("ps", value.ceil());
@@ -787,3 +840,4 @@ class _CommonDialogState extends State<CommonDialog> {
         "s";
   }
 }
+

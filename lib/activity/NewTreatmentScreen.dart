@@ -60,7 +60,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Dashboard("2")),
+                        MaterialPageRoute(builder: (context) => Dashboard()),
                       );
                     },
                   ),
@@ -644,7 +644,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
       preferences.setString("pweight", weightId.text.toString());
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Dashboard("2")),
+        MaterialPageRoute(builder: (context) => Dashboard()),
       );
     }
   }

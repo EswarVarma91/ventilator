@@ -24,9 +24,6 @@ import 'package:ventilator/activity/About.dart';
 import 'package:ventilator/activity/NewTreatmentScreen.dart';
 
 class Dashboard extends StatefulWidget {
-  String pageRefresh;
-  Dashboard(this.pageRefresh);
-
   @override
   _CheckPageState createState() => _CheckPageState();
 }
@@ -298,7 +295,7 @@ class _CheckPageState extends State<Dashboard> {
       psvMinTeValue = 1,
       psvPcValue = 25;
 
-  int psvmaxValue = 60, psvminValue = 1, psvdefaultValue = 25;
+  int psvmaxValue = 60, psvminValue = 5, psvdefaultValue = 25;
   String psvparameterName = "PS", psvparameterUnits = "cmH\u2082O  Below PEEP";
 
   bool psimvItrig = false,
@@ -427,7 +424,6 @@ class _CheckPageState extends State<Dashboard> {
   bool playOnEnabled = false, powerOnEnabled = false;
   var dbHelper = DatabaseHelper();
   var dbHelpera = ADatabaseHelper();
-  ADatabaseHelper dbHelper1;
   var dbCounter = CounterDatabaseHelper();
   String lastRecordTime;
   String priorityNo, alarmActive;
@@ -671,29 +667,17 @@ class _CheckPageState extends State<Dashboard> {
   bool getportsData = false;
   @override
   initState() {
-    dbHelper = DatabaseHelper();
-    dbHelper1 = ADatabaseHelper();
     super.initState();
-
     var now = new DateTime.now();
     lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
     // counterData();
-    
+    getData();
     // getNoTimes();
     UsbSerial.usbEventStream.listen((UsbEvent event) {
       _getPorts();
     });
     _getPorts();
-    // _timer3 =Timer.periodic(Duration(milliseconds: 5000), (timer) {
-    //   // Fluttertoast.showToast(msg:(rrValue==null).toString()+" "+rrValue.toString());
-    //   if (rrValue == null ) {
-    //     saveDataa();
-    //     getData();
-    //   } else {
-    //     // _timer3.cancel();
-    //   }
-    //  });
-     getData();
+
     // _timer3 = Timer.periodic(Duration(milliseconds:100), (timer) {
     //   if(_status == "Disconnected"){
     //   // UsbSerial.usbEventStream.listen((UsbEvent event) {
@@ -728,7 +712,6 @@ class _CheckPageState extends State<Dashboard> {
     // });
 
     _timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
-      
       // if(getportsData==false){
       //   Fluttertoast.showToast(msg: "null");
       //     _getPorts();
@@ -834,64 +817,6 @@ class _CheckPageState extends State<Dashboard> {
       }
     });
   }
-
-  // saveDataa() async {
-  //   WidgetsFlutterBinding.ensureInitialized();
-
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-
-  //   preferences.setString("mode", "PC-CMV");
-
-  //   preferences.setString("checkMode", "0");
-  //   preferences.setInt("rr", 20);
-  //   preferences.setInt("ie", 51);
-  //   preferences.setString("i", "1.0");
-  //   preferences.setString("e", "3.0");
-  //   preferences.setInt("peep", 10);
-  //   // preferences.setInt("ps", 40);
-  //   preferences.setInt("fio2", 21);
-  //   preferences.setInt("tih", 50);
-  //   preferences.setInt("paw", 0);
-  //   preferences.setInt("itrig", 3);
-  //   preferences.setInt("atime", 10);
-  //   preferences.setInt("ti", 1);
-  //   preferences.setBool("play", true);
-  //   // preferences.setInt("tidal", 14);
-  //   // preferences.setInt("mv", 500);
-  //   preferences.setInt("rrtotal", 0);
-  //   preferences.setInt("ps", 25);
-  //   preferences.setInt("pc", 25);
-  //   preferences.setInt("vt", 400);
-  //   preferences.setInt("te", 20);
-  //   preferences.setInt("vte", 0);
-  //   preferences.setString("pid", "");
-  //   preferences.setString("pname", "");
-  //   preferences.setString("pgender", "");
-  //   preferences.setString("page", "");
-  //   preferences.setString("pweight", "");
-  //   preferences.setString("pheight", "");
-  //   preferences.setInt('minrr', 1);
-  //   preferences.setInt('maxrr', 70);
-  //   preferences.setInt('minvte', 0);
-  //   preferences.setInt('maxvte', 2400);
-  //   preferences.setInt('minppeak', 0);
-  //   preferences.setInt('maxppeak', 100);
-  //   preferences.setInt('minpeep', 0);
-  //   preferences.setInt('maxpeep', 40);
-  //   var dateS = preferences.getString('lastRecordTime');
-  //   var res = dbHelper.delete7Daysdata(dateS);
-  //   var res1 = dbHelper1.delete1Daysdata(dateS);
-
-    // if(counter==null){
-    //   counter = counter +1;
-    // }else{
-    // counter = counter +1;
-    // }
-
-    // print(res.toString()+"  "+res1.toString());
-    //  preferences.setInt('noTimes', counter);
-    // await sleep(Duration(seconds: 2));
-  // }
 
   Future<File> _writeStringToTextFile(
     String presetnTime,
@@ -4677,7 +4602,7 @@ class _CheckPageState extends State<Dashboard> {
                           // :""
                           : "";
 
-                      lockEnabled ? rrValue!=null ? modesEnabled = true : "":"";
+                      lockEnabled ? modesEnabled = true : "";
 
                       if (_status == "Connected") {
                         writeAlarmsData();
@@ -6798,7 +6723,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                rrValue!=null ? rrValue.toString():"0",
+                                rrValue.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6855,7 +6780,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                i!=null ? checkI(i) + ":" + checkE(e):"0.0",
+                                checkI(i) + ":" + checkE(e),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6874,7 +6799,13 @@ class _CheckPageState extends State<Dashboard> {
                   _setValuesonClick = false;
                 });
                 if (modeWriteList.isNotEmpty) {
-                  lockEnabled ? playOnEnabled ? "" : CommonClick("PEEP") : "";
+                  lockEnabled
+                      ? playOnEnabled
+                          ? ""
+                          : operatinModeR == 5 || modeName == "VSIMV"
+                              ? CommonClick("VPEEP")
+                              : CommonClick("PEEP")
+                      : "";
                 }
               },
               child: Center(
@@ -6912,7 +6843,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                               peepValue!=null ? peepValue.toString():"0",
+                                peepValue.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6938,7 +6869,13 @@ class _CheckPageState extends State<Dashboard> {
                       });
                       if (modeWriteList.isNotEmpty) {
                         lockEnabled
-                            ? playOnEnabled ? "" : CommonClick("PS")
+                            ? playOnEnabled
+                                ? ""
+                                : modeName == "VSIMV" || operatinModeR == 5
+                                    ? CommonClick("VPS")
+                                    : operatinModeR == 4 || modeName == "PSIMV"
+                                        ? CommonClick("PSV")
+                                        : CommonClick("PS")
                             : "";
                       }
                     },
@@ -6977,7 +6914,7 @@ class _CheckPageState extends State<Dashboard> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 17.0),
                                     child: Text(
-                                     psValue!=null ?  psValue.toString():"0",
+                                      psValue.toString(),
                                       style: TextStyle(
                                           fontSize: 30, color: Colors.white),
                                     ),
@@ -7000,15 +6937,18 @@ class _CheckPageState extends State<Dashboard> {
                   lockEnabled
                       ? playOnEnabled
                           ? ""
-                          : CommonClick(operatinModeR == 6 || operatinModeR == 2
-                              ? "PC"
-                              : operatinModeR == 7 ||
-                                      operatinModeR == 1 ||
-                                      operatinModeR == 5
-                                  ? "Vt"
-                                  : modeName == "PC-CMV" || modeName == "PACV"
+                          : CommonClick(
+                              operatinModeR == 4 || modeName == "PSIMV"
+                                  ? CommonClick("PCV")
+                                  : operatinModeR == 6 ||
+                                          operatinModeR == 2 ||
+                                          modeName == "PC-CMV" ||
+                                          modeName == "PACV"
                                       ? "PC"
-                                      : modeName == "VC-CMV" ||
+                                      : operatinModeR == 7 ||
+                                              operatinModeR == 1 ||
+                                              operatinModeR == 5 ||
+                                              modeName == "VC-CMV" ||
                                               modeName == "VACV" ||
                                               modeName == "VSIMV"
                                           ? "Vt"
@@ -7089,21 +7029,21 @@ class _CheckPageState extends State<Dashboard> {
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
                                 operatinModeR == 6 || operatinModeR == 2
-                                    ? pcValue!=null ? pcValue.toString():"0"
+                                    ? pcValue.toString()
                                     : operatinModeR == 7 ||
                                             operatinModeR == 1 ||
                                             operatinModeR == 5 ||
                                             operatinModeR == 14
-                                        ? vtValue!=null ? vtValue.toString():"0"
+                                        ? vtValue.toString()
                                         : modeName == "PC-CMV" ||
                                                 modeName == "PACV"
-                                            ? pcValue!=null ? pcValue.toString():"0"
+                                            ? pcValue.toString()
                                             : modeName == "VC-CMV" ||
                                                     modeName == "VACV" ||
                                                     modeName == "VSIMV" ||
                                                     modeName == "PRVC"
-                                                ? vtValue!=null ? vtValue.toString():"0"
-                                                : pcValue!=null ? pcValue.toString():"0",
+                                                ? vtValue.toString()
+                                                : pcValue.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7160,7 +7100,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                               fio2Value!=null ?  fio2Value.toString():"0",
+                                fio2Value.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7224,7 +7164,7 @@ class _CheckPageState extends State<Dashboard> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 17.0),
                                     child: Text(
-                                     itrigValue!=null ?  "-" + itrigValue.toString():"0",
+                                      "-" + itrigValue.toString(),
                                       style: TextStyle(
                                           fontSize: 30, color: Colors.white),
                                     ),
@@ -7520,7 +7460,7 @@ class _CheckPageState extends State<Dashboard> {
             onTap: () {
               setState(() {
                 psvmaxValue = 60;
-                psvminValue = 1;
+                psvminValue = 5;
                 psvparameterName = "PS";
                 psvparameterUnits = "cmH\u2082O above PEEP";
                 psvItrig = false;
@@ -7587,7 +7527,7 @@ class _CheckPageState extends State<Dashboard> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            "1",
+                            "5",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: psvPs
@@ -7634,7 +7574,7 @@ class _CheckPageState extends State<Dashboard> {
             onTap: () {
               setState(() {
                 psvmaxValue = 60;
-                psvminValue = 1;
+                psvminValue = 5;
                 psvparameterName = "PC";
                 psvparameterUnits = "cmH\u2082O above PEEP";
                 psvItrig = false;
@@ -7701,7 +7641,7 @@ class _CheckPageState extends State<Dashboard> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            "1",
+                            "5",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: psvPc
@@ -9083,7 +9023,7 @@ class _CheckPageState extends State<Dashboard> {
                                   });
                                 } else if (psvPs == true &&
                                     psvPsValue != psvPcValue + 1 &&
-                                    psvPsValue != 1) {
+                                    psvPsValue != 5) {
                                   setState(() {
                                     psvPsValue = psvPsValue - 1;
                                   });
@@ -9115,7 +9055,7 @@ class _CheckPageState extends State<Dashboard> {
                                   });
                                 } else if (psvPc == true &&
                                     psvPcValue != psvminValue &&
-                                    psvPcValue != 1) {
+                                    psvPcValue != 5) {
                                   setState(() {
                                     psvPcValue = psvPcValue - 1;
                                     if (psvPcValue < psvPsValue) {
@@ -12779,7 +12719,7 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 setState(() {
                   psimvmaxValue = 60;
-                  psimvminValue = 0;
+                  psimvminValue = 5;
                   psimvparameterName = "PC";
                   psimvparameterUnits = "cmH\u2082O above PEEP";
                   psimvItrig = false;
@@ -12843,7 +12783,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "0",
+                              "5",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPc
@@ -13362,7 +13302,7 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 setState(() {
                   psimvmaxValue = 60;
-                  psimvminValue = 0;
+                  psimvminValue = 5;
                   psimvparameterName = "PS";
                   psimvparameterUnits = "cmH\u2082O above PEEP";
                   psimvItrig = false;
@@ -13426,7 +13366,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "0",
+                              "5",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: psimvPs
@@ -13755,7 +13695,7 @@ class _CheckPageState extends State<Dashboard> {
                                   });
                                 } else if (psimvPc == true &&
                                     psimvPcValue != psimvminValue &&
-                                    psimvPcValue != 0) {
+                                    psimvPcValue != 5) {
                                   setState(() {
                                     psimvPcValue = psimvPcValue - 1;
                                     if (psimvPcValue < psimvPsValue) {
@@ -13785,7 +13725,7 @@ class _CheckPageState extends State<Dashboard> {
                                   });
                                 } else if (psimvPs == true &&
                                     psimvPsValue != psimvPcValue + 1 &&
-                                    psimvPsValue != 0) {
+                                    psimvPsValue != 5) {
                                   setState(() {
                                     psimvPsValue = psimvPsValue - 1;
                                   });
@@ -18147,7 +18087,14 @@ class _CheckPageState extends State<Dashboard> {
                               size: 45,
                             ),
                             onPressed: () {
+                              int vmaxValuepsValue, vmaxValuepeepValue;
                               setState(() {
+                                vmaxValuepsValue = 65 - vsimvPeepValue;
+                                if ((65.0 - vsimvPsValue) >= 30) {
+                                  vmaxValuepeepValue = 30;
+                                } else {
+                                  vmaxValuepeepValue = 65 - vsimvPsValue;
+                                }
                                 // if (vsimvItrig == true &&
                                 //     vsimvItrigValue != vsimvmaxValue) {
                                 //   setState(() {
@@ -18167,7 +18114,8 @@ class _CheckPageState extends State<Dashboard> {
                                     vsimvItrigValue = vsimvItrigValue + 1;
                                   });
                                 } else if (vsimvPeep == true &&
-                                    vsimvPeepValue != vsimvmaxValue) {
+                                    vsimvPeepValue != vsimvmaxValue &&
+                                    vsimvPeepValue < vmaxValuepeepValue) {
                                   setState(() {
                                     vsimvPeepValue = vsimvPeepValue + 1;
                                   });
@@ -18210,7 +18158,8 @@ class _CheckPageState extends State<Dashboard> {
                                     vsimvFlowRampValue = vsimvFlowRampValue + 1;
                                   });
                                 } else if (vsimvPs == true &&
-                                    vsimvPsValue != vsimvmaxValue) {
+                                    vsimvPsValue != vsimvmaxValue &&
+                                    vsimvPsValue < vmaxValuepsValue) {
                                   setState(() {
                                     vsimvPsValue = vsimvPsValue + 1;
                                   });
@@ -18277,38 +18226,24 @@ class _CheckPageState extends State<Dashboard> {
                             min: vsimvminValue.toDouble() ?? 0,
                             max: vsimvmaxValue.toDouble(),
                             onChanged: (double value) {
-// if (vsimvItrig == true && vsimvItrigValue != 10) {
-//   setState(() {
-//     if (vsimvPeepValue == 0) {
-//       vsimvItrigValue = 1;
-//     } else {
-//       if (value.toInt() > vsimvPeepValue) {
-//         vsimvItrigValue = vsimvPeepValue;
-//       } else {
-//         vsimvItrigValue = value.toInt();
-//       }
-//     }
-//   });
-// } else if (vsimvPeep == true) {
-//   setState(() {
-//     vsimvPeepValue = value.toInt();
-//     if (vsimvItrigValue > 1 &&
-//         vsimvItrigValue > vsimvPeepValue) {
-//       if (vsimvPeepValue == 0) {
-//         vsimvItrigValue = 1;
-//       } else {
-//         vsimvItrigValue = vsimvPeepValue;
-//       }
-//     }
-//   });
-// }
+                              int vmaxValuepsValue, vmaxValuepeepValue;
+                              vmaxValuepsValue = 65 - vsimvPeepValue;
+                              if ((65.0 - vsimvPsValue) >= 30) {
+                                vmaxValuepeepValue = 30;
+                              } else {
+                                vmaxValuepeepValue = 65 - vsimvPsValue;
+                              }
                               if (vsimvItrig == true && vsimvItrigValue != 10) {
                                 setState(() {
                                   vsimvItrigValue = value.toInt();
                                 });
                               } else if (vsimvPeep == true) {
                                 setState(() {
-                                  vsimvPeepValue = value.toInt();
+                                  if (value.toInt() >= vmaxValuepeepValue) {
+                                    vsimvPeepValue = vmaxValuepeepValue;
+                                  } else {
+                                    vsimvPeepValue = value.toInt();
+                                  }
                                 });
                               } else if (vsimvRr == true) {
                                 setState(() {
@@ -18345,7 +18280,11 @@ class _CheckPageState extends State<Dashboard> {
                                 });
                               } else if (vsimvPs == true) {
                                 setState(() {
-                                  vsimvPsValue = value.toInt();
+                                  if (value.toInt() >= vmaxValuepsValue) {
+                                    vsimvPsValue = vmaxValuepsValue;
+                                  } else {
+                                    vsimvPsValue = value.toInt();
+                                  }
                                 });
                               }
                             },
@@ -20553,6 +20492,10 @@ class _CheckPageState extends State<Dashboard> {
         getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
+        if (receivedps > temp) {
+          //TODO
+          _changepspsimvValue(temp);
+        }
       } else if (vsimvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[10]=((temp & 0xFF00) >> 8);
@@ -20571,6 +20514,10 @@ class _CheckPageState extends State<Dashboard> {
         getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
+        if (receivedps > temp) {
+          //TODO
+          _changepspsvValue(temp);
+        }
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[14] = ((temp & 0xFF00) >> 8);
@@ -21035,6 +20982,29 @@ class _CheckPageState extends State<Dashboard> {
       // // print(modeWriteList.toString());
       sendDataUsbConnection(modeWriteList, 1);
     }
+  }
+  _changepspsimvValue(int temp){
+     modeWriteList[20] = ((temp & 0xFF00) >> 8);
+        modeWriteList[21] = (temp & 0xFF);
+        modeWriteList[26] = (1);
+        modeWriteList[27] = (0);
+
+        preferences.setInt('psimvPsValue', temp);
+        getData();
+        // // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList, 1);
+  }
+
+  _changepspsvValue(int temp){
+    modeWriteList[8] = ((temp & 0xFF00) >> 8);
+        modeWriteList[9] = (temp & 0xFF);
+        modeWriteList[32] = (0);
+        modeWriteList[33] = (4);
+
+        preferences.setInt('psvPsValue', temp);
+        getData();
+        // // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList, 1);
   }
 
   getTiValueNumber(checkTi) {
@@ -22287,7 +22257,7 @@ class _CheckPageState extends State<Dashboard> {
         psvPcValue = 25;
 
         psvmaxValue = 60;
-        psvminValue = 1;
+        psvminValue = 5;
         psvdefaultValue = 25;
         psvparameterName = "PS";
         psvparameterUnits = "cmH\u2082O  Below PEEP";

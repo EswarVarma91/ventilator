@@ -58,7 +58,7 @@ class _ViewLogPatientListState extends State<ViewLogPatientList> {
       body: WillPopScope(
         onWillPop: () {
           // Navigator.pop(context);
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard("2")), ModalRoute.withName('/'));
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Dashboard()), ModalRoute.withName('/'));
           // Navigator.push(
           //   context,
           //   MaterialPageRoute(builder: (context) => Dashboard()),
