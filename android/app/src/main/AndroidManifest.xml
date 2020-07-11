@@ -39,7 +39,7 @@
             android:launchMode="singleTop"
             android:exported="true"
             android:theme="@style/LaunchTheme"
-            android:directBootAware="true"
+            android:directBootAware="false"
             android:windowSoftInputMode="adjustResize">
 
             <meta-data android:name="io.flutter.app.android.SplashScreenUntilFirstFrame" android:value="true" />
