@@ -130,7 +130,7 @@ class _CommonDialogState extends State<CommonDialog> {
         commomValue = preferences.getInt("ps").toDouble();
         checkValue = preferences.getInt("ps").toDouble();
         _pcCheckValue = preferences.getInt("pc").toDouble();
-        min = 0;
+        min = 5;
         max = vmaxValuepsValue;
         prefix = false;
         suffix = false;

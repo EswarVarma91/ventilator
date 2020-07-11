@@ -2362,16 +2362,16 @@ class _CheckPageState extends State<Dashboard> {
                       width: 250,
                       height: 250,
                       child: LiquidCircularProgressIndicator(
-                        value: batteryPercentage.toDouble(),
+                        value: (batteryPercentage/100).toDouble(),
                         backgroundColor: Colors.white,
                         valueColor: AlwaysStoppedAnimation(Colors.orange),
                         borderColor: Colors.grey,
                         borderWidth: 5.0,
                         center: Text(
-                          batteryPercentage.toString(),
+                          batteryPercentage.toString() + "%",
                           style: TextStyle(
                             fontSize: 18.0,
-                            color: Colors.grey,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -2383,7 +2383,7 @@ class _CheckPageState extends State<Dashboard> {
                       width: 250,
                       height: 250,
                       child: LiquidCircularProgressIndicator(
-                        value: batteryStatus == 1 ? 50.0 : 0.0,
+                        value: batteryStatus == 1 ? 0.7 : 0.2,
                         backgroundColor: Colors.white,
                         valueColor: AlwaysStoppedAnimation(Colors.orange),
                         borderColor: Colors.grey,
@@ -2392,7 +2392,7 @@ class _CheckPageState extends State<Dashboard> {
                           batteryStatus == 1 ? "Charging..." : "No Battery",
                           style: TextStyle(
                             fontSize: 18.0,
-                            color: Colors.grey,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -17644,7 +17644,7 @@ class _CheckPageState extends State<Dashboard> {
               onTap: () {
                 setState(() {
                   vsimvmaxValue = 60;
-                  vsimvminValue = 0;
+                  vsimvminValue = 5;
                   vsimvparameterName = "PS";
                   vsimvparameterUnits = "cmH\u2082O above PEEP";
                   vsimvItrig = false;
@@ -17708,7 +17708,7 @@ class _CheckPageState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "0",
+                              "5",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: vsimvPs
