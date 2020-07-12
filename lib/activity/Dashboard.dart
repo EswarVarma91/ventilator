@@ -50,6 +50,23 @@ class _CheckPageState extends State<Dashboard> {
     0x8801,
     0x4400
   ]);
+
+  List<double> traceSine2 = [
+    10.0,
+    10.0,
+    10.0,
+    10.0,
+    10.0,
+    10.0,
+    10.0,
+    10.0,
+    10.0,
+    10.0,
+    10.0,
+    
+    
+    
+  ];
   List<double> traceSine1 = [
     5.0,
     5.0,
@@ -105,9 +122,14 @@ class _CheckPageState extends State<Dashboard> {
   ];
 
   List<double> pressurePoints = [];
+  List<double> pipPoints = [];
+   List<double> fio2Points = [];
+    List<double> peepPoints = []; 
+    List<double> vtPoints = [];
+  int packetCounter = 0;
   List<double> flowPoints = [];
   List<double> volumePoints = [];
-  Oscilloscope scopeOne, scopeOne1, scopeOne2;
+  Oscilloscope scopeOne, scopeOne1, scopeOne2, scopeOne3,scopeOne4,scopeOne5,scopeOne6;
 
   UsbPort _port;
   String _status = "Idle";
@@ -550,6 +572,9 @@ class _CheckPageState extends State<Dashboard> {
   String assistStatus = "OFF";
   var batteryforceCharge = 0;
   bool batterChargingScreen = false;
+  bool _pipDataScreen = false;
+  double postiveNumber, negativeNumber;
+  bool bpostive = false, bnegative = true;
 
   List<Widget> _temporarySetValue = [];
 
@@ -686,7 +711,6 @@ class _CheckPageState extends State<Dashboard> {
     //   }
     // });
 
-    
     // _timer = Timer.periodic(Duration(seconds:1), (timer) async {
     //   var now = new DateTime.now();
     //   setState((){
@@ -1445,6 +1469,43 @@ class _CheckPageState extends State<Dashboard> {
         yAxisMax: 1000.0,
         yAxisMin: 0.0,
         dataSet: volumePoints);
+    scopeOne3 = Oscilloscope(
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Colors.black.withOpacity(0.7),
+        traceColor: Colors.yellow,
+        yAxisMax: 100.0,
+        yAxisMin: 0.0,
+        dataSet: pipPoints);
+    scopeOne4 = Oscilloscope(
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Colors.transparent,
+        traceColor: Colors.green,
+        yAxisMax: 100.0,
+        yAxisMin: 0.0,
+        dataSet: fio2Points);
+     scopeOne5 = Oscilloscope(
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Colors.transparent,
+        traceColor: Colors.blue,
+        yAxisMax: 100.0,
+        yAxisMin: 0.0,
+        dataSet: peepPoints);
+
+     scopeOne6 = Oscilloscope(
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Colors.black.withOpacity(0.7),
+        traceColor: Colors.orange,
+        yAxisMax: 1000.0,
+        yAxisMin: 0.0,
+        dataSet: vtPoints);
 
     return Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -2086,7 +2147,9 @@ class _CheckPageState extends State<Dashboard> {
                                   ? callibrationData()
                                   : batterChargingScreen
                                       ? batteryCharginScreen()
-                                      : Container(),
+                                      : _pipDataScreen
+                                          ? pipDataUi()
+                                          : Container(),
 
               // _buttonPressed
               //     ? Center(
@@ -2458,12 +2521,18 @@ class _CheckPageState extends State<Dashboard> {
                   child: IconButton(
                       icon: Icon(
                         Icons.settings,
-                        color: textText=="Calibrating 0\u2082.."? Colors.grey : Colors.white,
+                        color: textText == "Calibrating 0\u2082.."
+                            ? Colors.grey
+                            : Colors.white,
                         size: 40,
                       ),
                       onPressed: () {
-                       textText=="Calibrating 0\u2082.." ? "": Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => About()));
+                        textText == "Calibrating 0\u2082.."
+                            ? ""
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => About()));
                       }),
                 ),
                 // Padding(
@@ -2599,16 +2668,19 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Card(
-                  color: textText=="Calibrating 0\u2082.." ? Colors.grey : Colors.white,
+                  color: textText == "Calibrating 0\u2082.."
+                      ? Colors.grey
+                      : Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    
                   ),
                   child: InkWell(
                     onTap: () {
                       // selfTestingEnabled = false;
                       setState(() {
-                       textText=="Calibrating 0\u2082.." ? "": callibrationEnabled = false;
+                        textText == "Calibrating 0\u2082.."
+                            ? ""
+                            : callibrationEnabled = false;
                       });
                     },
                     child: Container(
@@ -2620,7 +2692,9 @@ class _CheckPageState extends State<Dashboard> {
                             Text(
                               "Continue \n with".toUpperCase(),
                               style: TextStyle(
-                                color: textText=="Calibrating 0\u2082.." ? Colors.white :Colors.black,
+                                color: textText == "Calibrating 0\u2082.."
+                                    ? Colors.white
+                                    : Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
                               ),
@@ -2629,7 +2703,9 @@ class _CheckPageState extends State<Dashboard> {
                             Text(
                               "Treatment".toUpperCase(),
                               style: TextStyle(
-                                color: textText=="Calibrating 0\u2082.." ? Colors.white :Colors.black,
+                                color: textText == "Calibrating 0\u2082.."
+                                    ? Colors.white
+                                    : Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 22,
                               ),
@@ -2642,6 +2718,213 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
               ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  pipDataUi() {
+    return Container(
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            Container(
+              color:Colors.black.withOpacity(0.5),
+               margin: EdgeInsets.only(left: 150,),
+              height:300,
+              child: Stack(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+                      child: scopeOne3),
+                   Container(
+                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+                      child: scopeOne4),
+                     Container(
+                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+                      child: scopeOne5),
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 120, top: 10),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(packetCounter.toString(),style:TextStyle(color:Colors.white,fontSize:30)),
+                          IconButton(
+                            icon: Icon(Icons.history, color: Colors.white, size: 40),
+                            onPressed: () {
+                              setState(() {
+                                packetCounter = 0;
+                                pipPoints.clear();
+                                fio2Points.clear();
+                                peepPoints.clear();
+                                vtPoints.clear();
+                              });
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.close, color: Colors.white, size: 40),
+                            onPressed: () {
+                              setState(() {
+                                _pipDataScreen = false;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 8),
+                    child: Text(
+                      "100" + " cmH\u2082O",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 280),
+                    child: Text(
+                      "0",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 252),
+                    child: Text(
+                      "10",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 224),
+                    child: Text(
+                      "20",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 196),
+                    child: Text(
+                      "30",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 168),
+                    child: Text(
+                      "40",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 140),
+                    child: Text(
+                      "50",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 112),
+                    child: Text(
+                      "60",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 84),
+                    child: Text(
+                      "70",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 56),
+                    child: Text(
+                      "80",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 28),
+                    child: Text(
+                      "90",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                ],
+              ),
+            ),
+            Container(
+              color:Colors.black.withOpacity(0.5),
+              height:300,
+              margin: EdgeInsets.only(left: 150,),
+              child: Stack(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+                      child: scopeOne6),
+                   Container(
+                    margin: EdgeInsets.only(left: 20, top: 8),
+                    child: Text(
+                      "1000" + " mL",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 280),
+                    child: Text(
+                      "0",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 252),
+                    child: Text(
+                      "100",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 224),
+                    child: Text(
+                      "200",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 196),
+                    child: Text(
+                      "300",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 168),
+                    child: Text(
+                      "400",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 140),
+                    child: Text(
+                      "500",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                Container(
+                    margin: EdgeInsets.only(left: 20, top: 112),
+                    child: Text(
+                      "600",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 84),
+                    child: Text(
+                      "700",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 56),
+                    child: Text(
+                      "800",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 28),
+                    child: Text(
+                      "900",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                  
+                ],
+              ),
             ),
           ],
         ),
@@ -4490,6 +4773,7 @@ class _CheckPageState extends State<Dashboard> {
                 SizedBox(
                   height: 130,
                 ),
+                
                 playOnEnabled
                     ? Column(
                         children: [
@@ -7122,8 +7406,8 @@ class _CheckPageState extends State<Dashboard> {
                     operatinModeR == 2 ||
                     operatinModeR == 3 ||
                     operatinModeR == 4 ||
-                    operatinModeR == 5 || 
-                    operatinModeR == 14 
+                    operatinModeR == 5 ||
+                    operatinModeR == 14
                 ? InkWell(
                     onTap: () {
                       setState(() {
@@ -7325,16 +7609,17 @@ class _CheckPageState extends State<Dashboard> {
                       borderRadius: BorderRadius.circular(5.0),
                       color: Colors.white,
                       child: Container(
-                        width: 80,
-                        height: 40,
-                        child: Center(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("00:00",
-                              style:
-                                  TextStyle(color: Colors.green, fontSize: 20)),
-                        )),
-                      )),
+                          width: 80,
+                          height: 40,
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("00:00",
+                                style:
+                                    TextStyle(color: Colors.green, fontSize: 20)),
+                          )),
+                        ),
+                      ),
               // SizedBox(width: 10),
               // Material(
               //     borderRadius: BorderRadius.circular(5),
@@ -7353,13 +7638,20 @@ class _CheckPageState extends State<Dashboard> {
                   color: powerIndication == 1
                       ? Colors.green
                       : powerIndication == 0 ? Colors.red : Colors.red,
+                  child: InkWell(
+                    onTap:(){
+                      setState(() {
+                            _pipDataScreen = true;
+                          });
+                    },
                   child: Container(
-                      width: 70,
-                      height: 40,
-                      child: Center(
-                        child: Image.asset("assets/images/powersymbol.png",
-                            color: Colors.white),
-                      ))),
+                        width: 70,
+                        height: 40,
+                        child: Center(
+                          child: Image.asset("assets/images/powersymbol.png",
+                              color: Colors.white),
+                        )),
+                  )),
               SizedBox(width: 5),
               InkWell(
                 onTap: () {
@@ -20488,19 +20780,19 @@ class _CheckPageState extends State<Dashboard> {
         // sendDataUsbConnection(modeWriteList,1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
-          modeWriteList[12] = ((temp & 0xFF00) >> 8);
-          modeWriteList[13] = (temp & 0xFF);
-          modeWriteList[26] = (0);
-          modeWriteList[27] = (16);
-          preferences.setInt('psimvPcValue', temp);
-       
+        modeWriteList[12] = ((temp & 0xFF00) >> 8);
+        modeWriteList[13] = (temp & 0xFF);
+        modeWriteList[26] = (0);
+        modeWriteList[27] = (16);
+        preferences.setInt('psimvPcValue', temp);
+
         if (receivedps > temp) {
           modeWriteList[20] = ((temp & 0xFF00) >> 8);
           modeWriteList[21] = (temp & 0xFF);
           modeWriteList[26] = (1);
           preferences.setInt('psimvPsValue', temp);
         }
-         getData();
+        getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
       } else if (vsimvEnabled == true) {
@@ -20518,7 +20810,7 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[32] = (8);
         modeWriteList[33] = (0);
         preferences.setInt('psvPcValue', temp);
-        
+
         if (receivedps > temp) {
           modeWriteList[8] = ((temp & 0xFF00) >> 8);
           modeWriteList[9] = (temp & 0xFF);
@@ -20996,10 +21288,7 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
- 
-
   _changepspsvValue(int temp) {
-    
     getData();
     // // print(modeWriteList.toString());
     sendDataUsbConnection(modeWriteList, 1);
@@ -22322,31 +22611,31 @@ class _CheckPageState extends State<Dashboard> {
         psimvparameterUnits = "bpm";
       });
     } else if (prvcEnabled == true) {
-        prvcItrig = false;
-        prvcRr = true;
-        prvcIe = false;
-        prvcPeep = false;
-        prvcVt = false;
-        prvcPcMin = false;
-        prvcPcMax = false;
-        prvcFio2 = false;
-        prvcFlowRamp = false;
+      prvcItrig = false;
+      prvcRr = true;
+      prvcIe = false;
+      prvcPeep = false;
+      prvcVt = false;
+      prvcPcMin = false;
+      prvcPcMax = false;
+      prvcFio2 = false;
+      prvcFlowRamp = false;
 
-        prvcItrigValue = 3;
-        prvcRrValue = 20;
-        prvcIeValue = 51;
-        prvcPeepValue = 10;
-        prvcVtValue = 400;
-        prvcPcMinValue = 20;
-        prvcPcMaxValue = 60;
-        prvcFio2Value = 21;
-        prvcFlowRampValue = 4;
+      prvcItrigValue = 3;
+      prvcRrValue = 20;
+      prvcIeValue = 51;
+      prvcPeepValue = 10;
+      prvcVtValue = 400;
+      prvcPcMinValue = 20;
+      prvcPcMaxValue = 60;
+      prvcFio2Value = 21;
+      prvcFlowRampValue = 4;
 
-        prvcmaxValue = 30;
-        prvcminValue = 1;
-        prvcdefaultValue = 20;
-        prvcparameterName = "RR";
-        prvcparameterUnits = "bpm";
+      prvcmaxValue = 30;
+      prvcminValue = 1;
+      prvcdefaultValue = 20;
+      prvcparameterName = "RR";
+      prvcparameterUnits = "bpm";
     }
   }
 
@@ -23883,6 +24172,7 @@ class _CheckPageState extends State<Dashboard> {
     if (finalList.isNotEmpty && finalList.length == 164) {
       //114
       var now = new DateTime.now();
+      
 
       lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
       preferences = await SharedPreferences.getInstance();
@@ -24440,6 +24730,63 @@ class _CheckPageState extends State<Dashboard> {
           flowPoints.add(temp3);
         }
 
+        if (temp3 < 0 && bnegative == true) {
+          negativeNumber = temp3;
+          bnegative = false;
+          bpostive = true;
+          // if (pipPoints.length >= 100) {
+          //   setState(() {
+          //     pipPoints.removeAt(0);
+          //     pipPoints.add(negativeNumber.toDouble());
+          //     // Fluttertoast.showToast(msg: temp.toString());
+          //   });
+          // } else {
+          //   pipPoints.add(negativeNumber.toDouble());
+          // }
+        } else {
+          if (bpostive == true && temp3 > 0) {
+            bnegative = true;
+            bpostive = false;
+            packetCounter = packetCounter + 1;
+            if (pipPoints.length >= 50) {
+              setState(() {
+                pipPoints.removeAt(0);
+                pipPoints.add(pipValue.toDouble());
+                // Fluttertoast.showToast(msg: temp.toString());
+              });
+            } else {
+              pipPoints.add(pipValue.toDouble());
+            }
+            if (fio2Points.length >= 50) {
+              setState(() {
+                fio2Points.removeAt(0);
+                fio2Points.add(fio2DisplayParameter.toDouble());
+                // Fluttertoast.showToast(msg: temp.toString());
+              });
+            } else {
+              fio2Points.add(fio2DisplayParameter.toDouble());
+            }
+            if (peepPoints.length >= 50) {
+              setState(() {
+                peepPoints.removeAt(0);
+                peepPoints.add(peepDisplayValue.toDouble());
+                // Fluttertoast.showToast(msg: temp.toString());
+              });
+            } else {
+              peepPoints.add(peepDisplayValue.toDouble());
+            }
+            if (vtPoints.length >= 50) {
+              setState(() {
+                vtPoints.removeAt(0);
+                vtPoints.add(vteValue.toDouble());
+                // Fluttertoast.showToast(msg: temp.toString());
+              });
+            } else {
+              vtPoints.add(vteValue.toDouble());
+            }
+          }
+        }
+
         if (_setValuesonClick == true && operatinModeR != 0) {
           setState(() {
             receivedoperatingModeR = ((finalList[112] << 8) + finalList[113]);
@@ -24884,3 +25231,6 @@ class _CheckPageState extends State<Dashboard> {
     });
   }
 }
+
+
+
