@@ -685,6 +685,8 @@ class _CheckPageState extends State<Dashboard> {
     // // });
     //   }
     // });
+
+    
     // _timer = Timer.periodic(Duration(seconds:1), (timer) async {
     //   var now = new DateTime.now();
     //   setState((){
@@ -2271,18 +2273,19 @@ class _CheckPageState extends State<Dashboard> {
                 borderRadius: BorderRadius.circular(20.0)), //this right here
             child: Container(
                 height: 200,
-                width: 400,
+                width: 450,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(height: 20),
                     Center(
-                        child: Text("Please Connect Lung.",
+                        child: Text("Please Connect Lung and O\u2082.",
                             style: TextStyle(
                                 fontSize: 25,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold))),
-                    SizedBox(height: 60),
+                    SizedBox(height: 40),
                     InkWell(
                       onTap: () {
                         sendCalibrationText();
@@ -2362,7 +2365,7 @@ class _CheckPageState extends State<Dashboard> {
                       width: 250,
                       height: 250,
                       child: LiquidCircularProgressIndicator(
-                        value: (batteryPercentage/100).toDouble(),
+                        value: (batteryPercentage / 100).toDouble(),
                         backgroundColor: Colors.white,
                         valueColor: AlwaysStoppedAnimation(Colors.orange),
                         borderColor: Colors.grey,
@@ -2455,11 +2458,11 @@ class _CheckPageState extends State<Dashboard> {
                   child: IconButton(
                       icon: Icon(
                         Icons.settings,
-                        color: Colors.white,
+                        color: textText=="Calibrating 0\u2082.."? Colors.grey : Colors.white,
                         size: 40,
                       ),
                       onPressed: () {
-                        Navigator.push(context,
+                       textText=="Calibrating 0\u2082.." ? "": Navigator.push(context,
                             MaterialPageRoute(builder: (context) => About()));
                       }),
                 ),
@@ -2596,14 +2599,16 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Card(
+                  color: textText=="Calibrating 0\u2082.." ? Colors.grey : Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
+                    
                   ),
                   child: InkWell(
                     onTap: () {
                       // selfTestingEnabled = false;
                       setState(() {
-                        callibrationEnabled = false;
+                       textText=="Calibrating 0\u2082.." ? "": callibrationEnabled = false;
                       });
                     },
                     child: Container(
@@ -2615,7 +2620,7 @@ class _CheckPageState extends State<Dashboard> {
                             Text(
                               "Continue \n with".toUpperCase(),
                               style: TextStyle(
-                                color: Colors.black,
+                                color: textText=="Calibrating 0\u2082.." ? Colors.white :Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
                               ),
@@ -2624,7 +2629,7 @@ class _CheckPageState extends State<Dashboard> {
                             Text(
                               "Treatment".toUpperCase(),
                               style: TextStyle(
-                                color: Colors.black,
+                                color: textText=="Calibrating 0\u2082.." ? Colors.white :Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 22,
                               ),
@@ -3586,48 +3591,48 @@ class _CheckPageState extends State<Dashboard> {
                                                 ),
                                               ),
                                             ),
-                                            // InkWell(
-                                            //   onTap: () {
-                                            //     setState(() {
-                                            //       pccmvEnabled = false;
-                                            //       vccmvEnabled = false;
-                                            //       pacvEnabled = false;
-                                            //       vacvEnabled = false;
-                                            //       psimvEnabled = false;
-                                            //       vsimvEnabled = false;
-                                            //       psvEnabled = false;
-                                            //       prvcEnabled = true;
-                                            //     });
-                                            //   },
-                                            //   child: Card(
-                                            //     color: prvcEnabled
-                                            //         ? Colors.blue
-                                            //         : Colors.white,
-                                            //     child: Container(
-                                            //       width: 98,
-                                            //       height: 70,
-                                            //       child: Align(
-                                            // alignment:
-                                            //     Alignment.center,
-                                            // child: Padding(
-                                            //   padding:
-                                            //       const EdgeInsets
-                                            // .all(8.0),
-                                            //   child: Text("PRVC",
-                                            //       style: TextStyle(
-                                            // fontSize: 20,
-                                            // color: prvcEnabled
-                                            //     ? Colors
-                                            //         .white
-                                            //     : Colors
-                                            //         .black,
-                                            // fontWeight:
-                                            //     FontWeight
-                                            //         .bold)),
-                                            // )),
-                                            //     ),
-                                            //   ),
-                                            // ),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  pccmvEnabled = false;
+                                                  vccmvEnabled = false;
+                                                  pacvEnabled = false;
+                                                  vacvEnabled = false;
+                                                  psimvEnabled = false;
+                                                  vsimvEnabled = false;
+                                                  psvEnabled = false;
+                                                  prvcEnabled = true;
+                                                });
+                                              },
+                                              child: Card(
+                                                color: prvcEnabled
+                                                    ? Colors.blue
+                                                    : Colors.white,
+                                                child: Container(
+                                                  width: 98,
+                                                  height: 70,
+                                                  child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text("PRVC",
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                color: prvcEnabled
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      )),
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -7117,7 +7122,8 @@ class _CheckPageState extends State<Dashboard> {
                     operatinModeR == 2 ||
                     operatinModeR == 3 ||
                     operatinModeR == 4 ||
-                    operatinModeR == 5
+                    operatinModeR == 5 || 
+                    operatinModeR == 14 
                 ? InkWell(
                     onTap: () {
                       setState(() {
@@ -7447,7 +7453,7 @@ class _CheckPageState extends State<Dashboard> {
         psimvEnabled ? psimvData() : Container(),
         vsimvEnabled ? vsimvData() : Container(),
         psvEnabled ? psvData() : Container(),
-        // prvcEnabled ? prvcData() : Container(),
+        prvcEnabled ? prvcData() : Container(),
       ],
     );
   }
@@ -20482,20 +20488,21 @@ class _CheckPageState extends State<Dashboard> {
         // sendDataUsbConnection(modeWriteList,1);
       } else if (psimvEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
-        modeWriteList[12] = ((temp & 0xFF00) >> 8);
-        modeWriteList[13] = (temp & 0xFF);
-        modeWriteList[26] = (0);
-        modeWriteList[27] = (16);
-
-        preferences.setInt('psimvPcValue', temp);
-        // preferences.setInt("psimvPsValue", temp);
-        getData();
+          modeWriteList[12] = ((temp & 0xFF00) >> 8);
+          modeWriteList[13] = (temp & 0xFF);
+          modeWriteList[26] = (0);
+          modeWriteList[27] = (16);
+          preferences.setInt('psimvPcValue', temp);
+       
+        if (receivedps > temp) {
+          modeWriteList[20] = ((temp & 0xFF00) >> 8);
+          modeWriteList[21] = (temp & 0xFF);
+          modeWriteList[26] = (1);
+          preferences.setInt('psimvPsValue', temp);
+        }
+         getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
-        if (receivedps > temp) {
-          //TODO
-          _changepspsimvValue(temp);
-        }
       } else if (vsimvEnabled == true) {
         // int temp = int.tryParse(result.split("ab")[0]);
         // modeWriteList[10]=((temp & 0xFF00) >> 8);
@@ -20511,13 +20518,16 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[32] = (8);
         modeWriteList[33] = (0);
         preferences.setInt('psvPcValue', temp);
+        
+        if (receivedps > temp) {
+          modeWriteList[8] = ((temp & 0xFF00) >> 8);
+          modeWriteList[9] = (temp & 0xFF);
+          modeWriteList[33] = (4);
+          preferences.setInt('psvPsValue', temp);
+        }
         getData();
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
-        if (receivedps > temp) {
-          //TODO
-          _changepspsvValue(temp);
-        }
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
         modeWriteList[14] = ((temp & 0xFF00) >> 8);
@@ -20945,14 +20955,16 @@ class _CheckPageState extends State<Dashboard> {
         // // print(modeWriteList.toString());
         sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
-        // int temp = int.tryParse(result.split("ab")[0]);
-        // modeWriteList[12] = ((temp & 0xFF00) >> 8);
-        // modeWriteList[13] = (temp & 0xFF);
-        // modeWriteList[24] = (0);
-        // modeWriteList[25] = (16);
-        // getData();
-        // // // print(modeWriteList.toString());
-        // sendDataUsbConnection(modeWriteList,1);
+        int temp = int.tryParse(result.split("ab")[0]);
+        modeWriteList[4] = ((-temp & 0xFF00) >> 8);
+        modeWriteList[5] = (-temp & 0xFF);
+        modeWriteList[24] = (0);
+        modeWriteList[25] = (1);
+
+        preferences.setInt('prvcItrigValue', temp);
+        getData();
+        // // print(modeWriteList.toString());
+        sendDataUsbConnection(modeWriteList, 1);
       }
     } else if (res == "atime") {
       int temp = int.tryParse(result.split("ab")[0]);
@@ -20983,28 +20995,14 @@ class _CheckPageState extends State<Dashboard> {
       sendDataUsbConnection(modeWriteList, 1);
     }
   }
-  _changepspsimvValue(int temp){
-     modeWriteList[20] = ((temp & 0xFF00) >> 8);
-        modeWriteList[21] = (temp & 0xFF);
-        modeWriteList[26] = (1);
-        modeWriteList[27] = (0);
 
-        preferences.setInt('psimvPsValue', temp);
-        getData();
-        // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList, 1);
-  }
+ 
 
-  _changepspsvValue(int temp){
-    modeWriteList[8] = ((temp & 0xFF00) >> 8);
-        modeWriteList[9] = (temp & 0xFF);
-        modeWriteList[32] = (0);
-        modeWriteList[33] = (4);
-
-        preferences.setInt('psvPsValue', temp);
-        getData();
-        // // print(modeWriteList.toString());
-        sendDataUsbConnection(modeWriteList, 1);
+  _changepspsvValue(int temp) {
+    
+    getData();
+    // // print(modeWriteList.toString());
+    sendDataUsbConnection(modeWriteList, 1);
   }
 
   getTiValueNumber(checkTi) {
@@ -21594,45 +21592,45 @@ class _CheckPageState extends State<Dashboard> {
       var dataE2 = (dataE1 * 10).toInt();
       setState(() {
         // modeWriteList.add(0x7E);
-        modeWriteList.add(0); //1
+        modeWriteList.add(0); //0
         modeWriteList.add(20);
         modeWriteList.add(0);
         modeWriteList.add(4);
 
-        modeWriteList.add((-psimvItrigValue & 0xFF00) >> 8); //5
+        modeWriteList.add((-psimvItrigValue & 0xFF00) >> 8); //4
         modeWriteList.add((-psimvItrigValue & 0x00FF));
 
-        modeWriteList.add((psimvRrValue & 0xFF00) >> 8); //7
+        modeWriteList.add((psimvRrValue & 0xFF00) >> 8); //6
         modeWriteList.add((psimvRrValue & 0x00FF));
 
-        modeWriteList.add((dataI2 & 0x00FF)); //9
+        modeWriteList.add((dataI2 & 0x00FF)); //8
         modeWriteList.add((dataE2 & 0x00FF));
 
-        modeWriteList.add((psimvPeepValue & 0xFF00) >> 8); //11
+        modeWriteList.add((psimvPeepValue & 0xFF00) >> 8); //10
         modeWriteList.add((psimvPeepValue & 0x00FF));
 
-        modeWriteList.add((psimvPcValue & 0xFF00) >> 8); //13
+        modeWriteList.add((psimvPcValue & 0xFF00) >> 8); //12
         modeWriteList.add((psimvPcValue & 0x00FF));
 
-        modeWriteList.add((psimvVtMinValue & 0xFF00) >> 8); //15
+        modeWriteList.add((psimvVtMinValue & 0xFF00) >> 8); //14
         modeWriteList.add((psimvVtMinValue & 0x00FF));
 
-        modeWriteList.add((psimvVtMaxValue & 0xFF00) >> 8); //17
+        modeWriteList.add((psimvVtMaxValue & 0xFF00) >> 8); //16
         modeWriteList.add((psimvVtMaxValue & 0x00FF));
 
-        modeWriteList.add((psimvFio2Value & 0xFF00) >> 8); //19
+        modeWriteList.add((psimvFio2Value & 0xFF00) >> 8); //18
         modeWriteList.add((psimvFio2Value & 0x00FF));
 
-        modeWriteList.add((psimvPsValue & 0xFF00) >> 8); //21
+        modeWriteList.add((psimvPsValue & 0xFF00) >> 8); //20
         modeWriteList.add((psimvPsValue & 0x00FF));
 
-        modeWriteList.add(0); //23
+        modeWriteList.add(0); //22
         modeWriteList.add(0); //
-        modeWriteList.add(0); //25
+        modeWriteList.add(0); //24
         modeWriteList.add(0); //
 
-        modeWriteList.add(7); //27
-        modeWriteList.add(255);
+        modeWriteList.add(7); //26
+        modeWriteList.add(255); //27
         modeWriteList.add(0); //29
         modeWriteList.add(0); //30
         // modeWriteList.add(0x7F);
@@ -21918,28 +21916,28 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add(20);
         modeWriteList.add(0);
         modeWriteList.add(14);
-        modeWriteList.add((-prvcItrigValue & 0xFF00) >> 8); //5
+        modeWriteList.add((-prvcItrigValue & 0xFF00) >> 8); //4
         modeWriteList.add((-prvcItrigValue & 0x00FF));
 
-        modeWriteList.add((prvcRrValue & 0xFF00) >> 8); //7
+        modeWriteList.add((prvcRrValue & 0xFF00) >> 8); //6
         modeWriteList.add((prvcRrValue & 0x00FF));
 
-        modeWriteList.add((dataI2 & 0x00FF)); //9
+        modeWriteList.add((dataI2 & 0x00FF)); //8
         modeWriteList.add((dataE2 & 0x00FF));
 
-        modeWriteList.add((prvcPeepValue & 0xFF00) >> 8); //11
+        modeWriteList.add((prvcPeepValue & 0xFF00) >> 8); //10
         modeWriteList.add((prvcPeepValue & 0x00FF));
 
-        modeWriteList.add((prvcVtValue & 0xFF00) >> 8); //13
+        modeWriteList.add((prvcVtValue & 0xFF00) >> 8); //12
         modeWriteList.add((prvcVtValue & 0x00FF));
 
-        modeWriteList.add(0); //15
+        modeWriteList.add(0); //14
         modeWriteList.add(0);
 
-        modeWriteList.add((prvcPcMaxValue & 0xFF00) >> 8); //17
+        modeWriteList.add((prvcPcMaxValue & 0xFF00) >> 8); //16
         modeWriteList.add((prvcPcMaxValue & 0x00FF));
 
-        modeWriteList.add((prvcFio2Value & 0xFF00) >> 8); //19
+        modeWriteList.add((prvcFio2Value & 0xFF00) >> 8); //18
         modeWriteList.add((prvcFio2Value & 0x00FF));
 
         modeWriteList.add(0); //21
@@ -21948,7 +21946,7 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add(0); //23
         modeWriteList.add(0);
 
-        modeWriteList.add(3); //25
+        modeWriteList.add(3); //24
         modeWriteList.add(255);
 
         modeWriteList.add(0); //27 crc
@@ -21971,6 +21969,7 @@ class _CheckPageState extends State<Dashboard> {
       // preferences.setInt("ps", 40);
       preferences.setInt("fio2", prvcFio2Value);
       preferences.setInt("vt", prvcVtValue);
+      preferences.setInt("itrig", prvcItrigValue);
 
       preferences.setInt('prvcItrigValue', prvcItrigValue);
 
@@ -22322,6 +22321,32 @@ class _CheckPageState extends State<Dashboard> {
         psimvparameterName = "RR";
         psimvparameterUnits = "bpm";
       });
+    } else if (prvcEnabled == true) {
+        prvcItrig = false;
+        prvcRr = true;
+        prvcIe = false;
+        prvcPeep = false;
+        prvcVt = false;
+        prvcPcMin = false;
+        prvcPcMax = false;
+        prvcFio2 = false;
+        prvcFlowRamp = false;
+
+        prvcItrigValue = 3;
+        prvcRrValue = 20;
+        prvcIeValue = 51;
+        prvcPeepValue = 10;
+        prvcVtValue = 400;
+        prvcPcMinValue = 20;
+        prvcPcMaxValue = 60;
+        prvcFio2Value = 21;
+        prvcFlowRampValue = 4;
+
+        prvcmaxValue = 30;
+        prvcminValue = 1;
+        prvcdefaultValue = 20;
+        prvcparameterName = "RR";
+        prvcparameterUnits = "bpm";
     }
   }
 
@@ -24607,6 +24632,21 @@ class _CheckPageState extends State<Dashboard> {
               // psvEnabled = true;
 
               // getData();
+            } else if (operatinModeR == 14 && receivedoperatingModeR == 3) {
+              preferences.setInt("rr", receivedrr);
+              preferences.setString("i", i);
+              preferences.setString("e", e);
+              preferences.setInt("peep", receivedpeep);
+              preferences.setInt("fio2", receivedfio2);
+              preferences.setInt("vt", receivedvt);
+              preferences.setInt("itrig", receivedItrig);
+              preferences.setInt('prvcItrigValue', receivedItrig);
+              preferences.setInt('prvcRrValue', receivedrr);
+              preferences.setInt(
+                  'prvcIeValue', getIeNumber(i + ":" + e.toString()));
+              preferences.setInt('prvcPeepValue', receivedpeep);
+              preferences.setInt('prvcVtValue', receivedvt);
+              preferences.setInt('prvcFio2Value', receivedfio2);
             }
           });
         }
