@@ -204,7 +204,8 @@ class _CheckPageState extends State<Dashboard> {
       alarmsSetting1 = true,
       editbbEnabled = false,
       alarmsSetting2 = false,
-      assistmodeOn = false;
+      assistmodePressureOn = false,
+      assistmodeVolumeOn = false;
 
   bool pacvItrig = false,
       pacvRr = true,
@@ -3526,54 +3527,8 @@ class _CheckPageState extends State<Dashboard> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            assistmodeOn
-                                                ? Container()
-                                                : InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        getData();
-                                                        pccmvEnabled = true;
-                                                        vccmvEnabled = false;
-                                                        pacvEnabled = false;
-                                                        vacvEnabled = false;
-                                                        psimvEnabled = false;
-                                                        vsimvEnabled = false;
-                                                        psvEnabled = false;
-                                                        prvcEnabled = false;
-                                                      });
-                                                    },
-                                                    child: Card(
-                                                      color: pccmvEnabled
-                                                          ? Colors.blue
-                                                          : Colors.white,
-                                                      child: Container(
-                                                        width: 115,
-                                                        height: 70,
-                                                        child: Align(
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Text(
-                                                                  "PC-CMV",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          20,
-                                                                      color: pccmvEnabled
-                                                                          ? Colors
-                                                                              .white
-                                                                          : Colors
-                                                                              .black,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold)),
-                                                            )),
-                                                      ),
-                                                    ),
-                                                  ),
-                                            assistmodeOn
+                                             
+                                            assistmodePressureOn
                                                 ? InkWell(
                                                     onTap: () {
                                                       setState(() {
@@ -3618,16 +3573,13 @@ class _CheckPageState extends State<Dashboard> {
                                                             )),
                                                       ),
                                                     ),
-                                                  )
-                                                : Container(),
-                                            assistmodeOn
-                                                ? Container()
-                                                : InkWell(
+                                                  ):
+                                                  InkWell(
                                                     onTap: () {
                                                       setState(() {
                                                         getData();
-                                                        pccmvEnabled = false;
-                                                        vccmvEnabled = true;
+                                                        pccmvEnabled = true;
+                                                        vccmvEnabled = false;
                                                         pacvEnabled = false;
                                                         vacvEnabled = false;
                                                         psimvEnabled = false;
@@ -3637,38 +3589,38 @@ class _CheckPageState extends State<Dashboard> {
                                                       });
                                                     },
                                                     child: Card(
-                                                        color: vccmvEnabled
-                                                            ? Colors.blue
-                                                            : Colors.white,
-                                                        child: Container(
-                                                          width: 115,
-                                                          height: 70,
-                                                          child: Align(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        8.0),
-                                                                child: Text(
-                                                                    "VC-CMV",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            20,
-                                                                        color: vccmvEnabled
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Colors
-                                                                                .black,
-                                                                        fontWeight:
-                                                                            FontWeight.bold)),
-                                                              )),
-                                                        )),
+                                                      color: pccmvEnabled
+                                                          ? Colors.blue
+                                                          : Colors.white,
+                                                      child: Container(
+                                                        width: 115,
+                                                        height: 70,
+                                                        child: Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Text(
+                                                                  "PC-CMV",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      color: pccmvEnabled
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            )),
+                                                      ),
+                                                    ),
                                                   ),
-                                            assistmodeOn
-                                                ? InkWell(
+                                                 assistmodeVolumeOn ?
+                                                InkWell(
                                                     onTap: () {
                                                       setState(() {
                                                         getData();
@@ -3713,7 +3665,51 @@ class _CheckPageState extends State<Dashboard> {
                                                       ),
                                                     ),
                                                   )
-                                                : Container(),
+                                                :InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        getData();
+                                                        pccmvEnabled = false;
+                                                        vccmvEnabled = true;
+                                                        pacvEnabled = false;
+                                                        vacvEnabled = false;
+                                                        psimvEnabled = false;
+                                                        vsimvEnabled = false;
+                                                        psvEnabled = false;
+                                                        prvcEnabled = false;
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                        color: vccmvEnabled
+                                                            ? Colors.blue
+                                                            : Colors.white,
+                                                        child: Container(
+                                                          width: 115,
+                                                          height: 70,
+                                                          child: Align(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                    "VC-CMV",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            20,
+                                                                        color: vccmvEnabled
+                                                                            ? Colors
+                                                                                .white
+                                                                            : Colors
+                                                                                .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                              )),
+                                                        )),
+                                                  ),
                                             InkWell(
                                               onTap: () {
                                                 setState(() {
@@ -3938,15 +3934,15 @@ class _CheckPageState extends State<Dashboard> {
                                               // InkWell(
                                               //   onTap: () {
                                               //     setState(() {
-                                              //       assistmodeOn =
-                                              //           !assistmodeOn;
+                                              //       assistmodePressureOn =
+                                              //           !assistmodePressureOn;
                                               //       if (assistStatus == "OFF") {
                                               //         assistStatus = "ON";
                                               //       } else if (assistStatus ==
                                               //           "ON") {
                                               //         assistStatus = "OFF";
                                               //       }
-                                              //       if (assistmodeOn == true) {
+                                              //       if (assistmodePressureOn == true) {
                                               //         pacvEnabled = true;
                                               //         pccmvEnabled = false;
                                               //       } else {
@@ -10747,8 +10743,8 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      assistmodeOn = !assistmodeOn;
-                      if (assistmodeOn == true) {
+                      assistmodePressureOn = !assistmodePressureOn;
+                      if (assistmodePressureOn == true) {
                         pacvEnabled = true;
                         pccmvEnabled = false;
                       } else {
@@ -10759,13 +10755,13 @@ class _CheckPageState extends State<Dashboard> {
                   },
                   child: Card(
                       color:
-                          assistmodeOn ? Color(0xFF213855) : Color(0xFFE0E0E0),
+                          assistmodePressureOn ? Color(0xFF213855) : Color(0xFFE0E0E0),
                       child: Padding(
                         padding: const EdgeInsets.all(22.0),
                         child: Text(
                           "Assist Off",
                           style: TextStyle(
-                            color: assistmodeOn
+                            color: assistmodePressureOn
                                 ? Color(0xFFE0E0E0)
                                 : Color(0xFF213855),
                           ),
@@ -10775,8 +10771,8 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      assistmodeOn = !assistmodeOn;
-                      if (assistmodeOn == true) {
+                      assistmodePressureOn = !assistmodePressureOn;
+                      if (assistmodePressureOn == true) {
                         pacvEnabled = true;
                         pccmvEnabled = false;
                       } else {
@@ -10787,13 +10783,13 @@ class _CheckPageState extends State<Dashboard> {
                   },
                   child: Card(
                       color:
-                          assistmodeOn ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                          assistmodePressureOn ? Color(0xFFE0E0E0) : Color(0xFF213855),
                       child: Padding(
                         padding: const EdgeInsets.all(22.0),
                         child: Text(
                           "Assist on",
                           style: TextStyle(
-                            color: assistmodeOn
+                            color: assistmodePressureOn
                                 ? Color(0xFF213855)
                                 : Color(0xFFE0E0E0),
                           ),
@@ -15264,9 +15260,9 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      assistmodeOn = !assistmodeOn;
+                      assistmodePressureOn = !assistmodePressureOn;
 
-                      if (assistmodeOn == true) {
+                      if (assistmodePressureOn == true) {
                         pacvEnabled = true;
                         pccmvEnabled = false;
                       } else {
@@ -15276,7 +15272,7 @@ class _CheckPageState extends State<Dashboard> {
                     });
                   },
                   child: Card(
-                      color: invasiveEnabled
+                      color: assistmodePressureOn==false
                           ? Color(0xFFE0E0E0)
                           : Color(0xFF213855),
                       child: Padding(
@@ -15284,7 +15280,7 @@ class _CheckPageState extends State<Dashboard> {
                         child: Text(
                           "Assist Off",
                           style: TextStyle(
-                            color: invasiveEnabled
+                            color: assistmodePressureOn==false
                                 ? Color(0xFF213855)
                                 : Color(0xFFE0E0E0),
                           ),
@@ -15294,9 +15290,9 @@ class _CheckPageState extends State<Dashboard> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      assistmodeOn = !assistmodeOn;
+                      assistmodePressureOn = !assistmodePressureOn;
 
-                      if (assistmodeOn == true) {
+                      if (assistmodePressureOn == true) {
                         pacvEnabled = true;
                         pccmvEnabled = false;
                       } else {
@@ -15306,7 +15302,7 @@ class _CheckPageState extends State<Dashboard> {
                     });
                   },
                   child: Card(
-                      color: noninvasiveEnabled
+                      color: assistmodePressureOn==true
                           ? Color(0xFFE0E0E0)
                           : Color(0xFF213855),
                       child: Padding(
@@ -15314,7 +15310,7 @@ class _CheckPageState extends State<Dashboard> {
                         child: Text(
                           "Assist On",
                           style: TextStyle(
-                            color: noninvasiveEnabled
+                            color: assistmodePressureOn==true
                                 ? Color(0xFF213855)
                                 : Color(0xFFE0E0E0),
                           ),
@@ -16330,6 +16326,121 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  vccmvmaxValue = 100;
+                  vccmvminValue = 0;
+                  vccmvparameterName = "PC Max";
+                  vccmvparameterUnits = "cmH\u2082O above PEEP";
+                  vccmvRR = false;
+                  vccmvIe = false;
+                  vccmvPeep = false;
+                  vccmvVt = false;
+                  vccmvPcMax = true;
+                  vccmvPcMin = false;
+                  vccmvFio2 = false;
+                  vccmvFlowRamp = false;
+                  vccmvTih = false;
+                });
+                sleep(const Duration(milliseconds: 200));
+              },
+              child: Center(
+                child: Container(
+                  width: 146,
+                  height: 130,
+                  child: Card(
+                    elevation: 40,
+                    color: vccmvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Max",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style: TextStyle(
+                                  fontSize: 9,
+                                  color: vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              "100",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "0",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0)),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1.0),
+                              child: Text(
+                                vccmvPcMaxValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: vccmvPcMax
+                                        ? Color(0xFF213855)
+                                        : Color(0xFFE0E0E0)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20.0, left: 10, right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  vccmvPcMax
+                                      ? Color(0xFF213855)
+                                      : Color(0xFFE0E0E0),
+                                ),
+                                value: vccmvPcMaxValue != null
+                                    ? vccmvPcMaxValue / 100
+                                    : 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
         Column(
@@ -16449,125 +16560,78 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  vccmvmaxValue = 100;
-                  vccmvminValue = 0;
-                  vccmvparameterName = "PC Max";
-                  vccmvparameterUnits = "cmH\u2082O above PEEP";
-                  vccmvRR = false;
-                  vccmvIe = false;
-                  vccmvPeep = false;
-                  vccmvVt = false;
-                  vccmvPcMax = true;
-                  vccmvPcMin = false;
-                  vccmvFio2 = false;
-                  vccmvFlowRamp = false;
-                  vccmvTih = false;
-                });
-                sleep(const Duration(milliseconds: 200));
-              },
-              child: Center(
-                child: Container(
-                  width: 146,
-                  height: 130,
-                  child: Card(
-                    elevation: 40,
-                    color: vccmvPcMax ? Color(0xFFE0E0E0) : Color(0xFF213855),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Max",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: vccmvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "cmH\u2082O",
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  color: vccmvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "100",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vccmvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "0",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: vccmvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0)),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(
-                                vccmvPcMaxValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    color: vccmvPcMax
-                                        ? Color(0xFF213855)
-                                        : Color(0xFFE0E0E0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20.0, left: 10, right: 10),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: LinearProgressIndicator(
-                                backgroundColor: Colors.grey,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  vccmvPcMax
-                                      ? Color(0xFF213855)
-                                      : Color(0xFFE0E0E0),
-                                ),
-                                value: vccmvPcMaxValue != null
-                                    ? vccmvPcMaxValue / 100
-                                    : 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Container(width: 146),
+            
           ],
         ),
-        SizedBox(width: 140),
+        SizedBox(width: 15),
+        Container(
+            padding: EdgeInsets.only(top: 290),
+            width: 255,
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      assistmodeVolumeOn = !assistmodeVolumeOn;
+
+                      if (assistmodeVolumeOn == true) {
+                        vacvEnabled = true;
+                        vccmvEnabled = false;
+                      } else {
+                        vccmvEnabled = true;
+                        vacvEnabled = false;
+                      }
+                    });
+                  },
+                  child: Card(
+                      color: assistmodeVolumeOn==false
+                          ? Color(0xFFE0E0E0)
+                          : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Text(
+                          "Assist Off",
+                          style: TextStyle(
+                            color: assistmodeVolumeOn==false
+                                ? Color(0xFF213855)
+                                : Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      )),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      assistmodeVolumeOn = !assistmodeVolumeOn;
+
+                      if (assistmodeVolumeOn == true) {
+                        vacvEnabled = true;
+                        vccmvEnabled = false;
+                      } else {
+                        vccmvEnabled = true;
+                        vacvEnabled = false;
+                      }
+                    });
+                  },
+                  child: Card(
+                      color: assistmodeVolumeOn==true
+                          ? Color(0xFFE0E0E0)
+                          : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Text(
+                          "Assist On",
+                          style: TextStyle(
+                            color: assistmodeVolumeOn==true
+                                ? Color(0xFF213855)
+                                : Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      )),
+                ),
+              ],
+            )),
+        SizedBox(width: 15),
         Column(
           children: [
             Container(
@@ -19311,6 +19375,8 @@ class _CheckPageState extends State<Dashboard> {
           ],
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // InkWell(
             //   onTap: () {
@@ -19668,9 +19734,79 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
+            SizedBox(width:40),
+            Container(
+            padding: EdgeInsets.only(top: 160),
+            width: 255,
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      assistmodeVolumeOn = !assistmodeVolumeOn;
+
+                      if (assistmodeVolumeOn == true) {
+                        vacvEnabled = true;
+                        vccmvEnabled = false;
+                      } else {
+                        vccmvEnabled = true;
+                        vacvEnabled = false;
+                      }
+                    });
+                  },
+                  child: Card(
+                      color: assistmodeVolumeOn==false
+                          ? Color(0xFFE0E0E0)
+                          : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Text(
+                          "Assist Off",
+                          style: TextStyle(
+                            color: assistmodeVolumeOn==false
+                                ? Color(0xFF213855)
+                                : Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      )),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      assistmodeVolumeOn = !assistmodeVolumeOn;
+
+                      if (assistmodeVolumeOn == true) {
+                        vacvEnabled = true;
+                        vccmvEnabled = false;
+                      } else {
+                        vccmvEnabled = true;
+                        vacvEnabled = false;
+                      }
+                    });
+                  },
+                  child: Card(
+                      color: assistmodeVolumeOn==true
+                          ? Color(0xFFE0E0E0)
+                          : Color(0xFF213855),
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Text(
+                          "Assist On",
+                          style: TextStyle(
+                            color: assistmodeVolumeOn==true
+                                ? Color(0xFF213855)
+                                : Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      )),
+                ),
+              ],
+            )),
+            
           ],
         ),
-        SizedBox(width: 140),
+        SizedBox(width:25),
+        
         Column(
           children: [
             Container(
