@@ -7112,6 +7112,68 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
+            operatinModeR == 14 ||
+                    modeName == "PRVC" ?InkWell(
+              onTap: () {
+                setState(() {
+                  _setValuesonClick = false;
+                });
+                if (modeWriteList.isNotEmpty) {
+                  lockEnabled
+                      ? playOnEnabled
+                          ? ""
+                          : CommonClick("PC MAX")
+                      : "";
+                }
+              },
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC Max".toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                pcValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ):Container(),
             operatinModeR == 4 ||
                     modeName == "PSIMV" ||
                     operatinModeR == 3 ||
@@ -20929,10 +20991,12 @@ class _CheckPageState extends State<Dashboard> {
         sendDataUsbConnection(modeWriteList, 1);
       } else if (prvcEnabled == true) {
         int temp = int.tryParse(result.split("ab")[0]);
-        modeWriteList[14] = ((temp & 0xFF00) >> 8);
-        modeWriteList[15] = (temp & 0xFF);
+        modeWriteList[16] = ((temp & 0xFF00) >> 8);
+        modeWriteList[17] = (temp & 0xFF);
         modeWriteList[24] = (0);
         modeWriteList[25] = (64);
+         preferences.setInt('prvcPcMaxValue', temp);
+        
 
         getData();
         // // print(modeWriteList.toString());
@@ -21117,7 +21181,7 @@ class _CheckPageState extends State<Dashboard> {
 
         preferences.setString("i", dataI1.toString());
         preferences.setString("e", dataE1.toString());
-        // getData();
+        // getData();""
 
         modeWriteList[8] = (dataI2);
         modeWriteList[9] = (dataE2);
@@ -22362,7 +22426,7 @@ class _CheckPageState extends State<Dashboard> {
       preferences.setString("i", dataI1.toString());
       preferences.setString("e", dataE1.toString());
       preferences.setInt("peep", prvcPeepValue);
-      // preferences.setInt("ps", 40);
+      preferences.setInt("pc", prvcPcMaxValue);
       preferences.setInt("fio2", prvcFio2Value);
       preferences.setInt("vt", prvcVtValue);
       preferences.setInt("itrig", prvcItrigValue);

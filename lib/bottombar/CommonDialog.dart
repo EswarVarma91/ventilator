@@ -168,6 +168,17 @@ class _CommonDialogState extends State<CommonDialog> {
         suffix = false;
         units = true;
       });
+    }else if (widget.value.toString() == "PC MAX") {
+      setState(() {
+        commomValue = preferences.getInt("pc").toDouble();
+        checkValue = preferences.getInt("pc").toDouble();
+        _psCheckValue = preferences.getInt("ps").toDouble();
+        min = 10;
+        max = 100;
+        prefix = false;
+        suffix = false;
+        units = true;
+      });
     } else if (widget.value.toString() == "PCV") {
       setState(() {
         commomValue = preferences.getInt("pc").toDouble();
@@ -402,6 +413,8 @@ class _CommonDialogState extends State<CommonDialog> {
                                             ? "PEEP"
                                             : widget.value.toString() == "VPS"
                                                 ? "PS"
+                                                : widget.value.toString() =="PC MAX"
+                                                ? "PC MAC"
                                                 : widget.value.toString(),
                         style: TextStyle(
                             color: Colors.white,
@@ -512,6 +525,7 @@ class _CommonDialogState extends State<CommonDialog> {
                                       : widget.value.toString() == "Ti"
                                           ? "Min " +
                                               getTiValue(min.toInt()).toString()
+                                              
                                           : "Min " + min.toInt().toString()),
                               // SizedBox(height: 30,),
                               Text(widget.value.toString() == "RR" ||
@@ -761,7 +775,12 @@ class _CommonDialogState extends State<CommonDialog> {
         }
       });
       Navigator.pop(context, value.ceil().toString() + "ab" + "pc");
-    } else if (widget.value.toString() == "PCV") {
+    } else if (widget.value.toString() == "PC MAX") {
+      setState(() {
+        preferences.setInt("pc", value.ceil());
+      });
+      Navigator.pop(context, value.ceil().toString() + "ab" + "pc");
+    }else if (widget.value.toString() == "PCV") {
       setState(() {
         preferences.setInt("pc", value.ceil());
         // print(value.ceil().toString() + " " + _psCheckValue.ceil().toString());
