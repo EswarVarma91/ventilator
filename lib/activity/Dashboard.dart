@@ -51,22 +51,7 @@ class _CheckPageState extends State<Dashboard> {
     0x4400
   ]);
 
-  List<double> traceSine2 = [
-    10.0,
-    10.0,
-    10.0,
-    10.0,
-    10.0,
-    10.0,
-    10.0,
-    10.0,
-    10.0,
-    10.0,
-    10.0,
-    
-    
-    
-  ];
+ 
   List<double> traceSine1 = [
     5.0,
     5.0,
@@ -122,14 +107,15 @@ class _CheckPageState extends State<Dashboard> {
   ];
 
   List<double> pressurePoints = [];
-  List<double> pipPoints = [];
-   List<double> fio2Points = [];
-    List<double> peepPoints = []; 
-    List<double> vtPoints = [];
-  int packetCounter = 0;
+  // List<double> pipPoints = [];
+  //  List<double> fio2Points = [];
+  //   List<double> peepPoints = []; 
+  //   List<double> vtPoints = [];
+  // int packetCounter = 0;
   List<double> flowPoints = [];
   List<double> volumePoints = [];
-  Oscilloscope scopeOne, scopeOne1, scopeOne2, scopeOne3,scopeOne4,scopeOne5,scopeOne6;
+  Oscilloscope scopeOne, scopeOne1, scopeOne2;
+  //scopeOne3,scopeOne4,scopeOne5,scopeOne6;
 
   UsbPort _port;
   String _status = "Idle";
@@ -572,9 +558,9 @@ class _CheckPageState extends State<Dashboard> {
   String assistStatus = "OFF";
   var batteryforceCharge = 0;
   bool batterChargingScreen = false;
-  bool _pipDataScreen = false;
-  double postiveNumber, negativeNumber;
-  bool bpostive = false, bnegative = true;
+  // bool _pipDataScreen = false;
+  // double postiveNumber, negativeNumber;
+  // bool bpostive = false, bnegative = true;
 
   List<Widget> _temporarySetValue = [];
 
@@ -1469,43 +1455,43 @@ class _CheckPageState extends State<Dashboard> {
         yAxisMax: 1000.0,
         yAxisMin: 0.0,
         dataSet: volumePoints);
-    scopeOne3 = Oscilloscope(
-        showYAxis: true,
-        yAxisColor: Colors.grey,
-        padding: 10.0,
-        backgroundColor: Colors.black.withOpacity(0.7),
-        traceColor: Colors.yellow,
-        yAxisMax: 100.0,
-        yAxisMin: 0.0,
-        dataSet: pipPoints);
-    scopeOne4 = Oscilloscope(
-        showYAxis: true,
-        yAxisColor: Colors.grey,
-        padding: 10.0,
-        backgroundColor: Colors.transparent,
-        traceColor: Colors.teal,
-        yAxisMax: 100.0,
-        yAxisMin: 0.0,
-        dataSet: fio2Points);
-     scopeOne5 = Oscilloscope(
-        showYAxis: true,
-        yAxisColor: Colors.grey,
-        padding: 10.0,
-        backgroundColor: Colors.transparent,
-        traceColor: Colors.pink,
-        yAxisMax: 100.0,
-        yAxisMin: 0.0,
-        dataSet: peepPoints);
+    // scopeOne3 = Oscilloscope(
+    //     showYAxis: true,
+    //     yAxisColor: Colors.grey,
+    //     padding: 10.0,
+    //     backgroundColor: Colors.black.withOpacity(0.7),
+    //     traceColor: Colors.yellow,
+    //     yAxisMax: 100.0,
+    //     yAxisMin: 0.0,
+    //     dataSet: pipPoints);
+    // scopeOne4 = Oscilloscope(
+    //     showYAxis: true,
+    //     yAxisColor: Colors.grey,
+    //     padding: 10.0,
+    //     backgroundColor: Colors.transparent,
+    //     traceColor: Colors.teal,
+    //     yAxisMax: 100.0,
+    //     yAxisMin: 0.0,
+    //     dataSet: fio2Points);
+    //  scopeOne5 = Oscilloscope(
+    //     showYAxis: true,
+    //     yAxisColor: Colors.grey,
+    //     padding: 10.0,
+    //     backgroundColor: Colors.transparent,
+    //     traceColor: Colors.pink,
+    //     yAxisMax: 100.0,
+    //     yAxisMin: 0.0,
+    //     dataSet: peepPoints);
 
-     scopeOne6 = Oscilloscope(
-        showYAxis: true,
-        yAxisColor: Colors.grey,
-        padding: 10.0,
-        backgroundColor: Colors.black.withOpacity(0.7),
-        traceColor: Colors.green,
-        yAxisMax: 700.0,
-        yAxisMin: 0.0,
-        dataSet: vtPoints);
+    //  scopeOne6 = Oscilloscope(
+    //     showYAxis: true,
+    //     yAxisColor: Colors.grey,
+    //     padding: 10.0,
+    //     backgroundColor: Colors.black.withOpacity(0.7),
+    //     traceColor: Colors.green,
+    //     yAxisMax: 700.0,
+    //     yAxisMin: 0.0,
+    //     dataSet: vtPoints);
 
     return Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -2147,8 +2133,8 @@ class _CheckPageState extends State<Dashboard> {
                                   ? callibrationData()
                                   : batterChargingScreen
                                       ? batteryCharginScreen()
-                                      : _pipDataScreen
-                                          ? pipDataUi()
+                                      // : _pipDataScreen
+                                      //     ? pipDataUi()
                                           : Container(),
 
               // _buttonPressed
@@ -2725,197 +2711,197 @@ class _CheckPageState extends State<Dashboard> {
     );
   }
 
-  pipDataUi() {
-    return Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              color:Colors.black.withOpacity(0.5),
-               margin: EdgeInsets.only(left: 150,),
-              height:300,
-              child: Stack(
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
-                      child: scopeOne3),
-                   Container(
-                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
-                      child: scopeOne4),
-                     Container(
-                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
-                      child: scopeOne5),
-                  Container(
-                    margin: EdgeInsets.only(left: 10, right: 120, top: 10),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Text(packetCounter.toString(),style:TextStyle(color:Colors.white,fontSize:30)),
-                          IconButton(
-                            icon: Icon(Icons.history, color: Colors.white, size: 40),
-                            onPressed: () {
-                              setState(() {
-                                packetCounter = 0;
-                                pipPoints.clear();
-                                fio2Points.clear();
-                                peepPoints.clear();
-                                vtPoints.clear();
-                              });
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.close, color: Colors.white, size: 40),
-                            onPressed: () {
-                              setState(() {
-                                _pipDataScreen = false;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 20, top: 8),
-                    child: Text(
-                      "100" + " cmH\u2082O",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 280),
-                    child: Text(
-                      "0",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 252),
-                    child: Text(
-                      "10",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 224),
-                    child: Text(
-                      "20",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 196),
-                    child: Text(
-                      "30",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 168),
-                    child: Text(
-                      "40",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 140),
-                    child: Text(
-                      "50",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 112),
-                    child: Text(
-                      "60",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                  Container(
-                    margin: EdgeInsets.only(left: 20, top: 84),
-                    child: Text(
-                      "70",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                  Container(
-                    margin: EdgeInsets.only(left: 20, top: 56),
-                    child: Text(
-                      "80",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                  Container(
-                    margin: EdgeInsets.only(left: 20, top: 28),
-                    child: Text(
-                      "90",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                ],
-              ),
-            ),
-            Container(
-              color:Colors.black.withOpacity(0.5),
-              height:300,
-              margin: EdgeInsets.only(left: 150,),
-              child: Stack(
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
-                      child: scopeOne6),
-                   Container(
-                    margin: EdgeInsets.only(left: 20, top: 8),
-                    child: Text(
-                      "700" + " mL",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 280),
-                    child: Text(
-                      "0",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 240),
-                    child: Text(
-                      "100",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 200),
-                    child: Text(
-                      "200",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 160),
-                    child: Text(
-                      "300",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 120),
-                    child: Text(
-                      "400",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 80),
-                    child: Text(
-                      "500",
-                      style: TextStyle(color: Colors.grey),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, top: 40),
-                    child: Text(
-                      "600",
-                      style: TextStyle(color: Colors.grey),
-                    )),
+  // pipDataUi() {
+  //   return Container(
+  //     child: Center(
+  //       child: Column(
+  //         children: <Widget>[
+  //           Container(
+  //             color:Colors.black.withOpacity(0.5),
+  //              margin: EdgeInsets.only(left: 150,),
+  //             height:300,
+  //             child: Stack(
+  //               children: [
+  //                 Container(
+  //                     margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+  //                     child: scopeOne3),
+  //                  Container(
+  //                     margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+  //                     child: scopeOne4),
+  //                    Container(
+  //                     margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+  //                     child: scopeOne5),
+  //                 Container(
+  //                   margin: EdgeInsets.only(left: 10, right: 120, top: 10),
+  //                   child: Align(
+  //                     alignment: Alignment.topRight,
+  //                     child: Row(
+  //                       crossAxisAlignment: CrossAxisAlignment.end,
+  //                       mainAxisAlignment: MainAxisAlignment.end,
+  //                       children: <Widget>[
+  //                         Text(packetCounter.toString(),style:TextStyle(color:Colors.white,fontSize:30)),
+  //                         IconButton(
+  //                           icon: Icon(Icons.history, color: Colors.white, size: 40),
+  //                           onPressed: () {
+  //                             setState(() {
+  //                               packetCounter = 0;
+  //                               pipPoints.clear();
+  //                               fio2Points.clear();
+  //                               peepPoints.clear();
+  //                               vtPoints.clear();
+  //                             });
+  //                           },
+  //                         ),
+  //                         IconButton(
+  //                           icon: Icon(Icons.close, color: Colors.white, size: 40),
+  //                           onPressed: () {
+  //                             setState(() {
+  //                               _pipDataScreen = false;
+  //                             });
+  //                           },
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 8),
+  //                   child: Text(
+  //                     "100" + " cmH\u2082O",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 280),
+  //                   child: Text(
+  //                     "0",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 252),
+  //                   child: Text(
+  //                     "10",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 224),
+  //                   child: Text(
+  //                     "20",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 196),
+  //                   child: Text(
+  //                     "30",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 168),
+  //                   child: Text(
+  //                     "40",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 140),
+  //                   child: Text(
+  //                     "50",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 112),
+  //                   child: Text(
+  //                     "60",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //                 Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 84),
+  //                   child: Text(
+  //                     "70",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //                 Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 56),
+  //                   child: Text(
+  //                     "80",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //                 Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 28),
+  //                   child: Text(
+  //                     "90",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               ],
+  //             ),
+  //           ),
+  //           Container(
+  //             color:Colors.black.withOpacity(0.5),
+  //             height:300,
+  //             margin: EdgeInsets.only(left: 150,),
+  //             child: Stack(
+  //               children: [
+  //                 Container(
+  //                     margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+  //                     child: scopeOne6),
+  //                  Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 8),
+  //                   child: Text(
+  //                     "700" + " mL",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 280),
+  //                   child: Text(
+  //                     "0",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 240),
+  //                   child: Text(
+  //                     "100",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 200),
+  //                   child: Text(
+  //                     "200",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 160),
+  //                   child: Text(
+  //                     "300",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 120),
+  //                   child: Text(
+  //                     "400",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 80),
+  //                   child: Text(
+  //                     "500",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
+  //               Container(
+  //                   margin: EdgeInsets.only(left: 20, top: 40),
+  //                   child: Text(
+  //                     "600",
+  //                     style: TextStyle(color: Colors.grey),
+  //                   )),
                     
                   
                   
                   
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   selfTestingData() {
     return Container(
@@ -4673,7 +4659,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "T1.8.3L",
+                  "V1.8.3l",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -7626,7 +7612,7 @@ class _CheckPageState extends State<Dashboard> {
                   child: InkWell(
                     onTap:(){
                       setState(() {
-                            _pipDataScreen = true;
+                            // _pipDataScreen = true;
                           });
                     },
                   child: Container(
@@ -24715,62 +24701,62 @@ class _CheckPageState extends State<Dashboard> {
           flowPoints.add(temp3);
         }
 
-        if (temp3 < 0 && bnegative == true) {
-          negativeNumber = temp3;
-          bnegative = false;
-          bpostive = true;
-          // if (pipPoints.length >= 100) {
-          //   setState(() {
-          //     pipPoints.removeAt(0);
-          //     pipPoints.add(negativeNumber.toDouble());
-          //     // Fluttertoast.showToast(msg: temp.toString());
-          //   });
-          // } else {
-          //   pipPoints.add(negativeNumber.toDouble());
-          // }
-        } else {
-          if (bpostive == true && temp3 > 0) {
-            bnegative = true;
-            bpostive = false;
-            packetCounter = packetCounter + 1;
-            if (pipPoints.length >= 60) {
-              setState(() {
-                pipPoints.removeAt(0);
-                pipPoints.add(pipValue.toDouble());
-                // Fluttertoast.showToast(msg: temp.toString());
-              });
-            } else {
-              pipPoints.add(pipValue.toDouble());
-            }
-            if (fio2Points.length >= 60) {
-              setState(() {
-                fio2Points.removeAt(0);
-                fio2Points.add(fio2DisplayParameter.toDouble());
-                // Fluttertoast.showToast(msg: temp.toString());
-              });
-            } else {
-              fio2Points.add(fio2DisplayParameter.toDouble());
-            }
-            if (peepPoints.length >= 60) {
-              setState(() {
-                peepPoints.removeAt(0);
-                peepPoints.add(peepDisplayValue.toDouble());
-                // Fluttertoast.showToast(msg: temp.toString());
-              });
-            } else {
-              peepPoints.add(peepDisplayValue.toDouble());
-            }
-            if (vtPoints.length >= 60) {
-              setState(() {
-                vtPoints.removeAt(0);
-                vtPoints.add(vteValue.toDouble());
-                // Fluttertoast.showToast(msg: temp.toString());
-              });
-            } else {
-              vtPoints.add(vteValue.toDouble());
-            }
-          }
-        }
+        // if (temp3 < 0 && bnegative == true) {
+        //   negativeNumber = temp3;
+        //   bnegative = false;
+        //   bpostive = true;
+        //   // if (pipPoints.length >= 100) {
+        //   //   setState(() {
+        //   //     pipPoints.removeAt(0);
+        //   //     pipPoints.add(negativeNumber.toDouble());
+        //   //     // Fluttertoast.showToast(msg: temp.toString());
+        //   //   });
+        //   // } else {
+        //   //   pipPoints.add(negativeNumber.toDouble());
+        //   // }
+        // } else {
+        //   if (bpostive == true && temp3 > 0) {
+        //     bnegative = true;
+        //     bpostive = false;
+        //     packetCounter = packetCounter + 1;
+        //     if (pipPoints.length >= 60) {
+        //       setState(() {
+        //         pipPoints.removeAt(0);
+        //         pipPoints.add(pipValue.toDouble());
+        //         // Fluttertoast.showToast(msg: temp.toString());
+        //       });
+        //     } else {
+        //       pipPoints.add(pipValue.toDouble());
+        //     }
+        //     if (fio2Points.length >= 60) {
+        //       setState(() {
+        //         fio2Points.removeAt(0);
+        //         fio2Points.add(fio2DisplayParameter.toDouble());
+        //         // Fluttertoast.showToast(msg: temp.toString());
+        //       });
+        //     } else {
+        //       fio2Points.add(fio2DisplayParameter.toDouble());
+        //     }
+        //     if (peepPoints.length >= 60) {
+        //       setState(() {
+        //         peepPoints.removeAt(0);
+        //         peepPoints.add(peepDisplayValue.toDouble());
+        //         // Fluttertoast.showToast(msg: temp.toString());
+        //       });
+        //     } else {
+        //       peepPoints.add(peepDisplayValue.toDouble());
+        //     }
+        //     if (vtPoints.length >= 60) {
+        //       setState(() {
+        //         vtPoints.removeAt(0);
+        //         vtPoints.add(vteValue.toDouble());
+        //         // Fluttertoast.showToast(msg: temp.toString());
+        //       });
+        //     } else {
+        //       vtPoints.add(vteValue.toDouble());
+        //     }
+        //   }
+        // }
 
         if (_setValuesonClick == true && operatinModeR != 0) {
           setState(() {
