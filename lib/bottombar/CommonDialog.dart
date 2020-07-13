@@ -205,7 +205,7 @@ class _CommonDialogState extends State<CommonDialog> {
         commomValue = preferences.getInt("vt").toDouble();
         checkValue = preferences.getInt("vt").toDouble();
         min = 200;
-        max = 600;
+        max = 1200;
         prefix = false;
         suffix = false;
         units = true;
