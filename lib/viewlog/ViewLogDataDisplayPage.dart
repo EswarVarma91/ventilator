@@ -12,7 +12,7 @@ import 'package:ventilator/viewlog/ViewLogPatientList.dart';
 
 class ViewLogDataDisplayPage extends StatefulWidget {
   var patientID, fromDateC, toDateC;
-  ViewLogDataDisplayPage( this.fromDateC, this.toDateC);
+  ViewLogDataDisplayPage(this.fromDateC, this.toDateC);
 
   @override
   StateViewLogPage createState() => StateViewLogPage();
@@ -34,11 +34,10 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       patientName = "",
       alarmActive = "0",
       alarmMessage = "0",
-      alarmPriority ="5",
+      alarmPriority = "5",
       paw = "0",
       dateTime = "0";
 
-  
   String ioreDisplayParamter = "I/E";
   DatabaseHelper dbHelper;
   List<VentilatorOMode> vomL;
@@ -54,9 +53,13 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       rrValue = "0",
       peepValue = "0",
       psValue = "0",
+      pcValue = "0",
+      itrigValue = "0",
+      atime = "0",
+      tipsv = "0",
       vtValue = "0";
 
-      int minRrtotal = 1,
+  int minRrtotal = 1,
       maxRrtotal = 70,
       minvte = 0,
       maxvte = 2400,
@@ -72,14 +75,16 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   @override
   void initState() {
     super.initState();
-    vomL=[];
+    vomL = [];
     Screen.keepOn(true);
     dbHelper = DatabaseHelper();
     getPatientData(widget.fromDateC, widget.toDateC);
   }
 
   runData(data) async {
-    for (currentValue = data==null || data=="" ? 0 : data; currentValue < vomL.length; currentValue++) {
+    for (currentValue = data == null || data == "" ? 0 : data;
+        currentValue < vomL.length;
+        currentValue++) {
       dataPack(currentValue, 1);
       await justWait(numberOfMilliseconds: 100);
     }
@@ -90,13 +95,12 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   }
 
   getPatientData(var fromDate, var toDate) async {
-    
-    vomL = await dbHelper.getPatientsData(fromDate.toString(), toDate.toString());
+    vomL =
+        await dbHelper.getPatientsData(fromDate.toString(), toDate.toString());
     // print(vomL);
     pressurePoints = [];
-    volumePoints=[];
-    flowPoints=[];
-    
+    volumePoints = [];
+    flowPoints = [];
 
     if (vomL.isNotEmpty) {
       setState(() {
@@ -130,6 +134,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
     setState(() {
       psValue1 = vomL[currentValue].pipD;
       vteValue = vomL[currentValue].vtD;
+      vtValue = vomL[currentValue].vtValue;
       peepDisplayValue = vomL[currentValue].peepD;
       rrDisplayValue = vomL[currentValue].rrD;
       fio2DisplayParameter = vomL[currentValue].fio2D;
@@ -141,14 +146,18 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       ieValue = vomL[currentValue].ieS;
       peepValue = vomL[currentValue].peepS;
       psValue = vomL[currentValue].psS;
+      pcValue = vomL[currentValue].pcS;
+      itrigValue = vomL[currentValue].itrigS;
+      tipsv = vomL[currentValue].tipsvS;
+      atime = vomL[currentValue].atimeS;
       fio2Value = vomL[currentValue].fio2S;
       operatinModeR = vomL[currentValue]?.operatingMode ?? "0";
       patientName = vomL[currentValue]?.patientName ?? "";
       paw = vomL[currentValue]?.paw ?? "0";
       dateTime = vomL[currentValue].dateTime;
       alarmActive = vomL[currentValue].alarmActive;
-      alarmMessage =vomL[currentValue].alarmC;
-      alarmPriority= vomL[currentValue].alarmP;
+      alarmMessage = vomL[currentValue].alarmC;
+      alarmPriority = vomL[currentValue].alarmP;
 
       if (operatinModeR == "1") {
         setState(() {
@@ -203,69 +212,74 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
       }
 
       if (alarmActive == '1') {
-              setState(() {
-                if (alarmPriority == '1' || alarmPriority == '0') {
-                  alarmMessage == '5'
-                      ? alarmMessage = "SYSTEM FAULT"
-                      : alarmMessage == '7'
-                          ? alarmMessage = "FiO\u2082 SENSOR MISSING"
-                          : alarmMessage == '10'
-                              ? alarmMessage = "HIGH LEAKAGE"
-                              : alarmMessage == '11'
-                                  ? alarmMessage = "HIGH PRESSURE"
-                                  : alarmMessage == '17'
-                                      ? alarmMessage = "PATIENT DISCONNECTED"
-                                      : alarmMessage = "";
-                } else if (alarmPriority == '2') {
-                  // print("alarm code "+((alarmMessage).toString());
-                  alarmMessage == '1'
-                      ? alarmMessage = "AC POWER DISCONNECTED"
-                      : alarmMessage == '2'
-                          ? alarmMessage = " LOW BATTERY"
-                          : alarmMessage == '3'
-                              ? alarmMessage = "CALIBRATE FiO2"
-                              : alarmMessage == '4'
-                                  ? alarmMessage = "CALIBRATION FiO2 FAIL"
-                                  : alarmMessage == '6'
-                                      ? alarmMessage = "SELF TEST FAIL"
-                                      : alarmMessage == '8'
-                                          ? alarmMessage = "HIGH FiO2"
-                                          : alarmMessage == '9'
-                                              ? alarmMessage = "LOW FIO2"
-                                              : alarmMessage == '12'
-                                                  ? alarmMessage =
-                                                      "LOW PRESSURE"
-                                                  : alarmMessage == '13'
-                                                      ? alarmMessage = "LOW VTE"
-                                                      : alarmMessage ==
-                                                              '14'
-                                                          ? alarmMessage =
-                                                              "HIGH VTE"
-                                                          : alarmMessage ==
-                                                                  '15'
-                                                              ? alarmMessage =
-                                                                  "LOW VTI"
-                                                              : alarmMessage == '16'
-                                                                  ? alarmMessage =
-                                                                      "HIGH VTI"
-                                                                  : alarmMessage == "18"
-                                                                      ? alarmMessage =
-                                                                          "LOW O2  supply"
-                                                                      : alarmMessage ==
-                                                                              '19'
-                                                                          ? alarmMessage =
-                                                                              "LOW RR"
-                                                                          : alarmMessage == '20'
-                                                                              ? alarmMessage = "HIGH RR"
-                                                                              : alarmMessage == '21' ? alarmMessage = "HIGH PEEP" : alarmMessage == '22' ? alarmMessage = "LOW PEEP" : alarmMessage = "";
-                } else if (alarmPriority == '3') {
-                  alarmMessage == '23'
-                      ? alarmMessage = "Apnea backup"
-                      : alarmMessage = "";
-                }
-              });
-            }
-      
+        setState(() {
+          if (alarmPriority == '1' || alarmPriority == '0') {
+            alarmMessage == '5'
+                ? alarmMessage = "SYSTEM FAULT"
+                : alarmMessage == '7'
+                    ? alarmMessage = "FiO\u2082 SENSOR MISSING"
+                    : alarmMessage == '10'
+                        ? alarmMessage = "HIGH LEAKAGE"
+                        : alarmMessage == '11'
+                            ? alarmMessage = "HIGH PRESSURE"
+                            : alarmMessage == '17'
+                                ? alarmMessage = "PATIENT DISCONNECTED"
+                                : alarmMessage = "";
+          } else if (alarmPriority == '2') {
+            // print("alarm code "+((alarmMessage).toString());
+            alarmMessage == '1'
+                ? alarmMessage = "AC POWER DISCONNECTED"
+                : alarmMessage == '2'
+                    ? alarmMessage = " LOW BATTERY"
+                    : alarmMessage == '3'
+                        ? alarmMessage = "CALIBRATE FiO2"
+                        : alarmMessage == '4'
+                            ? alarmMessage = "CALIBRATION FiO2 FAIL"
+                            : alarmMessage == '6'
+                                ? alarmMessage = "SELF TEST FAIL"
+                                : alarmMessage == '8'
+                                    ? alarmMessage = "HIGH FiO2"
+                                    : alarmMessage == '9'
+                                        ? alarmMessage = "LOW FIO2"
+                                        : alarmMessage == '12'
+                                            ? alarmMessage = "LOW PRESSURE"
+                                            : alarmMessage == '13'
+                                                ? alarmMessage = "LOW VTE"
+                                                : alarmMessage == '14'
+                                                    ? alarmMessage = "HIGH VTE"
+                                                    : alarmMessage == '15'
+                                                        ? alarmMessage =
+                                                            "LOW VTI"
+                                                        : alarmMessage == '16'
+                                                            ? alarmMessage =
+                                                                "HIGH VTI"
+                                                            : alarmMessage ==
+                                                                    "18"
+                                                                ? alarmMessage =
+                                                                    "LOW O2  supply"
+                                                                : alarmMessage ==
+                                                                        '19'
+                                                                    ? alarmMessage =
+                                                                        "LOW RR"
+                                                                    : alarmMessage ==
+                                                                            '20'
+                                                                        ? alarmMessage =
+                                                                            "HIGH RR"
+                                                                        : alarmMessage ==
+                                                                                '21'
+                                                                            ? alarmMessage =
+                                                                                "HIGH PEEP"
+                                                                            : alarmMessage == '22'
+                                                                                ? alarmMessage = "LOW PEEP"
+                                                                                : alarmMessage = "";
+          } else if (alarmPriority == '3') {
+            alarmMessage == '23'
+                ? alarmMessage = "Apnea backup"
+                : alarmMessage = "";
+          }
+        });
+      }
+
       // ieValue
       // Fluttertoast.showToast(msg: psValue1, toastLength: Toast.LENGTH_SHORT);
     });
@@ -338,9 +352,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                               child: Container(
                                 child: CupertinoSlider(
                                   onChanged: (value) {
-                                    pressurePoints=[];
-                                    volumePoints=[];
-                                    flowPoints=[];
+                                    pressurePoints = [];
+                                    volumePoints = [];
+                                    flowPoints = [];
                                     // if (isPlaying == false) {
                                     setState(() {
                                       currentValue = value.toInt();
@@ -458,7 +472,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
   }
 
   main() {
-     return Stack(
+    return Stack(
       children: [
         topbar(),
         leftbar(),
@@ -622,7 +636,8 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                                       const EdgeInsets.only(
                                                           right: 8.0),
                                                   child: Text(
-                                                    (int.tryParse(mvValue) / 1000)
+                                                    (int.tryParse(mvValue) /
+                                                            1000)
                                                         .toStringAsFixed(3),
                                                     // "0000",
                                                     style: TextStyle(
@@ -932,52 +947,48 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                 ),
                                 Stack(
                                   children: [
-                                   Align(
-                                            alignment: Alignment.center,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Image.asset(
-                                                    lungImage == 1
-                                                        ? "assets/lungs/1.png"
-                                                        : lungImage == 2
-                                                            ? "assets/lungs/2.png"
-                                                            : lungImage == 3
-                                                                ? "assets/lungs/3.png"
-                                                                : lungImage == 4
-                                                                    ? "assets/lungs/4.png"
-                                                                    : lungImage ==
-                                                                            5
-                                                                        ? "assets/lungs/5.png"
-                                                                        : "assets/lungs/1.png",
-                                                    width: 120),
-                                                Container(
-                                                  height: 25,
-                                                  width: 25,
-                                                  decoration: new BoxDecoration(
-                                                    borderRadius:
-                                                        new BorderRadius
-                                                            .circular(25.0),
-                                                    border: new Border.all(
-                                                      width: 2.0,
-                                                      color: Colors.green,
-                                                    ),
-                                                  ),
-                                                  child: Center(
-                                                      child: Text(
-                                                          ioreDisplayParamter,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 10))),
-                                                ),
-                                              ],
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                              lungImage == "1"
+                                                  ? "assets/lungs/1.png"
+                                                  : lungImage == "2"
+                                                      ? "assets/lungs/2.png"
+                                                      : lungImage == "3"
+                                                          ? "assets/lungs/3.png"
+                                                          : lungImage == "4"
+                                                              ? "assets/lungs/4.png"
+                                                              : lungImage == "5"
+                                                                  ? "assets/lungs/5.png"
+                                                                  : "assets/lungs/1.png",
+                                              width: 120),
+                                          Container(
+                                            height: 25,
+                                            width: 25,
+                                            decoration: new BoxDecoration(
+                                              borderRadius:
+                                                  new BorderRadius.circular(
+                                                      25.0),
+                                              border: new Border.all(
+                                                width: 2.0,
+                                                color: Colors.green,
+                                              ),
                                             ),
-                                          )
-                                        
+                                            child: Center(
+                                                child: Text(ioreDisplayParamter,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10))),
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                   ],
                                 )
                               ],
@@ -986,7 +997,9 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                         ],
                       ),
                     ),
-                    bottombar(),
+                    modeName == "PSV" || operatinModeR == "3"
+                        ? psvBottomBar()
+                        : bottombar(),
                   ],
                 ),
               ),
@@ -1233,8 +1246,8 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
                                   //         modeName == "VACV" ||
                                   //         modeName == "VSIMV"
                                   //     ? vteMinValue.toString()
-                                  //     : 
-                                      minvte.toString(),
+                                  //     :
+                                  minvte.toString(),
                                   ////""
                                   style: TextStyle(
                                       color: Colors.yellow, fontSize: 12),
@@ -1594,311 +1607,1009 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
     );
   }
 
-  bottombar() {
-    return Stack(
-      children: [
-        Container(
-          color: Color(0xFF171e27),
-          width: 904,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Container(
-                      width: 120,
-                      height: 110,
-                      child: Card(
-                        elevation: 40,
-                        color: Color(0xFF213855),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                              child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "RR",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
+  psvBottomBar() {
+    return Container(
+      color: Color(0xFF171e27),
+      width: 708,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PS",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                psValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
                               ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  "b/min",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 17.0),
-                                  child: Text(
-                                    rrValue.toString(),
-                                    style: TextStyle(
-                                        fontSize: 25, color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                        ),
-                      ),
+                            ),
+                          ),
+                        ],
+                      )),
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Container(
-                      width: 120,
-                      height: 110,
-                      child: Card(
-                        elevation: 40,
-                        color: Color(0xFF213855),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                              child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "I:E".toUpperCase(),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 17.0),
-                                  child: Text(
-                                    ieValue.toString(),
-                                    style: TextStyle(
-                                        fontSize: 25, color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Container(
-                      width: 120,
-                      height: 110,
-                      child: Card(
-                        elevation: 40,
-                        color: Color(0xFF213855),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                              child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "peep".toUpperCase(),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 17.0),
-                                  child: Text(
-                                    peepValue.toString(),
-                                    style: TextStyle(
-                                        fontSize: 25, color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Container(
-                      width: 120,
-                      height: 110,
-                      child: Card(
-                        elevation: 40,
-                        color: Color(0xFF213855),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                              child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  operatinModeR == "6" ||
-                                          operatinModeR == "2" ||
-                                          operatinModeR == "4" ||
-                                          operatinModeR == "3"
-                                      ? "PS"
-                                      : operatinModeR == "7" ||
-                                              operatinModeR == "1" ||
-                                              operatinModeR == "5"
-                                          ? "Vt"
-                                          : modeName == "PC-CMV" ||
-                                                  modeName == "PACV" ||
-                                                  modeName == "PSIMV" ||
-                                                  modeName == "PSV"
-                                              ? "PS"
-                                              : modeName == "VC-CMV" ||
-                                                      modeName == "VACV" ||
-                                                      modeName == "VSIMV"
-                                                  ? "Vt"
-                                                  : "PS",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 17.0),
-                                  child: Text(
-                                    operatinModeR == "6" ||
-                                            operatinModeR == "2" ||
-                                            operatinModeR == "4" ||
-                                            operatinModeR == "3"
-                                        ? psValue.toString()
-                                        : operatinModeR == "7" ||
-                                                operatinModeR == "1" ||
-                                                operatinModeR == "5"
-                                            ? vtValue.toString()
-                                            : modeName == "PC-CMV" ||
-                                                    modeName == "PACV" ||
-                                                    modeName == "PSIMV" ||
-                                                    modeName == "PSV"
-                                                ? psValue.toString()
-                                                : modeName == "VC-CMV" ||
-                                                        modeName == "VACV" ||
-                                                        modeName == "VSIMV"
-                                                    ? vtValue.toString()
-                                                    : psValue.toString(),
-                                    style: TextStyle(
-                                        fontSize: 25, color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Container(
-                      width: 120,
-                      height: 110,
-                      child: Card(
-                        elevation: 40,
-                        color: Color(0xFF213855),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Center(
-                              child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "FiO2",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 17.0),
-                                  child: Text(
-                                    fio2Value.toString(),
-                                    style: TextStyle(
-                                        fontSize: 25, color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "peep".toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                peepValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "FiO\u2082",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "%",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                fio2Value.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Backup RR",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                rrValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Backup I:E",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                ieValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "PC",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                pcValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I Trig",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "%",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                "-" + itrigValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Apnea Time",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "s",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                atime.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Ti",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "s",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                getTiValue(int.tryParse(tipsv)).toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
+
+  bottombar() {
+    return Container(
+      color: Color(0xFF171e27),
+      width: 710,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "RR",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "bpm",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                rrValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "I:E".toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                ieValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "peep".toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "cmH\u2082O",
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                peepValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            operatinModeR == "14" || modeName == "PRVC"
+                ? InkWell(
+                    onTap: () {},
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 110,
+                        child: Card(
+                          elevation: 40,
+                          color: Color(0xFF213855),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "PC Max".toUpperCase(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "",
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 17.0),
+                                    child: Text(
+                                      pcValue.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
+            operatinModeR == "4" ||
+                    modeName == "PSIMV" ||
+                    operatinModeR == "3" ||
+                    modeName == "PSV" ||
+                    modeName == "VSIMV" ||
+                    operatinModeR == "5"
+                ? InkWell(
+                    onTap: () {},
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 110,
+                        child: Card(
+                          elevation: 40,
+                          color: Color(0xFF213855),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "PS",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "cmH\u2082O",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 17.0),
+                                    child: Text(
+                                      psValue.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              operatinModeR == "6" || operatinModeR == "2"
+                                  ? "PC"
+                                  : operatinModeR == "7" ||
+                                          operatinModeR == "1" ||
+                                          operatinModeR == "5"
+                                      ? "Vt"
+                                      : modeName == "PC-CMV" ||
+                                              modeName == "PACV"
+                                          ? "PC"
+                                          : modeName == "VC-CMV" ||
+                                                  modeName == "VACV" ||
+                                                  modeName == "VSIMV"
+                                              ? "Vt"
+                                              : operatinModeR == "14" ||
+                                                      modeName == "PRVC"
+                                                  ? "Target Vt"
+                                                  : "PC",
+                              style: TextStyle(
+                                  fontSize: operatinModeR == "14" ||
+                                          modeName == "PRVC"
+                                      ? 14
+                                      : 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              operatinModeR == "6" || operatinModeR == "2"
+                                  ? "cmH\u2082O"
+                                  : operatinModeR == "7" ||
+                                          operatinModeR == "1" ||
+                                          operatinModeR == "5" ||
+                                          operatinModeR == "14"
+                                      ? "ml"
+                                      : modeName == "PC-CMV" ||
+                                              modeName == "PACV"
+                                          ? "cmH\u2082O"
+                                          : modeName == "VC-CMV" ||
+                                                  modeName == "VACV" ||
+                                                  modeName == "VSIMV" ||
+                                                  modeName == "PRVC"
+                                              ? "ml"
+                                              : "cmH\u2082O",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                operatinModeR == "6" || operatinModeR == "2"
+                                    ? pcValue.toString()
+                                    : operatinModeR == "7" ||
+                                            operatinModeR == "1" ||
+                                            operatinModeR == "5" ||
+                                            operatinModeR == "14"
+                                        ? vtValue.toString()
+                                        : modeName == "PC-CMV" ||
+                                                modeName == "PACV"
+                                            ? pcValue.toString()
+                                            : modeName == "VC-CMV" ||
+                                                    modeName == "VACV" ||
+                                                    modeName == "VSIMV" ||
+                                                    modeName == "PRVC"
+                                                ? vtValue.toString()
+                                                : pcValue.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Center(
+                child: Container(
+                  width: 120,
+                  height: 110,
+                  child: Card(
+                    elevation: 40,
+                    color: Color(0xFF213855),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Center(
+                          child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "FiO\u2082",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "%",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 17.0),
+                              child: Text(
+                                fio2Value.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            operatinModeR == "1" ||
+                    operatinModeR == "2" ||
+                    operatinModeR == "3" ||
+                    operatinModeR == "4" ||
+                    operatinModeR == "5" ||
+                    operatinModeR == "14"
+                ? InkWell(
+                    onTap: () {},
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 110,
+                        child: Card(
+                          elevation: 40,
+                          color: Color(0xFF213855),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "I Trig",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "%",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 17.0),
+                                    child: Text(
+                                      "-" + itrigValue.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
+            SizedBox(
+              width: operatinModeR == "4" ||
+                      modeName == "PSIMV" ||
+                      operatinModeR == "3" ||
+                      modeName == "PSV" ||
+                      modeName == "VSIMV" ||
+                      operatinModeR == "5"
+                  ? 10
+                  : 130,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  getTiValue(checkTi) {
+    var data = checkTi == 1
+        ? "0.5"
+        : checkTi == 2
+            ? "0.6"
+            : checkTi == 3
+                ? "0.7"
+                : checkTi == 4
+                    ? "0.8"
+                    : checkTi == 5
+                        ? "0.9"
+                        : checkTi == 6
+                            ? "1.0"
+                            : checkTi == 7
+                                ? "1.1"
+                                : checkTi == 8
+                                    ? "1.2"
+                                    : checkTi == 9
+                                        ? "1.3"
+                                        : checkTi == 10
+                                            ? "1.4"
+                                            : checkTi == 11
+                                                ? "1.5"
+                                                : checkTi == 12
+                                                    ? "1.6"
+                                                    : checkTi == 13
+                                                        ? "1.7"
+                                                        : checkTi == 14
+                                                            ? "1.8"
+                                                            : checkTi == 15
+                                                                ? "1.9"
+                                                                : checkTi == 16
+                                                                    ? "2.0"
+                                                                    : checkTi ==
+                                                                            17
+                                                                        ? "2.1"
+                                                                        : checkTi ==
+                                                                                18
+                                                                            ? "2.2"
+                                                                            : checkTi == 19
+                                                                                ? "2.3"
+                                                                                : checkTi == 20 ? "2.4" : checkTi == 21 ? "2.5" : checkTi == 22 ? "2.6" : checkTi == 23 ? "2.7" : checkTi == 24 ? "2.8" : checkTi == 25 ? "2.9" : checkTi == 26 ? "3.0" : checkTi == 27 ? "3.1" : checkTi == 28 ? "3.2" : checkTi == 29 ? "3.3" : checkTi == 30 ? "3.4" : checkTi == 31 ? "3.5" : checkTi == 32 ? "3.6" : checkTi == 33 ? "3.7" : checkTi == 34 ? "3.8" : checkTi == 35 ? "3.9" : checkTi == 36 ? "4.0" : checkTi == 37 ? "4.1" : checkTi == 38 ? "4.2" : checkTi == 39 ? "4.3" : checkTi == 40 ? "4.4" : checkTi == 41 ? "4.5" : checkTi == 42 ? "4.6" : checkTi == 43 ? "4.7" : checkTi == 44 ? "4.8" : checkTi == 45 ? "4.9" : checkTi == 46 ? "5.0" : "0.5";
+
+    return data;
+  }
+
 
   topbar() {
     return Container(
@@ -1941,7 +2652,7 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
     );
   }
 
- graphs() {
+  graphs() {
     return Container(
       padding: EdgeInsets.only(left: 170, right: 0, top: 45),
       child: Column(
@@ -2206,21 +2917,5 @@ class StateViewLogPage extends State<ViewLogDataDisplayPage> {
         ],
       ),
     );
-  }
-
-  next10min(patientID, fromDateC, toDateC) {
-    var dateFrom =  DateFormat("yyyy-MM-dd HH:mm:ss").parse(fromDateC);
-    var dateTo =  DateFormat("yyyy-MM-dd HH:mm:ss").parse(toDateC);
-    var dateFromSend = DateTime(dateFrom.year, dateFrom.month, dateFrom.day,
-        dateFrom.hour, dateFrom.minute + 10, dateFrom.second);
-    var dateToSend = DateTime(dateTo.year, dateTo.month, dateTo.day,
-        dateTo.hour, dateTo.minute + 10, dateTo.second);
-
-    var finalFrom = DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateFromSend.toString().split(".")[0]);
-    var finalTo = DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateToSend.toString().split(".")[0]);
-
-    vomL.clear();
-
-    getPatientData(finalFrom , finalTo);
   }
 }

@@ -51,7 +51,6 @@ class _CheckPageState extends State<Dashboard> {
     0x4400
   ]);
 
- 
   List<double> traceSine1 = [
     5.0,
     5.0,
@@ -107,15 +106,15 @@ class _CheckPageState extends State<Dashboard> {
   ];
 
   List<double> pressurePoints = [];
-  // List<double> pipPoints = [];
-  //  List<double> fio2Points = [];
-  //   List<double> peepPoints = []; 
-  //   List<double> vtPoints = [];
-  // int packetCounter = 0;
+  List<double> pipPoints = [];
+  List<double> fio2Points = [];
+  List<double> peepPoints = [];
+  List<double> vtPoints = [];
+  int packetCounter = 0;
   List<double> flowPoints = [];
   List<double> volumePoints = [];
   Oscilloscope scopeOne, scopeOne1, scopeOne2;
-  //scopeOne3,scopeOne4,scopeOne5,scopeOne6;
+  Oscilloscope scopeOne3, scopeOne4, scopeOne5, scopeOne6;
 
   UsbPort _port;
   String _status = "Idle";
@@ -559,14 +558,18 @@ class _CheckPageState extends State<Dashboard> {
   String assistStatus = "OFF";
   var batteryforceCharge = 0;
   bool batterChargingScreen = false;
-  // bool _pipDataScreen = false;
-  // double postiveNumber, negativeNumber;
-  // bool bpostive = false, bnegative = true;
+  bool _pipDataScreen = false;
+  double postiveNumber, negativeNumber;
+  bool bpostive = false, bnegative = true;
 
   List<Widget> _temporarySetValue = [];
 
   Future<bool> _connectTo(device) async {
     list.clear();
+    pipPoints.clear();
+    fio2Points.clear();
+    peepPoints.clear();
+    vtPoints.clear();
     pressurePoints.clear();
     volumePoints.clear();
     flowPoints.clear();
@@ -724,27 +727,26 @@ class _CheckPageState extends State<Dashboard> {
     //   //_writeStringToTextFile(_textField.text);
     // });
 
-    _timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
-      // if(getportsData==false){
-      //   Fluttertoast.showToast(msg: "null");
-      //     _getPorts();
-      // }
-      counter = counter + 1;
-      List<int> obj = [0, 20, 0, 11, 0];
-      if (counter <= 250) {
-        setState(() {
-          obj.add(counter);
-          obj.add(3);
-        });
-        if (_status == "Connected") {
-          sendDataUsbConnection(obj, 2);
-        }
-      } else {
-        setState(() {
-          counter = 0;
-        });
-      }
-    });
+    // _timer = Timer.periodic(Duration(milliseconds: 100), (timer) async {
+    //   // if(getportsData==false){
+    //   //   Fluttertoast.showToast(msg: "null");
+    //   //     _getPorts();
+    //   // }
+    //   counter = counter + 1;
+    //   List<int> obj = [0, 20, 0, 11, 0];
+    //   if (counter <= 250) {
+    //     setState(() {
+    //       obj.add(counter);
+    //     });
+    //     if (_status == "Connected") {
+    //       sendDataUsbConnection(obj, 2);
+    //     }
+    //   } else {
+    //     setState(() {
+    //       counter = 0;
+    //     });
+    //   }
+    // });
 
     _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
       if (_status != "Connected") {
@@ -812,23 +814,23 @@ class _CheckPageState extends State<Dashboard> {
         });
       } else {}
     });
-    _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
-      if (_status == "Connected") {
-        shutdownChannel.invokeMethod('getBatteryLevel').then((result) async {
-          List<int> resList = [];
-          setState(() {
-            // resList.add(0x7E);
-            resList.add(0);
-            resList.add(20);
-            resList.add(0);
-            resList.add(15);
-            resList.add((result & 0x00FF));
-            // resList.add(0x7F);
-          });
-          sendDataUsbConnection(resList, 2);
-        });
-      }
-    });
+    // _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
+    //   if (_status == "Connected") {
+    //     shutdownChannel.invokeMethod('getBatteryLevel').then((result) async {
+    //       List<int> resList = [];
+    //       setState(() {
+    //         // resList.add(0x7E);
+    //         resList.add(0);
+    //         resList.add(20);
+    //         resList.add(0);
+    //         resList.add(15);
+    //         resList.add((result & 0x00FF));
+    //         // resList.add(0x7F);
+    //       });
+    //       sendDataUsbConnection(resList, 2);
+    //     });
+    //   }
+    // });
   }
 
   Future<File> _writeStringToTextFile(
@@ -954,39 +956,39 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  getCrcData(List<int> obj) async {
-    // obj.clear();
-    int length = obj.length;
-    // int n = 0, iCRC = 0xFFFF, i = 0;
+  // getCrcData(List<int> obj) async {
+  //   // obj.clear();
+  //   int length = obj.length;
+  //   // int n = 0, iCRC = 0xFFFF, i = 0;
 
-    // while (n < length) {
-    //   iCRC = iCRC ^ obj[n];
-    //   i = 0;
-    //   while (i < 8) {
-    //     if ((iCRC & 0X0001) != 0) {
-    //       iCRC = iCRC >> 1;
-    //       iCRC = iCRC ^ 40961;
-    //     } else
-    //       iCRC = iCRC >> 1;
-    //     i++;
-    //   }
-    //   n++;
-    // }
+  //   // while (n < length) {
+  //   //   iCRC = iCRC ^ obj[n];
+  //   //   i = 0;
+  //   //   while (i < 8) {
+  //   //     if ((iCRC & 0X0001) != 0) {
+  //   //       iCRC = iCRC >> 1;
+  //   //       iCRC = iCRC ^ 40961;
+  //   //     } else
+  //   //       iCRC = iCRC >> 1;
+  //   //     i++;
+  //   //   }
+  //   //   n++;
+  //   // }
 
-    // obj.insert(length, iCRC & 0xFF);
-    // obj.insert(length + 1, (iCRC & 0xFF00) >> 8);
+  //   // obj.insert(length, iCRC & 0xFF);
+  //   // obj.insert(length + 1, (iCRC & 0xFF00) >> 8);
 
-    // obj.insert(length + 1, 0x7F);
-    // // print(obj.toString());
+  //   // obj.insert(length + 1, 0x7F);
+  //   // // print(obj.toString());
 
-    if (_status == "Connected") {
-      // Fluttertoast.showToast(msg: obj.toString());
-      await _port.write(Uint8List.fromList(obj));
-      setState(() {
-        // modeWriteList.clear();
-      });
-    }
-  }
+  //   if (_status == "Connected") {
+  //     // Fluttertoast.showToast(msg: obj.toString());
+  //     await _port.write(Uint8List.fromList(obj));
+  //     setState(() {
+  //       // modeWriteList.clear();
+  //     });
+  //   }
+  // }
 
   void _increaseCounterWhilePressed() async {
     if (_buttonPressed == false) {
@@ -1061,25 +1063,40 @@ class _CheckPageState extends State<Dashboard> {
     sendDataUsbConnection(resList, 2);
   }
 
+  Future<dynamic> getCrc(List<int> obj, length) async {
+    print(length);
+    int index = length;
+    int i = 0;
+    int crcData = 0;
+    int uiCrc = 0, r = 0;
+    int temp = 0;
+
+    while (index-- > 0) {
+      r = ulCrc16Table[uiCrc & 0xF];
+      uiCrc = ((uiCrc >> 4) & 0x0FFF);
+      temp = obj[i];
+      uiCrc = (uiCrc ^ r ^ ulCrc16Table[temp & 0xF]);
+      r = ulCrc16Table[uiCrc & 0xF];
+      uiCrc = ((uiCrc >> 4) & 0x0FFF);
+      uiCrc = (uiCrc ^ r ^ ulCrc16Table[(temp >> 4) & 0xF]);
+      i++;
+    }
+    print(uiCrc);
+    return uiCrc;
+  }
+
   checkCrc(List<int> obj, length) async {
     int index = length - 2;
     int i = 0;
     int crcData = 0;
     int uiCrc = 0, r = 0;
     int temp = 0;
-    // List<int> l = [];
-    // l.insert(0,126);
-    // l.addAll(obj);
-    // // // print(l);
 
     while (index-- > 0) {
       r = ulCrc16Table[uiCrc & 0xF];
       uiCrc = ((uiCrc >> 4) & 0x0FFF);
-
       temp = obj[i];
-
       uiCrc = (uiCrc ^ r ^ ulCrc16Table[temp & 0xF]);
-
       r = ulCrc16Table[uiCrc & 0xF];
       uiCrc = ((uiCrc >> 4) & 0x0FFF);
       uiCrc = (uiCrc ^ r ^ ulCrc16Table[(temp >> 4) & 0xF]);
@@ -1089,12 +1106,12 @@ class _CheckPageState extends State<Dashboard> {
     crcData = obj[length - 1] * 256 + obj[length - 2];
 
     if (crcData == uiCrc) {
-      cc = cc + 1;
-      if (cc > 20000) {
-        setState(() {
-          cc = 0;
-        });
-      }
+      // cc = cc + 1;
+      // if (cc > 20000) {
+      //   setState(() {
+      //     cc = 0;
+      //   });
+      // }
 
       return true;
     } else {
@@ -1456,43 +1473,43 @@ class _CheckPageState extends State<Dashboard> {
         yAxisMax: 1000.0,
         yAxisMin: 0.0,
         dataSet: volumePoints);
-    // scopeOne3 = Oscilloscope(
-    //     showYAxis: true,
-    //     yAxisColor: Colors.grey,
-    //     padding: 10.0,
-    //     backgroundColor: Colors.black.withOpacity(0.7),
-    //     traceColor: Colors.yellow,
-    //     yAxisMax: 100.0,
-    //     yAxisMin: 0.0,
-    //     dataSet: pipPoints);
-    // scopeOne4 = Oscilloscope(
-    //     showYAxis: true,
-    //     yAxisColor: Colors.grey,
-    //     padding: 10.0,
-    //     backgroundColor: Colors.transparent,
-    //     traceColor: Colors.teal,
-    //     yAxisMax: 100.0,
-    //     yAxisMin: 0.0,
-    //     dataSet: fio2Points);
-    //  scopeOne5 = Oscilloscope(
-    //     showYAxis: true,
-    //     yAxisColor: Colors.grey,
-    //     padding: 10.0,
-    //     backgroundColor: Colors.transparent,
-    //     traceColor: Colors.pink,
-    //     yAxisMax: 100.0,
-    //     yAxisMin: 0.0,
-    //     dataSet: peepPoints);
+    scopeOne3 = Oscilloscope(
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Colors.black.withOpacity(0.7),
+        traceColor: Colors.yellow,
+        yAxisMax: 100.0,
+        yAxisMin: 0.0,
+        dataSet: pipPoints);
+    scopeOne4 = Oscilloscope(
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Colors.transparent,
+        traceColor: Colors.teal,
+        yAxisMax: 100.0,
+        yAxisMin: 0.0,
+        dataSet: fio2Points);
+    scopeOne5 = Oscilloscope(
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Colors.transparent,
+        traceColor: Colors.pink,
+        yAxisMax: 100.0,
+        yAxisMin: 0.0,
+        dataSet: peepPoints);
 
-    //  scopeOne6 = Oscilloscope(
-    //     showYAxis: true,
-    //     yAxisColor: Colors.grey,
-    //     padding: 10.0,
-    //     backgroundColor: Colors.black.withOpacity(0.7),
-    //     traceColor: Colors.green,
-    //     yAxisMax: 700.0,
-    //     yAxisMin: 0.0,
-    //     dataSet: vtPoints);
+    scopeOne6 = Oscilloscope(
+        showYAxis: true,
+        yAxisColor: Colors.grey,
+        padding: 10.0,
+        backgroundColor: Colors.black.withOpacity(0.7),
+        traceColor: Colors.green,
+        yAxisMax: 700.0,
+        yAxisMin: 0.0,
+        dataSet: vtPoints);
 
     return Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -2134,8 +2151,8 @@ class _CheckPageState extends State<Dashboard> {
                                   ? callibrationData()
                                   : batterChargingScreen
                                       ? batteryCharginScreen()
-                                      // : _pipDataScreen
-                                      //     ? pipDataUi()
+                                      : _pipDataScreen
+                                          ? pipDataUi()
                                           : Container(),
 
               // _buttonPressed
@@ -2330,28 +2347,51 @@ class _CheckPageState extends State<Dashboard> {
                   children: <Widget>[
                     SizedBox(height: 20),
                     Center(
-                        child: Text("Please Connect Lung and O\u2082.",
+                        child: Text("Please Connect Test Lung and O\u2082.",
                             style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold))),
                     SizedBox(height: 40),
-                    InkWell(
-                      onTap: () {
-                        sendCalibrationText();
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.orange),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, bottom: 8, left: 60, right: 60),
-                            child: Text("Ok",
-                                style: TextStyle(
-                                    fontSize: 25, color: Colors.white)),
-                          )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        InkWell(
+                          onTap: () {
+                            // sendCalibrationText();
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.orange),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, bottom: 8, left: 40, right: 40),
+                                child: Text("Cancel",
+                                    style: TextStyle(
+                                        fontSize: 25, color: Colors.white)),
+                              )),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            sendCalibrationText();
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.orange),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, bottom: 8, left: 60, right: 60),
+                                child: Text("Ok",
+                                    style: TextStyle(
+                                        fontSize: 25, color: Colors.white)),
+                              )),
+                        ),
+                      ],
                     ),
                   ],
                 )),
@@ -2359,33 +2399,10 @@ class _CheckPageState extends State<Dashboard> {
         });
   }
 
-  sendSelfTest() async {
+  sendTest() async {
     setState(() {
-      textText = "";
-      o2pressuresensor = 0;
-      mtpressuresensor = 0;
-      exhalationflowsensor = 0;
-      inhalationflowsensor = 0;
-      exhalationpressure = 0;
-      inhalationpressure = 0;
-      o2sensor = 0;
-      inhalationvalve = 0;
-      exhalationvalve = 0;
-      ventvalue = 0;
-      mainpower = 0;
-      battery = 0;
-      communication = 0;
-      compressor = 0;
-      blender = 0;
-      checkOfffset = 0;
+      callibrationEnabled = true;
     });
-    List<int> objSelfTestData = [0x7E, 0, 20, 0, 16, 0, 2, 0x7F];
-    if (_status == "Connected") {
-      await _port.write(Uint8List.fromList(objSelfTestData));
-      setState(() {
-        selfTestingEnabled = true;
-      });
-    }
   }
 
   sendCalibrationText() async {
@@ -2548,62 +2565,86 @@ class _CheckPageState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Card(
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(15.0),
-                //   ),
-                //   child: InkWell(
-                //     onTap: () {
-                //       setState(() {
-                //         testingText= true;
-                //         textText = "Testing 0 \u2082..";
-                //       });
-                //       sendFullTest();
-
-                //        setState(() {
-                //         testingText= true;
-                //         textText = "Testing 0\u2082..";
-                //       });
-
-                //        _timer = Timer.periodic(Duration(seconds: 15), (timer) {
-                // setState(() async {
-                //   testingText=true;
-                //   textText = "Calibration Completed.";
-                //   // await sleep(Duration(seconds:1));
-                // });
-                //       });
-
-                //     },
-                //     child: Container(
-                //       width: 220,
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(18.0),
-                //         child: Column(
-                // children: [
-                //   Text(
-                //     "Continue \n with".toUpperCase(),
-                //     style: TextStyle(
-                //       color: Colors.black,
-                //       fontWeight: FontWeight.bold,
-                //       fontSize: 15,
-                //     ),
-                //     textAlign: TextAlign.center,
-                //   ),
-                //   Text(
-                //     "Full Test".toUpperCase(),
-                //     style: TextStyle(
-                //       color: Colors.black,
-                //       fontWeight: FontWeight.bold,
-                //       fontSize: 22,
-                //     ),
-                //     textAlign: TextAlign.center,
-                //   ),
-                // ],
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                Card(
+                  color: textText == "Calibrating 0\u2082.."
+                      ? Colors.grey
+                      : Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: InkWell(
+                    onTap: () async {
+                      if (_status == "Connected" &&
+                          textText != "Calibrating 0\u2082..") {
+                        setState(() {
+                          textText = "";
+                          o2pressuresensor = 0;
+                          mtpressuresensor = 0;
+                          exhalationflowsensor = 0;
+                          inhalationflowsensor = 0;
+                          exhalationpressure = 0;
+                          inhalationpressure = 0;
+                          o2sensor = 0;
+                          inhalationvalve = 0;
+                          exhalationvalve = 0;
+                          ventvalue = 0;
+                          mainpower = 0;
+                          battery = 0;
+                          communication = 0;
+                          compressor = 0;
+                          blender = 0;
+                          checkOfffset = 0;
+                        });
+                        List<int> objSelfTestData = [
+                          0x7E,
+                          0,
+                          20,
+                          0,
+                          16,
+                          0,
+                          2,
+                          0x7F
+                        ];
+                        await _port.write(Uint8List.fromList(objSelfTestData));
+                        setState(() {
+                          selfTestingEnabled = true;
+                        });
+                      }
+                    },
+                    child: Container(
+                      width: 220,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Continue \n with".toUpperCase(),
+                              style: TextStyle(
+                                color: textText == "Calibrating 0\u2082.."
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "Self Test".toUpperCase(),
+                              style: TextStyle(
+                                color: textText == "Calibrating 0\u2082.."
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -2712,197 +2753,201 @@ class _CheckPageState extends State<Dashboard> {
     );
   }
 
-  // pipDataUi() {
-  //   return Container(
-  //     child: Center(
-  //       child: Column(
-  //         children: <Widget>[
-  //           Container(
-  //             color:Colors.black.withOpacity(0.5),
-  //              margin: EdgeInsets.only(left: 150,),
-  //             height:300,
-  //             child: Stack(
-  //               children: [
-  //                 Container(
-  //                     margin: EdgeInsets.only(left: 20, right: 120, top: 10),
-  //                     child: scopeOne3),
-  //                  Container(
-  //                     margin: EdgeInsets.only(left: 20, right: 120, top: 10),
-  //                     child: scopeOne4),
-  //                    Container(
-  //                     margin: EdgeInsets.only(left: 20, right: 120, top: 10),
-  //                     child: scopeOne5),
-  //                 Container(
-  //                   margin: EdgeInsets.only(left: 10, right: 120, top: 10),
-  //                   child: Align(
-  //                     alignment: Alignment.topRight,
-  //                     child: Row(
-  //                       crossAxisAlignment: CrossAxisAlignment.end,
-  //                       mainAxisAlignment: MainAxisAlignment.end,
-  //                       children: <Widget>[
-  //                         Text(packetCounter.toString(),style:TextStyle(color:Colors.white,fontSize:30)),
-  //                         IconButton(
-  //                           icon: Icon(Icons.history, color: Colors.white, size: 40),
-  //                           onPressed: () {
-  //                             setState(() {
-  //                               packetCounter = 0;
-  //                               pipPoints.clear();
-  //                               fio2Points.clear();
-  //                               peepPoints.clear();
-  //                               vtPoints.clear();
-  //                             });
-  //                           },
-  //                         ),
-  //                         IconButton(
-  //                           icon: Icon(Icons.close, color: Colors.white, size: 40),
-  //                           onPressed: () {
-  //                             setState(() {
-  //                               _pipDataScreen = false;
-  //                             });
-  //                           },
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 8),
-  //                   child: Text(
-  //                     "100" + " cmH\u2082O",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 280),
-  //                   child: Text(
-  //                     "0",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 252),
-  //                   child: Text(
-  //                     "10",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 224),
-  //                   child: Text(
-  //                     "20",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 196),
-  //                   child: Text(
-  //                     "30",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 168),
-  //                   child: Text(
-  //                     "40",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 140),
-  //                   child: Text(
-  //                     "50",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 112),
-  //                   child: Text(
-  //                     "60",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //                 Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 84),
-  //                   child: Text(
-  //                     "70",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //                 Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 56),
-  //                   child: Text(
-  //                     "80",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //                 Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 28),
-  //                   child: Text(
-  //                     "90",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               ],
-  //             ),
-  //           ),
-  //           Container(
-  //             color:Colors.black.withOpacity(0.5),
-  //             height:300,
-  //             margin: EdgeInsets.only(left: 150,),
-  //             child: Stack(
-  //               children: [
-  //                 Container(
-  //                     margin: EdgeInsets.only(left: 20, right: 120, top: 10),
-  //                     child: scopeOne6),
-  //                  Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 8),
-  //                   child: Text(
-  //                     "700" + " mL",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 280),
-  //                   child: Text(
-  //                     "0",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 240),
-  //                   child: Text(
-  //                     "100",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 200),
-  //                   child: Text(
-  //                     "200",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 160),
-  //                   child: Text(
-  //                     "300",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 120),
-  //                   child: Text(
-  //                     "400",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 80),
-  //                   child: Text(
-  //                     "500",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-  //               Container(
-  //                   margin: EdgeInsets.only(left: 20, top: 40),
-  //                   child: Text(
-  //                     "600",
-  //                     style: TextStyle(color: Colors.grey),
-  //                   )),
-                    
-                  
-                  
-                  
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+  pipDataUi() {
+    return Container(
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            Container(
+              color: Colors.black.withOpacity(0.5),
+              margin: EdgeInsets.only(
+                left: 150,
+              ),
+              height: 300,
+              child: Stack(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+                      child: scopeOne3),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+                      child: scopeOne4),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+                      child: scopeOne5),
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 120, top: 10),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(packetCounter.toString(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 30)),
+                          IconButton(
+                            icon: Icon(Icons.history,
+                                color: Colors.white, size: 40),
+                            onPressed: () {
+                              setState(() {
+                                packetCounter = 0;
+                                pipPoints.clear();
+                                fio2Points.clear();
+                                peepPoints.clear();
+                                vtPoints.clear();
+                              });
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.close,
+                                color: Colors.white, size: 40),
+                            onPressed: () {
+                              setState(() {
+                                _pipDataScreen = false;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 8),
+                      child: Text(
+                        "100" + " cmH\u2082O",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 280),
+                      child: Text(
+                        "0",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 252),
+                      child: Text(
+                        "10",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 224),
+                      child: Text(
+                        "20",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 196),
+                      child: Text(
+                        "30",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 168),
+                      child: Text(
+                        "40",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 140),
+                      child: Text(
+                        "50",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 112),
+                      child: Text(
+                        "60",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 84),
+                      child: Text(
+                        "70",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 56),
+                      child: Text(
+                        "80",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 28),
+                      child: Text(
+                        "90",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                ],
+              ),
+            ),
+            Container(
+              color: Colors.black.withOpacity(0.5),
+              height: 300,
+              margin: EdgeInsets.only(
+                left: 150,
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(left: 20, right: 120, top: 10),
+                      child: scopeOne6),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 8),
+                      child: Text(
+                        "700" + " mL",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 280),
+                      child: Text(
+                        "0",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 240),
+                      child: Text(
+                        "100",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 200),
+                      child: Text(
+                        "200",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 160),
+                      child: Text(
+                        "300",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 120),
+                      child: Text(
+                        "400",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 80),
+                      child: Text(
+                        "500",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                  Container(
+                      margin: EdgeInsets.only(left: 20, top: 40),
+                      child: Text(
+                        "600",
+                        style: TextStyle(color: Colors.grey),
+                      )),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   selfTestingData() {
     return Container(
@@ -2923,8 +2968,12 @@ class _CheckPageState extends State<Dashboard> {
                         size: 40,
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => About()));
+                        checkOfffset == 2
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => About()))
+                            : "";
                       }),
                 ),
                 // Padding(
@@ -3434,6 +3483,7 @@ class _CheckPageState extends State<Dashboard> {
                       setState(() {
                         selfTestingEnabled = false;
                         callibrationEnabled = true;
+                        textText = "";
                       });
                     },
                     child: Container(
@@ -3527,7 +3577,6 @@ class _CheckPageState extends State<Dashboard> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                             
                                             assistmodePressureOn
                                                 ? InkWell(
                                                     onTap: () {
@@ -3573,8 +3622,8 @@ class _CheckPageState extends State<Dashboard> {
                                                             )),
                                                       ),
                                                     ),
-                                                  ):
-                                                  InkWell(
+                                                  )
+                                                : InkWell(
                                                     onTap: () {
                                                       setState(() {
                                                         getData();
@@ -3619,8 +3668,8 @@ class _CheckPageState extends State<Dashboard> {
                                                       ),
                                                     ),
                                                   ),
-                                                 assistmodeVolumeOn ?
-                                                InkWell(
+                                            assistmodeVolumeOn
+                                                ? InkWell(
                                                     onTap: () {
                                                       setState(() {
                                                         getData();
@@ -3665,7 +3714,7 @@ class _CheckPageState extends State<Dashboard> {
                                                       ),
                                                     ),
                                                   )
-                                                :InkWell(
+                                                : InkWell(
                                                     onTap: () {
                                                       setState(() {
                                                         getData();
@@ -4740,7 +4789,7 @@ class _CheckPageState extends State<Dashboard> {
                 SizedBox(
                   height: 130,
                 ),
-                
+
                 playOnEnabled
                     ? Column(
                         children: [
@@ -7112,68 +7161,67 @@ class _CheckPageState extends State<Dashboard> {
                 ),
               ),
             ),
-            operatinModeR == 14 ||
-                    modeName == "PRVC" ?InkWell(
-              onTap: () {
-                setState(() {
-                  _setValuesonClick = false;
-                });
-                if (modeWriteList.isNotEmpty) {
-                  lockEnabled
-                      ? playOnEnabled
-                          ? ""
-                          : CommonClick("PC MAX")
-                      : "";
-                }
-              },
-              child: Center(
-                child: Container(
-                  width: 120,
-                  height: 110,
-                  child: Card(
-                    elevation: 40,
-                    color: lockEnabled ? Color(0xFF213855) : Colors.grey,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Center(
-                          child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "PC Max".toUpperCase(),
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
+            operatinModeR == 14 || modeName == "PRVC"
+                ? InkWell(
+                    onTap: () {
+                      setState(() {
+                        _setValuesonClick = false;
+                      });
+                      if (modeWriteList.isNotEmpty) {
+                        lockEnabled
+                            ? playOnEnabled ? "" : CommonClick("PC MAX")
+                            : "";
+                      }
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 110,
+                        child: Card(
+                          elevation: 40,
+                          color: lockEnabled ? Color(0xFF213855) : Colors.grey,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "PC Max".toUpperCase(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    "",
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.white),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 17.0),
+                                    child: Text(
+                                      pcValue.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
                           ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              "",
-                              style:
-                                  TextStyle(fontSize: 10, color: Colors.white),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 17.0),
-                              child: Text(
-                                pcValue.toString(),
-                                style: TextStyle(
-                                    fontSize: 30, color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ):Container(),
+                  )
+                : Container(),
             operatinModeR == 4 ||
                     modeName == "PSIMV" ||
                     operatinModeR == 3 ||
@@ -7598,7 +7646,7 @@ class _CheckPageState extends State<Dashboard> {
                   borderRadius: BorderRadius.circular(5),
                   child: InkWell(
                     onTap: () {
-                      playOnEnabled ? sendSelfTest() : "";
+                      playOnEnabled ? sendTest() : "";
                       // selfTestingEnabled = true;
                     },
                     child: Container(
@@ -7638,17 +7686,17 @@ class _CheckPageState extends State<Dashboard> {
                       borderRadius: BorderRadius.circular(5.0),
                       color: Colors.white,
                       child: Container(
-                          width: 80,
-                          height: 40,
-                          child: Center(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("00:00",
-                                style:
-                                    TextStyle(color: Colors.green, fontSize: 20)),
-                          )),
-                        ),
+                        width: 80,
+                        height: 40,
+                        child: Center(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("00:00",
+                              style:
+                                  TextStyle(color: Colors.green, fontSize: 20)),
+                        )),
                       ),
+                    ),
               // SizedBox(width: 10),
               // Material(
               //     borderRadius: BorderRadius.circular(5),
@@ -7668,12 +7716,12 @@ class _CheckPageState extends State<Dashboard> {
                       ? Colors.green
                       : powerIndication == 0 ? Colors.red : Colors.red,
                   child: InkWell(
-                    onTap:(){
+                    onTap: () {
                       setState(() {
-                            // _pipDataScreen = true;
-                          });
+                        patientName == "betauser" ? _pipDataScreen = true : "";
+                      });
                     },
-                  child: Container(
+                    child: Container(
                         width: 70,
                         height: 40,
                         child: Center(
@@ -10816,8 +10864,9 @@ class _CheckPageState extends State<Dashboard> {
                     });
                   },
                   child: Card(
-                      color:
-                          assistmodePressureOn ? Color(0xFF213855) : Color(0xFFE0E0E0),
+                      color: assistmodePressureOn
+                          ? Color(0xFF213855)
+                          : Color(0xFFE0E0E0),
                       child: Padding(
                         padding: const EdgeInsets.all(22.0),
                         child: Text(
@@ -10844,8 +10893,9 @@ class _CheckPageState extends State<Dashboard> {
                     });
                   },
                   child: Card(
-                      color:
-                          assistmodePressureOn ? Color(0xFFE0E0E0) : Color(0xFF213855),
+                      color: assistmodePressureOn
+                          ? Color(0xFFE0E0E0)
+                          : Color(0xFF213855),
                       child: Padding(
                         padding: const EdgeInsets.all(22.0),
                         child: Text(
@@ -15334,7 +15384,7 @@ class _CheckPageState extends State<Dashboard> {
                     });
                   },
                   child: Card(
-                      color: assistmodePressureOn==false
+                      color: assistmodePressureOn == false
                           ? Color(0xFFE0E0E0)
                           : Color(0xFF213855),
                       child: Padding(
@@ -15342,7 +15392,7 @@ class _CheckPageState extends State<Dashboard> {
                         child: Text(
                           "Assist Off",
                           style: TextStyle(
-                            color: assistmodePressureOn==false
+                            color: assistmodePressureOn == false
                                 ? Color(0xFF213855)
                                 : Color(0xFFE0E0E0),
                           ),
@@ -15364,7 +15414,7 @@ class _CheckPageState extends State<Dashboard> {
                     });
                   },
                   child: Card(
-                      color: assistmodePressureOn==true
+                      color: assistmodePressureOn == true
                           ? Color(0xFFE0E0E0)
                           : Color(0xFF213855),
                       child: Padding(
@@ -15372,7 +15422,7 @@ class _CheckPageState extends State<Dashboard> {
                         child: Text(
                           "Assist On",
                           style: TextStyle(
-                            color: assistmodePressureOn==true
+                            color: assistmodePressureOn == true
                                 ? Color(0xFF213855)
                                 : Color(0xFFE0E0E0),
                           ),
@@ -16622,7 +16672,6 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            
           ],
         ),
         SizedBox(width: 15),
@@ -16646,7 +16695,7 @@ class _CheckPageState extends State<Dashboard> {
                     });
                   },
                   child: Card(
-                      color: assistmodeVolumeOn==false
+                      color: assistmodeVolumeOn == false
                           ? Color(0xFFE0E0E0)
                           : Color(0xFF213855),
                       child: Padding(
@@ -16654,7 +16703,7 @@ class _CheckPageState extends State<Dashboard> {
                         child: Text(
                           "Assist Off",
                           style: TextStyle(
-                            color: assistmodeVolumeOn==false
+                            color: assistmodeVolumeOn == false
                                 ? Color(0xFF213855)
                                 : Color(0xFFE0E0E0),
                           ),
@@ -16676,7 +16725,7 @@ class _CheckPageState extends State<Dashboard> {
                     });
                   },
                   child: Card(
-                      color: assistmodeVolumeOn==true
+                      color: assistmodeVolumeOn == true
                           ? Color(0xFFE0E0E0)
                           : Color(0xFF213855),
                       child: Padding(
@@ -16684,7 +16733,7 @@ class _CheckPageState extends State<Dashboard> {
                         child: Text(
                           "Assist On",
                           style: TextStyle(
-                            color: assistmodeVolumeOn==true
+                            color: assistmodeVolumeOn == true
                                 ? Color(0xFF213855)
                                 : Color(0xFFE0E0E0),
                           ),
@@ -19796,79 +19845,77 @@ class _CheckPageState extends State<Dashboard> {
             //     ),
             //   ),
             // ),
-            SizedBox(width:40),
+            SizedBox(width: 40),
             Container(
-            padding: EdgeInsets.only(top: 160),
-            width: 255,
-            child: Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      assistmodeVolumeOn = !assistmodeVolumeOn;
+                padding: EdgeInsets.only(top: 160),
+                width: 255,
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          assistmodeVolumeOn = !assistmodeVolumeOn;
 
-                      if (assistmodeVolumeOn == true) {
-                        vacvEnabled = true;
-                        vccmvEnabled = false;
-                      } else {
-                        vccmvEnabled = true;
-                        vacvEnabled = false;
-                      }
-                    });
-                  },
-                  child: Card(
-                      color: assistmodeVolumeOn==false
-                          ? Color(0xFFE0E0E0)
-                          : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(22.0),
-                        child: Text(
-                          "Assist Off",
-                          style: TextStyle(
-                            color: assistmodeVolumeOn==false
-                                ? Color(0xFF213855)
-                                : Color(0xFFE0E0E0),
-                          ),
-                        ),
-                      )),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      assistmodeVolumeOn = !assistmodeVolumeOn;
+                          if (assistmodeVolumeOn == true) {
+                            vacvEnabled = true;
+                            vccmvEnabled = false;
+                          } else {
+                            vccmvEnabled = true;
+                            vacvEnabled = false;
+                          }
+                        });
+                      },
+                      child: Card(
+                          color: assistmodeVolumeOn == false
+                              ? Color(0xFFE0E0E0)
+                              : Color(0xFF213855),
+                          child: Padding(
+                            padding: const EdgeInsets.all(22.0),
+                            child: Text(
+                              "Assist Off",
+                              style: TextStyle(
+                                color: assistmodeVolumeOn == false
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0),
+                              ),
+                            ),
+                          )),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          assistmodeVolumeOn = !assistmodeVolumeOn;
 
-                      if (assistmodeVolumeOn == true) {
-                        vacvEnabled = true;
-                        vccmvEnabled = false;
-                      } else {
-                        vccmvEnabled = true;
-                        vacvEnabled = false;
-                      }
-                    });
-                  },
-                  child: Card(
-                      color: assistmodeVolumeOn==true
-                          ? Color(0xFFE0E0E0)
-                          : Color(0xFF213855),
-                      child: Padding(
-                        padding: const EdgeInsets.all(22.0),
-                        child: Text(
-                          "Assist On",
-                          style: TextStyle(
-                            color: assistmodeVolumeOn==true
-                                ? Color(0xFF213855)
-                                : Color(0xFFE0E0E0),
-                          ),
-                        ),
-                      )),
-                ),
-              ],
-            )),
-            
+                          if (assistmodeVolumeOn == true) {
+                            vacvEnabled = true;
+                            vccmvEnabled = false;
+                          } else {
+                            vccmvEnabled = true;
+                            vacvEnabled = false;
+                          }
+                        });
+                      },
+                      child: Card(
+                          color: assistmodeVolumeOn == true
+                              ? Color(0xFFE0E0E0)
+                              : Color(0xFF213855),
+                          child: Padding(
+                            padding: const EdgeInsets.all(22.0),
+                            child: Text(
+                              "Assist On",
+                              style: TextStyle(
+                                color: assistmodeVolumeOn == true
+                                    ? Color(0xFF213855)
+                                    : Color(0xFFE0E0E0),
+                              ),
+                            ),
+                          )),
+                    ),
+                  ],
+                )),
           ],
         ),
-        SizedBox(width:25),
-        
+        SizedBox(width: 25),
         Column(
           children: [
             Container(
@@ -20995,8 +21042,7 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList[17] = (temp & 0xFF);
         modeWriteList[24] = (0);
         modeWriteList[25] = (64);
-         preferences.setInt('prvcPcMaxValue', temp);
-        
+        preferences.setInt('prvcPcMaxValue', temp);
 
         getData();
         // // print(modeWriteList.toString());
@@ -21459,12 +21505,6 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  _changepspsvValue(int temp) {
-    getData();
-    // // print(modeWriteList.toString());
-    sendDataUsbConnection(modeWriteList, 1);
-  }
-
   getTiValueNumber(checkTi) {
     var data = checkTi == "0.5"
         ? 1
@@ -21714,9 +21754,6 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add(1); //22 val
         modeWriteList.add(255); //23
 
-        modeWriteList.add(0); //24 crc
-        modeWriteList.add(0); //25
-
         // modeWriteList.add((pccmvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((pccmvFlowRampValue & 0x00FF));
         // modeWriteList.add(0x7F);
@@ -21804,8 +21841,6 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList.add(1); //23
         modeWriteList.add(255);
-        modeWriteList.add(0); //25 crc
-        modeWriteList.add(0); //26
 
         // modeWriteList.add((vccmvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((vccmvFlowRampValue & 0x00FF));
@@ -21898,8 +21933,6 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList.add(3); //25
         modeWriteList.add(255);
-        modeWriteList.add(0); //27
-        modeWriteList.add(0); //28
 
         // modeWriteList.add((pacvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((pacvFlowRampValue & 0x00FF));
@@ -21993,8 +22026,6 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList.add(3); //25
         modeWriteList.add(255);
-        modeWriteList.add(0); //27
-        modeWriteList.add(0); //
 
         // modeWriteList.add((vacvFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((vacvFlowRampValue & 0x00FF));
@@ -22091,8 +22122,6 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList.add(7); //26
         modeWriteList.add(255); //27
-        modeWriteList.add(0); //29
-        modeWriteList.add(0); //30
         // modeWriteList.add(0x7F);
       });
 
@@ -22188,8 +22217,6 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList.add(7); //27
         modeWriteList.add(255);
-        modeWriteList.add(0); //29
-        modeWriteList.add(0); //30
 
         // modeWriteList.add(0x7F); //23
       });
@@ -22305,8 +22332,6 @@ class _CheckPageState extends State<Dashboard> {
 
         modeWriteList.add(63); //33
         modeWriteList.add(255);
-        modeWriteList.add(0); //35
-        modeWriteList.add(0); //36
 
         // modeWriteList.add(0x7F); //23
         // Fluttertoast.showToast(msg: modeWriteList.toString());
@@ -22409,9 +22434,6 @@ class _CheckPageState extends State<Dashboard> {
         modeWriteList.add(3); //24
         modeWriteList.add(255);
 
-        modeWriteList.add(0); //27 crc
-        modeWriteList.add(0);
-
         // modeWriteList.add((prvcFlowRampValue & 0xFF00) >> 8);
         // modeWriteList.add((prvcFlowRampValue & 0x00FF));
 
@@ -22483,6 +22505,14 @@ class _CheckPageState extends State<Dashboard> {
   sendDataUsbConnection(List<int> samplemodeWriteList, checkValue) async {
     var modeNumber = samplemodeWriteList[3];
 
+    List<int> listCrcData = [];
+
+    // int returnDataCrc = await getCrc(samplemodeWriteList, samplemodeWriteList.length);
+    // print(returnDataCrc);
+    listCrcData.addAll(samplemodeWriteList);
+    // listCrcData.add((returnDataCrc & 0x00FF));
+    // listCrcData.add((returnDataCrc & 0xFF00) >> 8);
+
     if (modeNumber == 1 ||
         modeNumber == 2 ||
         modeNumber == 3 ||
@@ -22499,21 +22529,21 @@ class _CheckPageState extends State<Dashboard> {
     list = [];
     List<int> listTempF = [];
     int cIndex = 0;
-    for (int i = 0; i < samplemodeWriteList.length; i++) {
-      if (samplemodeWriteList[i] == 0x7F) {
+    for (int i = 0; i < listCrcData.length; i++) {
+      if (listCrcData[i] == 0x7F) {
         listTempF.insert(cIndex, 0X7D);
         cIndex = cIndex + 1;
         listTempF.insert(cIndex, 0X5F);
-      } else if (samplemodeWriteList[i] == 0x7E) {
+      } else if (listCrcData[i] == 0x7E) {
         listTempF.insert(cIndex, 0X7D);
         cIndex = cIndex + 1;
         listTempF.insert(cIndex, 0X5E);
-      } else if (samplemodeWriteList[i] == 0x7D) {
+      } else if (listCrcData[i] == 0x7D) {
         listTempF.insert(cIndex, 0X7D);
         cIndex = cIndex + 1;
         listTempF.insert(cIndex, 0X5D);
       } else {
-        listTempF.insert(cIndex, samplemodeWriteList[i]);
+        listTempF.insert(cIndex, listCrcData[i]);
       }
       cIndex = cIndex + 1;
     }
@@ -24343,7 +24373,6 @@ class _CheckPageState extends State<Dashboard> {
     if (finalList.isNotEmpty && finalList.length == 164) {
       //114
       var now = new DateTime.now();
-      
 
       lastRecordTime = DateFormat("yyyy-MM-dd HH:mm:ss").format(now).toString();
       preferences = await SharedPreferences.getInstance();
@@ -24355,171 +24384,114 @@ class _CheckPageState extends State<Dashboard> {
       // if (data == false) {
       //   finalList.clear();
       // } else {
-      // // // print("page no " + finalList[112].toString());
-      // if (finalList[112] == 1) {
-      //   Navigator.pushAndRemoveUntil(
-      //       context,
-      //       MaterialPageRoute(
-      // builder: (BuildContext context) => SelfTestPage()),
-      //       ModalRoute.withName('/'));
-      // } else if (finalList[112] == 2) {
-      //   Navigator.pushAndRemoveUntil(
-      //       context,
-      //       MaterialPageRoute(
-      // builder: (BuildContext context) => CallibrationPage()),
-      //       ModalRoute.withName('/'));
-      // }
-      setState(() {
+        // // // print("page no " + finalList[112].toString());
+        // if (finalList[112] == 1) {
+        //   Navigator.pushAndRemoveUntil(
+        //       context,
+        //       MaterialPageRoute(
+        // builder: (BuildContext context) => SelfTestPage()),
+        //       ModalRoute.withName('/'));
+        // } else if (finalList[112] == 2) {
+        //   Navigator.pushAndRemoveUntil(
+        //       context,
+        //       MaterialPageRoute(
+        // builder: (BuildContext context) => CallibrationPage()),
+        //       ModalRoute.withName('/'));
+        // }
         setState(() {
-          var now = new DateTime.now();
-
-          int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
-
-          if ((vteValueCheck != "" || vteValueCheck != null) &&
-              vteValueCheck.round() >= 0 &&
-              vteValueCheck.round() <= 2500) {
-            setState(() {
-              vteMinValue = vteValue - vtValue;
-              vteValue = ((finalList[4] << 8) + finalList[5]);
-            });
-          }
-          int mvValueCheck = (((finalList[8] << 8) + finalList[9])).toInt();
-
           setState(() {
-            mvValue = mvValueCheck;
-          });
+            var now = new DateTime.now();
 
-          leakVolumeDisplay =
-              ((finalList[102] << 8) + finalList[103]); //103 104
-          peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
-          spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
+            int vteValueCheck = ((finalList[4] << 8) + finalList[5]); //5 6
 
-          int rrtotalCheck =
-              ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
+            if ((vteValueCheck != "" || vteValueCheck != null) &&
+                vteValueCheck.round() >= 0 &&
+                vteValueCheck.round() <= 2500) {
+              setState(() {
+                vteMinValue = vteValue - vtValue;
+                vteValue = ((finalList[4] << 8) + finalList[5]);
+              });
+            }
+            int mvValueCheck = (((finalList[8] << 8) + finalList[9])).toInt();
 
-          if (rrtotalCheck != "" &&
-              rrtotalCheck.round() >= 0 &&
-              rrtotalCheck.round() <= 100) {
             setState(() {
-              rrDisplayValue = rrtotalCheck;
+              mvValue = mvValueCheck;
             });
-          }
-          int pipValueCheck = (((finalList[14] << 8) + finalList[15]) / 100)
-              .round()
-              .toInt(); //15 16
 
-          if ((((finalList[16] << 8) + finalList[17]) / 100).round().toInt() >=
-                  0 &&
-              (((finalList[16] << 8) + finalList[17]) / 100).round().toInt() <=
-                  150) {
-            peepDisplayValue = (((finalList[16] << 8) + finalList[17]) / 100)
+            leakVolumeDisplay =
+                ((finalList[102] << 8) + finalList[103]); //103 104
+            peakFlowDisplay = ((finalList[70] << 8) + finalList[71]); //71 72
+            spontaneousDisplay = ((finalList[82] << 8) + finalList[83]); //83 84
+
+            int rrtotalCheck =
+                ((finalList[10] << 8) + finalList[11]).toInt(); //11,12
+
+            if (rrtotalCheck != "" &&
+                rrtotalCheck.round() >= 0 &&
+                rrtotalCheck.round() <= 100) {
+              setState(() {
+                rrDisplayValue = rrtotalCheck;
+              });
+            }
+            int pipValueCheck = (((finalList[14] << 8) + finalList[15]) / 100)
                 .round()
-                .toInt(); //17 18
-          }
+                .toInt(); //15 16
 
-          if (pipValueCheck != 0 &&
-              pipValueCheck.round() >= 0 &&
-              pipValueCheck.round() <= 150) {
-            setState(() {
-              pipValue = pipValueCheck;
-            });
-          }
-          paw = (((finalList[34] << 8) + finalList[35]) / 100).toInt();
+            if ((((finalList[16] << 8) + finalList[17]) / 100)
+                        .round()
+                        .toInt() >=
+                    0 &&
+                (((finalList[16] << 8) + finalList[17]) / 100)
+                        .round()
+                        .toInt() <=
+                    150) {
+              peepDisplayValue = (((finalList[16] << 8) + finalList[17]) / 100)
+                  .round()
+                  .toInt(); //17 18
+            }
 
-          if (paw > 200) {
-            setState(() {
-              paw = 0;
-            });
-          }
+            if (pipValueCheck != 0 &&
+                pipValueCheck.round() >= 0 &&
+                pipValueCheck.round() <= 150) {
+              setState(() {
+                pipValue = pipValueCheck;
+              });
+            }
+            paw = (((finalList[34] << 8) + finalList[35]) / 100).toInt();
 
-          expiratoryPressureR =
-              (((finalList[36] << 8) + finalList[37]) / 100).toInt(); //37 38
+            if (paw > 200) {
+              setState(() {
+                paw = 0;
+              });
+            }
 
-          if (((finalList[38] << 8) + finalList[39]).round() >= 20 &&
-              ((finalList[38] << 8) + finalList[39]).round() <= 100) {
-            fio2DisplayParameter =
-                ((finalList[38] << 8) + finalList[39]); // 39,40
-          }
+            expiratoryPressureR =
+                (((finalList[36] << 8) + finalList[37]) / 100).toInt(); //37 38
 
-          checkTempData = finalList[31].toString();
+            if (((finalList[38] << 8) + finalList[39]).round() >= 20 &&
+                ((finalList[38] << 8) + finalList[39]).round() <= 100) {
+              fio2DisplayParameter =
+                  ((finalList[38] << 8) + finalList[39]); // 39,40
+            }
 
-          var highPriorityAlarm = 0;
-          var mediumPriorityAlarm = 0;
-          var lowPriorityAlarm = 0;
+            checkTempData = finalList[31].toString();
 
-          if (finalList[108] == 1) {
-            presentCode = ((finalList[106] << 8) + finalList[107]);
-            alarmCounter = finalList[90];
+            var highPriorityAlarm = 0;
+            var mediumPriorityAlarm = 0;
+            var lowPriorityAlarm = 0;
 
-            if (presentCode != previousCode) {
-              previousCode = presentCode;
-              sendSoundOn();
-              _stopMusic();
-              var data = AlarmsList(
-                  presentCode.toString(), this.globalCounterNo.toString());
-              dbHelpera.saveAlarm(data);
-              // alarmPrevCounter = alarmCounter;
+            if (finalList[108] == 1) {
+              presentCode = ((finalList[106] << 8) + finalList[107]);
+              alarmCounter = finalList[90];
 
-              if ((presentCode == 5 ||
-                      presentCode == 7 ||
-                      presentCode == 10 ||
-                      presentCode == 11 ||
-                      presentCode == 17) &&
-                  highPriorityAlarm == 0) {
-                setState(() {
-                  highPriorityAlarm = 1;
-                  mediumPriorityAlarm = 0;
-                  lowPriorityAlarm = 0;
-                });
-                _stopMusic();
-                _playMusicHigh();
+              if (presentCode != previousCode) {
+                previousCode = presentCode;
                 sendSoundOn();
-                audioEnable = true;
-              } else if ((presentCode == 1 ||
-                      presentCode == 2 ||
-                      presentCode == 3 ||
-                      presentCode == 4 ||
-                      presentCode == 6 ||
-                      presentCode == 8 ||
-                      presentCode == 9 ||
-                      presentCode == 12 ||
-                      presentCode == 13 ||
-                      presentCode == 14 ||
-                      presentCode == 15 ||
-                      presentCode == 16 ||
-                      presentCode == 18 ||
-                      presentCode == 19 ||
-                      presentCode == 20 ||
-                      presentCode == 21 ||
-                      presentCode == 22) &&
-                  mediumPriorityAlarm == 0) {
-                setState(() {
-                  highPriorityAlarm = 0;
-                  mediumPriorityAlarm = 1;
-                  lowPriorityAlarm = 0;
-                });
-                _stopMusic();
-                _playMusicMedium();
-                sendSoundOn();
-                audioEnable = true;
-              } else if (presentCode == 23 && lowPriorityAlarm == 0) {
-                setState(() {
-                  highPriorityAlarm = 0;
-                  mediumPriorityAlarm = 0;
-                  lowPriorityAlarm = 1;
-                });
-                _stopMusic();
-                _playMusicLower();
-                sendSoundOn();
-                audioEnable = true;
-              }
-            } else {
-              if (alarmCounter != alarmPrevCounter) {
-                alarmPrevCounter = alarmCounter;
                 _stopMusic();
                 var data = AlarmsList(
                     presentCode.toString(), this.globalCounterNo.toString());
                 dbHelpera.saveAlarm(data);
+                // alarmPrevCounter = alarmCounter;
 
                 if ((presentCode == 5 ||
                         presentCode == 7 ||
@@ -24574,154 +24546,214 @@ class _CheckPageState extends State<Dashboard> {
                   sendSoundOn();
                   audioEnable = true;
                 }
-              }
-            }
-            // }
-          } else if (finalList[108] == 0) {
-            setState(() {
-              highPriorityAlarm = 0;
-              mediumPriorityAlarm = 0;
-              lowPriorityAlarm = 0;
-            });
-            sendSoundOff();
-            _stopMusic();
-          }
-
-          if (vteValue != null &&
-              vteValue != 0 &&
-              pplateauDisplay != null &&
-              pplateauDisplay != 0) {
-            try {
-              // var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
-              var dataC =
-                  (vteValue / (pplateauDisplay.toInt() - peepDisplayValue))
-                      .toInt();
-              if (dataC < 0) {
-                // cdisplayParameter = 0;
               } else {
-                cdisplayParameter = dataC;
+                if (alarmCounter != alarmPrevCounter) {
+                  alarmPrevCounter = alarmCounter;
+                  _stopMusic();
+                  var data = AlarmsList(
+                      presentCode.toString(), this.globalCounterNo.toString());
+                  dbHelpera.saveAlarm(data);
+
+                  if ((presentCode == 5 ||
+                          presentCode == 7 ||
+                          presentCode == 10 ||
+                          presentCode == 11 ||
+                          presentCode == 17) &&
+                      highPriorityAlarm == 0) {
+                    setState(() {
+                      highPriorityAlarm = 1;
+                      mediumPriorityAlarm = 0;
+                      lowPriorityAlarm = 0;
+                    });
+                    _stopMusic();
+                    _playMusicHigh();
+                    sendSoundOn();
+                    audioEnable = true;
+                  } else if ((presentCode == 1 ||
+                          presentCode == 2 ||
+                          presentCode == 3 ||
+                          presentCode == 4 ||
+                          presentCode == 6 ||
+                          presentCode == 8 ||
+                          presentCode == 9 ||
+                          presentCode == 12 ||
+                          presentCode == 13 ||
+                          presentCode == 14 ||
+                          presentCode == 15 ||
+                          presentCode == 16 ||
+                          presentCode == 18 ||
+                          presentCode == 19 ||
+                          presentCode == 20 ||
+                          presentCode == 21 ||
+                          presentCode == 22) &&
+                      mediumPriorityAlarm == 0) {
+                    setState(() {
+                      highPriorityAlarm = 0;
+                      mediumPriorityAlarm = 1;
+                      lowPriorityAlarm = 0;
+                    });
+                    _stopMusic();
+                    _playMusicMedium();
+                    sendSoundOn();
+                    audioEnable = true;
+                  } else if (presentCode == 23 && lowPriorityAlarm == 0) {
+                    setState(() {
+                      highPriorityAlarm = 0;
+                      mediumPriorityAlarm = 0;
+                      lowPriorityAlarm = 1;
+                    });
+                    _stopMusic();
+                    _playMusicLower();
+                    sendSoundOn();
+                    audioEnable = true;
+                  }
+                }
               }
-            } catch (e) {}
-          }
+              // }
+            } else if (finalList[108] == 0) {
+              setState(() {
+                highPriorityAlarm = 0;
+                mediumPriorityAlarm = 0;
+                lowPriorityAlarm = 0;
+              });
+              sendSoundOff();
+              _stopMusic();
+            }
 
-          if (finalList[108] == 1) {
-            setState(() {
-              if (finalList[109] == 1 || finalList[109] == 0) {
-                ((finalList[106] << 8) + finalList[107]) == 5
-                    ? alarmMessage = "SYSTEM FAULT"
-                    : ((finalList[106] << 8) + finalList[107]) == 7
-                        ? alarmMessage = "FiO\u2082 SENSOR MISSING"
-                        : ((finalList[106] << 8) + finalList[107]) == 10
-                            ? alarmMessage = "HIGH LEAKAGE"
-                            : ((finalList[106] << 8) + finalList[107]) == 11
-                                ? alarmMessage = "HIGH PRESSURE"
-                                : ((finalList[106] << 8) + finalList[107]) == 17
-                                    ? alarmMessage = "PATIENT DISCONNECTED"
-                                    : alarmMessage = "";
-              } else if (finalList[109] == 2) {
-                // // // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
-                ((finalList[106] << 8) + finalList[107]) == 1
-                    ? alarmMessage = "POWER SUPPLY DISCONNECTED"
-                    : ((finalList[106] << 8) + finalList[107]) == 2
-                        ? alarmMessage = " LOW BATTERY"
-                        : ((finalList[106] << 8) + finalList[107]) == 3
-                            ? alarmMessage = "CALIBRATE FiO2"
-                            : ((finalList[106] << 8) + finalList[107]) == 4
-                                ? alarmMessage = "CALIBRATION FiO2 FAIL"
-                                : ((finalList[106] << 8) + finalList[107]) == 6
-                                    ? alarmMessage = "SELF TEST FAIL"
-                                    : ((finalList[106] << 8) + finalList[107]) == 8
-                                        ? alarmMessage = "HIGH FiO2"
-                                        : ((finalList[106] << 8) + finalList[107]) == 9
-                                            ? alarmMessage = "LOW FIO2"
-                                            : ((finalList[106] << 8) +
-                                                        finalList[107]) ==
-                                                    12
-                                                ? alarmMessage = "LOW PRESSURE"
-                                                : ((finalList[106] << 8) +
-                                                            finalList[107]) ==
-                                                        13
-                                                    ? alarmMessage = "LOW VTE"
-                                                    : ((finalList[106] << 8) + finalList[107]) == 14
-                                                        ? alarmMessage =
-                                                            "HIGH VTE"
-                                                        : ((finalList[106] << 8) + finalList[107]) == 15
-                                                            ? alarmMessage =
-                                                                "LOW VTI"
-                                                            : ((finalList[106] << 8) + finalList[107]) == 16
-                                                                ? alarmMessage =
-                                                                    "HIGH VTI"
-                                                                : ((finalList[106] << 8) + finalList[107]) == 18
-                                                                    ? alarmMessage =
-                                                                        "LOW O2  supply"
-                                                                    : ((finalList[106] << 8) + finalList[107]) ==
-                                                                            19
-                                                                        ? alarmMessage =
-                                                                            "LOW RR"
-                                                                        : ((finalList[106] << 8) + finalList[107]) == 20
-                                                                            ? alarmMessage = "HIGH RR"
-                                                                            : ((finalList[106] << 8) + finalList[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((finalList[106] << 8) + finalList[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
-              } else if (finalList[109] == 3) {
-                ((finalList[106] << 8) + finalList[107]) == 23
-                    ? alarmMessage = "Apnea backup"
-                    : alarmMessage = "";
-              }
-            });
-          }
+            if (vteValue != null &&
+                vteValue != 0 &&
+                pplateauDisplay != null &&
+                pplateauDisplay != 0) {
+              try {
+                // var dataC = (double.tryParse(vteValue.toString()) /(pplateauDisplay - double.tryParse(peepDisplayValue.toString()))).toInt();
+                var dataC =
+                    (vteValue / (pplateauDisplay.toInt() - peepDisplayValue))
+                        .toInt();
+                if (dataC < 0) {
+                  // cdisplayParameter = 0;
+                } else {
+                  cdisplayParameter = dataC;
+                }
+              } catch (e) {}
+            }
 
-          if (paw <= 10) {
-            setState(() {
-              lungImage = 1;
-            });
-          } else if (paw <= 20 && paw >= 11) {
-            setState(() {
-              lungImage = 2;
-            });
-          } else if (paw <= 30 && paw >= 21) {
-            setState(() {
-              lungImage = 3;
-            });
-          } else if (paw <= 40 && paw >= 31) {
-            setState(() {
-              lungImage = 4;
-            });
-          } else if (paw <= 100 && paw >= 41) {
-            setState(() {
-              lungImage = 5;
-            });
-          }
-        });
-        setState(() {
-          String i = "", e = "", tempIe = "";
-          i = finalList[12].toString();
-          e = finalList[13].toString();
-          tempIe = i + ":" + e;
-        });
+            if (finalList[108] == 1) {
+              setState(() {
+                if (finalList[109] == 1 || finalList[109] == 0) {
+                  ((finalList[106] << 8) + finalList[107]) == 5
+                      ? alarmMessage = "SYSTEM FAULT"
+                      : ((finalList[106] << 8) + finalList[107]) == 7
+                          ? alarmMessage = "FiO\u2082 SENSOR MISSING"
+                          : ((finalList[106] << 8) + finalList[107]) == 10
+                              ? alarmMessage = "HIGH LEAKAGE"
+                              : ((finalList[106] << 8) + finalList[107]) == 11
+                                  ? alarmMessage = "HIGH PRESSURE"
+                                  : ((finalList[106] << 8) + finalList[107]) ==
+                                          17
+                                      ? alarmMessage = "PATIENT DISCONNECTED"
+                                      : alarmMessage = "";
+                } else if (finalList[109] == 2) {
+                  // // // print("alarm code "+(((finalList[106] << 8) + finalList[107])).toString());
+                  ((finalList[106] << 8) + finalList[107]) == 1
+                      ? alarmMessage = "POWER SUPPLY DISCONNECTED"
+                      : ((finalList[106] << 8) + finalList[107]) == 2
+                          ? alarmMessage = " LOW BATTERY"
+                          : ((finalList[106] << 8) + finalList[107]) == 3
+                              ? alarmMessage = "CALIBRATE FiO2"
+                              : ((finalList[106] << 8) + finalList[107]) == 4
+                                  ? alarmMessage = "CALIBRATION FiO2 FAIL"
+                                  : ((finalList[106] << 8) + finalList[107]) == 6
+                                      ? alarmMessage = "SELF TEST FAIL"
+                                      : ((finalList[106] << 8) + finalList[107]) == 8
+                                          ? alarmMessage = "HIGH FiO2"
+                                          : ((finalList[106] << 8) + finalList[107]) == 9
+                                              ? alarmMessage = "LOW FIO2"
+                                              : ((finalList[106] << 8) +
+                                                          finalList[107]) ==
+                                                      12
+                                                  ? alarmMessage =
+                                                      "LOW PRESSURE"
+                                                  : ((finalList[106] << 8) +
+                                                              finalList[107]) ==
+                                                          13
+                                                      ? alarmMessage = "LOW VTE"
+                                                      : ((finalList[106] << 8) + finalList[107]) == 14
+                                                          ? alarmMessage =
+                                                              "HIGH VTE"
+                                                          : ((finalList[106] << 8) + finalList[107]) == 15
+                                                              ? alarmMessage =
+                                                                  "LOW VTI"
+                                                              : ((finalList[106] << 8) + finalList[107]) == 16
+                                                                  ? alarmMessage =
+                                                                      "HIGH VTI"
+                                                                  : ((finalList[106] << 8) + finalList[107]) == 18
+                                                                      ? alarmMessage =
+                                                                          "LOW O2  supply"
+                                                                      : ((finalList[106] << 8) + finalList[107]) == 19
+                                                                          ? alarmMessage =
+                                                                              "LOW RR"
+                                                                          : ((finalList[106] << 8) + finalList[107]) == 20 ? alarmMessage = "HIGH RR" : ((finalList[106] << 8) + finalList[107]) == 21 ? alarmMessage = "HIGH PEEP" : ((finalList[106] << 8) + finalList[107]) == 22 ? alarmMessage = "LOW PEEP" : alarmMessage = "";
+                } else if (finalList[109] == 3) {
+                  ((finalList[106] << 8) + finalList[107]) == 23
+                      ? alarmMessage = "Apnea backup"
+                      : alarmMessage = "";
+                }
+              });
+            }
 
-        setState(() {
+            if (paw <= 10) {
+              setState(() {
+                lungImage = 1;
+              });
+            } else if (paw <= 20 && paw >= 11) {
+              setState(() {
+                lungImage = 2;
+              });
+            } else if (paw <= 30 && paw >= 21) {
+              setState(() {
+                lungImage = 3;
+              });
+            } else if (paw <= 40 && paw >= 31) {
+              setState(() {
+                lungImage = 4;
+              });
+            } else if (paw <= 100 && paw >= 41) {
+              setState(() {
+                lungImage = 5;
+              });
+            }
+          });
+          setState(() {
+            String i = "", e = "", tempIe = "";
+            i = finalList[12].toString();
+            e = finalList[13].toString();
+            tempIe = i + ":" + e;
+          });
+
+          setState(() {
 // list[26]=(0x55);
 // list[27]=(0x55);
 // list[28]=(0x55);
 // list[29]=(0x55);
-          o2pressuresensor = ((list[26] & 0x3) >> 0);
-          mtpressuresensor = ((list[26] & 0xC) >> 2);
-          exhalationflowsensor = ((list[26] & 0x30) >> 4);
-          inhalationflowsensor = ((list[26] & 0xC0) >> 6);
+            o2pressuresensor = ((list[26] & 0x3) >> 0);
+            mtpressuresensor = ((list[26] & 0xC) >> 2);
+            exhalationflowsensor = ((list[26] & 0x30) >> 4);
+            inhalationflowsensor = ((list[26] & 0xC0) >> 6);
 
-          exhalationpressure = ((list[27] & 0x3) >> 0);
-          inhalationpressure = ((list[27] & 0xC) >> 2);
-          o2sensor = ((list[27] & 0x30) >> 4);
-          inhalationvalve = ((list[27] & 0xC0) >> 6);
+            exhalationpressure = ((list[27] & 0x3) >> 0);
+            inhalationpressure = ((list[27] & 0xC) >> 2);
+            o2sensor = ((list[27] & 0x30) >> 4);
+            inhalationvalve = ((list[27] & 0xC0) >> 6);
 
-          exhalationvalve = ((list[28] & 0x3) >> 0);
-          ventvalue = ((list[28] & 0xC) >> 2);
-          mainpower = ((list[28] & 0x30) >> 4);
-          battery = ((list[28] & 0xC0) >> 6);
+            exhalationvalve = ((list[28] & 0x3) >> 0);
+            ventvalue = ((list[28] & 0xC) >> 2);
+            mainpower = ((list[28] & 0x30) >> 4);
+            battery = ((list[28] & 0xC0) >> 6);
 
-          communication = ((list[29] & 0x3) >> 0);
-          compressor = ((list[29] & 0xC) >> 2);
-          blender = ((list[29] & 0x30) >> 4);
-          checkOfffset = ((list[29] & 0xC0) >> 6);
+            communication = ((list[29] & 0x3) >> 0);
+            compressor = ((list[29] & 0xC) >> 2);
+            blender = ((list[29] & 0x30) >> 4);
+            checkOfffset = ((list[29] & 0xC0) >> 6);
 
 // if (checkOfffset == 2) {
 //   _port.close();
@@ -24729,492 +24761,497 @@ class _CheckPageState extends State<Dashboard> {
 // }
 
 // Fluttertoast.showToast(msg: o2pressuresensor.toString() +" "+mtpressuresensor.toString());
-        });
-        setState(() {
-          checkO2CalibrationValue = finalList[30];
-        });
+          });
+          setState(() {
+            checkO2CalibrationValue = finalList[30];
+          });
 
-        // Fluttertoast.showToast(msg:checkO2CalibrationValue.toString());
-        if (checkO2CalibrationValue == 1) {
-          setState(() {
-            textText = "Lung Disconnected";
-          });
-        } else if (checkO2CalibrationValue == 2) {
-          setState(() {
-            textText = "Calibrating 0\u2082..";
-          });
-        } else if (checkO2CalibrationValue == 3) {
-          setState(() {
-            textText = "Calibrating Completed..";
-          });
-        } else if (checkO2CalibrationValue == 0) {
-          setState(() {
-            checkO2CalibrationValue = "";
-          });
-        }
-
-        var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
-        if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
-          setState(() {
-            operatinModeR = ((finalList[104] << 8) + finalList[105]);
-          });
-        }
-
-        if (operatinModeR == 1) {
-          setState(() {
-            modeName = "VACV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 2) {
-          setState(() {
-            modeName = "PACV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 3) {
-          setState(() {
-            modeName = "PSV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 4) {
-          setState(() {
-            modeName = "PSIMV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 5) {
-          setState(() {
-            modeName = "VSIMV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 6) {
-          setState(() {
-            modeName = "PC-CMV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 7) {
-          setState(() {
-            modeName = "VC-CMV";
-            selfTestingButtonEnabled = false;
-          });
-        } else if (operatinModeR == 14) {
-          setState(() {
-            modeName = "PRVC";
-            selfTestingButtonEnabled = false;
-          });
-        } else {
-          setState(() {
-            selfTestingButtonEnabled = true;
-          });
-        }
-
-        if ((((finalList[68] << 8) + finalList[69]) / 100).round().toInt() >=
-                0 &&
-            (((finalList[68] << 8) + finalList[69]) / 100).round().toInt() <=
-                150) {
-          mapDisplayValue =
-              (((finalList[68] << 8) + finalList[69]) / 100).toInt();
-        }
-        if (finalList[84] == 1) {
-          ioreDisplayParamter = "I";
-        } else if (finalList[84] == 2) {
-          ioreDisplayParamter = "E";
-        } else {
-          ioreDisplayParamter = "";
-        }
-
-        if (finalList[91] == 1) {
-          amsDisplayParamter = "A";
-        } else if (finalList[91] == 2) {
-          amsDisplayParamter = "M";
-        } else if (finalList[91] == 3) {
-          amsDisplayParamter = "S";
-        } else {
-          amsDisplayParamter = "";
-        }
-
-        displayTemperature = finalList[88];
-
-        setState(() {
-          if (finalList[108] != 0 &&
-              ((finalList[106] << 8) + finalList[107]) != null &&
-              ((finalList[106] << 8) + finalList[107]) >= 1 &&
-              ((finalList[106] << 8) + finalList[107]) <= 23) {
-            alarmActive = finalList[108].toString();
-          } else {
-            alarmActive = 0.toString();
+          // Fluttertoast.showToast(msg:checkO2CalibrationValue.toString());
+          if (checkO2CalibrationValue == 1) {
+            setState(() {
+              textText = "Lung Disconnected";
+            });
+          } else if (checkO2CalibrationValue == 2) {
+            setState(() {
+              textText = "Calibrating 0\u2082..";
+            });
+          } else if (checkO2CalibrationValue == 3) {
+            setState(() {
+              textText = "Calibrating Completed..";
+            });
+          } else if (checkO2CalibrationValue == 0) {
+            setState(() {
+              checkO2CalibrationValue = "";
+            });
           }
-        });
 
-        // pressure graph
-        double temp = (((finalList[34] << 8) + finalList[35]))
-            .toDouble(); // pressure points 35,36
+          var dataOperatingMode = ((finalList[104] << 8) + finalList[105]);
+          if (dataOperatingMode >= 0 && dataOperatingMode <= 14) {
+            setState(() {
+              operatinModeR = ((finalList[104] << 8) + finalList[105]);
+            });
+          }
 
-        if (temp > 40000) {
-          setState(() {
-            temp = -((65535 - temp) / 100);
-          });
-        } else {
-          setState(() {
-            temp = temp / 100;
-          });
-        }
-
-        if (pressurePoints.length >= 50) {
-          setState(() {
-            pressurePoints.removeAt(0);
-            pressurePoints.add(temp);
-            // Fluttertoast.showToast(msg: temp.toString());
-          });
-        } else {
-          pressurePoints.add(temp);
-        }
-
-        if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
-            ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
-          setState(() {
-            pplateauDisplay = ((finalList[60] << 8) + finalList[61]).toDouble();
-          });
-        }
-
-        double temp1 = ((finalList[58] << 8) + finalList[59])
-            .toDouble(); // volume points 59,60
-
-        if (volumePoints.length >= 50) {
-          setState(() {
-            volumePoints.removeAt(0);
-            volumePoints.add(temp1);
-          });
-        } else {
-          volumePoints.add(temp1);
-        }
-
-        double temp3 = ((((finalList[46] << 8) + finalList[47])) -
-                (((finalList[48] << 8) + finalList[49])))
-            .toDouble();
-        temp3 = temp3 * 0.06;
-
-        if (flowPoints.length >= 50) {
-          setState(() {
-            flowPoints.removeAt(0);
-            flowPoints.add(temp3);
-          });
-        } else {
-          flowPoints.add(temp3);
-        }
-
-        // if (temp3 < 0 && bnegative == true) {
-        //   negativeNumber = temp3;
-        //   bnegative = false;
-        //   bpostive = true;
-        //   // if (pipPoints.length >= 100) {
-        //   //   setState(() {
-        //   //     pipPoints.removeAt(0);
-        //   //     pipPoints.add(negativeNumber.toDouble());
-        //   //     // Fluttertoast.showToast(msg: temp.toString());
-        //   //   });
-        //   // } else {
-        //   //   pipPoints.add(negativeNumber.toDouble());
-        //   // }
-        // } else {
-        //   if (bpostive == true && temp3 > 0) {
-        //     bnegative = true;
-        //     bpostive = false;
-        //     packetCounter = packetCounter + 1;
-        //     if (pipPoints.length >= 60) {
-        //       setState(() {
-        //         pipPoints.removeAt(0);
-        //         pipPoints.add(pipValue.toDouble());
-        //         // Fluttertoast.showToast(msg: temp.toString());
-        //       });
-        //     } else {
-        //       pipPoints.add(pipValue.toDouble());
-        //     }
-        //     if (fio2Points.length >= 60) {
-        //       setState(() {
-        //         fio2Points.removeAt(0);
-        //         fio2Points.add(fio2DisplayParameter.toDouble());
-        //         // Fluttertoast.showToast(msg: temp.toString());
-        //       });
-        //     } else {
-        //       fio2Points.add(fio2DisplayParameter.toDouble());
-        //     }
-        //     if (peepPoints.length >= 60) {
-        //       setState(() {
-        //         peepPoints.removeAt(0);
-        //         peepPoints.add(peepDisplayValue.toDouble());
-        //         // Fluttertoast.showToast(msg: temp.toString());
-        //       });
-        //     } else {
-        //       peepPoints.add(peepDisplayValue.toDouble());
-        //     }
-        //     if (vtPoints.length >= 60) {
-        //       setState(() {
-        //         vtPoints.removeAt(0);
-        //         vtPoints.add(vteValue.toDouble());
-        //         // Fluttertoast.showToast(msg: temp.toString());
-        //       });
-        //     } else {
-        //       vtPoints.add(vteValue.toDouble());
-        //     }
-        //   }
-        // }
-
-        if (_setValuesonClick == true && operatinModeR != 0) {
-          setState(() {
-            receivedoperatingModeR = ((finalList[112] << 8) + finalList[113]);
-            if (((finalList[114] << 8) + finalList[115]) != 0) {
-              receivedItrig =
-                  (65536 - ((finalList[114] << 8) + finalList[115]));
-            }
-
-            receivedpeep = ((finalList[116] << 8) + finalList[117]);
-
-            receivedps = ((finalList[118] << 8) + finalList[119]);
-
-            receivedfio2 = ((finalList[120] << 8) + finalList[121]);
-
-            receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
-
-            receivedi = finalList[124];
-
-            i = (receivedi / 10).toString();
-            receivede = finalList[125];
-            e = (receivede / 10).toString();
-            receivedti = (((finalList[126] << 8) + finalList[127])).toInt();
-
-            receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
-
-            receivedvvttmin = ((finalList[130] << 8) + finalList[131]);
-            receivedvtmax = ((finalList[132] << 8) + finalList[133]);
-            receivedminte = ((finalList[134] << 8) + finalList[135]);
-            receivedpc = ((finalList[136] << 8) + finalList[137]);
-
-            receivedrr = ((finalList[138] << 8) + finalList[139]);
-
-            receivedvt = ((finalList[140] << 8) + finalList[141]);
-
-            receivedpcmin = ((finalList[142] << 8) + finalList[143]);
-
-            receivedpcmax = ((finalList[144] << 8) + finalList[145]);
-
-            receivedo2pressure = ((finalList[146] << 8) + finalList[147]);
-            receivedtankpressure = ((finalList[148] << 8) + finalList[149]);
-            receivedinhalationblowercommand =
-                ((finalList[150] << 8) + finalList[151]);
-            receivedexhalatioblowercommand =
-                ((finalList[152] << 8) + finalList[153]);
-            dreceivedfio2 = ((finalList[154] << 8) + finalList[155]);
-            receivedvti = ((finalList[156] << 8) + finalList[157]);
-            receivedvte = ((finalList[158] << 8) + finalList[159]);
-            receivedflatprop = ((finalList[160] << 8) + finalList[161]);
-          });
-
-          setState(() {
-            if (operatinModeR == 6 && receivedoperatingModeR == 6) {
-              pccmvRRValue = receivedrr;
-              pccmvIeValue = getIeNumber(i + ":" + e.toString());
-              pccmvPeepValue = receivedpeep;
-              pccmvPcValue = receivedpc;
-              pccmvFio2Value = receivedfio2; //6
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("pc", receivedpc);
-              // pccmvEnabled = true;
-              // getData();
-
-            } else if (operatinModeR == 7 && receivedoperatingModeR == 7) {
-              preferences.setString("checkMode", "vccmv");
-              preferences.setInt('vccmvRRValue', receivedrr);
-              preferences.setInt(
-                  'vccmvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('vccmvPeepValue', receivedpeep);
-              preferences.setInt('vccmvFio2Value', receivedfio2);
-              preferences.setInt('vccmvVtValue', receivedvt); //7
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("vt", receivedvt);
-              // vccmvEnabled = true;
-              // getData();
-            } else if (operatinModeR == 2 && receivedoperatingModeR == 2) {
-              preferences.setString("checkMode", "pacv");
-              preferences.setInt('pacvItrigValue', receivedItrig);
-              preferences.setInt('pacvRrValue', receivedrr);
-              preferences.setInt(
-                  'pacvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('pacvPeepValue', receivedpeep);
-              preferences.setInt('pacvPcValue', receivedpc);
-              preferences.setInt('pacvFio2Value', receivedfio2); //2
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("pc", receivedpc);
-              preferences.setInt("itrig", receivedItrig);
-              // pacvEnabled  = true;
-              // getData();
-            } else if (operatinModeR == 1 && receivedoperatingModeR == 1) {
-              preferences.setString("checkMode", "vacv");
-              preferences.setInt('vacvItrigValue', receivedItrig);
-              preferences.setInt('vacvRrValue', receivedrr);
-              preferences.setInt(
-                  'vacvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('vacvPeepValue', receivedpeep);
-              preferences.setInt('vacvVtValue', receivedvt);
-              preferences.setInt('vacvFio2Value', receivedfio2); //1
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("vt", receivedvt);
-              preferences.setInt("itrig", receivedItrig);
-              // vacvEnabled = true;
-              // getData();
-            } else if (operatinModeR == 4 && receivedoperatingModeR == 4) {
-              preferences.setString("checkMode", "psimv");
-              preferences.setInt('psimvRrValue', receivedrr);
-              preferences.setInt('psimvPsValue', receivedps);
-              preferences.setInt(
-                  'psimvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('psimvPeepValue', receivedpeep);
-              preferences.setInt('psimvPcValue', receivedpc);
-              preferences.setInt('psimvFio2Value', receivedfio2); //4
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("pc", receivedpc);
-              preferences.setInt("ps", receivedps);
-              // psimvEnabled = true;
-              // getData();
-            } else if (operatinModeR == 5 && receivedoperatingModeR == 5) {
-              preferences.setString("checkMode", "vsimv");
-              preferences.setInt('vsimvRrValue', receivedrr);
-              preferences.setInt(
-                  'vsimvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('vsimvPeepValue', receivedpeep);
-              preferences.setInt('vsimvVtValue', receivedvt);
-              preferences.setInt('vsimvPsValue', receivedps);
-              preferences.setInt('vsimvFio2Value', receivedfio2); //5
-
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("vt", receivedvt);
-              // vsimvEnabled = true;
-              // preferences.setInt("ps", receivedps);
-              // getData();
-            } else if (operatinModeR == 3 && receivedoperatingModeR == 3) {
-              var apneatimeCaal = (receivedapneaTime / 1000).toInt();
-              preferences.setString("checkMode", "psv");
-              preferences.setInt('psvItrigValue', receivedItrig);
-              // preferences.setInt('psvTiValue', psvTiValue);
-              preferences.setInt('psvPeepValue', receivedpeep);
-              preferences.setInt(
-                  'psvIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('psvPsValue', receivedps);
-              preferences.setInt('psvFio2Value', receivedfio2);
-              preferences.setInt('psvBackupRrValue', receivedbackuprr);
-              preferences.setInt('psvPcValue', receivedpc);
-              preferences.setInt('psvAtimeValue', apneatimeCaal); //3
-
-              preferences.setInt("rr", receivedbackuprr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("pc", receivedpc);
-              preferences.setInt("ps", receivedps);
-              preferences.setInt("itrig", receivedItrig);
-              preferences.setInt("atime", apneatimeCaal);
-              // Fluttertoast.showToast(msg:getTiValueNumber(receivedti).toString());
-              preferences.setInt(
-                  "ti",
-                  getTiValueNumber(
-                      ((receivedti / 1000).toDouble()).toString()));
-
-              // psvEnabled = true;
-
-              // getData();
-            } else if (operatinModeR == 14 && receivedoperatingModeR == 3) {
-              preferences.setInt("rr", receivedrr);
-              preferences.setString("i", i);
-              preferences.setString("e", e);
-              preferences.setInt("peep", receivedpeep);
-              preferences.setInt("fio2", receivedfio2);
-              preferences.setInt("vt", receivedvt);
-              preferences.setInt("itrig", receivedItrig);
-              preferences.setInt('prvcItrigValue', receivedItrig);
-              preferences.setInt('prvcRrValue', receivedrr);
-              preferences.setInt(
-                  'prvcIeValue', getIeNumber(i + ":" + e.toString()));
-              preferences.setInt('prvcPeepValue', receivedpeep);
-              preferences.setInt('prvcVtValue', receivedvt);
-              preferences.setInt('prvcFio2Value', receivedfio2);
-            }
-          });
-        }
-
-        // var setValueData = pcValue + peepValue;
-
-        // if (pipValue>setValueData){
-        //   _temporarySetValue.add(Text(lastRecordTime+" "+pipValue.toString()+" "+setValueData.toString(),style:TextStyle(color:Colors.white)));
-        // }
-
-        setState(() {
-          powerIndication = finalList[64];
-          batteryPercentage = finalList[65];
-          batteryStatus = finalList[78];
-        });
-        if (playOnEnabled == false) {
-          if (patientId != "") {
-            var data = VentilatorOMode(
-                patientId,
-                patientName.toString(),
-                pipValue.toString(),
-                vteValue.toString(),
-                peepDisplayValue.toString(),
-                rrDisplayValue.toString(),
-                fio2DisplayParameter.toString(),
-                mapDisplayValue.toString(),
-                mvValue.toString(),
-                cdisplayParameter.toString(),
-                ieDisplayValue.toString(),
-                rrValue.toString(),
-                checkI(i) + ":" + checkE(e).toString(),
-                peepValue.toString(),
-                psValue.toString(),
-                fio2Value.toString(),
-                vtValue.toString(),
-                tiValue.toString(),
-                teValue.toString(),
-                temp,
-                temp3,
-                temp1,
-                operatinModeR.toString(),
-                lungImage.toString(),
-                paw.toString(),
-                globalCounterNo.toString(),
-                ((finalList[106] << 8) + finalList[107]).toString(),
-                finalList[109].toString(),
-                alarmActive);
-            saveData(data, patientId);
+          if (operatinModeR == 1) {
+            setState(() {
+              modeName = "VACV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 2) {
+            setState(() {
+              modeName = "PACV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 3) {
+            setState(() {
+              modeName = "PSV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 4) {
+            setState(() {
+              modeName = "PSIMV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 5) {
+            setState(() {
+              modeName = "VSIMV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 6) {
+            setState(() {
+              modeName = "PC-CMV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 7) {
+            setState(() {
+              modeName = "VC-CMV";
+              selfTestingButtonEnabled = false;
+            });
+          } else if (operatinModeR == 14) {
+            setState(() {
+              modeName = "PRVC";
+              selfTestingButtonEnabled = false;
+            });
           } else {
-            var data = VentilatorOMode(
+            setState(() {
+              selfTestingButtonEnabled = true;
+            });
+          }
+
+          if ((((finalList[68] << 8) + finalList[69]) / 100).round().toInt() >=
+                  0 &&
+              (((finalList[68] << 8) + finalList[69]) / 100).round().toInt() <=
+                  150) {
+            mapDisplayValue =
+                (((finalList[68] << 8) + finalList[69]) / 100).toInt();
+          }
+          if (finalList[84] == 1) {
+            ioreDisplayParamter = "I";
+          } else if (finalList[84] == 2) {
+            ioreDisplayParamter = "E";
+          } else {
+            ioreDisplayParamter = "";
+          }
+
+          if (finalList[91] == 1) {
+            amsDisplayParamter = "A";
+          } else if (finalList[91] == 2) {
+            amsDisplayParamter = "M";
+          } else if (finalList[91] == 3) {
+            amsDisplayParamter = "S";
+          } else {
+            amsDisplayParamter = "";
+          }
+
+          displayTemperature = finalList[88];
+
+          setState(() {
+            if (finalList[108] != 0 &&
+                ((finalList[106] << 8) + finalList[107]) != null &&
+                ((finalList[106] << 8) + finalList[107]) >= 1 &&
+                ((finalList[106] << 8) + finalList[107]) <= 23) {
+              alarmActive = finalList[108].toString();
+            } else {
+              alarmActive = 0.toString();
+            }
+          });
+
+          // pressure graph
+          double temp = (((finalList[34] << 8) + finalList[35]))
+              .toDouble(); // pressure points 35,36
+
+          if (temp > 40000) {
+            setState(() {
+              temp = -((65535 - temp) / 100);
+            });
+          } else {
+            setState(() {
+              temp = temp / 100;
+            });
+          }
+
+          if (pressurePoints.length >= 50) {
+            setState(() {
+              pressurePoints.removeAt(0);
+              pressurePoints.add(temp);
+              // Fluttertoast.showToast(msg: temp.toString());
+            });
+          } else {
+            pressurePoints.add(temp);
+          }
+
+          if (((finalList[60] << 8) + finalList[61]).toInt() >= 0 &&
+              ((finalList[60] << 8) + finalList[61]).toInt() <= 150) {
+            setState(() {
+              pplateauDisplay =
+                  ((finalList[60] << 8) + finalList[61]).toDouble();
+            });
+          }
+
+          double temp1 = ((finalList[58] << 8) + finalList[59])
+              .toDouble(); // volume points 59,60
+
+          if (volumePoints.length >= 50) {
+            setState(() {
+              volumePoints.removeAt(0);
+              volumePoints.add(temp1);
+            });
+          } else {
+            volumePoints.add(temp1);
+          }
+
+          double temp3 = ((((finalList[46] << 8) + finalList[47])) -
+                  (((finalList[48] << 8) + finalList[49])))
+              .toDouble();
+          temp3 = temp3 * 0.06;
+
+          if (flowPoints.length >= 50) {
+            setState(() {
+              flowPoints.removeAt(0);
+              flowPoints.add(temp3);
+            });
+          } else {
+            flowPoints.add(temp3);
+          }
+
+          if (temp3 < 0 && bnegative == true) {
+            negativeNumber = temp3;
+            bnegative = false;
+            bpostive = true;
+            // if (pipPoints.length >= 100) {
+            //   setState(() {
+            //     pipPoints.removeAt(0);
+            //     pipPoints.add(negativeNumber.toDouble());
+            //     // Fluttertoast.showToast(msg: temp.toString());
+            //   });
+            // } else {
+            //   pipPoints.add(negativeNumber.toDouble());
+            // }
+          } else {
+            if (bpostive == true && temp3 > 0) {
+              bnegative = true;
+              bpostive = false;
+              packetCounter = packetCounter + 1;
+              if (pipPoints.length >= 60) {
+                setState(() {
+                  pipPoints.removeAt(0);
+                  pipPoints.add(pipValue.toDouble());
+                  // Fluttertoast.showToast(msg: temp.toString());
+                });
+              } else {
+                pipPoints.add(pipValue.toDouble());
+              }
+              if (fio2Points.length >= 60) {
+                setState(() {
+                  fio2Points.removeAt(0);
+                  fio2Points.add(fio2DisplayParameter.toDouble());
+                  // Fluttertoast.showToast(msg: temp.toString());
+                });
+              } else {
+                fio2Points.add(fio2DisplayParameter.toDouble());
+              }
+              if (peepPoints.length >= 60) {
+                setState(() {
+                  peepPoints.removeAt(0);
+                  peepPoints.add(peepDisplayValue.toDouble());
+                  // Fluttertoast.showToast(msg: temp.toString());
+                });
+              } else {
+                peepPoints.add(peepDisplayValue.toDouble());
+              }
+              if (vtPoints.length >= 60) {
+                setState(() {
+                  vtPoints.removeAt(0);
+                  vtPoints.add(vteValue.toDouble());
+                  // Fluttertoast.showToast(msg: temp.toString());
+                });
+              } else {
+                vtPoints.add(vteValue.toDouble());
+              }
+            }
+          }
+
+          if (_setValuesonClick == true && operatinModeR != 0) {
+            setState(() {
+              receivedoperatingModeR = ((finalList[112] << 8) + finalList[113]);
+              if (((finalList[114] << 8) + finalList[115]) != 0) {
+                receivedItrig =
+                    (65536 - ((finalList[114] << 8) + finalList[115]));
+              }
+
+              receivedpeep = ((finalList[116] << 8) + finalList[117]);
+
+              receivedps = ((finalList[118] << 8) + finalList[119]);
+
+              receivedfio2 = ((finalList[120] << 8) + finalList[121]);
+
+              receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
+
+              receivedi = finalList[124];
+
+              i = (receivedi / 10).toString();
+              receivede = finalList[125];
+              e = (receivede / 10).toString();
+              receivedti = (((finalList[126] << 8) + finalList[127])).toInt();
+
+              receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
+
+              receivedvvttmin = ((finalList[130] << 8) + finalList[131]);
+              receivedvtmax = ((finalList[132] << 8) + finalList[133]);
+              receivedminte = ((finalList[134] << 8) + finalList[135]);
+              receivedpc = ((finalList[136] << 8) + finalList[137]);
+
+              receivedrr = ((finalList[138] << 8) + finalList[139]);
+
+              receivedvt = ((finalList[140] << 8) + finalList[141]);
+
+              receivedpcmin = ((finalList[142] << 8) + finalList[143]);
+
+              receivedpcmax = ((finalList[144] << 8) + finalList[145]);
+
+              receivedo2pressure = ((finalList[146] << 8) + finalList[147]);
+              receivedtankpressure = ((finalList[148] << 8) + finalList[149]);
+              receivedinhalationblowercommand =
+                  ((finalList[150] << 8) + finalList[151]);
+              receivedexhalatioblowercommand =
+                  ((finalList[152] << 8) + finalList[153]);
+              dreceivedfio2 = ((finalList[154] << 8) + finalList[155]);
+              receivedvti = ((finalList[156] << 8) + finalList[157]);
+              receivedvte = ((finalList[158] << 8) + finalList[159]);
+              receivedflatprop = ((finalList[160] << 8) + finalList[161]);
+            });
+
+            setState(() {
+              if (operatinModeR == 6 && receivedoperatingModeR == 6) {
+                pccmvRRValue = receivedrr;
+                pccmvIeValue = getIeNumber(i + ":" + e.toString());
+                pccmvPeepValue = receivedpeep;
+                pccmvPcValue = receivedpc;
+                pccmvFio2Value = receivedfio2; //6
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("pc", receivedpc);
+                // pccmvEnabled = true;
+                // getData();
+
+              } else if (operatinModeR == 7 && receivedoperatingModeR == 7) {
+                preferences.setString("checkMode", "vccmv");
+                preferences.setInt('vccmvRRValue', receivedrr);
+                preferences.setInt(
+                    'vccmvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('vccmvPeepValue', receivedpeep);
+                preferences.setInt('vccmvFio2Value', receivedfio2);
+                preferences.setInt('vccmvVtValue', receivedvt); //7
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("vt", receivedvt);
+                // vccmvEnabled = true;
+                // getData();
+              } else if (operatinModeR == 2 && receivedoperatingModeR == 2) {
+                preferences.setString("checkMode", "pacv");
+                preferences.setInt('pacvItrigValue', receivedItrig);
+                preferences.setInt('pacvRrValue', receivedrr);
+                preferences.setInt(
+                    'pacvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('pacvPeepValue', receivedpeep);
+                preferences.setInt('pacvPcValue', receivedpc);
+                preferences.setInt('pacvFio2Value', receivedfio2); //2
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("pc", receivedpc);
+                preferences.setInt("itrig", receivedItrig);
+                // pacvEnabled  = true;
+                // getData();
+              } else if (operatinModeR == 1 && receivedoperatingModeR == 1) {
+                preferences.setString("checkMode", "vacv");
+                preferences.setInt('vacvItrigValue', receivedItrig);
+                preferences.setInt('vacvRrValue', receivedrr);
+                preferences.setInt(
+                    'vacvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('vacvPeepValue', receivedpeep);
+                preferences.setInt('vacvVtValue', receivedvt);
+                preferences.setInt('vacvFio2Value', receivedfio2); //1
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("vt", receivedvt);
+                preferences.setInt("itrig", receivedItrig);
+                // vacvEnabled = true;
+                // getData();
+              } else if (operatinModeR == 4 && receivedoperatingModeR == 4) {
+                preferences.setString("checkMode", "psimv");
+                preferences.setInt('psimvRrValue', receivedrr);
+                preferences.setInt('psimvPsValue', receivedps);
+                preferences.setInt(
+                    'psimvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('psimvPeepValue', receivedpeep);
+                preferences.setInt('psimvPcValue', receivedpc);
+                preferences.setInt('psimvFio2Value', receivedfio2); //4
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("pc", receivedpc);
+                preferences.setInt("ps", receivedps);
+                // psimvEnabled = true;
+                // getData();
+              } else if (operatinModeR == 5 && receivedoperatingModeR == 5) {
+                preferences.setString("checkMode", "vsimv");
+                preferences.setInt('vsimvRrValue', receivedrr);
+                preferences.setInt(
+                    'vsimvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('vsimvPeepValue', receivedpeep);
+                preferences.setInt('vsimvVtValue', receivedvt);
+                preferences.setInt('vsimvPsValue', receivedps);
+                preferences.setInt('vsimvFio2Value', receivedfio2); //5
+
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("vt", receivedvt);
+                // vsimvEnabled = true;
+                // preferences.setInt("ps", receivedps);
+                // getData();
+              } else if (operatinModeR == 3 && receivedoperatingModeR == 3) {
+                var apneatimeCaal = (receivedapneaTime / 1000).toInt();
+                preferences.setString("checkMode", "psv");
+                preferences.setInt('psvItrigValue', receivedItrig);
+                // preferences.setInt('psvTiValue', psvTiValue);
+                preferences.setInt('psvPeepValue', receivedpeep);
+                preferences.setInt(
+                    'psvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('psvPsValue', receivedps);
+                preferences.setInt('psvFio2Value', receivedfio2);
+                preferences.setInt('psvBackupRrValue', receivedbackuprr);
+                preferences.setInt('psvPcValue', receivedpc);
+                preferences.setInt('psvAtimeValue', apneatimeCaal); //3
+
+                preferences.setInt("rr", receivedbackuprr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("pc", receivedpc);
+                preferences.setInt("ps", receivedps);
+                preferences.setInt("itrig", receivedItrig);
+                preferences.setInt("atime", apneatimeCaal);
+                // Fluttertoast.showToast(msg:getTiValueNumber(receivedti).toString());
+                preferences.setInt(
+                    "ti",
+                    getTiValueNumber(
+                        ((receivedti / 1000).toDouble()).toString()));
+
+                // psvEnabled = true;
+
+                // getData();
+              } else if (operatinModeR == 14 && receivedoperatingModeR == 3) {
+                preferences.setInt("rr", receivedrr);
+                preferences.setString("i", i);
+                preferences.setString("e", e);
+                preferences.setInt("peep", receivedpeep);
+                preferences.setInt("fio2", receivedfio2);
+                preferences.setInt("vt", receivedvt);
+                preferences.setInt("itrig", receivedItrig);
+                preferences.setInt('prvcItrigValue', receivedItrig);
+                preferences.setInt('prvcRrValue', receivedrr);
+                preferences.setInt(
+                    'prvcIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('prvcPeepValue', receivedpeep);
+                preferences.setInt('prvcVtValue', receivedvt);
+                preferences.setInt('prvcFio2Value', receivedfio2);
+              }
+            });
+          }
+
+          // var setValueData = pcValue + peepValue;
+
+          // if (pipValue>setValueData){
+          //   _temporarySetValue.add(Text(lastRecordTime+" "+pipValue.toString()+" "+setValueData.toString(),style:TextStyle(color:Colors.white)));
+          // }
+
+          setState(() {
+            powerIndication = finalList[64];
+            batteryPercentage = finalList[65];
+            batteryStatus = finalList[78];
+          });
+          if (playOnEnabled == false) {
+            if (patientId != "") {
+              var data = VentilatorOMode(
+                  patientId,
+                  patientName.toString(),
+                  pipValue.toString(),
+                  vteValue.toString(),
+                  peepDisplayValue.toString(),
+                  rrDisplayValue.toString(),
+                  fio2DisplayParameter.toString(),
+                  mapDisplayValue.toString(),
+                  mvValue.toString(),
+                  cdisplayParameter.toString(),
+                  ieDisplayValue.toString(),
+                  rrValue.toString(),
+                  checkI(i) + ":" + checkE(e).toString(),
+                  peepValue.toString(),
+                  pcValue.toString(),
+                  psValue.toString(),
+                  itrigValue.toString(),
+                  fio2Value.toString(),
+                  vtValue.toString(),
+                  tiValue.toString(),
+                  teValue.toString(),
+                  atimeValue.toString(),
+                  tipsvValue.toString(),
+                  temp,
+                  temp3,
+                  temp1,
+                  operatinModeR.toString(),
+                  lungImage.toString(),
+                  paw.toString(),
+                  globalCounterNo.toString(),
+                  ((finalList[106] << 8) + finalList[107]).toString(),
+                  finalList[109].toString(),
+                  alarmActive);
+              saveData(data, patientId);
+            } else {
+              var data = VentilatorOMode(
                 "SWASIT " + globalCounterNo.toString(),
                 patientName,
                 pipValue.toString(),
@@ -25229,11 +25266,15 @@ class _CheckPageState extends State<Dashboard> {
                 rrValue.toString(),
                 checkI(i) + ":" + checkE(e).toString(),
                 peepValue.toString(),
+                pcValue.toString(),
                 psValue.toString(),
+                itrigValue.toString(),
                 fio2Value.toString(),
                 vtValue.toString(),
                 tiValue.toString(),
                 teValue.toString(),
+                atimeValue.toString(),
+                tipsvValue.toString(),
                 temp,
                 temp3,
                 temp1,
@@ -25243,14 +25284,15 @@ class _CheckPageState extends State<Dashboard> {
                 globalCounterNo.toString(),
                 ((finalList[106] << 8) + finalList[107]).toString(),
                 finalList[109].toString(),
-                alarmActive);
-            saveData(data, patientId);
+                alarmActive,
+              );
+              saveData(data, patientId);
+            }
           }
-        }
-        finalList = [];
-        list = [];
-        listTemp = [];
-      });
+          finalList = [];
+          list = [];
+          listTemp = [];
+        });
       // }
     } else if (finalList.isNotEmpty &&
         ((finalList[2] << 8) + finalList[3]) == 17) {
@@ -25266,15 +25308,18 @@ class _CheckPageState extends State<Dashboard> {
     }
   }
 
-  sendData(List<int> listTempF, checkValue) async {
-    // print(listTempF.toString());
+  sendData(List<int> listCrcDataC, checkValue) async {
+    print(listCrcDataC.toString());
     finalListSend = [];
 
     finalListSend.add(126);
-    finalListSend.addAll(listTempF);
+    finalListSend.addAll(listCrcDataC);
     finalListSend.add(127);
 
+    print(finalListSend.toString());
+
     await _port.write(Uint8List.fromList(finalListSend));
+    // getData();
 
     // if (checkValue == 1) {
     //   sleep(Duration(milliseconds: 50));
@@ -25308,6 +25353,7 @@ class _CheckPageState extends State<Dashboard> {
       } else if (checkValue == 2) {
         clearData();
       }
+      getData();
       // writeAlarmsData();
     } else if (acknowReceivedValue == 1 && ackPacket == 10) {
       clearAlarmData();
@@ -25402,6 +25448,3 @@ class _CheckPageState extends State<Dashboard> {
     });
   }
 }
-
-
-

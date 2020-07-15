@@ -8,6 +8,8 @@ import 'Dashboard.dart';
 import 'DowngradeAppScreen.dart';
 
 class About extends StatefulWidget {
+  
+
   @override
   _AboutState createState() => _AboutState();
 }
@@ -172,21 +174,25 @@ class _AboutState extends State<About> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white),
-                      child: downloadUrl!=null ?  FlatButton(
-                        child: Text(
-                          "Check for Update",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
-                        ),
-                        onPressed: () {
-                          // Fluttertoast.showToast(msg: Constants.versionNew.toString() +"   "+ versionCheck(downloadUrl)).toString();
-                          if (Constants.versionNew == versionCheck(downloadUrl)) {
-                            Fluttertoast.showToast(msg:"no updates found.!");
-                          }else{
-                            getLatestUrl();
-                            
-                          }
-                        },
-                      ):Container(),
+                      child: downloadUrl != null
+                          ? FlatButton(
+                              child: Text(
+                                "Check for Update",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20),
+                              ),
+                              onPressed: () {
+                                // Fluttertoast.showToast(msg: Constants.versionNew.toString() +"   "+ versionCheck(downloadUrl)).toString();
+                                if (Constants.versionNew ==
+                                    versionCheck(downloadUrl)) {
+                                  Fluttertoast.showToast(
+                                      msg: "no updates found.!");
+                                } else {
+                                  getLatestUrl();
+                                }
+                              },
+                            )
+                          : Container(),
                     ),
                     SizedBox(
                       height: 18,
@@ -201,7 +207,7 @@ class _AboutState extends State<About> {
     );
   }
 
-   versionCheck(String downloadUrl) {
+  versionCheck(String downloadUrl) {
     //  Fluttertoast.showToast(msg: downloadUrl.split("/v")[1].toString().split(".apk")[0].toString());
     return downloadUrl.split("/v")[1].toString().split(".apk")[0].toString();
   }

@@ -97,7 +97,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                     child: Container(
                       width: 210,
                       child: TextFormField(
-                        showCursor: true,
+                        showCursor: false,
                         readOnly: true,
                         onTap: () {
                           setState(() {

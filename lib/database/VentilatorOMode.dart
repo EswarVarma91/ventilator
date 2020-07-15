@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 class VentilatorOMode {
-   int id;
-    String  operatingMode,lungImage,paw,
+  int id;
+  String operatingMode,
+      lungImage,
+      paw,
       pipD,
       vtD,
       peepD,
@@ -15,13 +17,19 @@ class VentilatorOMode {
       rrS,
       ieS,
       peepS,
+      pcS,
       psS,
+      itrigS,
       fio2S,
       tiS,
-      teS,globalCounterNo,vtValue;
+      teS,
+      atimeS,
+      tipsvS,
+      globalCounterNo,
+      vtValue;
   double pressureValues, flowValues, volumeValues;
   String dateTime;
-  String patientName,patientId,alarmC,alarmP,alarmActive;
+  String patientName, patientId, alarmC, alarmP, alarmActive;
 
   VentilatorOMode(
       this.patientId,
@@ -38,14 +46,25 @@ class VentilatorOMode {
       this.rrS,
       this.ieS,
       this.peepS,
+      this.pcS,
       this.psS,
+      this.itrigS,
       this.fio2S,
       this.vtValue,
       this.tiS,
       this.teS,
+      this.atimeS,
+      this.tipsvS,
       this.pressureValues,
       this.flowValues,
-      this.volumeValues,this.operatingMode,this.lungImage,this.paw,this.globalCounterNo,this.alarmC,this.alarmP,this.alarmActive);
+      this.volumeValues,
+      this.operatingMode,
+      this.lungImage,
+      this.paw,
+      this.globalCounterNo,
+      this.alarmC,
+      this.alarmP,
+      this.alarmActive);
 
   // Map<String, dynamic> toMap() {
   //   var map = <String, dynamic>{
@@ -94,23 +113,26 @@ class VentilatorOMode {
     rrS = map['rrS'];
     ieS = map['ieS'];
     peepS = map['peepS'];
+    pcS = map['pcS'];
     psS = map['psS'];
+    itrigS = map['itrigS'];
     fio2S = map['fio2S'];
     vtValue = map['vtValueS'];
     tiS = map['tiS'];
     teS = map['teS'];
+    atimeS = map['atimeS'];
+    tipsvS = map['tipsvS'];
     pressureValues = map['pressureP'];
     flowValues = map['flowP'];
     volumeValues = map['volumeP'];
     dateTime = map['datetimeP'];
     operatingMode = map['operatingMode'];
     lungImage = map['lungImage'];
-    paw = map['paw'];//
+    paw = map['paw']; //
     globalCounterNo = map['globalCounterNo'];
     alarmC = map['alarmCodes'];
     alarmP = map['alarmPriority'];
     alarmActive = map['alarmActive'];
-    
   }
 
   VentilatorOMode.fromJson(Map<String, dynamic> json)
@@ -128,21 +150,23 @@ class VentilatorOMode {
         rrS = json['rrS'],
         ieS = json['ieS'],
         peepS = json['peepS'],
+        pcS = json['pcS'],
         psS = json['psS'],
+        itrigS = json['itrigS'],
         fio2S = json['fio2S'],
         vtValue = json['vtValueS'],
         tiS = json['tiS'],
         teS = json['teS'],
+        atimeS = json['atimeS'],
+        tipsvS = json['tipsvS'],
         pressureValues = json['pressureValues'],
         flowValues = json['flowValues'],
         volumeValues = json['volumeValues'],
         dateTime = json['dateTime'],
-         globalCounterNo = json['globalCounterNo'],
-          alarmC = json['alarmCodes'],
-    alarmP = json['alarmPriority'],
-    alarmActive = json['alarmActive']
-    
-        ;
+        globalCounterNo = json['globalCounterNo'],
+        alarmC = json['alarmCodes'],
+        alarmP = json['alarmPriority'],
+        alarmActive = json['alarmActive'];
 
   VentilatorOMode.map(dynamic obj) {
     this.id = obj['id'];
@@ -164,6 +188,8 @@ class VentilatorOMode {
     this.vtValue = obj['vtValueS'];
     this.tiS = obj['tiS'];
     this.teS = obj['teS'];
+    this.atimeS = obj['atimeS'];
+    this.tipsvS = obj['tipsvS'];
     this.pressureValues = obj['pressureValues'];
     this.flowValues = obj['flowValues'];
     this.volumeValues = obj['volumeValues'];
@@ -172,7 +198,6 @@ class VentilatorOMode {
     this.alarmC = obj['alarmCodes'];
     this.alarmP = obj['alarmPriority'];
     this.alarmActive = obj['alarmActive'];
-
   }
 }
 
@@ -183,9 +208,10 @@ class PatientsList {
   String maxTime;
   String datetimeP;
 
-  PatientsList(this.pId,this.pName,this.minTime,this.maxTime,this.datetimeP);
+  PatientsList(
+      this.pId, this.pName, this.minTime, this.maxTime, this.datetimeP);
 
-   PatientsList.fromMap(Map<String, dynamic> map) {
+  PatientsList.fromMap(Map<String, dynamic> map) {
     pId = map['patientId'];
     pName = map['patientName'];
     minTime = map['minTime'];
@@ -194,24 +220,21 @@ class PatientsList {
   }
 }
 
-
 class AlarmsList {
   String alarmId;
   String alarmCode;
   String datetime;
   String globalCounterNo;
 
-  AlarmsList(this.alarmCode,this.globalCounterNo);
+  AlarmsList(this.alarmCode, this.globalCounterNo);
 
-   AlarmsList.fromMap(Map<String, dynamic> map) {
+  AlarmsList.fromMap(Map<String, dynamic> map) {
     alarmId = map['id'].toString();
     alarmCode = map['alarmCodes'].toString();
     datetime = map['datetime'].toString();
     // globalCounterNo = map['globalCounterNo'];
   }
 }
-
-
 
 class PatientsSaveList {
   String patientId;
@@ -221,9 +244,10 @@ class PatientsSaveList {
   String patientHeight;
   String datetime;
 
-  PatientsSaveList(this.patientId,this.patientName,this.patientAge,this.patientGender,this.patientHeight);
+  PatientsSaveList(this.patientId, this.patientName, this.patientAge,
+      this.patientGender, this.patientHeight);
 
-   PatientsSaveList.fromMap(Map<String, dynamic> map) {
+  PatientsSaveList.fromMap(Map<String, dynamic> map) {
     patientId = map['patientId'];
     patientName = map['patientName'];
     patientAge = map['patientAge'];
@@ -233,14 +257,13 @@ class PatientsSaveList {
   }
 }
 
-
 class CounterValue {
   int id;
   String counterValue;
 
   CounterValue(this.counterValue);
 
-  CounterValue.fromMap(Map<String,dynamic> map) {
+  CounterValue.fromMap(Map<String, dynamic> map) {
     id = map['id'];
     counterValue = map['counterNo'];
   }

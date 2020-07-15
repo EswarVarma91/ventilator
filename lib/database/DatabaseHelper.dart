@@ -26,10 +26,14 @@ class DatabaseHelper {
   static const String IES = 'ieS';
   static const String PEEPS = 'peepS';
   static const String PSS = 'psS';
+  static const String PCS = 'pcS';
+  static const String ITRIGS = 'itrigS';
   static const String FIO2S = 'fio2S';
   static const String VT_VALUE = 'vtValueS';
   static const String TIS = 'tiS';
   static const String TES = 'teS';
+  static const String ATIMES = 'atimeS';
+  static const String TIPSVS = 'tipsvS';
   static const String PRESSURE_POINTS = 'pressureP';
   static const String FLOW_POINTS = 'flowP';
   static const String VOLUME_POINTS = 'volumeP';
@@ -49,9 +53,9 @@ class DatabaseHelper {
   static const String PATIENT_HEIGHT = 'patientHeight';
   static const String TABLE_PATIENT = 'apatientTb';
   static const String TABLE_NAME = 'acounterV';
-  static const String TABLE_ALARM = 'aalarms';
-  static const String TABLE = 'agraphPoints';
-  static const String DATABASE = 'adb';
+  static const String TABLE_ALARM = 'balarms';
+  static const String TABLE = 'bgraphPoints';
+  static const String DATABASE = 'bdb';
 
   Future<Database> get db async {
     if (_db != null) {
@@ -70,7 +74,7 @@ class DatabaseHelper {
 
   _onCreate(Database db, int version) async {
     await db.execute(
-        'CREATE TABLE $TABLE($ID INTEGER PRIMARY KEY AUTOINCREMENT, $PATIENTID TEXT, $PATIENTNAME TEXT,$PIPD TEXT, $VTD TEXT,$PEEPD TEXT, $RRD TEXT,$FIO2D TEXT,$VT_VALUE TEXT,$MAPD TEXT,$MVD TEXT,$COMPLAINCED TEXT, $IED TEXT,$RRS TEXT,$IES TEXT,$PEEPS TEXT,$PSS TEXT,$FIO2S TEXT,$TIS TEXT,$TES TEXT,$PRESSURE_POINTS REAL, $FLOW_POINTS REAL, $VOLUME_POINTS REAL, $DATE_TIME TEXT,$OPERATING_MODE TEXT,$LUNG_IMAGE TEXT,$PAW TEXT,$GLOBAL_COUNTER_NO TEXT,$ALARM,$ALARM_PRIORITY,$ALARM_ACTIVE)');
+        'CREATE TABLE $TABLE($ID INTEGER PRIMARY KEY AUTOINCREMENT, $PATIENTID TEXT, $PATIENTNAME TEXT,$PIPD TEXT, $VTD TEXT,$PEEPD TEXT, $RRD TEXT,$FIO2D TEXT,$VT_VALUE TEXT,$MAPD TEXT,$MVD TEXT,$COMPLAINCED TEXT, $IED TEXT,$RRS TEXT,$IES TEXT,$PEEPS TEXT,$PCS TEXT,$PSS TEXT,$ITRIGS TEXT,$FIO2S TEXT,$TIS TEXT,$ATIMES TEXT,$TIPSVS TEXT,$TES TEXT,$PRESSURE_POINTS REAL, $FLOW_POINTS REAL, $VOLUME_POINTS REAL, $DATE_TIME TEXT,$OPERATING_MODE TEXT,$LUNG_IMAGE TEXT,$PAW TEXT,$GLOBAL_COUNTER_NO TEXT,$ALARM,$ALARM_PRIORITY,$ALARM_ACTIVE)');
     // await db.execute('CREATE TABLE $TABLE_ALARM($ID INTERGER PRIMARY KEY AUTOINCREMENT,$ALARM TEXT,$DATE_TIME TEXT)');
     await db.execute(
         'CREATE TABLE $TABLE_NAME($ID INTERGER PRIMARY KEY,$COUNTER_NO TEXT,$DATE_TIME TEXT)');
@@ -106,7 +110,7 @@ class DatabaseHelper {
     try {
       var dbClient = await db;
       var res = await dbClient.rawInsert(
-          "INSERT into $TABLE ($PATIENTID,$PATIENTNAME,$PIPD,$VTD, $PEEPD, $RRD, $FIO2D, $MAPD, $MVD, $COMPLAINCED,$IED, $RRS, $IES, $PEEPS, $PSS, $FIO2S,$VT_VALUE,$TIS, $TES,$PRESSURE_POINTS,$FLOW_POINTS, $VOLUME_POINTS,$DATE_TIME,$OPERATING_MODE,$LUNG_IMAGE,$PAW,$GLOBAL_COUNTER_NO,$ALARM,$ALARM_PRIORITY,$ALARM_ACTIVE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+          "INSERT into $TABLE ($PATIENTID,$PATIENTNAME,$PIPD,$VTD, $PEEPD, $RRD, $FIO2D, $MAPD, $MVD, $COMPLAINCED,$IED, $RRS, $IES, $PEEPS,$PCS, $PSS,$ITRIGS, $FIO2S,$VT_VALUE,$TIS, $TES,$ATIMES,$TIPSVS,$PRESSURE_POINTS,$FLOW_POINTS, $VOLUME_POINTS,$DATE_TIME,$OPERATING_MODE,$LUNG_IMAGE,$PAW,$GLOBAL_COUNTER_NO,$ALARM,$ALARM_PRIORITY,$ALARM_ACTIVE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
           [
             vom.patientId,
             vom.patientName,
@@ -122,11 +126,15 @@ class DatabaseHelper {
             vom.rrS,
             vom.ieS,
             vom.peepS,
+            vom.pcS,
             vom.psS,
+            vom.itrigS,
             vom.fio2S,
             vom.vtValue,
             vom.tiS,
             vom.teS,
+            vom.atimeS,
+            vom.tipsvS,
             vom.pressureValues,
             vom.flowValues,
             vom.volumeValues,
