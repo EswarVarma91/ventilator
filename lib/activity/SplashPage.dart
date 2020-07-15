@@ -64,29 +64,29 @@ class _SplashPageState extends State<SplashPage> {
     
     SharedPreferences preferences = await SharedPreferences.getInstance();
     
-      preferences.setString("mode", "PC-CMV");
+      preferences.setString("mode", "        ");
       
     preferences.setString("checkMode", "0");
-    preferences.setInt("rr", 20);
-    preferences.setInt("ie", 51);
-    preferences.setString("i", "1.0");
-    preferences.setString("e", "3.0");
-    preferences.setInt("peep", 10);
+    preferences.setInt("rr", 0);
+    preferences.setInt("ie", 0);
+    preferences.setString("i", "0.0");
+    preferences.setString("e", "0.0");
+    preferences.setInt("peep", 0);
     // preferences.setInt("ps", 40);
-    preferences.setInt("fio2", 21);
-    preferences.setInt("tih", 50);
+    preferences.setInt("fio2", 0);
+    preferences.setInt("tih", 0);
     preferences.setInt("paw", 0);
-    preferences.setInt("itrig", 3);
-    preferences.setInt("atime", 10);
-    preferences.setInt("ti", 1);
+    preferences.setInt("itrig", 0);
+    preferences.setInt("atime", 0);
+    preferences.setInt("ti", 0);
     preferences.setBool("play", true);
     // preferences.setInt("tidal", 14);
     // preferences.setInt("mv", 500);
     preferences.setInt("rrtotal", 0);
-    preferences.setInt("ps", 25);
-    preferences.setInt("pc", 25);
-    preferences.setInt("vt", 400);
-    preferences.setInt("te", 20);
+    preferences.setInt("ps", 0);
+    preferences.setInt("pc", 0);
+    preferences.setInt("vt", 0);
+    preferences.setInt("te", 0);
     preferences.setInt("vte", 0);
     preferences.setString("pid", "");
     preferences.setString("pname", "");
