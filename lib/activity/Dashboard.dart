@@ -814,7 +814,7 @@ class _CheckPageState extends State<Dashboard> {
         });
       } else {}
     });
-    _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
+    _timer3 = Timer.periodic(Duration(milliseconds: 60000), (timer) {
       if (_status == "Connected") {
         shutdownChannel.invokeMethod('getBatteryLevel').then((result) async {
           List<int> resList = [];
@@ -1106,14 +1106,14 @@ class _CheckPageState extends State<Dashboard> {
     crcData = obj[length - 1] * 256 + obj[length - 2];
 
     if (crcData == uiCrc) {
-      cc = cc + 1;
-      if (cc > 20000) {
-        setState(() {
-          cc = 0;
-        });
-      }
+      // cc = cc + 1;
+      // if (cc > 20000) {
+      //   setState(() {
+      //     cc = 0;
+      //   });
+      // }
 
-      Fluttertoast.showToast(msg: cc.toString());
+      // Fluttertoast.showToast(msg: cc.toString());
 
       return true;
     } else {
@@ -22532,7 +22532,7 @@ class _CheckPageState extends State<Dashboard> {
         modeNumber == 6 ||
         modeNumber == 7 ||
         modeNumber == 14) {
-      List<String> strList = modeWriteList.map((i) => i.toString()).toList();
+      List<String> strList = samplemodeWriteList.map((i) => i.toString()).toList();
       preferences.setStringList("saveList", strList);
       print(modeWriteList.toString());
     }
