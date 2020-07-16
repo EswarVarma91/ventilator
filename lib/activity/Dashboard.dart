@@ -25009,7 +25009,6 @@ class _CheckPageState extends State<Dashboard> {
               }
             }
           }
-
           if (_setValuesonClick == true && operatinModeR != 0) {
             setState(() {
               receivedoperatingModeR = ((finalList[112] << 8) + finalList[113]);
