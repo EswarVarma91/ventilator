@@ -11,17 +11,76 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb362ea0-1d3f-40da-912c-25d409e43da3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.dart_tool/package_config.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/generated/source/buildConfig/debug/com/example/ventilator/BuildConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/AssetManifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/FontManifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/fonts/appleFont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/bell_line.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/bell_silent_line.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/calibrate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/chargingbattery.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/fullbattery.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/lowbattery.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/nobattery.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/normalbattery.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/powerIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/images/powersymbol.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/lungs/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/lungs/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/lungs/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/lungs/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/assets/lungs/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/fonts/MaterialIcons-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/isolate_snapshot_data" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_assets/vm_snapshot_data" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/flutter_build.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/intermediates/flutter/debug/libs.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/META-INF/app_debug.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$Companion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity$configureFlutterEngine$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MainActivity.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MyDeviceAdminReceiver$Companion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/MyDeviceAdminReceiver.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/util/DownloadController$Companion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/util/DownloadController$showInstallOption$onComplete$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/util/DownloadController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/util/ExtensionKt$showSnackbar$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/util/ExtensionKt$showSnackbar$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/app/tmp/kotlin-classes/debug/com/example/ventilator/util/ExtensionKt.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/fluttertoast/generated/source/buildConfig/debug/io/github/ponnamkarthik/toast/fluttertoast/BuildConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/fluttertoast/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/path_provider/generated/source/buildConfig/debug/io/flutter/plugins/pathprovider/BuildConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/path_provider/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/screen/generated/source/buildConfig/debug/flutter/plugins/screen/screen/BuildConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/screen/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/shared_preferences/generated/source/buildConfig/debug/io/flutter/plugins/sharedpreferences/BuildConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/shared_preferences/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/sqflite/generated/source/buildConfig/debug/com/tekartik/sqflite/BuildConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/sqflite/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/usb_serial/generated/source/buildConfig/debug/dev/bessems/usbserial/BuildConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../build/usb_serial/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/activity/Dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/activity/Dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/activity/SplashPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/activity/SplashPage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="0123456789ABCDEF" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="HA140ZBE" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -246,10 +305,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1593354832783" />
-    <state x="390" y="278" key="com.intellij.ide.util.TipDialog" timestamp="1594624531218">
+    <state x="390" y="280" key="com.intellij.ide.util.TipDialog" timestamp="1594893018195">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="390" y="278" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1594624531218" />
+    <state x="390" y="280" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1594893018195" />
     <state x="390" y="278" key="com.intellij.ide.util.TipDialog/0.23.1440.823@0.23.1440.823" timestamp="1594030354767" />
   </component>
 </project>

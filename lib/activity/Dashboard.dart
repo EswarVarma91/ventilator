@@ -429,7 +429,7 @@ class _CheckPageState extends State<Dashboard> {
       cdisplayParameter = 0,
       rrDisplayValue = 0;
   String ioreDisplayParamter = "I/E", amsDisplayParamter = "AMS";
-  bool playOnEnabled = false, powerOnEnabled = false;
+  bool playOnEnabled = false, powerOnEnabled = false,_playButtonbool;
   var dbHelper = DatabaseHelper();
   var dbHelpera = ADatabaseHelper();
   var dbCounter = CounterDatabaseHelper();
@@ -526,7 +526,7 @@ class _CheckPageState extends State<Dashboard> {
   bool alarmDisplayErrorEnabled = false;
   bool playpauseButtonEnabled = false;
 
-  bool _setValuesonClick = false;
+  bool _setValuesonClick = true;
 
   int receivedItrig = 0,
       receivedpeep = 0,
@@ -553,6 +553,8 @@ class _CheckPageState extends State<Dashboard> {
       receivedvti = 0,
       receivedvte = 0,
       receivedflatprop = 0,
+      receivedo2voltage = 0,
+      receivedthold = 0,
       receivedoperatingModeR = 0;
 
   String assistStatus = "OFF";
@@ -1214,6 +1216,7 @@ class _CheckPageState extends State<Dashboard> {
       maxppeak = preferences.getInt('maxppeak');
       minpeep = preferences.getInt('minpeep');
       maxpeep = preferences.getInt('maxpeep');
+      playpauseButtonEnabled = true;
 
       if (checkData == "0") {
       } else if (checkData == "pacv") {
@@ -1514,7 +1517,7 @@ class _CheckPageState extends State<Dashboard> {
         //     icon: Icon(Icons.arrow_forward),
         //     onTap: () {}
         // ),
-        endDrawer: patientName == "betauser" ? endDrawerMethod() : Container(),
+        endDrawer: patientName == "betauser" || patientName == "userbeta"  ? endDrawerMethod() : Container(),
         drawer: Container(
           // width: 190,
           child: Theme(
@@ -2320,6 +2323,17 @@ class _CheckPageState extends State<Dashboard> {
                   padding: const EdgeInsets.all(2.0),
                   child: Text("flat prop " + receivedflatprop.toString()),
                 )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("o2 voltage " + receivedo2voltage.toString()),
+                )),
+                Card(
+                    child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("T hold " + receivedthold.toString()),
+                )),
+                
               ],
             ),
           ],
@@ -4694,7 +4708,7 @@ class _CheckPageState extends State<Dashboard> {
                   ),
                 ),
                 Text(
-                  "V1.8.3l",
+                  "V1.8.3o",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -5893,7 +5907,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                psValue.toString(),
+                                receivedps.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -5950,7 +5964,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                peepValue.toString(),
+                                receivedpeep.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6007,7 +6021,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                fio2Value.toString(),
+                                receivedfio2.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6066,7 +6080,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                rrValue.toString(),
+                                receivedbackuprr.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6125,7 +6139,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                checkI(i) + ":" + checkE(e),
+                                checkI((receivedi/10).toString()) + ":" + checkE((receivede/10).toString()),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6182,7 +6196,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                pcValue.toString(),
+                                receivedpc.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6239,7 +6253,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                "-" + itrigValue.toString(),
+                                "-" + receivedItrig.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6298,7 +6312,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                atimeValue.toString(),
+                                ((receivedapneaTime/1000).toInt()).toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -6354,8 +6368,7 @@ class _CheckPageState extends State<Dashboard> {
                             alignment: Alignment.center,
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
-                              child: Text(
-                                getTiValue(tipsvValue).toString(),
+                              child: Text(((receivedti / 1000).toDouble()).toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7028,7 +7041,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                rrValue.toString(),
+                                receivedrr.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7148,7 +7161,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                peepValue.toString(),
+                                receivedpeep.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7208,7 +7221,7 @@ class _CheckPageState extends State<Dashboard> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 17.0),
                                     child: Text(
-                                      pcValue.toString(),
+                                      receivedpc.toString(),
                                       style: TextStyle(
                                           fontSize: 30, color: Colors.white),
                                     ),
@@ -7280,7 +7293,7 @@ class _CheckPageState extends State<Dashboard> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 17.0),
                                     child: Text(
-                                      psValue.toString(),
+                                      receivedps.toString(),
                                       style: TextStyle(
                                           fontSize: 30, color: Colors.white),
                                     ),
@@ -7395,21 +7408,21 @@ class _CheckPageState extends State<Dashboard> {
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
                                 operatinModeR == 6 || operatinModeR == 2
-                                    ? pcValue.toString()
+                                    ? receivedpc.toString()
                                     : operatinModeR == 7 ||
                                             operatinModeR == 1 ||
                                             operatinModeR == 5 ||
                                             operatinModeR == 14
-                                        ? vtValue.toString()
+                                        ? receivedvt.toString()
                                         : modeName == "PC-CMV" ||
                                                 modeName == "PACV"
-                                            ? pcValue.toString()
+                                            ? receivedpc.toString()
                                             : modeName == "VC-CMV" ||
                                                     modeName == "VACV" ||
                                                     modeName == "VSIMV" ||
                                                     modeName == "PRVC"
-                                                ? vtValue.toString()
-                                                : pcValue.toString(),
+                                                ? receivedvt.toString()
+                                                : receivedpc.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7466,7 +7479,7 @@ class _CheckPageState extends State<Dashboard> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 17.0),
                               child: Text(
-                                fio2Value.toString(),
+                                receivedfio2.toString(),
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),
@@ -7531,7 +7544,7 @@ class _CheckPageState extends State<Dashboard> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 17.0),
                                     child: Text(
-                                      "-" + itrigValue.toString(),
+                                      "-" + receivedItrig.toString(),
                                       style: TextStyle(
                                           fontSize: 30, color: Colors.white),
                                     ),
@@ -22509,11 +22522,11 @@ class _CheckPageState extends State<Dashboard> {
 
     List<int> listCrcData = [];
 
-    int returnDataCrc = await getCrc(samplemodeWriteList, samplemodeWriteList.length);
+    // int returnDataCrc = await getCrc(samplemodeWriteList, samplemodeWriteList.length);
     // // print(returnDataCrc);
     listCrcData.addAll(samplemodeWriteList);
-    listCrcData.add((returnDataCrc & 0x00FF));
-    listCrcData.add((returnDataCrc & 0xFF00) >> 8);
+    // listCrcData.add((returnDataCrc & 0x00FF));
+    // listCrcData.add((returnDataCrc & 0xFF00) >> 8);
 
     if (modeNumber == 1 ||
         modeNumber == 2 ||
@@ -22523,6 +22536,9 @@ class _CheckPageState extends State<Dashboard> {
         modeNumber == 6 ||
         modeNumber == 7 ||
         modeNumber == 14) {
+          setState((){
+            playpauseButtonEnabled = true;
+          });
       List<String> strList = samplemodeWriteList.map((i) => i.toString()).toList();
       preferences.setStringList("saveList", strList);
       print(modeWriteList.toString());
@@ -24373,7 +24389,7 @@ class _CheckPageState extends State<Dashboard> {
   }
 
   serialiseReceivedPacket(List<int> finalList) async {
-    if (finalList.isNotEmpty && finalList.length == 164) {
+    if (finalList.isNotEmpty && finalList.length == 168) {
       //114
       var now = new DateTime.now();
 
@@ -24383,10 +24399,10 @@ class _CheckPageState extends State<Dashboard> {
 
       //
 
-      bool data = await checkCrc(finalList, finalList.length);
-      if (data == false) {
-        finalList.clear();
-      } else {
+      // bool data = await checkCrc(finalList, finalList.length);
+      // if (data == false) {
+      //   finalList.clear();
+      // } else {
         // // // // print("page no " + finalList[112].toString());
         // if (finalList[112] == 1) {
         //   Navigator.pushAndRemoveUntil(
@@ -24780,7 +24796,7 @@ class _CheckPageState extends State<Dashboard> {
             });
           } else if (checkO2CalibrationValue == 3) {
             setState(() {
-              textText = "Calibrating Completed..";
+              textText = "0\u2082 Calibration Completed.";
             });
           } else if (checkO2CalibrationValue == 0) {
             setState(() {
@@ -25001,37 +25017,24 @@ class _CheckPageState extends State<Dashboard> {
                 receivedItrig =
                     (65536 - ((finalList[114] << 8) + finalList[115]));
               }
-
               receivedpeep = ((finalList[116] << 8) + finalList[117]);
-
               receivedps = ((finalList[118] << 8) + finalList[119]);
-
               receivedfio2 = ((finalList[120] << 8) + finalList[121]);
-
               receivedapneaTime = ((finalList[122] << 8) + finalList[123]);
-
               receivedi = finalList[124];
-
               i = (receivedi / 10).toString();
               receivede = finalList[125];
               e = (receivede / 10).toString();
               receivedti = (((finalList[126] << 8) + finalList[127])).toInt();
-
               receivedbackuprr = ((finalList[128] << 8) + finalList[129]);
-
               receivedvvttmin = ((finalList[130] << 8) + finalList[131]);
               receivedvtmax = ((finalList[132] << 8) + finalList[133]);
               receivedminte = ((finalList[134] << 8) + finalList[135]);
               receivedpc = ((finalList[136] << 8) + finalList[137]);
-
               receivedrr = ((finalList[138] << 8) + finalList[139]);
-
               receivedvt = ((finalList[140] << 8) + finalList[141]);
-
               receivedpcmin = ((finalList[142] << 8) + finalList[143]);
-
               receivedpcmax = ((finalList[144] << 8) + finalList[145]);
-
               receivedo2pressure = ((finalList[146] << 8) + finalList[147]);
               receivedtankpressure = ((finalList[148] << 8) + finalList[149]);
               receivedinhalationblowercommand =
@@ -25042,20 +25045,26 @@ class _CheckPageState extends State<Dashboard> {
               receivedvti = ((finalList[156] << 8) + finalList[157]);
               receivedvte = ((finalList[158] << 8) + finalList[159]);
               receivedflatprop = ((finalList[160] << 8) + finalList[161]);
+              receivedo2voltage = ((finalList[162] << 8) + finalList[163]);
+              receivedthold = ((finalList[164] << 8) + finalList[165]);
             });
 
             setState(() {
               if (operatinModeR == 6 && receivedoperatingModeR == 6) {
-                pccmvRRValue = receivedrr;
-                pccmvIeValue = getIeNumber(i + ":" + e.toString());
-                pccmvPeepValue = receivedpeep;
-                pccmvPcValue = receivedpc;
-                pccmvFio2Value = receivedfio2; //6
-                rrValue = receivedrr;
-                ieValue = getIeNumber(i + ":" + e.toString());
-                peepValue = receivedpeep;
-                pcValue = receivedpc;
-                fio2Value = receivedfio2;
+                preferences.setString("checkMode", "pccmv");
+                preferences.setInt('pccmvRRValue', receivedrr);
+                preferences.setInt(
+                    'pccmvIeValue', getIeNumber(i + ":" + e.toString()));
+                preferences.setInt('pccmvPeepValue', receivedpeep);
+                preferences.setInt('pccmvFio2Value', receivedfio2);
+                preferences.setInt('pccmvPcValue', receivedpc); //7
+                
+
+                // rrValue = receivedrr;
+                // ieValue = getIeNumber(i + ":" + e.toString());
+                // peepValue = receivedpeep;
+                // pcValue = receivedpc;
+                // fio2Value = receivedfio2;
 
                 preferences.setInt("rr", receivedrr);
                 preferences.setString("i", i);
@@ -25075,11 +25084,11 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt('vccmvFio2Value', receivedfio2);
                 preferences.setInt('vccmvVtValue', receivedvt); //7
 
-                rrValue = receivedrr;
-                ieValue = getIeNumber(i + ":" + e.toString());
-                peepValue = receivedpeep;
-                vtValue = receivedvt;
-                fio2Value = receivedfio2;
+                // rrValue = receivedrr;
+                // ieValue = getIeNumber(i + ":" + e.toString());
+                // peepValue = receivedpeep;
+                // vtValue = receivedvt;
+                // fio2Value = receivedfio2;
 
                 preferences.setInt("rr", receivedrr);
                 preferences.setString("i", i);
@@ -25099,12 +25108,12 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt('pacvPcValue', receivedpc);
                 preferences.setInt('pacvFio2Value', receivedfio2); //2
 
-                rrValue = receivedrr;
-                ieValue = getIeNumber(i + ":" + e.toString());
-                peepValue = receivedpeep;
-                pcValue = receivedpc;
-                fio2Value = receivedfio2;
-                itrigValue = receivedItrig;
+                // rrValue = receivedrr;
+                // ieValue = getIeNumber(i + ":" + e.toString());
+                // peepValue = receivedpeep;
+                // pcValue = receivedpc;
+                // fio2Value = receivedfio2;
+                // itrigValue = receivedItrig;
 
                 preferences.setInt("rr", receivedrr);
                 preferences.setString("i", i);
@@ -25125,12 +25134,12 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt('vacvVtValue', receivedvt);
                 preferences.setInt('vacvFio2Value', receivedfio2); //1
 
-                rrValue = receivedrr;
-                ieValue = getIeNumber(i + ":" + e.toString());
-                peepValue = receivedpeep;
-                vtValue = receivedvt;
-                fio2Value = receivedfio2;
-                itrigValue = receivedItrig;
+                // rrValue = receivedrr;
+                // ieValue = getIeNumber(i + ":" + e.toString());
+                // peepValue = receivedpeep;
+                // vtValue = receivedvt;
+                // fio2Value = receivedfio2;
+                // itrigValue = receivedItrig;
 
                 preferences.setInt("rr", receivedrr);
                 preferences.setString("i", i);
@@ -25152,13 +25161,13 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt('psimvFio2Value', receivedfio2); //4
                 preferences.setInt('psimvItrigValue', receivedItrig);
 
-                rrValue = receivedrr;
-                ieValue = getIeNumber(i + ":" + e.toString());
-                peepValue = receivedpeep;
-                pcValue = receivedpc;
-                psValue = receivedps;
-                fio2Value = receivedfio2;
-                itrigValue = receivedItrig;
+                // rrValue = receivedrr;
+                // ieValue = getIeNumber(i + ":" + e.toString());
+                // peepValue = receivedpeep;
+                // pcValue = receivedpc;
+                // psValue = receivedps;
+                // fio2Value = receivedfio2;
+                // itrigValue = receivedItrig;
 
                 preferences.setInt("rr", receivedrr);
                 preferences.setString("i", i);
@@ -25181,13 +25190,13 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt('vsimvFio2Value', receivedfio2); //5
                 preferences.setInt('vsimvItrigValue', receivedItrig);
 
-                rrValue = receivedrr;
-                ieValue = getIeNumber(i + ":" + e.toString());
-                peepValue = receivedpeep;
-                vtValue = receivedvt;
-                psValue = receivedps;
-                fio2Value = receivedfio2;
-                itrigValue = receivedItrig;
+                // rrValue = receivedrr;
+                // ieValue = getIeNumber(i + ":" + e.toString());
+                // peepValue = receivedpeep;
+                // vtValue = receivedvt;
+                // psValue = receivedps;
+                // fio2Value = receivedfio2;
+                // itrigValue = receivedItrig;
 
                 preferences.setInt("rr", receivedrr);
                 preferences.setString("i", i);
@@ -25212,23 +25221,23 @@ class _CheckPageState extends State<Dashboard> {
                 preferences.setInt('psvFio2Value', receivedfio2);
                 preferences.setInt('psvBackupRrValue', receivedbackuprr);
                 preferences.setInt('psvPcValue', receivedpc);
-                preferences.setInt('psvAtimeValue', apneatimeCaal); //3
+                preferences.setInt('psvAtimeValue', receivedapneaTime); //3
                 preferences.setInt(
                     'psvTiValue',
                     getTiValueNumber(
                         ((receivedti / 1000).toDouble()).toString()));
 
-                rrValue = receivedbackuprr;
-                ieValue = getIeNumber(i + ":" + e.toString());
-                peepValue = receivedpeep;
-                vtValue = receivedvt;
-                psValue = receivedps;
-                pcValue = receivedpc;
-                fio2Value = receivedfio2;
-                itrigValue = receivedItrig;
-                atimeValue = apneatimeCaal;
-                tipsvValue = int.tryParse(
-                    getTiValueNumber(((receivedti / 1000).toDouble())));
+                // rrValue = receivedbackuprr;
+                // ieValue = getIeNumber(i + ":" + e.toString());
+                // peepValue = receivedpeep;
+                // vtValue = receivedvt;
+                // psValue = receivedps;
+                // pcValue = receivedpc;
+                // fio2Value = receivedfio2;
+                // itrigValue = receivedItrig;
+                // atimeValue = apneatimeCaal;
+                // tipsvValue = int.tryParse(
+                //     getTiValueNumber(((receivedti / 1000).toDouble())));
 
                 preferences.setInt("rr", receivedbackuprr);
                 preferences.setString("i", i);
@@ -25358,7 +25367,7 @@ class _CheckPageState extends State<Dashboard> {
           list = [];
           listTemp = [];
         });
-      }
+      // }
     } else if (finalList.isNotEmpty &&
         ((finalList[2] << 8) + finalList[3]) == 17) {
       // Fluttertoast.showToast(msg: finalList.toString());
