@@ -732,20 +732,7 @@ class _CheckPageState extends State<Dashboard> {
       //   Fluttertoast.showToast(msg: "null");
       //     _getPorts();
       // }
-      counter = counter + 1;
-      List<int> obj = [0, 20, 0, 11, 0];
-      if (counter <= 250) {
-        setState(() {
-          obj.add(counter);
-        });
-        if (_status == "Connected") {
-          sendDataUsbConnection(obj, 2);
-        }
-      } else {
-        setState(() {
-          counter = 0;
-        });
-      }
+      
     });
 
     _timer2 = Timer.periodic(Duration(seconds: 1), (timer) async {
@@ -814,20 +801,24 @@ class _CheckPageState extends State<Dashboard> {
         });
       } else {}
     });
-    _timer3 = Timer.periodic(Duration(milliseconds: 60000), (timer) {
+    _timer3 = Timer.periodic(Duration(milliseconds: 150), (timer) {
       if (_status == "Connected") {
         shutdownChannel.invokeMethod('getBatteryLevel').then((result) async {
-          List<int> resList = [];
+          counter = counter + 1;
+          List<int> resList = [0, 20, 0, 15];
+          if (counter <= 250) {
           setState(() {
-            // resList.add(0x7E);
-            resList.add(0);
-            resList.add(20);
-            resList.add(0);
-            resList.add(15);
             resList.add((result & 0x00FF));
-            // resList.add(0x7F);
+            resList.add(counter);
           });
-          sendDataUsbConnection(resList, 2);
+          if (_status == "Connected") {
+            sendDataUsbConnection(resList, 2);
+          }
+        } else {
+          setState(() {
+            counter = 0;
+          });
+        }
         });
       }
     });
