@@ -19,14 +19,14 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
   TextEditingController ageId = TextEditingController();
   TextEditingController heightId = TextEditingController();
   TextEditingController weightId = TextEditingController();
-  bool isNumericMode = false;
-  bool keyboardEnable = false;
-  bool patientIdEnable = false;
-  bool nameEnable = false;
-  bool shiftEnabled = false;
+  // bool isNumericMode = false;
+  // bool keyboardEnable = false;
+  // bool patientIdEnable = false;
+  // bool nameEnable = false;
+  // bool shiftEnabled = false;
   bool maleEnabled = true;
   bool femaleEnabled = false;
-  bool ageEnabled = false;
+  // bool ageEnabled = false;
   bool heightEnabled = false;
   bool adultEnabled = true;
   bool pediatricEnabled = false;
@@ -86,26 +86,16 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        keyboardEnable = false;
-                        patientIdEnable = false;
-                        nameEnable = true;
-                        isNumericMode = false;
-                        ageEnabled = false;
                         heightEnabled = false;
                       });
                     },
                     child: Container(
                       width: 210,
                       child: TextFormField(
-                        showCursor: false,
-                        readOnly: true,
+                        autofocus: true,
+                        showCursor: true,
                         onTap: () {
                           setState(() {
-                            keyboardEnable = false;
-                            patientIdEnable = false;
-                            nameEnable = true;
-                            isNumericMode = false;
-                            ageEnabled = false;
                             heightEnabled = false;
                           });
                         },
@@ -122,11 +112,6 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        keyboardEnable = false;
-                        patientIdEnable = true;
-                        nameEnable = false;
-                        ageEnabled = false;
-                        isNumericMode = false;
                         heightEnabled = false;
                       });
                     },
@@ -134,14 +119,8 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                       width: 210,
                       child: TextFormField(
                         showCursor: true,
-                        readOnly: true,
                         onTap: () {
                           setState(() {
-                            keyboardEnable = false;
-                            patientIdEnable = true;
-                            nameEnable = false;
-                            ageEnabled = false;
-                            isNumericMode = false;
                             heightEnabled = false;
                           });
                         },
@@ -165,7 +144,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                               setState(() {
                                 maleEnabled = true;
                                 femaleEnabled = false;
-                                keyboardEnable = true;
+                                // keyboardEnable = true;
                               });
                             },
                             child: Material(
@@ -190,7 +169,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                               setState(() {
                                 maleEnabled = false;
                                 femaleEnabled = true;
-                                keyboardEnable = true;
+                                // keyboardEnable = true;
                               });
                             },
                             child: Material(
@@ -223,7 +202,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                                 setState(() {
                                   adultEnabled = true;
                                   pediatricEnabled = false;
-                                  keyboardEnable = true;
+                                  // keyboardEnable = true;
                                 });
                               },
                               child: Material(
@@ -248,7 +227,7 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                                 setState(() {
                                   adultEnabled = false;
                                   pediatricEnabled = true;
-                                  keyboardEnable = true;
+                                  // keyboardEnable = true;
                                 });
                               },
                               child: Material(
@@ -283,31 +262,19 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        keyboardEnable = false;
-                        isNumericMode = true;
-                        ageEnabled = true;
-                        patientIdEnable = false;
-                        nameEnable = false;
                         heightEnabled = false;
+                        // FocusScope.of(context).unfocus();
                       });
                     },
                     child: Container(
                       width: 250,
                       child: TextFormField(
                         showCursor: true,
-                        readOnly: true,
                         maxLength: 3,
                         maxLines: 1,
+                        keyboardType: TextInputType.number,
                         controller: ageId,
-                        onTap: () {
-                          setState(() {
-                            keyboardEnable = false;
-                            isNumericMode = true;
-                            ageEnabled = true;
-                            patientIdEnable = false;
-                            nameEnable = false;
-                          });
-                        },
+                        onTap: () {},
                         onChanged: (value) {
                           if (value.length >= 3) {
                             Fluttertoast.showToast(
@@ -328,12 +295,8 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            keyboardEnable = true;
-                            isNumericMode = true;
-                            ageEnabled = true;
-                            patientIdEnable = false;
-                            nameEnable = false;
                             heightEnabled = true;
+                            FocusScope.of(context).unfocus();
                           });
                         },
                         child: Container(
@@ -360,12 +323,8 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            keyboardEnable = true;
-                            isNumericMode = true;
-                            ageEnabled = true;
-                            patientIdEnable = false;
-                            nameEnable = false;
                             heightEnabled = true;
+                            FocusScope.of(context).unfocus();
                           });
                         },
                         child: Container(
@@ -415,85 +374,84 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
             Container(
               height: heightEnabled ? 0 : 21,
             ),
-            keyboardEnable
-                ? heightEnabled
-                    ? Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              height: 310,
-                              child: CupertinoPicker(
-                                  itemExtent: 30,
-                                  onSelectedItemChanged: (int index) {
+            // keyboardEnable
+            //     ?
+            heightEnabled
+                ? Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          height: 310,
+                          child: CupertinoPicker(
+                              itemExtent: 30,
+                              onSelectedItemChanged: (int index) {
+                                setState(() {
+                                  heightId.text =
+                                      getDataheight(index).toString();
+                                  if (getDataheight(index) <= 70) {
                                     setState(() {
-                                      heightId.text =
-                                          getDataheight(index).toString();
-                                      if (getDataheight(index) <= 70) {
-                                        setState(() {
-                                          weightId.text =
-                                              ((0.125 * getDataheight(index)) -
-                                                      0.75)
+                                      weightId.text =
+                                          ((0.125 * getDataheight(index)) -
+                                                  0.75)
+                                              .toInt()
+                                              .toString();
+                                    });
+                                  } else if (70 < getDataheight(index) &&
+                                      getDataheight(index) <= 128) {
+                                    setState(() {
+                                      weightId.text =
+                                          (((0.0037 * getDataheight(index) -
+                                                          0.4018) *
+                                                      getDataheight(index)) +
+                                                  18.62)
+                                              .toInt()
+                                              .toString();
+                                    });
+                                  } else if (getDataheight(index) >= 129) {
+                                    setState(() {
+                                      maleEnabled == true
+                                          ? weightId.text =
+                                              ((0.9079 * getDataheight(index)) -
+                                                      88.022)
                                                   .toInt()
-                                                  .toString();
-                                        });
-                                      } else if (70 < getDataheight(index) &&
-                                          getDataheight(index) <= 128) {
-                                        setState(() {
-                                          weightId.text =
-                                              (((0.0037 * getDataheight(index) -
-                                                              0.4018) *
-                                                          getDataheight(
-                                                              index)) +
-                                                      18.62)
-                                                  .toInt()
-                                                  .toString();
-                                        });
-                                      } else if (getDataheight(index) >= 129) {
-                                        setState(() {
-                                          maleEnabled == true
-                                              ? weightId.text = ((0.9079 *
+                                                  .toString()
+                                          : femaleEnabled == true
+                                              ? weightId.text = ((0.9049 *
                                                           getDataheight(
                                                               index)) -
                                                       88.022)
                                                   .toInt()
                                                   .toString()
-                                              : femaleEnabled == true
-                                                  ? weightId.text = ((0.9049 *
-                                                              getDataheight(
-                                                                  index)) -
-                                                          88.022)
-                                                      .toInt()
-                                                      .toString()
-                                                  : 0.toString();
-                                        });
-                                      }
+                                              : 0.toString();
                                     });
-                                  },
-                                  children: List.generate(
-                                      67,
-                                      (index) => Center(
-                                            child: Text((getDataheight(index))
-                                                .toString()),
-                                          ))),
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container()
-                : Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      color: Color(0xFF171e27),
-                      child: VirtualKeyboard(
-                          height: 308,
-                          textColor: Colors.white,
-                          type: isNumericMode
-                              ? VirtualKeyboardType.Numeric
-                              : VirtualKeyboardType.Alphanumeric,
-                          onKeyPress: _onKeyPress),
-                    ),
+                                  }
+                                });
+                              },
+                              children: List.generate(
+                                  67,
+                                  (index) => Center(
+                                        child: Text(
+                                            (getDataheight(index)).toString()),
+                                      ))),
+                        ),
+                      ),
+                    ],
                   )
+                : Container()
+            // : Align(
+            //     alignment: Alignment.bottomCenter,
+            //     child: Container(
+            //       color: Color(0xFF171e27),
+            //       child: VirtualKeyboard(
+            //           height: 308,
+            //           textColor: Colors.white,
+            //           type: isNumericMode
+            //               ? VirtualKeyboardType.Numeric
+            //               : VirtualKeyboardType.Alphanumeric,
+            //           onKeyPress: _onKeyPress),
+            //     ),
+            //   )
           ],
         ),
       ),
@@ -544,87 +502,87 @@ class _NewTreatmentScreenState extends State<NewTreatmentScreen> {
                                                                                 : index == 19 ? 153 : index == 20 ? 154 : index == 21 ? 155 : index == 22 ? 156 : index == 23 ? 157 : index == 24 ? 158 : index == 25 ? 159 : index == 26 ? 160 : index == 27 ? 161 : index == 28 ? 162 : index == 29 ? 163 : index == 30 ? 164 : index == 31 ? 165 : index == 32 ? 166 : index == 33 ? 167 : index == 34 ? 168 : index == 35 ? 169 : index == 36 ? 170 : index == 37 ? 171 : index == 38 ? 172 : index == 39 ? 173 : index == 40 ? 174 : index == 41 ? 175 : index == 42 ? 176 : index == 43 ? 177 : index == 44 ? 178 : index == 45 ? 179 : index == 46 ? 170 : index == 47 ? 181 : index == 48 ? 182 : index == 49 ? 183 : index == 50 ? 184 : index == 51 ? 185 : index == 52 ? 186 : index == 53 ? 187 : index == 54 ? 188 : index == 55 ? 189 : index == 56 ? 190 : index == 57 ? 191 : index == 58 ? 192 : index == 59 ? 193 : index == 60 ? 194 : index == 61 ? 195 : index == 62 ? 196 : index == 63 ? 197 : index == 64 ? 198 : index == 65 ? 199 : index == 66 ? 200 : "";
   }
 
-  /// Fired when the virtual keyboard key is pressed.
-  _onKeyPress(VirtualKeyboardKey key) {
-    if (patientIdEnable == true) {
-      setState(() {
-        if (key.keyType == VirtualKeyboardKeyType.String) {
-          patientId.text =
-              patientId.text + (shiftEnabled ? key.capsText : key.text);
-        } else if (key.keyType == VirtualKeyboardKeyType.Action) {
-          switch (key.action) {
-            case VirtualKeyboardKeyAction.Backspace:
-              if (patientId.text.length == 0) return;
-              patientId.text =
-                  patientId.text.substring(0, patientId.text.length - 1);
-              break;
-            // case VirtualKeyboardKeyAction.Return:
-            //   patientId.text = patientId.text + '\n';
-            //   break;
-            case VirtualKeyboardKeyAction.Space:
-              patientId.text = patientId.text + key.text;
-              break;
-            case VirtualKeyboardKeyAction.Shift:
-              shiftEnabled = !shiftEnabled;
-              break;
-            default:
-          }
-        }
-      });
+  // /// Fired when the virtual keyboard key is pressed.
+  // _onKeyPress(VirtualKeyboardKey key) {
+  //   if (patientIdEnable == true) {
+  //     setState(() {
+  //       if (key.keyType == VirtualKeyboardKeyType.String) {
+  //         patientId.text =
+  //             patientId.text + (shiftEnabled ? key.capsText : key.text);
+  //       } else if (key.keyType == VirtualKeyboardKeyType.Action) {
+  //         switch (key.action) {
+  //           case VirtualKeyboardKeyAction.Backspace:
+  //             if (patientId.text.length == 0) return;
+  //             patientId.text =
+  //                 patientId.text.substring(0, patientId.text.length - 1);
+  //             break;
+  //           // case VirtualKeyboardKeyAction.Return:
+  //           //   patientId.text = patientId.text + '\n';
+  //           //   break;
+  //           case VirtualKeyboardKeyAction.Space:
+  //             patientId.text = patientId.text + key.text;
+  //             break;
+  //           case VirtualKeyboardKeyAction.Shift:
+  //             shiftEnabled = !shiftEnabled;
+  //             break;
+  //           default:
+  //         }
+  //       }
+  //     });
 
-      // Update the screen
-      setState(() {});
-    } else if (nameEnable == true) {
-      setState(() {
-        if (key.keyType == VirtualKeyboardKeyType.String) {
-          nameId.text = nameId.text + (shiftEnabled ? key.capsText : key.text);
-        } else if (key.keyType == VirtualKeyboardKeyType.Action) {
-          switch (key.action) {
-            case VirtualKeyboardKeyAction.Backspace:
-              if (nameId.text.length == 0) return;
-              nameId.text = nameId.text.substring(0, nameId.text.length - 1);
-              break;
-            // case VirtualKeyboardKeyAction.Return:
-            //   patientId.text = patientId.text + '\n';
-            //   break;
-            case VirtualKeyboardKeyAction.Space:
-              nameId.text = nameId.text + key.text;
-              break;
-            case VirtualKeyboardKeyAction.Shift:
-              shiftEnabled = !shiftEnabled;
-              break;
-            default:
-          }
-        }
-      });
+  //     // Update the screen
+  //     setState(() {});
+  //   } else if (nameEnable == true) {
+  //     setState(() {
+  //       if (key.keyType == VirtualKeyboardKeyType.String) {
+  //         nameId.text = nameId.text + (shiftEnabled ? key.capsText : key.text);
+  //       } else if (key.keyType == VirtualKeyboardKeyType.Action) {
+  //         switch (key.action) {
+  //           case VirtualKeyboardKeyAction.Backspace:
+  //             if (nameId.text.length == 0) return;
+  //             nameId.text = nameId.text.substring(0, nameId.text.length - 1);
+  //             break;
+  //           // case VirtualKeyboardKeyAction.Return:
+  //           //   patientId.text = patientId.text + '\n';
+  //           //   break;
+  //           case VirtualKeyboardKeyAction.Space:
+  //             nameId.text = nameId.text + key.text;
+  //             break;
+  //           case VirtualKeyboardKeyAction.Shift:
+  //             shiftEnabled = !shiftEnabled;
+  //             break;
+  //           default:
+  //         }
+  //       }
+  //     });
 
-      // Update the screen
-      setState(() {});
-    } else if (ageEnabled == true) {
-      setState(() {
-        if (key.keyType == VirtualKeyboardKeyType.String) {
-          ageId.text = ageId.text + (shiftEnabled ? key.capsText : key.text);
-        } else if (key.keyType == VirtualKeyboardKeyType.Action) {
-          switch (key.action) {
-            case VirtualKeyboardKeyAction.Backspace:
-              if (ageId.text.length == 0) return;
-              ageId.text = ageId.text.substring(0, ageId.text.length - 1);
-              break;
-            // case VirtualKeyboardKeyAction.Return:
-            //   patientId.text = patientId.text + '\n';
-            //   break;
-            case VirtualKeyboardKeyAction.Space:
-              ageId.text = ageId.text + key.text;
-              break;
-            case VirtualKeyboardKeyAction.Shift:
-              shiftEnabled = !shiftEnabled;
-              break;
-            default:
-          }
-        }
-      });
-    }
-  }
+  //     // Update the screen
+  //     setState(() {});
+  //   } else if (ageEnabled == true) {
+  //     setState(() {
+  //       if (key.keyType == VirtualKeyboardKeyType.String) {
+  //         ageId.text = ageId.text + (shiftEnabled ? key.capsText : key.text);
+  //       } else if (key.keyType == VirtualKeyboardKeyType.Action) {
+  //         switch (key.action) {
+  //           case VirtualKeyboardKeyAction.Backspace:
+  //             if (ageId.text.length == 0) return;
+  //             ageId.text = ageId.text.substring(0, ageId.text.length - 1);
+  //             break;
+  //           // case VirtualKeyboardKeyAction.Return:
+  //           //   patientId.text = patientId.text + '\n';
+  //           //   break;
+  //           case VirtualKeyboardKeyAction.Space:
+  //             ageId.text = ageId.text + key.text;
+  //             break;
+  //           case VirtualKeyboardKeyAction.Shift:
+  //             shiftEnabled = !shiftEnabled;
+  //             break;
+  //           default:
+  //         }
+  //       }
+  //     });
+  //   }
+  // }
 
   savePatientData() async {
     if (patientId.text.isEmpty) {

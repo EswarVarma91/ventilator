@@ -2788,12 +2788,13 @@ class _CheckPageState extends State<Dashboard> {
                         children: <Widget>[
                           Text(packetCounter.toString(),
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 30)),
+                                  TextStyle(color: Colors.white, fontSize: 40)),
+                          SizedBox(width:20),
                           IconButton(
                             icon: Icon(Icons.history,
-                                color: Colors.white, size: 40),
+                                color: Colors.white, size: 50),
                             onPressed: () {
-                              setState(() {
+                              setState(() { 
                                 packetCounter = 0;
                                 pipPoints.clear();
                                 fio2Points.clear();
@@ -2802,9 +2803,10 @@ class _CheckPageState extends State<Dashboard> {
                               });
                             },
                           ),
+                          SizedBox(width:20),
                           IconButton(
                             icon: Icon(Icons.close,
-                                color: Colors.white, size: 40),
+                                color: Colors.white, size: 50),
                             onPressed: () {
                               setState(() {
                                 _pipDataScreen = false;
